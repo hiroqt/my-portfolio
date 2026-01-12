@@ -245,8 +245,9 @@ export function PageLoader() {
                     key={i}
                     className="absolute w-2 h-2 bg-white rounded-full"
                     style={{
-                      left: '50%',
-                      top: '50%',
+                      left: `${50 + Math.cos(i * Math.PI / 4) * 50}%`,
+                      top: `${50 + Math.sin(i * Math.PI / 4) * 50}%`,
+                      transform: 'translate(-50%, -50%)',
                       transformOrigin: '0 0',
                     }}
                     animate={{
@@ -266,7 +267,6 @@ export function PageLoader() {
                         delay: i * 0.125,
                       }
                     }}
-                    transform={`translate(-50%, -50%) translate(${Math.cos(i * Math.PI / 4) * 50}px, ${Math.sin(i * Math.PI / 4) * 50}px)`}
                   />
                 ))}
               </motion.div>
