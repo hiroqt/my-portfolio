@@ -39,8 +39,8 @@ A premium, cinematic portfolio website showcasing full-stack development experti
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/portfolio-website.git
-cd portfolio-website
+git clone https://github.com/hiroqt/my-portfolio.git
+cd my-portfolio
 ```
 
 2. Install dependencies:
@@ -119,7 +119,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/portfolio-website/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/hiroqt/my-portfolio/issues).
 
 ## 📞 Contact
 
