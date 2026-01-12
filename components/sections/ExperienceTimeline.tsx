@@ -154,7 +154,8 @@ export function ExperienceTimeline() {
                       className={activeTab === tab.id ? 'text-black' : 'text-white/70'} 
                       size={14} 
                     />
-                    <span className="truncate">{tab.label}</span>
+                    {/* Show text only on sm and larger screens */}
+                    <span className="truncate hidden sm:inline">{tab.label}</span>
                   </motion.button>
                 ))}
               </div>

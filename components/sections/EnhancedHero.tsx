@@ -2,8 +2,8 @@
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { FloatingElements } from '@/components/animation/FloatingElements'
-import { ArchitectureIcon, AIIcon, CodeIcon } from '@/components/icons/MoreTechIcons'
+import { ArchitectureIcon, AIIcon, CodeIcon, LinkedInIcon, GmailIcon } from '@/components/icons/MoreTechIcons'
+import { GitHubIcon } from '@/components/icons/TechIcons'
 
 export function EnhancedHero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -81,7 +81,6 @@ export function EnhancedHero() {
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-background via-background/95 to-background/90">
       <div ref={ref} className="relative z-10 w-full">
-        <FloatingElements />
         
         <motion.div 
           style={{ y, opacity, scale }}
@@ -109,7 +108,6 @@ export function EnhancedHero() {
                 animate={{
                   opacity: [0.2, 0.8, 0.2],
                   scale: [0.8, 1.3, 0.8],
-                  rotate: [0, 360],
                 }}
                 transition={{
                   duration: 8,
@@ -117,61 +115,6 @@ export function EnhancedHero() {
                   ease: "easeInOut"
                 }}
               />
-              
-              {/* Multiple particle layers */}
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className={`absolute w-${i % 3 + 1} h-${i % 3 + 1} ${
-                    i % 3 === 0 ? 'bg-primary' : 
-                    i % 3 === 1 ? 'bg-secondary' : 'bg-accent'
-                  } rounded-full`}
-                  style={{
-                    left: `${10 + (i * 8) % 80}%`,
-                    top: `${5 + (i * 12) % 90}%`,
-                  }}
-                  animate={{
-                    y: [-20, -60, -20],
-                    x: [0, (i % 2 === 0 ? 20 : -20), 0],
-                    opacity: [0, 1, 0],
-                    scale: [0, 1.5, 0],
-                    rotate: [0, 360],
-                  }}
-                  transition={{
-                    duration: 4 + (i % 3),
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                    ease: "easeInOut"
-                  }}
-                />
-              ))}
-              
-              {/* Letter-by-letter animation overlay */}
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{ duration: 3, delay: 0.5 }}
-              >
-                {['A', 'R', 'N', 'E', 'L', ' ', 'A', '.', ' ', 'B', 'A', 'Y', 'L', 'O', 'N'].map((letter, i) => (
-                  <motion.span
-                    key={i}
-                    className="text-white/20 font-bold"
-                    animate={{
-                      color: ['rgba(255,255,255,0.2)', 'rgba(124,58,237,1)', 'rgba(255,255,255,0.2)'],
-                      scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                      duration: 0.3,
-                      delay: i * 0.1,
-                      repeat: Infinity,
-                      repeatDelay: 5
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </motion.div>
             </motion.h1>
             
             {/* Enhanced divider with multiple animations */}
@@ -182,33 +125,6 @@ export function EnhancedHero() {
               transition={{ duration: 2, delay: 0.8 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent" />
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent"
-                animate={{ x: ['-200%', '200%'] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 2
-                }}
-              />
-              {/* Pulsing dots */}
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute top-1/2 w-1 h-1 bg-white rounded-full transform -translate-y-1/2"
-                  style={{ left: `${20 + i * 15}%` }}
-                  animate={{
-                    scale: [0, 1.5, 0],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.2 + 3
-                  }}
-                />
-              ))}
             </motion.div>
           </motion.div>
           
@@ -324,28 +240,6 @@ export function EnhancedHero() {
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 1, delay: 2 }}
                 />
-                
-                {/* Multiple sparkle effects */}
-                {[...Array(3)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-2 h-2 bg-primary rounded-full"
-                    style={{
-                      top: `${-10 + i * 5}px`,
-                      right: `${-5 + i * 8}px`,
-                    }}
-                    animate={{
-                      scale: [0, 1.5, 0],
-                      rotate: [0, 180, 360],
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: 3 + i * 0.3
-                    }}
-                  />
-                ))}
               </motion.span>
               <span className="block sm:inline mt-2 sm:mt-0">
                 {' '}through{' '}
@@ -364,20 +258,6 @@ export function EnhancedHero() {
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 1, delay: 2.2 }}
-                />
-                
-                {/* AI-themed particles */}
-                <motion.div
-                  className="absolute -top-3 -right-3 w-3 h-3 border border-secondary rounded-full"
-                  animate={{
-                    rotate: [0, 360],
-                    scale: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: 3.5
-                  }}
                 />
               </motion.span>
             </div>
@@ -429,23 +309,12 @@ export function EnhancedHero() {
                 />
                 
                 <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 relative z-10">
-                  <motion.div
-                    className="flex items-center justify-center"
-                    animate={{
-                      rotate: [0, 10, -10, 0],
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: index * 0.5
-                    }}
-                  >
+                  <div className="flex items-center justify-center">
                     <badge.IconComponent 
                       className={`text-${badge.color} group-hover:text-white transition-colors duration-300`}
                       size={20}
                     />
-                  </motion.div>
+                  </div>
                   <span className={`text-${badge.color} font-bold text-sm sm:text-base md:text-lg tracking-wide group-hover:text-white transition-colors duration-300 text-center sm:text-left`}>
                     {badge.label}
                   </span>
@@ -458,114 +327,88 @@ export function EnhancedHero() {
                   whileHover={{ x: "200%" }}
                   transition={{ duration: 0.8 }}
                 />
-                
-                {/* Floating particles around badge */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className={`absolute w-1 h-1 bg-${badge.color} rounded-full opacity-0 group-hover:opacity-100`}
-                    style={{
-                      left: `${20 + i * 20}%`,
-                      top: `${10 + (i % 2) * 80}%`,
-                    }}
-                    animate={{
-                      y: [-5, -15, -5],
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: i * 0.2
-                    }}
-                  />
-                ))}
               </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Social Media Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.6 }}
+            className="flex justify-center gap-6 mt-element-gap px-4"
+          >
+            {[
+              { 
+                name: "GitHub", 
+                url: "https://github.com/hiroqt", 
+                IconComponent: GitHubIcon,
+                color: "text-white hover:text-primary"
+              },
+              { 
+                name: "LinkedIn", 
+                url: "https://www.linkedin.com/in/arnel-baylon-b05233189", 
+                IconComponent: LinkedInIcon,
+                color: "text-white hover:text-secondary"
+              },
+              { 
+                name: "Gmail", 
+                url: "mailto:arnelbaylon15@gmail.com", 
+                IconComponent: GmailIcon,
+                color: "text-white hover:text-accent"
+              }
+            ].map((social, index) => (
+              <motion.a
+                key={social.name}
+                href={social.url}
+                target={social.name === "Gmail" ? "_self" : "_blank"}
+                rel={social.name === "Gmail" ? "" : "noopener noreferrer"}
+                className={`glass-premium rounded-full p-4 group cursor-pointer relative overflow-hidden transform-gpu transition-all duration-300 ${social.color}`}
+                initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: 1.8 + index * 0.1,
+                  type: "spring",
+                  stiffness: 200
+                }}
+                whileHover={{ 
+                  scale: 1.1,
+                  y: -5,
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {/* Background glow effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 rounded-full"
+                  transition={{ duration: 0.3 }}
+                />
+                
+                <social.IconComponent 
+                  className="relative z-10 transition-colors duration-300"
+                  size={24}
+                />
+                
+                {/* Shine effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100"
+                  initial={{ x: "-200%" }}
+                  whileHover={{ x: "200%" }}
+                  transition={{ duration: 0.6 }}
+                />
+              </motion.a>
             ))}
           </motion.div>
         </motion.div>
       </div>
       
-      {/* Enhanced background elements with more dynamic animations */}
+      {/* Subtle static background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Primary gradient orb */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-radial from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.4, 1.2, 1],
-            opacity: [0.3, 0.8, 0.5, 0.3],
-            x: [0, 100, -50, 0],
-            y: [0, -50, 50, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        {/* Secondary gradient orb */}
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-gradient-radial from-secondary/15 via-secondary/8 to-transparent rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.5, 1.1, 1],
-            opacity: [0.2, 0.7, 0.4, 0.2],
-            x: [0, -80, 60, 0],
-            y: [0, 60, -40, 0],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3
-          }}
-        />
-        
-        {/* Accent gradient orb */}
-        <motion.div
-          className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-gradient-radial from-accent/12 via-accent/6 to-transparent rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1.1, 1],
-            opacity: [0.1, 0.6, 0.3, 0.1],
-            x: [0, 70, -30, 0],
-            y: [0, -70, 30, 0],
-            rotate: [0, 270, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 6
-          }}
-        />
-        
-        {/* Additional floating elements */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-${2 + (i % 3)} h-${2 + (i % 3)} ${
-              i % 3 === 0 ? 'bg-primary/20' : 
-              i % 3 === 1 ? 'bg-secondary/20' : 'bg-accent/20'
-            } rounded-full blur-sm`}
-            style={{
-              left: `${10 + (i * 12) % 80}%`,
-              top: `${10 + (i * 15) % 80}%`,
-            }}
-            animate={{
-              x: [0, (i % 2 === 0 ? 100 : -100), 0],
-              y: [0, (i % 2 === 0 ? -100 : 100), 0],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 10 + (i % 5),
-              repeat: Infinity,
-              delay: i * 0.5,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
+        {/* Static gradient orbs */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-radial from-primary/10 via-primary/5 to-transparent rounded-full blur-3xl opacity-30" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-gradient-radial from-secondary/8 via-secondary/4 to-transparent rounded-full blur-3xl opacity-20" />
+        <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-gradient-radial from-accent/6 via-accent/3 to-transparent rounded-full blur-3xl opacity-15" />
       </div>
     </div>
   )
