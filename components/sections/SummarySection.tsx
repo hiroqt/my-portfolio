@@ -56,26 +56,117 @@ export function SummarySection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed space-y-3 lg:space-y-4">
-                <p>
-                  I am a Full-Stack Developer and "vibe coder" specializing in building scalable web systems 
-                  through a fusion of deep technical logic and advanced AI orchestration. By leveraging tools 
-                  like Cursor, GitHub Copilot, and LLMs, I rapidly architect high-performance applications in 
-                  PHP Laravel 12, React.js, and Next.js.
-                </p>
+              <div className="text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed space-y-4 lg:space-y-5">
+                <div>
+                  I am a Full-Stack Developer and{' '}
+                  <motion.span 
+                    className="text-primary font-semibold relative inline-block"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    "vibe coder"
+                  </motion.span>
+                  {' '}who bridges the gap between creative design and mission-critical logic. By orchestrating advanced AI tools like{' '}
+                  <span className="text-secondary font-medium">Cursor, GitHub Copilot, and LLMs</span>, I rapidly architect high-performance systems using{' '}
+                  <span className="text-accent font-medium">PHP Laravel 12, React.js, and Next.js</span>. I specialize in engineering reliable, production-ready solutions, incorporating{' '}
+                  <motion.span 
+                    className="text-primary font-semibold relative inline-block"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    Idempotent API design
+                  </motion.span>
+                  {' '}to ensure data consistency and system stability across complex architectures.
+                </div>
                 
-                <p>
-                  I don't just write code; I engineer solutions that move the needle—recently delivering a 
-                  real-world system that achieved a 40% reduction in manual data processing. Whether I am 
-                  designing interactive prototypes in Figma or optimizing complex MySQL architectures, my 
-                  focus is on speed, security, and seamless user experiences.
-                </p>
-                
-                <p className="text-white/70 font-medium text-sm sm:text-base">
-                  <span className="text-primary">Tech Stack:</span> PHP Laravel, React/Next.js, MySQL, Supabase, 
-                  and AI Integration (OpenAI, Groq, LangChain).
-                </p>
+                <div>
+                  I don't just ship features; I deliver{' '}
+                  <motion.span 
+                    className="text-secondary font-bold relative inline-block"
+                    whileHover={{ 
+                      scale: 1.1,
+                      textShadow: "0 0 20px rgba(6, 182, 212, 0.6)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    measurable efficiency
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-secondary/50 rounded-full"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      transition={{ duration: 0.8, delay: 0.5 }}
+                    />
+                  </motion.span>
+                  . I recently engineered a real-world system that achieved a{' '}
+                  <motion.span 
+                    className="text-accent font-bold text-lg relative inline-block"
+                    whileHover={{ 
+                      scale: 1.15,
+                      textShadow: "0 0 20px rgba(251, 191, 36, 0.6)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    40% reduction
+                  </motion.span>
+                  {' '}in manual data processing while significantly enhancing system response times. From designing high-fidelity prototypes in{' '}
+                  <span className="text-primary font-medium">Figma</span> to optimizing{' '}
+                  <span className="text-secondary font-medium">MySQL database schemas</span>, my focus is on merging speed with{' '}
+                  <motion.span 
+                    className="text-accent font-semibold relative inline-block"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    "bulletproof" reliability
+                  </motion.span>.
+                </div>
               </div>
+              
+              {/* Tech Stack Highlights */}
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mt-8 lg:mt-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <motion.div 
+                  className="glass-subtle rounded-xl p-4 lg:p-6 text-center group hover:bg-primary/5 transition-colors duration-300"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <h4 className="text-primary font-bold text-sm lg:text-base mb-2 group-hover:text-white transition-colors duration-300">
+                    Tech Stack
+                  </h4>
+                  <p className="text-white/70 text-xs lg:text-sm leading-relaxed">
+                    <span className="text-accent font-medium">PHP Laravel 12</span>, React/Next.js, MySQL, Supabase
+                  </p>
+                </motion.div>
+                
+                <motion.div 
+                  className="glass-subtle rounded-xl p-4 lg:p-6 text-center group hover:bg-secondary/5 transition-colors duration-300"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <h4 className="text-secondary font-bold text-sm lg:text-base mb-2 group-hover:text-white transition-colors duration-300">
+                    AI Integration
+                  </h4>
+                  <p className="text-white/70 text-xs lg:text-sm leading-relaxed">
+                    <span className="text-primary font-medium">OpenAI API</span>, Groq LLM, LangChain, Prompt Engineering
+                  </p>
+                </motion.div>
+                
+                <motion.div 
+                  className="glass-subtle rounded-xl p-4 lg:p-6 text-center group hover:bg-accent/5 transition-colors duration-300"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <h4 className="text-accent font-bold text-sm lg:text-base mb-2 group-hover:text-white transition-colors duration-300">
+                    Core Logic
+                  </h4>
+                  <p className="text-white/70 text-xs lg:text-sm leading-relaxed">
+                    <span className="text-secondary font-medium">Idempotent API Design</span>, Systems Analysis, RESTful Architecture
+                  </p>
+                </motion.div>
+              </motion.div>
             </motion.div>
             
             {/* Stats Grid */}

@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* Power Stack Bento Grid */}
       <Section>
-        <div className="container-spacing px-4">
+        <div id="power-stack" className="container-spacing px-4">
           <ScrollReveal>
             <ParallaxText speed={0.3}>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-lg font-bold mb-6 lg:mb-element-gap text-center text-shimmer px-4">
@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* Experience Timeline */}
       <Section>
-        <div className="container-spacing">
+        <div id="experience" className="container-spacing">
           <ScrollReveal>
             <ParallaxText speed={0.2}>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-lg font-bold mb-6 lg:mb-element-gap text-center text-shimmer px-4">
