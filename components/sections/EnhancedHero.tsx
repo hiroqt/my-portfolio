@@ -2,8 +2,8 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { LinkedInIcon, GmailIcon } from '@/components/icons/MoreTechIcons'
-import { GitHubIcon } from '@/components/icons/TechIcons'
+import { LinkedInIcon, GmailIcon } from '../icons/MoreTechIcons'
+import { GitHubIcon } from '../icons/TechIcons'
 
 export function EnhancedHero() {
   const ref = useRef<HTMLDivElement>(null)
