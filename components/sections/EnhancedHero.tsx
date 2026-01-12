@@ -84,14 +84,14 @@ export function EnhancedHero() {
         
         <motion.div 
           style={{ y, opacity, scale }}
-          className="text-center space-y-element-gap px-6 w-full max-w-7xl mx-auto"
+          className="text-center space-y-element-gap px-6 w-full max-w-7xl mx-auto pt-16 sm:pt-0"
         >
           {/* Enhanced name with particle effects */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="space-y-micro-gap relative"
+            className="space-y-micro-gap relative mt-8 sm:mt-0"
           >
             <motion.h1 
               className="text-3xl sm:text-4xl md:text-5xl lg:text-display font-bold text-shimmer relative px-4"

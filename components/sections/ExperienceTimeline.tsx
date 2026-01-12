@@ -43,7 +43,7 @@ const getTechIcon = (tech: string) => {
   const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?: number }> } = {
     'Laravel 11.x': LaravelIcon,
     'MySQL/SQLite': MySQLIcon,
-    'Spatie Laravel-Permission': SpatieIcon,
+    'Spatie Permission': SpatieIcon,
     'Role-based Auth': SpatieIcon,
     'Tailwind CSS': TailwindIcon,
     'Alpine.js': AlpineJSIcon,
@@ -228,12 +228,12 @@ export function ExperienceTimeline() {
                           Backend & Database
                         </h5>
                         <div className="flex flex-wrap gap-2">
-                          {['Laravel 11.x', 'MySQL/SQLite', 'Spatie Laravel-Permission'].map((tech, idx) => {
+                          {['Laravel 11.x', 'MySQL/SQLite', 'Spatie Permission'].map((tech, idx) => {
                             const IconComponent = getTechIcon(tech)
                             return (
                               <motion.span 
                                 key={tech}
-                                className="glass-subtle rounded-lg px-3 py-2 text-xs text-white/80 font-medium hover:bg-accent/20 transition-colors duration-300 flex items-center gap-2"
+                                className="glass-subtle rounded-lg px-2 sm:px-3 py-2 text-xs text-white/80 font-medium hover:bg-accent/20 transition-colors duration-300 flex items-center gap-1 sm:gap-2 max-w-full"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.3, delay: idx * 0.1 }}
@@ -245,7 +245,7 @@ export function ExperienceTimeline() {
                                     size={12} 
                                   />
                                 )}
-                                <span className="whitespace-nowrap">{tech}</span>
+                                <span className="truncate text-xs">{tech}</span>
                               </motion.span>
                             )
                           })}
@@ -262,7 +262,7 @@ export function ExperienceTimeline() {
                             return (
                               <motion.span 
                                 key={tech}
-                                className="glass-subtle rounded-lg px-3 py-2 text-xs text-white/80 font-medium hover:bg-primary/20 transition-colors duration-300 flex items-center gap-2"
+                                className="glass-subtle rounded-lg px-2 sm:px-3 py-2 text-xs text-white/80 font-medium hover:bg-primary/20 transition-colors duration-300 flex items-center gap-1 sm:gap-2 max-w-full"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.3, delay: idx * 0.1 }}
@@ -274,7 +274,7 @@ export function ExperienceTimeline() {
                                     size={12} 
                                   />
                                 )}
-                                <span className="whitespace-nowrap">{tech}</span>
+                                <span className="truncate text-xs">{tech}</span>
                               </motion.span>
                             )
                           })}
