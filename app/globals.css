@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-white font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-section px-container-gap;
+  }
+  
+  .container-spacing {
+    @apply max-w-7xl mx-auto px-container-gap;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+  }
+  
+  .glow-text {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
