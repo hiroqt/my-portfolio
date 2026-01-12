@@ -127,7 +127,7 @@ export function EnhancedHero() {
             </span>
           </div>
           <div className="hidden sm:block text-zinc-500">
-            {new Date().toLocaleTimeString('en-US', { hour12: false })}
+            SYSTEM ONLINE
           </div>
         </div>
       </motion.div>
