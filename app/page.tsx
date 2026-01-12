@@ -100,16 +100,6 @@ export default function Home() {
               <CertificationMarquee />
             </div>
           </Section>
-
-          {/* Scrolling Text */}
-          <Section>
-            <ParallaxText speed={-0.5}>
-              Full-Stack Development • AI Integration • System Architecture • Performance Optimization • 
-            </ParallaxText>
-            <ParallaxText speed={0.5}>
-              Laravel • Next.js • React • TypeScript • Tailwind CSS • Framer Motion • 
-            </ParallaxText>
-          </Section>
         </>
       )}
     </>

@@ -8,7 +8,7 @@ export function PowerStack() {
     {
       title: "Backend Architecture",
       description: "Robust server-side solutions with modern PHP framework",
-      technologies: ["Laravel 11.x", "MySQL/SQLite", "Spatie Permissions", "RESTful APIs"],
+      technologies: ["Laravel 12.x", "MySQL/SQLite", "Spatie Permissions", "RESTful APIs"],
       color: "primary",
       gradient: "from-primary/20 to-primary-light/10"
     },

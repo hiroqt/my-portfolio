@@ -40,14 +40,16 @@ export function SummarySection() {
         <ScrollReveal>
           <div className="text-center space-y-6 lg:space-y-element-gap">
             <motion.h2 
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-lg font-bold text-white mb-6 lg:mb-element-gap px-4 leading-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-lg font-bold text-white mb-6 lg:mb-element-gap px-4 leading-loose"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              style={{ lineHeight: '1.4' }}
             >
               <span className="block sm:inline">Full-Stack Developer</span>
-              <span className="block sm:inline"> & </span>
-              <span className="block sm:inline">AI-Augmented Engineer</span>
+              <span className="block sm:inline mx-2"> & </span>
+              <span className="block sm:inline">AI-Augmented</span>
+              <span className="block"> Engineer</span>
             </motion.h2>
             
             <motion.div
