@@ -87,3 +87,39 @@ export const GmailIcon = ({ className = "", size = 16 }: IconProps) => (
     <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
   </svg>
 )
+
+export const PayrollIcon = ({ className = "", size = 16 }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M11,9H13V11H15V13H13V15H11V13H9V11H11V9Z"/>
+  </svg>
+)
+
+export const LeaveIcon = ({ className = "", size = 16 }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/>
+  </svg>
+)
+
+export const RoleIcon = ({ className = "", size = 16 }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
+  </svg>
+)
+
+export const ComposerIcon = ({ className = "", size = 16 }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,7H13V9H11V7M11,11H13V17H11V11Z"/>
+  </svg>
+)
+
+export const NPMIcon = ({ className = "", size = 16 }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M0,7.334v8h6.666v1.332H12v-1.332h12v-8H0z M6.666,13.667H5.334v-4H3.999v4H1.335V8.667h5.331V13.667z M13.333,13.667h-1.333v1.333h-2.666V8.667h4V13.667z M24,13.667h-1.334v-4h-1.332v4h-1.336v-4h-1.332v4h-2.664V8.667h8V13.667z M10.666,10H12v2.667h-1.334V10z"/>
+  </svg>
+)
+
+export const ArtisanIcon = ({ className = "", size = 16 }: IconProps) => (
+  <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20,19V7H4V19H20M20,3A2,2 0 0,1 22,5V19A2,2 0 0,1 20,21H4A2,2 0 0,1 2,19V5C2,3.89 2.9,3 4,3H20M13,17V15H18V17H13M9.58,13L5.57,9H11.4L11.61,9.3L12.08,10.2L12.31,10.5V11.5L12.08,11.8L11.61,12.7L11.4,13H9.58Z"/>
+  </svg>
+)

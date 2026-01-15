@@ -2,6 +2,50 @@
 
 import { motion } from 'framer-motion'
 import { ScrollReveal } from '@/components/animation/ScrollReveal'
+import { 
+  LaravelIcon, 
+  MySQLIcon, 
+  TailwindIcon, 
+  AlpineJSIcon, 
+  ViteIcon,
+  GitHubIcon
+} from '@/components/icons/TechIcons'
+import { 
+  QRCodeIcon, 
+  PayrollIcon, 
+  LeaveIcon, 
+  RoleIcon,
+  ComposerIcon,
+  NPMIcon,
+  ArtisanIcon,
+  SpatieIcon,
+  APIIcon,
+  MobileIcon
+} from '@/components/icons/MoreTechIcons'
+
+// Technology icon mapping
+const getTechIcon = (tech: string) => {
+  const iconMap: { [key: string]: React.ComponentType<{ className?: string; size?: number }> } = {
+    'Laravel 12.x': LaravelIcon,
+    'MySQL/SQLite': MySQLIcon,
+    'Spatie Permissions': SpatieIcon,
+    'RESTful APIs': APIIcon,
+    'Tailwind CSS': TailwindIcon,
+    'Alpine.js': AlpineJSIcon,
+    'Vite': ViteIcon,
+    'Mobile Responsive': MobileIcon,
+    'QR Attendance': QRCodeIcon,
+    'Payroll System': PayrollIcon,
+    'Leave Management': LeaveIcon,
+    'Role-based Access': RoleIcon,
+    'Git/GitHub': GitHubIcon,
+    'Composer': ComposerIcon,
+    'NPM/Yarn': NPMIcon,
+    'Laravel Artisan': ArtisanIcon
+  }
+  
+  return iconMap[tech] || null
+}
 
 export function PowerStack() {
   const stackItems = [
@@ -79,24 +123,33 @@ export function PowerStack() {
               
               {/* Technologies grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-3">
-                {item.technologies.map((tech, techIndex) => (
-                  <motion.div
-                    key={techIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: techIndex * 0.1 
-                    }}
-                    whileHover={{ 
-                      scale: 1.05,
-                      backgroundColor: "rgba(255, 255, 255, 0.1)"
-                    }}
-                    className="glass-subtle rounded-lg lg:rounded-xl px-3 sm:px-4 py-2 lg:py-3 text-white/80 text-xs sm:text-sm font-medium text-center cursor-pointer transition-all duration-300"
-                  >
-                    <span className="whitespace-nowrap">{tech}</span>
-                  </motion.div>
-                ))}
+                {item.technologies.map((tech, techIndex) => {
+                  const IconComponent = getTechIcon(tech)
+                  return (
+                    <motion.div
+                      key={techIndex}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ 
+                        duration: 0.5, 
+                        delay: techIndex * 0.1 
+                      }}
+                      whileHover={{ 
+                        scale: 1.05,
+                        backgroundColor: "rgba(255, 255, 255, 0.1)"
+                      }}
+                      className="glass-subtle rounded-lg lg:rounded-xl px-3 sm:px-4 py-2 lg:py-3 text-white/80 text-xs sm:text-sm font-medium cursor-pointer transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      {IconComponent && (
+                        <IconComponent 
+                          className="text-white/70 flex-shrink-0" 
+                          size={14} 
+                        />
+                      )}
+                      <span className="whitespace-nowrap">{tech}</span>
+                    </motion.div>
+                  )
+                })}
               </div>
             </div>
             
