@@ -162,7 +162,7 @@ export function ProjectShowcase() {
         </motion.div>
 
         {/* Main Project Display */}
-        <div className="relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] perspective-1000">
+        <div className="relative perspective-1000 pb-8">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
@@ -177,7 +177,7 @@ export function ProjectShowcase() {
                 scale: { duration: 0.4 },
                 rotateY: { duration: 0.4 }
               }}
-              className="absolute inset-0 w-full"
+              className="w-full"
             >
               <ProjectCard project={currentProject} />
             </motion.div>
@@ -411,7 +411,7 @@ function ProjectCard({ project }: { project: any }) {
             </div>
 
             {/* Image Preview */}
-            <div className="glass-card rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12 min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] flex items-center justify-center relative overflow-hidden group/visual">
+            <div className="glass-card rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12 flex items-center justify-center relative overflow-hidden group/visual">
               {/* Animated background */}
               <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-50`} />
               
@@ -422,7 +422,7 @@ function ProjectCard({ project }: { project: any }) {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="relative z-10 w-full h-full flex items-center justify-center"
+                className="relative z-10 w-full flex items-center justify-center py-4"
               >
                 {activeView === 'desktop' ? (
                   // Laptop Mockup

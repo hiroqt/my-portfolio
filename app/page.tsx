@@ -12,6 +12,7 @@ import { CertificationMarquee } from '@/components/sections/CertificationMarquee
 import { EnhancedHero } from '@/components/sections/EnhancedHero'
 import { SummarySection } from '@/components/sections/SummarySection'
 import { SectionSeparator } from '@/components/ui/SectionSeparator'
+import { ScrollToTop } from '@/components/ui/ScrollToTop'
 
 // Dynamically import PageLoader to ensure it only renders on client
 const PageLoader = dynamic(() => import('@/components/ui/PageLoader').then(mod => ({ default: mod.PageLoader })), {
@@ -100,6 +101,9 @@ export default function Home() {
               <CertificationMarquee />
             </div>
           </Section>
+
+          {/* Scroll to Top Button */}
+          <ScrollToTop />
         </>
       )}
     </>
