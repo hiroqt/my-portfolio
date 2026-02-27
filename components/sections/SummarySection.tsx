@@ -7,7 +7,7 @@ import { CodeIcon, DatabaseIcon, APIIcon, AIIcon, SecurityIcon, PerformanceIcon,
 
 export function SummarySection() {
   const stats = [
-    { number: "40%", label: "Reduction in Manual Processing" },
+    { number: "99%", label: "Reduction in Manual Processing" },
     { number: "2+", label: "Years of Development Experience" },
     { number: "100%", label: "Project Success Rate" },
     { number: "24/7", label: "System Reliability" }
