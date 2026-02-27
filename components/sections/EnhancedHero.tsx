@@ -184,14 +184,6 @@ export function EnhancedHero() {
               whileHover={{ scale: 1.05, y: -5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-white mb-1">
-                  40% Reduction
-                </div>
-                <div className="text-sm text-zinc-400">
-                  in Manual Data Processing achieved in latest HRIS build
-                </div>
-              </div>
             </motion.div>
           </motion.div>
 
