@@ -171,22 +171,6 @@ export function EnhancedHero() {
               />
             </div>
           </motion.div>
-
-          {/* Impact Badge */}
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.8 }}
-          >
-            <motion.div
-              className="glass-premium rounded-2xl px-6 py-4 max-w-md mx-auto backdrop-blur-md bg-white/5 border border-white/10"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-            </motion.div>
-          </motion.div>
-
           {/* Call to Action Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-8"
