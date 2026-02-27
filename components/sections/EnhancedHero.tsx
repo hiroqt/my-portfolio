@@ -2,8 +2,14 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { LinkedInIcon, GmailIcon } from '../icons/MoreTechIcons'
 import { GitHubIcon } from '../icons/TechIcons'
+
+// Dynamically import DarkVeil to avoid SSR issues
+const DarkVeil = dynamic(() => import('@/components/background/DarkVeil'), {
+  ssr: false
+})
 
 export function EnhancedHero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -78,8 +84,20 @@ export function EnhancedHero() {
   return (
     <div 
       ref={ref}
-      className="min-h-screen w-full relative overflow-hidden bg-zinc-950 flex flex-col"
+      className="min-h-screen w-full relative overflow-hidden flex flex-col"
     >
+      {/* DarkVeil WebGL Background */}
+      <div className="absolute inset-0 z-0">
+        <DarkVeil
+          hueShift={0}
+          noiseIntensity={0}
+          scanlineIntensity={0}
+          speed={0.5}
+          scanlineFrequency={0}
+          warpAmount={0}
+        />
+      </div>
+
       {/* Interactive Grid Background */}
       <div className="absolute inset-0">
         <motion.div
