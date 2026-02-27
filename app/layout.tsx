@@ -11,7 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Arnel A. Baylon | Full-Stack Developer & AI Specialist',
+  title: 'Arnel A. Baylon | Portfolio',
   description: 'Architecting Scalable Systems & AI-Driven Solutions. Full-Stack Developer specializing in PHP Laravel and Next.js with proven AI automation expertise.',
 }
 
