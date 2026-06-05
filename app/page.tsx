@@ -24,8 +24,8 @@ const systems = [
     summary:
       'Developed a queue workflow for hospital transactions, counter assignment, patient calling, and service status monitoring.',
     impact: 'Improved queue visibility for staff and helped patients move through service points with less confusion.',
-    stack: ['Vue.js', 'MySQL', 'JavaScript', 'Responsive UI'],
-    details: ['Ticket flow', 'Printed tickets', 'Counter dashboard', 'Status tracking', 'Staff controls'],
+    stack: ['Vue.js', 'MySQL', 'JavaScript', 'Responsive UI', 'Grok AI Integration', 'Role-based Access'],
+    details: ['Ticket flow', 'Printed tickets', 'Counter dashboard', 'Status tracking', 'Staff controls', 'Patient display', 'Service records'],
     status: 'Implemented'
   },
   {
@@ -35,8 +35,8 @@ const systems = [
     summary:
       'Created a clearance process for tracking requirements, approvals, department routing, and final release status.',
     impact: 'Made clearance requests easier to audit by replacing scattered manual follow-ups with a structured system.',
-    stack: ['Vue.js', 'MySQL', 'Role-based Access', 'Audit Trail'],
-    details: ['Approval routing', 'Requirement tracking', 'Department views', 'Release records'],
+    stack: ['Vue.js', 'MySQL', 'Role-based Access', 'Audit Trail' , 'Responsive UI', 'Grok AI Integration' , 'Protected Access'],
+    details: ['Approval routing', 'Requirement tracking', 'Department views', 'Release records' , 'Protected access', 'Audit logs'],
     status: 'Implemented'
   },
   {
@@ -46,8 +46,8 @@ const systems = [
     summary:
       'Developed core EMR features for patient records, clinical notes, visit history, and organized medical data access.',
     impact: 'Supported faster record lookup and cleaner documentation for hospital workflows.',
-    stack: ['Vue.js', 'MySQL', 'Secure Records', 'Responsive UI'],
-    details: ['Patient profiles', 'Integrated System', 'Visit history', 'Clinical notes', 'Protected access'],
+    stack: ['Vue.js', 'MySQL', 'Secure Records', 'Responsive UI' , 'Role-based Access', 'Grok AI Integration'],
+    details: ['Patient profiles', 'Integrated System', 'Visit history', 'Clinical notes', 'Protected access' , 'Audit logs', 'Data organization', 'Medical records'],
     status: 'Implemented'
   }
 ]
