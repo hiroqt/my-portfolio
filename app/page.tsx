@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 
 type Theme = 'light' | 'dark'
@@ -14,7 +13,7 @@ const systems = [
       'Built a complete HR platform for employee records, QR attendance, leave management, payroll preparation, and role-based access.',
     impact: 'Reduced manual HR processing and centralized staff data into one reliable workflow.',
     stack: ['Laravel', 'MySQL', 'Tailwind CSS', 'Alpine.js', 'Vite'],
-    details: ['QR attendance', 'Payroll support', 'Employee lifecycle', 'Role permissions'],
+    details: ['QR attendance', 'Payroll support', 'Employee lifecycle', 'Role permissions', 'Leave management', 'Data organization', 'Secure access', 'Audit logs', 'Responsive UI', '20+ Modules and 100+ Sub-features'],
     status: 'Production'
   },
   {
@@ -52,22 +51,42 @@ const systems = [
   }
 ]
 
-const skills = [
-  'PHP Laravel',
-  'React / Next.js',
-  'MySQL',
-  'Tailwind CSS',
-  'Vue.js',
-  'REST APIs',
-  'Role-based Access',
-  'System Analysis',
-  'UI Prototyping',
-  'Git / GitHub',
-  'AI-assisted Development'
+const techStack = [
+  {
+    group: 'Frontend',
+    tools: [
+      'React',
+      'Next.js',
+      'Vue.js',
+      'Tailwind CSS',
+      'Alpine.js',
+      'JavaScript',
+      'TypeScript',
+    ]
+  },
+  {
+    group: 'Backend',
+    tools: [
+      'PHP',
+      'Laravel',
+      'MySQL',
+      'REST APIs',
+      'Node.js'
+    ]
+  },
+  {
+    group: 'DevOps',
+    tools: [
+      'Git',
+      'GitHub',
+      'Composer',
+      'NPM'
+    ]
+  }
 ]
 
 const highlights = [
-  'Full-stack developer focused on practical business and hospital systems.',
+  'Full-stack developer building practical software that solves real-world operational challenges.',
   'Builds database-driven applications with clean workflows and reliable access control.',
   'Comfortable translating manual office processes into maintainable web applications.'
 ]
@@ -76,7 +95,7 @@ const certifications = [
   'Cisco Networking Academy - Ethical Hacker Certification',
   'Digital Literacy Webinar - AI Tools & Applications',
   'Blockchain Campus Conference - Web3 & Blockchain Technology',
-  'Laravel Framework - Intermediate Developer'
+  'On the job training (486hrs OJT)'
 ]
 
 export default function Home() {
@@ -97,7 +116,7 @@ export default function Home() {
         <header className="resume-hero">
           <nav className="resume-nav" aria-label="Portfolio navigation">
             <a href="#systems">Systems</a>
-            <a href="#skills">Skills</a>
+            <a href="#tech-stack">Tech Stack</a>
             <a href="#contact">Contact</a>
             <div className="theme-switch" aria-label="Theme selector">
               {(['light', 'dark'] as Theme[]).map((option) => (
@@ -119,8 +138,7 @@ export default function Home() {
               <p className="eyebrow">Full-Stack Developer</p>
               <h1>Arnel A. Baylon</h1>
               <p className="headline">
-                Resume-style portfolio for web systems, HR workflows, hospital operations, and
-                database-driven applications.
+                Making daily operations easier for staff and administrators
               </p>
               <div className="contact-row" id="contact">
                 <a href="mailto:arnelbaylon15@gmail.com">arnelbaylon15@gmail.com</a>
@@ -159,12 +177,17 @@ export default function Home() {
               </p>
             </ResumeSection>
 
-            <ResumeSection title="Core Skills" id="skills">
-              <div className="skill-list">
-                {skills.map((skill) => (
-                  <span key={skill}>{skill}</span>
-                ))}
-              </div>
+            <ResumeSection title="Tech Stack" id="tech-stack">
+              {techStack.map((stack) => (
+                <div key={stack.group} className="tech-category">
+                  <h3 className="tech-category-title">{stack.group}</h3>
+                  <div className="skill-list">
+                    {stack.tools.map((tool) => (
+                      <span key={tool}>{tool}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </ResumeSection>
 
             <ResumeSection title="Education">
@@ -173,8 +196,8 @@ export default function Home() {
                 <span>Current Student</span>
               </div>
               <div className="timeline-item">
-                <strong>Computer Programming</strong>
-                <span>Current Student</span>
+                <strong>Senior Highschool - ICT</strong>
+                <span>2021 - 2022</span>
               </div>
             </ResumeSection>
 
@@ -190,7 +213,7 @@ export default function Home() {
           <div className="resume-main">
             <ResumeSection title="Selected Systems" id="systems">
               <div className="system-stack">
-                {systems.map((system, index) => (
+                {systems.map((system) => (
                   <article className="system-card" key={`${system.organization}-${system.name}`}>
                     <div className="system-card-header">
                       <div>
@@ -200,18 +223,6 @@ export default function Home() {
                       </div>
                       <strong>{system.status}</strong>
                     </div>
-
-                    {index === 0 && (
-                      <div className="system-image">
-                        <Image
-                          src="/images/vcm_desktop.png"
-                          alt="Victorious Christian Montessori HRIS desktop preview"
-                          fill
-                          sizes="(max-width: 900px) 100vw, 640px"
-                          priority
-                        />
-                      </div>
-                    )}
 
                     <p>{system.summary}</p>
                     <p className="impact">{system.impact}</p>

@@ -404,6 +404,24 @@
   gap: 8px;
 }
 
+.tech-category {
+  display: grid;
+  gap: 12px;
+}
+
+.tech-category + .tech-category {
+  margin-top: 20px;
+}
+
+.tech-category-title {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 .timeline-item {
   display: grid;
   gap: 4px;
@@ -475,20 +493,6 @@
 
 .system-org {
   margin: 0 0 6px;
-}
-
-.system-image {
-  position: relative;
-  min-height: 240px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-soft);
-}
-
-.system-image img {
-  object-fit: cover;
-  object-position: top center;
 }
 
 .impact {
@@ -589,7 +593,4 @@
     flex-direction: column;
   }
 
-  .system-image {
-    min-height: 190px;
-  }
 }

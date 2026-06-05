@@ -382,8 +382,8 @@ function ProjectCard({ project }: { project: any }) {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <div className="space-y-3 sm:space-y-4">
-            {/* Tab Buttons */}
-            <div className="flex gap-2 justify-center">
+            {/* Tab Buttons - Hidden on mobile (< 640px) */}
+            <div className="hidden sm:flex gap-2 justify-center">
               <motion.button
                 onClick={() => setActiveView('desktop')}
                 className={`px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
