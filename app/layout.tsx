@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { CinematicBackground } from '@/components/layout/CinematicBackground'
 import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ 
@@ -11,8 +10,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Arnel A. Baylon | Portfolio',
-  description: 'Architecting Scalable Systems & AI-Driven Solutions. Full-Stack Developer specializing in PHP Laravel and Next.js with proven AI automation expertise.',
+  title: 'Arnel A. Baylon | Resume Portfolio',
+  description: 'Resume-style portfolio for full-stack web systems including HRIS, queuing, clearance, and EMR platforms.',
 }
 
 export default function RootLayout({
@@ -22,11 +21,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="min-h-screen relative">
-        <CinematicBackground />
-        <main className="relative z-10">
-          {children}
-        </main>
+      <body className="min-h-screen">
+        {children}
         <Analytics />
       </body>
     </html>

@@ -1,111 +1,290 @@
 'use client'
 
-import { useState } from 'react'
-import dynamic from 'next/dynamic'
-import { Section } from '@/components/layout/Section'
-import { ParallaxText } from '@/components/animation/ParallaxText'
-import { ScrollReveal } from '@/components/animation/ScrollReveal'
-import { PowerStack } from '@/components/sections/PowerStack'
-import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline'
-import { ProjectShowcase } from '@/components/sections/ProjectShowcase'
-import { CertificationMarquee } from '@/components/sections/CertificationMarquee'
-import { EnhancedHero } from '@/components/sections/EnhancedHero'
-import { SummarySection } from '@/components/sections/SummarySection'
-import { SectionSeparator } from '@/components/ui/SectionSeparator'
-import { ScrollToTop } from '@/components/ui/ScrollToTop'
+import Image from 'next/image'
+import { useEffect, useMemo, useState } from 'react'
 
-// Dynamically import PageLoader to ensure it only renders on client
-const PageLoader = dynamic(() => import('@/components/ui/PageLoader').then(mod => ({ default: mod.PageLoader })), {
-  ssr: false
-})
+type Theme = 'light' | 'dark'
+
+const systems = [
+  {
+    name: 'HRIS',
+    organization: 'Victorious Christian Montessori',
+    type: 'Human Resource Information System',
+    summary:
+      'Built a complete HR platform for employee records, QR attendance, leave management, payroll preparation, and role-based access.',
+    impact: 'Reduced manual HR processing and centralized staff data into one reliable workflow.',
+    stack: ['Laravel', 'MySQL', 'Tailwind CSS', 'Alpine.js', 'Vite'],
+    details: ['QR attendance', 'Payroll support', 'Employee lifecycle', 'Role permissions'],
+    status: 'Production'
+  },
+  {
+    name: 'Queuing System',
+    organization: 'GEAMH',
+    type: 'Patient Flow Management',
+    summary:
+      'Developed a queue workflow for hospital transactions, counter assignment, patient calling, and service status monitoring.',
+    impact: 'Improved queue visibility for staff and helped patients move through service points with less confusion.',
+    stack: ['Vue.js', 'MySQL', 'JavaScript', 'Responsive UI'],
+    details: ['Ticket flow', 'Printed tickets', 'Counter dashboard', 'Status tracking', 'Staff controls'],
+    status: 'Implemented'
+  },
+  {
+    name: 'Clearance System',
+    organization: 'GEAMH',
+    type: 'Digital Clearance Workflow',
+    summary:
+      'Created a clearance process for tracking requirements, approvals, department routing, and final release status.',
+    impact: 'Made clearance requests easier to audit by replacing scattered manual follow-ups with a structured system.',
+    stack: ['Vue.js', 'MySQL', 'Role-based Access', 'Audit Trail'],
+    details: ['Approval routing', 'Requirement tracking', 'Department views', 'Release records'],
+    status: 'Implemented'
+  },
+  {
+    name: 'EMR System',
+    organization: 'GEAMH',
+    type: 'Electronic Medical Records',
+    summary:
+      'Developed core EMR features for patient records, clinical notes, visit history, and organized medical data access.',
+    impact: 'Supported faster record lookup and cleaner documentation for hospital workflows.',
+    stack: ['Vue.js', 'MySQL', 'Secure Records', 'Responsive UI'],
+    details: ['Patient profiles', 'Integrated System', 'Visit history', 'Clinical notes', 'Protected access'],
+    status: 'Implemented'
+  }
+]
+
+const skills = [
+  'PHP Laravel',
+  'React / Next.js',
+  'MySQL',
+  'Tailwind CSS',
+  'Vue.js',
+  'REST APIs',
+  'Role-based Access',
+  'System Analysis',
+  'UI Prototyping',
+  'Git / GitHub',
+  'AI-assisted Development'
+]
+
+const highlights = [
+  'Full-stack developer focused on practical business and hospital systems.',
+  'Builds database-driven applications with clean workflows and reliable access control.',
+  'Comfortable translating manual office processes into maintainable web applications.'
+]
+
+const certifications = [
+  'Cisco Networking Academy - Ethical Hacker Certification',
+  'Digital Literacy Webinar - AI Tools & Applications',
+  'Blockchain Campus Conference - Web3 & Blockchain Technology',
+  'Laravel Framework - Intermediate Developer'
+]
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [theme, setTheme] = useState<Theme>('dark')
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false)
-  }
+  useEffect(() => {
+    const requestedTheme = new URLSearchParams(window.location.search).get('theme')
+    if (requestedTheme === 'light' || requestedTheme === 'dark') {
+      setTheme(requestedTheme)
+    }
+  }, [])
+
+  const themeLabel = useMemo(() => (theme === 'dark' ? 'Dark' : 'Light'), [theme])
 
   return (
-    <>
-      {isLoading && <PageLoader onComplete={handleLoadingComplete} />}
-      
-      {!isLoading && (
-        <>
-          {/* Enhanced Hero Section */}
-          <EnhancedHero />
-
-          {/* Separator */}
-          <SectionSeparator variant="geometric" />
-
-          {/* Summary Section */}
-          <SummarySection />
-
-          {/* Separator */}
-          <SectionSeparator variant="lines" />
-
-          {/* Power Stack Bento Grid */}
-          <Section>
-            <div id="power-stack" className="container-spacing px-4">
-              <ScrollReveal>
-                <ParallaxText speed={0.3}>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-lg font-bold mb-6 lg:mb-element-gap text-center text-shimmer px-4">
-                    Power Stack
-                  </h2>
-                </ParallaxText>
-              </ScrollReveal>
-              <PowerStack />
+    <main className="resume-page" data-theme={theme}>
+      <div className="resume-shell">
+        <header className="resume-hero">
+          <nav className="resume-nav" aria-label="Portfolio navigation">
+            <a href="#systems">Systems</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+            <div className="theme-switch" aria-label="Theme selector">
+              {(['light', 'dark'] as Theme[]).map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  aria-pressed={theme === option}
+                  onClick={() => setTheme(option)}
+                  className={theme === option ? 'is-active' : ''}
+                >
+                  {option}
+                </button>
+              ))}
             </div>
-          </Section>
+          </nav>
 
-          {/* Separator */}
-          <SectionSeparator variant="wave" />
-
-          {/* Experience Timeline */}
-          <Section>
-            <div id="experience" className="container-spacing">
-              <ScrollReveal>
-                <ParallaxText speed={0.2}>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-lg font-bold mb-6 lg:mb-element-gap text-center text-shimmer px-4">
-                    Professional Impact
-                  </h2>
-                </ParallaxText>
-              </ScrollReveal>
-              <ExperienceTimeline />
+          <section className="hero-grid" aria-label="Profile summary">
+            <div className="identity-block">
+              <p className="eyebrow">Full-Stack Developer</p>
+              <h1>Arnel A. Baylon</h1>
+              <p className="headline">
+                Resume-style portfolio for web systems, HR workflows, hospital operations, and
+                database-driven applications.
+              </p>
+              <div className="contact-row" id="contact">
+                <a href="mailto:arnelbaylon15@gmail.com">arnelbaylon15@gmail.com</a>
+                <span>Cavite, Philippines</span>
+                <a href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer">
+                  github.com/hiroqt
+                </a>
+              </div>
             </div>
-          </Section>
 
-          {/* Separator */}
-          <SectionSeparator variant="dots" />
+            <aside className="theme-preview" aria-label={`${themeLabel} mode preview`}>
+              <div className="preview-top">
+                <span>{themeLabel} Mode</span>
+                <span>Resume Preview</span>
+              </div>
+              <div className="preview-panels">
+                <MiniPreview mode="light" active={theme === 'light'} onSelect={setTheme} />
+                <MiniPreview mode="dark" active={theme === 'dark'} onSelect={setTheme} />
+              </div>
+            </aside>
+          </section>
+        </header>
 
-          {/* Interactive Project Showcase */}
-          <Section>
-            <div className="container-spacing">
-              <ScrollReveal>
-                <ParallaxText speed={0.1}>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-heading-lg font-bold mb-6 lg:mb-element-gap text-center text-shimmer px-4">
-                    Featured Projects
-                  </h2>
-                </ParallaxText>
-              </ScrollReveal>
-              <ProjectShowcase />
-            </div>
-          </Section>
+        <section className="summary-band">
+          {highlights.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
+        </section>
 
-          {/* Separator */}
-          <SectionSeparator variant="lines" />
+        <section className="resume-layout">
+          <aside className="resume-sidebar" aria-label="Resume details">
+            <ResumeSection title="Profile">
+              <p>
+                I design and develop simple, useful web systems that organize records, automate
+                repetitive work, and make daily operations easier for staff and administrators.
+              </p>
+            </ResumeSection>
 
-          {/* Certifications Marquee */}
-          <Section>
-            <div className="container-spacing px-4">
-              <CertificationMarquee />
-            </div>
-          </Section>
+            <ResumeSection title="Core Skills" id="skills">
+              <div className="skill-list">
+                {skills.map((skill) => (
+                  <span key={skill}>{skill}</span>
+                ))}
+              </div>
+            </ResumeSection>
 
-          {/* Scroll to Top Button */}
-          <ScrollToTop />
-        </>
-      )}
-    </>
+            <ResumeSection title="Education">
+              <div className="timeline-item">
+                <strong>Bachelor of Science in Information Technology</strong>
+                <span>Current Student</span>
+              </div>
+              <div className="timeline-item">
+                <strong>Computer Programming</strong>
+                <span>Current Student</span>
+              </div>
+            </ResumeSection>
+
+            <ResumeSection title="Training">
+              <ul className="plain-list">
+                {certifications.map((cert) => (
+                  <li key={cert}>{cert}</li>
+                ))}
+              </ul>
+            </ResumeSection>
+          </aside>
+
+          <div className="resume-main">
+            <ResumeSection title="Selected Systems" id="systems">
+              <div className="system-stack">
+                {systems.map((system, index) => (
+                  <article className="system-card" key={`${system.organization}-${system.name}`}>
+                    <div className="system-card-header">
+                      <div>
+                        <p className="system-org">{system.organization}</p>
+                        <h2>{system.name}</h2>
+                        <span>{system.type}</span>
+                      </div>
+                      <strong>{system.status}</strong>
+                    </div>
+
+                    {index === 0 && (
+                      <div className="system-image">
+                        <Image
+                          src="/images/vcm_desktop.png"
+                          alt="Victorious Christian Montessori HRIS desktop preview"
+                          fill
+                          sizes="(max-width: 900px) 100vw, 640px"
+                          priority
+                        />
+                      </div>
+                    )}
+
+                    <p>{system.summary}</p>
+                    <p className="impact">{system.impact}</p>
+
+                    <div className="detail-grid">
+                      {system.details.map((detail) => (
+                        <span key={detail}>{detail}</span>
+                      ))}
+                    </div>
+
+                    <div className="stack-row">
+                      {system.stack.map((tech) => (
+                        <span key={tech}>{tech}</span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </ResumeSection>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}
+
+function ResumeSection({
+  children,
+  id,
+  title
+}: {
+  children: React.ReactNode
+  id?: string
+  title: string
+}) {
+  return (
+    <section className="resume-section" id={id}>
+      <h2>{title}</h2>
+      {children}
+    </section>
+  )
+}
+
+function MiniPreview({
+  active,
+  mode,
+  onSelect
+}: {
+  active: boolean
+  mode: Theme
+  onSelect: (theme: Theme) => void
+}) {
+  return (
+    <button
+      type="button"
+      className="mini-preview"
+      data-preview={mode}
+      data-active={active}
+      onClick={() => onSelect(mode)}
+      aria-label={`${mode} preview`}
+    >
+      <span className="mini-header">
+        <span />
+        <span>{mode}</span>
+      </span>
+      <span className="mini-title" />
+      <span className="mini-line long" />
+      <span className="mini-line" />
+      <span className="mini-grid">
+        <span />
+        <span />
+        <span />
+      </span>
+    </button>
   )
 }
