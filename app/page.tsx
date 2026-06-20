@@ -14,7 +14,8 @@ const systems = [
     impact: 'Reduced manual HR processing and centralized staff data into one reliable workflow.',
     stack: ['Laravel', 'MySQL', 'Tailwind CSS', 'Alpine.js', 'Vite'],
     details: ['QR attendance', 'Payroll support', 'Employee lifecycle', 'Role permissions', 'Leave management', 'Data organization', 'Secure access', 'Audit logs', 'Responsive UI', '20+ Modules and 100+ Sub-features'],
-    status: 'Production'
+    status: 'Production',
+    url: 'https://vcm-cavite.online'
   },
   {
     name: 'Queuing System',
@@ -48,6 +49,30 @@ const systems = [
     stack: ['Vue.js', 'MySQL', 'Secure Records', 'Responsive UI' , 'Role-based Access', 'Grok AI Integration'],
     details: ['Patient profiles', 'Integrated System', 'Visit history', 'Clinical notes', 'Protected access' , 'Audit logs', 'Data organization', 'Medical records'],
     status: 'Implemented'
+  },
+  {
+    name: 'TMRC Running Club Website',
+    organization: 'Tanza Millennium Running Club',
+    type: 'Community & Event Platform',
+    summary:
+      'Created a dynamic website for a running club featuring event management, member tracking, and community engagement tools.',
+    impact: 'Centralized event registration and member communication, making it easier to coordinate runs and track participation.',
+    stack: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Responsive UI'],
+    details: ['Event registration', 'Member profiles', 'Running routes', 'Photo galleries', 'News updates', 'Achievement tracking', 'Mobile optimized', 'Community features'],
+    status: 'Live',
+    url: 'https://tmrc.vercel.app'
+  },
+  {
+    name: 'HiveSyncVA Website',
+    organization: 'HiveSyncVA',
+    type: 'Service Showcase & Portfolio',
+    summary:
+      'Developed a professional website for a virtual assistant service showcasing offerings, client work, and streamlined inquiry handling.',
+    impact: 'Enhanced online presence with clear service presentation and improved client onboarding through automated contact forms.',
+    stack: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Responsive UI'],
+    details: ['Service packages', 'Pricing tiers', 'Client testimonials', 'Project portfolio', 'Contact automation', 'Case studies', 'Professional design', 'SEO optimized'],
+    status: 'Live',
+    url: 'https://hivesync.vercel.app'
   }
 ]
 
@@ -95,7 +120,8 @@ const certifications = [
   'Cisco Networking Academy - Ethical Hacker Certification',
   'Digital Literacy Webinar - AI Tools & Applications',
   'Blockchain Campus Conference - Web3 & Blockchain Technology',
-  'On the job training (486hrs OJT)'
+  'On the job training (486hrs OJT)', 'Advanced SQL and Database Design', 
+  'Introduction to Generative AI - Art of the Possible', 'Getting into the ServerlessMindset'
 ]
 
 export default function Home() {
@@ -220,6 +246,15 @@ export default function Home() {
                         <p className="system-org">{system.organization}</p>
                         <h2>{system.name}</h2>
                         <span>{system.type}</span>
+                        {system.url && (
+                          <a 
+                            href={system.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                          >
+                            🔗 {system.url}
+                          </a>
+                        )}
                       </div>
                       <strong>{system.status}</strong>
                     </div>

@@ -1,134 +1,123 @@
-# Arnel A. Baylon - Portfolio
+# Resume Portfolio
 
-A premium, cinematic portfolio website showcasing full-stack development expertise with a focus on scalable systems and AI-driven solutions.
+A clean, professional resume-style portfolio website for Arnel Baylon showcasing full-stack development projects and technical expertise.
 
-## 🚀 Features
+## Features
 
-- **Cinematic Design**: Premium glassmorphism effects with sophisticated animations
-- **Responsive**: Mobile-first design that works perfectly on all devices
-- **Performance Optimized**: Built with Next.js 14 App Router for optimal performance
-- **Interactive Elements**: Advanced animations using Framer Motion
-- **Modern Tech Stack**: Latest web technologies and best practices
+- 🎨 **Dual Theme Support** - Light and dark mode with smooth transitions
+- 💬 **AI Chat Assistant** - Interactive chat powered by Groq LLM to answer visitor questions
+- 📱 **Fully Responsive** - Optimized for all devices from mobile to desktop
+- ⚡ **Fast & Modern** - Built with Next.js 14, React 18, and TypeScript
+- 🎭 **Smooth Animations** - Powered by Framer Motion
+- 📊 **Analytics** - Integrated Vercel Analytics
 
-## 🛠️ Tech Stack
+## Tech Stack
 
+### Frontend
 - **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
 - **Language**: TypeScript
-- **Icons**: Custom SVG components
-- **Deployment**: Vercel (recommended)
+- **Styling**: Tailwind CSS + Custom CSS
+- **Animations**: Framer Motion
+- **UI Library**: React 18
 
-## 🎯 Key Sections
+### Backend & AI
+- **Chat AI**: Groq SDK (Llama 3.3 70B)
+- **API Routes**: Next.js API Routes
+- **Rate Limiting**: In-memory (production: use Redis)
 
-- **Hero Section**: Dynamic typewriter effect with holographic animations
-- **Professional Summary**: AI-augmented engineer identity with scrolling competencies
-- **Experience Timeline**: Interactive tabbed interface showcasing HRIS project
-- **Project Showcase**: Featured projects with technology stack visualization
-- **Certifications**: Marquee display of professional certifications
-- **Power Stack**: Technology expertise visualization
+### DevOps
+- **Hosting**: Vercel
+- **Analytics**: Vercel Analytics
+- **Version Control**: Git
 
-## 🚀 Getting Started
+## Projects Showcase
+
+1. **HRIS Management System** - HR platform with QR attendance and payroll
+2. **Queuing System** - Hospital patient flow management
+3. **Clearance System** - Digital clearance workflow
+4. **EMR System** - Electronic medical records platform
+5. **TMRC Running Club Website** - Community event platform
+6. **HiveSyncVA Website** - VA service showcase
+
+## Getting Started
 
 ### Prerequisites
-
 - Node.js 18+ 
 - npm or yarn
+- Groq API key (for chat feature)
 
 ### Installation
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/hiroqt/my-portfolio.git
-cd my-portfolio
-```
+# Clone the repository
+git clone <repository-url>
 
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-```
 
-3. Run the development server:
-```bash
+# Set up environment variables
+cp .env.example .env.local
+# Add your GROQ_API_KEY to .env.local
+
+# Run development server
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
-## 📁 Project Structure
+### Environment Variables
+
+Create a `.env.local` file:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+## Project Structure
 
 ```
-├── app/                    # Next.js App Router
+├── app/
+│   ├── api/chat/          # Chat API endpoint
 │   ├── globals.css        # Global styles
+│   ├── chat-widget.css    # Chat widget styles
 │   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
+│   └── page.tsx           # Main resume page
 ├── components/
-│   ├── animation/         # Animation components
-│   ├── icons/            # SVG icon components
-│   ├── layout/           # Layout components
-│   ├── sections/         # Page sections
-│   └── ui/               # UI components
-├── lib/                  # Utility functions
-└── public/               # Static assets
+│   ├── layout/
+│   │   └── Section.tsx    # Section wrapper component
+│   └── ui/
+│       └── ChatWidget.tsx # AI chat interface
+├── lib/
+│   └── utils.ts           # Utility functions
+└── public/                # Static assets
 ```
 
-## 🎨 Design Features
+## Build & Deploy
 
-- **Monochrome Theme**: Sophisticated black, white, and gray color palette
-- **Glassmorphism**: Modern glass-like UI elements
-- **Particle Systems**: Dynamic floating elements and animations
-- **Responsive Typography**: Fluid typography using clamp() functions
-- **Advanced Animations**: Scroll-triggered and hover animations
+```bash
+# Build for production
+npm run build
 
-## 📱 Mobile Optimization
+# Start production server
+npm start
+```
 
-- Touch-friendly interface
-- Responsive breakpoints
-- Optimized animations for mobile devices
-- Adaptive spacing and typography
+The site is optimized for Vercel deployment with automatic builds on push.
 
-## 🔧 Customization
+## Security Features
 
-The portfolio is highly customizable. Key areas to modify:
+- Rate limiting on chat API (10 requests/minute per IP)
+- Input sanitization and validation
+- Content security patterns
+- Environment variable protection
 
-1. **Personal Information**: Update `components/sections/EnhancedHero.tsx`
-2. **Projects**: Modify `components/sections/ProjectShowcase.tsx`
-3. **Experience**: Update `components/sections/ExperienceTimeline.tsx`
-4. **Skills**: Customize `components/sections/PowerStack.tsx`
-5. **Colors**: Adjust theme in `tailwind.config.ts`
+## License
 
-## 🚀 Deployment
+Private - All rights reserved
 
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Deploy with zero configuration
-
-### Other Platforms
-
-The project can be deployed to any platform that supports Next.js:
-- Netlify
-- AWS Amplify
-- Railway
-- DigitalOcean App Platform
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/hiroqt/my-portfolio/issues).
-
-## 📞 Contact
+## Contact
 
 **Arnel A. Baylon**
-- Website: [vcm-cavite.online](https://vcm-cavite.online)
-- Email: your.email@example.com
-- LinkedIn: [Your LinkedIn Profile]
-- GitHub: [Your GitHub Profile]
-
----
-
-⭐ Star this repository if you found it helpful!
+- Email: arnelbaylon15@gmail.com
+- GitHub: [hiroqt](https://github.com/hiroqt)
+- Location: Cavite, Philippines

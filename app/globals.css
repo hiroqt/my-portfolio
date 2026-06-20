@@ -481,6 +481,21 @@
   font-weight: 700;
 }
 
+.system-card-header a {
+  display: block;
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.system-card-header a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
 .system-card-header strong {
   flex: 0 0 auto;
   padding: 7px 10px;

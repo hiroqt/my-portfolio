@@ -1,5 +1,5 @@
 {
-  "name": "cinematic-portfolio",
+  "name": "resume-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,6 @@
     "framer-motion": "^11.0.0",
     "groq-sdk": "^1.2.1",
     "next": "^14.2.0",
-    "ogl": "^1.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
