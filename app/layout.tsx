@@ -1,19 +1,19 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Sora } from 'next/font/google'
 import './globals.css'
 import './chat-widget.css'
 import { Analytics } from '@vercel/analytics/next'
 import { ChatWidget } from '@/components/ui/ChatWidget'
 
-const inter = Inter({ 
+const sora = Sora({ 
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-sora'
 })
 
 export const metadata: Metadata = {
-  title: 'Arnel A. Baylon | Resume Portfolio',
-  description: 'Resume-style portfolio for full-stack web systems including HRIS, queuing, clearance, and EMR platforms.',
+  title: 'Arnel A. Baylon - Full-Stack Developer',
+  description: 'Making daily operations easier for staff and administrators through high-performance full-stack architectures.',
 }
 
 export default function RootLayout({
@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen">
+    <html lang="en" className={`dark ${sora.variable}`}>
+      <body className="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container min-h-screen">
         {children}
         <ChatWidget />
         <Analytics />

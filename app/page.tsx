@@ -1,336 +1,449 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
-
-type Theme = 'light' | 'dark'
-
-const systems = [
-  {
-    name: 'HRIS',
-    organization: 'Victorious Christian Montessori',
-    type: 'Human Resource Information System',
-    summary:
-      'Built a complete HR platform for employee records, QR attendance, leave management, payroll preparation, and role-based access.',
-    impact: 'Reduced manual HR processing and centralized staff data into one reliable workflow.',
-    stack: ['Laravel', 'MySQL', 'Tailwind CSS', 'Alpine.js', 'Vite'],
-    details: ['QR attendance', 'Payroll support', 'Employee lifecycle', 'Role permissions', 'Leave management', 'Data organization', 'Secure access', 'Audit logs', 'Responsive UI', '20+ Modules and 100+ Sub-features'],
-    status: 'Production',
-    url: 'https://vcm-cavite.online'
-  },
-  {
-    name: 'Queuing System',
-    organization: 'GEAMH',
-    type: 'Patient Flow Management',
-    summary:
-      'Developed a queue workflow for hospital transactions, counter assignment, patient calling, and service status monitoring.',
-    impact: 'Improved queue visibility for staff and helped patients move through service points with less confusion.',
-    stack: ['Vue.js', 'MySQL', 'JavaScript', 'Responsive UI', 'Grok AI Integration', 'Role-based Access'],
-    details: ['Ticket flow', 'Printed tickets', 'Counter dashboard', 'Status tracking', 'Staff controls', 'Patient display', 'Service records'],
-    status: 'Implemented'
-  },
-  {
-    name: 'Clearance System',
-    organization: 'GEAMH',
-    type: 'Digital Clearance Workflow',
-    summary:
-      'Created a clearance process for tracking requirements, approvals, department routing, and final release status.',
-    impact: 'Made clearance requests easier to audit by replacing scattered manual follow-ups with a structured system.',
-    stack: ['Vue.js', 'MySQL', 'Role-based Access', 'Audit Trail' , 'Responsive UI', 'Grok AI Integration' , 'Protected Access'],
-    details: ['Approval routing', 'Requirement tracking', 'Department views', 'Release records' , 'Protected access', 'Audit logs'],
-    status: 'Implemented'
-  },
-  {
-    name: 'EMR System',
-    organization: 'GEAMH',
-    type: 'Electronic Medical Records',
-    summary:
-      'Developed core EMR features for patient records, clinical notes, visit history, and organized medical data access.',
-    impact: 'Supported faster record lookup and cleaner documentation for hospital workflows.',
-    stack: ['Vue.js', 'MySQL', 'Secure Records', 'Responsive UI' , 'Role-based Access', 'Grok AI Integration'],
-    details: ['Patient profiles', 'Integrated System', 'Visit history', 'Clinical notes', 'Protected access' , 'Audit logs', 'Data organization', 'Medical records'],
-    status: 'Implemented'
-  },
-  {
-    name: 'TMRC Running Club Website',
-    organization: 'Tanza Millennium Running Club',
-    type: 'Community & Event Platform',
-    summary:
-      'Created a dynamic website for a running club featuring event management, member tracking, and community engagement tools.',
-    impact: 'Centralized event registration and member communication, making it easier to coordinate runs and track participation.',
-    stack: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Responsive UI'],
-    details: ['Event registration', 'Member profiles', 'Running routes', 'Photo galleries', 'News updates', 'Achievement tracking', 'Mobile optimized', 'Community features'],
-    status: 'Live',
-    url: 'https://tmrc.vercel.app'
-  },
-  {
-    name: 'HiveSyncVA Website',
-    organization: 'HiveSyncVA',
-    type: 'Service Showcase & Portfolio',
-    summary:
-      'Developed a professional website for a virtual assistant service showcasing offerings, client work, and streamlined inquiry handling.',
-    impact: 'Enhanced online presence with clear service presentation and improved client onboarding through automated contact forms.',
-    stack: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Responsive UI'],
-    details: ['Service packages', 'Pricing tiers', 'Client testimonials', 'Project portfolio', 'Contact automation', 'Case studies', 'Professional design', 'SEO optimized'],
-    status: 'Live',
-    url: 'https://hivesync.vercel.app'
-  }
-]
-
-const techStack = [
-  {
-    group: 'Frontend',
-    tools: [
-      'React',
-      'Next.js',
-      'Vue.js',
-      'Tailwind CSS',
-      'Alpine.js',
-      'JavaScript',
-      'TypeScript',
-    ]
-  },
-  {
-    group: 'Backend',
-    tools: [
-      'PHP',
-      'Laravel',
-      'MySQL',
-      'REST APIs',
-      'Node.js'
-    ]
-  },
-  {
-    group: 'DevOps',
-    tools: [
-      'Git',
-      'GitHub',
-      'Composer',
-      'NPM'
-    ]
-  }
-]
-
-const highlights = [
-  'Full-stack developer building practical software that solves real-world operational challenges.',
-  'Builds database-driven applications with clean workflows and reliable access control.',
-  'Comfortable translating manual office processes into maintainable web applications.'
-]
-
-const certifications = [
-  'Cisco Networking Academy - Ethical Hacker Certification',
-  'Digital Literacy Webinar - AI Tools & Applications',
-  'Blockchain Campus Conference - Web3 & Blockchain Technology',
-  'On the job training (486hrs OJT)', 'Advanced SQL and Database Design', 
-  'Introduction to Generative AI - Art of the Possible', 'Getting into the ServerlessMindset'
-]
+import { useEffect, useRef } from 'react'
+import { DotGrid } from '@/components/DotGrid'
+import { FaReact, FaVuejs, FaSass, FaNodeJs, FaLaravel, FaGitAlt, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { SiTailwindcss, SiMysql, SiGithubactions } from 'react-icons/si';
+import { MdOutlineBrowserUpdated, MdStorage, MdSettingsSuggest, MdArrowDownward, MdDownload, MdOutlineMedicalServices } from 'react-icons/md';
 
 export default function Home() {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const blobRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const requestedTheme = new URLSearchParams(window.location.search).get('theme')
-    if (requestedTheme === 'light' || requestedTheme === 'dark') {
-      setTheme(requestedTheme)
-    }
-  }, [])
+    // Trigger subtitle and buttons after typewriter animation
+    setTimeout(() => {
+      document.querySelectorAll('.hero-section .reveal-fade, .hero-section .reveal').forEach(el => {
+        el.classList.add('active');
+      });
+    }, 3500); // After both typewriter lines complete
 
-  const themeLabel = useMemo(() => (theme === 'dark' ? 'Dark' : 'Light'), [theme])
+    // Enhanced reveal logic for multiple animation types
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -80px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all reveal animation types
+    const revealSelectors = ['.reveal', '.reveal-left', '.reveal-right', '.reveal-scale', '.reveal-fade'];
+    revealSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => revealObserver.observe(el));
+    });
+
+    // Smooth scroll for nav links
+    const handleSmoothScroll = (e: Event) => {
+        const anchor = e.currentTarget as HTMLAnchorElement;
+        const targetId = anchor.getAttribute('href');
+        if (targetId && targetId !== '#' && targetId.startsWith('#')) {
+            e.preventDefault();
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+    };
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', handleSmoothScroll);
+    });
+
+    // Antigravity Mouse Blob tracking
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+        if (blobRef.current) {
+            blobRef.current.animate({
+                left: `${e.clientX}px`,
+                top: `${e.clientY}px`
+            }, { duration: 3000, fill: "forwards" });
+        }
+    };
+    window.addEventListener('mousemove', handleGlobalMouseMove);
+
+    // Header scroll behavior
+    const header = document.querySelector('header');
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            header?.classList.add('-translate-y-24', 'opacity-0');
+        } else {
+            header?.classList.remove('-translate-y-24', 'opacity-0');
+        }
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    // Parallax Effect for Project Cards
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    const handleMouseMove = (e: Event) => {
+        const mouseEvent = e as MouseEvent;
+        const card = mouseEvent.currentTarget as HTMLElement;
+        const image = card.querySelector('.parallax-img') as HTMLElement;
+        if (!image) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = mouseEvent.clientX - rect.left;
+        const y = mouseEvent.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const moveX = (x - centerX) / 15;
+        const moveY = (y - centerY) / 15;
+        
+        image.style.transform = `scale(1.1) translate(${moveX}px, ${moveY}px)`;
+    };
+
+    const handleMouseLeave = (e: Event) => {
+        const card = e.currentTarget as HTMLElement;
+        const image = card.querySelector('.parallax-img') as HTMLElement;
+        if (image) {
+            image.style.transform = `scale(1.1) translate(0, 0)`;
+        }
+    };
+
+    projectCards.forEach(card => {
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+    });
+
+    return () => {
+        revealObserver.disconnect();
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('mousemove', handleGlobalMouseMove);
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.removeEventListener('click', handleSmoothScroll);
+        });
+        projectCards.forEach(card => {
+            card.removeEventListener('mousemove', handleMouseMove);
+            card.removeEventListener('mouseleave', handleMouseLeave);
+        });
+    };
+  }, []);
 
   return (
-    <main className="resume-page" data-theme={theme}>
-      <div className="resume-shell">
-        <header className="resume-hero">
-          <nav className="resume-nav" aria-label="Portfolio navigation">
-            <a href="#systems">Systems</a>
-            <a href="#tech-stack">Tech Stack</a>
-            <a href="#contact">Contact</a>
-            <div className="theme-switch" aria-label="Theme selector">
-              {(['light', 'dark'] as Theme[]).map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  aria-pressed={theme === option}
-                  onClick={() => setTheme(option)}
-                  className={theme === option ? 'is-active' : ''}
-                >
-                  {option}
-                </button>
-              ))}
+    <>
+      {/* NAVIGATION SHELL */}
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full bg-surface/80 backdrop-blur-xl border border-border-subtle shadow-[0_8px_32px_0_rgba(115,46,228,0.15)] px-8 py-3">
+        <nav className="flex items-center gap-8">
+            <a className="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#work">Work</a>
+            <a className="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#skills">Skills</a>
+            <a className="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#about">About</a>
+            <a className="px-6 py-2 bg-primary-container text-on-primary-container font-label-md text-label-md rounded-full hover:scale-105 active:scale-95 transition-all duration-200" href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      {/* HERO SECTION */}
+      <section className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <DotGrid />
+        
+        {/* Antigravity Background */}
+        <div 
+          ref={blobRef} 
+          className="pointer-events-none fixed top-1/2 left-1/2 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-primary-container/40 to-inverse-primary/40 blur-[120px] rounded-full z-0 opacity-60"
+        />
+
+        <div className="relative z-10 w-full max-w-container-max px-margin-mobile md:px-gutter flex flex-col items-center text-center">
+          <h1 className="text-[56px] leading-tight md:text-[96px] md:leading-tight font-bold text-white mb-8 tracking-tight typewriter-container">
+            <div className="typewriter-line">
+              Making daily operations easier
             </div>
-          </nav>
-
-          <section className="hero-grid" aria-label="Profile summary">
-            <div className="identity-block">
-              <p className="eyebrow">Full-Stack Developer</p>
-              <h1>Arnel A. Baylon</h1>
-              <p className="headline">
-                Making daily operations easier for staff and administrators
-              </p>
-              <div className="contact-row" id="contact">
-                <a href="mailto:arnelbaylon15@gmail.com">arnelbaylon15@gmail.com</a>
-                <span>Cavite, Philippines</span>
-                <a href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer">
-                  github.com/hiroqt
-                </a>
-              </div>
+            <div className="typewriter-line">
+              <span className="text-primary">through full-stack architectures</span>
             </div>
-
-            <aside className="theme-preview" aria-label={`${themeLabel} mode preview`}>
-              <div className="preview-top">
-                <span>{themeLabel} Mode</span>
-                <span>Resume Preview</span>
-              </div>
-              <div className="preview-panels">
-                <MiniPreview mode="light" active={theme === 'light'} onSelect={setTheme} />
-                <MiniPreview mode="dark" active={theme === 'dark'} onSelect={setTheme} />
-              </div>
-            </aside>
-          </section>
-        </header>
-
-        <section className="summary-band">
-          {highlights.map((item) => (
-            <p key={item}>{item}</p>
-          ))}
-        </section>
-
-        <section className="resume-layout">
-          <aside className="resume-sidebar" aria-label="Resume details">
-            <ResumeSection title="Profile">
-              <p>
-                I design and develop simple, useful web systems that organize records, automate
-                repetitive work, and make daily operations easier for staff and administrators.
-              </p>
-            </ResumeSection>
-
-            <ResumeSection title="Tech Stack" id="tech-stack">
-              {techStack.map((stack) => (
-                <div key={stack.group} className="tech-category">
-                  <h3 className="tech-category-title">{stack.group}</h3>
-                  <div className="skill-list">
-                    {stack.tools.map((tool) => (
-                      <span key={tool}>{tool}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </ResumeSection>
-
-            <ResumeSection title="Education">
-              <div className="timeline-item">
-                <strong>Bachelor of Science in Information Technology</strong>
-                <span>Current Student</span>
-              </div>
-              <div className="timeline-item">
-                <strong>Senior Highschool - ICT</strong>
-                <span>2021 - 2022</span>
-              </div>
-            </ResumeSection>
-
-            <ResumeSection title="Training">
-              <ul className="plain-list">
-                {certifications.map((cert) => (
-                  <li key={cert}>{cert}</li>
-                ))}
-              </ul>
-            </ResumeSection>
-          </aside>
-
-          <div className="resume-main">
-            <ResumeSection title="Selected Systems" id="systems">
-              <div className="system-stack">
-                {systems.map((system) => (
-                  <article className="system-card" key={`${system.organization}-${system.name}`}>
-                    <div className="system-card-header">
-                      <div>
-                        <p className="system-org">{system.organization}</p>
-                        <h2>{system.name}</h2>
-                        <span>{system.type}</span>
-                        {system.url && (
-                          <a 
-                            href={system.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                          >
-                            🔗 {system.url}
-                          </a>
-                        )}
-                      </div>
-                      <strong>{system.status}</strong>
-                    </div>
-
-                    <p>{system.summary}</p>
-                    <p className="impact">{system.impact}</p>
-
-                    <div className="detail-grid">
-                      {system.details.map((detail) => (
-                        <span key={detail}>{detail}</span>
-                      ))}
-                    </div>
-
-                    <div className="stack-row">
-                      {system.stack.map((tech) => (
-                        <span key={tech}>{tech}</span>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </ResumeSection>
+          </h1>
+          <p className="text-xl md:text-2xl font-normal text-text-secondary max-w-3xl mb-12 leading-relaxed reveal-fade delay-600 opacity-0">
+            Building high-performance systems for staff and administrators.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 reveal delay-600 opacity-0">
+            <a className="px-8 py-4 bg-primary text-on-primary font-bold rounded-lg hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all duration-300 flex items-center justify-center gap-2" href="#work">
+              View Work <MdArrowDownward className="text-xl" />
+            </a>
+            <a className="px-8 py-4 border border-primary text-primary font-bold rounded-lg hover:bg-primary/10 transition-all duration-300 flex items-center justify-center gap-2" href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" rel="noopener noreferrer">
+              Download Resume <MdDownload className="text-xl" />
+            </a>
           </div>
-        </section>
-      </div>
-    </main>
-  )
-}
+        </div>
+      </section>
 
-function ResumeSection({
-  children,
-  id,
-  title
-}: {
-  children: React.ReactNode
-  id?: string
-  title: string
-}) {
-  return (
-    <section className="resume-section" id={id}>
-      <h2>{title}</h2>
-      {children}
-    </section>
-  )
-}
+      {/* WORK SECTION */}
+      <section className="py-section-gap-mobile md:py-section-gap-desktop bg-background relative z-10" id="work">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <div className="flex flex-col gap-4 mb-16 reveal-fade">
+            <span className="text-primary font-label-md text-label-md tracking-widest uppercase">Portfolio</span>
+            <h2 className="text-headline-md md:text-headline-md font-headline-md text-on-surface">Systems & Solutions</h2>
+          </div>
+          
+          {/* Bento Grid of Projects */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            
+            {/* PaceMentor */}
+            <div className="project-card reveal-scale md:col-span-12 group relative overflow-hidden rounded-xl border border-border-subtle bg-surface-elevated hover:border-primary/50 transition-all duration-500">
+              <div className="aspect-video md:aspect-[21/9] w-full relative parallax-container bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
+                <div className="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 pointer-events-none"></div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="parallax-img object-cover w-full h-full opacity-70 scale-110 transition-opacity duration-700" alt="PaceMentor - Outrun your potential hero" src="https://pacementor.vercel.app/_next/image?url=%2Flight_mockup_dashboard.png&w=1920&q=75"/>
+              </div>
+              <div className="p-6 md:p-8 md:absolute md:bottom-0 md:left-0 md:right-0 md:glass-card pointer-events-none bg-surface-elevated md:bg-transparent">
+                <h3 className="text-headline-sm md:text-headline-md font-headline-sm md:font-headline-md text-white mb-2">PaceMentor - AI Running Coach</h3>
+                <p className="text-text-secondary text-sm md:text-base max-w-xl mb-4">A premium run club aesthetic training app featuring AI Coaching and dynamic, socially shareable workout graphics. Built with Flutter for cross-platform mobile experience.</p>
+                <div className="flex gap-2 flex-wrap">
+                  <span className="text-xs font-code-inline text-secondary-fixed-dim bg-secondary/10 border border-secondary/20 px-3 py-1 rounded-full">Live</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Flutter</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Next.js</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">AI</span>
+                </div>
+              </div>
+            </div>
 
-function MiniPreview({
-  active,
-  mode,
-  onSelect
-}: {
-  active: boolean
-  mode: Theme
-  onSelect: (theme: Theme) => void
-}) {
-  return (
-    <button
-      type="button"
-      className="mini-preview"
-      data-preview={mode}
-      data-active={active}
-      onClick={() => onSelect(mode)}
-      aria-label={`${mode} preview`}
-    >
-      <span className="mini-header">
-        <span />
-        <span>{mode}</span>
-      </span>
-      <span className="mini-title" />
-      <span className="mini-line long" />
-      <span className="mini-line" />
-      <span className="mini-grid">
-        <span />
-        <span />
-        <span />
-      </span>
-    </button>
+            {/* HRIS Project */}
+            <div className="project-card reveal-left delay-100 md:col-span-8 group relative overflow-hidden rounded-xl border border-border-subtle bg-surface-elevated hover:border-primary/50 transition-all duration-500">
+              <div className="aspect-video w-full relative parallax-container">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="parallax-img object-cover w-full h-full opacity-60 scale-110 transition-opacity duration-700" alt="HRIS Dashboard interface" src="/images/vcm_desktop.png"/>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none"></div>
+              </div>
+              <div className="p-6 md:p-8 md:absolute md:bottom-0 md:left-0 md:right-0 pointer-events-none bg-surface-elevated md:bg-transparent">
+                <div className="flex gap-2 mb-3">
+                  <span className="px-3 py-1 bg-surface-container text-secondary text-xs font-bold rounded-full">Capstone</span>
+                  <span className="px-3 py-1 bg-surface-container text-text-secondary text-xs font-bold rounded-full">PRODUCTION</span>
+                </div>
+                <h3 className="text-headline-sm font-headline-sm text-white mb-2">Victorious Christian Montessori HRIS</h3>
+                <p className="text-text-secondary text-sm md:text-base max-w-xl mb-4">Streamlining employee records, attendance, and payroll processing for large-scale administrative teams.</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Laravel</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">MySQL</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Bootstrap</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* EMR System */}
+            <div className="reveal-right delay-200 md:col-span-4 group relative overflow-hidden rounded-xl border border-border-subtle bg-surface-elevated hover:border-primary/50 transition-all duration-500">
+              <div className="p-6 h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6 text-primary">
+                    <MdOutlineMedicalServices className="text-2xl" />
+                  </div>
+                  <h3 className="text-headline-sm font-headline-sm text-white mb-2">Electronic Medical Records</h3>
+                  <p className="text-text-secondary text-sm mb-6">Patient data management with encrypted history and medical tracking.</p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">React</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Node.js</span>
+                </div>
+              </div>
+            </div>
+
+            {/* TMRC Project */}
+            <div className="project-card reveal-left delay-300 md:col-span-4 group relative overflow-hidden rounded-xl border border-border-subtle bg-surface-elevated hover:border-primary/50 transition-all duration-500">
+              <div className="aspect-video md:aspect-square w-full relative parallax-container">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-red-900/50 mix-blend-overlay z-10 pointer-events-none"></div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="parallax-img object-cover w-full h-full opacity-70 scale-110 transition-opacity duration-700" alt="TMRC Run Club Community" src="https://tmrc.vercel.app/bg.jpg"/>
+              </div>
+              <div className="p-6 md:absolute md:bottom-0 md:left-0 md:right-0 md:glass-card pointer-events-none bg-surface-elevated md:bg-transparent">
+                <h3 className="text-headline-sm font-headline-sm text-white mb-2">Trece Martires Run Club</h3>
+                <p className="text-text-secondary text-sm mb-4">Community-driven running club platform with social feeds, hall of fame, and event management.</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-xs font-code-inline text-secondary-fixed-dim bg-secondary/10 border border-secondary/20 px-3 py-1 rounded-full">Live</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Next.js</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">React</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* HiveSyncVA */}
+            <div className="project-card reveal-right delay-400 md:col-span-8 group relative overflow-hidden rounded-xl border border-border-subtle bg-surface-elevated hover:border-primary/50 transition-all duration-500">
+              <div className="aspect-video w-full relative parallax-container">
+                <div className="absolute inset-0 bg-primary/5 mix-blend-overlay z-10 pointer-events-none"></div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="parallax-img object-cover w-full h-full opacity-60 scale-110 transition-opacity duration-700" alt="HiveSyncVA interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzI0YDY0ETpBDTy-9ai3FKoCz4q9ATBkjhSln5uX9FmtQ1bMwXUM53kRU3ZLo2KKn5cjyTf6FXPosytyA_aIHkLQ3J4hmZ-n9qs_BK4-OUiKOF1YUV5Iy3-fMkBZVDTEcOkL4zG-n1340pud3eJChE9vvcE2hNBEWKJd4b4PsqlvuyU0yFl80jirC9p-NDhjGDMZfXak3NhUpN3OUCpvetBmPObBtDq2Nei3WTTVTBUWmMgnPBx7sY32A3B_1WxXRmHmCgFvDTD3YP"/>
+              </div>
+              <div className="p-6 md:p-8 md:absolute md:bottom-0 md:left-0 md:right-0 md:glass-card pointer-events-none bg-surface-elevated md:bg-transparent">
+                <h3 className="text-headline-sm font-headline-sm text-white mb-2">HiveSyncVA</h3>
+                <p className="text-text-secondary text-sm md:text-base max-w-xl mb-4">A unified dashboard for virtual assistants to manage cross-platform workflows and sync data effortlessly.</p>
+                <div className="flex gap-2 flex-wrap">
+                  <span className="text-xs font-code-inline text-secondary-fixed-dim bg-secondary/10 border border-secondary/20 px-3 py-1 rounded-full">Active</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Next.js</span>
+                  <span className="text-xs font-code-inline text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Firebase</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      {/* TECH STACK */}
+      <section className="py-section-gap-mobile md:py-section-gap-desktop bg-surface-container-lowest" id="skills">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <div className="text-center mb-16 reveal-fade">
+            <h2 className="text-headline-md font-headline-md text-on-surface mb-4">Technical Proficiency</h2>
+            <p className="text-text-secondary font-body-md">Engineered with modern tools and performance-driven frameworks.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Frontend */}
+            <div className="reveal-scale delay-100 p-8 glass-card rounded-2xl hover:-translate-y-2 transition-all duration-300">
+              <h3 className="text-headline-sm font-headline-sm text-primary mb-6 flex items-center gap-2">
+                <MdOutlineBrowserUpdated className="text-2xl" /> Frontend
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-colors cursor-default">
+                  <FaReact className="text-lg" /> React
+                </div>
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-colors cursor-default">
+                  <FaVuejs className="text-lg" /> Vue.js
+                </div>
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-colors cursor-default">
+                  <SiTailwindcss className="text-lg" /> TailwindCSS
+                </div>
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-colors cursor-default">
+                  <FaSass className="text-lg" /> Sass
+                </div>
+              </div>
+            </div>
+            {/* Backend */}
+            <div className="reveal-scale delay-200 p-8 glass-card rounded-2xl hover:-translate-y-2 transition-all duration-300">
+              <h3 className="text-headline-sm font-headline-sm text-secondary mb-6 flex items-center gap-2">
+                <MdStorage className="text-2xl" /> Backend
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-secondary hover:text-on-secondary transition-colors cursor-default">
+                  <FaNodeJs className="text-lg" /> Node.js
+                </div>
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-secondary hover:text-on-secondary transition-colors cursor-default">
+                  <FaLaravel className="text-lg" /> Laravel
+                </div>
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-secondary hover:text-on-secondary transition-colors cursor-default">
+                  <SiMysql className="text-lg" /> MySQL
+                </div>
+              </div>
+            </div>
+            {/* DevOps */}
+            <div className="reveal-scale delay-300 p-8 glass-card rounded-2xl hover:-translate-y-2 transition-all duration-300">
+              <h3 className="text-headline-sm font-headline-sm text-tertiary mb-6 flex items-center gap-2">
+                <MdSettingsSuggest className="text-2xl" /> Infrastructure
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-tertiary hover:text-on-tertiary transition-colors cursor-default">
+                  <SiGithubactions className="text-lg" /> CI/CD
+                </div>
+                <div className="group flex items-center gap-2 bg-surface-variant px-4 py-2 rounded-lg hover:bg-tertiary hover:text-on-tertiary transition-colors cursor-default">
+                  <FaGitAlt className="text-lg" /> Git
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT / TIMELINE */}
+      <section className="py-section-gap-mobile md:py-section-gap-desktop" id="about">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter grid md:grid-cols-2 gap-16 items-start">
+          <div className="reveal-left">
+            <h2 className="text-headline-md font-headline-md text-white mb-8">Professional Journey</h2>
+            <div className="space-y-12">
+              <div className="relative pl-8 border-l border-primary/30 reveal-left delay-100">
+                <div className="absolute -left-1.5 top-0 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_rgba(124,58,237,0.8)]"></div>
+                <span className="text-label-md font-label-md text-primary mb-2 block">2025 - 2026</span>
+                <h4 className="text-headline-sm font-headline-sm text-on-surface mb-2">Full Stack Developer</h4>
+                <p className="text-text-secondary font-body-md">Architecting and building the Victorious Christian Montessori HRIS Capstone project.</p>
+              </div>
+              <div className="relative pl-8 border-l border-primary/30 reveal-left delay-200">
+                <div className="absolute -left-1.5 top-0 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_rgba(124,58,237,0.8)]"></div>
+                <span className="text-label-md font-label-md text-primary mb-2 block">2021 - Present</span>
+                <h4 className="text-headline-sm font-headline-sm text-on-surface mb-2">Freelance Full-Stack Developer</h4>
+                <p className="text-text-secondary font-body-md">Designing and deploying bespoke systems for SMEs, including medical centers and educational institutions.</p>
+              </div>
+              <div className="relative pl-8 border-l border-primary/30 reveal-left delay-300">
+                <div className="absolute -left-1.5 top-0 w-3 h-3 bg-primary rounded-full"></div>
+                <span className="text-label-md font-label-md text-text-secondary mb-2 block">Education</span>
+                <h4 className="text-headline-sm font-headline-sm text-on-surface mb-2">Bachelor of Science in Information Technology</h4>
+                <p className="text-text-secondary font-body-md">Focused on advanced web architectures and database management systems.</p>
+              </div>
+            </div>
+          </div>
+          <div className="reveal-right relative group">
+            <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+            <div className="relative rounded-2xl overflow-hidden border border-border-subtle bg-surface-elevated p-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="w-full h-auto rounded-xl grayscale hover:grayscale-0 transition-all duration-500" alt="Developer profile portrait" src="/images/me.jpg"/>
+              <div className="mt-8 px-4 pb-4">
+                <p className="text-body-lg font-body-lg text-on-surface italic leading-relaxed">
+                  &quot;Precision in code, clarity in design. My goal is to transform complex operational challenges into seamless digital experiences.&quot;
+                </p>
+                <div className="mt-6 flex gap-4">
+                  <a className="text-text-secondary hover:text-primary transition-colors" href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer">
+                    <FaGithub className="text-2xl" />
+                  </a>
+                  <a className="text-text-secondary hover:text-primary transition-colors" href="https://www.linkedin.com/in/arnel-baylon-b0523318" target="_blank" rel="noopener noreferrer">
+                    <FaLinkedin className="text-2xl" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT SECTION */}
+      <section className="py-section-gap-mobile md:py-section-gap-desktop bg-surface-container-low relative" id="contact">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <div className="reveal-scale max-w-3xl mx-auto glass-card p-8 md:p-16 rounded-3xl border border-border-subtle">
+            <div className="text-center mb-12">
+              <h2 className="text-headline-md font-headline-md text-white mb-4">Start a Project</h2>
+              <p className="text-text-secondary">Interested in collaborating or have a system in mind? Let&apos;s talk.</p>
+            </div>
+            <form action="#" className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-label-md font-label-md text-text-secondary ml-1">Name</label>
+                  <input className="w-full bg-void-black border border-border-subtle rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white transition-all" type="text"/>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-label-md font-label-md text-text-secondary ml-1">Email</label>
+                  <input className="w-full bg-void-black border border-border-subtle rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white transition-all" type="email"/>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-label-md font-label-md text-text-secondary ml-1">Message</label>
+                <textarea className="w-full bg-void-black border border-border-subtle rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-white transition-all" placeholder="How can I help your operations?" rows={5}></textarea>
+              </div>
+              <button className="w-full py-4 bg-primary text-on-primary font-bold rounded-xl hover:shadow-[0_0_30px_rgba(124,58,237,0.4)] transition-all duration-300" type="submit">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="w-full py-section-gap-mobile md:py-16 bg-surface border-t border-border-subtle">
+        <div className="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto gap-8">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <span className="text-headline-sm font-headline-sm font-bold text-on-surface">Nel</span>
+            <p className="text-label-md font-label-md text-text-secondary text-center md:text-left">© 2025 Arnel A. Baylon. Built with precision.</p>
+          </div>
+          <div className="flex gap-8">
+            <a className="flex items-center gap-2 text-label-md font-label-md text-text-secondary hover:text-secondary transition-colors" href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer">
+              <FaGithub /> GitHub
+            </a>
+            <a className="flex items-center gap-2 text-label-md font-label-md text-text-secondary hover:text-secondary transition-colors" href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin /> LinkedIn
+            </a>
+            <a className="flex items-center gap-2 text-label-md font-label-md text-text-secondary hover:text-secondary transition-colors" href="mailto:arnelbaylon15@gmail.com">
+              Email
+            </a>
+          </div>
+        </div>
+      </footer>
+    </>
   )
 }
