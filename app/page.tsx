@@ -130,12 +130,12 @@ export default function Home() {
   return (
     <>
       {/* NAVIGATION SHELL */}
-      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full bg-surface/80 backdrop-blur-xl border border-border-subtle shadow-[0_8px_32px_0_rgba(115,46,228,0.15)] px-8 py-3">
-        <nav className="flex items-center gap-8">
-            <a className="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#work">Work</a>
-            <a className="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#skills">Skills</a>
-            <a className="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#about">About</a>
-            <a className="px-6 py-2 bg-primary-container text-on-primary-container font-label-md text-label-md rounded-full hover:scale-105 active:scale-95 transition-all duration-200" href="#contact">Contact</a>
+      <header className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full bg-surface/80 backdrop-blur-xl border border-border-subtle shadow-[0_8px_32px_0_rgba(115,46,228,0.15)] px-4 sm:px-8 py-2 sm:py-3 w-[95%] sm:w-auto max-w-[400px] sm:max-w-none">
+        <nav className="flex items-center justify-between sm:justify-center gap-2 sm:gap-8 w-full sm:w-auto">
+            <a className="text-sm sm:text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#work">Work</a>
+            <a className="text-sm sm:text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#skills">Skills</a>
+            <a className="text-sm sm:text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all duration-300" href="#about">About</a>
+            <a className="px-4 sm:px-6 py-2 bg-primary-container text-on-primary-container font-label-md text-sm sm:text-label-md rounded-full hover:scale-105 active:scale-95 transition-all duration-200 whitespace-nowrap" href="#contact">Contact</a>
         </nav>
       </header>
 
@@ -150,7 +150,7 @@ export default function Home() {
         />
 
         <div className="relative z-10 w-full max-w-container-max px-margin-mobile md:px-gutter flex flex-col items-center text-center">
-          <h1 className="text-[56px] leading-tight md:text-[96px] md:leading-tight font-bold text-white mb-8 tracking-tight typewriter-container">
+          <h1 className="text-4xl sm:text-[56px] leading-tight md:text-[96px] md:leading-tight font-bold text-white mb-8 tracking-tight typewriter-container w-full">
             <div className="typewriter-line">
               Making daily operations easier
             </div>
