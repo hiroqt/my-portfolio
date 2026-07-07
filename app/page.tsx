@@ -5,7 +5,7 @@ import { DotGrid } from '@/components/DotGrid'
 import { TerminalIntro } from '@/components/TerminalIntro'
 import { TypingText } from '@/components/TypingText'
 import { GitHubStats } from '@/components/GitHubStats'
-import { FaReact, FaVuejs, FaSass, FaNodeJs, FaLaravel, FaGitAlt, FaGithub, FaLinkedin, FaBootstrap, FaCss3Alt, FaPhp, FaAws, FaFigma, FaAndroid, FaHtml5, FaJs } from 'react-icons/fa';
+import { FaReact, FaVuejs, FaSass, FaNodeJs, FaLaravel, FaGitAlt, FaGithub, FaLinkedin, FaBootstrap, FaCss3Alt, FaPhp, FaAws, FaFigma, FaAndroid, FaHtml5, FaJs, FaRocket } from 'react-icons/fa';
 import { SiTailwindcss, SiMysql, SiGithubactions, SiTypescript, SiDart, SiSupabase, SiFirebase, SiExpress, SiVercel, SiGooglecloud, SiNotion, SiClaude, SiOpenai } from 'react-icons/si';
 import { MdOutlineBrowserUpdated, MdStorage, MdSettingsSuggest, MdArrowDownward, MdDownload, MdOutlineMedicalServices, MdCloud, MdSmartToy } from 'react-icons/md';
 import { TbBrandVscode } from 'react-icons/tb';
@@ -215,6 +215,9 @@ export default function Home() {
             <a className="px-6 py-3 bg-terminal-fg text-terminal-bg font-bold border border-terminal-fg hover:bg-terminal-bg hover:text-terminal-fg transition-all duration-300 flex items-center justify-center gap-2" href="#work">
               [View Work] <MdArrowDownward className="text-lg" />
             </a>
+            <a className="px-6 py-3 border border-terminal-fg text-terminal-fg font-bold hover:bg-terminal-fg hover:text-terminal-bg transition-all duration-300 flex items-center justify-center gap-2" href="https://www.appbuildersph.com/apps/pacementor" target="_blank" rel="noopener noreferrer">
+              [Vote My App] <FaRocket className="text-lg" />
+            </a>
             <a className="px-6 py-3 border border-terminal-fg text-terminal-fg font-bold hover:bg-terminal-fg hover:text-terminal-bg transition-all duration-300 flex items-center justify-center gap-2" href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" rel="noopener noreferrer">
               [Download Resume] <MdDownload className="text-lg" />
             </a>
@@ -241,13 +244,16 @@ export default function Home() {
                 <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700 grayscale" alt="PaceMentor - Outrun your potential hero" src="https://pacementor.vercel.app/_next/image?url=%2Flight_mockup_dashboard.png&w=1920&q=75"/>
               </div>
               <div className="p-4 md:p-6 md:absolute md:bottom-0 md:left-0 md:right-0 pointer-events-none bg-terminal-bg md:bg-terminal-bg/90 border-t border-terminal-border">
-                <h3 className="text-lg md:text-xl font-bold text-terminal-fg mb-1">$ PaceMentor - AI Running Coach</h3>
-                <p className="text-terminal-gray text-xs md:text-sm max-w-xl mb-2">// A premium run club aesthetic training app featuring AI Coaching and dynamic, socially shareable workout graphics.</p>
-                <div className="flex gap-2 flex-wrap">
-                  <span className="text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1">[Live]</span>
+                <h3 className="text-lg md:text-xl font-bold text-terminal-fg mb-1">$ PaceMentor - Your AI Running Coach</h3>
+                <p className="text-terminal-gray text-xs md:text-sm max-w-3xl mb-2">// Comprehensive mobile app with AI-powered coaching, adaptive training plans, real-time GPS tracking, and Strava integration. Features intelligent workout adjustments, detailed performance analytics, and beautiful shareable workout graphics.</p>
+                <div className="flex gap-2 flex-wrap items-center">
+                  <a href="https://pacementor.vercel.app/" target="_blank" rel="noopener noreferrer" className="pointer-events-auto text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1 hover:bg-terminal-fg hover:text-terminal-bg transition-all">[Live App]</a>
+                  <a href="https://www.appbuildersph.com/apps/pacementor" target="_blank" rel="noopener noreferrer" className="pointer-events-auto text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1 hover:bg-terminal-fg hover:text-terminal-bg transition-all">[App Builders PH - 10 ⬆]</a>
                   <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Flutter</span>
                   <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Next.js</span>
                   <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">AI</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Sports</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Health</span>
                 </div>
               </div>
             </div>
@@ -483,11 +489,14 @@ export default function Home() {
                     &gt; &quot;Precision in code, clarity in design.&quot;
                   </p>
                   <div className="mt-3 flex gap-3 justify-center">
-                    <a className="text-terminal-gray hover:text-terminal-fg transition-colors" href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer">
+                    <a className="text-terminal-gray hover:text-terminal-fg transition-colors" href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer" title="GitHub">
                       <FaGithub className="text-lg" />
                     </a>
-                    <a className="text-terminal-gray hover:text-terminal-fg transition-colors" href="https://www.linkedin.com/in/arnel-baylon-b0523318" target="_blank" rel="noopener noreferrer">
+                    <a className="text-terminal-gray hover:text-terminal-fg transition-colors" href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                       <FaLinkedin className="text-lg" />
+                    </a>
+                    <a className="text-terminal-gray hover:text-terminal-fg transition-colors" href="https://appbuildersph.com/apps/pacementor" target="_blank" rel="noopener noreferrer" title="App Builders PH">
+                      <FaRocket className="text-lg" />
                     </a>
                   </div>
                 </div>
@@ -554,6 +563,9 @@ export default function Home() {
             </a>
             <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-terminal-fg transition-colors" href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noopener noreferrer">
               <FaLinkedin /> [LinkedIn]
+            </a>
+            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-terminal-fg transition-colors" href="https://www.appbuildersph.com/makers/arnelbaylon158137f51a" target="_blank" rel="noopener noreferrer">
+              <FaRocket /> [App Builders PH]
             </a>
             <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-terminal-fg transition-colors" href="mailto:arnelbaylon15@gmail.com">
               [Email]
