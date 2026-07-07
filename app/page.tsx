@@ -469,7 +469,7 @@ export default function Home() {
                 <div className="relative pl-6 border-l border-terminal-border">
                   <div className="absolute -left-1 top-0 w-2 h-2 bg-terminal-fg"></div>
                   <span className="text-xs text-terminal-gray mb-1 block">[Education]</span>
-                  <h4 className="text-base font-bold text-terminal-fg mb-1">$ BS Information Technology</h4>
+                  <h4 className="text-base font-bold text-terminal-fg mb-1">$ BS Information Technology Graduate</h4>
                   <p className="text-terminal-gray text-sm">// Web architectures & database systems.</p>
                 </div>
               </div>
