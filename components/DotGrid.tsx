@@ -103,8 +103,8 @@ export function DotGrid() {
         dot.size += (targetSize - dot.size) * 0.1;
 
         ctx.beginPath();
-        // Using the tailwind text-secondary equivalent color (zinc-400 / #A1A1AA)
-        ctx.fillStyle = `rgba(161, 161, 170, ${dot.opacity})`;
+        // Terminal theme: white/gray dots
+        ctx.fillStyle = `rgba(255, 255, 255, ${dot.opacity * 0.5})`;
         ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
         ctx.fill();
       }
@@ -125,7 +125,7 @@ export function DotGrid() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 mix-blend-screen"
+      className="absolute inset-0 pointer-events-none z-0 opacity-30"
     />
   );
 }

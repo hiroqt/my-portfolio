@@ -4,6 +4,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
+/* Terminal-like styling */
+* {
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -84,9 +89,9 @@
   .delay-600 { transition-delay: 600ms; }
 
   .glass-card {
-      background: rgba(24, 24, 27, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(39, 39, 42, 0.5);
+      background: #000000;
+      backdrop-filter: none;
+      border: 1px solid #333333;
   }
   
   .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -105,8 +110,8 @@
 }
 
 @keyframes brandGlow {
-  0%, 100% { text-shadow: 0 0 10px rgba(124, 58, 237, 0.4); filter: brightness(1); }
-  50% { text-shadow: 0 0 25px rgba(124, 58, 237, 0.8); filter: brightness(1.2); }
+  0%, 100% { text-shadow: none; filter: brightness(1); }
+  50% { text-shadow: none; filter: brightness(1); }
 }
 
 @keyframes fadeInUp {
@@ -114,78 +119,59 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
+/* Terminal text animations */
+@keyframes terminalFadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes blinkCaret {
-  from, to { opacity: 1; }
+@keyframes blinkUnderscore {
+  0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-.typewriter-container {
+.animate-fade-in {
+  animation: terminalFadeIn 0.6s ease-out forwards;
+}
+
+.terminal-text-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
 
-.typewriter-line {
+.terminal-line {
+  opacity: 0;
+  animation: terminalFadeIn 0.8s ease-out forwards;
+}
+
+.terminal-line:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.terminal-line:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.terminal-cursor {
   display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  width: 0;
-  animation: typewriter 1.8s steps(40, end) forwards;
-}
-
-.typewriter-line::after {
-  content: '';
-  position: absolute;
-  right: -3px;
-  top: 0;
-  width: 3px;
-  height: 100%;
-  background-color: rgba(124, 58, 237, 0.9);
-  animation: blinkCaret 0.8s step-end infinite;
-}
-
-.typewriter-line:nth-child(1) {
-  animation-delay: 0.3s;
-}
-
-.typewriter-line:nth-child(1)::after {
-  animation-delay: 0.3s;
-}
-
-.typewriter-line:nth-child(2) {
-  animation-delay: 2.3s;
-}
-
-.typewriter-line:nth-child(2)::after {
-  animation-delay: 2.3s;
-  animation-duration: 0.8s;
-  animation-iteration-count: 5;
+  width: 12px;
+  height: 2px;
+  background-color: #FFFFFF;
+  margin-left: 4px;
+  animation: blinkUnderscore 1s step-end infinite;
+  vertical-align: middle;
 }
 
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-
-@media (max-width: 640px) {
-  .typewriter-line {
-    white-space: normal;
-    animation: fadeIn 1s ease-in forwards;
-    width: auto;
-  }
-  .typewriter-line::after {
-    display: none;
-  }
-  .typewriter-line:nth-child(2) {
-    animation-delay: 0.5s;
-    opacity: 0;
-  }
 }
 
 @keyframes fadeIn {

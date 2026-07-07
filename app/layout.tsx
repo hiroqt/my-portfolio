@@ -1,12 +1,6 @@
 import type { Metadata } from 'next'
-import { Sora } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
-const sora = Sora({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sora'
-})
 
 export const metadata: Metadata = {
   title: 'Arnel A. Baylon - Full-Stack Developer',
@@ -19,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${sora.variable}`}>
-      <body className="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+    <html lang="en" className="dark">
+      <body className="bg-terminal-bg text-terminal-fg font-mono overflow-x-hidden selection:bg-terminal-fg selection:text-terminal-bg min-h-screen" style={{ fontFamily: "'Courier New', Courier, monospace" }}>
         {children}
         <Analytics />
       </body>

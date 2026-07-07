@@ -6,10 +6,11 @@ A clean, professional resume-style portfolio website for Arnel Baylon showcasing
 
 - 🎨 **Dual Theme Support** - Light and dark mode with smooth transitions
 - 💬 **AI Chat Assistant** - Interactive chat powered by Groq LLM to answer visitor questions
+- 📊 **Real-Time GitHub Stats** - Live contribution graph, repository stats, and language analysis
 - 📱 **Fully Responsive** - Optimized for all devices from mobile to desktop
 - ⚡ **Fast & Modern** - Built with Next.js 14, React 18, and TypeScript
 - 🎭 **Smooth Animations** - Powered by Framer Motion
-- 📊 **Analytics** - Integrated Vercel Analytics
+- 📈 **Analytics** - Integrated Vercel Analytics
 
 ## Tech Stack
 
@@ -32,12 +33,25 @@ A clean, professional resume-style portfolio website for Arnel Baylon showcasing
 
 ## Projects Showcase
 
-1. **HRIS Management System** - HR platform with QR attendance and payroll
-2. **Queuing System** - Hospital patient flow management
-3. **Clearance System** - Digital clearance workflow
-4. **EMR System** - Electronic medical records platform
-5. **TMRC Running Club Website** - Community event platform
-6. **HiveSyncVA Website** - VA service showcase
+1. **PaceMentor** - AI-powered running coach with dynamic workout graphics
+2. **HRIS Management System** - HR platform with QR attendance and payroll
+3. **Queuing System** - Hospital patient flow management
+4. **Clearance System** - Digital clearance workflow
+5. **EMR System** - Electronic medical records platform
+6. **TMRC Running Club Website** - Community event platform
+7. **HiveSyncVA Website** - VA service showcase
+
+## GitHub Integration
+
+The portfolio includes a **real-time GitHub activity section** that displays:
+
+- 📈 **Contribution Graph** - 365-day heatmap of GitHub activity
+- 📦 **Repository Stats** - Total repos, commits, and stars
+- 💻 **Language Analysis** - Most used programming languages
+- ⭐ **Featured Repos** - Top repositories by stars
+- 👤 **Profile Info** - Bio, followers, and following count
+
+All data is fetched directly from GitHub's public API. See `GITHUB_INTEGRATION.md` for detailed setup instructions.
 
 ## Getting Started
 
@@ -70,7 +84,12 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 Create a `.env.local` file:
 
 ```env
+# Required for chat feature
 GROQ_API_KEY=your_groq_api_key_here
+
+# Optional for GitHub stats (higher rate limits)
+NEXT_PUBLIC_GITHUB_TOKEN=your_github_token_here
+NEXT_PUBLIC_GITHUB_USERNAME=hiroqt
 ```
 
 ## Project Structure
@@ -85,8 +104,12 @@ GROQ_API_KEY=your_groq_api_key_here
 ├── components/
 │   ├── layout/
 │   │   └── Section.tsx    # Section wrapper component
-│   └── ui/
-│       └── ChatWidget.tsx # AI chat interface
+│   ├── GitHubStats.tsx    # GitHub activity component
+│   ├── DotGrid.tsx        # Background grid animation
+│   ├── TerminalIntro.tsx  # Terminal animation
+│   └── TypingText.tsx     # Typing effect component
+├── docs/
+│   └── GITHUB_STATS.md    # GitHub integration docs
 ├── lib/
 │   └── utils.ts           # Utility functions
 └── public/                # Static assets
