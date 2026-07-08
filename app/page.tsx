@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { DotGrid } from '@/components/DotGrid'
 import { TerminalIntro } from '@/components/TerminalIntro'
 import { TypingText } from '@/components/TypingText'
+import { RotatingTypingText } from '@/components/RotatingTypingText'
+import { GallerySlider } from '@/components/GallerySlider'
 import { GitHubStats } from '@/components/GitHubStats'
 import { FaReact, FaVuejs, FaSass, FaNodeJs, FaLaravel, FaGitAlt, FaGithub, FaLinkedin, FaBootstrap, FaCss3Alt, FaPhp, FaAws, FaFigma, FaAndroid, FaHtml5, FaJs, FaRocket } from 'react-icons/fa';
 import { SiTailwindcss, SiMysql, SiGithubactions, SiTypescript, SiDart, SiSupabase, SiFirebase, SiExpress, SiVercel, SiGooglecloud, SiNotion, SiClaude, SiOpenai } from 'react-icons/si';
@@ -179,7 +181,7 @@ export default function Home() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="hero-section relative min-h-[50vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden pt-20 pb-8 md:pb-12 border-b border-terminal-border bg-terminal-bg">
+      <section className="hero-section relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20 pb-8 md:pb-12 border-b border-terminal-border bg-terminal-bg">
         <DotGrid />
 
         <div className="relative z-10 w-full max-w-container-max px-margin-mobile md:px-gutter flex flex-col items-center text-center">
@@ -196,11 +198,16 @@ export default function Home() {
             {showLine2 && (
               <div>
                 <span className="text-terminal-fg">$ </span>
-                <TypingText 
-                  text="through full-stack architectures"
+                <RotatingTypingText 
+                  words={[
+                    'through full-stack architectures',
+                    'with modern web applications',
+                    'via scalable cloud solutions',
+                    'using robust backend systems'
+                  ]}
                   delay={0}
-                  speed={60}
-                  onComplete={handleLine2Complete}
+                  typingSpeed={60}
+                  onFirstComplete={handleLine2Complete}
                 />
               </div>
             )}
@@ -482,12 +489,8 @@ export default function Home() {
               
               {/* Profile Image - Compact */}
               <div className="relative border border-terminal-border overflow-hidden bg-terminal-bg p-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="w-full h-auto grayscale max-w-[200px] mx-auto" alt="Developer profile portrait" src="/images/me.jpg"/>
+                <GallerySlider />
                 <div className="mt-3 px-2">
-                  <p className="text-xs text-terminal-fg leading-relaxed">
-                    &gt; &quot;Precision in code, clarity in design.&quot;
-                  </p>
                   <div className="mt-3 flex gap-3 justify-center">
                     <a className="text-terminal-gray hover:text-terminal-fg transition-colors" href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer" title="GitHub">
                       <FaGithub className="text-lg" />
