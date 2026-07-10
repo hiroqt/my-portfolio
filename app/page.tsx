@@ -524,12 +524,29 @@ export default function Home() {
                   </div>
 
                   <div className="p-3 border border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-300">
-                    <h4 className="text-sm font-bold text-terminal-fg mb-1">$ AWS Certifications</h4>
-                    <ul className="text-xs text-terminal-gray space-y-1 ml-4">
-                      <li>&gt; Advanced SQL and Database Design</li>
-                      <li>&gt; Generative AI</li>
-                      <li>&gt; Serverless Mindset</li>
-                    </ul>
+                    <h4 className="text-sm font-bold text-terminal-fg mb-3">$ AWS Certifications</h4>
+                    
+                    <div className="flex flex-col sm:flex-row gap-4 items-start">
+                      {/* Credly Verification Badge */}
+                      <div className="flex-shrink-0">
+                        <div 
+                          data-iframe-width="150" 
+                          data-iframe-height="270" 
+                          data-share-badge-id="7d53aa8f-5672-4064-b296-f6fccf400108" 
+                          data-share-badge-host="https://www.credly.com"
+                        ></div>
+                      </div>
+                      
+                      {/* Certifications List */}
+                      <div className="flex-1">
+                        <ul className="text-xs text-terminal-gray space-y-1 ml-4">
+                          <li>&gt; Advanced SQL and Database Design</li>
+                          <li>&gt; AWS Knowledge: Object Storage</li>
+                          <li>&gt; Generative AI</li>
+                          <li>&gt; Serverless Mindset</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="p-3 border border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-300">
