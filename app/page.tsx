@@ -2,32 +2,22 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { DotGrid } from '@/components/DotGrid'
-import { TerminalIntro } from '@/components/TerminalIntro'
 import { TypingText } from '@/components/TypingText'
 import { RotatingTypingText } from '@/components/RotatingTypingText'
 import { GallerySlider } from '@/components/GallerySlider'
 import { GitHubStats } from '@/components/GitHubStats'
-import { FaReact, FaVuejs, FaSass, FaNodeJs, FaLaravel, FaGitAlt, FaGithub, FaLinkedin, FaBootstrap, FaCss3Alt, FaPhp, FaAws, FaFigma, FaAndroid, FaHtml5, FaJs, FaRocket } from 'react-icons/fa';
+import { FaReact, FaVuejs, FaSass, FaNodeJs, FaLaravel, FaGitAlt, FaGithub, FaLinkedin, FaBootstrap, FaCss3Alt, FaPhp, FaAws, FaFigma, FaAndroid, FaHtml5, FaJs, FaRocket, FaFacebook, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import { SiTailwindcss, SiMysql, SiGithubactions, SiTypescript, SiDart, SiSupabase, SiFirebase, SiExpress, SiVercel, SiGooglecloud, SiNotion, SiClaude, SiOpenai } from 'react-icons/si';
 import { MdOutlineBrowserUpdated, MdStorage, MdSettingsSuggest, MdArrowDownward, MdDownload, MdOutlineMedicalServices, MdCloud, MdSmartToy } from 'react-icons/md';
 import { TbBrandVscode } from 'react-icons/tb';
 
 export default function Home() {
   const blobRef = useRef<HTMLDivElement>(null);
-  const [showIntro, setShowIntro] = useState(true);
-  const [showContent, setShowContent] = useState(false);
   const [showLine2, setShowLine2] = useState(false);
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showAllFrontend, setShowAllFrontend] = useState(false);
   const [showAllBackend, setShowAllBackend] = useState(false);
   const [showAllDevOps, setShowAllDevOps] = useState(false);
-
-  const handleIntroComplete = () => {
-    setShowIntro(false);
-    setTimeout(() => {
-      setShowContent(true);
-    }, 100);
-  };
 
   const handleLine1Complete = () => {
     setShowLine2(true);
@@ -40,9 +30,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Only run animations if content is shown
-    if (!showContent) return;
-
     // Trigger buttons after typing completes
     if (showSubtitle) {
       setTimeout(() => {
@@ -148,6 +135,12 @@ export default function Home() {
         card.addEventListener('mouseleave', handleMouseLeave);
     });
 
+    // Load Credly badge script
+    const credlyScript = document.createElement('script');
+    credlyScript.src = '//cdn.credly.com/assets/utilities/embed.js';
+    credlyScript.async = true;
+    document.body.appendChild(credlyScript);
+
     return () => {
         revealObserver.disconnect();
         window.removeEventListener('scroll', handleScroll);
@@ -159,16 +152,17 @@ export default function Home() {
             card.removeEventListener('mousemove', handleMouseMove);
             card.removeEventListener('mouseleave', handleMouseLeave);
         });
+        // Clean up Credly script
+        if (credlyScript.parentNode) {
+            credlyScript.parentNode.removeChild(credlyScript);
+        }
     };
-  }, [showContent, showSubtitle]);
+  }, [showSubtitle]);
 
   return (
     <>
-      {/* Terminal Intro Animation */}
-      {showIntro && <TerminalIntro onComplete={handleIntroComplete} />}
-
-      {/* Main Content - Hidden until intro completes */}
-      <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Main Content */}
+      <div>
       {/* NAVIGATION SHELL */}
       <header className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 bg-terminal-bg border border-terminal-border px-4 sm:px-8 py-2 sm:py-3 w-[95%] sm:w-auto max-w-[500px] sm:max-w-none">
         <nav className="flex items-center justify-between sm:justify-center gap-2 sm:gap-6 w-full sm:w-auto">
@@ -218,17 +212,38 @@ export default function Home() {
             </p>
           )}
           {showSubtitle && (
-            <div className="flex flex-col sm:flex-row gap-3 reveal opacity-0">
-            <a className="px-6 py-3 bg-terminal-fg text-terminal-bg font-bold border border-terminal-fg hover:bg-terminal-bg hover:text-terminal-fg transition-all duration-300 flex items-center justify-center gap-2" href="#work">
-              [View Work] <MdArrowDownward className="text-lg" />
-            </a>
-            <a className="px-6 py-3 border border-terminal-fg text-terminal-fg font-bold hover:bg-terminal-fg hover:text-terminal-bg transition-all duration-300 flex items-center justify-center gap-2" href="https://www.appbuildersph.com/apps/pacementor" target="_blank" rel="noopener noreferrer">
-              [Vote My App] <FaRocket className="text-lg" />
-            </a>
-            <a className="px-6 py-3 border border-terminal-fg text-terminal-fg font-bold hover:bg-terminal-fg hover:text-terminal-bg transition-all duration-300 flex items-center justify-center gap-2" href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" rel="noopener noreferrer">
-              [Download Resume] <MdDownload className="text-lg" />
-            </a>
-          </div>
+            <div className="flex flex-col items-center gap-6 reveal opacity-0">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a className="px-6 py-3 bg-terminal-fg text-terminal-bg font-bold border border-terminal-fg hover:bg-terminal-bg hover:text-terminal-fg transition-all duration-300 flex items-center justify-center gap-2" href="#work">
+                  [View Work] <MdArrowDownward className="text-lg" />
+                </a>
+                <a className="px-6 py-3 border border-terminal-fg text-terminal-fg font-bold hover:bg-terminal-fg hover:text-terminal-bg transition-all duration-300 flex items-center justify-center gap-2" href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                  [Download Resume] <MdDownload className="text-lg" />
+                </a>
+              </div>
+              
+              {/* Social Links */}
+              <div className="flex gap-4 items-center">
+                <a href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-terminal-border hover:border-[#0A66C2] hover:bg-[#0A66C2] flex items-center justify-center transition-all duration-300 group">
+                  <FaLinkedin className="text-xl text-terminal-gray group-hover:text-white transition-colors" />
+                </a>
+                <a href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-terminal-border hover:border-[#333] hover:bg-[#333] flex items-center justify-center transition-all duration-300 group">
+                  <FaGithub className="text-xl text-terminal-gray group-hover:text-white transition-colors" />
+                </a>
+                <a href="mailto:arnelbaylon15@gmail.com" className="w-12 h-12 rounded-full border-2 border-terminal-border hover:border-[#EA4335] hover:bg-[#EA4335] flex items-center justify-center transition-all duration-300 group">
+                  <FaEnvelope className="text-xl text-terminal-gray group-hover:text-white transition-colors" />
+                </a>
+                <a href="https://www.facebook.com/arnel.baylon.165" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-terminal-border hover:border-[#1877F2] hover:bg-[#1877F2] flex items-center justify-center transition-all duration-300 group">
+                  <FaFacebook className="text-xl text-terminal-gray group-hover:text-white transition-colors" />
+                </a>
+                <a href="https://www.appbuildersph.com/makers/hiroqt_" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-terminal-border hover:border-[#10B981] hover:bg-[#10B981] flex items-center justify-center transition-all duration-300 group">
+                  <FaRocket className="text-xl text-terminal-gray group-hover:text-white transition-colors" />
+                </a>
+                <a href="https://www.instagram.com/yheellll?igsh=MWYxMDZlMzYzNXA2dw" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-terminal-border hover:border-[#E4405F] hover:bg-[#E4405F] flex items-center justify-center transition-all duration-300 group">
+                  <FaInstagram className="text-xl text-terminal-gray group-hover:text-white transition-colors" />
+                </a>
+              </div>
+            </div>
           )}
         </div>
       </section>
@@ -248,7 +263,7 @@ export default function Home() {
             <div className="project-card reveal-scale md:col-span-12 group relative overflow-hidden border-2 border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-500">
               <div className="aspect-video md:aspect-[24/9] w-full relative parallax-container bg-terminal-bg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700 grayscale" alt="PaceMentor - Outrun your potential hero" src="https://pacementor.vercel.app/_next/image?url=%2Flight_mockup_dashboard.png&w=1920&q=75"/>
+                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700" alt="PaceMentor - Outrun your potential hero" src="https://pacementor.vercel.app/_next/image?url=%2Flight_mockup_dashboard.png&w=1920&q=75"/>
               </div>
               <div className="p-4 md:p-6 md:absolute md:bottom-0 md:left-0 md:right-0 pointer-events-none bg-terminal-bg md:bg-terminal-bg/90 border-t border-terminal-border">
                 <h3 className="text-lg md:text-xl font-bold text-terminal-fg mb-1">$ PaceMentor - Your AI Running Coach</h3>
@@ -269,7 +284,7 @@ export default function Home() {
             <div className="project-card reveal-left delay-100 md:col-span-6 group relative overflow-hidden border-2 border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-500">
               <div className="aspect-video w-full relative parallax-container">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700 grayscale" alt="HRIS Dashboard interface" src="/images/vcm_desktop.png"/>
+                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700" alt="HRIS Dashboard interface" src="/images/vcm_desktop.png"/>
               </div>
               <div className="p-4 md:p-5 md:absolute md:bottom-0 md:left-0 md:right-0 pointer-events-none bg-terminal-bg/90 border-t border-terminal-border">
                 <div className="flex gap-2 mb-2">
@@ -279,6 +294,8 @@ export default function Home() {
                 <h3 className="text-base md:text-lg font-bold text-terminal-fg mb-1">$ VCM HRIS</h3>
                 <p className="text-terminal-gray text-xs mb-2">// Streamlining employee records, attendance, and payroll.</p>
                 <div className="flex flex-wrap gap-1">
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Blade</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">PHP</span>
                   <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Laravel</span>
                   <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">MySQL</span>
                 </div>
@@ -289,13 +306,15 @@ export default function Home() {
             <div className="project-card reveal-left delay-300 md:col-span-3 group relative overflow-hidden border-2 border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-500">
               <div className="aspect-video md:aspect-square w-full relative parallax-container">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700 grayscale" alt="TMRC Run Club Community" src="https://tmrc.vercel.app/bg.jpg"/>
+                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700" alt="TMRC Run Club Community" src="https://tmrc.vercel.app/bg.jpg"/>
               </div>
               <div className="p-4 md:absolute md:bottom-0 md:left-0 md:right-0 pointer-events-none bg-terminal-bg/90 border-t border-terminal-border">
                 <h3 className="text-sm md:text-base font-bold text-terminal-fg mb-1">$ TMRC</h3>
                 <p className="text-terminal-gray text-xs mb-2">// Running club platform.</p>
                 <div className="flex flex-wrap gap-1">
-                  <span className="text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1">[Live]</span>
+                  <a href="https://tmrc.vercel.app/" target="_blank" rel="noopener noreferrer" className="pointer-events-auto text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1 hover:bg-terminal-fg hover:text-terminal-bg transition-all">[Live]</a>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">TypeScript</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Next.js</span>
                 </div>
               </div>
             </div>
@@ -304,13 +323,39 @@ export default function Home() {
             <div className="project-card reveal-right delay-400 md:col-span-3 group relative overflow-hidden border-2 border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-500">
               <div className="aspect-video md:aspect-square w-full relative parallax-container">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700 grayscale" alt="HiveSyncVA interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzI0YDY0ETpBDTy-9ai3FKoCz4q9ATBkjhSln5uX9FmtQ1bMwXUM53kRU3ZLo2KKn5cjyTf6FXPosytyA_aIHkLQ3J4hmZ-n9qs_BK4-OUiKOF1YUV5Iy3-fMkBZVDTEcOkL4zG-n1340pud3eJChE9vvcE2hNBEWKJd4b4PsqlvuyU0yFl80jirC9p-NDhjGDMZfXak3NhUpN3OUCpvetBmPObBtDq2Nei3WTTVTBUWmMgnPBx7sY32A3B_1WxXRmHmCgFvDTD3YP"/>
+                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700" alt="HiveSyncVA interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzI0YDY0ETpBDTy-9ai3FKoCz4q9ATBkjhSln5uX9FmtQ1bMwXUM53kRU3ZLo2KKn5cjyTf6FXPosytyA_aIHkLQ3J4hmZ-n9qs_BK4-OUiKOF1YUV5Iy3-fMkBZVDTEcOkL4zG-n1340pud3eJChE9vvcE2hNBEWKJd4b4PsqlvuyU0yFl80jirC9p-NDhjGDMZfXak3NhUpN3OUCpvetBmPObBtDq2Nei3WTTVTBUWmMgnPBx7sY32A3B_1WxXRmHmCgFvDTD3YP"/>
               </div>
               <div className="p-4 md:absolute md:bottom-0 md:left-0 md:right-0 pointer-events-none bg-terminal-bg/90 border-t border-terminal-border">
                 <h3 className="text-sm md:text-base font-bold text-terminal-fg mb-1">$ HiveSyncVA</h3>
                 <p className="text-terminal-gray text-xs mb-2">// VA dashboard.</p>
                 <div className="flex gap-1 flex-wrap">
                   <span className="text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1">[Active]</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">TypeScript</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Next.js</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Present Po */}
+            <div className="project-card reveal-left delay-200 md:col-span-6 group relative overflow-hidden border-2 border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-500">
+              <div className="aspect-video w-full relative parallax-container">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="parallax-img object-cover w-full h-full opacity-30 scale-110 transition-opacity duration-700" alt="Present Po DTR Landing Page" src="/images/dtr_landing.png"/>
+              </div>
+              <div className="p-4 md:p-5 md:absolute md:bottom-0 md:left-0 md:right-0 pointer-events-none bg-terminal-bg/90 border-t border-terminal-border">
+                <div className="flex gap-2 mb-2">
+                  <span className="px-2 py-1 bg-terminal-bg border border-terminal-fg text-terminal-fg text-xs font-bold">[Internship]</span>
+                  <span className="px-2 py-1 bg-terminal-bg border border-terminal-border text-terminal-gray text-xs font-bold">[PRODUCTION]</span>
+                </div>
+                <h3 className="text-base md:text-lg font-bold text-terminal-fg mb-1">$ Present Po</h3>
+                <p className="text-terminal-gray text-xs mb-2">// Modern, animated time tracking system with admin dashboard, QR code-based attendance, and group management. Built for General Emilio Aguinaldo Memorial Hospital.</p>
+                <div className="flex flex-wrap gap-1">
+                  <a href="https://presentpo.vercel.app/" target="_blank" rel="noopener noreferrer" className="pointer-events-auto text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1 hover:bg-terminal-fg hover:text-terminal-bg transition-all">[Live App]</a>
+                  <a href="https://appbuildersph.com/apps/present-po" target="_blank" rel="noopener noreferrer" className="pointer-events-auto text-xs font-code-inline text-terminal-fg bg-terminal-bg border border-terminal-fg px-2 py-1 hover:bg-terminal-fg hover:text-terminal-bg transition-all">[App Builders PH]</a>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Next.js</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">TypeScript</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Supabase</span>
+                  <span className="text-xs font-code-inline text-terminal-gray bg-terminal-bg border border-terminal-border px-2 py-1">Framer Motion</span>
                 </div>
               </div>
             </div>
@@ -441,6 +486,36 @@ export default function Home() {
                     <h4 className="text-sm font-bold text-terminal-fg mb-1">$ Internship - 486hrs</h4>
                     <p className="text-xs text-terminal-gray">Full Stack & IT Support at General Emilio Aguinaldo Memorial Hospital</p>
                   </div>
+                  
+                  {/* IBM Badges */}
+                  <div className="p-3 border border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-300">
+                    <h4 className="text-sm font-bold text-terminal-fg mb-3">$ IBM AI Certifications</h4>
+                    
+                    <div className="flex flex-col sm:flex-row gap-4 items-start">
+                      {/* Credly Verification Badge */}
+                      <div className="flex-shrink-0">
+                        <div 
+                          data-iframe-width="150" 
+                          data-iframe-height="270" 
+                          data-share-badge-id="82e8f4a4-6ae5-4bea-8b5e-212cf6ec6563" 
+                          data-share-badge-host="https://www.credly.com"
+                        ></div>
+                      </div>
+                      
+                      {/* Certifications List */}
+                      <div className="flex-1">
+                        <ul className="text-xs text-terminal-gray space-y-1 ml-4">
+                          <li>&gt; AI Fundamentals: Foundations for Understanding AI</li>
+                          <li>&gt; AI Forms and Functions</li>
+                          <li>&gt; Introduction to Artificial Intelligence</li>
+                          <li>&gt; Machine Learning</li>
+                          <li>&gt; Neural Networks and Deep Learning</li>
+                          <li>&gt; The Intelligence Behind AI</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="p-3 border border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-300">
                     <h4 className="text-sm font-bold text-terminal-fg mb-1">$ AWS Certifications</h4>
                     <ul className="text-xs text-terminal-gray space-y-1 ml-4">
@@ -560,18 +635,24 @@ export default function Home() {
             <span className="text-lg font-bold text-terminal-fg">$ Nel</span>
             <p className="text-xs text-terminal-gray text-center md:text-left">// © 2025 Arnel A. Baylon. Built with precision.</p>
           </div>
-          <div className="flex gap-6">
-            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-terminal-fg transition-colors" href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer">
-              <FaGithub /> [GitHub]
-            </a>
-            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-terminal-fg transition-colors" href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noopener noreferrer">
+          <div className="flex gap-6 flex-wrap justify-center">
+            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-[#0A66C2] transition-colors" href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noopener noreferrer">
               <FaLinkedin /> [LinkedIn]
             </a>
-            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-terminal-fg transition-colors" href="https://www.appbuildersph.com/makers/arnelbaylon158137f51a" target="_blank" rel="noopener noreferrer">
+            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-[#333] transition-colors" href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer">
+              <FaGithub /> [GitHub]
+            </a>
+            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-[#EA4335] transition-colors" href="mailto:arnelbaylon15@gmail.com">
+              <FaEnvelope /> [Email]
+            </a>
+            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-[#1877F2] transition-colors" href="https://www.facebook.com/arnel.baylon.165" target="_blank" rel="noopener noreferrer">
+              <FaFacebook /> [Facebook]
+            </a>
+            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-[#10B981] transition-colors" href="https://www.appbuildersph.com/makers/hiroqt_" target="_blank" rel="noopener noreferrer">
               <FaRocket /> [App Builders PH]
             </a>
-            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-terminal-fg transition-colors" href="mailto:arnelbaylon15@gmail.com">
-              [Email]
+            <a className="flex items-center gap-2 text-xs text-terminal-gray hover:text-[#E4405F] transition-colors" href="https://www.instagram.com/yheellll?igsh=MWYxMDZlMzYzNXA2dw" target="_blank" rel="noopener noreferrer">
+              <FaInstagram /> [Instagram]
             </a>
           </div>
         </div>

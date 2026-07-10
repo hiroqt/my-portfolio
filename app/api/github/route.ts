@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
+export const revalidate = 0 // Disable caching
 
 export async function GET(request: Request) {
   try {
@@ -124,7 +125,14 @@ export async function GET(request: Request) {
       }
     }
 
-    return NextResponse.json(processedData)
+    // Return with no-cache headers to prevent browser caching
+    return NextResponse.json(processedData, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      }
+    })
   } catch (error) {
     console.error('Error in GitHub API route:', error)
     return NextResponse.json(

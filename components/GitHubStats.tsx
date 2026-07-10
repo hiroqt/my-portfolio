@@ -43,6 +43,7 @@ export function GitHubStats({ username = 'hiroqt' }: { username?: string }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showAllRepos, setShowAllRepos] = useState(false)
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
   useEffect(() => {
     const fetchGitHubData = async () => {
@@ -50,8 +51,13 @@ export function GitHubStats({ username = 'hiroqt' }: { username?: string }) {
         setLoading(true)
         setError(null)
 
-        // Fetch from our secure API route
-        const response = await fetch(`/api/github?username=${username}`)
+        // Fetch from our secure API route with cache-busting
+        const response = await fetch(`/api/github?username=${username}&_t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+          }
+        })
         
         if (!response.ok) {
           const errorData = await response.json()
@@ -78,6 +84,9 @@ export function GitHubStats({ username = 'hiroqt' }: { username?: string }) {
         // Set contribution data
         setTotalCommits(data.contributions.totalContributions)
         setContributions(data.contributions.days)
+        
+        // Update last refresh time
+        setLastUpdated(new Date())
 
         setLoading(false)
       } catch (err) {
@@ -88,6 +97,11 @@ export function GitHubStats({ username = 'hiroqt' }: { username?: string }) {
     }
 
     fetchGitHubData()
+    
+    // Auto-refresh every 5 minutes to get latest contribution data
+    const refreshInterval = setInterval(fetchGitHubData, 5 * 60 * 1000)
+    
+    return () => clearInterval(refreshInterval)
   }, [username])
 
   const getContributionColor = (count: number) => {
@@ -205,9 +219,16 @@ export function GitHubStats({ username = 'hiroqt' }: { username?: string }) {
 
       {/* Contribution Graph */}
       <div className="reveal-scale delay-100">
-        <h3 className="text-headline-sm font-headline-sm text-terminal-fg mb-6 flex items-center gap-2">
-          <span className="text-terminal-gray">//</span> Contribution Activity
-        </h3>
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-headline-sm font-headline-sm text-terminal-fg flex items-center gap-2">
+            <span className="text-terminal-gray">//</span> Contribution Activity
+          </h3>
+          {lastUpdated && (
+            <span className="text-xs text-terminal-gray">
+              Last updated: {lastUpdated.toLocaleTimeString()}
+            </span>
+          )}
+        </div>
         <div className="border-2 border-terminal-border bg-terminal-bg p-6 overflow-x-auto">
           <div className="min-w-max">
             <div className="grid grid-cols-52 gap-1">
