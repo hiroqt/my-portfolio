@@ -492,12 +492,18 @@ export default function Home() {
                     <h4 className="text-sm font-bold text-terminal-fg mb-3">$ IBM AI Certifications</h4>
                     
                     <div className="flex flex-col sm:flex-row gap-4 items-start">
-                      {/* Credly Verification Badge */}
-                      <div className="flex-shrink-0">
+                      {/* Credly Verification Badges */}
+                      <div className="flex flex-wrap gap-3 flex-shrink-0">
                         <div 
                           data-iframe-width="150" 
                           data-iframe-height="270" 
                           data-share-badge-id="82e8f4a4-6ae5-4bea-8b5e-212cf6ec6563" 
+                          data-share-badge-host="https://www.credly.com"
+                        ></div>
+                        <div 
+                          data-iframe-width="150" 
+                          data-iframe-height="270" 
+                          data-share-badge-id="06cc685a-5d6c-49fe-bc49-f86e53e5417e" 
                           data-share-badge-host="https://www.credly.com"
                         ></div>
                       </div>
@@ -510,6 +516,7 @@ export default function Home() {
                           <li>&gt; Introduction to Artificial Intelligence</li>
                           <li>&gt; Machine Learning</li>
                           <li>&gt; Neural Networks and Deep Learning</li>
+                          <li>&gt; Retrieval-Augmented Generation for Enhanced AI Outputs</li>
                           <li>&gt; The Intelligence Behind AI</li>
                         </ul>
                       </div>
@@ -523,6 +530,11 @@ export default function Home() {
                       <li>&gt; Generative AI</li>
                       <li>&gt; Serverless Mindset</li>
                     </ul>
+                  </div>
+
+                  <div className="p-3 border border-terminal-border bg-terminal-bg hover:border-terminal-fg transition-all duration-300">
+                    <h4 className="text-sm font-bold text-terminal-fg mb-1">$ Lean Six Sigma White Belt</h4>
+                    <p className="text-xs text-terminal-gray ml-4">&gt; Process Improvement & Quality Management</p>
                   </div>
                 </div>
               </div>
