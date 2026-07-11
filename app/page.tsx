@@ -93,7 +93,14 @@ export default function Home() {
               className="absolute right-0 top-0 bottom-0 w-full md:w-[450px] bg-foreground text-background p-8 md:p-16 flex flex-col justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex flex-col h-full pt-16">
+              <button 
+                onClick={() => setIsMenuOpen(false)}
+                className="md:hidden absolute top-5 right-6 text-sm font-medium tracking-widest hover:text-background/70 transition-colors p-2"
+              >
+                CLOSE
+              </button>
+
+              <div className="flex flex-col h-full pt-12 md:pt-16">
 
                 {/* Menu Links */}
                 <div className="flex-1 flex flex-col justify-center gap-6">
