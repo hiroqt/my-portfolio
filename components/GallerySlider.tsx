@@ -30,7 +30,7 @@ export function GallerySlider() {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="relative w-full aspect-square md:aspect-[4/3] overflow-hidden border border-terminal-border bg-terminal-bg">
+      <div className="relative w-full aspect-square md:aspect-[4/3] overflow-hidden border border-border bg-background">
         {galleryData.map((item, index) => (
           <img
             key={item.src}
@@ -41,14 +41,14 @@ export function GallerySlider() {
             }`}
           />
         ))}
-        <div className="absolute bottom-2 right-2 z-20 bg-terminal-bg/80 border border-terminal-border px-2 py-1 text-[10px] text-terminal-fg font-mono">
+        <div className="absolute bottom-2 right-2 z-20 bg-background/80 border border-border px-2 py-1 text-[10px] text-foreground font-mono">
           [{currentIndex + 1}/{galleryData.length}]
         </div>
       </div>
       
       <div className="mt-3 px-2 min-h-[40px] flex items-center justify-center text-center">
-        <p className="text-xs text-terminal-fg leading-relaxed">
-          &gt; &quot;{galleryData[currentIndex].caption}&quot;
+        <p className="text-sm font-semibold text-muted-foreground leading-relaxed">
+          &quot;{galleryData[currentIndex].caption}&quot;
         </p>
       </div>
     </div>

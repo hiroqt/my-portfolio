@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-terminal-bg text-terminal-fg font-mono overflow-x-hidden selection:bg-terminal-fg selection:text-terminal-bg min-h-screen" style={{ fontFamily: "'Courier New', Courier, monospace" }}>
+      <body className="overflow-x-hidden min-h-screen font-sans">
         {children}
         <Analytics />
       </body>
