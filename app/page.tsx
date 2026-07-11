@@ -167,7 +167,7 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter leading-none">
-              Full-Stack<br />Developer.
+              Generative AI<br />Developer.
             </h1>
           </motion.div>
 
