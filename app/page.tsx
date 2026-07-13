@@ -611,7 +611,7 @@ export default function Home() {
             <a href="https://github.com/hiroqt" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors hover:-translate-y-0.5 transform duration-200"><FaGithub /></a>
             <a href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors hover:-translate-y-0.5 transform duration-200"><FaLinkedin /></a>
             <a href="mailto:arnelbaylon15@gmail.com" className="hover:text-foreground transition-colors hover:-translate-y-0.5 transform duration-200"><FaEnvelope /></a>
-            <a href="https://www.facebook.com/arnel.baylon.165" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors hover:-translate-y-0.5 transform duration-200"><FaFacebook /></a>
+            <a href="https://www.facebook.com/arnel.baylon.1650" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors hover:-translate-y-0.5 transform duration-200"><FaFacebook /></a>
             <a href="https://www.instagram.com/yheellll?igsh=MWYxMDZlMzYzNXA2dw" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors hover:-translate-y-0.5 transform duration-200"><FaInstagram /></a>
           </div>
         </div>
