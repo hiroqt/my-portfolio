@@ -18,6 +18,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
+        display: ["Syne", "sans-serif"],
       },
       maxWidth: {
         'screen-wide': '1600px',
