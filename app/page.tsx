@@ -282,6 +282,14 @@ export default function Home() {
               },
               {
                 id: "02",
+                title: "HiveSync VA",
+                description: "Client project - Professional virtual assistant services platform streamlining business operations. Live at www.hivesyncva.com",
+                tags: ["Next.js", "TypeScript"],
+                image: "/images/hivesyncva.png",
+                link: "https://www.hivesyncva.com"
+              },
+              {
+                id: "03",
                 title: "VCM HRIS",
                 description: "Comprehensive QR-Code based Human Resource Information System with employee management, leave tracking, job applications, realtime notifiactions and payroll integration.",
                 tags: ["Laravel", "PHP", "MySQL"],
@@ -289,7 +297,7 @@ export default function Home() {
                 link: "#"
               },
               {
-                id: "03",
+                id: "04",
                 title: "TMRC",
                 description: "Running Club Website built for Trece Martirez Running Club, Showcasing their upcoming and past races, races results, and community updates.",
                 tags: ["Next.js", "TypeScript"],
@@ -297,7 +305,7 @@ export default function Home() {
                 link: "#"
               },
               {
-                id: "04",
+                id: "05",
                 title: "Present Po",
                 description: "Comprehensive attendance and time tracking application that transforms how organizations monitor workforce presence, manage schedules, and generate reports.",
                 tags: ["Next.js", "Supabase"],
