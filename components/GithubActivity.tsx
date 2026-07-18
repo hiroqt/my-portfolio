@@ -231,67 +231,70 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="text-2xl font-bold tracking-tight mb-6 flex flex-wrap items-center gap-3">
-              <MdCalendarToday className="text-xl" />
-              Contribution Activity
-              <span className="text-xs font-mono bg-muted px-3 py-1.5 text-muted-foreground rounded">{totalCommits} contributions in the last year</span>
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6 flex flex-wrap items-center gap-2 sm:gap-3">
+              <MdCalendarToday className="text-lg sm:text-xl" />
+              <span>Contribution Activity</span>
+              <span className="text-[10px] sm:text-xs font-mono bg-muted px-2 sm:px-3 py-1 sm:py-1.5 text-muted-foreground rounded">{totalCommits} contributions</span>
             </h3>
-            <div className="border border-border bg-background p-4 sm:p-6 md:p-8 hover:border-foreground transition-all duration-300 w-full">
-              {/* Activity Grid with Day Labels */}
-              <div className="flex gap-2 sm:gap-3 w-full">
-                {/* Day Labels */}
-                <div className="flex flex-col gap-[3px] sm:gap-1 pr-2">
-                  {[0, 1, 2, 3, 4, 5, 6].map((index) => (
-                    <div key={index} className="h-[10px] sm:h-3 flex items-center text-[9px] sm:text-[11px] text-muted-foreground">
-                      {getDayLabel(index)}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Contribution Squares */}
-                <div className="grid grid-rows-7 grid-flow-col gap-[3px] sm:gap-1 flex-1">
-                  {contributions.map((day, index) => {
-                    const date = new Date(day.date)
-                    const formattedDate = date.toLocaleDateString('en-US', { 
-                      weekday: 'short', 
-                      year: 'numeric', 
-                      month: 'short', 
-                      day: 'numeric' 
-                    })
-                    const contributionText = day.contributionCount === 0
-                      ? 'No contributions'
-                      : day.contributionCount === 1 
-                        ? '1 contribution' 
-                        : `${day.contributionCount} contributions`
-
-                    return (
-                      <div
-                        key={index}
-                        className={`aspect-square rounded-[2px] ${getContributionColor(day.contributionCount)} 
-                          transition-all hover:ring-2 hover:ring-offset-1 hover:ring-foreground/30 cursor-pointer relative group`}
-                        title={`${formattedDate}\n${contributionText}`}
-                      >
-                        {/* Tooltip */}
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded text-[11px] leading-tight
-                          opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 whitespace-nowrap z-50 shadow-lg">
-                          <div className="font-semibold">{contributionText}</div>
-                          <div className="text-gray-300 dark:text-gray-600">{formattedDate}</div>
-                        </div>
+            <div className="border border-border bg-background p-3 sm:p-6 md:p-8 hover:border-foreground transition-all duration-300 w-full overflow-x-auto">
+              {/* Activity Grid Container with min width for mobile scroll */}
+              <div className="min-w-[280px] sm:min-w-0">
+                {/* Activity Grid with Day Labels */}
+                <div className="flex gap-1.5 sm:gap-2 md:gap-3">
+                  {/* Day Labels */}
+                  <div className="flex flex-col gap-[2px] sm:gap-[3px] pr-1 sm:pr-2">
+                    {[0, 1, 2, 3, 4, 5, 6].map((index) => (
+                      <div key={index} className="h-[8px] sm:h-[10px] md:h-3 flex items-center text-[8px] sm:text-[9px] md:text-[11px] text-muted-foreground leading-none">
+                        {getDayLabel(index)}
                       </div>
-                    )
-                  })}
-                </div>
-              </div>
+                    ))}
+                  </div>
 
-              {/* Legend */}
-              <div className="flex items-center justify-end gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] text-muted-foreground mt-3 sm:mt-4 w-full">
-                <span>Less</span>
-                <div className="w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22] border border-[#d0d7de] dark:border-[#30363d]" />
-                <div className="w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429] border border-[#9be9a8] dark:border-[#0e4429]" />
-                <div className="w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] bg-[#40c463] dark:bg-[#006d32] border border-[#40c463] dark:border-[#006d32]" />
-                <div className="w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] bg-[#30a14e] dark:bg-[#26a641] border border-[#30a14e] dark:border-[#26a641]" />
-                <div className="w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] bg-[#216e39] dark:bg-[#39d353] border border-[#216e39] dark:border-[#39d353]" />
-                <span>More</span>
+                  {/* Contribution Squares */}
+                  <div className="grid grid-rows-7 grid-flow-col gap-[2px] sm:gap-[3px] md:gap-1">
+                    {contributions.map((day, index) => {
+                      const date = new Date(day.date)
+                      const formattedDate = date.toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })
+                      const contributionText = day.contributionCount === 0
+                        ? 'No contributions'
+                        : day.contributionCount === 1 
+                          ? '1 contribution' 
+                          : `${day.contributionCount} contributions`
+
+                      return (
+                        <div
+                          key={index}
+                          className={`w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] ${getContributionColor(day.contributionCount)} 
+                            transition-all hover:ring-1 hover:ring-offset-1 hover:ring-foreground/30 cursor-pointer relative group`}
+                          title={`${formattedDate}\n${contributionText}`}
+                        >
+                          {/* Tooltip - hidden on mobile, shown on hover for desktop */}
+                          <div className="hidden sm:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded text-[11px] leading-tight
+                            opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 whitespace-nowrap z-50 shadow-lg">
+                            <div className="font-semibold">{contributionText}</div>
+                            <div className="text-gray-300 dark:text-gray-600 text-[10px]">{formattedDate}</div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                {/* Legend */}
+                <div className="flex items-center justify-end gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] md:text-[11px] text-muted-foreground mt-2 sm:mt-3 md:mt-4">
+                  <span>Less</span>
+                  <div className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22] border border-[#d0d7de] dark:border-[#30363d]" />
+                  <div className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429] border border-[#9be9a8] dark:border-[#0e4429]" />
+                  <div className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] bg-[#40c463] dark:bg-[#006d32] border border-[#40c463] dark:border-[#006d32]" />
+                  <div className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] bg-[#30a14e] dark:bg-[#26a641] border border-[#30a14e] dark:border-[#26a641]" />
+                  <div className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] bg-[#216e39] dark:bg-[#39d353] border border-[#216e39] dark:border-[#39d353]" />
+                  <span>More</span>
+                </div>
               </div>
             </div>
           </motion.div>

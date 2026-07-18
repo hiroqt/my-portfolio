@@ -56,49 +56,81 @@ export default function ThemeToggle({ variant = 'header', onToggle }: ThemeToggl
           document.body
         )}
 
-        {/* Sidebar Theme Toggle */}
-        <motion.button
-          onClick={toggleTheme}
-          disabled={isSlashing}
-          className="w-full flex items-center justify-between px-6 py-4 text-background hover:bg-background/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed border-t border-background/20 mt-6"
-          whileTap={{ scale: 0.98 }}
-          aria-label="Toggle theme"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                {theme === 'dark' ? (
-                  <motion.div
-                    key="moon"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <MoonIcon />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="sun"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <SunIcon />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            <div className="text-left">
-              <div className="text-sm font-medium">Theme</div>
-              <div className="text-xs opacity-70 font-mono uppercase tracking-wider">
-                {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-              </div>
+        {/* Sidebar Theme Toggle - Compact circular button */}
+        <div className="flex items-center justify-between px-6 py-4 border-t border-background/20 mt-6">
+          <div className="text-left">
+            <div className="text-xs font-mono text-background/50 uppercase tracking-widest">Theme</div>
+            <div className="text-sm font-medium text-background mt-1">
+              {theme === 'dark' ? 'Dark' : 'Light'}
             </div>
           </div>
-          <div className="text-xs opacity-50">⚔️</div>
-        </motion.button>
+          <motion.button
+            onClick={toggleTheme}
+            disabled={isSlashing}
+            className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed bg-background/10 border border-background/30 hover:border-background/50 shadow-lg backdrop-blur-sm"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Toggle theme"
+          >
+            <AnimatePresence mode="wait">
+              {theme === 'dark' ? (
+                <motion.div
+                  key="moon"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-background"
+                  >
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="sun"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-background"
+                  >
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                  </svg>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
       </>
     )
   }
