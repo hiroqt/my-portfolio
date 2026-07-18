@@ -10,11 +10,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#ffffff",
-        foreground: "#0a0a0a",
-        muted: "#f5f5f5",
-        "muted-foreground": "#737373",
-        border: "#e5e5e5",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
+        "muted-foreground": "var(--muted-foreground)",
+        border: "var(--border)",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaRocket, FaInstagram, Fa
 import { MdOutlineBrowserUpdated, MdStorage, MdCloud } from 'react-icons/md'
 import { GallerySlider } from '@/components/GallerySlider'
 import { GithubActivity } from '@/components/GithubActivity'
+import ThemeToggle from '@/components/ThemeToggle'
 import {
   SiFlutter, SiNextdotjs, SiLaravel, SiPhp, SiMysql, SiTypescript, SiSupabase,
   SiReact, SiVuedotjs, SiTailwindcss, SiNodedotjs, SiFirebase, SiVercel, SiGit, SiFigma,
@@ -70,22 +71,28 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans">
+    <div ref={containerRef} className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans relative">
       {/* Scroll Progress */}
       <motion.div
         style={{ scaleX }}
         className="fixed top-0 left-0 right-0 h-[2px] bg-foreground origin-left z-50"
       />
       {/* Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-md border-b border-border">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-md border-b border-border overflow-visible">
         <nav className="max-w-screen-wide mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-bold text-xl tracking-tight relative z-50">Nel.</span>
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="relative z-50 flex items-center gap-2 font-medium text-sm hover:text-muted-foreground transition-colors tracking-widest"
-          >
-            {isMenuOpen ? "CLOSE" : "MENU"}
-          </button>
+          <div className="flex items-center gap-3 relative z-50">
+            {/* Desktop Theme Toggle - visible only on desktop */}
+            <div className="hidden md:block">
+              <ThemeToggle variant="header" />
+            </div>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex items-center gap-2 font-medium text-sm hover:text-muted-foreground transition-colors tracking-widest"
+            >
+              {isMenuOpen ? "CLOSE" : "MENU"}
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -148,19 +155,24 @@ export default function Home() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
-                  className="mt-auto grid grid-cols-2 gap-8 pt-12 border-t border-background/20"
+                  className="mt-auto pt-12 border-t border-background/20"
                 >
-                  <div>
-                    <span className="text-xs font-mono text-background/50 uppercase tracking-widest mb-4 block">Social</span>
-                    <div className="flex flex-col gap-3 text-sm font-medium">
-                      <a href="https://github.com/hiroqt" target="_blank" rel="noreferrer" className="hover:text-background/70 transition-colors">Github</a>
-                      <a href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noreferrer" className="hover:text-background/70 transition-colors">LinkedIn</a>
-                      <a href="https://www.facebook.com/arnel.baylon.165" target="_blank" rel="noreferrer" className="hover:text-background/70 transition-colors">Facebook</a>
+                  {/* Theme Toggle - Mobile Sidebar */}
+                  <ThemeToggle variant="sidebar" />
+                  
+                  <div className="grid grid-cols-2 gap-8 pt-6 mt-6 border-t border-background/20">
+                    <div>
+                      <span className="text-xs font-mono text-background/50 uppercase tracking-widest mb-4 block">Social</span>
+                      <div className="flex flex-col gap-3 text-sm font-medium">
+                        <a href="https://github.com/hiroqt" target="_blank" rel="noreferrer" className="hover:text-background/70 transition-colors">Github</a>
+                        <a href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noreferrer" className="hover:text-background/70 transition-colors">LinkedIn</a>
+                        <a href="https://www.facebook.com/arnel.baylon.165" target="_blank" rel="noreferrer" className="hover:text-background/70 transition-colors">Facebook</a>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono text-background/50 uppercase tracking-widest mb-4 block">Get in touch</span>
-                    <a href="mailto:arnelbaylon15@gmail.com" className="text-sm font-medium hover:text-background/70 transition-colors block">arnelbaylon15@gmail.com</a>
+                    <div>
+                      <span className="text-xs font-mono text-background/50 uppercase tracking-widest mb-4 block">Get in touch</span>
+                      <a href="mailto:arnelbaylon15@gmail.com" className="text-sm font-medium hover:text-background/70 transition-colors block">arnelbaylon15@gmail.com</a>
+                    </div>
                   </div>
                 </motion.div>
 
