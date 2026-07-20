@@ -21,7 +21,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-        display: ["Syne", "sans-serif"],
+        display: ["var(--font-clash)", "Syne", "sans-serif"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       maxWidth: {
         'screen-wide': '1600px',

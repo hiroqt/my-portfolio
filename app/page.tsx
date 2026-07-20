@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence, useSpring, useReducedMotion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaRocket, FaInstagram, FaArrowRight } from 'react-icons/fa'
 import { MdOutlineBrowserUpdated, MdStorage, MdCloud } from 'react-icons/md'
 import { GallerySlider } from '@/components/GallerySlider'
@@ -44,6 +44,7 @@ const techIcons: Record<string, React.ReactNode> = {
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const containerRef = useRef(null)
+  const reduce = useReducedMotion()
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
@@ -53,8 +54,11 @@ export default function Home() {
     target: containerRef,
     offset: ["start start", "end start"]
   })
-  const yHero = useTransform(heroProgress, [0, 1], ["0%", "50%"])
-  const opacityHero = useTransform(heroProgress, [0, 1], [1, 0])
+  const yHeroRaw = useTransform(heroProgress, [0, 1], ["0%", "50%"])
+  const opacityHeroRaw = useTransform(heroProgress, [0, 1], [1, 0])
+  // Neutralize parallax when the user prefers reduced motion
+  const yHero = reduce ? "0%" : yHeroRaw
+  const opacityHero = reduce ? 1 : opacityHeroRaw
 
   useEffect(() => {
     // Load Credly badge script
@@ -195,18 +199,29 @@ export default function Home() {
             className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-2"
           >
             <span className="inline-block w-8 h-px bg-muted-foreground" />
-            Full-Stack & AI Developer
+            Arnel Baylon — Full-Stack &amp; AI Developer
           </motion.span>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <h1 className="text-5xl md:text-7xl lg:text-[9rem] font-bold tracking-tighter leading-none font-display">
-              Generative AI<br />Developer.
+          <div>
+            <h1 className="text-5xl md:text-7xl lg:text-[8.5rem] font-bold tracking-tighter leading-[0.9] font-display">
+              {["Generative AI", "Developer."].map((line, i) => (
+                <span key={line} className="block overflow-hidden">
+                  <motion.span
+                    className="block"
+                    initial={reduce ? false : { y: "110%" }}
+                    animate={{ y: "0%" }}
+                    transition={{
+                      duration: 0.9,
+                      delay: 0.1 + i * 0.12,
+                      ease: [0.76, 0, 0.24, 1],
+                    }}
+                  >
+                    {line}
+                  </motion.span>
+                </span>
+              ))}
             </h1>
-          </motion.div>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -223,10 +238,10 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="flex flex-wrap gap-4"
           >
-            <a href="#work" className="group inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors">
+            <a href="#work" className="group inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background font-medium hover:bg-foreground/90 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               View Work <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" className="px-8 py-4 border border-border font-medium hover:bg-muted transition-colors">
+            <a href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" className="px-8 py-4 border border-border font-medium hover:bg-muted transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               Resume
             </a>
           </motion.div>
@@ -559,14 +574,14 @@ export default function Home() {
       </section>
 
       {/* GitHub Activity Section */}
-      <section id="activity" className="py-24 px-6 border-t border-border">
+      <section id="activity" className="py-16 sm:py-24 px-6 border-t border-border">
         <div className="max-w-screen-wide mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+            className="mb-10 sm:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
           >
             <div>
               <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-2 mb-4">

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -19,7 +19,8 @@
     --muted-foreground: #a3a3a3;
     --border: #262626;
   }
-  * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+  :root { font-family: 'Inter', sans-serif; }
+  * { box-sizing: border-box; }
   html { scroll-behavior: smooth; position: relative; }
   body {
     background-color: var(--background);
@@ -35,7 +36,7 @@
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  .font-display { font-family: 'Syne', sans-serif; }
+  .font-display { font-family: var(--font-clash), 'Syne', sans-serif; }
   .section-label { @apply text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground; }
   .glass {
     background: color-mix(in srgb, var(--background) 75%, transparent);
@@ -65,3 +66,13 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-up { animation: fadeUp 0.7s ease-out forwards; }
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
