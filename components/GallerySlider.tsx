@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 
 const galleryData = [
+  { src: '/images/gallery/aws.jpg', caption: 'AWS Event' },
   { src: '/images/gallery/aws_bizzdev.jpg', caption: 'AWS Business Development Event' },
   { src: '/images/gallery/aws_day3.jpg', caption: 'AWS Training Day 3' },
   { src: '/images/gallery/aws_day3_me.jpg', caption: 'AWS Training Day 3 - Individual' },
@@ -10,6 +11,13 @@ const galleryData = [
   { src: '/images/gallery/aws_quickflow.jpg', caption: 'AWS QuickFlow Architecture' },
   { src: '/images/gallery/aws_week2.jpg', caption: 'AWS Training Week 2' },
   { src: '/images/gallery/capstone_project.jpg', caption: 'VCM HRIS Capstone Project' },
+  { src: '/images/gallery/egov1.jpg', caption: 'eGov PH App Implementation' },
+  { src: '/images/gallery/egov2.jpg', caption: 'eGov PH App Assistance' },
+  { src: '/images/gallery/egov3.jpg', caption: 'eGov PH App Registration' },
+  { src: '/images/gallery/egov4.jpg', caption: 'eGov PH App Event' },
+  { src: '/images/gallery/egov5.jpg', caption: 'eGov PH App Launch' },
+  { src: '/images/gallery/egov6.jpg', caption: 'eGov PH App Campaign' },
+  { src: '/images/gallery/egov7.jpg', caption: 'eGov PH App Outreach' },
   { src: '/images/gallery/internship.jpg', caption: 'Internship at General Emilio Aguinaldo Memorial Hospital' },
   { src: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg', caption: 'Presenting Queuing System to Section Heads' },
   { src: '/images/gallery/internship_presenting_to_sectionheads.jpg', caption: 'Presenting Solutions to Section Heads' },
