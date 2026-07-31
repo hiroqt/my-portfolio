@@ -13,8 +13,15 @@ const clashDisplay = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Arnel A. Baylon - Full-Stack Developer',
-  description: 'Making daily operations easier for staff and administrators through high-performance full-stack architectures.',
+  title: 'Arnel A. Baylon — Résumé',
+  description:
+    'Résumé of Arnel A. Baylon: Generative AI developer and full-stack engineer. BS Information Technology, Cavite State University. Experience, projects, certifications, and skills.',
+  openGraph: {
+    title: 'Arnel A. Baylon — Résumé',
+    description:
+      'Generative AI developer and full-stack engineer. Experience, projects, certifications, and skills.',
+    type: 'profile',
+  },
 }
 
 export default function RootLayout({

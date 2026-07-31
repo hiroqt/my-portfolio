@@ -21,12 +21,10 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
+        serif: ["'Source Serif 4'", "Georgia", "'Times New Roman'", "serif"],
         display: ["var(--font-clash)", "Syne", "sans-serif"],
         mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
       },
-      maxWidth: {
-        'screen-wide': '1600px',
-      }
     }
   },
   plugins: [
