@@ -3,15 +3,6 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 
-const clashDisplay = localFont({
-  src: [
-    { path: '../public/fonts/clash-display/ClashDisplay-Semibold.woff2', weight: '600', style: 'normal' },
-    { path: '../public/fonts/clash-display/ClashDisplay-Bold.woff2', weight: '700', style: 'normal' },
-  ],
-  variable: '--font-clash',
-  display: 'swap',
-})
-
 const comico = localFont({
   src: '../public/Fonts/WEB/fonts/Comico-Regular.woff2',
   variable: '--font-comico',
@@ -36,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${clashDisplay.variable} ${comico.variable}`}>
+    <html lang="en" className={`dark ${comico.variable}`}>
       <body className="overflow-x-hidden min-h-screen font-sans">
         {children}
         <Analytics />
