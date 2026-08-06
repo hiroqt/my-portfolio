@@ -13,6 +13,7 @@ import {
   SiFigma, SiTrello, SiDart
 } from 'react-icons/si'
 import { GallerySlider } from '@/components/GallerySlider'
+import { AccordionGallery } from '@/components/AccordionGallery'
 import { GithubActivity } from '@/components/GithubActivity'
 import ThemeToggle from '@/components/ThemeToggle'
 
@@ -45,8 +46,7 @@ const navItems = [
   { id: '04', label: 'certifications', href: '#certifications' },
   { id: '05', label: 'skills', href: '#skills' },
   { id: '06', label: 'github', href: '#github' },
-  { id: '07', label: 'gallery', href: '#gallery' },
-  { id: '08', label: 'contact', href: '#contact' },
+  { id: '07', label: 'contact', href: '#contact' },
 ]
 
 const experience = [
@@ -84,10 +84,18 @@ const experience = [
 
 const projects = [
   {
+    title: 'Tearsize',
+    summary: 'Client project — E-commerce platform for health products featuring full payment integration.',
+    tags: ['TypeScript', 'Tailwind CSS'],
+    link: '#',
+    image: '/images/tearsize.png',
+  },
+  {
     title: 'e Buddy (eGov Hackathon 2026)',
     summary: 'Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.',
     tags: ['TypeScript', 'AI', 'Tailwind CSS'],
     link: '#',
+    image: '/images/egov.png',
   },
   {
     title: 'PaceMentor',
@@ -95,25 +103,29 @@ const projects = [
     tags: ['Flutter', 'Dart', 'AI'],
     link: '#',
     embedUrl: 'https://appbuildersph.com/embed/apps/pacementor',
-    embedTitle: 'PaceMentor votes on App Builders PH'
+    embedTitle: 'PaceMentor votes on App Builders PH',
+    image: '/images/pcaementor.png',
   },
   {
     title: 'HiveSync VA',
     summary: 'Client project — virtual assistant services platform streamlining business operations for distributed teams.',
     tags: ['Next.js', 'TypeScript'],
     link: 'https://www.hivesyncva.com',
+    image: '/images/hivesync.png',
   },
   {
     title: 'VCM HRIS',
     summary: 'QR-code based Human Resource Information System: employee management, leave tracking, job applications, real-time notifications, and payroll.',
     tags: ['Laravel', 'PHP', 'MySQL'],
     link: '#',
+    image: '/images/vcm.png',
   },
   {
     title: 'TMRC',
     summary: 'Community website for Trece Martirez Running Club — upcoming and past races, race results, and community updates.',
     tags: ['Next.js', 'TypeScript'],
     link: '#',
+    image: '/images/tmrc.png',
   },
   {
     title: 'Present Po',
@@ -121,13 +133,15 @@ const projects = [
     tags: ['Next.js', 'TypeScript', 'Supabase'],
     link: '#',
     embedUrl: 'https://appbuildersph.com/embed/apps/present-po',
-    embedTitle: 'Present Po votes on App Builders PH'
+    embedTitle: 'Present Po votes on App Builders PH',
+    image: '/images/presentpo.png',
   },
   {
     title: 'Hospital Queuing System',
     summary: 'A centralized local queuing system with AI integration developed for a hospital to streamline patient workflows.',
     tags: ['Vue.js', 'PHP', 'MySQL', 'AI'],
     link: '#',
+    image: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg',
   },
 ]
 
@@ -178,7 +192,6 @@ const contactLinks = [
   { label: 'Instagram', value: '@yheellll', href: 'https://www.instagram.com/yheellll?igsh=MWYxMDZlMzYzNXA2dw', icon: <FaInstagram /> },
 ]
 
-/** Numbered section heading, e.g. "01 — education" with an optional right-aligned action. */
 function SectionHeading({
   id,
   label,
@@ -189,9 +202,9 @@ function SectionHeading({
   action?: React.ReactNode
 }) {
   return (
-    <div className="flex items-baseline justify-between gap-4 mb-6 pb-2 border-b border-foreground">
-      <h2 className="text-xs sm:text-sm font-mono tracking-[0.2em] text-foreground">
-        <span className="text-muted-foreground">{id}</span> — {label}
+    <div className="flex items-baseline justify-between gap-4 mb-8 pb-3 border-b border-border/60">
+      <h2 className="text-sm sm:text-base font-display font-semibold tracking-widest uppercase text-foreground">
+        <span className="text-accent mr-2 opacity-80">{id}</span> {label}
       </h2>
       {action}
     </div>
@@ -239,17 +252,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
       {/* Header */}
-      <header className="sticky top-0 z-40 glass border-b border-border print:hidden">
-        <nav className="max-w-screen-2xl mx-auto px-8 h-14 flex items-center justify-between gap-4">
-          <a href="#top" className="font-semibold tracking-tight">Nel.</a>
-          <div className="flex items-center gap-4">
+      <header className="sticky top-0 z-40 glass print:hidden">
+        <nav className="max-w-screen-2xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between gap-4">
+          <a href="#top" className="font-display font-bold text-xl tracking-tight hover:text-accent transition-colors">Nel.</a>
+          <div className="flex items-center gap-6">
             <a
               href="/pdf/Arnel_Baylon_Resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground hover:text-accent transition-colors group"
             >
-              <FaFilePdf /> Résumé
+              <FaFilePdf className="group-hover:-translate-y-0.5 transition-transform" /> Résumé
             </a>
             <ThemeToggle variant="header" />
           </div>
@@ -259,36 +272,54 @@ export default function Home() {
       <main id="top" className="max-w-screen-2xl mx-auto px-8 py-14 sm:py-20">
 
         {/* Masthead */}
-        <header className="pb-8 border-b-2 border-foreground">
+        <header className="pb-24 pt-20 md:pt-32 flex flex-col justify-center min-h-[85vh] relative">
           <Reveal>
-            <h1 className="text-3xl sm:text-5xl font-bold tracking-[0.02em] uppercase">
-              Arnel Baylon
-            </h1>
-            <p className="mt-3 text-sm sm:text-base text-muted-foreground italic">
-              Generative AI Developer · Full-Stack Engineer · Freelance Software Consultant
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs sm:text-sm">
-              <a href="mailto:arnelbaylon15@gmail.com" className="hover:underline underline-offset-4">
-                arnelbaylon15@gmail.com
-              </a>
-              <span aria-hidden className="text-muted-foreground">•</span>
-              <a
-                href="https://www.linkedin.com/in/arnel-baylon-b05233189"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline underline-offset-4"
-              >
-                linkedin.com/in/arnel-baylon
-              </a>
-              <span aria-hidden className="text-muted-foreground">•</span>
-              <a
-                href="https://github.com/hiroqt"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline underline-offset-4"
-              >
-                github.com/hiroqt
-              </a>
+            <div className="relative z-10">
+              
+              <div className="flex flex-col lg:flex-row lg:items-center justify-start gap-8 lg:gap-12">
+                <h1 className="text-[15vw] sm:text-[12vw] md:text-[8rem] lg:text-[9rem] xl:text-[10rem] font-comico font-extrabold tracking-tighter leading-[0.85] text-foreground uppercase shrink-0">
+                  Arnel
+                  <br />
+                  <span className="text-muted-foreground">Baylon.</span>
+                </h1>
+                
+                <div className="w-full flex-1 max-w-4xl">
+                  <AccordionGallery />
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-12 gap-8 md:gap-12 mt-16 md:mt-24 items-end">
+                <div className="md:col-span-7 lg:col-span-8">
+                  <p className="text-xl sm:text-2xl md:text-3xl text-foreground font-medium leading-tight tracking-tight max-w-2xl">
+                    Crafting intelligent systems and scalable architectures. I blend <span className="text-muted-foreground">generative AI</span> with robust <span className="text-muted-foreground">full-stack engineering</span> to build the future.
+                  </p>
+                </div>
+                
+                <div className="md:col-span-5 lg:col-span-4 flex flex-col sm:flex-row md:flex-col items-start md:items-end justify-end gap-6 font-semibold">
+                  <a href="mailto:arnelbaylon15@gmail.com" className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono">
+                    <span>Start a project</span> 
+                    <FaArrowRight className="group-hover:translate-x-1 transition-transform text-lg" />
+                  </a>
+                  <div className="flex gap-6">
+                    <a
+                      href="https://github.com/hiroqt"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono"
+                    >
+                      <FaGithub className="text-xl group-hover:scale-110 transition-transform" /> <span className="hidden sm:inline">GitHub</span>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/arnel-baylon-b05233189"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono"
+                    >
+                      <FaLinkedin className="text-xl group-hover:scale-110 transition-transform" /> <span className="hidden sm:inline">LinkedIn</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </Reveal>
         </header>
@@ -328,28 +359,30 @@ export default function Home() {
           <div className="space-y-8">
             {experience.map((job, i) => (
               <Reveal key={job.org} delay={i * 0.06}>
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                  <h3 className="font-semibold uppercase tracking-wide text-sm sm:text-base">
-                    {job.org}
-                  </h3>
-                  <span className="text-xs sm:text-sm text-muted-foreground shrink-0">
-                    {job.location}
-                  </span>
+                <div className="gemini-card p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                    <h3 className="font-semibold uppercase tracking-wide text-sm sm:text-base">
+                      {job.org}
+                    </h3>
+                    <span className="text-xs sm:text-sm text-muted-foreground shrink-0">
+                      {job.location}
+                    </span>
+                  </div>
+                  <div className="mt-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                    <p className="text-sm font-medium text-accent">{job.role}</p>
+                    <span className="text-xs sm:text-sm text-muted-foreground shrink-0 tabular-nums">
+                      {job.period}
+                    </span>
+                  </div>
+                  <ul className="mt-4 space-y-2">
+                    {job.bullets.map((bullet) => (
+                      <li key={bullet} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                        <span aria-hidden className="text-accent shrink-0">•</span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="mt-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                  <p className="text-sm font-medium">{job.role}</p>
-                  <span className="text-xs sm:text-sm text-muted-foreground shrink-0 tabular-nums">
-                    {job.period}
-                  </span>
-                </div>
-                <ul className="mt-3 space-y-2">
-                  {job.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                      <span aria-hidden className="text-foreground shrink-0">•</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
               </Reveal>
             ))}
           </div>
@@ -372,51 +405,88 @@ export default function Home() {
               </a>
             }
           />
-          <div className="space-y-6">
-            {projects.map((project, i) => {
+          <div className="relative h-[450px] sm:h-[500px] flex items-center justify-center w-full max-w-5xl mx-auto overflow-x-clip my-8 group">
+            {/* Left Card: Present Po */}
+            <div className="absolute w-[280px] sm:w-[360px] h-[340px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-700 transform -rotate-12 -translate-x-12 sm:-translate-x-48 translate-y-4 group-hover:-translate-x-20 sm:group-hover:-translate-x-64 group-hover:-rotate-6 z-0 hover:z-20 hover:scale-105 cursor-pointer hidden sm:block overflow-hidden group/card flex flex-col justify-between">
+              <div>
+                <div className="flex gap-2 mb-4 flex-wrap relative z-10">
+                  <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ FEATURED APP ❯</span>
+                  <span className="border border-border text-foreground text-[9px] font-mono px-2 py-1 rounded-full bg-background">B2B SOLUTION</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground relative z-10 group-hover/card:text-transparent transition-colors duration-300">Present Po</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-4 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">Workforce attendance and time-tracking platform with scheduling, presence monitoring, and automated reporting.</p>
+              </div>
+              <div className="mt-4 pointer-events-none opacity-80 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">
+                <iframe src="https://appbuildersph.com/embed/apps/present-po" title="Present Po votes" width="320" height="72" style={{ border: 0, width: '100%', maxWidth: '100%' }} loading="lazy" scrolling="no" />
+              </div>
+              <img src="/images/presentpo.png" alt="Present Po" className="absolute left-1/2 -bottom-20 w-[85%] h-auto rounded-t-xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-20 group-hover/card:opacity-100 transition-all duration-500 z-0" />
+            </div>
+
+            {/* Right Card: e Buddy */}
+            <div className="absolute w-[280px] sm:w-[360px] h-[340px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-700 transform rotate-12 translate-x-12 sm:translate-x-48 translate-y-4 group-hover:translate-x-20 sm:group-hover:translate-x-64 group-hover:rotate-6 z-0 hover:z-20 hover:scale-105 cursor-pointer hidden sm:block overflow-hidden group/card flex flex-col justify-start">
+              <div className="flex gap-2 mb-4 flex-wrap relative z-10">
+                <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ HACKATHON ENTRY ❯</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground relative z-10 group-hover/card:text-transparent transition-colors duration-300">e Buddy</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.</p>
+              <img src="/images/egov.png" alt="e Buddy" className="absolute left-1/2 -bottom-20 w-[85%] h-auto rounded-t-xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-24 group-hover/card:opacity-100 transition-all duration-500 z-0" />
+            </div>
+
+            {/* Center Card: PaceMentor */}
+            <div className="absolute w-[300px] sm:w-[420px] h-[400px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-700 transform z-10 group-hover:-translate-y-6 hover:scale-105 cursor-pointer overflow-hidden group/card flex flex-col justify-between">
+              <div>
+                <div className="flex gap-2 mb-6 flex-wrap relative z-10">
+                  <span className="bg-foreground text-background text-[10px] sm:text-xs font-mono px-3 py-1.5 rounded-full flex items-center gap-1">✦ AI RUNNING COACH ❯</span>
+                  <span className="border border-border text-foreground text-[10px] sm:text-xs font-mono px-3 py-1.5 rounded-full bg-background">STRAVA READY</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-foreground relative z-10 group-hover/card:text-transparent transition-colors duration-300">PaceMentor</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-6 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">AI-powered running coach with adaptive training plans, real-time GPS tracking, and Strava integration — from first steps to personal best.</p>
+              </div>
+              <div className="mt-4 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">
+                <iframe src="https://appbuildersph.com/embed/apps/pacementor" title="PaceMentor votes" width="320" height="72" style={{ border: 0, width: '100%' }} loading="lazy" scrolling="no" />
+              </div>
+              <img src="/images/pcaementor.png" alt="PaceMentor" className="absolute left-1/2 -bottom-24 w-[90%] h-auto rounded-t-2xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-28 group-hover/card:opacity-100 transition-all duration-500 z-0" />
+            </div>
+          </div>
+
+          <div className="space-y-6 mt-8 sm:mt-12 max-w-4xl mx-auto">
+            <h4 className="text-sm font-mono text-muted-foreground uppercase tracking-widest border-b border-border/40 pb-4 mb-8">Other Projects</h4>
+            {projects.filter(p => !['PaceMentor', 'Present Po', 'e Buddy (eGov Hackathon 2026)'].includes(p.title)).map((project, i) => {
               const isLive = project.link !== '#'
+
               return (
                 <Reveal key={project.title} delay={i * 0.05}>
-                  <div className="flex flex-wrap items-baseline gap-x-2">
-                    <h3 className="font-semibold text-sm sm:text-base">{project.title}</h3>
-                    {isLive && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        live <FaExternalLinkAlt className="text-[9px]" />
-                      </a>
+                  <div className="relative mb-10 group/row cursor-pointer py-4 sm:py-6 border-b border-border/40 last:border-0 overflow-visible flex items-center justify-between">
+                    <div className="relative z-10 w-full sm:w-2/3 transition-transform duration-500 group-hover/row:-translate-y-1">
+                      <div className="flex items-baseline gap-3 mb-2">
+                        <h3 className="text-lg sm:text-2xl font-display font-bold text-foreground">
+                          {project.title}
+                        </h3>
+                        {isLive && (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 ml-auto sm:ml-0"
+                          >
+                            live ↗
+                          </a>
+                        )}
+                      </div>
+                      <p className="text-base text-muted-foreground leading-relaxed">
+                        {project.summary}
+                      </p>
+                    </div>
+                    {project.image && (
+                      <div className="hidden sm:block absolute left-1/2 sm:left-1/4 bottom-full -translate-x-1/2 mb-4 w-[280px] h-[180px] z-50 pointer-events-none perspective-1000">
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover rounded-xl shadow-2xl opacity-0 group-hover/row:opacity-100 transform translate-y-8 group-hover/row:translate-y-0 rotate-x-12 group-hover/row:rotate-x-0 transition-all duration-700 ease-out origin-bottom" 
+                        />
+                      </div>
                     )}
                   </div>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {project.summary}
-                  </p>
-                  <ul className="mt-2 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="inline-flex items-center gap-1.5 text-[11px] px-2 py-0.5 border border-border text-muted-foreground"
-                      >
-                        {techIcons[tag]}
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                  {project.embedUrl && (
-                    <div className="mt-4">
-                      <iframe 
-                        src={project.embedUrl} 
-                        title={project.embedTitle} 
-                        width="320" 
-                        height="72" 
-                        style={{ border: 0 }} 
-                        loading="lazy" 
-                        scrolling="no"
-                      />
-                    </div>
-                  )}
                 </Reveal>
               )
             })}
@@ -429,37 +499,41 @@ export default function Home() {
           <div className="space-y-8">
             {certifications.map((cert, i) => (
               <Reveal key={cert.title} delay={i * 0.06}>
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="font-semibold text-sm sm:text-base">{cert.title}</h3>
-                  <span className="text-[11px] font-mono text-muted-foreground">{cert.count}</span>
-                </div>
-                <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2">
-                  {cert.topics.map((topic) => (
-                    <li key={topic} className="flex gap-3 text-sm text-muted-foreground">
-                      <span aria-hidden className="text-foreground shrink-0">•</span>
-                      <span>{topic}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 flex flex-wrap gap-4 print:hidden">
-                  {cert.badges.map((badgeId) => (
-                    <div
-                      key={badgeId}
-                      data-iframe-width="140"
-                      data-iframe-height="240"
-                      data-share-badge-id={badgeId}
-                      data-share-badge-host="https://www.credly.com"
-                    />
-                  ))}
+                <div className="gemini-card p-6">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+                    <h3 className="font-semibold text-sm sm:text-base">{cert.title}</h3>
+                    <span className="text-[11px] font-mono text-muted-foreground">{cert.count}</span>
+                  </div>
+                  <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                    {cert.topics.map((topic) => (
+                      <li key={topic} className="flex gap-3 text-sm text-muted-foreground">
+                        <span aria-hidden className="text-accent shrink-0">•</span>
+                        <span>{topic}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-wrap gap-4 print:hidden">
+                    {cert.badges.map((badgeId) => (
+                      <div
+                        key={badgeId}
+                        data-iframe-width="140"
+                        data-iframe-height="240"
+                        data-share-badge-id={badgeId}
+                        data-share-badge-host="https://www.credly.com"
+                      />
+                    ))}
+                  </div>
                 </div>
               </Reveal>
             ))}
 
             <Reveal delay={0.12}>
-              <h3 className="font-semibold text-sm sm:text-base">Lean Six Sigma — White Belt</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Process Improvement &amp; Quality Management
-              </p>
+              <div className="gemini-card p-6">
+                <h3 className="font-semibold text-sm sm:text-base">Lean Six Sigma — White Belt</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Process Improvement &amp; Quality Management
+                </p>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -477,9 +551,9 @@ export default function Home() {
                   {group.items.map((item) => (
                     <li
                       key={item}
-                      className="inline-flex items-center gap-2 text-xs px-3 py-1.5 border border-border hover:border-foreground transition-colors"
+                      className="inline-flex items-center gap-2 text-xs px-3.5 py-2 rounded-xl bg-background border border-border text-muted-foreground hover:border-accent hover:text-accent transition-colors"
                     >
-                      {techIcons[item]}
+                      <span className="text-base">{techIcons[item]}</span>
                       {item}
                     </li>
                   ))}
@@ -516,40 +590,30 @@ export default function Home() {
           <GithubActivity />
         </section>
 
-        {/* 07 — Gallery */}
-        <section id="gallery" className="pt-12 scroll-mt-20 print:hidden">
-          <SectionHeading id="07" label="gallery" />
-          <Reveal>
-            <div className="border border-border p-3">
-              <GallerySlider />
-            </div>
-          </Reveal>
-        </section>
-
-        {/* 08 — Contact */}
+        {/* 07 — Contact */}
         <section id="contact" className="pt-12 scroll-mt-20">
-          <SectionHeading id="08" label="contact" />
+          <SectionHeading id="07" label="contact" />
           <Reveal>
-            <p className="text-sm leading-relaxed text-muted-foreground max-w-prose">
+            <p className="text-sm leading-relaxed text-muted-foreground max-w-prose mb-6">
               Open to freelance projects, collaborations, and full-time opportunities.
             </p>
-            <ul className="mt-5 grid sm:grid-cols-2 gap-2">
+            <ul className="grid sm:grid-cols-2 gap-4">
               {contactLinks.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
                     target={item.href.startsWith('mailto:') ? undefined : '_blank'}
                     rel="noreferrer"
-                    className="group flex items-center gap-3 px-3 py-2.5 border border-border hover:border-foreground transition-colors"
+                    className="group flex items-center gap-4 p-4 gemini-card"
                   >
-                    <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                    <span className="text-muted-foreground group-hover:text-accent transition-colors text-xl">
                       {item.icon}
                     </span>
                     <span className="min-w-0">
                       <span className="block text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
                         {item.label}
                       </span>
-                      <span className="block text-sm truncate">{item.value}</span>
+                      <span className="block text-sm truncate font-medium">{item.value}</span>
                     </span>
                   </a>
                 </li>

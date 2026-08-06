@@ -24,6 +24,7 @@ const config: Config = {
         serif: ["'Source Serif 4'", "Georgia", "'Times New Roman'", "serif"],
         display: ["var(--font-clash)", "Syne", "sans-serif"],
         mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
+        comico: ["var(--font-comico)", "sans-serif"],
       },
     }
   },

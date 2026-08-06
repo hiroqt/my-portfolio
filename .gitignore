@@ -105,3 +105,6 @@ dist
 # Temporary folders
 tmp/
 temp/
+
+# Agents
+.gemini

@@ -12,6 +12,12 @@ const clashDisplay = localFont({
   display: 'swap',
 })
 
+const comico = localFont({
+  src: '../public/Fonts/WEB/fonts/Comico-Regular.woff2',
+  variable: '--font-comico',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'Arnel A. Baylon — Résumé',
   description:
@@ -30,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${clashDisplay.variable}`}>
+    <html lang="en" className={`dark ${clashDisplay.variable} ${comico.variable}`}>
       <body className="overflow-x-hidden min-h-screen font-sans">
         {children}
         <Analytics />
