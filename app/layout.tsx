@@ -27,13 +27,6 @@ export const metadata: Metadata = {
       'Generative AI developer and full-stack engineer. Experience, projects, certifications, and skills.',
     type: 'profile',
   },
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
 }
 
 export default function RootLayout({
