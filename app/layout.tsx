@@ -28,7 +28,11 @@ export const metadata: Metadata = {
     type: 'profile',
   },
   icons: {
-    icon: '/logo.jpg',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 }
 
