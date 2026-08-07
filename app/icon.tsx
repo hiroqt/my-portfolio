@@ -1,10 +1,17 @@
 import { ImageResponse } from 'next/og'
+import { readFile } from 'fs/promises'
+import { join } from 'path'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
 
-export default function Icon() {
+export default async function Icon() {
+  const logoPath = join(process.cwd(), 'public', 'logo.jpg')
+  const logoBuffer = await readFile(logoPath)
+  const logoBase64 = logoBuffer.toString('base64')
+  const logoSrc = `data:image/jpeg;base64,${logoBase64}`
+
   return new ImageResponse(
     (
       <div
@@ -14,14 +21,18 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#09090b',
-          color: '#fafafa',
-          fontSize: 18,
-          fontWeight: 700,
-          fontFamily: 'system-ui, sans-serif',
+          backgroundColor: 'transparent',
         }}
       >
-        AB
+        <img
+          src={logoSrc}
+          alt="Logo"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
       </div>
     ),
     {
