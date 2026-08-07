@@ -25,6 +25,7 @@ const config: Config = {
         display: ["var(--font-clash)", "Syne", "sans-serif"],
         mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
         comico: ["var(--font-comico)", "sans-serif"],
+        pacifico: ["var(--font-pacifico)", "cursive"],
       },
     }
   },

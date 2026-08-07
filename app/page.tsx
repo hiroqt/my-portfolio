@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import {
   FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaInstagram,
   FaExternalLinkAlt, FaArrowRight, FaRocket, FaFilePdf
@@ -13,7 +13,7 @@ import {
   SiFigma, SiTrello, SiDart
 } from 'react-icons/si'
 import { GallerySlider } from '@/components/GallerySlider'
-import { AccordionGallery } from '@/components/AccordionGallery'
+import { DraggableMasonry } from '@/components/DraggableMasonry'
 import { GithubActivity } from '@/components/GithubActivity'
 import ThemeToggle from '@/components/ThemeToggle'
 
@@ -235,6 +235,15 @@ function Reveal({
 }
 
 export default function Home() {
+  const [phase, setPhase] = useState<'drop' | 'name' | 'done'>('drop')
+
+  useEffect(() => {
+    // Sequence timings
+    const t1 = setTimeout(() => setPhase('name'), 600) // Water drop falls for 600ms
+    const t2 = setTimeout(() => setPhase('done'), 2200) // Name stays for 1600ms
+    return () => { clearTimeout(t1); clearTimeout(t2); }
+  }, [])
+
   useEffect(() => {
     // Load Credly badge script
     const credlyScript = document.createElement('script')
@@ -251,10 +260,60 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
+      {/* Intro Animation Layer */}
+      <AnimatePresence>
+        {phase !== 'done' && (
+          <motion.div 
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background pointer-events-none"
+            exit={{ opacity: 0, backgroundColor: 'transparent' }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          >
+            {/* Water Drop */}
+            <AnimatePresence>
+              {phase === 'drop' && (
+                <motion.div
+                  key="drop"
+                  initial={{ y: '-50vh', scaleY: 1.5, scaleX: 0.5 }}
+                  animate={{ y: 0, scaleY: 1, scaleX: 1 }}
+                  exit={{ scale: 3, opacity: 0, filter: 'blur(10px)' }}
+                  transition={{ duration: 0.6, ease: "easeIn", exit: { duration: 0.2, ease: "easeOut" } }}
+                  className="absolute w-8 h-8 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-black dark:bg-white blur-[2px]"
+                />
+              )}
+            </AnimatePresence>
+
+            {/* Name at Center */}
+            <AnimatePresence>
+              {phase === 'name' && (
+                <motion.div
+                  key="nameCenter"
+                  layoutId="hero-title"
+                  initial={{ scale: 0.5, opacity: 0, filter: 'blur(10px)' }}
+                  animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
+                  transition={{ type: 'spring', damping: 20, stiffness: 100 }}
+                  className="absolute flex flex-col items-center text-center"
+                >
+                  <h1 className="text-[20vw] md:text-[10rem] lg:text-[12rem] font-pacifico text-reference leading-tight capitalize">
+                    Arnel<br/>Baylon.
+                  </h1>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
-      <header className="sticky top-0 z-40 glass print:hidden">
+      <motion.header 
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : -10 }}
+        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+        className="sticky top-0 z-40 glass print:hidden"
+      >
         <nav className="max-w-screen-2xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between gap-4">
-          <a href="#top" className="font-display font-bold text-xl tracking-tight hover:text-accent transition-colors">Nel.</a>
+          <a href="#top" className="font-pacifico text-reference-sm text-3xl sm:text-4xl hover:scale-105 transition-transform origin-left block tracking-tight pt-1" aria-label="Nel Home">
+            Nel.
+          </a>
           <div className="flex items-center gap-6">
             <a
               href="/pdf/Arnel_Baylon_Resume.pdf"
@@ -267,7 +326,7 @@ export default function Home() {
             <ThemeToggle variant="header" />
           </div>
         </nav>
-      </header>
+      </motion.header>
 
       <main id="top" className="max-w-screen-2xl mx-auto px-8 py-14 sm:py-20">
 
@@ -277,25 +336,53 @@ export default function Home() {
             <div className="relative z-10">
               
               <div className="flex flex-col lg:flex-row lg:items-center justify-start gap-8 lg:gap-12">
-                <h1 className="text-[15vw] sm:text-[12vw] md:text-[8rem] lg:text-[9rem] xl:text-[10rem] font-comico font-extrabold tracking-tighter leading-[0.85] text-foreground uppercase shrink-0">
-                  Arnel
-                  <br />
-                  <span className="text-muted-foreground">Baylon.</span>
-                </h1>
-                
-                <div className="w-full flex-1 max-w-4xl">
-                  <AccordionGallery />
+                <div className="shrink-0">
+                  {phase === 'done' ? (
+                    <motion.div 
+                      layoutId="hero-title"
+                      transition={{ type: 'spring', damping: 25, stiffness: 100 }}
+                    >
+                      <h1 className="text-[18vw] sm:text-[15vw] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-pacifico text-reference leading-tight capitalize pb-4 md:pb-8">
+                        Arnel<br/>Baylon.
+                      </h1>
+                    </motion.div>
+                  ) : (
+                    <div className="opacity-0">
+                      <h1 className="text-[18vw] sm:text-[15vw] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-pacifico leading-tight capitalize pb-4 md:pb-8">
+                        Arnel<br/>Baylon.
+                      </h1>
+                    </div>
+                  )}
                 </div>
+                
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: phase === 'done' ? 1 : 0, x: phase === 'done' ? 0 : 20 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                  className="w-full flex-1 max-w-4xl"
+                >
+                  <DraggableMasonry />
+                </motion.div>
               </div>
               
               <div className="grid md:grid-cols-12 gap-8 md:gap-12 mt-16 md:mt-24 items-end">
-                <div className="md:col-span-7 lg:col-span-8">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  className="md:col-span-7 lg:col-span-8"
+                >
                   <p className="text-xl sm:text-2xl md:text-3xl text-foreground font-medium leading-tight tracking-tight max-w-2xl">
-                    Crafting intelligent systems and scalable architectures. I blend <span className="text-muted-foreground">generative AI</span> with robust <span className="text-muted-foreground">full-stack engineering</span> to build the future.
+                    Empowering businesses with intelligent systems and scalable architectures. I blend <span className="text-muted-foreground">generative AI</span> with robust <span className="text-muted-foreground">full-stack engineering</span> to accelerate your growth.
                   </p>
-                </div>
+                </motion.div>
                 
-                <div className="md:col-span-5 lg:col-span-4 flex flex-col sm:flex-row md:flex-col items-start md:items-end justify-end gap-6 font-semibold">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
+                  transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                  className="md:col-span-5 lg:col-span-4 flex flex-col sm:flex-row md:flex-col items-start md:items-end justify-end gap-6 font-semibold"
+                >
                   <a href="mailto:arnelbaylon15@gmail.com" className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono">
                     <span>Start a project</span> 
                     <FaArrowRight className="group-hover:translate-x-1 transition-transform text-lg" />
@@ -318,7 +405,7 @@ export default function Home() {
                       <FaLinkedin className="text-xl group-hover:scale-110 transition-transform" /> <span className="hidden sm:inline">LinkedIn</span>
                     </a>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </Reveal>
