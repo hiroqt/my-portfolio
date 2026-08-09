@@ -42,6 +42,13 @@ export async function POST(request: Request) {
     )
   }
 
+  // Capture the real client IP to forward downstream so the freelance API's
+  // rate-limiter keys on the actual user rather than Vercel's shared egress IPs.
+  const clientIp =
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    request.headers.get('x-real-ip') ??
+    'unknown'
+
   // 2 — Server-side schema validation (authoritative)
   const parsed = inquiryFormSchema.safeParse(body)
   if (!parsed.success) {
@@ -75,7 +82,7 @@ export async function POST(request: Request) {
   })
 
   // 5 — Forward to the freelance application
-  const result = await submitInquiry(payload)
+  const result = await submitInquiry(payload, clientIp)
 
   if (result.ok) {
     return NextResponse.json({ success: true }, { status: 200 })

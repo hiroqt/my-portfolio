@@ -16,6 +16,7 @@ export type SubmitInquiryResult =
  */
 export async function submitInquiry(
   payload: InquiryPayload,
+  clientIp?: string,
 ): Promise<SubmitInquiryResult> {
   const apiUrl = process.env.FREELANCE_INQUIRY_API_URL
   const apiSecret = process.env.FREELANCE_INQUIRY_API_SECRET
@@ -36,6 +37,9 @@ export async function submitInquiry(
       headers: {
         'Content-Type': 'application/json',
         'X-Inquiry-Secret': apiSecret,
+        // Forward the real client IP so the downstream rate-limiter keys on
+        // the actual user, not on Vercel's shared serverless egress IPs.
+        ...(clientIp && clientIp !== 'unknown' ? { 'X-Client-Ip': clientIp } : {}),
       },
       body: JSON.stringify(payload),
       signal: controller.signal,
