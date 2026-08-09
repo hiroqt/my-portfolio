@@ -95,6 +95,17 @@ function FieldError({ id, message }: { id?: string; message?: string }) {
   )
 }
 
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+
+if (!TURNSTILE_SITE_KEY) {
+  console.error(
+    '[InquiryForm] NEXT_PUBLIC_TURNSTILE_SITE_KEY is not set. ' +
+      'Add it to your .env.local file. The human-verification widget will not work.',
+  )
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export function InquiryForm() {
@@ -442,13 +453,19 @@ export function InquiryForm() {
         <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-2">
           Human verification
         </p>
-        <Turnstile
-          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA'}
-          onSuccess={handleTurnstileSuccess}
-          onError={handleTurnstileError}
-          onExpire={handleTurnstileError}
-          options={{ theme: 'auto', size: 'normal' }}
-        />
+        {TURNSTILE_SITE_KEY ? (
+          <Turnstile
+            siteKey={TURNSTILE_SITE_KEY}
+            onSuccess={handleTurnstileSuccess}
+            onError={handleTurnstileError}
+            onExpire={handleTurnstileError}
+            options={{ theme: 'auto', size: 'normal' }}
+          />
+        ) : (
+          <p className="text-xs text-red-500 font-mono">
+            Verification widget unavailable — NEXT_PUBLIC_TURNSTILE_SITE_KEY is not configured.
+          </p>
+        )}
         <AnimatePresence mode="wait">
           {errors.turnstileToken && (
             <FieldError message={errors.turnstileToken.message} />
