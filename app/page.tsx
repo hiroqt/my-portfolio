@@ -16,6 +16,7 @@ import { GallerySlider } from '@/components/GallerySlider'
 import { DraggableMasonry } from '@/components/DraggableMasonry'
 import { GithubActivity } from '@/components/GithubActivity'
 import ThemeToggle from '@/components/ThemeToggle'
+import { InquiryForm } from '@/components/contact/InquiryForm'
 
 const techIcons: Record<string, React.ReactNode> = {
   "Flutter": <SiFlutter />,
@@ -383,7 +384,7 @@ export default function Home() {
                   transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
                   className="md:col-span-5 lg:col-span-4 flex flex-col sm:flex-row md:flex-col items-start md:items-end justify-end gap-6 font-semibold"
                 >
-                  <a href="mailto:arnelbaylon15@gmail.com" className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono">
+                  <a href="#contact" className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono">
                     <span>Start a project</span> 
                     <FaArrowRight className="group-hover:translate-x-1 transition-transform text-lg" />
                   </a>
@@ -680,33 +681,46 @@ export default function Home() {
         {/* 07 — Contact */}
         <section id="contact" className="pt-12 scroll-mt-20">
           <SectionHeading id="07" label="contact" />
-          <Reveal>
-            <p className="text-sm leading-relaxed text-muted-foreground max-w-prose mb-6">
-              Open to freelance projects, collaborations, and full-time opportunities.
-            </p>
-            <ul className="grid sm:grid-cols-2 gap-4">
-              {contactLinks.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    target={item.href.startsWith('mailto:') ? undefined : '_blank'}
-                    rel="noreferrer"
-                    className="group flex items-center gap-4 p-4 gemini-card"
-                  >
-                    <span className="text-muted-foreground group-hover:text-accent transition-colors text-xl">
-                      {item.icon}
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
-                        {item.label}
+
+          <div className="grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-14 items-start">
+            {/* Left — Inquiry form */}
+            <Reveal>
+              <p className="text-sm leading-relaxed text-muted-foreground max-w-prose mb-6">
+                Open to freelance projects, collaborations, and full-time opportunities.
+                Fill in the form and I&apos;ll get back to you as soon as possible.
+              </p>
+              <InquiryForm />
+            </Reveal>
+
+            {/* Right — Social / direct contact links */}
+            <Reveal delay={0.08}>
+              <h3 className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-4">
+                Or reach me directly
+              </h3>
+              <ul className="space-y-3">
+                {contactLinks.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      target={item.href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel="noreferrer"
+                      className="group flex items-center gap-4 p-4 gemini-card"
+                    >
+                      <span className="text-muted-foreground group-hover:text-accent transition-colors text-xl">
+                        {item.icon}
                       </span>
-                      <span className="block text-sm truncate font-medium">{item.value}</span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+                      <span className="min-w-0">
+                        <span className="block text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
+                          {item.label}
+                        </span>
+                        <span className="block text-sm truncate font-medium">{item.value}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
         </section>
       </main>
 

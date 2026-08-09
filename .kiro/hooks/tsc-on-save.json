@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "TypeScript Check on Save",
+      "trigger": "PostFileSave",
+      "description": "Runs tsc --noEmit after every TypeScript file save to surface type errors immediately in the agent output.",
+      "matcher": "\\.(ts|tsx)$",
+      "action": {
+        "type": "command",
+        "command": "cd /Users/arnel/Projects/my-portfolio && npx tsc --noEmit 2>&1 | head -60",
+        "timeout": 60
+      }
+    }
+  ]
+}
