@@ -33,7 +33,7 @@ const BUDGET_OPTIONS = [
   "Let's discuss",
 ]
 
-const MESSAGE_MAX = 5000
+const MESSAGE_MAX = 2000
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

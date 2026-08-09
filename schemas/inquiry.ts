@@ -5,7 +5,7 @@ import { z } from 'zod'
 export const inquiryFormSchema = z.object({
   name: z
     .string()
-    .min(1, 'Name is required.')
+    .min(2, 'Name must be at least 2 characters.')
     .max(100, 'Name must be 100 characters or fewer.'),
 
   email: z
@@ -40,8 +40,8 @@ export const inquiryFormSchema = z.object({
 
   message: z
     .string()
-    .min(1, 'Message is required.')
-    .max(5000, 'Message must be 5000 characters or fewer.'),
+    .min(10, 'Message must be at least 10 characters.')
+    .max(2000, 'Message must be 2000 characters or fewer.'),
 
   // Cloudflare Turnstile token — required on the client form, verified server-side.
   turnstileToken: z
