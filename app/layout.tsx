@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { Pacifico } from 'next/font/google'
+import { Pacifico, Share_Tech } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 
@@ -14,6 +14,13 @@ const pacifico = Pacifico({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-pacifico',
+  display: 'swap',
+})
+
+const shareTech = Share_Tech({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-sharetech',
   display: 'swap',
 })
 
@@ -35,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${comico.variable} ${pacifico.variable}`}>
+    <html lang="en" className={`dark ${comico.variable} ${pacifico.variable} ${shareTech.variable}`}>
       <body className="overflow-x-hidden min-h-screen font-sans">
         {children}
         <Analytics />

@@ -12,8 +12,9 @@ import {
   SiReact, SiVuedotjs, SiTailwindcss, SiNodedotjs, SiFirebase, SiVercel, SiGit,
   SiFigma, SiTrello, SiDart
 } from 'react-icons/si'
-import { GallerySlider } from '@/components/GallerySlider'
+import { Sidebar } from '@/components/Sidebar'
 import { DraggableMasonry } from '@/components/DraggableMasonry'
+import { TechMarquee } from '@/components/TechMarquee'
 import { GithubActivity } from '@/components/GithubActivity'
 import ThemeToggle from '@/components/ThemeToggle'
 import { InquiryForm } from '@/components/contact/InquiryForm'
@@ -248,7 +249,7 @@ export default function Home() {
   useEffect(() => {
     // Load Credly badge script
     const credlyScript = document.createElement('script')
-    credlyScript.src = '//cdn.credly.com/assets/utilities/embed.js'
+    credlyScript.src = 'https://cdn.credly.com/assets/utilities/embed.js'
     credlyScript.async = true
     document.body.appendChild(credlyScript)
 
@@ -264,7 +265,7 @@ export default function Home() {
       {/* Intro Animation Layer */}
       <AnimatePresence>
         {phase !== 'done' && (
-          <motion.div 
+          <motion.div
             className="fixed inset-0 z-[100] flex items-center justify-center bg-background pointer-events-none"
             exit={{ opacity: 0, backgroundColor: 'transparent' }}
             transition={{ duration: 1, ease: "easeInOut" }}
@@ -294,8 +295,8 @@ export default function Home() {
                   transition={{ type: 'spring', damping: 20, stiffness: 100 }}
                   className="absolute flex flex-col items-center text-center"
                 >
-                  <h1 className="text-[20vw] md:text-[10rem] lg:text-[12rem] font-pacifico text-reference leading-tight capitalize">
-                    Arnel<br/>Baylon.
+                  <h1 className="text-[12vw] sm:text-[10vw] md:text-[8rem] lg:text-[10rem] xl:text-[11rem] font-display font-bold leading-none tracking-tighter capitalize text-foreground whitespace-nowrap">
+                    Arnel Baylon
                   </h1>
                 </motion.div>
               )}
@@ -304,89 +305,61 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Header */}
-      <motion.header 
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : -10 }}
-        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-        className="sticky top-0 z-40 glass print:hidden"
-      >
-        <nav className="max-w-screen-2xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between gap-4">
-          <a href="#top" className="font-pacifico text-reference-sm text-3xl sm:text-4xl hover:scale-105 transition-transform origin-left block tracking-tight pt-1" aria-label="Nel Home">
-            Nel.
-          </a>
-          <div className="flex items-center gap-6">
-            <a
-              href="/pdf/Arnel_Baylon_Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground hover:text-accent transition-colors group"
-            >
-              <FaFilePdf className="group-hover:-translate-y-0.5 transition-transform" /> Résumé
-            </a>
-            <ThemeToggle variant="header" />
-          </div>
-        </nav>
-      </motion.header>
+      <Sidebar />
 
-      <main id="top" className="max-w-screen-2xl mx-auto px-8 py-14 sm:py-20">
+      {/* Header removed for sidebar */}
+
+      <main id="top" className="max-w-screen-2xl mx-auto px-8 pb-14 pt-4 sm:pb-20 sm:pt-8">
 
         {/* Masthead */}
-        <header className="pb-24 pt-20 md:pt-32 flex flex-col justify-center min-h-[85vh] relative">
+        <header className="pb-16 pt-8 md:pt-12 flex flex-col justify-center min-h-screen relative">
+          <div className="absolute inset-0 w-[100vw] left-1/2 -translate-x-1/2 bg-[image:radial-gradient(var(--border)_1.5px,transparent_1.5px)] bg-[size:24px_24px] pointer-events-none [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] opacity-80" />
           <Reveal>
             <div className="relative z-10">
-              
-              <div className="flex flex-col lg:flex-row lg:items-center justify-start gap-8 lg:gap-12">
-                <div className="shrink-0">
+
+              <div className="flex flex-col justify-center items-center text-center">
+                <div>
                   {phase === 'done' ? (
-                    <motion.div 
+                    <motion.div
                       layoutId="hero-title"
                       transition={{ type: 'spring', damping: 25, stiffness: 100 }}
                     >
-                      <h1 className="text-[18vw] sm:text-[15vw] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-pacifico text-reference leading-tight capitalize pb-4 md:pb-8">
-                        Arnel<br/>Baylon.
+                      <h1 className="text-[13vw] sm:text-[11vw] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-apoc leading-none tracking-tight capitalize pb-2 text-foreground whitespace-nowrap">
+                        Arnel Baylon
                       </h1>
                     </motion.div>
                   ) : (
                     <div className="opacity-0">
-                      <h1 className="text-[18vw] sm:text-[15vw] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-pacifico leading-tight capitalize pb-4 md:pb-8">
-                        Arnel<br/>Baylon.
+                      <h1 className="text-[13vw] sm:text-[11vw] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-apoc leading-none tracking-tight capitalize pb-2 text-foreground whitespace-nowrap">
+                        Arnel Baylon
                       </h1>
                     </div>
                   )}
                 </div>
-                
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: phase === 'done' ? 1 : 0, x: phase === 'done' ? 0 : 20 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                  className="w-full flex-1 max-w-4xl"
-                >
-                  <DraggableMasonry />
-                </motion.div>
               </div>
-              
-              <div className="grid md:grid-cols-12 gap-8 md:gap-12 mt-16 md:mt-24 items-end">
-                <motion.div 
+
+              <div className="flex flex-col items-center gap-8 mt-6 lg:mt-10 justify-center text-center">
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
                   transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                  className="md:col-span-7 lg:col-span-8"
+                  className="w-full max-w-4xl"
                 >
-                  <p className="text-xl sm:text-2xl md:text-3xl text-foreground font-medium leading-tight tracking-tight max-w-2xl">
-                    Empowering businesses with intelligent systems and scalable architectures. I blend <span className="text-muted-foreground">generative AI</span> with robust <span className="text-muted-foreground">full-stack engineering</span> to accelerate your growth.
+                  <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight tracking-tight mb-4">
+                    Full-Stack Engineer & AI Developer. I build scalable, intelligent web and mobile applications.
+                    <br /><span className="text-muted-foreground mt-4 inline-block text-xl sm:text-2xl md:text-3xl">Available for full-time opportunities.</span>
                   </p>
                 </motion.div>
-                
-                <motion.div 
+
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
                   transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-                  className="md:col-span-5 lg:col-span-4 flex flex-col sm:flex-row md:flex-col items-start md:items-end justify-end gap-6 font-semibold"
+                  className="flex flex-col sm:flex-row items-center justify-center gap-6 font-semibold shrink-0"
                 >
-                  <a href="#contact" className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono">
-                    <span>Start a project</span> 
-                    <FaArrowRight className="group-hover:translate-x-1 transition-transform text-lg" />
+                  <a href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono">
+                    <span>Download Résumé</span>
+                    <FaFilePdf className="group-hover:-translate-y-1 transition-transform text-lg" />
                   </a>
                   <div className="flex gap-6">
                     <a
@@ -408,6 +381,15 @@ export default function Home() {
                   </div>
                 </motion.div>
               </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
+                transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+                className="mt-12 sm:mt-16"
+              >
+                <TechMarquee />
+              </motion.div>
             </div>
           </Reveal>
         </header>
@@ -567,10 +549,10 @@ export default function Home() {
                     </div>
                     {project.image && (
                       <div className="hidden sm:block absolute left-1/2 sm:left-1/4 bottom-full -translate-x-1/2 mb-4 w-[280px] h-[180px] z-50 pointer-events-none perspective-1000">
-                        <img 
-                          src={project.image} 
-                          alt={project.title} 
-                          className="w-full h-full object-cover rounded-xl shadow-2xl opacity-0 group-hover/row:opacity-100 transform translate-y-8 group-hover/row:translate-y-0 rotate-x-12 group-hover/row:rotate-x-0 transition-all duration-700 ease-out origin-bottom" 
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover rounded-xl shadow-2xl opacity-0 group-hover/row:opacity-100 transform translate-y-8 group-hover/row:translate-y-0 rotate-x-12 group-hover/row:rotate-x-0 transition-all duration-700 ease-out origin-bottom"
                         />
                       </div>
                     )}
@@ -656,6 +638,14 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">English (fluent) · Filipino (native)</p>
             </Reveal>
           </div>
+        </section>
+
+        {/* Gallery */}
+        <section className="pt-12 scroll-mt-20 print:hidden">
+          <SectionHeading id="✦" label="gallery" />
+          <Reveal>
+            <DraggableMasonry />
+          </Reveal>
         </section>
 
         {/* 06 — GitHub */}

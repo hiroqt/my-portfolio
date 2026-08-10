@@ -5,6 +5,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer base {
   :root {
     --background: #FFFFFF;
@@ -34,6 +36,8 @@
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
     position: relative;
+    background-image: radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
   ::selection { background-color: var(--foreground); color: var(--background); }
 }

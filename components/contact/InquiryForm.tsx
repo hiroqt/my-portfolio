@@ -97,7 +97,9 @@ function FieldError({ id, message }: { id?: string; message?: string }) {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+const TURNSTILE_SITE_KEY = process.env.NODE_ENV === 'development' 
+  ? '1x00000000000000000000AA' // Cloudflare testing key (always passes)
+  : process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 if (!TURNSTILE_SITE_KEY) {
   console.error(

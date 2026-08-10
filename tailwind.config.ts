@@ -20,12 +20,14 @@ const config: Config = {
         border: "var(--border)",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Helvetica", "Arial", "sans-serif"],
         serif: ["'Source Serif 4'", "Georgia", "'Times New Roman'", "serif"],
-        display: ["var(--font-clash)", "Syne", "sans-serif"],
+        display: ["'Apoc Revelations'", "serif"],
         mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
         comico: ["var(--font-comico)", "sans-serif"],
         pacifico: ["var(--font-pacifico)", "cursive"],
+        sharetech: ["var(--font-sharetech)", "sans-serif"],
+        apoc: ["'Apoc Revelations'", "serif"],
       },
     }
   },

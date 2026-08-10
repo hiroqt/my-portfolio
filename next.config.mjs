@@ -19,7 +19,7 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               // Scripts: self + Cloudflare Turnstile + Credly badges
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdn.credly.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdn.credly.com https://va.vercel-scripts.com",
               // Frames: Turnstile widget + Credly badge iframes + AppBuildersPH vote embeds
               "frame-src 'self' https://challenges.cloudflare.com https://www.credly.com https://appbuildersph.com",
               // Styles: inline (Tailwind/Framer) + Google Fonts CSS + Fontshare CSS
@@ -29,7 +29,7 @@ const nextConfig = {
               // Images: self + data URIs + Credly badge images + avatar images from GitHub
               "img-src 'self' data: blob: https://images.credly.com https://cdn.credly.com https://avatars.githubusercontent.com",
               // Connections: same-origin API routes only (GitHub/Turnstile called server-side)
-              "connect-src 'self'",
+              "connect-src 'self' https://vitals.vercel-insights.com",
             ].join('; '),
           },
         ],

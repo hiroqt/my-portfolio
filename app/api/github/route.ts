@@ -12,11 +12,22 @@ export async function GET(request: Request) {
 
     const token = process.env.GITHUB_TOKEN
     
-    if (!token) {
-      return NextResponse.json(
-        { error: 'GitHub token is not configured on the server.' },
-        { status: 500 }
-      )
+    if (!token || token.includes('your_github_personal_access_token_here')) {
+      return NextResponse.json({
+        user: {
+          name: "Mock User",
+          bio: "Please configure a valid GITHUB_TOKEN in .env.local",
+          public_repos: 0,
+          followers: 0,
+          following: 0,
+          avatar_url: "https://avatars.githubusercontent.com/u/9919?v=4"
+        },
+        repos: [],
+        contributions: {
+          totalContributions: 0,
+          days: []
+        }
+      })
     }
 
     // Use GitHub GraphQL API for accurate data including private repos
@@ -76,10 +87,21 @@ export async function GET(request: Request) {
     })
 
     if (!graphqlResponse.ok) {
-      return NextResponse.json(
-        { error: 'Failed to fetch GitHub data. Please check token permissions.' },
-        { status: graphqlResponse.status }
-      )
+      return NextResponse.json({
+        user: {
+          name: "Invalid Token",
+          bio: "GitHub API request failed. Please check your GITHUB_TOKEN permissions.",
+          public_repos: 0,
+          followers: 0,
+          following: 0,
+          avatar_url: "https://avatars.githubusercontent.com/u/9919?v=4"
+        },
+        repos: [],
+        contributions: {
+          totalContributions: 0,
+          days: []
+        }
+      })
     }
 
     const { data, errors } = await graphqlResponse.json()

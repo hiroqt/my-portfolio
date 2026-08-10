@@ -3,28 +3,25 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const galleryData = [
-  { id: 1, src: '/images/gallery/aws.jpg', title: 'AWS Event' },
-  { id: 2, src: '/images/gallery/aws_bizzdev.jpg', title: 'AWS Business Dev' },
-  { id: 3, src: '/images/gallery/aws_day3.jpg', title: 'AWS Day 3' },
-  { id: 4, src: '/images/gallery/aws_day3_me.jpg', title: 'AWS Portrait' },
-  { id: 5, src: '/images/gallery/aws_presentation_week2.jpg', title: 'AWS Presentation' },
-  { id: 6, src: '/images/gallery/aws_quickflow.jpg', title: 'AWS QuickFlow' },
-  { id: 7, src: '/images/gallery/aws_week2.jpg', title: 'AWS Week 2' },
-  { id: 8, src: '/images/gallery/capstone_project.jpg', title: 'Capstone' },
-  { id: 9, src: '/images/gallery/egov1.jpg', title: 'eGov 1' },
-  { id: 10, src: '/images/gallery/egov2.jpg', title: 'eGov 2' },
-  { id: 11, src: '/images/gallery/egov3.jpg', title: 'eGov 3' },
-  { id: 12, src: '/images/gallery/egov4.jpg', title: 'eGov 4' },
-  { id: 13, src: '/images/gallery/egov5.jpg', title: 'eGov 5' },
-  { id: 14, src: '/images/gallery/egov6.jpg', title: 'eGov 6' },
-  { id: 15, src: '/images/gallery/egov7.jpg', title: 'eGov 7' },
-  { id: 16, src: '/images/gallery/internship.jpg', title: 'Internship' },
-  { id: 17, src: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg', title: 'Presenting Queuing' },
-  { id: 18, src: '/images/gallery/internship_presenting_to_sectionheads.jpg', title: 'Presenting' },
-  { id: 19, src: '/images/gallery/pacementor_development.jpg', title: 'PaceMentor' },
-  { id: 20, src: '/images/gallery/runclub_development.jpg', title: 'RunClub' },
+const projectsList = [
+  { id: 1, src: '/images/tearsize.png', title: 'Tearsize' },
+  { id: 2, src: '/images/egov.png', title: 'e Buddy' },
+  { id: 3, src: '/images/pcaementor.png', title: 'PaceMentor' },
+  { id: 4, src: '/images/hivesync.png', title: 'HiveSync VA' },
+  { id: 5, src: '/images/vcm.png', title: 'VCM HRIS' },
+  { id: 6, src: '/images/tmrc.png', title: 'TMRC' },
+  { id: 7, src: '/images/presentpo.png', title: 'Present Po' },
+  { id: 8, src: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg', title: 'Hospital Queuing' },
 ];
+
+const galleryData = [
+  ...projectsList,
+  ...projectsList,
+  ...projectsList
+].map((item, index) => ({
+  ...item,
+  id: index + 1
+}));
 
 // Simple pseudo-random shuffle to maintain hydration safety by not depending on Math.random() strictly,
 // or we can just use a fixed seed/pre-shuffled layout for consistent hydration.

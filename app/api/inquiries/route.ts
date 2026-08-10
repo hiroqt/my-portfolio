@@ -7,7 +7,9 @@ export const runtime = 'nodejs'
 
 // Verify a Cloudflare Turnstile token server-side.
 async function verifyTurnstileToken(token: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY
+  const secret = process.env.NODE_ENV === 'development'
+    ? '1x0000000000000000000000000000000AA' // Cloudflare testing secret (always passes)
+    : process.env.TURNSTILE_SECRET_KEY
 
   if (!secret) {
     // If Turnstile is not configured (e.g. local dev without a key),
