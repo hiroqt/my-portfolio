@@ -18,6 +18,8 @@ import { TechMarquee } from '@/components/TechMarquee'
 import { GithubActivity } from '@/components/GithubActivity'
 import ThemeToggle from '@/components/ThemeToggle'
 import { InquiryForm } from '@/components/contact/InquiryForm'
+import { projectsData } from '@/lib/data/projects'
+import Link from 'next/link'
 
 const techIcons: Record<string, React.ReactNode> = {
   "Flutter": <SiFlutter />,
@@ -84,68 +86,7 @@ const experience = [
   },
 ]
 
-const projects = [
-  {
-    title: 'Tearsize',
-    summary: 'Client project — E-commerce platform for health products featuring full payment integration.',
-    tags: ['TypeScript', 'Tailwind CSS'],
-    link: '#',
-    image: '/images/tearsize.png',
-  },
-  {
-    title: 'e Buddy (eGov Hackathon 2026)',
-    summary: 'Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.',
-    tags: ['TypeScript', 'AI', 'Tailwind CSS'],
-    link: '#',
-    image: '/images/egov.png',
-  },
-  {
-    title: 'PaceMentor',
-    summary: 'AI-powered running coach with adaptive training plans, real-time GPS tracking, and Strava integration — from first steps to personal best.',
-    tags: ['Flutter', 'Dart', 'AI'],
-    link: '#',
-    embedUrl: 'https://appbuildersph.com/embed/apps/pacementor',
-    embedTitle: 'PaceMentor votes on App Builders PH',
-    image: '/images/pcaementor.png',
-  },
-  {
-    title: 'HiveSync VA',
-    summary: 'Client project — virtual assistant services platform streamlining business operations for distributed teams.',
-    tags: ['Next.js', 'TypeScript'],
-    link: 'https://www.hivesyncva.com',
-    image: '/images/hivesync.png',
-  },
-  {
-    title: 'VCM HRIS',
-    summary: 'QR-code based Human Resource Information System: employee management, leave tracking, job applications, real-time notifications, and payroll.',
-    tags: ['Laravel', 'PHP', 'MySQL'],
-    link: '#',
-    image: '/images/vcm.png',
-  },
-  {
-    title: 'TMRC',
-    summary: 'Community website for Trece Martirez Running Club — upcoming and past races, race results, and community updates.',
-    tags: ['Next.js', 'TypeScript'],
-    link: '#',
-    image: '/images/tmrc.png',
-  },
-  {
-    title: 'Present Po',
-    summary: 'Workforce attendance and time-tracking platform with scheduling, presence monitoring, and automated reporting.',
-    tags: ['Next.js', 'TypeScript', 'Supabase'],
-    link: '#',
-    embedUrl: 'https://appbuildersph.com/embed/apps/present-po',
-    embedTitle: 'Present Po votes on App Builders PH',
-    image: '/images/presentpo.png',
-  },
-  {
-    title: 'Hospital Queuing System',
-    summary: 'A centralized local queuing system with AI integration developed for a hospital to streamline patient workflows.',
-    tags: ['Vue.js', 'PHP', 'MySQL', 'AI'],
-    link: '#',
-    image: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg',
-  },
-]
+
 
 const certifications = [
   {
@@ -240,6 +181,12 @@ export default function Home() {
   const [phase, setPhase] = useState<'drop' | 'name' | 'done'>('drop')
 
   useEffect(() => {
+    // If returning to a specific section (hash is present), skip intro
+    if (typeof window !== 'undefined' && window.location.hash) {
+      setPhase('done')
+      return
+    }
+
     // Sequence timings
     const t1 = setTimeout(() => setPhase('name'), 600) // Water drop falls for 600ms
     const t2 = setTimeout(() => setPhase('done'), 2200) // Name stays for 1600ms
@@ -478,6 +425,7 @@ export default function Home() {
           <div className="relative h-[450px] sm:h-[500px] flex items-center justify-center w-full max-w-5xl mx-auto overflow-x-clip my-8 group">
             {/* Left Card: Present Po */}
             <div className="absolute w-[280px] sm:w-[360px] h-[340px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-700 transform -rotate-12 -translate-x-12 sm:-translate-x-48 translate-y-4 group-hover:-translate-x-20 sm:group-hover:-translate-x-64 group-hover:-rotate-6 z-0 hover:z-20 hover:scale-105 cursor-pointer hidden sm:block overflow-hidden group/card flex flex-col justify-between">
+              <Link href="/projects/present-po" className="absolute inset-0 z-20"><span className="sr-only">View Details</span></Link>
               <div>
                 <div className="flex gap-2 mb-4 flex-wrap relative z-10">
                   <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ FEATURED APP ❯</span>
@@ -494,6 +442,7 @@ export default function Home() {
 
             {/* Right Card: e Buddy */}
             <div className="absolute w-[280px] sm:w-[360px] h-[340px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-700 transform rotate-12 translate-x-12 sm:translate-x-48 translate-y-4 group-hover:translate-x-20 sm:group-hover:translate-x-64 group-hover:rotate-6 z-0 hover:z-20 hover:scale-105 cursor-pointer hidden sm:block overflow-hidden group/card flex flex-col justify-start">
+              <Link href="/projects/e-buddy" className="absolute inset-0 z-20"><span className="sr-only">View Details</span></Link>
               <div className="flex gap-2 mb-4 flex-wrap relative z-10">
                 <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ HACKATHON ENTRY ❯</span>
               </div>
@@ -504,6 +453,7 @@ export default function Home() {
 
             {/* Center Card: PaceMentor */}
             <div className="absolute w-[300px] sm:w-[420px] h-[400px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-700 transform z-10 group-hover:-translate-y-6 hover:scale-105 cursor-pointer overflow-hidden group/card flex flex-col justify-between">
+              <Link href="/projects/pacementor" className="absolute inset-0 z-20"><span className="sr-only">View Details</span></Link>
               <div>
                 <div className="flex gap-2 mb-6 flex-wrap relative z-10">
                   <span className="bg-foreground text-background text-[10px] sm:text-xs font-mono px-3 py-1.5 rounded-full flex items-center gap-1">✦ AI RUNNING COACH ❯</span>
@@ -521,38 +471,63 @@ export default function Home() {
 
           <div className="space-y-6 mt-8 sm:mt-12 max-w-4xl mx-auto">
             <h4 className="text-sm font-mono text-muted-foreground uppercase tracking-widest border-b border-border/40 pb-4 mb-8">Other Projects</h4>
-            {projects.filter(p => !['PaceMentor', 'Present Po', 'e Buddy (eGov Hackathon 2026)'].includes(p.title)).map((project, i) => {
+            {projectsData.filter(p => !p.isFeatured).map((project, i) => {
               const isLive = project.link !== '#'
 
               return (
                 <Reveal key={project.title} delay={i * 0.05}>
-                  <div className="relative mb-10 group/row cursor-pointer py-4 sm:py-6 border-b border-border/40 last:border-0 overflow-visible flex items-center justify-between">
-                    <div className="relative z-10 w-full sm:w-2/3 transition-transform duration-500 group-hover/row:-translate-y-1">
-                      <div className="flex items-baseline gap-3 mb-2">
-                        <h3 className="text-lg sm:text-2xl font-display font-bold text-foreground">
+                  <div className="relative mb-4 group/row cursor-pointer p-4 sm:p-6 rounded-2xl hover:bg-muted/30 border border-transparent hover:border-border/50 transition-all duration-500 overflow-visible flex items-center justify-between -mx-4 sm:-mx-6">
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="absolute inset-0 z-20"
+                      aria-label={`View details for ${project.title}`}
+                    >
+                      <span className="sr-only">View Details</span>
+                    </Link>
+                    <div className="relative z-10 w-full sm:w-2/3 transition-transform duration-500 group-hover/row:translate-x-2 group-hover/row:-translate-y-1">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <h3 className="text-lg sm:text-2xl font-display font-bold text-foreground group-hover/row:text-accent transition-colors duration-300">
                           {project.title}
                         </h3>
+                        {project.type && (
+                          <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full border border-border/60 text-muted-foreground group-hover/row:border-accent/40 group-hover/row:text-accent transition-colors duration-300">
+                            {project.type}
+                          </span>
+                        )}
                         {isLive && (
                           <a
                             href={project.link}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 ml-auto sm:ml-0"
+                            className="relative z-30 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 ml-auto sm:ml-0"
                           >
                             live ↗
                           </a>
                         )}
                       </div>
-                      <p className="text-base text-muted-foreground leading-relaxed">
+                      <p className="text-base text-muted-foreground leading-relaxed transition-colors duration-500 group-hover/row:text-foreground/80">
                         {project.summary}
                       </p>
+                      <div className="mt-4 flex gap-2 flex-wrap">
+                        {project.tags.map(tag => (
+                          <span key={tag} className="text-xs text-muted-foreground/70 font-mono group-hover/row:text-muted-foreground transition-colors duration-300">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+                    
+                    {/* Hover Arrow Indicator */}
+                    <div className="hidden sm:flex absolute right-6 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-border/40 items-center justify-center opacity-0 -translate-x-4 group-hover/row:opacity-100 group-hover/row:translate-x-0 group-hover/row:border-accent/40 group-hover/row:text-accent transition-all duration-500">
+                      <FaArrowRight className="text-sm transform -rotate-45 group-hover/row:rotate-0 transition-transform duration-500" />
+                    </div>
+
                     {project.image && (
-                      <div className="hidden sm:block absolute left-1/2 sm:left-1/4 bottom-full -translate-x-1/2 mb-4 w-[280px] h-[180px] z-50 pointer-events-none perspective-1000">
+                      <div className="hidden sm:block absolute left-1/2 sm:left-[60%] bottom-full -translate-x-1/2 mb-4 w-[320px] h-[200px] z-50 pointer-events-none perspective-1000">
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover rounded-xl shadow-2xl opacity-0 group-hover/row:opacity-100 transform translate-y-8 group-hover/row:translate-y-0 rotate-x-12 group-hover/row:rotate-x-0 transition-all duration-700 ease-out origin-bottom"
+                          className="w-full h-full object-cover rounded-xl shadow-2xl opacity-0 group-hover/row:opacity-100 transform translate-y-8 group-hover/row:translate-y-0 rotate-x-12 group-hover/row:rotate-x-0 scale-95 group-hover/row:scale-100 transition-all duration-500 ease-out origin-bottom"
                         />
                       </div>
                     )}

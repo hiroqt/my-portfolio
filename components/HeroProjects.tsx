@@ -4,31 +4,10 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 
-const topProjects = [
-  {
-    title: 'PaceMentor',
-    summary: 'AI-powered running coach with adaptive training plans and Strava integration.',
-    tag: 'AI RUNNING COACH',
-    image: '/images/pcaementor.png',
-    link: '#projects'
-  },
-  {
-    title: 'e Buddy',
-    summary: 'Unified government services platform using an agentic AI named e Buddy.',
-    tag: 'HACKATHON ENTRY',
-    image: '/images/egov.png',
-    link: '#projects'
-  },
-  {
-    title: 'Present Po',
-    summary: 'Workforce attendance and time-tracking platform with scheduling and presence monitoring.',
-    tag: 'B2B SOLUTION',
-    image: '/images/presentpo.png',
-    link: '#projects'
-  },
-]
+import { projectsData } from '@/lib/data/projects'
 
 export function HeroProjects() {
+  const topProjects = projectsData.filter(p => p.isFeatured);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -60,8 +39,8 @@ export function HeroProjects() {
 
         return (
           <motion.a
-            href={project.link}
-            key={project.title}
+            href={`/projects/${project.slug}`}
+            key={project.slug}
             onHoverStart={() => setHoveredIndex(i)}
             onHoverEnd={() => setHoveredIndex(null)}
             initial={{ opacity: 0, y: 100 }}
@@ -83,20 +62,20 @@ export function HeroProjects() {
             <div>
               <div className="flex gap-2 mb-4 relative z-10">
                 <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">
-                  ✦ {project.tag} ❯
+                  ✦ {project.featuredTag || 'FEATURED'} ❯
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold mb-2 text-foreground relative z-10">
-                {project.title}
+                {project.featuredTitle || project.title}
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground relative z-10 line-clamp-2">
-                {project.summary}
+                {project.featuredSummary || project.summary}
               </p>
             </div>
             
             <motion.img 
               src={project.image} 
-              alt={project.title} 
+              alt={project.featuredTitle || project.title} 
               animate={{ 
                 y: isHovered ? -20 : 0,
                 scale: isHovered ? 1.05 : 1
