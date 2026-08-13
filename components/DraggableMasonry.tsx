@@ -50,7 +50,9 @@ export function DraggableMasonry() {
 
   return (
     <div 
-      className="w-full h-[350px] lg:h-[450px] overflow-hidden rounded-2xl cursor-grab active:cursor-grabbing relative bg-muted/10 border border-border/20"
+      tabIndex={0}
+      aria-label="Interactive project screenshot gallery (drag or swipe to explore)"
+      className="w-[full] h-[350px] lg:h-[450px] overflow-hidden rounded-2xl cursor-grab active:cursor-grabbing relative bg-muted/10 border border-border/20 focus-visible:ring-2 focus-visible:ring-foreground"
       ref={containerRef}
     >
       {data.length > 0 && (
@@ -70,7 +72,7 @@ export function DraggableMasonry() {
               <div key={`${item.id}-${idx}`} className="break-inside-avoid mb-3 relative group">
                 <img 
                   src={item.src} 
-                  alt={item.title} 
+                  alt={`${item.title} screenshot`} 
                   className="w-full rounded-xl object-cover pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-300" 
                   draggable={false}
                 />

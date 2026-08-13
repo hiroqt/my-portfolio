@@ -28,6 +28,10 @@
   }
   :root { font-family: 'Inter', sans-serif; }
   * { box-sizing: border-box; }
+  *:focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
   html { scroll-behavior: smooth; position: relative; }
   body {
     background-color: var(--background);

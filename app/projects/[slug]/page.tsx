@@ -24,8 +24,8 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-12 sm:mb-16"
         >
-          <Link href="/#projects" className="group inline-flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
-            <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+          <Link href="/#projects" aria-label="Back to portfolio projects section" className="group inline-flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+            <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
             Back to Portfolio
           </Link>
         </motion.div>
@@ -63,9 +63,10 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
               href={project.link} 
               target="_blank" 
               rel="noreferrer"
+              aria-label={`View live site for ${project.title} (opens in new tab)`}
               className="inline-flex items-center gap-2 text-sm font-medium text-background bg-foreground px-6 py-3 rounded-full hover:scale-105 transition-transform"
             >
-              View Live Project <FaExternalLinkAlt className="text-xs" />
+              View Live Project <FaExternalLinkAlt className="text-xs" aria-hidden="true" />
             </a>
           )}
         </motion.header>
@@ -80,7 +81,7 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
           >
             <img 
               src={project.image} 
-              alt={project.title} 
+              alt={`${project.title} project showcase screenshot`} 
               className="w-full h-auto object-cover max-h-[60vh]"
             />
           </motion.div>

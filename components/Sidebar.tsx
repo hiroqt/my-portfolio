@@ -15,9 +15,9 @@ const contactLinks = [
 
 const navItems = [
   { id: '01', label: 'education', href: '#education' },
-  { id: '02', label: 'skills', href: '#skills' },
-  { id: '03', label: 'experience', href: '#experience' },
-  { id: '04', label: 'projects', href: '#projects' },
+  { id: '02', label: 'experience', href: '#experience' },
+  { id: '03', label: 'projects', href: '#projects' },
+  { id: '04', label: 'skills', href: '#skills' },
   { id: '05', label: 'certifications', href: '#certifications' },
 ]
 
@@ -29,15 +29,23 @@ export const Sidebar = () => {
     setMounted(true)
   }, [])
 
-  // Prevent scroll when sidebar is open
+  // Prevent scroll when sidebar is open & add Escape key listener
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+      }
+    }
+
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      window.addEventListener('keydown', handleKeyDown)
     } else {
       document.body.style.overflow = ''
     }
     return () => {
       document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen])
 
@@ -49,9 +57,11 @@ export const Sidebar = () => {
       <button
         onClick={() => setIsOpen(true)}
         className="fixed top-6 right-6 z-50 p-3 text-foreground hover:text-muted-foreground transition-all duration-300 hover:scale-110 print:hidden"
-        aria-label="Open Menu"
+        aria-label={isOpen ? "Close Menu" : "Open Menu"}
+        aria-expanded={isOpen}
+        aria-controls="sidebar-navigation"
       >
-        <FaBars className="text-xl" />
+        <FaBars className="text-xl" aria-hidden="true" />
       </button>
 
       {/* Sidebar Overlay */}
@@ -68,6 +78,10 @@ export const Sidebar = () => {
             
             {/* Sidebar Content */}
             <motion.aside
+              id="sidebar-navigation"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation Menu"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -75,21 +89,21 @@ export const Sidebar = () => {
               className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background border-l border-border z-[60] p-8 flex flex-col shadow-2xl"
             >
               <div className="flex justify-between items-center mb-12">
-                <a href="#top" onClick={() => setIsOpen(false)} className="font-apoc font-bold text-foreground text-4xl hover:scale-105 transition-transform tracking-tighter">
+                <a href="#main-content" onClick={() => setIsOpen(false)} className="font-apoc font-bold text-foreground text-4xl hover:scale-105 transition-transform tracking-tighter">
                   Nel.
                 </a>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="Close Menu"
+                  aria-label="Close Navigation Menu"
                 >
-                  <FaTimes className="text-2xl" />
+                  <FaTimes className="text-2xl" aria-hidden="true" />
                 </button>
               </div>
 
               <div className="flex-1 flex flex-col gap-8">
-                <nav className="flex flex-col gap-4">
-                  <h4 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-2">Menu</h4>
+                <nav className="flex flex-col gap-4" aria-label="Sidebar Sections">
+                  <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-2">Menu</h2>
                   {navItems.map((item) => (
                     <a
                       key={item.id}
@@ -108,13 +122,14 @@ export const Sidebar = () => {
                     href="/pdf/Arnel_Baylon_Resume.pdf"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="Download Résumé (PDF, opens in new tab)"
                     className="inline-flex items-center gap-3 text-sm font-mono uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors group"
                   >
-                    <FaFilePdf className="group-hover:-translate-y-1 transition-transform text-lg" /> Download Résumé
+                    <FaFilePdf className="group-hover:-translate-y-1 transition-transform text-lg" aria-hidden="true" /> Download Résumé
                   </a>
                   
                   <div className="flex flex-col gap-4">
-                    <h4 className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Let's Connect</h4>
+                    <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Let's Connect</h2>
                     <div className="flex gap-5">
                       {contactLinks.map((item) => (
                         <a
@@ -122,7 +137,7 @@ export const Sidebar = () => {
                           href={item.href}
                           target={item.href.startsWith('mailto:') ? undefined : '_blank'}
                           rel="noreferrer"
-                          aria-label={item.label}
+                          aria-label={item.href.startsWith('mailto:') ? item.label : `${item.label} (opens in new tab)`}
                           className="text-foreground hover:text-muted-foreground transition-all duration-300 text-2xl hover:scale-110"
                         >
                           {item.icon}

@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import {
   FaGithub, FaLinkedin, FaEnvelope, FaFacebook, FaInstagram,
-  FaExternalLinkAlt, FaArrowRight, FaRocket, FaFilePdf
+  FaExternalLinkAlt, FaArrowRight, FaRocket, FaBrain, FaSyncAlt, FaPlug, FaRobot, FaNetworkWired
 } from 'react-icons/fa'
 import { MdCloud } from 'react-icons/md'
 import {
   SiFlutter, SiNextdotjs, SiLaravel, SiPhp, SiMysql, SiTypescript, SiSupabase,
   SiReact, SiVuedotjs, SiTailwindcss, SiNodedotjs, SiFirebase, SiVercel, SiGit,
-  SiFigma, SiTrello, SiDart
+  SiFigma, SiTrello, SiDart, SiPostgresql
 } from 'react-icons/si'
 import { Sidebar } from '@/components/Sidebar'
 import { DraggableMasonry } from '@/components/DraggableMasonry'
@@ -22,12 +22,19 @@ import { projectsData } from '@/lib/data/projects'
 import Link from 'next/link'
 
 const techIcons: Record<string, React.ReactNode> = {
+  "Context Engineering": <FaBrain />,
+  "Agentic Loops": <FaSyncAlt />,
+  "API Integration": <FaPlug />,
+  "LLM Orchestration": <FaRobot />,
+  "RAG Architectures": <FaNetworkWired />,
+  "Prompt Engineering": <FaRocket />,
   "Flutter": <SiFlutter />,
   "Dart": <SiDart />,
   "Next.js": <SiNextdotjs />,
   "AI": <FaRocket />,
   "Laravel": <SiLaravel />,
   "PHP": <SiPhp />,
+  "PostgreSQL": <SiPostgresql />,
   "MySQL": <SiMysql />,
   "TypeScript": <SiTypescript />,
   "Supabase": <SiSupabase />,
@@ -35,6 +42,7 @@ const techIcons: Record<string, React.ReactNode> = {
   "Vue.js": <SiVuedotjs />,
   "Tailwind CSS": <SiTailwindcss />,
   "Node.js": <SiNodedotjs />,
+  "Firebase (NoSQL)": <SiFirebase />,
   "Firebase": <SiFirebase />,
   "Vercel": <SiVercel />,
   "AWS": <MdCloud />,
@@ -43,15 +51,7 @@ const techIcons: Record<string, React.ReactNode> = {
   "Trello": <SiTrello />
 }
 
-const navItems = [
-  { id: '01', label: 'education', href: '#education' },
-  { id: '02', label: 'experience', href: '#experience' },
-  { id: '03', label: 'projects', href: '#projects' },
-  { id: '04', label: 'certifications', href: '#certifications' },
-  { id: '05', label: 'skills', href: '#skills' },
-  { id: '06', label: 'github', href: '#github' },
-  { id: '07', label: 'contact', href: '#contact' },
-]
+
 
 const experience = [
   {
@@ -122,8 +122,19 @@ const certifications = [
 ]
 
 const skillGroups = [
+  {
+    label: 'AI & Context Engineering',
+    items: [
+      'Context Engineering',
+      'Agentic Loops',
+      'API Integration',
+      'LLM Orchestration',
+      'RAG Architectures',
+      'Prompt Engineering',
+    ],
+  },
   { label: 'Frontend', items: ['React', 'Next.js', 'Vue.js', 'Tailwind CSS', 'TypeScript', 'Flutter'] },
-  { label: 'Backend', items: ['Laravel', 'PHP', 'Node.js', 'Firebase', 'MySQL', 'Supabase'] },
+  { label: 'Backend & Databases', items: ['Laravel', 'PHP', 'Node.js', 'PostgreSQL', 'MySQL', 'Firebase (NoSQL)', 'Supabase'] },
   { label: 'DevOps & Tools', items: ['Vercel', 'AWS', 'Git', 'Figma', 'Trello'] },
 ]
 
@@ -256,7 +267,7 @@ export default function Home() {
 
       {/* Header removed for sidebar */}
 
-      <main id="top" className="max-w-screen-2xl mx-auto px-8 pb-14 pt-4 sm:pb-20 sm:pt-8">
+      <main id="main-content" tabIndex={-1} className="max-w-screen-2xl mx-auto px-8 pb-14 pt-4 sm:pb-20 sm:pt-8 outline-none">
 
         {/* Masthead */}
         <header className="pb-16 pt-8 md:pt-12 flex flex-col justify-center min-h-screen relative">
@@ -293,8 +304,8 @@ export default function Home() {
                   className="w-full max-w-4xl"
                 >
                   <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight tracking-tight mb-4">
-                    Full-Stack Engineer & AI Developer. I build scalable, intelligent web and mobile applications.
-                    <br /><span className="text-muted-foreground mt-4 inline-block text-xl sm:text-2xl md:text-3xl">Available for full-time opportunities.</span>
+                    Full-Stack & Context Engineer. I build client operations tools and intelligent web & mobile applications.
+                    <br /><span className="text-muted-foreground mt-4 inline-block text-xl sm:text-2xl md:text-3xl">Available for work.</span>
                   </p>
                 </motion.div>
 
@@ -304,26 +315,24 @@ export default function Home() {
                   transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
                   className="flex flex-col sm:flex-row items-center justify-center gap-6 font-semibold shrink-0"
                 >
-                  <a href="/pdf/Arnel_Baylon_Resume.pdf" target="_blank" className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono">
-                    <span>Download Résumé</span>
-                    <FaFilePdf className="group-hover:-translate-y-1 transition-transform text-lg" />
-                  </a>
                   <div className="flex gap-6">
                     <a
                       href="https://github.com/hiroqt"
                       target="_blank"
                       rel="noreferrer"
+                      aria-label="GitHub profile (opens in new tab)"
                       className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono"
                     >
-                      <FaGithub className="text-xl group-hover:scale-110 transition-transform" /> <span className="hidden sm:inline">GitHub</span>
+                      <FaGithub className="text-xl group-hover:scale-110 transition-transform" aria-hidden="true" /> <span className="hidden sm:inline">GitHub</span>
                     </a>
                     <a
                       href="https://www.linkedin.com/in/arnel-baylon-b05233189"
                       target="_blank"
                       rel="noreferrer"
+                      aria-label="LinkedIn profile (opens in new tab)"
                       className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono"
                     >
-                      <FaLinkedin className="text-xl group-hover:scale-110 transition-transform" /> <span className="hidden sm:inline">LinkedIn</span>
+                      <FaLinkedin className="text-xl group-hover:scale-110 transition-transform" aria-hidden="true" /> <span className="hidden sm:inline">LinkedIn</span>
                     </a>
                   </div>
                 </motion.div>
@@ -341,18 +350,7 @@ export default function Home() {
           </Reveal>
         </header>
 
-        {/* Section index */}
-        <nav className="py-6 border-b border-border print:hidden" aria-label="Sections">
-          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[11px] font-mono text-muted-foreground">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a href={item.href} className="hover:text-foreground transition-colors">
-                  <span className="tabular-nums">{item.id}</span> {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+
 
         {/* 01 — Education */}
         <section id="education" className="pt-12 scroll-mt-20">
@@ -415,17 +413,18 @@ export default function Home() {
                 href="https://github.com/hiroqt?tab=repositories"
                 target="_blank"
                 rel="noreferrer"
+                aria-label="View all projects on GitHub (opens in new tab)"
                 className="group inline-flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors print:hidden"
               >
                 all projects
-                <FaArrowRight className="text-[9px] group-hover:translate-x-0.5 transition-transform" />
+                <FaArrowRight className="text-[9px] group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
               </a>
             }
           />
           <div className="relative h-[450px] sm:h-[500px] flex items-center justify-center w-full max-w-5xl mx-auto overflow-x-clip my-8 group">
             {/* Left Card: Present Po */}
             <div className="absolute w-[280px] sm:w-[360px] h-[340px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-700 transform -rotate-12 -translate-x-12 sm:-translate-x-48 translate-y-4 group-hover:-translate-x-20 sm:group-hover:-translate-x-64 group-hover:-rotate-6 z-0 hover:z-20 hover:scale-105 cursor-pointer hidden sm:block overflow-hidden group/card flex flex-col justify-between">
-              <Link href="/projects/present-po" className="absolute inset-0 z-20"><span className="sr-only">View Details</span></Link>
+              <Link href="/projects/present-po" className="absolute inset-0 z-20"><span className="sr-only">View details for Present Po project</span></Link>
               <div>
                 <div className="flex gap-2 mb-4 flex-wrap relative z-10">
                   <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ FEATURED APP ❯</span>
@@ -435,25 +434,25 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-muted-foreground mb-4 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">Workforce attendance and time-tracking platform with scheduling, presence monitoring, and automated reporting.</p>
               </div>
               <div className="mt-4 pointer-events-none opacity-80 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">
-                <iframe src="https://appbuildersph.com/embed/apps/present-po" title="Present Po votes" width="320" height="72" style={{ border: 0, width: '100%', maxWidth: '100%' }} loading="lazy" scrolling="no" />
+                <iframe src="https://appbuildersph.com/embed/apps/present-po" title="Present Po votes counter widget" width="320" height="72" style={{ border: 0, width: '100%', maxWidth: '100%' }} loading="lazy" scrolling="no" />
               </div>
-              <img src="/images/presentpo.png" alt="Present Po" className="absolute left-1/2 -bottom-20 w-[85%] h-auto rounded-t-xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-20 group-hover/card:opacity-100 transition-all duration-500 z-0" />
+              <img src="/images/presentpo.png" alt="Present Po application screenshot preview" className="absolute left-1/2 -bottom-20 w-[85%] h-auto rounded-t-xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-20 group-hover/card:opacity-100 transition-all duration-500 z-0" />
             </div>
 
             {/* Right Card: e Buddy */}
             <div className="absolute w-[280px] sm:w-[360px] h-[340px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-700 transform rotate-12 translate-x-12 sm:translate-x-48 translate-y-4 group-hover:translate-x-20 sm:group-hover:translate-x-64 group-hover:rotate-6 z-0 hover:z-20 hover:scale-105 cursor-pointer hidden sm:block overflow-hidden group/card flex flex-col justify-start">
-              <Link href="/projects/e-buddy" className="absolute inset-0 z-20"><span className="sr-only">View Details</span></Link>
+              <Link href="/projects/e-buddy" className="absolute inset-0 z-20"><span className="sr-only">View details for e Buddy project</span></Link>
               <div className="flex gap-2 mb-4 flex-wrap relative z-10">
                 <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ HACKATHON ENTRY ❯</span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground relative z-10 group-hover/card:text-transparent transition-colors duration-300">e Buddy</h3>
               <p className="text-xs sm:text-sm text-muted-foreground relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.</p>
-              <img src="/images/egov.png" alt="e Buddy" className="absolute left-1/2 -bottom-20 w-[85%] h-auto rounded-t-xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-24 group-hover/card:opacity-100 transition-all duration-500 z-0" />
+              <img src="/images/egov.png" alt="e Buddy application screenshot preview" className="absolute left-1/2 -bottom-20 w-[85%] h-auto rounded-t-xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-24 group-hover/card:opacity-100 transition-all duration-500 z-0" />
             </div>
 
             {/* Center Card: PaceMentor */}
             <div className="absolute w-[300px] sm:w-[420px] h-[400px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-2xl transition-all duration-700 transform z-10 group-hover:-translate-y-6 hover:scale-105 cursor-pointer overflow-hidden group/card flex flex-col justify-between">
-              <Link href="/projects/pacementor" className="absolute inset-0 z-20"><span className="sr-only">View Details</span></Link>
+              <Link href="/projects/pacementor" className="absolute inset-0 z-20"><span className="sr-only">View details for PaceMentor project</span></Link>
               <div>
                 <div className="flex gap-2 mb-6 flex-wrap relative z-10">
                   <span className="bg-foreground text-background text-[10px] sm:text-xs font-mono px-3 py-1.5 rounded-full flex items-center gap-1">✦ AI RUNNING COACH ❯</span>
@@ -463,14 +462,14 @@ export default function Home() {
                 <p className="text-sm sm:text-base text-muted-foreground mb-6 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">AI-powered running coach with adaptive training plans, real-time GPS tracking, and Strava integration — from first steps to personal best.</p>
               </div>
               <div className="mt-4 relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">
-                <iframe src="https://appbuildersph.com/embed/apps/pacementor" title="PaceMentor votes" width="320" height="72" style={{ border: 0, width: '100%' }} loading="lazy" scrolling="no" />
+                <iframe src="https://appbuildersph.com/embed/apps/pacementor" title="PaceMentor votes counter widget" width="320" height="72" style={{ border: 0, width: '100%' }} loading="lazy" scrolling="no" />
               </div>
-              <img src="/images/pcaementor.png" alt="PaceMentor" className="absolute left-1/2 -bottom-24 w-[90%] h-auto rounded-t-2xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-28 group-hover/card:opacity-100 transition-all duration-500 z-0" />
+              <img src="/images/pcaementor.png" alt="PaceMentor application screenshot preview" className="absolute left-1/2 -bottom-24 w-[90%] h-auto rounded-t-2xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-28 group-hover/card:opacity-100 transition-all duration-500 z-0" />
             </div>
           </div>
 
           <div className="space-y-6 mt-8 sm:mt-12 max-w-4xl mx-auto">
-            <h4 className="text-sm font-mono text-muted-foreground uppercase tracking-widest border-b border-border/40 pb-4 mb-8">Other Projects</h4>
+            <h3 className="text-sm font-mono text-muted-foreground uppercase tracking-widest border-b border-border/40 pb-4 mb-8">Other Projects</h3>
             {projectsData.filter(p => !p.isFeatured).map((project, i) => {
               const isLive = project.link !== '#'
 
@@ -480,9 +479,9 @@ export default function Home() {
                     <Link
                       href={`/projects/${project.slug}`}
                       className="absolute inset-0 z-20"
-                      aria-label={`View details for ${project.title}`}
+                      aria-label={`View details for ${project.title} project`}
                     >
-                      <span className="sr-only">View Details</span>
+                      <span className="sr-only">View details for {project.title} project</span>
                     </Link>
                     <div className="relative z-10 w-full sm:w-2/3 transition-transform duration-500 group-hover/row:translate-x-2 group-hover/row:-translate-y-1">
                       <div className="flex flex-wrap items-center gap-3 mb-3">
@@ -499,6 +498,7 @@ export default function Home() {
                             href={project.link}
                             target="_blank"
                             rel="noreferrer"
+                            aria-label={`View live site for ${project.title} (opens in new tab)`}
                             className="relative z-30 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 ml-auto sm:ml-0"
                           >
                             live ↗
@@ -538,9 +538,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 04 — Certifications */}
+        {/* 04 — Skills */}
+        <section id="skills" className="pt-12 scroll-mt-20">
+          <SectionHeading id="04" label="skills" />
+          <div className="space-y-8 sm:space-y-10">
+            {skillGroups.map((group, i) => (
+              <Reveal key={group.label} delay={i * 0.06}>
+                <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                  {group.label}
+                </h3>
+                <ul className="flex flex-wrap gap-3 sm:gap-3.5">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="inline-flex items-center gap-3 text-sm sm:text-base font-medium px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-background border border-border text-foreground hover:border-accent hover:text-accent hover:scale-105 transition-all duration-200 shadow-sm"
+                    >
+                      <span className="text-lg sm:text-xl text-accent" aria-hidden="true">{techIcons[item]}</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+
+            <Reveal delay={0.18}>
+              <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                Languages
+              </h3>
+              <p className="text-base sm:text-lg text-foreground font-medium">English (fluent) · Filipino (native)</p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* 05 — Certifications */}
         <section id="certifications" className="pt-12 scroll-mt-20">
-          <SectionHeading id="04" label="certifications" />
+          <SectionHeading id="05" label="certifications" />
           <div className="space-y-8">
             {certifications.map((cert, i) => (
               <Reveal key={cert.title} delay={i * 0.06}>
@@ -579,38 +611,6 @@ export default function Home() {
                   Process Improvement &amp; Quality Management
                 </p>
               </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* 05 — Skills */}
-        <section id="skills" className="pt-12 scroll-mt-20">
-          <SectionHeading id="05" label="skills" />
-          <div className="space-y-6">
-            {skillGroups.map((group, i) => (
-              <Reveal key={group.label} delay={i * 0.06}>
-                <h3 className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                  {group.label}
-                </h3>
-                <ul className="flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="inline-flex items-center gap-2 text-xs px-3.5 py-2 rounded-xl bg-background border border-border text-muted-foreground hover:border-accent hover:text-accent transition-colors"
-                    >
-                      <span className="text-base">{techIcons[item]}</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-
-            <Reveal delay={0.18}>
-              <h3 className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground mb-2">
-                Languages
-              </h3>
-              <p className="text-sm text-muted-foreground">English (fluent) · Filipino (native)</p>
             </Reveal>
           </div>
         </section>
@@ -693,7 +693,7 @@ export default function Home() {
       <footer className="border-t border-border">
         <div className="max-w-screen-2xl mx-auto px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[11px] font-mono text-muted-foreground text-center sm:text-left">
-            © {new Date().getFullYear()} Arnel A. Baylon — Full-Stack &amp; AI Developer
+            © {new Date().getFullYear()} Arnel A. Baylon — Full-Stack &amp; Context Engineer
           </p>
           <div className="flex gap-4 text-muted-foreground print:hidden">
             {contactLinks.map((item) => (
