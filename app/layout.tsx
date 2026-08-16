@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import { Pacifico, Share_Tech } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
+import { JARVISAssistant } from '@/components/ai/JARVISAssistant'
 
 const comico = localFont({
   src: '../public/Fonts/WEB/fonts/Comico-Regular.woff2',
@@ -51,6 +52,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <JARVISAssistant />
         <Analytics />
       </body>
     </html>

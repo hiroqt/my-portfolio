@@ -19,6 +19,7 @@ const navItems = [
   { id: '03', label: 'projects', href: '#projects' },
   { id: '04', label: 'skills', href: '#skills' },
   { id: '05', label: 'certifications', href: '#certifications' },
+  { id: '✦', label: 'yhelAI Assistant', href: '/assistant' },
 ]
 
 export const Sidebar = () => {
@@ -53,16 +54,19 @@ export const Sidebar = () => {
 
   return (
     <>
-      {/* Toggle Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed top-6 right-6 z-50 p-3 text-foreground hover:text-muted-foreground transition-all duration-300 hover:scale-110 print:hidden"
-        aria-label={isOpen ? "Close Menu" : "Open Menu"}
-        aria-expanded={isOpen}
-        aria-controls="sidebar-navigation"
-      >
-        <FaBars className="text-xl" aria-hidden="true" />
-      </button>
+      {/* Top Header Controls: Theme Toggle & Sidebar Trigger */}
+      <div className="fixed top-6 right-6 z-50 flex items-center gap-2 sm:gap-3 print:hidden">
+        <ThemeToggle variant="header" />
+        <button
+          onClick={() => setIsOpen(true)}
+          className="p-2.5 rounded-full glass border border-border/50 hover:border-border text-foreground hover:text-muted-foreground transition-all duration-300 hover:scale-110 shadow-sm"
+          aria-label={isOpen ? "Close Menu" : "Open Menu"}
+          aria-expanded={isOpen}
+          aria-controls="sidebar-navigation"
+        >
+          <FaBars className="text-lg" aria-hidden="true" />
+        </button>
+      </div>
 
       {/* Sidebar Overlay */}
       <AnimatePresence>
@@ -73,7 +77,7 @@ export const Sidebar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-background/60 backdrop-blur-sm z-[55]"
+              className="fixed inset-0 bg-background/60 backdrop-blur-sm z-[90]"
             />
             
             {/* Sidebar Content */}
@@ -86,7 +90,7 @@ export const Sidebar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background border-l border-border z-[60] p-8 flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background border-l border-border z-[100] p-8 flex flex-col shadow-2xl"
             >
               <div className="flex justify-between items-center mb-12">
                 <a href="#main-content" onClick={() => setIsOpen(false)} className="font-apoc font-bold text-foreground text-4xl hover:scale-105 transition-transform tracking-tighter">

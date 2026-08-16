@@ -16,8 +16,11 @@ import { Sidebar } from '@/components/Sidebar'
 import { DraggableMasonry } from '@/components/DraggableMasonry'
 import { TechMarquee } from '@/components/TechMarquee'
 import { GithubActivity } from '@/components/GithubActivity'
-import ThemeToggle from '@/components/ThemeToggle'
 import { InquiryForm } from '@/components/contact/InquiryForm'
+import { HeroGraphicBackground } from '@/components/HeroGraphicBackground'
+import { SectionGraphicAccent } from '@/components/SectionGraphicAccent'
+import { SectionCardWatermark } from '@/components/SectionCardWatermark'
+import { PageAmbientBackground } from '@/components/PageAmbientBackground'
 import { projectsData } from '@/lib/data/projects'
 import Link from 'next/link'
 
@@ -150,16 +153,21 @@ function SectionHeading({
   id,
   label,
   action,
+  accent,
 }: {
   id: string
   label: string
   action?: React.ReactNode
+  accent?: 'education' | 'experience' | 'projects' | 'skills' | 'certifications' | 'gallery' | 'github' | 'contact'
 }) {
   return (
-    <div className="flex items-baseline justify-between gap-4 mb-8 pb-3 border-b border-border/60">
-      <h2 className="text-sm sm:text-base font-display font-semibold tracking-widest uppercase text-foreground">
-        <span className="text-accent mr-2 opacity-80">{id}</span> {label}
-      </h2>
+    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3 mb-8 pb-3 border-b border-border/60">
+      <div className="flex items-center gap-4 flex-wrap">
+        <h2 className="text-sm sm:text-base font-display font-semibold tracking-widest uppercase text-foreground flex items-center gap-1.5">
+          <span className="text-accent mr-2 opacity-80">{id}</span> {label}
+        </h2>
+        {accent && <SectionGraphicAccent section={accent} className="hidden sm:block" />}
+      </div>
       {action}
     </div>
   )
@@ -267,136 +275,148 @@ export default function Home() {
 
       {/* Header removed for sidebar */}
 
-      <main id="main-content" tabIndex={-1} className="max-w-screen-2xl mx-auto px-8 pb-14 pt-4 sm:pb-20 sm:pt-8 outline-none">
-
-        {/* Masthead */}
-        <header className="pb-16 pt-8 md:pt-12 flex flex-col justify-center min-h-screen relative">
-          <div className="absolute inset-0 w-[100vw] left-1/2 -translate-x-1/2 bg-[image:radial-gradient(var(--border)_1.5px,transparent_1.5px)] bg-[size:24px_24px] pointer-events-none [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] opacity-80" />
+      {/* Masthead with Full Screen Illustrated Graphic Background */}
+      <header className="w-full min-h-screen relative overflow-hidden">
+        <HeroGraphicBackground variant="hero" className="w-full min-h-screen">
           <Reveal>
-            <div className="relative z-10">
-
-              <div className="flex flex-col justify-center items-center text-center">
-                <div>
-                  {phase === 'done' ? (
-                    <motion.div
-                      layoutId="hero-title"
-                      transition={{ type: 'spring', damping: 25, stiffness: 100 }}
-                    >
-                      <h1 className="text-[13vw] sm:text-[11vw] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-apoc leading-none tracking-tight capitalize pb-2 text-foreground whitespace-nowrap">
-                        Arnel Baylon
-                      </h1>
-                    </motion.div>
-                  ) : (
-                    <div className="opacity-0">
-                      <h1 className="text-[13vw] sm:text-[11vw] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-apoc leading-none tracking-tight capitalize pb-2 text-foreground whitespace-nowrap">
-                        Arnel Baylon
-                      </h1>
+            <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-8 md:px-12 pt-32 sm:pt-44 md:pt-56 pb-12 sm:pb-16 flex flex-col items-center text-center">
+              
+              {/* Intro Name Badge & Title */}
+              <div className="mb-4 sm:mb-6">
+                {phase === 'done' ? (
+                  <motion.div
+                    layoutId="hero-title"
+                    transition={{ type: 'spring', damping: 25, stiffness: 100 }}
+                  >
+                    <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#0e2c2b] dark:text-emerald-300 font-semibold px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full bg-slate-900/5 dark:bg-[#072b2a]/90 border border-slate-900/15 dark:border-emerald-400/40 backdrop-blur-md mb-4 sm:mb-6 shadow-md transition-colors">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400 animate-pulse" />
+                      Arnel Baylon • Portfolio
                     </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex flex-col items-center gap-8 mt-6 lg:mt-10 justify-center text-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
-                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                  className="w-full max-w-4xl"
-                >
-                  <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight tracking-tight mb-4">
-                    Full-Stack & Context Engineer. I build client operations tools and intelligent web & mobile applications.
-                    <br /><span className="text-muted-foreground mt-4 inline-block text-xl sm:text-2xl md:text-3xl">Available for work.</span>
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
-                  transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-                  className="flex flex-col sm:flex-row items-center justify-center gap-6 font-semibold shrink-0"
-                >
-                  <div className="flex gap-6">
-                    <a
-                      href="https://github.com/hiroqt"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="GitHub profile (opens in new tab)"
-                      className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono"
-                    >
-                      <FaGithub className="text-xl group-hover:scale-110 transition-transform" aria-hidden="true" /> <span className="hidden sm:inline">GitHub</span>
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/arnel-baylon-b05233189"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="LinkedIn profile (opens in new tab)"
-                      className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors uppercase tracking-[0.2em] text-xs font-mono"
-                    >
-                      <FaLinkedin className="text-xl group-hover:scale-110 transition-transform" aria-hidden="true" /> <span className="hidden sm:inline">LinkedIn</span>
-                    </a>
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-normal tracking-tight text-[#0e2c2b] dark:text-white max-w-5xl mx-auto leading-[1.12] sm:leading-[1.08] transition-colors">
+                      Context engineering & <br className="hidden sm:inline" />
+                      <span className="italic font-light text-emerald-800 dark:text-emerald-200">full-stack systems</span> made easy.
+                    </h1>
+                  </motion.div>
+                ) : (
+                  <div className="opacity-0">
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif">
+                      Arnel Baylon
+                    </h1>
                   </div>
-                </motion.div>
+                )}
               </div>
 
+              {/* Subtitle / Description - Crisp High-Contrast Theme-Adaptive Text */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                className="w-full max-w-2xl sm:max-w-3xl mt-2 sm:mt-4"
+              >
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-700 dark:text-emerald-50/90 font-normal leading-relaxed transition-colors px-2">
+                  Building intelligent client operations tools, context-engineered LLM workflows, and resilient web & mobile applications — giving total clarity and speed to modern teams.
+                </p>
+              </motion.div>
+
+              {/* Social Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                className="flex items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 text-xs font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] text-slate-600 dark:text-emerald-200/80 transition-colors"
+              >
+                <a
+                  href="https://github.com/hiroqt"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub profile (opens in new tab)"
+                  className="hover:text-[#0e2c2b] dark:hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2"
+                >
+                  <FaGithub className="text-sm sm:text-base" /> <span>GitHub</span>
+                </a>
+                <span>•</span>
+                <a
+                  href="https://www.linkedin.com/in/arnel-baylon-b05233189"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn profile (opens in new tab)"
+                  className="hover:text-[#0e2c2b] dark:hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2"
+                >
+                  <FaLinkedin className="text-sm sm:text-base" /> <span>LinkedIn</span>
+                </a>
+              </motion.div>
+
+              {/* Tech Marquee */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
                 transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-                className="mt-12 sm:mt-16"
+                className="w-full mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-slate-900/10 dark:border-white/15 overflow-hidden"
               >
                 <TechMarquee />
               </motion.div>
             </div>
           </Reveal>
-        </header>
+        </HeroGraphicBackground>
+      </header>
 
-
+      <main id="main-content" tabIndex={-1} className="relative max-w-screen-2xl mx-auto px-8 pb-14 pt-8 sm:pb-20 sm:pt-12 outline-none">
+        {/* Full-Page Architectural Ambient Background Graphic System (WCAG Compliant) */}
+        <PageAmbientBackground />
 
         {/* 01 — Education */}
-        <section id="education" className="pt-12 scroll-mt-20">
-          <SectionHeading id="01" label="education" />
+        <section id="education" className="relative z-10 pt-12 scroll-mt-20">
+          <SectionHeading id="01" label="education" accent="education" />
           <Reveal>
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-              <h3 className="font-semibold uppercase tracking-wide text-sm sm:text-base">
-                Cavite State University — Trece Martires Campus
-              </h3>
-              <span className="text-xs sm:text-sm text-muted-foreground shrink-0 tabular-nums">
-                Cavite, Philippines
-              </span>
+            <div className="relative gemini-card p-6 overflow-hidden">
+              <SectionCardWatermark variant="education" className="right-4 bottom-2" />
+              <div className="relative z-10">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <h3 className="font-semibold uppercase tracking-wide text-sm sm:text-base">
+                    Cavite State University — Trece Martires Campus
+                  </h3>
+                  <span className="text-xs sm:text-sm text-muted-foreground shrink-0 tabular-nums">
+                    Cavite, Philippines
+                  </span>
+                </div>
+                <p className="mt-1 text-sm">Bachelor of Science in Information Technology</p>
+              </div>
             </div>
-            <p className="mt-1 text-sm">Bachelor of Science in Information Technology</p>
           </Reveal>
         </section>
 
         {/* 02 — Experience */}
-        <section id="experience" className="pt-12 scroll-mt-20">
-          <SectionHeading id="02" label="experience" />
+        <section id="experience" className="relative z-10 pt-12 scroll-mt-20">
+          <SectionHeading id="02" label="experience" accent="experience" />
           <div className="space-y-8">
             {experience.map((job, i) => (
               <Reveal key={job.org} delay={i * 0.06}>
-                <div className="gemini-card p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                    <h3 className="font-semibold uppercase tracking-wide text-sm sm:text-base">
-                      {job.org}
-                    </h3>
-                    <span className="text-xs sm:text-sm text-muted-foreground shrink-0">
-                      {job.location}
-                    </span>
+                <div className="relative gemini-card p-6 overflow-hidden">
+                  <SectionCardWatermark variant={i === 0 ? "experience-1" : "experience-2"} className="right-3 bottom-3" />
+                  <div className="relative z-10">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <h3 className="font-semibold uppercase tracking-wide text-sm sm:text-base">
+                        {job.org}
+                      </h3>
+                      <span className="text-xs sm:text-sm text-muted-foreground shrink-0">
+                        {job.location}
+                      </span>
+                    </div>
+                    <div className="mt-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <p className="text-sm font-medium text-accent">{job.role}</p>
+                      <span className="text-xs sm:text-sm text-muted-foreground shrink-0 tabular-nums">
+                        {job.period}
+                      </span>
+                    </div>
+                    <ul className="mt-4 space-y-2">
+                      {job.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                          <span aria-hidden className="text-accent shrink-0">•</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="mt-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                    <p className="text-sm font-medium text-accent">{job.role}</p>
-                    <span className="text-xs sm:text-sm text-muted-foreground shrink-0 tabular-nums">
-                      {job.period}
-                    </span>
-                  </div>
-                  <ul className="mt-4 space-y-2">
-                    {job.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                        <span aria-hidden className="text-accent shrink-0">•</span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -404,10 +424,11 @@ export default function Home() {
         </section>
 
         {/* 03 — Projects */}
-        <section id="projects" className="pt-12 scroll-mt-20">
+        <section id="projects" className="relative z-10 pt-12 scroll-mt-20">
           <SectionHeading
             id="03"
             label="projects"
+            accent="projects"
             action={
               <a
                 href="https://github.com/hiroqt?tab=repositories"
@@ -539,84 +560,93 @@ export default function Home() {
         </section>
 
         {/* 04 — Skills */}
-        <section id="skills" className="pt-12 scroll-mt-20">
-          <SectionHeading id="04" label="skills" />
-          <div className="space-y-8 sm:space-y-10">
-            {skillGroups.map((group, i) => (
-              <Reveal key={group.label} delay={i * 0.06}>
-                <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">
-                  {group.label}
-                </h3>
-                <ul className="flex flex-wrap gap-3 sm:gap-3.5">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="inline-flex items-center gap-3 text-sm sm:text-base font-medium px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-background border border-border text-foreground hover:border-accent hover:text-accent hover:scale-105 transition-all duration-200 shadow-sm"
-                    >
-                      <span className="text-lg sm:text-xl text-accent" aria-hidden="true">{techIcons[item]}</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
+        <section id="skills" className="relative z-10 pt-12 scroll-mt-20">
+          <SectionHeading id="04" label="skills" accent="skills" />
+          <div className="relative p-6 sm:p-8 rounded-3xl bg-muted/40 border border-border/40 overflow-hidden">
+            <SectionCardWatermark variant="skills" className="right-4 top-4" />
+            <div className="relative z-10 space-y-8 sm:space-y-10">
+              {skillGroups.map((group, i) => (
+                <Reveal key={group.label} delay={i * 0.06}>
+                  <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                    {group.label}
+                  </h3>
+                  <ul className="flex flex-wrap gap-3 sm:gap-3.5">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className="inline-flex items-center gap-3 text-sm sm:text-base font-medium px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-background border border-border text-foreground hover:border-accent hover:text-accent hover:scale-105 transition-all duration-200 shadow-sm"
+                      >
+                        <span className="text-lg sm:text-xl text-accent" aria-hidden="true">{techIcons[item]}</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ))}
 
-            <Reveal delay={0.18}>
-              <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                Languages
-              </h3>
-              <p className="text-base sm:text-lg text-foreground font-medium">English (fluent) · Filipino (native)</p>
-            </Reveal>
+              <Reveal delay={0.18}>
+                <h3 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                  Languages
+                </h3>
+                <p className="text-base sm:text-lg text-foreground font-medium">English (fluent) · Filipino (native)</p>
+              </Reveal>
+            </div>
           </div>
         </section>
 
         {/* 05 — Certifications */}
-        <section id="certifications" className="pt-12 scroll-mt-20">
-          <SectionHeading id="05" label="certifications" />
+        <section id="certifications" className="relative z-10 pt-12 scroll-mt-20">
+          <SectionHeading id="05" label="certifications" accent="certifications" />
           <div className="space-y-8">
             {certifications.map((cert, i) => (
               <Reveal key={cert.title} delay={i * 0.06}>
-                <div className="gemini-card p-6">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
-                    <h3 className="font-semibold text-sm sm:text-base">{cert.title}</h3>
-                    <span className="text-[11px] font-mono text-muted-foreground">{cert.count}</span>
-                  </div>
-                  <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
-                    {cert.topics.map((topic) => (
-                      <li key={topic} className="flex gap-3 text-sm text-muted-foreground">
-                        <span aria-hidden className="text-accent shrink-0">•</span>
-                        <span>{topic}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-6 flex flex-wrap gap-4 print:hidden">
-                    {cert.badges.map((badgeId) => (
-                      <div
-                        key={badgeId}
-                        data-iframe-width="140"
-                        data-iframe-height="240"
-                        data-share-badge-id={badgeId}
-                        data-share-badge-host="https://www.credly.com"
-                      />
-                    ))}
+                <div className="relative gemini-card p-6 overflow-hidden">
+                  <SectionCardWatermark variant="certifications" className="right-3 top-3" />
+                  <div className="relative z-10">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+                      <h3 className="font-semibold text-sm sm:text-base">{cert.title}</h3>
+                      <span className="text-[11px] font-mono text-muted-foreground">{cert.count}</span>
+                    </div>
+                    <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                      {cert.topics.map((topic) => (
+                        <li key={topic} className="flex gap-3 text-sm text-muted-foreground">
+                          <span aria-hidden className="text-accent shrink-0">•</span>
+                          <span>{topic}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-6 flex flex-wrap gap-4 print:hidden">
+                      {cert.badges.map((badgeId) => (
+                        <div
+                          key={badgeId}
+                          data-iframe-width="140"
+                          data-iframe-height="240"
+                          data-share-badge-id={badgeId}
+                          data-share-badge-host="https://www.credly.com"
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </Reveal>
             ))}
 
             <Reveal delay={0.12}>
-              <div className="gemini-card p-6">
-                <h3 className="font-semibold text-sm sm:text-base">Lean Six Sigma — White Belt</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Process Improvement &amp; Quality Management
-                </p>
+              <div className="relative gemini-card p-6 overflow-hidden">
+                <SectionCardWatermark variant="certifications" className="right-3 top-3" />
+                <div className="relative z-10">
+                  <h3 className="font-semibold text-sm sm:text-base">Lean Six Sigma — White Belt</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Process Improvement &amp; Quality Management
+                  </p>
+                </div>
               </div>
             </Reveal>
           </div>
         </section>
 
         {/* Gallery */}
-        <section className="pt-12 scroll-mt-20 print:hidden">
+        <section className="relative z-10 pt-12 scroll-mt-20 print:hidden">
           <SectionHeading id="✦" label="gallery" />
           <Reveal>
             <DraggableMasonry />
@@ -624,10 +654,11 @@ export default function Home() {
         </section>
 
         {/* 06 — GitHub */}
-        <section id="github" className="pt-12 scroll-mt-20 print:hidden">
+        <section id="github" className="relative z-10 pt-12 scroll-mt-20 print:hidden">
           <SectionHeading
             id="06"
             label="github"
+            accent="github"
             action={
               <a
                 href="https://github.com/hiroqt"
@@ -644,17 +675,22 @@ export default function Home() {
         </section>
 
         {/* 07 — Contact */}
-        <section id="contact" className="pt-12 scroll-mt-20">
-          <SectionHeading id="07" label="contact" />
+        <section id="contact" className="relative z-10 pt-12 scroll-mt-20">
+          <SectionHeading id="07" label="contact" accent="contact" />
 
           <div className="grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-14 items-start">
             {/* Left — Inquiry form */}
             <Reveal>
-              <p className="text-sm leading-relaxed text-muted-foreground max-w-prose mb-6">
-                Open to freelance projects, collaborations, and full-time opportunities.
-                Fill in the form and I&apos;ll get back to you as soon as possible.
-              </p>
-              <InquiryForm />
+              <div className="relative p-6 sm:p-8 rounded-3xl bg-muted/40 border border-border/40 overflow-hidden">
+                <SectionCardWatermark variant="contact" className="right-4 bottom-4" />
+                <div className="relative z-10">
+                  <p className="text-sm leading-relaxed text-muted-foreground max-w-prose mb-6">
+                    Open to freelance projects, collaborations, and full-time opportunities.
+                    Fill in the form and I&apos;ll get back to you as soon as possible.
+                  </p>
+                  <InquiryForm />
+                </div>
+              </div>
             </Reveal>
 
             {/* Right — Social / direct contact links */}

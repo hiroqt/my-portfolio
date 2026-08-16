@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     optimizePackageImports: ['framer-motion'],
+    serverComponentsExternalPackages: ['msedge-tts', 'ws'],
   },
 
   async headers() {
@@ -28,6 +29,8 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com https://api.fontshare.com https://cdn.fontshare.com",
               // Images: self + data URIs + Credly badge images + avatar images from GitHub
               "img-src 'self' data: blob: https://images.credly.com https://cdn.credly.com https://avatars.githubusercontent.com",
+              // Media: self + audio blob playback for TTS
+              "media-src 'self' blob: data:",
               // Connections: same-origin API routes only (GitHub/Turnstile called server-side)
               "connect-src 'self' https://vitals.vercel-insights.com",
             ].join('; '),

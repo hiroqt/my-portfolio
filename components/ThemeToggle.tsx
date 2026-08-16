@@ -228,7 +228,7 @@ function SwordSlashEffect({ theme }: { theme: 'light' | 'dark' }) {
           <div 
             className="w-full h-full"
             style={{
-              background: oldTheme === 'dark' ? '#080808' : '#ffffff',
+              background: oldTheme === 'dark' ? '#0E1013' : '#F8F9FA',
             }}
           />
         </motion.div>
@@ -240,12 +240,12 @@ function SwordSlashEffect({ theme }: { theme: 'light' | 'dark' }) {
             originX: isLightToDark ? 0 : 1,
             originY: 0,
             background: oldTheme === 'dark'
-              ? 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 70%, transparent 100%)'
-              : 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,1) 70%, transparent 100%)',
+              ? 'linear-gradient(to bottom, transparent 0%, rgba(241,243,245,1) 30%, rgba(241,243,245,1) 70%, transparent 100%)'
+              : 'linear-gradient(to bottom, transparent 0%, rgba(18,19,22,1) 30%, rgba(18,19,22,1) 70%, transparent 100%)',
             filter: 'blur(2px)',
             boxShadow: oldTheme === 'dark'
-              ? '0 0 40px rgba(255,255,255,1), 0 0 80px rgba(255,255,255,0.6), 0 0 120px rgba(255,255,255,0.4)'
-              : '0 0 40px rgba(0,0,0,1), 0 0 80px rgba(0,0,0,0.6), 0 0 120px rgba(0,0,0,0.4)',
+              ? '0 0 40px rgba(241,243,245,1), 0 0 80px rgba(241,243,245,0.6), 0 0 120px rgba(241,243,245,0.4)'
+              : '0 0 40px rgba(18,19,22,1), 0 0 80px rgba(18,19,22,0.6), 0 0 120px rgba(18,19,22,0.4)',
           }}
           initial={{ 
             x: isLightToDark ? -100 : '100vw',
@@ -272,12 +272,12 @@ function SwordSlashEffect({ theme }: { theme: 'light' | 'dark' }) {
             originX: isLightToDark ? 0 : 1,
             originY: 0,
             background: oldTheme === 'dark'
-              ? 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,1) 40%, rgba(255,255,255,1) 60%, transparent 100%)'
-              : 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 60%, transparent 100%)',
+              ? 'linear-gradient(to bottom, transparent 0%, rgba(241,243,245,1) 40%, rgba(241,243,245,1) 60%, transparent 100%)'
+              : 'linear-gradient(to bottom, transparent 0%, rgba(18,19,22,1) 40%, rgba(18,19,22,1) 60%, transparent 100%)',
             filter: 'blur(0px)',
             boxShadow: oldTheme === 'dark'
-              ? '0 0 20px rgba(255,255,255,1)'
-              : '0 0 20px rgba(0,0,0,1)',
+              ? '0 0 20px rgba(241,243,245,1)'
+              : '0 0 20px rgba(18,19,22,1)',
           }}
           initial={{ 
             x: isLightToDark ? -100 : '100vw',
@@ -309,10 +309,10 @@ function SwordSlashEffect({ theme }: { theme: 'light' | 'dark' }) {
               style={{
                 width: i % 3 === 0 ? '4px' : '3px',
                 height: i % 3 === 0 ? '4px' : '3px',
-                background: oldTheme === 'dark' ? '#fff' : '#000',
+                background: oldTheme === 'dark' ? '#F1F3F5' : '#121316',
                 boxShadow: oldTheme === 'dark' 
-                  ? '0 0 16px #fff, 0 0 28px rgba(255,255,255,0.8)'
-                  : '0 0 16px #000, 0 0 28px rgba(0,0,0,0.8)',
+                  ? '0 0 16px #F1F3F5, 0 0 28px rgba(241,243,245,0.8)'
+                  : '0 0 16px #121316, 0 0 28px rgba(18,19,22,0.8)',
                 left: `${baseLeft}%`,
                 top: `${3 + i * 5}%`,
               }}
@@ -349,8 +349,8 @@ function SwordSlashEffect({ theme }: { theme: 'light' | 'dark' }) {
                 width: '2px',
                 height: '20px',
                 background: oldTheme === 'dark' 
-                  ? 'linear-gradient(to bottom, transparent, #fff, transparent)'
-                  : 'linear-gradient(to bottom, transparent, #000, transparent)',
+                  ? 'linear-gradient(to bottom, transparent, #F1F3F5, transparent)'
+                  : 'linear-gradient(to bottom, transparent, #121316, transparent)',
                 left: `${baseLeft}%`,
                 top: `${15 + i * 8}%`,
                 transformOrigin: 'center',
