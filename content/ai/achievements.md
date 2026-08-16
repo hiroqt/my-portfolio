@@ -1,7 +1,7 @@
 # Achievements, Certifications & Honors
 
 ## 1. Hackathons & Competitions
-- **eGov Hackathon 2026**: Featured participant with "e Buddy", an agentic AI designed to unify fragmented government public services, simplify citizen compliance, and automate multi-agency administrative workflows.
+- **eGov Hackathon 2026 (Winner - Top 30)**: Won Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government public services, simplify citizen compliance, and automate multi-agency administrative workflows.
 
 ## 2. IBM Professional AI Certifications (7 Topics Verified)
 - **AI Fundamentals**: Foundations for Understanding AI

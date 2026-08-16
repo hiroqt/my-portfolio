@@ -84,7 +84,7 @@ const experience = [
     period: '2025 – Present',
     bullets: [
       'Delivered custom software systems for SMEs and organizations, managing end-to-end project lifecycles from discovery and design through deployment.',
-      'Built Present Po (attendance & time-tracking) and TMRC (running club website) as freelance engagements with client-owned production deployments.',
+      'Built Present Po (attendance & time-tracking), Tearsize (e-commerce), and HiveSync (virtual assistant platform) as freelance engagements with client-owned production deployments.',
     ],
   },
 ]
@@ -288,13 +288,13 @@ export default function Home() {
                     layoutId="hero-title"
                     transition={{ type: 'spring', damping: 25, stiffness: 100 }}
                   >
-                    <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#0e2c2b] dark:text-emerald-300 font-semibold px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full bg-slate-900/5 dark:bg-[#072b2a]/90 border border-slate-900/15 dark:border-emerald-400/40 backdrop-blur-md mb-4 sm:mb-6 shadow-md transition-colors">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400 animate-pulse" />
+                    <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono tracking-[0.2em] sm:tracking-[0.25em] uppercase text-foreground font-semibold px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full bg-muted border border-border backdrop-blur-md mb-4 sm:mb-6 shadow-sm transition-colors">
+                      <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                       Arnel Baylon • Portfolio
                     </div>
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-normal tracking-tight text-[#0e2c2b] dark:text-white max-w-5xl mx-auto leading-[1.12] sm:leading-[1.08] transition-colors">
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-normal tracking-tight text-foreground max-w-5xl mx-auto leading-[1.12] sm:leading-[1.08] transition-colors">
                       Context engineering & <br className="hidden sm:inline" />
-                      <span className="italic font-light text-emerald-800 dark:text-emerald-200">full-stack systems</span> made easy.
+                      <span className="italic font-light text-accent">full-stack systems</span> made easy.
                     </h1>
                   </motion.div>
                 ) : (
@@ -313,7 +313,7 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                 className="w-full max-w-2xl sm:max-w-3xl mt-2 sm:mt-4"
               >
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-700 dark:text-emerald-50/90 font-normal leading-relaxed transition-colors px-2">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground font-normal leading-relaxed transition-colors px-2">
                   Building intelligent client operations tools, context-engineered LLM workflows, and resilient web & mobile applications — giving total clarity and speed to modern teams.
                 </p>
               </motion.div>
@@ -323,14 +323,14 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: phase === 'done' ? 1 : 0, y: phase === 'done' ? 0 : 20 }}
                 transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-                className="flex items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 text-xs font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] text-slate-600 dark:text-emerald-200/80 transition-colors"
+                className="flex items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 text-xs font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground transition-colors"
               >
                 <a
                   href="https://github.com/hiroqt"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="GitHub profile (opens in new tab)"
-                  className="hover:text-[#0e2c2b] dark:hover:text-white transition-colors flex items-center gap-1.5 sm:gap-2"
+                  className="hover:text-foreground transition-colors flex items-center gap-1.5 sm:gap-2"
                 >
                   <FaGithub className="text-sm sm:text-base" /> <span>GitHub</span>
                 </a>
@@ -464,10 +464,11 @@ export default function Home() {
             <div className="absolute w-[280px] sm:w-[360px] h-[340px] bg-background border border-border rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-700 transform rotate-12 translate-x-12 sm:translate-x-48 translate-y-4 group-hover:translate-x-20 sm:group-hover:translate-x-64 group-hover:rotate-6 z-0 hover:z-20 hover:scale-105 cursor-pointer hidden sm:block overflow-hidden group/card flex flex-col justify-start">
               <Link href="/projects/e-buddy" className="absolute inset-0 z-20"><span className="sr-only">View details for e Buddy project</span></Link>
               <div className="flex gap-2 mb-4 flex-wrap relative z-10">
-                <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ HACKATHON ENTRY ❯</span>
+                <span className="bg-foreground text-background text-[9px] font-mono px-2 py-1 rounded-full flex items-center gap-1">✦ WINNER - TOP 30 ❯</span>
+                <span className="border border-border text-foreground text-[9px] font-mono px-2 py-1 rounded-full bg-background">EGOV 2026</span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground relative z-10 group-hover/card:text-transparent transition-colors duration-300">e Buddy</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.</p>
+              <p className="text-xs sm:text-sm text-muted-foreground relative z-10 group-hover/card:opacity-0 transition-opacity duration-300">Winner of eGov Hackathon 2026 (Top 30). Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.</p>
               <img src="/images/egov.png" alt="e Buddy application screenshot preview" className="absolute left-1/2 -bottom-20 w-[85%] h-auto rounded-t-xl shadow-2xl opacity-0 transform -translate-x-1/2 group-hover/card:-translate-y-24 group-hover/card:opacity-100 transition-all duration-500 z-0" />
             </div>
 

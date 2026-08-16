@@ -80,16 +80,16 @@ export const projectsData: ProjectData[] = [
   },
   {
     slug: 'e-buddy',
-    title: 'e Buddy (eGov Hackathon 2026)',
+    title: 'e Buddy (Winner - eGov Hackathon 2026 Top 30)',
     type: 'Project',
-    summary: 'Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.',
+    summary: 'Winner of eGov Hackathon 2026 (Top 30). Designed to unify government agencies and make public services seamless using an agentic AI named e Buddy.',
     tags: ['TypeScript', 'AI', 'Tailwind CSS'],
     link: '#',
     image: '/images/egov.png',
     isFeatured: true,
-    featuredTag: 'HACKATHON ENTRY',
+    featuredTag: 'WINNER - TOP 30',
     featuredTitle: 'e Buddy',
-    featuredSummary: 'Unified government services platform using an agentic AI named e Buddy.',
+    featuredSummary: 'Winner of eGov Hackathon 2026 (Top 30). Unified government services platform using an agentic AI named e Buddy.',
     features: [
       'EGOV SSO',
       'EGOV Verify or E-Verify',
@@ -104,7 +104,7 @@ export const projectsData: ProjectData[] = [
     content: [
       {
         title: 'Abstract',
-        content: 'e Buddy was developed as a submission for the eGov Hackathon 2026. The core problem addressed is the fragmented nature of public services across different government agencies, leading to citizen frustration.'
+        content: 'e Buddy was developed for the eGov Hackathon 2026, where it emerged as a Top 30 winner. The core problem addressed is the fragmented nature of public services across different government agencies, leading to citizen frustration.'
       },
       {
         title: 'The Solution',

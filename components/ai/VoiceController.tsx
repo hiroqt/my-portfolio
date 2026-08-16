@@ -232,7 +232,7 @@ export const VoiceController: React.FC<VoiceControllerProps> = ({
         className={`p-2 rounded-xl transition-all duration-200 ${
           voiceEnabled
             ? isSpeaking
-              ? 'text-emerald-500 bg-emerald-500/10 border border-emerald-500/30'
+              ? 'text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/30'
               : 'text-foreground hover:bg-muted'
             : 'text-muted-foreground/60 hover:text-foreground hover:bg-muted'
         }`}

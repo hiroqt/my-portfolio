@@ -25,9 +25,26 @@ export const JARVISAssistant: React.FC = () => {
   const [currentAction, setCurrentAction] = useState<AgentAction | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Rate Limiting (15 requests per user)
+  const [remainingQuota, setRemainingQuota] = useState<number>(15);
+  const [totalQuota, setTotalQuota] = useState<number>(15);
+
   const [activeSection, setActiveSection] = useState<string>('top');
   const abortControllerRef = useRef<AbortController | null>(null);
   const cancelSpeechRef = useRef<(() => void) | null>(null);
+
+  // Fetch initial rate limit status on mount
+  useEffect(() => {
+    fetch('/api/ai/chat')
+      .then(res => res.json())
+      .then(data => {
+        if (typeof data.remaining === 'number') {
+          setRemainingQuota(data.remaining);
+          setTotalQuota(data.total || 15);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Observe active visible section on page for UI context awareness
   useEffect(() => {
@@ -80,7 +97,7 @@ export const JARVISAssistant: React.FC = () => {
   // Send message to AI endpoint
   const sendMessage = useCallback(async (queryText?: string) => {
     const textToSend = queryText || input;
-    if (!textToSend.trim() || isStreaming) return;
+    if (!textToSend.trim() || isStreaming || remainingQuota <= 0) return;
 
     // Synchronously unlock browser audio context on user action if available
     if (typeof unlockAudio === 'function') {
@@ -129,6 +146,9 @@ export const JARVISAssistant: React.FC = () => {
 
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
+        if (response.status === 429) {
+          setRemainingQuota(0);
+        }
         throw new Error(errData.error || `Server error (${response.status})`);
       }
 
@@ -170,7 +190,14 @@ export const JARVISAssistant: React.FC = () => {
               try {
                 const parsed = JSON.parse(dataStr);
 
-                if (parsed.type === 'delta' && parsed.content) {
+                if (parsed.type === 'meta') {
+                  if (typeof parsed.remaining === 'number') {
+                    setRemainingQuota(parsed.remaining);
+                  }
+                  if (typeof parsed.total === 'number') {
+                    setTotalQuota(parsed.total);
+                  }
+                } else if (parsed.type === 'delta' && parsed.content) {
                   assistantContent += parsed.content;
                   setMessages(prev => {
                     const updated = [...prev];
@@ -199,52 +226,32 @@ export const JARVISAssistant: React.FC = () => {
 
       // Flush remaining buffer if present
       if (buffer.trim()) {
-        const lines = buffer.split('\n');
-        for (const line of lines) {
-          const trimmedLine = line.trim();
-          if (trimmedLine.startsWith('data:')) {
-            const dataStr = trimmedLine.replace(/^data:\s*/, '');
-            if (dataStr && dataStr !== '[DONE]') {
-              try {
-                const parsed = JSON.parse(dataStr);
-                if (parsed.type === 'delta' && parsed.content) {
-                  assistantContent += parsed.content;
-                } else if (parsed.type === 'action' && parsed.action) {
-                  collectedActions.push(parsed.action);
-                  executeAction(parsed.action);
-                }
-              } catch {
-                // Ignore
-              }
+        const trimmedLine = buffer.trim();
+        if (trimmedLine.startsWith('data:')) {
+          const dataStr = trimmedLine.replace(/^data:\s*/, '');
+          try {
+            const parsed = JSON.parse(dataStr);
+            if (parsed.type === 'delta' && parsed.content) {
+              assistantContent += parsed.content;
             }
-          }
+          } catch {}
         }
       }
 
-      // Finalize assistant message with actions
-      setMessages(prev => {
-        const updated = [...prev];
-        const lastIdx = updated.length - 1;
-        if (lastIdx >= 0 && updated[lastIdx].role === 'assistant') {
-          updated[lastIdx] = {
-            ...updated[lastIdx],
-            content: assistantContent,
-            actions: collectedActions
-          };
-        }
-        return updated;
-      });
+      setStatus('idle');
 
-      // Spoken voice response with automatic summarization if voice is enabled
-      if (voiceEnabled && assistantContent) {
-        setStatus('speaking');
+      // If voice enabled, synthesize the full response
+      if (voiceEnabled && assistantContent.trim()) {
         setIsSpeaking(true);
-        cancelSpeechRef.current = speakText(assistantContent, () => {
-          setIsSpeaking(false);
-          setStatus('idle');
-        });
-      } else {
-        setStatus('idle');
+        setStatus('speaking');
+
+        cancelSpeechRef.current = speakText(
+          assistantContent,
+          () => {
+            setIsSpeaking(false);
+            setStatus('idle');
+          }
+        );
       }
     } catch (err: any) {
       if (err.name !== 'AbortError') {
@@ -258,7 +265,7 @@ export const JARVISAssistant: React.FC = () => {
       setIsStreaming(false);
       abortControllerRef.current = null;
     }
-  }, [input, isStreaming, messages, pathname, activeSection, persona, voiceEnabled, executeAction]);
+  }, [input, isStreaming, messages, pathname, activeSection, persona, voiceEnabled, remainingQuota, executeAction]);
 
   const stopGeneration = () => {
     if (abortControllerRef.current) {
@@ -300,6 +307,8 @@ export const JARVISAssistant: React.FC = () => {
         persona={persona}
         currentAction={currentAction}
         error={error}
+        remainingQuota={remainingQuota}
+        totalQuota={totalQuota}
         onClose={() => setIsOpen(false)}
         onToggleExpand={() => setIsExpanded(prev => !prev)}
         onClear={clearMessages}
@@ -314,3 +323,4 @@ export const JARVISAssistant: React.FC = () => {
     </>
   );
 };
+export default JARVISAssistant;

@@ -117,10 +117,9 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
     content: `Freelance Software Consultant (2025 - Present):
 - Delivered custom software systems, SaaS web platforms, and mobile apps for SMEs and independent clients.
 - Present Po: Developed a workforce attendance SaaS platform with AI journaling, QR group onboarding, and PDF OCR timesheet parsing (Next.js + Supabase).
-- Tearsize: Built an e-commerce platform with full payment integration for health and wellness products.
-- HiveSync VA: Developed an agency website for virtual assistant services with automated FB-to-blog syndication and booking.
-- TMRC: Created a community platform for Trece Martirez Running Club with race registration archives and result leaderboards.`,
-    keywords: ['freelance', 'consultant', 'present po', 'tearsize', 'hivesync', 'tmrc', 'client projects', 'experience', 'full-stack'],
+- Tearsize: Built an e-commerce platform with full payment integration for health and wellness products (TypeScript, Tailwind CSS).
+- HiveSync VA: Developed an agency website for virtual assistant services with automated FB-to-blog syndication and booking (Next.js, TypeScript).`,
+    keywords: ['freelance', 'consultant', 'present po', 'tearsize', 'hivesync', 'client projects', 'experience', 'full-stack'],
     metadata: { section: 'freelance', period: '2025 - Present', techStack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS'] }
   },
 
@@ -128,11 +127,11 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
   {
     id: 'achieve-hackathon',
     documentId: 'achievements',
-    title: 'eGov Hackathon 2026 Entry - e Buddy Agentic AI',
+    title: 'Winner - eGov Hackathon 2026 (Top 30) - e Buddy Agentic AI',
     category: 'achievements',
-    content: `eGov Hackathon 2026:
-Arnel competed in the national eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government agencies. The system features multi-modal AI chat, voice command execution, EGOV Single Sign-On (SSO), biometric face liveness detection (Face Live Nest), eGov Pay, and Department of Budget and Management (DBM) Compass analytics.`,
-    keywords: ['egov', 'hackathon', '2026', 'e-buddy', 'e buddy', 'agentic ai', 'government', 'achievement', 'award', 'competition'],
+    content: `eGov Hackathon 2026 (Winner - Top 30):
+Arnel won Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government agencies. The system features multi-modal AI chat, voice command execution, EGOV Single Sign-On (SSO), biometric face liveness detection (Face Live Nest), eGov Pay, and Department of Budget and Management (DBM) Compass analytics.`,
+    keywords: ['egov', 'hackathon', '2026', 'winner', 'top 30', 'e-buddy', 'e buddy', 'agentic ai', 'government', 'achievement', 'award', 'competition'],
     metadata: { section: 'hackathons', featured: true }
   },
   {

@@ -19,22 +19,22 @@ export function PageAmbientBackground() {
           preserveAspectRatio="xMidYMin slice"
         >
           <defs>
-            <pattern id="amb-purple" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-              <rect width="10" height="10" fill="#a48eec" fillOpacity="0.4" />
-              <line x1="0" y1="0" x2="0" y2="10" stroke="#795fd8" strokeWidth="1.5" opacity="0.3" strokeDasharray="3,2" />
+            <pattern id="amb-amber" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+              <rect width="10" height="10" fill="#fde68a" fillOpacity="0.4" />
+              <line x1="0" y1="0" x2="0" y2="10" stroke="#d97706" strokeWidth="1.5" opacity="0.3" strokeDasharray="3,2" />
             </pattern>
-            <pattern id="amb-emerald" width="10" height="10" patternTransform="rotate(-30 0 0)" patternUnits="userSpaceOnUse">
-              <rect width="10" height="10" fill="#6ee7b7" fillOpacity="0.4" />
-              <line x1="0" y1="0" x2="0" y2="10" stroke="#34d399" strokeWidth="1.5" opacity="0.3" strokeDasharray="3,2" />
+            <pattern id="amb-terracotta" width="10" height="10" patternTransform="rotate(-30 0 0)" patternUnits="userSpaceOnUse">
+              <rect width="10" height="10" fill="#fed7aa" fillOpacity="0.4" />
+              <line x1="0" y1="0" x2="0" y2="10" stroke="#ea580c" strokeWidth="1.5" opacity="0.3" strokeDasharray="3,2" />
             </pattern>
-            <pattern id="amb-cyan" width="10" height="10" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
-              <rect width="10" height="10" fill="#67e8f9" fillOpacity="0.4" />
-              <line x1="0" y1="0" x2="0" y2="10" stroke="#22d3ee" strokeWidth="1.5" opacity="0.3" strokeDasharray="3,2" />
+            <pattern id="amb-sand" width="10" height="10" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+              <rect width="10" height="10" fill="#e7e5e4" fillOpacity="0.4" />
+              <line x1="0" y1="0" x2="0" y2="10" stroke="#a8a29e" strokeWidth="1.5" opacity="0.3" strokeDasharray="3,2" />
             </pattern>
           </defs>
 
           {/* Continuous Architectural Grid Lines (Outer Margins) */}
-          <g className="stroke-slate-900/10 dark:stroke-white/8" strokeWidth="1" strokeDasharray="4 6">
+          <g className="stroke-stone-900/10 dark:stroke-white/8" strokeWidth="1" strokeDasharray="4 6">
             {/* Left Margin Rail */}
             <line x1="40" y1="0" x2="40" y2="2400" />
             <line x1="120" y1="0" x2="120" y2="2400" />
@@ -51,7 +51,7 @@ export function PageAmbientBackground() {
           </g>
 
           {/* Precision Alignment Crosshairs */}
-          <g className="stroke-slate-900/20 dark:stroke-white/15" strokeWidth="1.2">
+          <g className="stroke-stone-900/20 dark:stroke-white/15" strokeWidth="1.2">
             <path d="M35,400 H45 M40,395 V405" />
             <path d="M1395,400 H1405 M1400,395 V405" />
             <path d="M35,950 H45 M40,945 V955" />
@@ -64,19 +64,19 @@ export function PageAmbientBackground() {
 
           {/* Section 01 / 02 Area: Education & Experience Background Motifs */}
           <g className="opacity-40 dark:opacity-25">
-            {/* Left Lavender Arch */}
-            <path d="M 0,420 A 70,70 0 0,1 70,350 V 420 Z" fill="url(#amb-purple)" />
-            {/* Right Stippled Tile */}
-            <rect x="1370" y="520" width="70" height="90" rx="6" fill="url(#amb-emerald)" />
+            {/* Left Amber Arch */}
+            <path d="M 0,420 A 70,70 0 0,1 70,350 V 420 Z" fill="url(#amb-amber)" />
+            {/* Right Terracotta Tile */}
+            <rect x="1370" y="520" width="70" height="90" rx="6" fill="url(#amb-terracotta)" />
           </g>
 
           {/* Section 03 Area: Projects & Architecture Blueprint Motifs */}
-          <g className="stroke-[#0A2B2A]/30 dark:stroke-white/20" strokeWidth="1.4" strokeLinecap="round" fill="none">
+          <g className="stroke-[#1C1917]/30 dark:stroke-white/20" strokeWidth="1.4" strokeLinecap="round" fill="none">
             {/* Left Data Flow Node */}
             <g transform="translate(15, 880)">
               <rect x="0" y="0" width="80" height="44" rx="6" className="fill-background/40" strokeWidth="1.2" />
               <text x="10" y="22" fontSize="8" fontFamily="monospace" className="fill-current opacity-70" stroke="none">&lt;Deploy /&gt;</text>
-              <text x="10" y="34" fontSize="7.5" fontFamily="monospace" className="fill-emerald-600 dark:fill-emerald-400 font-semibold" stroke="none">200 OK</text>
+              <text x="10" y="34" fontSize="7.5" fontFamily="monospace" className="fill-[#C07736] dark:fill-[#E6A860] font-semibold" stroke="none">200 OK</text>
               <line x1="80" y1="22" x2="110" y2="22" strokeDasharray="2 2" />
             </g>
 
@@ -91,25 +91,25 @@ export function PageAmbientBackground() {
 
           {/* Section 04 / 05 Area: Skills & Neural Synapses */}
           <g className="opacity-40 dark:opacity-25">
-            <path d="M 1440,1400 A 70,70 0 0,0 1370,1470 H 1440 Z" fill="url(#amb-cyan)" />
-            <rect x="0" y="1520" width="60" height="80" rx="6" fill="url(#amb-purple)" />
+            <path d="M 1440,1400 A 70,70 0 0,0 1370,1470 H 1440 Z" fill="url(#amb-sand)" />
+            <rect x="0" y="1520" width="60" height="80" rx="6" fill="url(#amb-amber)" />
           </g>
 
           {/* Section 06 / 07 Area: GitHub & Contact Area */}
-          <g className="stroke-[#0A2B2A]/30 dark:stroke-white/20" strokeWidth="1.4" strokeLinecap="round" fill="none">
+          <g className="stroke-[#1C1917]/30 dark:stroke-white/20" strokeWidth="1.4" strokeLinecap="round" fill="none">
             {/* Git Branch Curve in Gutter */}
             <g transform="translate(20, 1950)">
               <line x1="10" y1="0" x2="10" y2="70" strokeWidth="1.4" />
               <circle cx="10" cy="15" r="3" className="fill-current opacity-60" />
               <path d="M 10,15 C 25,15 30,35 30,50" strokeDasharray="3 2" />
-              <circle cx="30" cy="50" r="3" className="fill-emerald-500" />
+              <circle cx="30" cy="50" r="3" className="fill-[#E6A860]" />
             </g>
 
             {/* Contact Signal Beam */}
             <g transform="translate(1340, 2150)">
               <path d="M 0,20 Q 20,5 40,20" strokeDasharray="2 2" />
               <path d="M 5,28 Q 20,15 35,28" strokeDasharray="2 2" />
-              <circle cx="20" cy="38" r="3" className="fill-emerald-500" />
+              <circle cx="20" cy="38" r="3" className="fill-[#E6A860]" />
             </g>
           </g>
 

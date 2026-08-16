@@ -32,7 +32,7 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="mb-8 flex items-center justify-between"
           >
-            <Link href="/#projects" aria-label="Back to portfolio projects section" className="group inline-flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-slate-700 dark:text-emerald-200/80 hover:text-[#0e2c2b] dark:hover:text-white transition-colors">
+            <Link href="/#projects" aria-label="Back to portfolio projects section" className="group inline-flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
               <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
               Back to Portfolio
             </Link>
@@ -44,26 +44,26 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="pb-4 text-[#0e2c2b] dark:text-white"
+            className="pb-4 text-foreground"
           >
             <div className="flex gap-3 mb-6 flex-wrap">
               {project.type && (
-                <span className="text-[10px] sm:text-xs font-mono tracking-widest uppercase px-3.5 py-1.5 rounded-full border border-slate-900/20 dark:border-emerald-400/40 bg-slate-900/5 dark:bg-emerald-950/60 text-[#0e2c2b] dark:text-emerald-300 backdrop-blur-md">
+                <span className="text-[10px] sm:text-xs font-mono tracking-widest uppercase px-3.5 py-1.5 rounded-full border border-border bg-muted text-accent backdrop-blur-md">
                   {project.type}
                 </span>
               )}
               {project.tags.map(tag => (
-                <span key={tag} className="text-[10px] sm:text-xs font-mono tracking-widest uppercase px-3.5 py-1.5 rounded-full bg-slate-900/5 dark:bg-white/10 text-slate-700 dark:text-emerald-100/90 border border-slate-900/10 dark:border-white/10 backdrop-blur-sm">
+                <span key={tag} className="text-[10px] sm:text-xs font-mono tracking-widest uppercase px-3.5 py-1.5 rounded-full bg-muted/70 text-muted-foreground border border-border backdrop-blur-sm">
                   {tag}
                 </span>
               ))}
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-normal mb-6 text-[#0e2c2b] dark:text-white leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-normal mb-6 text-foreground leading-tight tracking-tight">
               {project.title}
             </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-slate-700 dark:text-emerald-100/80 font-serif leading-relaxed mb-8 max-w-prose">
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-serif leading-relaxed mb-8 max-w-prose">
               {project.summary}
             </p>
             
@@ -73,7 +73,7 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
                 target="_blank" 
                 rel="noreferrer"
                 aria-label={`View live site for ${project.title} (opens in new tab)`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-white dark:text-[#0c3938] bg-[#0e2c2b] dark:bg-white px-7 py-3 rounded-full hover:scale-105 transition-all shadow-xl hover:shadow-emerald-950/50"
+                className="inline-flex items-center gap-2 text-sm font-medium text-background bg-foreground px-7 py-3 rounded-full hover:scale-105 transition-all shadow-lg"
               >
                 View Live Project <FaExternalLinkAlt className="text-xs" aria-hidden="true" />
               </a>

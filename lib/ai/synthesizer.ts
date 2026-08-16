@@ -309,13 +309,13 @@ export function synthesizeDynamicResponse(
 
     if (lower.includes('best') || lower.includes('top') || lower.includes('recommend') || lower.includes('impressive')) {
       return {
-        text: "Here are Arnel's standout projects:\n\n1. **e Buddy (eGov Hackathon 2026)**: An agentic AI platform uniting government public services with chat and voice workflows.\n2. **PaceMentor**: An AI-powered running coach mobile app built with Flutter and Strava sync.\n3. **Present Po**: A B2B attendance and workforce time-tracking SaaS with AI journaling.\n\nNavigating to the projects section.",
+        text: "Here are Arnel's standout projects:\n\n1. **e Buddy (eGov Hackathon 2026 Winner - Top 30)**: An agentic AI platform uniting government public services with chat and voice workflows.\n2. **PaceMentor**: An AI-powered running coach mobile app built with Flutter and Strava sync.\n3. **Present Po**: A B2B attendance and workforce time-tracking SaaS with AI journaling.\n\nNavigating to the projects section.",
         action
       };
     }
 
     return {
-      text: "Arnel has developed a range of production applications across AI agent tools, B2B SaaS, mobile apps, and e-commerce:\n\n- **e Buddy**: Agentic AI for public government services\n- **PaceMentor**: AI running coach app in Flutter\n- **Present Po**: Workforce attendance platform with AI journaling\n- **Hospital Queuing System**: AI triage system deployed at GEAMH\n- **yhel.os**: All-in-one freelance operating system\n- **VCM HRIS**: QR attendance & automated payroll system\n\nNavigating to the projects section.",
+      text: "Arnel has developed a range of production applications across AI agent tools, B2B SaaS, mobile apps, and e-commerce:\n\n- **e Buddy**: Agentic AI for public government services (eGov Hackathon 2026 Winner - Top 30)\n- **PaceMentor**: AI running coach app in Flutter\n- **Present Po**: Workforce attendance platform with AI journaling\n- **Hospital Queuing System**: AI triage system deployed at GEAMH\n- **yhel.os**: All-in-one freelance operating system\n- **VCM HRIS**: QR attendance & automated payroll system\n\nNavigating to the projects section.",
       action
     };
   }
@@ -338,7 +338,7 @@ export function synthesizeDynamicResponse(
     };
 
     const backgroundResponses = [
-      "Arnel's engineering background includes a Bachelor of Science in Information Technology from Cavite State University, a 486-hour software engineering internship at General Emilio Aguinaldo Memorial Hospital where he built an AI triage and queuing platform, and freelance work delivering production platforms like Present Po, e Buddy, and VCM HRIS.\n\nNavigating to the experience timeline.",
+      "Arnel's engineering background includes a Bachelor of Science in Information Technology from Cavite State University, a 486-hour software engineering internship at General Emilio Aguinaldo Memorial Hospital where he built an AI triage and queuing platform, and freelance work delivering client platforms like Present Po, Tearsize, and HiveSync VA.\n\nNavigating to the experience timeline.",
       "Looking at Arnel's background, he is a Full-Stack Developer and Context Engineer. His background highlights practical engineering at GEAMH developing AI hospital systems, architecting enterprise HRIS software with QR attendance, and earning 11 verified IBM and AWS technical certifications.\n\nNavigating to the experience timeline.",
       "Arnel's professional background covers full-stack web and AI engineering across three major milestones:\n\n1. **GEAMH Hospital Internship**: Engineered an AI patient queuing and triage system in Vue.js, PHP, and Groq LLMs.\n2. **Enterprise HRIS Capstone**: Built VCM HRIS with QR-code presence validation and automated payroll.\n3. **Freelance Solutions**: Delivered client platforms including Present Po, Tearsize, and HiveSync VA.\n\nNavigating to the experience timeline."
     ];

@@ -48,10 +48,10 @@ export const JARVISAvatar: React.FC<JARVISAvatarProps> = ({
       case 'speaking':
         return {
           core: 'bg-foreground text-background',
-          glow: 'bg-emerald-500/20',
-          ring1: 'border-emerald-500/50',
+          glow: 'bg-amber-500/20',
+          ring1: 'border-amber-500/50',
           ring2: 'border-dashed border-foreground/50',
-          wave: 'border-emerald-500/40'
+          wave: 'border-amber-500/40'
         };
       case 'navigating':
         return {

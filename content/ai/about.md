@@ -21,7 +21,7 @@ He has demonstrated his engineering capabilities through impactful real-world de
 1. Developing an AI-assisted hospital queuing system during a 486-hour internship at General Emilio Aguinaldo Memorial Hospital (GEAMH) utilizing Vue.js, PHP, MySQL, and Groq LLMs.
 2. Architecting the VCM HRIS capstone project featuring QR-code attendance verification, automated payroll computation, and absence monitoring.
 3. Building commercial freelance solutions including Tearsize (e-commerce), Present Po (workforce attendance & B2B SaaS with AI journaling), PaceMentor (AI-powered running coach app), and HiveSync VA.
-4. Competing in the eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify government services across disparate public agencies.
+4. Winning Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify government services across disparate public agencies.
 
 ## Core Engineering Philosophy
 - **Agentic AI First**: AI should not just answer questions passively; it should take intelligent actions, orchestrate tools, and automate tedious human workflows safely.

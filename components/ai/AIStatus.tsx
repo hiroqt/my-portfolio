@@ -37,21 +37,21 @@ export const AIStatus: React.FC<AIStatusProps> = ({ status, activeActionLabel })
               <motion.span
                 animate={{ height: ['20%', '100%', '30%'] }}
                 transition={{ repeat: Infinity, duration: 0.4 }}
-                className="w-0.5 bg-emerald-500 rounded-full"
+                className="w-0.5 bg-amber-500 rounded-full"
               />
               <motion.span
                 animate={{ height: ['60%', '20%', '90%'] }}
                 transition={{ repeat: Infinity, duration: 0.35 }}
-                className="w-0.5 bg-emerald-500 rounded-full"
+                className="w-0.5 bg-amber-500 rounded-full"
               />
               <motion.span
                 animate={{ height: ['30%', '90%', '40%'] }}
                 transition={{ repeat: Infinity, duration: 0.45 }}
-                className="w-0.5 bg-emerald-500 rounded-full"
+                className="w-0.5 bg-amber-500 rounded-full"
               />
             </span>
           ),
-          style: 'border-emerald-500/40 text-emerald-500 bg-emerald-500/10'
+          style: 'border-amber-500/40 text-amber-600 dark:text-amber-400 bg-amber-500/10'
         };
       case 'navigating':
         return {

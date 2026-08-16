@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkRateLimit } from '@/lib/ai/rateLimit';
+import { checkRateLimit, getRateLimitStatus, MAX_REQUESTS_PER_USER } from '@/lib/ai/rateLimit';
 import { checkQuerySafety } from '@/lib/rag/grounding';
 import { inferPersona, streamAgentResponse } from '@/lib/ai/agent';
 import { ChatRequestPayload } from '@/lib/ai/types';
@@ -7,9 +7,20 @@ import { ChatRequestPayload } from '@/lib/ai/types';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+// GET Handler to query remaining quota for user
+export async function GET(req: NextRequest) {
+  const clientIp =
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    req.headers.get('x-real-ip') ??
+    '127.0.0.1';
+
+  const status = getRateLimitStatus(clientIp);
+  return NextResponse.json(status);
+}
+
 export async function POST(req: NextRequest) {
   try {
-    // 1. Rate Limiting by Client IP
+    // 1. Strict 15 Requests Rate Limiting by Client IP
     const clientIp =
       req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
       req.headers.get('x-real-ip') ??
@@ -18,7 +29,12 @@ export async function POST(req: NextRequest) {
     const rateResult = checkRateLimit(clientIp);
     if (!rateResult.success) {
       return NextResponse.json(
-        { error: 'Rate limit exceeded. Please wait a few minutes before asking more questions.' },
+        { 
+          error: `Rate limit reached (${MAX_REQUESTS_PER_USER}/${MAX_REQUESTS_PER_USER} requests used). Please wait for the quota window to reset.`,
+          remaining: 0,
+          total: MAX_REQUESTS_PER_USER,
+          resetTime: rateResult.resetTime
+        },
         { status: 429 }
       );
     }
@@ -49,11 +65,20 @@ export async function POST(req: NextRequest) {
     // 4. Infer Persona if not explicitly provided
     const selectedPersona = persona && persona !== 'default' ? persona : inferPersona(latestUserMsg);
 
-    // 5. Create SSE Streaming Response
+    // 5. Create SSE Streaming Response with quota metadata
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
         try {
+          // Emit initial quota metadata event
+          const metaEvent = `data: ${JSON.stringify({ 
+            type: 'meta', 
+            remaining: rateResult.remaining, 
+            total: MAX_REQUESTS_PER_USER, 
+            persona: selectedPersona 
+          })}\n\n`;
+          controller.enqueue(encoder.encode(metaEvent));
+
           for await (const chunk of streamAgentResponse(messages, selectedPersona, uiContext)) {
             const sseEvent = `data: ${JSON.stringify({ ...chunk, persona: selectedPersona })}\n\n`;
             controller.enqueue(encoder.encode(sseEvent));
@@ -73,7 +98,9 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'text/event-stream; charset=utf-8',
         'Cache-Control': 'no-cache, no-transform',
         'Connection': 'keep-alive',
-        'X-Accel-Buffering': 'no'
+        'X-Accel-Buffering': 'no',
+        'X-RateLimit-Limit': String(MAX_REQUESTS_PER_USER),
+        'X-RateLimit-Remaining': String(rateResult.remaining)
       }
     });
   } catch (error: any) {

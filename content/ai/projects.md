@@ -1,14 +1,14 @@
 # Portfolio Projects Showcase
 
-## 1. e Buddy (eGov Hackathon 2026 Entry)
+## 1. e Buddy (Winner - eGov Hackathon 2026 Top 30)
 - **Slug**: `e-buddy`
-- **Title**: e Buddy (eGov Hackathon 2026)
+- **Title**: e Buddy (Winner - eGov Hackathon 2026 Top 30)
 - **Tagline**: Unified government services platform using an agentic AI named e Buddy.
 - **Category**: AI, Government Tech, Full-Stack
 - **Tags**: TypeScript, AI, Tailwind CSS, Agentic Workflows
-- **Featured**: Yes (Hackathon Entry)
+- **Featured**: Yes (Winner - Top 30)
 - **Overview**:
-  e Buddy was developed as a flagship submission for the eGov Hackathon 2026. Public services across government agencies are historically fragmented, requiring citizens to navigate separate portals, repeat document verification, and queue for hours.
+  e Buddy was developed for the eGov Hackathon 2026, where it emerged as a Top 30 winner. Public services across government agencies are historically fragmented, requiring citizens to navigate separate portals, repeat document verification, and queue for hours.
 - **Core Features**:
   - **Agentic AI Assistant**: Multi-modal AI chat, UI widgets, and voice command system that guides citizens step-by-step through government procedures.
   - **EGOV SSO & E-Verify**: Unified Single Sign-On and digital identity verification across public sector portals.

@@ -30,5 +30,4 @@
   - **Present Po**: Designed and built a workforce attendance and time-tracking SaaS platform using Next.js, Supabase, and AI journaling assistance with automated PDF OCR.
   - **Tearsize**: Developed an e-commerce platform for health and wellness products with secure payment gateway integration using TypeScript and Tailwind CSS.
   - **HiveSync VA**: Created a high-converting agency website for virtual assistant services with automated Facebook-to-blog syndication and client booking.
-  - **TMRC (Trece Martirez Running Club)**: Built a community hub for local runners featuring race event registrations, result archives, and news updates using Next.js.
   - Handled the complete product lifecycle: discovery, architectural design, database modeling, development, deployment on Vercel/Supabase, and client onboarding.
