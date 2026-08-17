@@ -605,17 +605,17 @@ export function stopAllSpeech(): void {
 }
 
 /**
- * Speak brief audio prompt immediately using Microsoft Edge Neural TTS or WebSpeech
+ * Speak brief audio prompt immediately using ElevenLabs or Microsoft Edge Neural TTS
  */
-export function speakPrompt(text: string, onEnd?: () => void): () => void {
+export function speakPrompt(text: string, onEnd?: () => void, voice?: string): () => void {
   unlockAudio();
-  return playNeuralSpeech(text, onEnd, 'en-US-BrianNeural');
+  return playNeuralSpeech(text, onEnd, voice);
 }
 
 /**
- * Speak assistant responses using Microsoft Edge Neural TTS with automatic summarization
+ * Speak assistant responses using ElevenLabs or Microsoft Edge Neural TTS with automatic summarization
  */
-export function speakText(text: string, onEnd?: () => void): () => void {
+export function speakText(text: string, onEnd?: () => void, voice?: string): () => void {
   unlockAudio();
-  return playNeuralSpeech(text, onEnd, 'en-US-BrianNeural');
+  return playNeuralSpeech(text, onEnd, voice);
 }

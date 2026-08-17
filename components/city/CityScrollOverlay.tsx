@@ -63,6 +63,8 @@ export const CityScrollOverlay: React.FC<CityScrollOverlayProps> = ({
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [isSprintActive, setIsSprintActive] = useState(false)
 
+  const [audioVolume, setAudioVolume] = useState(0.85)
+
   const handleAudioToggle = () => {
     const active = cityAudio.toggle()
     setIsPlayingAudio(active)
@@ -112,18 +114,45 @@ export const CityScrollOverlay: React.FC<CityScrollOverlayProps> = ({
 
         {/* Right: Controls & View Modes */}
         <div className="flex items-center flex-wrap justify-end gap-2 sm:gap-2.5 pointer-events-auto">
-          {/* Audio Synthesizer */}
-          <button
-            onClick={handleAudioToggle}
-            aria-label={isPlayingAudio ? 'Mute City Ambient Audio' : 'Play City Ambient Audio'}
-            className={`p-2.5 rounded-full backdrop-blur-md border transition-all duration-300 shadow-sm ${
-              isPlayingAudio
-                ? 'bg-sky-500/20 border-sky-400 text-sky-600 dark:text-sky-300'
-                : 'bg-white/85 dark:bg-slate-900/85 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white'
-            }`}
-          >
-            {isPlayingAudio ? <FaVolumeUp className="text-sm" /> : <FaVolumeMute className="text-sm" />}
-          </button>
+          {/* Audio Synthesizer & Volume Controller */}
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/85 dark:bg-slate-900/85 border border-slate-200 dark:border-slate-700 backdrop-blur-md shadow-sm">
+            <button
+              onClick={handleAudioToggle}
+              aria-label={isPlayingAudio ? 'Mute City Lo-Fi Beats' : 'Play City Lo-Fi Beats'}
+              className={`p-1 rounded-full transition-all duration-300 ${
+                isPlayingAudio
+                  ? 'text-sky-600 dark:text-sky-300 animate-pulse'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white'
+              }`}
+            >
+              {isPlayingAudio ? <FaVolumeUp className="text-sm" /> : <FaVolumeMute className="text-sm" />}
+            </button>
+
+            {isPlayingAudio && (
+              <div className="flex items-center gap-2 animate-fadeIn">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={audioVolume}
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value)
+                    setAudioVolume(val)
+                    cityAudio.setVolume(val)
+                  }}
+                  className="w-16 sm:w-20 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-sky-500"
+                  title="Master Volume"
+                />
+                <span className="text-[10px] font-mono font-bold text-slate-700 dark:text-slate-300 min-w-[26px]">
+                  {Math.round(audioVolume * 100)}%
+                </span>
+                <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-400 text-[9px] font-mono font-bold uppercase">
+                  🎧 LO-FI
+                </span>
+              </div>
+            )}
+          </div>
 
           {/* Lighting Mode Switcher */}
           <button

@@ -26,7 +26,8 @@ async function synthesizeWithElevenLabs(text: string, voiceId?: string): Promise
 
     const url = `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice}?optimize_streaming_latency=3&output_format=mp3_44100_128`;
 
-    const res = await fetch(url, {
+    // Attempt with low-latency turbo model first
+    let res = await fetch(url, {
       method: 'POST',
       headers: {
         'Accept': 'audio/mpeg',
@@ -35,7 +36,7 @@ async function synthesizeWithElevenLabs(text: string, voiceId?: string): Promise
       },
       body: JSON.stringify({
         text,
-        model_id: 'eleven_turbo_v2_5', // Ultra-fast response with high fidelity
+        model_id: 'eleven_turbo_v2_5',
         voice_settings: {
           stability: 0.5,
           similarity_boost: 0.8,
@@ -45,6 +46,28 @@ async function synthesizeWithElevenLabs(text: string, voiceId?: string): Promise
       })
     });
 
+    // If turbo model is not available on this tier, fallback to multilingual_v2
+    if (!res.ok && (res.status === 400 || res.status === 422)) {
+      res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': apiKey
+        },
+        body: JSON.stringify({
+          text,
+          model_id: 'eleven_multilingual_v2',
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.8,
+            style: 0.0,
+            use_speaker_boost: true
+          }
+        })
+      });
+    }
+
     if (!res.ok) {
       const errBody = await res.text().catch(() => '');
       console.warn(`[ElevenLabs API warning]: HTTP ${res.status} - ${errBody}. Falling back to Edge Neural TTS.`);
@@ -52,6 +75,7 @@ async function synthesizeWithElevenLabs(text: string, voiceId?: string): Promise
     }
 
     const arrayBuf = await res.arrayBuffer();
+    console.log(`[ElevenLabs TTS Success]: Synthesized ${arrayBuf.byteLength} bytes using voice "${selectedVoice}"`);
     return Buffer.from(arrayBuf);
   } catch (err: any) {
     console.warn('[ElevenLabs Fetch Error]:', err.message);
@@ -146,10 +170,12 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Attempt synthesis with ElevenLabs if API key is provided
+    let engine = 'ElevenLabs';
     let audioBuffer = await synthesizeWithElevenLabs(cleanText, voice);
 
     // 2. Fallback to Microsoft Edge Neural TTS if ElevenLabs is not configured or failed
     if (!audioBuffer) {
+      engine = 'EdgeNeural';
       audioBuffer = await synthesizeWithEdgeTTS(cleanText, voice || DEFAULT_EDGE_VOICE, rate, pitch);
     }
 
@@ -158,6 +184,7 @@ export async function POST(req: NextRequest) {
       headers: {
         'Content-Type': 'audio/mpeg',
         'Content-Length': String(audioBuffer.length),
+        'X-TTS-Engine': engine,
         'Cache-Control': 'public, max-age=86400, stale-while-revalidate=3600'
       }
     });

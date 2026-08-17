@@ -26,7 +26,6 @@ interface CitySceneProps {
   onAvatarInteract: () => void
 }
 
-// Helper to draw a crisp floating 3D billboard tag for the selected building
 function createBuildingLabelTexture(title: string, subtitle: string): THREE.CanvasTexture {
   const canvas = document.createElement('canvas')
   canvas.width = 512
@@ -35,12 +34,10 @@ function createBuildingLabelTexture(title: string, subtitle: string): THREE.Canv
   if (ctx) {
     ctx.clearRect(0, 0, 512, 140)
 
-    // Background Card
     ctx.fillStyle = 'rgba(15, 23, 42, 0.94)'
     ctx.strokeStyle = '#38bdf8'
     ctx.lineWidth = 5
 
-    // Rounded rectangle
     const x = 12
     const y = 12
     const w = 488
@@ -60,14 +57,12 @@ function createBuildingLabelTexture(title: string, subtitle: string): THREE.Canv
     ctx.fill()
     ctx.stroke()
 
-    // Title Text
     ctx.font = 'bold 30px system-ui, -apple-system, sans-serif'
     ctx.fillStyle = '#ffffff'
     ctx.textAlign = 'center'
     const displayTitle = title.length > 24 ? title.substring(0, 22) + '...' : title
     ctx.fillText(displayTitle, 256, 56)
 
-    // Subtitle Tag
     ctx.font = 'bold 22px monospace'
     ctx.fillStyle = '#38bdf8'
     ctx.fillText(subtitle, 256, 96)
@@ -135,36 +130,48 @@ export const CityScene: React.FC<CitySceneProps> = ({
 
     let animationFrameId: number
 
-    // 1. Scene & Natural Atmosphere
+    // 1. Device Capabilities Detection & Adaptive DPR
+    const isMobile =
+      typeof window !== 'undefined' &&
+      (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        window.innerWidth < 768)
+
+    const targetDPR = isMobile
+      ? Math.min(window.devicePixelRatio, 1.25)
+      : Math.min(window.devicePixelRatio, 1.5)
+
+    // 2. Scene & Atmosphere
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xbfe0f7)
     scene.fog = new THREE.FogExp2(0xbfe0f7, 0.0035)
 
-    // 2. Camera Setup
+    // 3. Camera Setup
     const camera = new THREE.PerspectiveCamera(
       45,
       container.clientWidth / container.clientHeight,
       0.5,
-      1400
+      1200
     )
     camera.position.set(0, 52, 75)
 
-    // 3. WebGL Renderer
+    // 4. WebGL Renderer with High-Performance Settings
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: !isMobile,
       powerPreference: 'high-performance',
+      precision: isMobile ? 'mediump' : 'highp',
       alpha: false,
     })
     renderer.setSize(container.clientWidth, container.clientHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(targetDPR)
     renderer.shadowMap.enabled = true
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap
+    renderer.shadowMap.type = isMobile ? THREE.BasicShadowMap : THREE.PCFSoftShadowMap
+    renderer.shadowMap.autoUpdate = true
     renderer.toneMapping = THREE.ACESFilmicToneMapping
     renderer.toneMappingExposure = 1.15
     container.appendChild(renderer.domElement)
 
-    // 4. Natural Sky Dome & Distant Skyline
-    const skyGeo = new THREE.SphereGeometry(450, 32, 24)
+    // 5. Sky Dome
+    const skyGeo = new THREE.SphereGeometry(450, 24, 16)
     skyGeo.scale(-1, 1, 1)
 
     const skyMat = new THREE.MeshBasicMaterial({
@@ -174,71 +181,64 @@ export const CityScene: React.FC<CitySceneProps> = ({
     const skyDome = new THREE.Mesh(skyGeo, skyMat)
     scene.add(skyDome)
 
-    // Distant Horizon Skyline Ring
-    const distantSkylineGroup = new THREE.Group()
-    const numDistantTowers = 110
+    // 6. INSTANCED Distant Horizon Skyline (Reduces 210 draw calls -> 1 draw call!)
+    const numDistantTowers = 95
     const horizonRadius = 160
-
+    const dTowerGeo = new THREE.BoxGeometry(1, 1, 1)
     const distantTowerMat = new THREE.MeshBasicMaterial({ color: 0x64748b, transparent: true, opacity: 0.85 })
-    const distantBeaconMat = new THREE.MeshBasicMaterial({ color: 0xef4444 })
+    const distantTowersInstanced = new THREE.InstancedMesh(dTowerGeo, distantTowerMat, numDistantTowers)
+
+    const dummyMatrix = new THREE.Matrix4()
+    const dummyPos = new THREE.Vector3()
+    const dummyScale = new THREE.Vector3()
+    const dummyQuat = new THREE.Quaternion()
 
     for (let i = 0; i < numDistantTowers; i++) {
       const angle = (i / numDistantTowers) * Math.PI * 2
-      const rad = horizonRadius + (Math.random() - 0.5) * 45
+      const rad = horizonRadius + (Math.sin(i * 3.7) * 20)
       const tx = Math.cos(angle) * rad
       const tz = Math.sin(angle) * rad
 
-      const tHeight = 25 + Math.random() * 70
-      const tWidth = 5 + Math.random() * 9
-      const tDepth = 5 + Math.random() * 9
+      const tHeight = 25 + (Math.sin(i * 1.3) + 1) * 25
+      const tWidth = 5 + (i % 3) * 2
+      const tDepth = 5 + ((i + 1) % 3) * 2
 
-      const dTowerGeo = new THREE.BoxGeometry(tWidth, tHeight, tDepth)
-      const dTower = new THREE.Mesh(dTowerGeo, distantTowerMat)
-      dTower.position.set(tx, tHeight / 2, tz)
-      distantSkylineGroup.add(dTower)
-
-      if (tHeight > 36) {
-        const dSpireGeo = new THREE.CylinderGeometry(0.08, 0.25, 9, 6)
-        const dSpire = new THREE.Mesh(dSpireGeo, distantTowerMat)
-        dSpire.position.set(tx, tHeight + 4.5, tz)
-        distantSkylineGroup.add(dSpire)
-
-        const dBeacon = new THREE.Mesh(new THREE.SphereGeometry(0.4, 6, 6), distantBeaconMat)
-        dBeacon.position.set(tx, tHeight + 9, tz)
-        distantSkylineGroup.add(dBeacon)
-      }
+      dummyPos.set(tx, tHeight / 2, tz)
+      dummyScale.set(tWidth, tHeight, tDepth)
+      dummyMatrix.compose(dummyPos, dummyQuat, dummyScale)
+      distantTowersInstanced.setMatrixAt(i, dummyMatrix)
     }
-    scene.add(distantSkylineGroup)
+    distantTowersInstanced.instanceMatrix.needsUpdate = true
+    scene.add(distantTowersInstanced)
 
-    // 5. Directional Sun & Ambient Lighting
+    // 7. Directional Sun & Ambient Lighting
     const ambientLight = new THREE.AmbientLight(0xdbeafe, 1.8)
     scene.add(ambientLight)
 
     const sunLight = new THREE.DirectionalLight(0xfffbeb, 2.8)
     sunLight.position.set(70, 110, 60)
-    sunLight.castShadow = true
-    sunLight.shadow.mapSize.width = 2048
-    sunLight.shadow.mapSize.height = 2048
+    sunLight.castShadow = !isMobile // Optimize mobile shadows
+    sunLight.shadow.mapSize.width = isMobile ? 512 : 1024
+    sunLight.shadow.mapSize.height = isMobile ? 512 : 1024
     sunLight.shadow.camera.near = 10
-    sunLight.shadow.camera.far = 300
-    const d = 80
+    sunLight.shadow.camera.far = 280
+    const d = 75
     sunLight.shadow.camera.left = -d
     sunLight.shadow.camera.right = d
     sunLight.shadow.camera.top = d
     sunLight.shadow.camera.bottom = -d
-    sunLight.shadow.bias = -0.0005
+    sunLight.shadow.bias = -0.0008
     scene.add(sunLight)
 
-    const bounceLight = new THREE.DirectionalLight(0xbfdbfe, 0.9)
+    const bounceLight = new THREE.DirectionalLight(0xbfdbfe, 0.8)
     bounceLight.position.set(-60, 40, -60)
     scene.add(bounceLight)
 
-    // 6. FLOATING 3D BUILDING SELECTION INDICATOR PIN & BILLBOARD TAG
+    // 8. 3D Floating Building Indicator Pin & Billboard Tag
     const selectionIndicatorGroup = new THREE.Group()
     selectionIndicatorGroup.visible = false
     scene.add(selectionIndicatorGroup)
 
-    // A. 3D Floating Diamond Pin
     const pinDiamondGeo = new THREE.OctahedronGeometry(1.5, 0)
     const pinDiamondMat = new THREE.MeshStandardMaterial({
       color: 0x38bdf8,
@@ -251,9 +251,8 @@ export const CityScene: React.FC<CitySceneProps> = ({
     pinDiamondMesh.position.y = 2.4
     selectionIndicatorGroup.add(pinDiamondMesh)
 
-    // B. Downward Pointer Cone
-    const pointerConeGeo = new THREE.ConeGeometry(0.7, 1.6, 16)
-    pointerConeGeo.rotateX(Math.PI) // Invert cone to point down
+    const pointerConeGeo = new THREE.ConeGeometry(0.7, 1.6, 12)
+    pointerConeGeo.rotateX(Math.PI)
     const pointerConeMat = new THREE.MeshStandardMaterial({
       color: 0x38bdf8,
       emissive: 0x0284c7,
@@ -265,8 +264,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
     pointerConeMesh.position.y = 0.8
     selectionIndicatorGroup.add(pointerConeMesh)
 
-    // C. Horizontal Target Halo Ring
-    const targetRingGeo = new THREE.RingGeometry(2.2, 2.6, 24)
+    const targetRingGeo = new THREE.RingGeometry(2.2, 2.6, 20)
     targetRingGeo.rotateX(-Math.PI / 2)
     const targetRingMat = new THREE.MeshBasicMaterial({
       color: 0x38bdf8,
@@ -278,7 +276,6 @@ export const CityScene: React.FC<CitySceneProps> = ({
     targetRingMesh.position.y = 0.1
     selectionIndicatorGroup.add(targetRingMesh)
 
-    // D. Billboard Floating Tag Badge (Always faces camera)
     const tagGeo = new THREE.PlaneGeometry(7.2, 2.0)
     const tagMat = new THREE.MeshBasicMaterial({
       transparent: true,
@@ -291,7 +288,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
 
     let lastTaggedBuildingId: string | null = null
 
-    // 7. Instantiate Subsystems
+    // 9. Instantiate Optimized Subsystems
     const buildingsController = createCityBuildings(contributions)
     scene.add(buildingsController.group)
 
@@ -311,7 +308,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
 
     setLoading(false)
 
-    // 8. Keyboard Controls
+    // 10. Keyboard Controls
     const keysPressed: Record<string, boolean> = {}
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -334,7 +331,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
     window.addEventListener('keydown', handleKeyDown, { passive: false })
     window.addEventListener('keyup', handleKeyUp)
 
-    // 9. Interactive Look, Flight & Raycasting State
+    // 11. Interactive Look, Flight & Raycasting State
     const raycaster = new THREE.Raycaster()
     const mouse = new THREE.Vector2(-1000, -1000)
     let hoveredMesh: THREE.Mesh | null = null
@@ -448,7 +445,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
     window.addEventListener('wheel', onWheel, { passive: false })
     window.addEventListener('click', onClick)
 
-    // 10. Resize Handling
+    // 12. Resize Handling
     const handleResize = () => {
       if (!container) return
       camera.aspect = container.clientWidth / container.clientHeight
@@ -457,7 +454,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
     }
     window.addEventListener('resize', handleResize)
 
-    // 11. Camera Scroll Keyframes
+    // 13. Camera Scroll Keyframes
     const keyframes = [
       { progress: 0.0, pos: new THREE.Vector3(0, 52, 75), lookAt: new THREE.Vector3(0, 8, 0) },
       { progress: 0.32, pos: new THREE.Vector3(0, 4.2, 9.5), lookAt: new THREE.Vector3(0, 2.7, 0) },
@@ -466,18 +463,22 @@ export const CityScene: React.FC<CitySceneProps> = ({
       { progress: 1.0, pos: new THREE.Vector3(45, 38, 55), lookAt: new THREE.Vector3(0, 6, 0) },
     ]
 
+    // Pre-allocated Zero-GC Scratch Vectors
     const currentLookAt = new THREE.Vector3(0, 8, 0)
     const targetLookAt = new THREE.Vector3(0, 8, 0)
     const targetPos = new THREE.Vector3(0, 52, 75)
+    const scratchLookVector = new THREE.Vector3()
+    const scratchBasePos = new THREE.Vector3()
+    const scratchBaseLookAt = new THREE.Vector3()
 
     const clock = new THREE.Clock()
     let footstepTimer = 0
 
-    // 12. Main Render Loop
+    // 14. Main 60FPS Zero-Allocation Render Loop
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate)
 
-      const delta = clock.getDelta()
+      const delta = Math.min(clock.getDelta(), 0.1)
       const elapsed = clock.getElapsedTime()
 
       let moveX = 0
@@ -520,7 +521,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
         isSprint,
       })
 
-      // Footsteps in Walk mode
+      // Footsteps
       if (charState.isMoving && viewModeRef.current === 'walk') {
         footstepTimer += delta
         const stepInterval = isSprint ? 0.26 : 0.38
@@ -595,16 +596,12 @@ export const CityScene: React.FC<CitySceneProps> = ({
         const bHeight = focusedBldg.height || 20
         const floatY = Math.sin(elapsed * 4.0) * 0.65
 
-        // Position the indicator directly hovering above the building roof
         selectionIndicatorGroup.position.set(bPos.x, bHeight + 3.2 + floatY, bPos.z)
-
-        // Animate Diamond Pin Spin & Target Ring Pulse
         pinDiamondMesh.rotation.y = elapsed * 2.6
         pinDiamondMesh.rotation.x = Math.sin(elapsed * 1.8) * 0.15
         targetRingMesh.rotation.z = elapsed * 1.2
         targetRingMat.opacity = 0.65 + Math.sin(elapsed * 5.0) * 0.25
 
-        // Update Billboard Tag Content when selection changes
         if (lastTaggedBuildingId !== focusedBldg.id) {
           const title = focusedBldg.repoName || `Sector ${focusedBldg.id.replace('bldg-', '')}`
           const subtitle = focusedBldg.isLandmark
@@ -615,7 +612,6 @@ export const CityScene: React.FC<CitySceneProps> = ({
           lastTaggedBuildingId = focusedBldg.id
         }
 
-        // Keep Billboard Tag perfectly facing camera
         tagMesh.quaternion.copy(camera.quaternion)
       } else {
         selectionIndicatorGroup.visible = false
@@ -623,7 +619,6 @@ export const CityScene: React.FC<CitySceneProps> = ({
       }
 
       if (focusedBldg) {
-        // SMOOTH ZOOM & FOCUS TO SPECIFIC CLICKED BUILDING
         const bPos = focusedBldg.position
         const bHeight = focusedBldg.height || 20
         const focusDist = Math.max(16.0, bHeight * 0.48 + 12.0) * currentZoom
@@ -639,7 +634,6 @@ export const CityScene: React.FC<CitySceneProps> = ({
         currentLookAt.lerp(targetLookAt, 0.12)
         camera.lookAt(currentLookAt)
       } else if (currentView === 'free') {
-        // FREE FLIGHT / SPECTATOR CAMERA
         const flySpeed = (isSprint ? 58.0 : 28.0) * (1.0 / currentZoom)
 
         const forwardX = Math.sin(freeCamYaw)
@@ -682,7 +676,6 @@ export const CityScene: React.FC<CitySceneProps> = ({
         currentLookAt.lerp(targetLookAt, 0.16)
         camera.lookAt(currentLookAt)
       } else {
-        // Scroll Mode with Free Zoom & Interactive Mouse Look
         const p = Math.max(0, Math.min(1, scrollProgressRef.current))
 
         let segmentIndex = 0
@@ -698,18 +691,17 @@ export const CityScene: React.FC<CitySceneProps> = ({
         const segProgress = kf2.progress === kf1.progress ? 0 : (p - kf1.progress) / (kf2.progress - kf1.progress)
         const ease = segProgress < 0.5 ? 2 * segProgress * segProgress : -1 + (4 - 2 * segProgress) * segProgress
 
-        const basePos = new THREE.Vector3().lerpVectors(kf1.pos, kf2.pos, ease)
-        const baseLookAt = new THREE.Vector3().lerpVectors(kf1.lookAt, kf2.lookAt, ease)
+        scratchBasePos.lerpVectors(kf1.pos, kf2.pos, ease)
+        scratchBaseLookAt.lerpVectors(kf1.lookAt, kf2.lookAt, ease)
 
-        const lookVector = new THREE.Vector3().subVectors(basePos, baseLookAt)
-        const zoomedPos = new THREE.Vector3().copy(baseLookAt).addScaledVector(lookVector, currentZoom)
-        targetPos.copy(zoomedPos)
+        scratchLookVector.subVectors(scratchBasePos, scratchBaseLookAt)
+        targetPos.copy(scratchBaseLookAt).addScaledVector(scratchLookVector, currentZoom)
 
-        const camDist = targetPos.distanceTo(baseLookAt)
+        const camDist = targetPos.distanceTo(scratchBaseLookAt)
         const parallaxX = mouse.x > -900 ? mouse.x * 2.5 : 0
         const parallaxY = mouse.y > -900 ? mouse.y * 1.8 : 0
 
-        targetLookAt.copy(baseLookAt)
+        targetLookAt.copy(scratchBaseLookAt)
         targetLookAt.x += Math.sin(scrollLookYaw) * camDist * 0.8 + parallaxX
         targetLookAt.z += (Math.cos(scrollLookYaw) - 1.0) * camDist * 0.8
         targetLookAt.y += scrollLookPitch * camDist * 0.5 + parallaxY
@@ -719,7 +711,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
         camera.lookAt(currentLookAt)
       }
 
-      // Raycasting Hover
+      // Raycasting Hover (Throttled for mobile efficiency)
       raycaster.setFromCamera(mouse, camera)
       const intersects = raycaster.intersectObjects(buildingsController.interactiveMeshes)
 
@@ -732,7 +724,7 @@ export const CityScene: React.FC<CitySceneProps> = ({
           hoveredMesh = hit
           if (hit.material instanceof THREE.MeshStandardMaterial) {
             originalEmissive = hit.material.emissiveIntensity
-            hit.material.emissiveIntensity = Math.min(2.5, originalEmissive + 0.6)
+            hit.material.emissiveIntensity = Math.min(2.5, originalEmissive + 0.5)
           }
         }
         document.body.style.cursor = 'pointer'

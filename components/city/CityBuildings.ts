@@ -111,9 +111,9 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
   const interactiveMeshes: THREE.Mesh[] = []
   const buildingsData = new Map<string, BuildingData>()
   const beaconLights: { mesh: THREE.Mesh; phase: number }[] = []
-  const buildingMaterialsList: { mat: THREE.MeshStandardMaterial; commits: number; isLandmark?: boolean }[] = []
   const landmarkSigns: THREE.Mesh[] = []
 
+  // 1. Shared Window Textures (5 Tiers)
   const textureTiers: THREE.CanvasTexture[] = []
   if (typeof window !== 'undefined') {
     textureTiers.push(createCommitWindowTexture(1))
@@ -123,14 +123,54 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
     textureTiers.push(createCommitWindowTexture(15))
   }
 
-  function getWindowTextureForCommits(commits: number): THREE.CanvasTexture | null {
-    if (textureTiers.length === 0) return null
-    if (commits >= 12) return textureTiers[4]
-    if (commits >= 9) return textureTiers[3]
-    if (commits >= 6) return textureTiers[2]
-    if (commits >= 3) return textureTiers[1]
-    return textureTiers[0]
-  }
+  // 2. Shared High-Performance Materials (5 Tiers instead of 200 individual instances)
+  const tierMaterials = [
+    new THREE.MeshStandardMaterial({
+      color: 0x475569,
+      roughness: 0.18,
+      metalness: 0.82,
+      map: textureTiers[0] || undefined,
+      emissiveMap: textureTiers[0] || undefined,
+      emissive: new THREE.Color(0xfef08a),
+      emissiveIntensity: 0.15,
+    }),
+    new THREE.MeshStandardMaterial({
+      color: 0x334155,
+      roughness: 0.18,
+      metalness: 0.82,
+      map: textureTiers[1] || undefined,
+      emissiveMap: textureTiers[1] || undefined,
+      emissive: new THREE.Color(0xfef08a),
+      emissiveIntensity: 0.22,
+    }),
+    new THREE.MeshStandardMaterial({
+      color: 0x0f766e,
+      roughness: 0.18,
+      metalness: 0.82,
+      map: textureTiers[2] || undefined,
+      emissiveMap: textureTiers[2] || undefined,
+      emissive: new THREE.Color(0xfef08a),
+      emissiveIntensity: 0.30,
+    }),
+    new THREE.MeshStandardMaterial({
+      color: 0x1e3a8a,
+      roughness: 0.18,
+      metalness: 0.82,
+      map: textureTiers[3] || undefined,
+      emissiveMap: textureTiers[3] || undefined,
+      emissive: new THREE.Color(0xfef08a),
+      emissiveIntensity: 0.38,
+    }),
+    new THREE.MeshStandardMaterial({
+      color: 0x1e3a8a,
+      roughness: 0.18,
+      metalness: 0.82,
+      map: textureTiers[4] || undefined,
+      emissiveMap: textureTiers[4] || undefined,
+      emissive: new THREE.Color(0xfef08a),
+      emissiveIntensity: 0.45,
+    }),
+  ]
 
   const landmarkRepos = [
     {
@@ -212,6 +252,7 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
     },
   ]
 
+  // Shared Static Materials
   const limestoneMaterial = new THREE.MeshStandardMaterial({
     color: 0x94a3b8,
     roughness: 0.8,
@@ -236,10 +277,17 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
   })
 
   const beaconMat = new THREE.MeshBasicMaterial({ color: 0xef4444 })
+  const spireMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.92, roughness: 0.2 })
+
+  // Shared Rooftop Geometries (Eliminates redundant allocations)
+  const legGeo = new THREE.CylinderGeometry(0.06, 0.06, 1.6, 5)
+  const barrelGeo = new THREE.CylinderGeometry(0.9, 0.9, 1.4, 12)
+  const tankRoofGeo = new THREE.ConeGeometry(1.05, 0.7, 12)
+  const beaconGeo = new THREE.SphereGeometry(0.22, 6, 6)
+  const spireGeo = new THREE.CylinderGeometry(0.06, 0.25, 6.0, 6)
 
   function createNYCWaterTank(): THREE.Group {
     const tank = new THREE.Group()
-    const legGeo = new THREE.CylinderGeometry(0.06, 0.06, 1.6, 6)
     const offsets = [
       [-0.6, 0.8, -0.6],
       [0.6, 0.8, -0.6],
@@ -252,12 +300,12 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
       tank.add(leg)
     })
 
-    const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 1.4, 16), cedarWaterTankMat)
+    const barrel = new THREE.Mesh(barrelGeo, cedarWaterTankMat)
     barrel.position.y = 2.3
     barrel.castShadow = true
     tank.add(barrel)
 
-    const roof = new THREE.Mesh(new THREE.ConeGeometry(1.05, 0.7, 16), tankSteelMat)
+    const roof = new THREE.Mesh(tankRoofGeo, tankSteelMat)
     roof.position.y = 3.35
     roof.castShadow = true
     tank.add(roof)
@@ -297,6 +345,9 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
 
   let dayIndex = 0
 
+  const sharedTrimGeo = new THREE.BoxGeometry(spacing * 0.7 * 1.02, 0.35, spacing * 0.7 * 1.02)
+  const sharedHvacGeo = new THREE.BoxGeometry(spacing * 0.7 * 0.35, 0.7, spacing * 0.7 * 0.35)
+
   for (let gx = 0; gx < gridSize; gx++) {
     for (let gz = 0; gz < gridSize; gz++) {
       const x = gx * spacing - halfGrid
@@ -329,29 +380,17 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
       const buildingGroup = new THREE.Group()
       buildingGroup.position.set(x, 0, z)
 
-      const windowTex = getWindowTextureForCommits(commits)
+      const tierIdx = commits >= 12 ? 4 : commits >= 9 ? 3 : commits >= 6 ? 2 : commits >= 3 ? 1 : 0
+      const mat = tierMaterials[tierIdx]
+
       const buildingGeo = new THREE.BoxGeometry(width, height, depth)
-
-      const mat = new THREE.MeshStandardMaterial({
-        color: commits >= 10 ? 0x1e3a8a : commits >= 6 ? 0x0f766e : commits >= 3 ? 0x334155 : 0x475569,
-        roughness: 0.15,
-        metalness: 0.85,
-        map: windowTex || undefined,
-        emissiveMap: windowTex || undefined,
-        emissive: new THREE.Color(0xfef08a),
-        emissiveIntensity: 0.15 + (commits / 15) * 0.35,
-      })
-
-      buildingMaterialsList.push({ mat, commits })
-
       const buildingMesh = new THREE.Mesh(buildingGeo, mat)
       buildingMesh.position.y = height / 2
       buildingMesh.castShadow = true
       buildingMesh.receiveShadow = true
       buildingGroup.add(buildingMesh)
 
-      const trimGeo = new THREE.BoxGeometry(width * 1.02, 0.35, depth * 1.02)
-      const trimMesh = new THREE.Mesh(trimGeo, limestoneMaterial)
+      const trimMesh = new THREE.Mesh(sharedTrimGeo, limestoneMaterial)
       trimMesh.position.y = height
       buildingGroup.add(trimMesh)
 
@@ -385,15 +424,12 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
         buildingGroup.add(tierMesh)
 
         if (height > 25) {
-          const spireHeight = 5.0 + Math.random() * 3.5
-          const spireGeo = new THREE.CylinderGeometry(0.06, 0.25, spireHeight, 8)
-          const spireMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.92, roughness: 0.2 })
           const spire = new THREE.Mesh(spireGeo, spireMat)
-          spire.position.y = height + tierHeight + spireHeight / 2
+          spire.position.y = height + tierHeight + 3.0
           buildingGroup.add(spire)
 
-          const beacon = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), beaconMat)
-          beacon.position.y = height + tierHeight + spireHeight
+          const beacon = new THREE.Mesh(beaconGeo, beaconMat)
+          beacon.position.y = height + tierHeight + 6.0
           buildingGroup.add(beacon)
           beaconLights.push({ mesh: beacon, phase: Math.random() * Math.PI * 2 })
         }
@@ -405,7 +441,7 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
           buildingGroup.add(waterTank)
         }
 
-        const hvac = new THREE.Mesh(new THREE.BoxGeometry(width * 0.35, 0.7, depth * 0.35), roofMaterial)
+        const hvac = new THREE.Mesh(sharedHvacGeo, roofMaterial)
         hvac.position.set(-width * 0.18, height + 0.35, -depth * 0.18)
         buildingGroup.add(hvac)
       }
@@ -415,6 +451,8 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
   }
 
   // Landmark Corporate Headquarters Towers
+  const landmarkMaterials: THREE.MeshStandardMaterial[] = []
+
   landmarkRepos.forEach((repo, idx) => {
     const landmarkGroup = new THREE.Group()
     landmarkGroup.position.set(repo.x, 0, repo.z)
@@ -423,7 +461,7 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
     const lHeight = repo.height
     const lDepth = 7.2
 
-    const landmarkTex = getWindowTextureForCommits(16)
+    const landmarkTex = textureTiers[4] || null
     const lMat = new THREE.MeshStandardMaterial({
       color: repo.tint,
       roughness: 0.12,
@@ -433,8 +471,7 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
       emissive: new THREE.Color(0xfef08a),
       emissiveIntensity: 0.45,
     })
-
-    buildingMaterialsList.push({ mat: lMat, commits: 16, isLandmark: true })
+    landmarkMaterials.push(lMat)
 
     const landmarkMesh = new THREE.Mesh(new THREE.BoxGeometry(lWidth, lHeight, lDepth), lMat)
     landmarkMesh.position.y = lHeight / 2
@@ -523,7 +560,7 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
     crown.position.y = lHeight + 4.5
     landmarkGroup.add(crown)
 
-    const beacon = new THREE.Mesh(new THREE.SphereGeometry(0.3, 8, 8), beaconMat)
+    const beacon = new THREE.Mesh(beaconGeo, beaconMat)
     beacon.position.y = lHeight + 9.2
     landmarkGroup.add(beacon)
     beaconLights.push({ mesh: beacon, phase: idx * 1.5 })
@@ -540,25 +577,40 @@ export function createCityBuildings(contributions: ContributionDay[] = []): City
     })
   }
 
+  // Fast theme updater (updates 5 tier materials and landmark materials in O(1))
   const setNightMode = (isNight: boolean, mode: 'day' | 'sunset' | 'night' | 'morning') => {
-    buildingMaterialsList.forEach(({ mat, commits, isLandmark }) => {
+    tierMaterials.forEach((mat, idx) => {
+      const commits = idx * 3.5
       if (mode === 'night') {
-        const baseGlow = isLandmark ? 2.2 : 0.4
         const commitGlow = Math.min(2.0, (commits / 10) * 1.6)
-        mat.emissiveIntensity = baseGlow + commitGlow
+        mat.emissiveIntensity = 0.4 + commitGlow
         mat.emissive.setHex(commits >= 8 ? 0xfef08a : 0xfde047)
       } else if (mode === 'sunset') {
-        const baseGlow = isLandmark ? 1.4 : 0.3
         const commitGlow = Math.min(1.2, (commits / 10) * 0.9)
-        mat.emissiveIntensity = baseGlow + commitGlow
+        mat.emissiveIntensity = 0.3 + commitGlow
         mat.emissive.setHex(0xfba257)
       } else if (mode === 'morning') {
-        const baseGlow = isLandmark ? 0.8 : 0.2
         const commitGlow = Math.min(0.8, (commits / 10) * 0.5)
-        mat.emissiveIntensity = baseGlow + commitGlow
+        mat.emissiveIntensity = 0.2 + commitGlow
         mat.emissive.setHex(0xfef9c3)
       } else {
         mat.emissiveIntensity = 0.15 + (commits / 15) * 0.3
+        mat.emissive.setHex(0xfef08a)
+      }
+    })
+
+    landmarkMaterials.forEach((mat) => {
+      if (mode === 'night') {
+        mat.emissiveIntensity = 2.2
+        mat.emissive.setHex(0xfef08a)
+      } else if (mode === 'sunset') {
+        mat.emissiveIntensity = 1.4
+        mat.emissive.setHex(0xfba257)
+      } else if (mode === 'morning') {
+        mat.emissiveIntensity = 0.8
+        mat.emissive.setHex(0xfef9c3)
+      } else {
+        mat.emissiveIntensity = 0.45
         mat.emissive.setHex(0xfef08a)
       }
     })
