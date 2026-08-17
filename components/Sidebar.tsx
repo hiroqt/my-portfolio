@@ -19,6 +19,7 @@ const navItems = [
   { id: '03', label: 'projects', href: '#projects' },
   { id: '04', label: 'skills', href: '#skills' },
   { id: '05', label: 'certifications', href: '#certifications' },
+  { id: '3D', label: '3D Commit Metropolis', href: '/city' },
   { id: '✦', label: 'yhelAI Assistant', href: '/assistant' },
 ]
 

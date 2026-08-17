@@ -661,15 +661,23 @@ export default function Home() {
             label="github"
             accent="github"
             action={
-              <a
-                href="https://github.com/hiroqt"
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors"
-              >
-                @hiroqt
-                <FaGithub className="text-xs group-hover:scale-110 transition-transform" />
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href="/city"
+                  className="group inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 text-[11px] font-mono transition-all hover:scale-105"
+                >
+                  <span>✦ 3D Metropolis</span>
+                </a>
+                <a
+                  href="https://github.com/hiroqt"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  @hiroqt
+                  <FaGithub className="text-xs group-hover:scale-110 transition-transform" />
+                </a>
+              </div>
             }
           />
           <GithubActivity />
