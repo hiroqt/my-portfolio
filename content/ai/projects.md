@@ -96,7 +96,7 @@
 - **Title**: VCM HRIS
 - **Tagline**: QR-code based Human Resource Information System for academic institutions.
 - **Category**: Capstone Project, Enterprise HR
-- **Tags**: Laravel, PHP, MySQL
+- **Tags**: Laravel, Livewire, PHP, MySQL
 - **Overview**:
   A comprehensive Human Resource Information System designed for schools to streamline faculty timekeeping, leave processing, and payroll calculation.
 - **Core Features**:
@@ -104,7 +104,7 @@
   - **Automated Payroll Engine**: Instant computation of gross pay, tax deductions, government contributions, and net salary.
   - **Teacher Recruitment Portal**: End-to-end applicant tracking from submission to interview and hire.
   - **Leave Management**: Online leave filing with automatic salary adjustments upon approval.
-- **Architecture**: Laravel MVC with MySQL relational database and QR generation libraries.
+- **Architecture**: Laravel & Livewire reactive full-stack architecture with MySQL relational database and QR generation libraries.
 
 ---
 

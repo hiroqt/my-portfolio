@@ -106,8 +106,8 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
 - Architected an enterprise HRIS for academic institutions with QR-code vicinity attendance verification to prevent proxy clock-ins.
 - Engineered an automated payroll calculation engine covering Philippine statutory deductions (SSS, PhilHealth, Pag-IBIG), tax withholdings, and digital payslips.
 - Implemented applicant tracking for faculty recruitment, leave request management, and campus announcement boards using Laravel and MySQL.`,
-    keywords: ['vcm', 'hris', 'capstone', 'qr', 'payroll', 'attendance', 'laravel', 'mysql', 'experience', 'leadership'],
-    metadata: { section: 'vcm-hris', period: '2025 - 2026', techStack: ['Laravel', 'PHP', 'MySQL', 'QR Code'] }
+    keywords: ['vcm', 'hris', 'capstone', 'qr', 'payroll', 'attendance', 'laravel', 'livewire', 'mysql', 'experience', 'leadership'],
+    metadata: { section: 'vcm-hris', period: '2025 - 2026', techStack: ['Laravel', 'Livewire', 'PHP', 'MySQL', 'QR Code'] }
   },
   {
     id: 'exp-freelance',

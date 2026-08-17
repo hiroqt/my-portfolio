@@ -178,7 +178,7 @@ export const projectsData: ProjectData[] = [
     title: 'VCM HRIS',
     type: 'Project',
     summary: 'QR-code based Human Resource Information System: employee management, leave tracking, job applications, real-time notifications, and payroll.',
-    tags: ['Laravel', 'PHP', 'MySQL'],
+    tags: ['Laravel', 'Livewire', 'PHP', 'MySQL'],
     link: '#',
     image: '/images/vcm.png',
     features: [
@@ -196,7 +196,7 @@ export const projectsData: ProjectData[] = [
       },
       {
         title: 'System Design',
-        content: 'A comprehensive monolithic architecture was chosen using Laravel and MySQL for rapid development and robust relational data management. The introduction of QR-code scanning reduced time-in/out friction to seconds.'
+        content: 'A comprehensive architecture was built using Laravel, Livewire, and MySQL for reactive full-stack development and robust relational data management. The introduction of QR-code scanning reduced time-in/out friction to seconds.'
       },
       {
         title: 'Impact',

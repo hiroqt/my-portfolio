@@ -1,4 +1,4 @@
-# Achievements, Certifications & Honors
+# Achievements & Certifications
 
 ## 1. Hackathons & Competitions
 - **eGov Hackathon 2026 (Winner - Top 30)**: Won Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government public services, simplify citizen compliance, and automate multi-agency administrative workflows.

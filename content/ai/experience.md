@@ -19,7 +19,7 @@
   - Engineered modules for QR attendance verification with vicinity validation (geofencing) to prevent proxy clock-ins.
   - Implemented automated payroll computation with government contribution deductions (SSS, PhilHealth, Pag-IBIG) and payslip generation.
   - Built teacher/employee job application pipelines, leave/absence tracking with salary adjustments, and internal/public announcement systems.
-  - Designed the relational schema in MySQL and built the backend application in Laravel.
+  - Designed the relational schema in MySQL and built the reactive full-stack application using Laravel and Livewire.
 
 ## 3. Freelance Software Developer & Independent Consultant
 - **Role**: Independent Software Consultant & Full-Stack Engineer

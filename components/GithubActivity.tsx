@@ -179,13 +179,13 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="border border-border bg-background p-6 sm:p-8 hover:border-foreground transition-all duration-300 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] flex flex-col justify-between"
+          className="rounded-3xl border border-border/70 bg-muted/40 p-6 sm:p-8 hover:border-accent/40 backdrop-blur-xs transition-all duration-300 shadow-sm flex flex-col justify-between"
         >
-          <div className="flex items-center gap-3 mb-4 sm:mb-6">
-            <MdCalendarToday className="text-2xl text-muted-foreground" />
-            <span className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">Total Commits (1yr)</span>
+          <div className="flex items-center gap-2.5 mb-4 sm:mb-6">
+            <MdCalendarToday className="text-xl text-accent" />
+            <span className="text-muted-foreground text-xs font-mono font-semibold tracking-[0.2em] uppercase">Total Commits (1yr)</span>
           </div>
-          <div className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter font-display">
+          <div className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-foreground">
             <AnimatedCounter value={totalCommits} />
           </div>
         </motion.div>
@@ -195,13 +195,13 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="border border-border bg-background p-6 sm:p-8 hover:border-foreground transition-all duration-300 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] flex flex-col justify-between"
+          className="rounded-3xl border border-border/70 bg-muted/40 p-6 sm:p-8 hover:border-accent/40 backdrop-blur-xs transition-all duration-300 shadow-sm flex flex-col justify-between"
         >
-          <div className="flex items-center gap-3 mb-4 sm:mb-6">
-            <MdCode className="text-2xl text-muted-foreground" />
-            <span className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">Repositories</span>
+          <div className="flex items-center gap-2.5 mb-4 sm:mb-6">
+            <MdCode className="text-xl text-accent" />
+            <span className="text-muted-foreground text-xs font-mono font-semibold tracking-[0.2em] uppercase">Repositories</span>
           </div>
-          <div className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter font-display">
+          <div className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-foreground">
             <AnimatedCounter value={repos.length} />
           </div>
         </motion.div>
@@ -211,13 +211,13 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="border border-border bg-background p-6 sm:p-8 hover:border-foreground transition-all duration-300 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] flex flex-col justify-between"
+          className="rounded-3xl border border-border/70 bg-muted/40 p-6 sm:p-8 hover:border-accent/40 backdrop-blur-xs transition-all duration-300 shadow-sm flex flex-col justify-between"
         >
-          <div className="flex items-center gap-3 mb-4 sm:mb-6">
-            <FaStar className="text-2xl text-muted-foreground" />
-            <span className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">Total Stars</span>
+          <div className="flex items-center gap-2.5 mb-4 sm:mb-6">
+            <FaStar className="text-xl text-accent" />
+            <span className="text-muted-foreground text-xs font-mono font-semibold tracking-[0.2em] uppercase">Total Stars</span>
           </div>
-          <div className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter font-display">
+          <div className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-foreground">
             <AnimatedCounter value={totalStars} />
           </div>
         </motion.div>
@@ -231,12 +231,12 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6 flex flex-wrap items-center gap-2 sm:gap-3">
-              <MdCalendarToday className="text-lg sm:text-xl" />
+            <h3 className="text-xl sm:text-2xl font-serif font-semibold tracking-tight mb-4 sm:mb-6 flex flex-wrap items-center gap-2 sm:gap-3 text-foreground">
+              <MdCalendarToday className="text-lg sm:text-xl text-accent" />
               <span>Contribution Activity</span>
-              <span className="text-[10px] sm:text-xs font-mono bg-muted px-2 sm:px-3 py-1 sm:py-1.5 text-muted-foreground rounded">{totalCommits} contributions</span>
+              <span className="text-[10px] sm:text-xs font-mono bg-background border border-border px-2.5 sm:px-3 py-1 sm:py-1.5 text-muted-foreground rounded-full">{totalCommits} contributions</span>
             </h3>
-            <div className="border border-border bg-background p-3 sm:p-6 md:p-8 hover:border-foreground transition-all duration-300 w-full overflow-x-auto">
+            <div className="rounded-3xl border border-border/70 bg-muted/40 p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 w-full overflow-x-auto">
               {/* Activity Grid Container with min width for mobile scroll */}
               <div className="min-w-[280px] sm:min-w-0">
                 {/* Activity Grid with Day Labels */}
@@ -244,7 +244,7 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
                   {/* Day Labels */}
                   <div className="flex flex-col gap-[2px] sm:gap-[3px] pr-1 sm:pr-2">
                     {[0, 1, 2, 3, 4, 5, 6].map((index) => (
-                      <div key={index} className="h-[8px] sm:h-[10px] md:h-3 flex items-center text-[8px] sm:text-[9px] md:text-[11px] text-muted-foreground leading-none">
+                      <div key={index} className="h-[8px] sm:h-[10px] md:h-3 flex items-center text-[8px] sm:text-[9px] md:text-[11px] font-mono text-muted-foreground leading-none">
                         {getDayLabel(index)}
                       </div>
                     ))}
@@ -277,7 +277,7 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
                           <div className="hidden sm:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded text-[11px] leading-tight
                             opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 whitespace-nowrap z-50 shadow-lg">
                             <div className="font-semibold">{contributionText}</div>
-                            <div className="text-gray-300 dark:text-gray-600 text-[10px]">{formattedDate}</div>
+                            <div className="text-gray-300 dark:text-gray-600 text-[10px] font-mono">{formattedDate}</div>
                           </div>
                         </div>
                       )
@@ -286,7 +286,7 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
                 </div>
 
                 {/* Legend */}
-                <div className="flex items-center justify-end gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] md:text-[11px] text-muted-foreground mt-2 sm:mt-3 md:mt-4">
+                <div className="flex items-center justify-end gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] md:text-[11px] font-mono text-muted-foreground mt-2 sm:mt-3 md:mt-4">
                   <span>Less</span>
                   <div className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22] border border-[#d0d7de] dark:border-[#30363d]" />
                   <div className="w-[8px] h-[8px] sm:w-[10px] sm:h-[10px] md:w-3 md:h-3 rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429] border border-[#9be9a8] dark:border-[#0e4429]" />
@@ -306,23 +306,23 @@ export function GithubActivity({ username = 'hiroqt' }: { username?: string }) {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-4 sm:mb-6">Top Languages</h3>
+            <h3 className="text-xl sm:text-2xl font-serif font-semibold tracking-tight mb-4 sm:mb-6 text-foreground">Top Languages</h3>
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {getMostUsedLanguages().map(([language, count], index) => {
                 const percentage = (count / repos.length) * 100
                 return (
-                  <div key={language} className="border border-border bg-background p-4 flex flex-col justify-center">
+                  <div key={language} className="rounded-2xl border border-border/70 bg-muted/40 p-4 sm:p-5 flex flex-col justify-center hover:border-accent/40 transition-all">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="font-bold">{language}</span>
-                      <span className="text-sm text-muted-foreground">{percentage.toFixed(1)}%</span>
+                      <span className="font-semibold text-sm sm:text-base text-foreground">{language}</span>
+                      <span className="text-xs font-mono text-muted-foreground">{percentage.toFixed(1)}%</span>
                     </div>
-                    <div className="w-full bg-muted h-1 rounded-full overflow-hidden">
+                    <div className="w-full bg-background h-1.5 rounded-full overflow-hidden border border-border/40">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${percentage}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.5 + (index * 0.1) }}
-                        className="h-full bg-foreground"
+                        className="h-full bg-accent"
                       />
                     </div>
                   </div>
