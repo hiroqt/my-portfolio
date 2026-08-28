@@ -4,15 +4,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaTrash, FaPaperPlane, FaStop, FaArrowRight } from 'react-icons/fa';
-import { JARVISAvatar } from '@/components/ai/JARVISAvatar';
-import { AIStatus } from '@/components/ai/AIStatus';
-import { ChatMessage } from '@/components/ai/ChatMessage';
-import { VoiceController, speakText, unlockAudio } from '@/components/ai/VoiceController';
-import ThemeToggle from '@/components/ThemeToggle';
-import { HeroGraphicBackground } from '@/components/HeroGraphicBackground';
-import { ChatWatermark, ChatQuotaBadge, ChatEmptyState } from '@/components/ai/ChatBotGraphics';
+import { JARVISAvatar } from '@/components/modules/ai/JARVISAvatar';
+import { AIStatus } from '@/components/modules/ai/AIStatus';
+import { ChatMessage } from '@/components/modules/ai/ChatMessage';
+import { VoiceController, speakText, unlockAudio } from '@/components/modules/ai/VoiceController';
+import ThemeToggle from '@/components/ui/ThemeToggle';
+import { HeroGraphicBackground } from '@/components/ui/HeroGraphicBackground';
+import { ChatWatermark, ChatQuotaBadge, ChatEmptyState } from '@/components/modules/ai/ChatBotGraphics';
 import { ChatMessageData, AgentAction, AdaptivePersona } from '@/lib/ai/types';
-import { AIStatusState } from '@/components/ai/types';
+import { AIStatusState } from '@/components/modules/ai/types';
 import { useRouter } from 'next/navigation';
 
 export default function AssistantPage() {

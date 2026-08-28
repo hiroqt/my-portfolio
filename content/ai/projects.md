@@ -1,6 +1,54 @@
 # Portfolio Projects Showcase
 
-## 1. e Buddy (Winner - eGov Hackathon 2026 Top 30)
+## 1. FinOps AI Dashboard (Winner - Best Business Impact)
+- **Slug**: `finops-ai-dashboard`
+- **Title**: FinOps AI Dashboard (Winner - Best Business Impact, Amazon Quick Quest Workshop)
+- **Tagline**: An AI-powered financial operations platform combining automated expense analysis, invoice-to-PO reconciliation, and real-time policy compliance into a single intelligent hub.
+- **Category**: Financial Operations, Enterprise AI, Cloud Workflows
+- **Tags**: Amazon Quick, FinOps, QuickSight Spaces, AWS, Google Connectors, AI Agents
+- **Award**: Winner — Best Business Impact at Amazon Quick Quest Workshop (AWS BGC, Taguig)
+- **Featured**: Yes (Flagship Project)
+- **Overview**:
+  Developed during the intensive Amazon Quick Quest Workshop at AWS Philippines in Bonifacio Global City. Solves enterprise financial operations challenges: manual expense review errors, tedious invoice-to-PO matching, compliance expert bottlenecks, and delayed anomaly detection.
+- **Core Features**:
+  - **Expense Analyzer**: Batch AI expense categorization and anomaly detection flagging.
+  - **Invoice Reconciliation**: Automated invoice-to-Purchase-Order (PO) matching and verification.
+  - **Policy Compliance Engine**: Structured real-time AI compliance verdicts (compliant / violation / review) and audit checks.
+  - **Amazon Quick Spaces & Flows**: Live expense policy document synchronization and automated finance workflow orchestration.
+  - **Conversational AI Chat Agents**: Real-time natural language querying of expense logs, budget variances, and audit trails.
+  - **Google Workspace Connectors**: Automated receipt ingestion from Gmail, compliance deadlines synced with Google Calendar, and bidirectional sync with Google Sheets.
+- **Key Metrics & Impact**:
+  - 80% faster expense review cycle time
+  - 95%+ accuracy in financial anomaly detection
+  - 100% automated persistent audit trail with zero manual logging
+  - Winner of "Best Business Impact" at Amazon Quick Quest BGC
+
+---
+
+## 2. Better Trece Martires (BetterGov Initiative)
+- **Slug**: `better-trece`
+- **Title**: Better Trece Martires (BetterGov Initiative)
+- **Tagline**: Open-source civic tech portal for Trece Martires City delivering open budget transparency, citizen service charters, and infrastructure tracking.
+- **Category**: Civic Tech, Open Governance, Open Data
+- **Tags**: React 19, TypeScript, Tailwind CSS, Open Data, Civic Tech, Leaflet OSM
+- **Featured**: Yes (BetterGov Initiative)
+- **Website**: https://bettertrecemartires.org
+- **GitHub**: https://github.com/hiroqt/bettertrece
+- **Overview**:
+  Part of the volunteer-led BetterGov Philippines civic tech initiative, Better Trece Martires transforms complex, fragmented government public records into clear, citizen-first digital tools.
+- **Core Features**:
+  - **Open Budget & Financial Transparency**: DBM GAA (2020–2026) multi-year budget records for local infrastructure, COA Annual Audit Reports (AAR) analysis, and financial health scorecards.
+  - **DPWH Public Works Explorer**: Interactive tracker for local engineering district projects, contractor details, and funding allocations.
+  - **Citizen Service Charters**: Step-by-step documentary guides, fees, and procedures for Mayor's business permits, civil registry, barangay clearances, and social welfare programs in English and Filipino.
+  - **Education & School Directory**: 60+ DepEd public and private schools mapped with Senior High tracks and strands.
+  - **Real-Time Fuel Price Monitor**: Interactive gas station map with weekly Department of Energy (DOE) benchmark pump pricing.
+  - **Public Safety & Hotlines**: Barangay VAWC desks, PNP stations, and emergency contact directory.
+  - **Political Dynasty Dashboard**: Public record analysis of local governance.
+- **Architecture**: React 19, TypeScript, Tailwind CSS v4, @bettergov/kapwa UI system, Vite, and Leaflet OpenStreetMap. 100% open-source under CC0 1.0 Public Domain.
+
+---
+
+## 2. e Buddy (Winner - eGov Hackathon 2026 Top 30)
 - **Slug**: `e-buddy`
 - **Title**: e Buddy (Winner - eGov Hackathon 2026 Top 30)
 - **Tagline**: Unified government services platform using an agentic AI named e Buddy.
@@ -19,7 +67,7 @@
 
 ---
 
-## 2. PaceMentor (AI Running Coach)
+## 3. PaceMentor (AI Running Coach)
 - **Slug**: `pacementor`
 - **Title**: PaceMentor
 - **Tagline**: AI-powered running coach with adaptive training plans and Strava integration.
@@ -37,7 +85,7 @@
 
 ---
 
-## 3. Present Po (Workforce Attendance & Time Tracking)
+## 4. Present Po (Workforce Attendance & Time Tracking)
 - **Slug**: `present-po`
 - **Title**: Present Po
 - **Tagline**: Workforce attendance and time-tracking platform with scheduling and presence monitoring.
@@ -56,7 +104,7 @@
 
 ---
 
-## 4. Building yhel.os for Freelancers
+## 5. Building yhel.os for Freelancers
 - **Slug**: `yhel-os`
 - **Title**: Building yhel.os for Freelancers
 - **Tagline**: All-in-one operating system and client CRM for independent developers.
@@ -74,7 +122,7 @@
 
 ---
 
-## 5. Hospital Queuing System
+## 6. Hospital Queuing System
 - **Slug**: `hospital-queuing-system`
 - **Title**: Hospital Queuing System
 - **Tagline**: Centralized local queuing system with AI integration developed for a hospital.
@@ -91,7 +139,7 @@
 
 ---
 
-## 6. VCM HRIS
+## 7. VCM HRIS
 - **Slug**: `vcm-hris`
 - **Title**: VCM HRIS
 - **Tagline**: QR-code based Human Resource Information System for academic institutions.
@@ -108,7 +156,7 @@
 
 ---
 
-## 7. Tearsize
+## 8. Tearsize
 - **Slug**: `tearsize`
 - **Title**: Tearsize
 - **Tagline**: E-commerce platform for health and wellness products with payment integration.
@@ -123,7 +171,7 @@
 
 ---
 
-## 8. HiveSync VA
+## 9. HiveSync VA
 - **Slug**: `hivesync-va`
 - **Title**: HiveSync VA
 - **Tagline**: Virtual assistant services platform streamlining operations for distributed teams.
@@ -138,7 +186,7 @@
 
 ---
 
-## 9. TMRC (Trece Martirez Running Club)
+## 10. TMRC (Trece Martirez Running Club)
 - **Slug**: `tmrc`
 - **Title**: TMRC
 - **Tagline**: Community website for Trece Martirez Running Club.

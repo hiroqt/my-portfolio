@@ -1,6 +1,7 @@
 # Achievements & Certifications
 
 ## 1. Hackathons & Competitions
+- **Amazon Quick Quest Workshop 2026 (Winner - Best Business Impact)**: Awarded "Best Business Impact" at AWS Philippines (Bonifacio Global City, Taguig) for the "FinOps AI Dashboard" — an intelligent financial operations platform combining automated expense analysis, invoice-to-PO reconciliation, and real-time policy compliance checking via Amazon Quick Spaces & Flows.
 - **eGov Hackathon 2026 (Winner - Top 30)**: Won Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government public services, simplify citizen compliance, and automate multi-agency administrative workflows.
 
 ## 2. IBM Professional AI Certifications (7 Topics Verified)

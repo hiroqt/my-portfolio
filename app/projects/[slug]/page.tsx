@@ -5,8 +5,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { FaArrowLeft, FaExternalLinkAlt } from 'react-icons/fa'
 import { motion } from 'framer-motion'
-import ThemeToggle from '@/components/ThemeToggle'
-import { HeroGraphicBackground } from '@/components/HeroGraphicBackground'
+import ThemeToggle from '@/components/ui/ThemeToggle'
+import { HeroGraphicBackground } from '@/components/ui/HeroGraphicBackground'
 
 export default function ProjectDetails({ params }: { params: { slug: string } }) {
   const project = projectsData.find(p => p.slug === params.slug)
@@ -95,7 +95,7 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
             <img 
               src={project.image} 
               alt={`${project.title} project showcase screenshot`} 
-              className="w-full h-auto object-cover max-h-[60vh]"
+              className="w-full h-auto object-contain max-h-[75vh] mx-auto bg-muted/20"
             />
           </motion.div>
         )}
