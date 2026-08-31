@@ -17,7 +17,7 @@ const navItems = [
   { id: '01', label: 'skills & arsenal', href: '#skills' },
   { id: '02', label: 'certifications', href: '#certifications' },
   { id: '03', label: 'experience', href: '#experience' },
-  { id: '04', label: 'betterGov initiative', href: '#bettergov' },
+  { id: '04', label: 'pixel crew swarm', href: '#pixelcrew' },
   { id: '05', label: 'featured work', href: '#projects' },
   { id: '06', label: 'other systems', href: '#other-projects' },
   { id: '07', label: 'education', href: '#education' },
@@ -96,8 +96,8 @@ export const Sidebar = () => {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed top-0 right-0 h-full w-full sm:w-96 bg-background border-l border-border z-[100] p-8 flex flex-col shadow-2xl"
             >
-              <div className="flex justify-between items-center mb-12">
-                <a href="#main-content" onClick={() => setIsOpen(false)} className="font-apoc font-bold text-foreground text-4xl hover:scale-105 transition-transform tracking-tighter">
+              <div className="flex justify-between items-center mb-10">
+                <a href="#main-content" onClick={() => setIsOpen(false)} className="font-handwriting font-bold text-foreground text-4xl hover:text-accent transition-colors tracking-tight">
                   Nel.
                 </a>
                 <button
@@ -109,35 +109,27 @@ export const Sidebar = () => {
                 </button>
               </div>
 
-              <div className="flex-1 flex flex-col gap-8">
-                <nav className="flex flex-col gap-4" aria-label="Sidebar Sections">
-                  <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-2">Menu</h2>
+              <div className="flex-1 flex flex-col justify-between">
+                <nav className="flex flex-col gap-3" aria-label="Sidebar Sections">
+                  <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-1">Navigation</h2>
                   {navItems.map((item) => (
                     <a
                       key={item.id}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="text-2xl font-medium text-foreground hover:text-muted-foreground transition-colors"
+                      className="group flex items-baseline gap-3 py-1 text-foreground hover:text-accent transition-colors"
                     >
-                      <span className="text-sm font-mono text-muted-foreground mr-4 tabular-nums">{item.id}</span>
-                      <span className="capitalize">{item.label}</span>
+                      <span className="text-xs font-mono text-muted-foreground tabular-nums group-hover:text-accent transition-colors">{item.id}</span>
+                      <span className="font-handwriting font-bold text-2xl sm:text-3xl capitalize tracking-wide group-hover:translate-x-1 transition-transform">
+                        {item.label}
+                      </span>
                     </a>
                   ))}
                 </nav>
 
-                <div className="mt-auto flex flex-col gap-6 pt-8 border-t border-border">
-                  <a
-                    href="/pdf/Arnel_Baylon_Resume.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Download Résumé (PDF, opens in new tab)"
-                    className="inline-flex items-center gap-3 text-sm font-mono uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors group"
-                  >
-                    <FaFilePdf className="group-hover:-translate-y-1 transition-transform text-lg" aria-hidden="true" /> Download Résumé
-                  </a>
-                  
-                  <div className="flex flex-col gap-4">
-                    <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Let&apos;s Connect</h2>
+                <div className="mt-auto flex flex-col gap-6 pt-6 border-t border-border">
+                  <div className="flex flex-col gap-3">
+                    <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest">Connect</h2>
                     <div className="flex gap-5">
                       {contactLinks.map((item) => (
                         <a
@@ -146,7 +138,7 @@ export const Sidebar = () => {
                           target={item.href.startsWith('mailto:') ? undefined : '_blank'}
                           rel="noreferrer"
                           aria-label={item.href.startsWith('mailto:') ? item.label : `${item.label} (opens in new tab)`}
-                          className="text-foreground hover:text-muted-foreground transition-all duration-300 text-2xl hover:scale-110"
+                          className="text-foreground hover:text-accent transition-all duration-300 text-xl hover:scale-110"
                         >
                           {item.icon}
                         </a>

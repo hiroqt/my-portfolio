@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 
 const projectsList = [
   { id: 1, src: '/images/finops.jpg', title: 'FinOps AI Dashboard (AWS Winner)' },
-  { id: 2, src: '/images/bettertrece.png', title: 'Better Trece Martires (BetterGov)' },
-  { id: 3, src: '/images/egov.png', title: 'e Buddy (eGov Top 30)' },
-  { id: 4, src: '/images/pcaementor.png', title: 'PaceMentor AI Coach' },
-  { id: 5, src: '/images/presentpo.png', title: 'Present Po B2B SaaS' },
-  { id: 6, src: '/images/vcm.png', title: 'VCM HRIS Capstone' },
-  { id: 7, src: '/images/tearsize.png', title: 'Tearsize E-Commerce' },
-  { id: 8, src: '/images/hivesync.png', title: 'HiveSync VA Platform' },
+  { id: 2, src: '/images/bettertrece.jpg', title: 'Better Trece Martires (BetterGov)' },
+  { id: 3, src: '/images/egov.jpg', title: 'e Buddy (eGov Top 30)' },
+  { id: 4, src: '/images/pcaementor.jpg', title: 'PaceMentor AI Coach' },
+  { id: 5, src: '/images/presentpo.jpg', title: 'Present Po B2B SaaS' },
+  { id: 6, src: '/images/vcm.jpg', title: 'VCM HRIS Capstone' },
+  { id: 7, src: '/images/tearsize.jpg', title: 'Tearsize E-Commerce' },
+  { id: 8, src: '/images/hivesync.jpg', title: 'HiveSync VA Platform' },
   { id: 9, src: '/images/gallery/echelon2026.jpg', title: 'Echelon 2026' },
   { id: 10, src: '/images/gallery/echelon 2026 delegte.jpg', title: 'Echelon 2026 Delegate' },
   { id: 11, src: '/images/gallery/sanbox echelon.jpg', title: 'Sandbox Echelon' },
@@ -19,7 +19,7 @@ const projectsList = [
   { id: 13, src: '/images/gallery/aws_presentation_week2.jpg', title: 'FinOps Quick Quest Presentation' },
   { id: 14, src: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg', title: 'Hospital AI Queuing Presentation' },
   { id: 15, src: '/images/gallery/capstone_project.jpg', title: 'VCM Capstone Defense' },
-  { id: 16, src: '/images/tmrc.png', title: 'TMRC Running Club' },
+  { id: 16, src: '/images/tmrc.jpg', title: 'TMRC Running Club' },
 ];
 
 const galleryData = [

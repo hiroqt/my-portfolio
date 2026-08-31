@@ -7,7 +7,7 @@ import { ATSResumeHeader } from '@/components/sections/ATSResumeHeader'
 import { SkillsSection } from '@/components/sections/SkillsSection'
 import { CertificationsSection } from '@/components/sections/CertificationsSection'
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
-import { BetterGovSection } from '@/components/sections/BetterGovSection'
+import { PixelCrewSection } from '@/components/sections/PixelCrewSection'
 import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsSection'
 import { OtherProjectsSection } from '@/components/sections/OtherProjectsSection'
 import { EducationSection } from '@/components/sections/EducationSection'
@@ -36,7 +36,7 @@ export default function Home() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="relative max-w-screen-2xl mx-auto px-4 sm:px-8 md:px-12 pb-16 pt-8 sm:pb-24 sm:pt-12 outline-none space-y-16 sm:space-y-24"
+        className="relative max-w-[1700px] 2xl:max-w-[1850px] mx-auto px-4 sm:px-8 md:px-12 xl:px-16 pb-16 pt-8 sm:pb-24 sm:pt-12 outline-none space-y-16 sm:space-y-24"
       >
         {/* Full-Page Ambient Background System */}
         <PageAmbientBackground />
@@ -50,8 +50,8 @@ export default function Home() {
         {/* 03 — Work Experience & Professional Track Record */}
         <ExperienceSection />
 
-        {/* 04 — BetterGov Initiative & Better Trece Martires Civic Tech Showcase */}
-        <BetterGovSection />
+        {/* 04 — Flagship Pixel Crew Autonomous Swarm Architecture Showcase */}
+        <PixelCrewSection />
 
         {/* 05 — Flagship Featured Projects */}
         <FeaturedProjectsSection />
@@ -71,9 +71,9 @@ export default function Home() {
 
       {/* Accessible Footer */}
       <footer className="border-t border-border bg-background/90 backdrop-blur-md">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 md:px-12 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-[1700px] 2xl:max-w-[1850px] mx-auto px-4 sm:px-8 md:px-12 xl:px-16 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs font-mono text-muted-foreground text-center sm:text-left">
-            © {new Date().getFullYear()} Arnel A. Baylon — Context Engineer &amp; Full-Stack Developer
+            © {new Date().getFullYear()} Arnel A. Baylon — Software Engineer &amp; Agentic Developer
           </p>
           <div className="flex gap-4 text-muted-foreground" aria-label="Social links">
             {footerLinks.map((item) => (

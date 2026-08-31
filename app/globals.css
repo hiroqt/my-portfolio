@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Syne:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&family=Kaushan+Script&family=Pacifico&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=Share+Tech&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap');
 
 @tailwind base;
@@ -18,13 +18,13 @@
     --accent-glow: rgba(192, 119, 54, 0.08);
   }
   .dark {
-    --background: #121110;
-    --foreground: #F7F4EE;
-    --muted: #1D1B19;
-    --muted-foreground: #A19A8E;
-    --border: #2E2A26;
-    --accent: #E6A860;
-    --accent-glow: rgba(230, 168, 96, 0.14);
+    --background: #0E0D0C;
+    --foreground: #FAF7F2;
+    --muted: #191816;
+    --muted-foreground: #B5AEA3;
+    --border: #2B2824;
+    --accent: #E89D52;
+    --accent-glow: rgba(232, 157, 82, 0.16);
   }
   :root { font-family: 'Inter', sans-serif; }
   * { box-sizing: border-box; }
@@ -49,6 +49,9 @@
 @layer utilities {
   .font-display { font-family: var(--font-clash), 'Syne', sans-serif; }
   .font-satoshi { font-family: 'Satoshi', sans-serif; }
+  .font-handwriting { 
+    font-family: 'Caveat', 'Dancing Script', 'Kaushan Script', 'Pacifico', cursive, sans-serif !important; 
+  }
   .glass {
     background: var(--background);
     border-bottom: 1px solid var(--border);

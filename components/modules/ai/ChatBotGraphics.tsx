@@ -161,7 +161,7 @@ export function ChatEmptyState({ onSelectPrompt, remaining }: ChatEmptyStateProp
         </div>
       </div>
 
-      <h3 className="font-serif text-lg sm:text-xl text-foreground font-semibold mb-1">
+      <h3 className="font-handwriting text-2xl sm:text-3xl text-foreground font-bold mb-1 tracking-wide">
         yhelAI Assistant
       </h3>
       <p className="text-xs font-mono text-muted-foreground tracking-wide mb-6 max-w-xs leading-relaxed">

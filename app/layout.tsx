@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { Pacifico, Share_Tech } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import { JARVISAssistant } from '@/components/modules/ai/JARVISAssistant'
@@ -11,28 +10,14 @@ const comico = localFont({
   display: 'swap',
 })
 
-const pacifico = Pacifico({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-pacifico',
-  display: 'swap',
-})
-
-const shareTech = Share_Tech({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-sharetech',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
   title: 'Arnel Baylon',
   description:
-    'Résumé of Arnel A. Baylon: Context Engineer and full-stack engineer. BS Information Technology, Cavite State University. Experience, projects, certifications, and skills.',
+    'Portfolio & Résumé of Arnel A. Baylon — Software Engineer & Agentic Developer. Experience, projects, certifications, and skills.',
   openGraph: {
     title: 'Arnel Baylon',
     description:
-      'Context Engineer and full-stack engineer. Experience, projects, certifications, and skills.',
+      'Software Engineer and Agentic Developer. Experience, projects, certifications, and skills.',
     type: 'profile',
   },
 }
@@ -43,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${comico.variable} ${pacifico.variable} ${shareTech.variable}`}>
+    <html lang="en" className={`dark ${comico.variable}`}>
       <body className="overflow-x-hidden min-h-screen font-sans">
         <a
           href="#main-content"
@@ -58,3 +43,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+

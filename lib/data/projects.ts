@@ -26,6 +26,52 @@ export interface ProjectData {
 
 export const projectsData: ProjectData[] = [
   {
+    slug: 'pixelcrew',
+    title: 'Pixel Crew (Autonomous Multi-Agent Swarm & Startup Office)',
+    type: 'Autonomous AI Swarm / Developer Tooling',
+    summary: 'Autonomous software synthesis framework compiling natural language instructions into Next.js App Router applications via a Directed Acyclic Graph (DAG) task engine orchestrating 23 specialized agent personas working in parallel swarm loops, while eliminating AI-generated slop via 64 strict anti-slop rules and fluid clamp typography.',
+    tags: ['Multi-Agent Swarm', 'TypeScript', 'Next.js', 'DAG Engine', 'Anti-AI-Slop', 'AST Symbol Graph', 'Pixel Art UI'],
+    link: 'https://github.com/hiroqt/PixelCrew',
+    github: 'https://github.com/hiroqt/PixelCrew',
+    image: '/images/pixelcrew.png',
+    isFeatured: true,
+    featuredTag: 'AUTONOMOUS AI SWARM',
+    featuredTitle: 'Pixel Crew',
+    featuredSummary: 'Autonomous software synthesis framework and retro pixel-art tech startup office compiling Next.js applications via DAG swarm engine with anti-AI-slop frontend principles.',
+    initiative: 'Open Source AI Tooling',
+    metrics: [
+      '23 Specialized agent command personas',
+      'DAG task engine with parallel swarm loops',
+      '64-pattern Impeccable anti-AI-slop design catalog',
+      '60%+ Average token efficiency via AST symbol graphs'
+    ],
+    features: [
+      'Directed Acyclic Graph (DAG) task engine orchestrating specialized agent personas in parallel',
+      'Anti-AI-slop design system enforcing fluid clamp scales, asymmetric grids, and zero generic blobs',
+      '23 Specialized autonomous agent personas with strict role boundaries & toolsets',
+      'Universal compatibility across Claude, Cursor, Gemini, Codex, Grok, Kiro, Hermes, OpenCode, and Antigravity',
+      'Interactive retro pixel-art tech startup office visual dashboard streaming live activity',
+      'AST symbol-graph context extraction reducing token consumption by 50%–75%',
+      'Multi-tiered consensus and automated security audit checks before code generation',
+      'Dynamic persona spawning for Frontend, Backend, Security Sentinel, and QA SRE',
+      'Context-aware multi-turn task memory and automated verification loops'
+    ],
+    content: [
+      {
+        title: 'Background & Motivation',
+        content: 'Modern AI coding assistants often suffer from context window pollution, generic code generation, and single-agent hallucinations. Pixel Crew was architected to simulate an authentic, high-velocity engineering department where specialized autonomous agents collaborate under strict domain protocols.'
+      },
+      {
+        title: 'Architecture & Token Efficiency',
+        content: 'Pixel Crew implements AST symbol-graph extraction to provide subagents with localized semantic context rather than dumping entire codebases, reducing token consumption by 50% to 75%. Agents operate within isolated sandboxes and communicate via structured JSON protocols.'
+      },
+      {
+        title: 'Interactive Pixel-Art Tech Startup Office',
+        content: 'Alongside headless CLI execution, Pixel Crew features an interactive retro pixel-art startup office dashboard that visualizes subagent tasks, status, and collaborative handoffs in real time.'
+      }
+    ]
+  },
+  {
     slug: 'finops-ai-dashboard',
     title: 'FinOps AI Dashboard (Winner - Best Business Impact)',
     type: 'Financial Operations / Enterprise AI',
@@ -37,10 +83,10 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'WINNER - BEST BUSINESS IMPACT',
     featuredTitle: 'FinOps AI Dashboard',
-    featuredSummary: 'Winner of Best Business Impact at Amazon Quick Quest Workshop (BGC). AI-powered financial operations hub automating expense reviews, invoice PO matching, and compliance.',
+    featuredSummary: 'Winner of Best Business Impact at the final capstone presentation of the 9-Week Amazon Quick Quest Workshop (AWS Office BGC). AI-powered financial operations hub automating expense reviews, invoice PO matching, and compliance.',
     initiative: 'Amazon Quick Quest Workshop (BGC)',
     metrics: [
-      'Winner: Best Business Impact (Amazon Quick Quest BGC)',
+      'Winner: Best Business Impact (Final Capstone Presentation, AWS BGC)',
       '80% Faster expense review cycle time',
       '95%+ Accuracy in financial anomaly detection',
       'Zero manual logging with persistent audit trails'
@@ -82,7 +128,7 @@ export const projectsData: ProjectData[] = [
     tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Open Data', 'Civic Tech', 'Leaflet OSM'],
     link: 'https://bettertrecemartires.org',
     github: 'https://github.com/hiroqt/bettertrece',
-    image: '/images/bettertrece.png',
+    image: '/images/bettertrece.jpg',
     isFeatured: true,
     featuredTag: 'BETTERGOV INITIATIVE',
     featuredTitle: 'Better Trece Martires',
@@ -126,7 +172,7 @@ export const projectsData: ProjectData[] = [
     summary: 'Winner of eGov Hackathon 2026 (Top 30). Unified government services platform designed to streamline citizen compliance and public service delivery using an agentic AI named e Buddy.',
     tags: ['TypeScript', 'AI', 'Tailwind CSS', 'Agentic AI', 'Next.js'],
     link: '#',
-    image: '/images/egov.png',
+    image: '/images/egov.jpg',
     isFeatured: true,
     featuredTag: 'WINNER - TOP 30',
     featuredTitle: 'e Buddy',
@@ -170,7 +216,7 @@ export const projectsData: ProjectData[] = [
     link: '#',
     embedUrl: 'https://appbuildersph.com/embed/apps/pacementor',
     embedTitle: 'PaceMentor votes on App Builders PH',
-    image: '/images/pcaementor.png',
+    image: '/images/pcaementor.jpg',
     isFeatured: true,
     featuredTag: 'AI RUNNING COACH',
     featuredTitle: 'PaceMentor',
@@ -210,7 +256,7 @@ export const projectsData: ProjectData[] = [
     link: '#',
     embedUrl: 'https://appbuildersph.com/embed/apps/present-po',
     embedTitle: 'Present Po votes on App Builders PH',
-    image: '/images/presentpo.png',
+    image: '/images/presentpo.jpg',
     isFeatured: true,
     featuredTag: 'B2B SOLUTION',
     featuredTitle: 'Present Po',
@@ -302,7 +348,7 @@ export const projectsData: ProjectData[] = [
     summary: 'QR-code based Human Resource Information System: employee records, leave tracking, faculty recruitment, real-time notifications, and automated payroll.',
     tags: ['Laravel', 'Livewire', 'PHP', 'MySQL', 'QR Attendance'],
     link: '#',
-    image: '/images/vcm.png',
+    image: '/images/vcm.jpg',
     features: [
       'QR-Based attendance validation restricting check-ins to the campus vicinity',
       'Automated payroll engine computing gross pay, statutory deductions, and net salary',
@@ -328,7 +374,7 @@ export const projectsData: ProjectData[] = [
     summary: 'Client project — E-commerce platform for health and wellness products featuring end-to-end checkout and payment integration.',
     tags: ['TypeScript', 'Tailwind CSS', 'Payment Gateway'],
     link: '#',
-    image: '/images/tearsize.png',
+    image: '/images/tearsize.jpg',
     features: [
       'Responsive product catalog with fast filtering and category indexing',
       'Secure payment gateway integration for digital payments and cards',
@@ -348,7 +394,7 @@ export const projectsData: ProjectData[] = [
     summary: 'Client project — Virtual assistant services platform streamlining business operations and lead generation for distributed teams.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Automation'],
     link: 'https://www.hivesyncva.com',
-    image: '/images/hivesync.png',
+    image: '/images/hivesync.jpg',
     features: [
       'Automated blog syndication syncing Facebook posts directly to website articles',
       'Integrated consultation booking and inquiry capture system'
@@ -367,7 +413,7 @@ export const projectsData: ProjectData[] = [
     summary: 'Centralized community hub for Trece Martirez Running Club — managing race registration archives, finish times, and community announcements.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     link: '#',
-    image: '/images/tmrc.png',
+    image: '/images/tmrc.jpg',
     features: [
       'Race registration directory with historical finish records',
       'Community announcement bulletin and upcoming run event calendar'

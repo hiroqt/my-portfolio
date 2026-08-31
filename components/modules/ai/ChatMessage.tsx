@@ -141,7 +141,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
           className={`relative px-4 py-3 rounded-2xl shadow-sm border transition-all duration-200 ${
             isUser
               ? 'bg-foreground text-background border-transparent rounded-tr-sm'
-              : 'bg-muted/70 dark:bg-muted/40 border-border text-foreground rounded-tl-sm backdrop-blur-sm'
+              : 'bg-muted border-border text-foreground rounded-tl-sm'
           }`}
         >
           {formatMarkdown(message.content)}

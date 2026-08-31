@@ -10,7 +10,7 @@ const educationData = {
   school: 'Cavite State University — Trece Martires Campus',
   degree: 'Bachelor of Science in Information Technology (BS IT)',
   location: 'Philippines',
-  period: 'Graduating 2026',
+  period: 'Batch 2026',
   highlights: [
     'Information Technology Foundations',
     'Full-Stack Systems Architecture',

@@ -106,7 +106,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           if (input.trim() && !isStreaming && !isQuotaExhausted) onSubmit();
         }}
         aria-label="Send message to yhelAI"
-        className={`flex items-end gap-2 bg-muted/40 border rounded-2xl p-1.5 transition-all duration-200 ${
+        className={`flex items-end gap-2 bg-muted border rounded-2xl p-1.5 transition-all duration-200 ${
           isQuotaExhausted
             ? 'border-rose-500/30 opacity-80'
             : 'border-border focus-within:border-accent focus-within:ring-1 focus-within:ring-accent/20'

@@ -115,7 +115,7 @@ export function BetterGovSection() {
             </div>
             <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden bg-muted">
               <img
-                src="/images/bettertrece.png"
+                src="/images/bettertrece.jpg"
                 alt="Better Trece Martires Civic Tech Portal Case Study Showcase"
                 className="w-full h-full object-cover object-center group-hover/img:scale-[1.02] transition-transform duration-500"
               />

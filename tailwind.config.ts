@@ -25,8 +25,9 @@ const config: Config = {
         display: ["'Apoc Revelations'", "serif"],
         mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
         comico: ["var(--font-comico)", "sans-serif"],
-        pacifico: ["var(--font-pacifico)", "cursive"],
-        sharetech: ["var(--font-sharetech)", "sans-serif"],
+        pacifico: ["'Pacifico'", "cursive"],
+        handwriting: ["'Caveat'", "'Pacifico'", "cursive"],
+        sharetech: ["'Share Tech'", "sans-serif"],
         apoc: ["'Apoc Revelations'", "serif"],
       },
     }

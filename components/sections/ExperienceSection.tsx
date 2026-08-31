@@ -8,6 +8,20 @@ import { SectionCardWatermark } from '@/components/ui/SectionCardWatermark'
 
 const experiences = [
   {
+    org: 'Amazon Web Services (AWS) — 9-Week AWS Quick Quest Workshop',
+    role: 'AI Solutions Builder & Capstone Winner (Best Business Impact Award)',
+    location: 'AWS Office in BGC, Taguig, Philippines',
+    period: '9-Week Intensive Workshop (2026)',
+    summary: 'Completed an intensive 9-week enterprise AI and business automation workshop at the AWS Philippines Office in BGC, winning the prestigious "Best Business Impact" award at the final capstone presentation for architecting and defending the FinOps AI Dashboard platform.',
+    bullets: [
+      'Won the prestigious "Best Business Impact" award at the final capstone presentation after pitching and defending the FinOps AI Dashboard to AWS Enterprise Solutions Architects and industry judges at the AWS BGC headquarters.',
+      'Architected and delivered the hands-on capstone project utilizing Amazon Quick Spaces for automated policy compliance and Quick Flows for instant invoice-to-PO reconciliation triggers.',
+      'Explored enterprise cloud workflows and engineered bi-directional Google Workspace connectors (Gmail receipt ingestion, Calendar audit deadlines, Sheets live reporting) enabling sub-second automated financial reconciliation.',
+      'Completed the 9-week intensive builder curriculum mastering enterprise AI agents, prompt optimization, and cloud solution architecture.',
+    ],
+    tech: ['Amazon Quick', 'AWS Cloud', 'Capstone Winner', 'Business Automation', 'Quick Spaces & Flows', 'AI Agents', 'FinOps'],
+  },
+  {
     org: 'General Emilio Aguinaldo Memorial Hospital (GEAMH)',
     role: 'Intern Full-Stack Developer (486 Hours)',
     location: 'Philippines',

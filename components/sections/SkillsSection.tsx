@@ -2,18 +2,35 @@
 
 import React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { FaBrain, FaSyncAlt, FaPlug, FaRobot, FaNetworkWired, FaRocket, FaTerminal, FaCode } from 'react-icons/fa'
+import {
+  FaBrain, FaSyncAlt, FaPlug, FaRobot, FaNetworkWired, FaRocket, FaTerminal, FaCode,
+  FaAward, FaCalendarCheck, FaClock, FaServer, FaCogs, FaTrello
+} from 'react-icons/fa'
 import { MdCloud } from 'react-icons/md'
 import {
   SiFlutter, SiNextdotjs, SiLaravel, SiPhp, SiMysql, SiTypescript, SiSupabase,
   SiReact, SiVuedotjs, SiTailwindcss, SiNodedotjs, SiFirebase, SiVercel, SiGit,
-  SiFigma, SiTrello, SiDart, SiPostgresql, SiLivewire, SiNestjs, SiExpress,
-  SiHtml5, SiSlack, SiOpenai, SiGoogle, SiAnthropic
+  SiFigma, SiDart, SiPostgresql, SiLivewire, SiNestjs, SiExpress,
+  SiHtml5, SiSlack, SiOpenai, SiGoogle, SiAnthropic, SiDocker, SiCloudflare, SiGithubactions,
+  SiTerraform
 } from 'react-icons/si'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { SectionCardWatermark } from '@/components/ui/SectionCardWatermark'
 
+// Monochrome / Neutral Tech Icons (No colored fonts)
 const techIcons: Record<string, React.ReactNode> = {
+  // AI Models & Agentic IDEs
+  "Claude": <SiAnthropic aria-hidden="true" />,
+  "Gemini": <SiGoogle aria-hidden="true" />,
+  "OpenAI / Codex": <SiOpenai aria-hidden="true" />,
+  "DeepSeek": <FaBrain aria-hidden="true" />,
+  "Qwen": <FaBrain aria-hidden="true" />,
+  "GLM": <FaBrain aria-hidden="true" />,
+  "Ollama": <FaRobot aria-hidden="true" />,
+  "Antigravity": <FaRocket aria-hidden="true" />,
+  "Cursor": <FaTerminal aria-hidden="true" />,
+  "Kiro": <FaCode aria-hidden="true" />,
+  "OpenCode": <FaTerminal aria-hidden="true" />,
+
   // AI & Context Engineering
   "Context Engineering": <FaBrain aria-hidden="true" />,
   "Agentic Loops": <FaSyncAlt aria-hidden="true" />,
@@ -23,33 +40,19 @@ const techIcons: Record<string, React.ReactNode> = {
   "Vector Search & Grounding": <FaBrain aria-hidden="true" />,
   "Prompt Engineering": <FaRocket aria-hidden="true" />,
 
-  // AI Models & Agentic IDEs
-  "Claude": <SiAnthropic aria-hidden="true" />,
-  "Gemini": <SiGoogle aria-hidden="true" />,
-  "OpenAI / Codex": <SiOpenai aria-hidden="true" />,
-  "DeepSeek": <FaBrain aria-hidden="true" />,
-  "Qwen": <FaBrain aria-hidden="true" />,
-  "GLM": <FaBrain aria-hidden="true" />,
-  "Antigravity": <FaRocket aria-hidden="true" />,
-  "Cursor": <FaTerminal aria-hidden="true" />,
-  "Kiro": <FaCode aria-hidden="true" />,
-
   // Frontend & Mobile
-  "TypeScript (Full-Stack)": <SiTypescript aria-hidden="true" />,
   "TypeScript": <SiTypescript aria-hidden="true" />,
   "Next.js": <SiNextdotjs aria-hidden="true" />,
   "React": <SiReact aria-hidden="true" />,
   "Vue.js": <SiVuedotjs aria-hidden="true" />,
-  "HTML5 / Semantic Web": <SiHtml5 aria-hidden="true" />,
-  "HTML": <SiHtml5 aria-hidden="true" />,
-  "Tailwind CSS": <SiTailwindcss aria-hidden="true" />,
   "Flutter": <SiFlutter aria-hidden="true" />,
   "Dart": <SiDart aria-hidden="true" />,
+  "Tailwind CSS": <SiTailwindcss aria-hidden="true" />,
+  "HTML5 / Semantic Web": <SiHtml5 aria-hidden="true" />,
 
-  // Backend, APIs & Databases
+  // Backend & Databases
   "NestJS": <SiNestjs aria-hidden="true" />,
   "Express.js": <SiExpress aria-hidden="true" />,
-  "RESTful APIs": <FaPlug aria-hidden="true" />,
   "Node.js": <SiNodedotjs aria-hidden="true" />,
   "Laravel": <SiLaravel aria-hidden="true" />,
   "Livewire": <SiLivewire aria-hidden="true" />,
@@ -58,27 +61,33 @@ const techIcons: Record<string, React.ReactNode> = {
   "MySQL": <SiMysql aria-hidden="true" />,
   "Supabase": <SiSupabase aria-hidden="true" />,
   "Firebase": <SiFirebase aria-hidden="true" />,
+  "RESTful APIs": <FaPlug aria-hidden="true" />,
 
-  // Cloud, Tooling & Integrations
+  // Cloud & Tooling
+  "Docker": <SiDocker aria-hidden="true" />,
+  "Terraform": <SiTerraform aria-hidden="true" />,
+  "CI/CD Pipelines": <SiGithubactions aria-hidden="true" />,
   "AWS Cloud": <MdCloud aria-hidden="true" />,
   "Vercel": <SiVercel aria-hidden="true" />,
+  "Hostinger": <FaServer aria-hidden="true" />,
+  "Cloudflare": <SiCloudflare aria-hidden="true" />,
   "Git & GitHub": <SiGit aria-hidden="true" />,
-  "Slack API": <SiSlack aria-hidden="true" />,
+  "Slack": <SiSlack aria-hidden="true" />,
+  "Trello": <FaTrello aria-hidden="true" />,
   "Figma": <SiFigma aria-hidden="true" />,
-  "Trello": <SiTrello aria-hidden="true" />
 }
 
 const experienceStats = [
-  { value: '2+', label: 'Years Experience', sub: 'Production & Consulting (2025–Present)' },
-  { value: '15+', label: 'Projects Built', sub: 'Client Deployments & Live Apps' },
-  { value: '11+', label: 'Certifications', sub: 'IBM AI & AWS Cloud Topics' },
-  { value: '480+', label: 'Internship Hours', sub: 'Hospital System & IT Ops' },
+  { icon: <FaCalendarCheck className="text-foreground text-sm" />, value: '2+ Years', label: 'Active Engineering', sub: 'Production & Consulting' },
+  { icon: <FaRocket className="text-foreground text-sm" />, value: '15+', label: 'Projects Shipped', sub: 'Live Deployments & Apps' },
+  { icon: <FaAward className="text-foreground text-sm" />, value: '11+', label: 'Verified Badges', sub: 'IBM AI & AWS Cloud' },
+  { icon: <FaClock className="text-foreground text-sm" />, value: '486 Hrs', label: 'Internship IT Ops', sub: 'Hospital System & Triage' },
 ]
 
 const skillCategories = [
   {
-    category: 'AI Models & Agentic Toolchains',
-    description: 'Frontier LLM foundation models, agentic reasoning architectures, and next-generation AI-assisted developer environments.',
+    category: 'AI Models & Agentic IDEs',
+    badge: 'Frontier AI',
     skills: [
       'Claude',
       'Gemini',
@@ -86,14 +95,16 @@ const skillCategories = [
       'DeepSeek',
       'Qwen',
       'GLM',
+      'Ollama',
       'Antigravity',
       'Cursor',
       'Kiro',
+      'OpenCode',
     ]
   },
   {
     category: 'AI & Context Engineering',
-    description: 'Autonomous decision loops, tool-calling pipelines, structured output enforcement, and zero-hallucination RAG retrieval architectures.',
+    badge: 'Context Architecture',
     skills: [
       'Context Engineering',
       'Agentic Loops',
@@ -105,26 +116,25 @@ const skillCategories = [
     ]
   },
   {
-    category: 'Frontend & Mobile Engineering',
-    description: 'High-performance reactive interfaces, TypeScript type safety, semantic HTML, and cross-platform native apps.',
+    category: 'Frontend & Cross-Platform Mobile',
+    badge: 'UI & Native Apps',
     skills: [
       'TypeScript',
       'Next.js',
       'React',
       'Vue.js',
-      'HTML5 / Semantic Web',
-      'Tailwind CSS',
       'Flutter',
       'Dart',
+      'Tailwind CSS',
+      'HTML5 / Semantic Web',
     ]
   },
   {
-    category: 'Backend, APIs & Databases',
-    description: 'Scalable NestJS and Express services, RESTful API design, relational data modeling, and enterprise MVC frameworks.',
+    category: 'Backend & Database Engineering',
+    badge: 'Services & Data',
     skills: [
       'NestJS',
       'Express.js',
-      'RESTful APIs',
       'Node.js',
       'Laravel',
       'Livewire',
@@ -133,18 +143,24 @@ const skillCategories = [
       'MySQL',
       'Supabase',
       'Firebase',
+      'RESTful APIs',
     ]
   },
   {
-    category: 'Cloud, Integrations & Tooling',
-    description: 'Continuous deployment, cloud compute, Slack workflow integrations, and collaborative product design.',
+    category: 'Cloud, Infrastructure & Tooling',
+    badge: 'Infra & Workflows',
     skills: [
       'AWS Cloud',
+      'Terraform',
+      'Docker',
+      'CI/CD Pipelines',
       'Vercel',
+      'Hostinger',
+      'Cloudflare',
       'Git & GitHub',
-      'Slack API',
-      'Figma',
+      'Slack',
       'Trello',
+      'Figma',
     ]
   }
 ]
@@ -158,88 +174,67 @@ export function SkillsSection() {
         id="01"
         badge="TECHNICAL ARSENAL"
         title={<>Core Competencies &amp; <span className="italic font-light text-accent">Tech Stack</span></>}
-        subtitle="Verifiable technical skills mapped by practical production experience and active deployment track record. Zero estimated percentages."
+        subtitle="Verifiable technical skills mapped by practical production experience and active deployment track record."
         accent="skills"
       />
 
-      {/* Experience & Velocity Spotlight Bar */}
+      {/* 4 Clean Metric Stat Highlights (Clean & Card-less) */}
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-10 sm:mb-12 p-6 sm:p-8 rounded-3xl bg-muted/40 border border-border/70 backdrop-blur-xs relative overflow-hidden shadow-xs"
+        transition={{ duration: 0.45 }}
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 pb-8 border-b border-border/40"
       >
-        <SectionCardWatermark variant="skills" className="right-4 bottom-4" />
-        
-        <div className="relative z-10 space-y-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/60 pb-6">
+        {experienceStats.map((stat, i) => (
+          <div key={i} className="flex items-start gap-3">
+            <span className="p-2 rounded-lg bg-muted text-foreground shrink-0 mt-0.5">
+              {stat.icon}
+            </span>
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-accent font-semibold mb-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
-                <span>Hands-On Track Record</span>
+              <div className="text-base sm:text-lg font-bold text-foreground tracking-tight">
+                {stat.value}
               </div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-semibold text-foreground">
-                2+ Years of <span className="italic font-light text-accent">Active Software Engineering</span>
-              </h3>
-              <p className="mt-1 text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
-                Active full-stack development, client consulting, and context engineering (2025 – Present) specializing in zero-hallucination agentic systems, enterprise operations, and civic platforms.
-              </p>
+              <div className="text-xs sm:text-sm font-medium text-foreground">
+                {stat.label}
+              </div>
+              <div className="text-xs text-muted-foreground mt-0.5">
+                {stat.sub}
+              </div>
             </div>
           </div>
-
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-6">
-            {experienceStats.map((stat) => (
-              <div key={stat.label} className="p-4 rounded-2xl bg-background/80 border border-border/60 flex flex-col justify-between hover:border-accent/40 transition-all shadow-xs">
-                <div className="text-3xl sm:text-4xl font-serif font-bold text-foreground tracking-tight tabular-nums">
-                  {stat.value}
-                </div>
-                <div className="mt-2">
-                  <div className="text-xs sm:text-sm font-semibold text-foreground">{stat.label}</div>
-                  <div className="text-[11px] font-mono text-muted-foreground mt-0.5">{stat.sub}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </motion.div>
 
-      {/* Categorized Skills Grid */}
-      <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+      {/* Clean Grouped Skills (Card-less & Container-less Layout) */}
+      <div className="space-y-10">
         {skillCategories.map((category, idx) => (
           <motion.div
             key={category.category}
-            initial={reduce ? false : { opacity: 0, y: 20 }}
+            initial={reduce ? false : { opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className={`p-6 sm:p-8 rounded-3xl border border-border/70 bg-muted/30 backdrop-blur-xs relative overflow-hidden flex flex-col justify-between hover:border-accent/50 transition-colors shadow-xs ${
-              idx === skillCategories.length - 1 && skillCategories.length % 2 !== 0 ? 'md:col-span-2' : ''
-            }`}
+            transition={{ duration: 0.4, delay: idx * 0.05 }}
+            className="pb-8 border-b border-border/30 last:border-0 last:pb-0"
           >
-            <div>
-              <div className="flex items-center justify-between gap-4 mb-3">
-                <h3 className="text-lg sm:text-xl font-serif font-semibold text-foreground">
-                  {category.category}
-                </h3>
-                <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6">
-                {category.description}
-              </p>
+            {/* Category Header */}
+            <div className="flex items-center gap-3 mb-4">
+              <h3 className="text-base sm:text-lg font-semibold text-foreground tracking-tight">
+                {category.category}
+              </h3>
+              <span className="text-xs text-muted-foreground font-medium">
+                &bull; {category.badge}
+              </span>
             </div>
 
-            {/* Skill Tags */}
-            <div className="flex flex-wrap gap-2 sm:gap-2.5 pt-2">
+            {/* Clean Skill Items without card containers (Hero font-sans font-medium text) */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               {category.skills.map((skill) => (
                 <div
                   key={skill}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background border border-border text-foreground text-xs sm:text-sm font-mono hover:border-accent hover:text-accent transition-colors shadow-2xs"
+                  className="inline-flex items-center gap-2 text-sm sm:text-base font-medium text-foreground hover:text-accent transition-colors"
                 >
-                  <span className="text-muted-foreground text-sm shrink-0">
+                  <span className="text-base shrink-0 opacity-80 text-foreground">
                     {techIcons[skill] || <FaCode aria-hidden="true" />}
                   </span>
                   <span>{skill}</span>
@@ -252,3 +247,4 @@ export function SkillsSection() {
     </section>
   )
 }
+export default SkillsSection

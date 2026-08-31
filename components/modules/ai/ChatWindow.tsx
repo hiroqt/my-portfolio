@@ -99,7 +99,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 16 }}
         transition={{ type: 'spring', damping: 25, stiffness: 280 }}
-        className={`fixed z-[80] shadow-2xl backdrop-blur-2xl bg-background/95 border border-border flex flex-col overflow-hidden transition-all duration-300 ${
+        className={`fixed z-[80] shadow-2xl bg-background border border-border flex flex-col overflow-hidden transition-all duration-300 ${
           isExpanded
             ? 'inset-3 sm:inset-6 md:inset-10 rounded-3xl'
             : 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[95vw] sm:w-[440px] md:w-[470px] h-[580px] sm:h-[620px] rounded-3xl'
@@ -130,21 +130,21 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
             : ''}
         </div>
 
-        {/* Streamlined, Decluttered Header HUD */}
-        <header className="flex items-center justify-between px-5 py-3 border-b border-border bg-background/90 backdrop-blur-md relative z-10">
+        {/* Streamlined, Decluttered Header HUD (Solid Background) */}
+        <header className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-background relative z-10">
           {/* Identity & Live Status Line */}
           <div className="flex items-center gap-2.5">
             <JARVISAvatar status={status} size="sm" />
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-xs sm:text-sm text-foreground tracking-tight">
+                <span className="font-handwriting font-bold text-xl sm:text-2xl text-foreground tracking-wide leading-none">
                   ✦ yhelAI
                 </span>
                 {status !== 'idle' && (
                   <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
                 )}
               </div>
-              <span className="text-[10px] font-mono text-muted-foreground tracking-tight flex items-center gap-1">
+              <span className="text-[10px] font-mono text-muted-foreground tracking-tight flex items-center gap-1 mt-0.5">
                 {status === 'thinking'
                   ? 'Analyzing context...'
                   : status === 'speaking'
@@ -309,8 +309,8 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
           </div>
         </main>
 
-        {/* Input Footer */}
-        <footer className="p-3 sm:p-4 bg-background/90 backdrop-blur-md border-t border-border relative z-10">
+        {/* Input Footer (Solid Background) */}
+        <footer className="p-3 sm:p-4 bg-background border-t border-border relative z-10">
           <ChatInput
             input={input}
             isStreaming={isStreaming}

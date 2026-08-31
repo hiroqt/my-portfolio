@@ -21,7 +21,7 @@ export function OtherProjectsSection() {
         accent="projects"
       />
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
         {nonFeaturedProjects.map((project, i) => {
           const isLive = project.link && project.link !== '#'
 
