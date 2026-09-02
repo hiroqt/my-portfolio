@@ -43,11 +43,11 @@ export function EducationSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.45 }}
-        className="rounded-2xl border border-border bg-muted/20 p-5 sm:p-7 hover:bg-muted/40 transition-colors shadow-xs"
+        className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 hover:bg-muted/40 transition-colors shadow-xs dark:shadow-lg dark:shadow-black/20"
       >
         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 pb-3 border-b border-border/50">
           <div className="flex items-start gap-3">
-            <span className="p-2 rounded-lg bg-background border border-border text-foreground shrink-0 mt-0.5">
+            <span className="p-2 rounded-lg bg-background dark:bg-muted/50 border border-border text-foreground shrink-0 mt-0.5">
               <FaGraduationCap className="text-base" />
             </span>
             <div>
@@ -72,7 +72,7 @@ export function EducationSection() {
             {educationData.highlights.map((item) => (
               <span
                 key={item}
-                className="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-md bg-background border border-border text-foreground"
+                className="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-md bg-background dark:bg-muted/40 border border-border text-foreground"
               >
                 <span className="text-accent text-[9px]">✦</span>
                 <span>{item}</span>

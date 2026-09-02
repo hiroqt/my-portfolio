@@ -118,15 +118,15 @@ export function CertificationsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: i * 0.08 }}
-            className="group relative flex flex-col justify-between rounded-xl border border-border/80 bg-muted/20 p-5 hover:border-accent/40 hover:bg-muted/40 transition-all shadow-xs"
+            className="group relative flex flex-col justify-between rounded-xl border border-border/80 bg-muted/20 dark:bg-card/80 p-5 hover:border-accent/40 hover:bg-muted/40 transition-all shadow-xs dark:shadow-lg dark:shadow-black/15"
           >
             <div>
               {/* Header: Authentic SVG Logo + Credly Count Badge */}
               <div className="flex items-start justify-between gap-2 mb-3">
-                <span className="p-2.5 rounded-xl bg-background border border-border text-foreground shadow-2xs inline-flex items-center justify-center">
+                <span className="p-2.5 rounded-xl bg-background dark:bg-muted/50 border border-border text-foreground shadow-2xs inline-flex items-center justify-center">
                   {cert.svgLogo}
                 </span>
-                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-background border border-border text-muted-foreground font-semibold">
+                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-background dark:bg-muted/40 border border-border text-muted-foreground font-semibold">
                   {cert.count}
                 </span>
               </div>

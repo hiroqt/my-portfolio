@@ -83,7 +83,7 @@ export function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="rounded-2xl border border-border bg-muted/20 p-5 sm:p-7 hover:bg-muted/30 transition-colors"
+          className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 hover:bg-muted/30 transition-colors dark:shadow-lg dark:shadow-black/20"
         >
           <h3 className="font-serif font-bold text-xl sm:text-2xl text-foreground">
             Let&apos;s build something exceptional together.
@@ -100,7 +100,7 @@ export function ContactSection() {
                 href={c.href}
                 target={c.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel={c.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                className="group flex items-center justify-between p-3 rounded-xl border border-border/80 bg-background hover:border-accent/50 transition-colors shadow-2xs"
+                className="group flex items-center justify-between p-3 rounded-xl border border-border/80 bg-background dark:bg-muted/30 hover:border-accent/50 transition-colors shadow-2xs"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   <span className="p-1.5 rounded-lg bg-muted shrink-0 text-sm">
@@ -129,7 +129,7 @@ export function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45, delay: 0.08 }}
-          className="rounded-2xl border border-border bg-muted/20 p-5 sm:p-7"
+          className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 dark:shadow-lg dark:shadow-black/20"
         >
           <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/50">
             <h4 className="font-serif font-bold text-base text-foreground">

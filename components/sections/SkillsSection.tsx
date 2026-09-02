@@ -94,7 +94,7 @@ export function SkillsSection() {
       </div>
 
       {/* ── Vertical Stacked Skill Categories with Title at Top ── */}
-      <div className="rounded-2xl border border-border bg-muted/20 divide-y divide-border/60 overflow-hidden shadow-2xs">
+      <div className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 divide-y divide-border/60 overflow-hidden shadow-2xs dark:shadow-lg dark:shadow-black/20">
         {stackGroups.map((group, idx) => (
           <motion.div
             key={group.category}
@@ -119,7 +119,7 @@ export function SkillsSection() {
               {group.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-lg bg-background border border-border/80 text-foreground font-mono text-xs hover:border-accent/40 hover:text-accent transition-colors shadow-2xs"
+                  className="px-3 py-1 rounded-lg bg-background dark:bg-muted/40 border border-border/80 text-foreground font-mono text-xs hover:border-accent/40 hover:text-accent transition-colors shadow-2xs"
                 >
                   {tag}
                 </span>

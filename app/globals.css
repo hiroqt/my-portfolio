@@ -7,28 +7,32 @@
 @layer base {
   :root {
     --background: #ffffff;
-    --foreground: #0a0a0a;
+    --foreground: #09090b;
+    --card: #ffffff;
+    --card-foreground: #09090b;
     --muted: #f4f4f5;
-    --muted-foreground: #71717a;
-    --border: #e4e4e7;
+    --muted-foreground: #64748b;
+    --border: #e2e8f0;
     --accent: #d97706;
     --accent-glow: rgba(217, 119, 6, 0.12);
-    --halftone: rgba(10, 10, 10, 0.85);
-    --sel-bg: #0a0a0a;
+    --halftone: rgba(15, 23, 42, 0.7);
+    --sel-bg: #09090b;
     --sel-fg: #ffffff;
   }
 
   .dark {
-    --background: #09090b;
-    --foreground: #f4f4f5;
-    --muted: #18181b;
-    --muted-foreground: #a1a1aa;
-    --border: #27272a;
+    --background: #08090e;
+    --foreground: #f1f5f9;
+    --card: #10131e;
+    --card-foreground: #f1f5f9;
+    --muted: #131724;
+    --muted-foreground: #94a3b8;
+    --border: rgba(255, 255, 255, 0.08);
     --accent: #f59e0b;
     --accent-glow: rgba(245, 158, 11, 0.18);
-    --halftone: rgba(244, 244, 245, 0.35);
-    --sel-bg: #fafafa;
-    --sel-fg: #0a0a0a;
+    --halftone: rgba(241, 245, 249, 0.15);
+    --sel-bg: #f59e0b;
+    --sel-fg: #08090e;
   }
 
   :root {

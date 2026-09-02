@@ -176,7 +176,7 @@ export function ExperienceSection() {
                     {job.tech.map((t) => (
                       <span
                         key={t}
-                        className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-background border border-border text-muted-foreground"
+                        className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-background dark:bg-muted/40 border border-border text-muted-foreground"
                       >
                         {t}
                       </span>

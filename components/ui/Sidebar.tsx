@@ -167,29 +167,33 @@ export function Sidebar() {
   return (
     <>
       {/* ── Desktop Clean Sidebar with Categorized Links & Dropdown yhelAI ── */}
-      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 z-50 flex-col justify-between border-r border-border bg-background px-5 py-6 select-none overflow-hidden">
+      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 z-50 flex-col justify-between border-r border-border/80 bg-background/95 backdrop-blur-sm px-5 py-6 select-none overflow-hidden">
         
         {/* Top: Minimal Clean Developer Brand (No Logo/Picture) */}
         <div className="flex flex-col min-h-0 flex-1">
-          <div className="pb-4 border-b border-border/60">
+          <div className="pb-5 border-b border-border/60">
             <Link href="/" className="group block">
               <span className="font-serif font-bold text-base text-foreground block truncate leading-tight group-hover:text-accent transition-colors">
                 Arnel Baylon
               </span>
-              <span className="font-mono text-[11px] text-muted-foreground block truncate mt-0.5">
+              <span className="font-mono text-[11px] text-muted-foreground block truncate mt-1">
                 Software Engineer
               </span>
             </Link>
           </div>
 
           {/* Main Area: Categorized Navigation Links with Responsive Inline yhelAI Dropdown */}
-          <div className="flex-1 overflow-y-auto mt-4 pr-1 space-y-4 scrollbar-thin">
+          <div className="flex-1 overflow-y-auto mt-5 pr-1 space-y-6 scrollbar-thin">
             
             {/* Categorized Navigation Groups */}
-            {categorizedNav.map((group) => (
-              <div key={group.category} className="space-y-1">
-                <div className="px-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/80 font-semibold mb-1.5">
-                  {group.category}
+            {categorizedNav.map((group, groupIdx) => (
+              <div key={group.category} className="space-y-1.5">
+                {/* Category Header with accent dot */}
+                <div className="flex items-center gap-2 px-3 mb-2">
+                  <span className="w-1 h-1 rounded-full bg-accent/60 shrink-0" />
+                  <span className="font-mono text-[10.5px] uppercase tracking-widest text-muted-foreground/75 font-semibold">
+                    {group.category}
+                  </span>
                 </div>
 
                 <nav className="space-y-0.5" aria-label={group.category}>
@@ -200,7 +204,7 @@ export function Sidebar() {
                       <a
                         key={item.id}
                         href={item.href}
-                        className={`group relative flex items-center justify-between px-3 py-1.5 rounded-lg font-mono text-xs transition-all duration-200 ${
+                        className={`group relative flex items-center justify-between px-3 py-2 rounded-xl font-mono text-xs transition-all duration-200 ${
                           isActive
                             ? 'text-foreground font-semibold bg-muted/60'
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
@@ -218,7 +222,7 @@ export function Sidebar() {
                         <span className="truncate pl-1">{item.label}</span>
 
                         {item.badge && (
-                          <span className="text-[10px] px-1.5 py-0.2 rounded bg-muted border border-border text-muted-foreground">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted border border-border text-muted-foreground">
                             {item.badge}
                           </span>
                         )}
@@ -226,11 +230,18 @@ export function Sidebar() {
                     )
                   })}
                 </nav>
+
+                {/* Subtle separator between groups (except last) */}
+                {groupIdx < categorizedNav.length - 1 && (
+                  <div className="pt-1">
+                    <div className="border-b border-border/40 mx-3" />
+                  </div>
+                )}
               </div>
             ))}
 
             {/* ── Responsive Inline Expandable yhelAI Assistant Dropdown ── */}
-            <div className="pt-2 border-t border-border/50">
+            <div className="pt-4 mt-2 border-t border-border/50">
               <button
                 type="button"
                 onClick={() => setIsChatOpen(!isChatOpen)}
@@ -443,21 +454,24 @@ export function Sidebar() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -12 }}
             transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-            className="lg:hidden fixed inset-x-0 top-14 z-50 p-5 bg-background border-b border-border shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto"
+            className="lg:hidden fixed inset-x-0 top-14 z-50 p-5 bg-background/98 backdrop-blur-sm border-b border-border shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto"
           >
             {/* Categorized Nav in Mobile */}
-            {categorizedNav.map((group) => (
-              <div key={group.category} className="space-y-1">
-                <div className="px-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-                  {group.category}
+            {categorizedNav.map((group, groupIdx) => (
+              <div key={group.category} className="space-y-1.5">
+                <div className="flex items-center gap-2 px-1 mb-2">
+                  <span className="w-1 h-1 rounded-full bg-accent/60 shrink-0" />
+                  <span className="font-mono text-[10.5px] uppercase tracking-widest text-muted-foreground/75 font-semibold">
+                    {group.category}
+                  </span>
                 </div>
-                <nav className="space-y-1">
+                <nav className="space-y-0.5">
                   {group.links.map((item) => (
                     <a
                       key={item.id}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="flex items-center justify-between p-2 rounded-lg text-xs font-mono text-foreground hover:bg-muted transition-colors"
+                      className="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-mono text-foreground hover:bg-muted/40 transition-colors"
                     >
                       <span className="font-medium">{item.label}</span>
                       {item.badge && (
@@ -468,11 +482,16 @@ export function Sidebar() {
                     </a>
                   ))}
                 </nav>
+                {groupIdx < categorizedNav.length - 1 && (
+                  <div className="pt-1">
+                    <div className="border-b border-border/40 mx-1" />
+                  </div>
+                )}
               </div>
             ))}
 
             {/* Mobile yhelAI Chat in Drawer */}
-            <div className="pt-3 border-t border-border space-y-3 font-mono text-xs">
+            <div className="pt-5 mt-2 border-t border-border space-y-3 font-mono text-xs">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 text-accent font-semibold">
                   <span>✦</span>

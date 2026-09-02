@@ -208,7 +208,7 @@ export function ATSResumeHeader() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="lg:col-span-6"
         >
-          <div className="rounded-2xl border border-border bg-muted/20 p-5 shadow-sm space-y-4">
+          <div className="rounded-2xl border border-border/80 bg-muted/20 dark:bg-card/80 p-5 shadow-sm dark:shadow-lg dark:shadow-black/20 space-y-4">
             
             {/* Header: Clean Typography & Social Connectors (No AB/Robot Icon) */}
             <div className="flex items-center justify-between pb-3 border-b border-border/60">
@@ -268,8 +268,8 @@ export function ATSResumeHeader() {
                       onClick={() => setSelectedCap(isSelected ? null : cap.id)}
                       className={`flex items-center gap-2 px-3 py-2 rounded-xl font-mono text-xs text-left transition-all cursor-pointer ${
                         isSelected
-                          ? 'bg-background text-foreground font-semibold shadow-xs border border-accent/40 ring-1 ring-accent/20'
-                          : 'bg-muted/40 text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/40'
+                          ? 'bg-background dark:bg-muted text-foreground font-semibold shadow-xs border border-accent/40 ring-1 ring-accent/20'
+                          : 'bg-muted/40 dark:bg-muted/30 text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/40'
                       }`}
                     >
                       <span className="text-xs shrink-0">{cap.icon}</span>
@@ -289,7 +289,7 @@ export function ATSResumeHeader() {
                   animate={{ opacity: 1, height: 'auto', y: 0 }}
                   exit={{ opacity: 0, height: 0, y: -4 }}
                   transition={{ duration: 0.25 }}
-                  className="overflow-hidden p-4 rounded-xl bg-background border border-border/80 space-y-3 shadow-2xs"
+                  className="overflow-hidden p-4 rounded-xl bg-background dark:bg-muted/40 border border-border/80 space-y-3 shadow-2xs"
                 >
                   {/* Title & Metrics */}
                   <div>
@@ -346,7 +346,7 @@ export function ATSResumeHeader() {
           <a
             key={idx}
             href={m.href}
-            className="group block p-3.5 rounded-xl border border-border/70 bg-muted/10 hover:bg-muted/30 hover:border-accent/40 transition-all shadow-2xs"
+            className="group block p-3.5 rounded-xl border border-border/70 bg-muted/10 dark:bg-card/60 hover:bg-muted/30 hover:border-accent/40 transition-all shadow-2xs dark:shadow-md dark:shadow-black/15"
           >
             <div className="font-serif text-lg sm:text-xl font-bold text-foreground group-hover:text-accent transition-colors flex items-center justify-between">
               <span>{m.value}</span>

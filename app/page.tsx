@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Sidebar } from '@/components/ui/Sidebar'
+import { DotWaveBackground } from '@/components/ui/DotWaveBackground'
 import { ATSResumeHeader } from '@/components/sections/ATSResumeHeader'
 import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsSection'
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
@@ -14,6 +15,9 @@ import { ContactSection } from '@/components/sections/ContactSection'
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative">
+      {/* ── Ambient 3D Dot Wave Background ── */}
+      <DotWaveBackground />
+
       {/* ── Floating Island Command Rail ── */}
       <Sidebar />
 

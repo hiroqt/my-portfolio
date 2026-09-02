@@ -370,8 +370,8 @@ export function FeaturedProjectsSection() {
                   onClick={() => setSelectedSystemId(item.id)}
                   className={`group text-left p-3 rounded-xl border transition-all cursor-pointer relative ${
                     isActive
-                      ? 'border-accent bg-accent/5 ring-1 ring-accent shadow-xs'
-                      : 'border-border/80 bg-muted/20 hover:bg-muted/40 hover:border-border'
+                      ? 'border-accent bg-accent/5 dark:bg-accent/10 ring-1 ring-accent shadow-xs'
+                      : 'border-border/80 bg-muted/20 dark:bg-card/50 hover:bg-muted/40 hover:border-border'
                   }`}
                 >
                   <div className="flex items-center justify-between text-[11px] font-mono mb-1">
@@ -403,7 +403,7 @@ export function FeaturedProjectsSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={reduce ? undefined : { opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="rounded-2xl border border-border bg-muted/20 p-5 sm:p-7 shadow-xs relative overflow-hidden"
+              className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 shadow-xs dark:shadow-lg dark:shadow-black/20 relative overflow-hidden"
             >
               <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                 
@@ -428,7 +428,7 @@ export function FeaturedProjectsSection() {
                   </p>
 
                   {/* Problem vs Solution Callout */}
-                  <div className="p-3.5 rounded-xl bg-background border border-border/80 space-y-2 text-xs">
+                  <div className="p-3.5 rounded-xl bg-background dark:bg-muted/40 border border-border/80 space-y-2 text-xs">
                     <div>
                       <span className="font-mono font-bold text-muted-foreground uppercase text-[10px]">
                         Challenge:
@@ -464,7 +464,7 @@ export function FeaturedProjectsSection() {
                       {selectedProject.tags.map((t) => (
                         <span
                           key={t}
-                          className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-background border border-border text-foreground"
+                          className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-background dark:bg-muted/50 border border-border text-foreground"
                         >
                           {t}
                         </span>
@@ -476,7 +476,7 @@ export function FeaturedProjectsSection() {
                 {/* Right Column: Visual Stage & Metrics */}
                 <div className="lg:col-span-5 space-y-4">
                   {/* Visual Preview Frame */}
-                  <div className="rounded-xl overflow-hidden border border-border bg-background shadow-xs group">
+                  <div className="rounded-xl overflow-hidden border border-border bg-background dark:bg-card shadow-xs group">
                     <div className="px-3 py-2 bg-muted/60 border-b border-border flex items-center justify-between text-[11px] font-mono text-muted-foreground">
                       <div className="flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-emerald-500" />
@@ -497,7 +497,7 @@ export function FeaturedProjectsSection() {
                     {selectedProject.metrics.map((m, mIdx) => (
                       <div
                         key={mIdx}
-                        className="p-2.5 rounded-lg bg-background border border-border/80 text-center shadow-2xs"
+                        className="p-2.5 rounded-lg bg-background dark:bg-muted/30 border border-border/80 text-center shadow-2xs"
                       >
                         <div className="font-serif font-bold text-xs sm:text-sm text-foreground">
                           {m.val}
@@ -571,8 +571,8 @@ export function FeaturedProjectsSection() {
                   onClick={() => setExpandedProjectId(isExpanded ? null : p.id)}
                   className={`p-4 rounded-xl border transition-all cursor-pointer flex flex-col justify-between space-y-3 ${
                     isExpanded
-                      ? 'border-accent bg-accent/5 ring-1 ring-accent shadow-xs'
-                      : 'border-border/80 bg-muted/20 hover:bg-muted/40 hover:border-accent/40'
+                      ? 'border-accent bg-accent/5 dark:bg-accent/10 ring-1 ring-accent shadow-xs'
+                      : 'border-border/80 bg-muted/20 dark:bg-card/50 hover:bg-muted/40 hover:border-accent/40'
                   }`}
                 >
                   <div className="space-y-2">
@@ -617,7 +617,7 @@ export function FeaturedProjectsSection() {
                 animate={{ opacity: 1, height: 'auto', y: 0 }}
                 exit={{ opacity: 0, height: 0, y: -8 }}
                 transition={{ duration: 0.25 }}
-                className="overflow-hidden p-5 sm:p-6 rounded-2xl border border-accent/40 bg-background shadow-md space-y-4"
+                className="overflow-hidden p-5 sm:p-6 rounded-2xl border border-accent/40 bg-background dark:bg-card shadow-md dark:shadow-lg dark:shadow-black/20 space-y-4"
               >
                 {/* Header with Title and Close Button */}
                 <div className="flex items-start justify-between pb-3 border-b border-border">
@@ -646,7 +646,7 @@ export function FeaturedProjectsSection() {
                 </p>
 
                 {/* Problem vs Solution */}
-                <div className="grid sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-muted/30 border border-border/70 text-xs">
+                <div className="grid sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-muted/30 dark:bg-muted/20 border border-border/70 text-xs">
                   <div>
                     <span className="font-mono font-bold text-muted-foreground uppercase text-[10px] block mb-0.5">
                       The Challenge:
