@@ -49,7 +49,7 @@ export const projectsData: ProjectData[] = [
       'Directed Acyclic Graph (DAG) task engine orchestrating specialized agent personas in parallel',
       'Anti-AI-slop design system enforcing fluid clamp scales, asymmetric grids, and zero generic blobs',
       '23 Specialized autonomous agent personas with strict role boundaries & toolsets',
-      'Universal compatibility across Claude, Cursor, Gemini, Codex, Grok, Kiro, Hermes, OpenCode, and Antigravity',
+      'Universal compatibility across Claude, Cursor, Gemini, Codex, Grok, Kiro, Hermes, and OpenCode',
       'Interactive retro pixel-art tech startup office visual dashboard streaming live activity',
       'AST symbol-graph context extraction reducing token consumption by 50%–75%',
       'Multi-tiered consensus and automated security audit checks before code generation',

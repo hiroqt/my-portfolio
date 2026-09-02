@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
-import { JARVISAssistant } from '@/components/modules/ai/JARVISAssistant'
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 const comico = localFont({
   src: '../public/Fonts/WEB/fonts/Comico-Regular.woff2',
@@ -30,15 +30,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${comico.variable}`}>
       <body className="overflow-x-hidden min-h-screen font-sans">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:px-4 focus:py-2 focus:bg-background focus:text-foreground focus:ring-2 focus:ring-accent focus:rounded-md font-mono text-sm shadow-lg"
-        >
-          Skip to main content
-        </a>
-        {children}
-        <JARVISAssistant />
-        <Analytics />
+        <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:px-4 focus:py-2 focus:bg-background focus:text-foreground focus:ring-2 focus:ring-accent focus:rounded-md font-mono text-sm shadow-lg"
+          >
+            Skip to main content
+          </a>
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

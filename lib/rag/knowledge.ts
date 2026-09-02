@@ -48,9 +48,9 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
 - Context Engineering: dynamic context window management, few-shot prompting, structured schema enforcement (Zod/JSON Schema), and token budget optimization.
 - Agentic Loops: autonomous decision loops, multi-step tool/function calling, plan-and-execute workflows, and self-correcting error handling.
 - RAG Architectures: semantic chunking, hybrid search (dense cosine embeddings + BM25/TF-IDF keyword weighting), Reciprocal Rank Fusion (RRF), pgvector indexing, and grounding guardrails.
-- LLM Orchestration & Frontier Models: Claude, Gemini, OpenAI / Codex, DeepSeek, Qwen, GLM, Ollama (local LLM runtime & quantization), Antigravity, Cursor, Kiro, OpenCode.`,
-    keywords: ['ai', 'context engineering', 'agentic loops', 'rag', 'llm', 'ollama', 'opencode', 'claude', 'gemini', 'cursor', 'kiro', 'antigravity', 'groq', 'llama', 'prompt engineering', 'embeddings', 'pgvector', 'tools'],
-    metadata: { section: 'ai', techStack: ['Ollama', 'OpenCode', 'Antigravity', 'Cursor', 'Kiro', 'Claude', 'Gemini', 'TypeScript'] }
+- LLM Orchestration & Frontier Models: Claude, Gemini, OpenAI / Codex, DeepSeek, Qwen, GLM, Ollama (local LLM runtime & quantization), Cursor, Kiro, OpenCode.`,
+    keywords: ['ai', 'context engineering', 'agentic loops', 'rag', 'llm', 'ollama', 'opencode', 'claude', 'gemini', 'cursor', 'kiro', 'groq', 'llama', 'prompt engineering', 'embeddings', 'pgvector', 'tools'],
+    metadata: { section: 'ai', techStack: ['Ollama', 'OpenCode', 'Cursor', 'Kiro', 'Claude', 'Gemini', 'TypeScript'] }
   },
   {
     id: 'skills-frontend',
@@ -184,9 +184,9 @@ Arnel won Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic 
 - Autonomous software synthesis framework compiling natural language instructions into Next.js App Router applications.
 - Directed Acyclic Graph (DAG) task engine orchestrating 23 specialized agent personas in parallel swarm execution loops (Creative Director, UX Planner, Design System Architect, Frontend/Backend Engineers, Performance SRE, Security Sentinel, QA).
 - Anti-AI-Slop Frontend Engine: Enforces strict design principles, preventing common automated template structures (such as repeating card grids and placeholder copy) by utilizing mathematical fluid clamp typography scales, asymmetric grid layouts, the 64-pattern Impeccable slop catalog, and formal API error specifications.
-- Supported IDEs & Agent Skills: Claude (.claude-plugin, .claude/skills), Cursor (.cursor/skills), Gemini (.gemini/skills), Codex (.codex/skills), Grok (.grok/skills), Kiro (.kiro/skills), Hermes (.hermes/skills), OpenCode (.opencode/skills), Pi (.pi/skills), and Antigravity (.agents).
+- Supported IDEs & Agent Skills: Claude (.claude-plugin, .claude/skills), Cursor (.cursor/skills), Gemini (.gemini/skills), Codex (.codex/skills), Grok (.grok/skills), Kiro (.kiro/skills), Hermes (.hermes/skills), OpenCode (.opencode/skills), and Pi (.pi/skills).
 - Interactive retro pixel-art startup office visual dashboard streaming live subagent tasks and state in real-time.`,
-    keywords: ['pixelcrew', 'pixel crew', 'pixelagents', 'multi-agent', 'swarm', 'dag', 'anti-slop', 'anti-ai-slop', 'claude', 'cursor', 'gemini', 'codex', 'kiro', 'grok', 'antigravity', 'agentic', 'open source', 'github'],
+    keywords: ['pixelcrew', 'pixel crew', 'pixelagents', 'multi-agent', 'swarm', 'dag', 'anti-slop', 'anti-ai-slop', 'claude', 'cursor', 'gemini', 'codex', 'kiro', 'grok', 'agentic', 'open source', 'github'],
     metadata: { section: 'pixelcrew', projectId: 'pixelcrew', featured: true }
   },
 
