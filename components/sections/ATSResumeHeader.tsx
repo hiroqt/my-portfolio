@@ -152,7 +152,7 @@ export function ATSResumeHeader() {
               Arnel Baylon
             </h1>
             <p className="mt-2 font-mono text-xs sm:text-sm text-accent font-semibold tracking-wide uppercase">
-              Full-Stack Engineer &bull; Generative AI Systems
+              Software Engineer &bull; Generative AI Systems
             </p>
           </motion.div>
 
