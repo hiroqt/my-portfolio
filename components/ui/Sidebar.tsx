@@ -262,13 +262,19 @@ export function Sidebar() {
                       {messages.map((m, idx) => (
                         <div
                           key={idx}
-                          className={`p-2 rounded-lg leading-relaxed ${
-                            m.role === 'assistant'
-                              ? 'bg-background text-foreground border border-border/70 shadow-2xs'
-                              : 'bg-accent text-white text-right ml-2'
+                          className={`flex ${
+                            m.role === 'assistant' ? 'justify-start' : 'justify-end'
                           }`}
                         >
-                          <p className="whitespace-pre-wrap">{m.content}</p>
+                          <div
+                            className={`p-2 rounded-lg leading-relaxed w-fit max-w-[85%] ${
+                              m.role === 'assistant'
+                                ? 'bg-background text-foreground border border-border/70 shadow-2xs'
+                                : 'bg-accent text-white'
+                            }`}
+                          >
+                            <p className="whitespace-pre-wrap">{m.content}</p>
+                          </div>
                         </div>
                       ))}
                       {isLoading && (
@@ -478,13 +484,19 @@ export function Sidebar() {
                 {messages.map((m, idx) => (
                   <div
                     key={idx}
-                    className={`p-2 rounded-lg text-[11px] ${
-                      m.role === 'assistant'
-                        ? 'bg-muted text-foreground'
-                        : 'bg-accent text-white text-right'
+                    className={`flex ${
+                      m.role === 'assistant' ? 'justify-start' : 'justify-end'
                     }`}
                   >
-                    {m.content}
+                    <div
+                      className={`p-2 rounded-lg text-[11px] w-fit max-w-[85%] ${
+                        m.role === 'assistant'
+                          ? 'bg-muted text-foreground'
+                          : 'bg-accent text-white'
+                      }`}
+                    >
+                      {m.content}
+                    </div>
                   </div>
                 ))}
               </div>

@@ -148,7 +148,7 @@ export function ATSResumeHeader() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.05 }}
           >
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.1]">
+            <h1 className="font-mono text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.1]">
               Arnel Baylon
             </h1>
             <p className="mt-2 font-mono text-xs sm:text-sm text-accent font-semibold tracking-wide uppercase">
@@ -213,11 +213,11 @@ export function ATSResumeHeader() {
             {/* Header: Clean Typography & Social Connectors (No AB/Robot Icon) */}
             <div className="flex items-center justify-between pb-3 border-b border-border/60">
               <div>
-                <div className="font-serif font-bold text-sm text-foreground leading-tight">
-                  Arnel Baylon
+                <div className="font-mono font-bold text-xs text-foreground leading-tight">
+                  Engineering Console
                 </div>
-                <div className="font-mono text-[11px] text-muted-foreground">
-                  BS Information Technology &bull; 2026
+                <div className="font-mono text-[10px] text-muted-foreground">
+                  Cavite, PH &bull; BS IT &bull; CvSU 2026
                 </div>
               </div>
 

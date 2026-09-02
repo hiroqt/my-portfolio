@@ -186,131 +186,132 @@ const featuredSystems: FeaturedProject[] = [
 // All Projects Catalog (Initial 4 shown in Horizontal View + Full Archive on "Show All")
 const allProjectsList: ProjectArchiveItem[] = [
   {
-    id: 'doculens-ai',
+    id: 'pacementor',
     number: '01',
-    title: 'DocuLens AI',
-    category: 'Enterprise AI & OCR',
-    summary: 'Multimodal document intelligence and structured JSON extraction pipeline for invoices, receipts, and clinical forms.',
-    problem: 'Manual document data entry is error-prone and delays accounting approvals by several business days.',
-    solution: 'Hybrid OCR + Vision parsing pipeline with automated JSON schema validation and zero-shot table extraction.',
+    title: 'PaceMentor',
+    category: 'Mobile App / AI',
+    summary: 'AI-powered running coach with adaptive training plans, real-time GPS tracking, and Strava integration — from first steps to personal best.',
+    problem: 'Amateur runners struggle to build consistent, injury-free training habits without expensive human coaching.',
+    solution: 'AI engine analyzing running metrics (pace, heart rate, elevation) to dynamically adjust future workouts, with deep Strava integration.',
     highlights: [
-      'Zero-shot tabular extraction with bounding box alignment',
-      'Automated validation against pre-configured ERP schema definitions',
-      'Sub-second inference pipeline with high confidence score filtering',
+      'AI-powered running coach with dynamic training plans tailored to user profiles',
+      'High-precision GPS tracking with auto-pause detection when walking or stopping',
+      'Seamless Strava API bi-directional synchronization for importing and exporting runs',
     ],
-    tags: ['Next.js', 'FastAPI', 'Python', 'Vision LLM', 'Tailwind'],
+    tags: ['Flutter', 'Dart', 'AI', 'Mobile', 'Strava API'],
     githubUrl: 'https://github.com/hiroqt',
   },
   {
-    id: 'hrms-payroll',
+    id: 'present-po',
     number: '02',
-    title: 'HRMS & Statutory Payroll',
-    category: 'B2B Cloud SaaS',
-    summary: 'Multi-tenant Philippine statutory payroll calculation engine (SSS, PhilHealth, Pag-IBIG, Tax) with biometric QR attendance.',
-    problem: 'Complex statutory deductions and manual biometric timekeeping create recurring compliance errors.',
-    solution: 'Deterministic statutory calculation engine with automated tax brackets and QR attendance verification.',
+    title: 'Present Po',
+    category: 'B2B SaaS / Productivity',
+    summary: 'Workforce attendance and time-tracking platform with scheduling, geofenced presence monitoring, AI journaling, and automated reporting.',
+    problem: 'Traditional workforce time tracking relies on manual timesheets, causing reconciliation overhead and inaccurate hour tallies.',
+    solution: 'One-tap geofenced attendance with AI journaling, OCR timesheet parsing, and bulk automated certificate generation.',
     highlights: [
-      'Complete automated Philippine statutory tax and contribution tables',
-      'Role-based multi-tenant security with automated payslip PDF generation',
-      'Real-time employee QR attendance check-in and shift scheduling',
+      'Automatic one-tap time-in and time-out with strict geofence vicinity validation',
+      'AI journaling with intelligent auto-completion of daily activity logs',
+      'Bulk automated completion certificate generation with validated hour tallies',
     ],
-    tags: ['Laravel', 'React', 'MySQL', 'Tailwind CSS', 'REST API'],
+    tags: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'AI'],
     githubUrl: 'https://github.com/hiroqt',
   },
   {
-    id: 'opd-triage-kiosk',
+    id: 'hospital-queuing-system',
     number: '03',
-    title: 'Hospital OPD Triage & Kiosk',
-    category: 'Healthcare IT',
-    summary: 'Clinical outpatient triage & real-time queuing system operated across 486+ operational hours at GEAMH Hospital.',
+    title: 'Hospital Queuing System',
+    category: 'Healthcare Enterprise / AI',
+    summary: 'A centralized local queuing and triage system with Groq LLM integration developed during a 486-hour internship at General Emilio Aguinaldo Memorial Hospital.',
     problem: 'Overcrowded waiting rooms and long intake delays for specialized medical hospital departments.',
-    solution: 'Natural language symptom intake with priority triage scoring, live department queues, and thermal printing.',
+    solution: 'Offline-capable local network queuing with Groq LLM triage, thermal receipt printing, and live waiting room display monitors.',
     highlights: [
-      '486+ operational hours deployed at General Emilio Aguinaldo Memorial Hospital',
-      'Automated clinical symptom triage routing patients to correct department',
-      'Live WebSockets queue display boards and thermal ESC/POS ticket printing',
+      'Offline-capable local network architecture for zero-downtime hospital triage',
+      'Groq LLM integration for intelligent symptom intake and clinic routing',
+      'Waiting room audio-visual display monitors with live queue updates',
     ],
-    tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'WebSockets', 'ESC/POS'],
+    tags: ['Vue.js', 'PHP', 'MySQL', 'Groq LLM', 'Healthcare'],
     githubUrl: 'https://github.com/hiroqt',
   },
   {
-    id: 'nexus-crm-saas',
+    id: 'yhel-os',
     number: '04',
-    title: 'Nexus B2B CRM SaaS',
-    category: 'Full-Stack Platform',
-    summary: 'High-throughput sales pipeline manager with automated lead scoring, interaction telemetry, and analytics.',
-    problem: 'Disorganized communication channels and delayed deal stage tracking across remote sales teams.',
-    solution: 'Real-time drag-and-drop Kanban pipeline with optimistic UI updates, automated activity logs, and conversion metrics.',
+    title: 'yhel.os',
+    category: 'Productivity Platform',
+    summary: 'All-in-one operating system and client CRM for independent developers featuring kanban engines, instant proposal generators, and webhook integrations.',
+    problem: 'Freelancers suffer from administrative friction, juggling multiple tools for invoicing, project management, and client communication.',
+    solution: 'Consolidated CRM with Kanban task engine, instant proposal generator, and Telegram/Gmail/Calendar webhook integrations.',
     highlights: [
-      'Optimistic UI state updates for immediate drag-and-drop deal progression',
-      'Automated interaction timeline tracking client calls, emails, and meetings',
-      'Comprehensive conversion metrics and revenue forecasting dashboards',
+      'Client management with a dedicated public secured portal for real-time monitoring',
+      'Interactive drag-and-drop Kanban task engine (To Do, On-going, Review, Done)',
+      'Instant split-screen letter of agreement and proposal generator',
     ],
-    tags: ['Next.js 15', 'Prisma', 'PostgreSQL', 'Tailwind CSS', 'Zustand'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'CRM', 'Webhooks'],
     githubUrl: 'https://github.com/hiroqt',
   },
   {
-    id: 'flutter-agro-market',
+    id: 'vcm-hris',
     number: '05',
-    title: 'AgroMarket Mobile App',
-    category: 'Mobile & Flutter',
-    summary: 'Direct farm-to-consumer mobile marketplace connecting local agricultural producers with wholesale buyers.',
-    problem: 'Middlemen markups reduce local farm margins while buyers face price volatility and unverified freshness.',
-    solution: 'Cross-platform Flutter app with localized price tracking, direct buyer messaging, and geolocation delivery routing.',
+    title: 'VCM HRIS',
+    category: 'Enterprise HR / Capstone',
+    summary: 'QR-code based Human Resource Information System: employee records, leave tracking, faculty recruitment, real-time notifications, and automated payroll.',
+    problem: 'Academic institution faced significant administrative overhead with manual timekeeping and disjointed HR processes.',
+    solution: 'QR-code vicinity attendance, automated statutory payroll engine, and faculty recruitment portal using Laravel and MySQL.',
     highlights: [
-      'Clean Riverpod state management with offline catalog caching',
-      'Real-time price feed comparing provincial market benchmarks',
-      'In-app order tracking with direct agricultural supplier dispatch',
+      'QR-Based attendance validation restricting check-ins to the campus vicinity',
+      'Automated payroll engine computing gross pay, statutory deductions, and net salary',
+      'Teacher recruitment portal with online application screening',
     ],
-    tags: ['Flutter', 'Dart', 'Firebase', 'REST API', 'Provider'],
+    tags: ['Laravel', 'Livewire', 'PHP', 'MySQL', 'QR Attendance'],
     githubUrl: 'https://github.com/hiroqt',
   },
   {
-    id: 'barangay-registry-qr',
+    id: 'tearsize',
     number: '06',
-    title: 'Barangay Citizen Registry & QR Portal',
-    category: 'Civic Software',
-    summary: 'Local community resident census, clearance certificate issuance, and cryptographic QR identification system.',
-    problem: 'Manual paper filing leads to lost records, slow clearance processing, and fraudulent residency certificates.',
-    solution: 'Encrypted citizen database with dynamic QR verification, digital clearance generation, and audit logging.',
+    title: 'Tearsize',
+    category: 'E-Commerce Storefront',
+    summary: 'Client project — E-commerce platform for health and wellness products featuring end-to-end checkout and payment integration.',
+    problem: 'Client needed a performant, reliable storefront with a smooth checkout flow for health and wellness products.',
+    solution: 'Responsive product catalog with fast filtering, secure payment gateway integration, and automated order confirmations.',
     highlights: [
-      'Cryptographically signed QR verification prevents forged barangay clearances',
-      'Instant resident search with fuzzy string matching across thousands of profiles',
-      'Automated document printing with official seal watermarking',
+      'Responsive product catalog with fast filtering and category indexing',
+      'Secure payment gateway integration for digital payments and cards',
+      'Order fulfillment and automated customer email confirmations',
     ],
-    tags: ['Laravel', 'Livewire', 'MySQL', 'Tailwind CSS', 'QR Engine'],
+    tags: ['TypeScript', 'Tailwind CSS', 'Payment Gateway'],
     githubUrl: 'https://github.com/hiroqt',
   },
   {
-    id: 'docu-mind-ai',
+    id: 'hivesync-va',
     number: '07',
-    title: 'DocuMind Research Engine',
-    category: 'AI Knowledge Base',
-    summary: 'Specialized document RAG search engine extracting key citations from technical whitepapers and PDF reports.',
-    problem: 'Engineers waste hours searching through multi-hundred-page technical documentation for precise implementation specs.',
-    solution: 'Semantic vector search pipeline with HyDE (Hypothetical Document Embeddings) and source passage highlighting.',
+    title: 'HiveSync VA',
+    category: 'Agency Platform',
+    summary: 'Client project — Virtual assistant services platform streamlining business operations and lead generation for distributed teams.',
+    problem: 'VA agency needed a high-performance web presence with automated social content pipelines and lead capture.',
+    solution: 'Next.js web application with automated Facebook-to-blog syndication and integrated consultation booking.',
     highlights: [
-      'HyDE retrieval strategy increasing semantic query accuracy',
-      'Precise page-level citation anchors with snippet preview',
-      'Local vector store with fast similarity indexing',
+      'Automated blog syndication syncing Facebook posts directly to website articles',
+      'Integrated consultation booking and inquiry capture system',
+      'SEO-optimized lead conversion flows for virtual assistant services',
     ],
-    tags: ['Python', 'FastAPI', 'pgvector', 'React', 'TypeScript'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Automation'],
+    liveUrl: 'https://www.hivesyncva.com',
     githubUrl: 'https://github.com/hiroqt',
   },
   {
-    id: 'devops-cloud-runner',
+    id: 'tmrc',
     number: '08',
-    title: 'DevOps Cloud Runner',
-    category: 'Cloud Infrastructure',
-    summary: 'Terraform modules and Dockerized deployment configurations for automated multi-environment cloud setups.',
-    problem: 'Inconsistent environment configurations between local staging and cloud production servers.',
-    solution: 'Declarative Terraform Infrastructure-as-Code modules with Docker Compose orchestration and S3 state storage.',
+    title: 'TMRC (Trece Martirez Running Club)',
+    category: 'Community Hub',
+    summary: 'Centralized community hub for Trece Martirez Running Club — managing race registration archives, finish times, and community announcements.',
+    problem: 'Running club lacked a permanent digital home for race records, registration, and community news.',
+    solution: 'Centralized community platform with permanent race registration archives, finish time leaderboards, and event calendar.',
     highlights: [
-      'Reusable Terraform modules for VPC, ECS, and S3 provisioning',
-      'Multi-stage Docker builds optimizing production image sizes',
-      'GitHub Actions CI/CD workflows for automated linting and deployment',
+      'Race registration directory with historical finish records',
+      'Community announcement bulletin and upcoming run event calendar',
+      'Permanent archive of race results and community milestones',
     ],
-    tags: ['Terraform', 'Docker', 'AWS S3', 'GitHub Actions', 'AWS'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     githubUrl: 'https://github.com/hiroqt',
   },
 ]
@@ -575,9 +576,9 @@ export function FeaturedProjectsSection() {
                   }`}
                 >
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between font-mono text-[11px]">
-                      <span className="text-accent font-bold">{p.number}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-background border border-border text-muted-foreground">
+                    <div className="flex items-center justify-between gap-2 font-mono text-[11px]">
+                      <span className="text-accent font-bold shrink-0">{p.number}</span>
+                      <span className="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded bg-background border border-border text-muted-foreground truncate max-w-[60%]" title={p.category}>
                         {p.category}
                       </span>
                     </div>
@@ -621,10 +622,10 @@ export function FeaturedProjectsSection() {
                 {/* Header with Title and Close Button */}
                 <div className="flex items-start justify-between pb-3 border-b border-border">
                   <div>
-                    <div className="flex items-center gap-2 font-mono text-xs text-accent font-bold mb-1">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[11px] sm:text-xs text-accent font-bold mb-1">
                       <span>Project #{expandedProject.number}</span>
-                      <span>&bull;</span>
-                      <span className="text-muted-foreground font-normal">{expandedProject.category}</span>
+                      <span className="hidden sm:inline">&bull;</span>
+                      <span className="text-muted-foreground font-normal text-[10px] sm:text-xs">{expandedProject.category}</span>
                     </div>
                     <h4 className="font-serif text-xl font-bold text-foreground">
                       {expandedProject.title}
