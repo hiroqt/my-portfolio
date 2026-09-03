@@ -36,7 +36,7 @@ export default function Home() {
       {/* ── Main Content Container (Fluid Padding sync with Sidebar) ── */}
       <main
         id="main-content"
-        className={`relative z-10 min-h-screen pt-20 lg:pt-5 pb-16 transition-[padding] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`relative z-10 min-h-screen pt-5 sm:pt-7 lg:pt-5 pb-32 lg:pb-16 transition-[padding] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           sidebarCollapsed ? 'lg:pl-[92px]' : 'lg:pl-[288px]'
         }`}
       >

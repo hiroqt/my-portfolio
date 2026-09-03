@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   FaGithub,
   FaLinkedin,
@@ -22,6 +22,7 @@ import {
   FaCertificate,
   FaGraduationCap,
   FaImages,
+  FaChevronRight,
 } from 'react-icons/fa'
 import { useTheme } from '../ThemeProvider'
 
@@ -76,8 +77,10 @@ const defaultPromptSuggestions = [
 
 export function Sidebar() {
   const { theme, setTheme } = useTheme()
+  const shouldReduceMotion = useReducedMotion()
   const [mounted, setMounted] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileHubOpen, setMobileHubOpen] = useState(false)
+  const [mobileCopilotOpen, setMobileCopilotOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [activeSection, setActiveSection] = useState('projects')
 
@@ -93,6 +96,7 @@ export function Sidebar() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const chatBottomRef = useRef<HTMLDivElement>(null)
+  const mobileChatBottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -103,7 +107,34 @@ export function Sidebar() {
     if (isChatOpen) {
       chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [messages, isChatOpen])
+    if (mobileCopilotOpen) {
+      mobileChatBottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [messages, isChatOpen, mobileCopilotOpen])
+
+  // Lock background scroll when mobile sheets are open
+  useEffect(() => {
+    if (mobileHubOpen || mobileCopilotOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileHubOpen, mobileCopilotOpen])
+
+  // Close mobile sheets on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileHubOpen(false)
+        setMobileCopilotOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   // Active section scroll spy
   useEffect(() => {
@@ -661,185 +692,640 @@ export function Sidebar() {
         </div>
       </aside>
 
-      {/* ── Mobile Floating Glass Dynamic Bar ── */}
-      <header className="lg:hidden fixed top-3 left-3 right-3 z-50 flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-background/85 dark:bg-[#080a12]/85 backdrop-blur-2xl border border-border/80 dark:border-white/[0.08] shadow-md">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span className="font-mono text-xs tracking-wider uppercase font-semibold text-foreground">
-            Navigation
-          </span>
-        </div>
+      {/* ── Apple iOS Dynamic Floating Bottom Dock (Mobile View — WCAG 2.1 Compliant) ── */}
+      <nav
+        aria-label="Mobile Navigation"
+        role="navigation"
+        className="lg:hidden fixed bottom-4 inset-x-3 sm:inset-x-4 max-w-lg mx-auto z-30 flex items-center justify-between px-2.5 py-2 rounded-[30px] min-h-[66px] bg-white/95 dark:bg-[#0d101d]/95 backdrop-blur-2xl backdrop-saturate-180 border border-border/90 dark:border-white/15 shadow-[0_14px_40px_rgba(0,0,0,0.18),0_2px_10px_rgba(0,0,0,0.08),inset_0_1px_1px_rgba(255,255,255,0.25)] dark:shadow-[0_24px_50px_rgba(0,0,0,0.75),0_4px_18px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.12)] pb-[max(0.5rem,env(safe-area-inset-bottom))]"
+      >
+        {/* Tab 1: Work (Featured Systems) — 50px min touch target */}
+        {(() => {
+          const isWorkActive = activeSection === 'projects' && !mobileHubOpen && !mobileCopilotOpen
+          return (
+            <a
+              href="#projects"
+              onClick={() => {
+                setMobileHubOpen(false)
+                setMobileCopilotOpen(false)
+              }}
+              aria-current={isWorkActive ? 'page' : undefined}
+              aria-label="Work section, featured systems"
+              className="relative flex-1 min-h-[50px] min-w-[48px] py-1.5 px-2 rounded-2xl flex flex-col items-center justify-center transition-colors cursor-pointer select-none group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {isWorkActive && (
+                <motion.div
+                  layoutId="activeMobileBottomDockPill"
+                  className="absolute inset-1 rounded-[22px] bg-accent/15 dark:bg-accent/25 border-2 border-accent/40 dark:border-accent/50 -z-10 shadow-xs"
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0.05 }
+                      : { type: 'spring', stiffness: 440, damping: 30 }
+                  }
+                />
+              )}
+              <FaTerminal
+                className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
+                  isWorkActive
+                    ? 'text-amber-600 dark:text-amber-400 scale-110'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+                aria-hidden="true"
+              />
+              <span
+                className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
+                  isWorkActive
+                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+              >
+                Work
+              </span>
+            </a>
+          )
+        })()}
 
-        <div className="flex items-center gap-2">
-          <a
-            href="/pdf/Arnel_Baylon_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1.5 rounded-xl bg-accent/10 border border-accent/25 text-accent text-xs"
-            aria-label="Download Résumé"
-            title="Download Résumé"
-          >
-            <FaFilePdf />
-          </a>
-          <button
-            type="button"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-1.5 rounded-xl bg-foreground text-background text-xs cursor-pointer hover:opacity-90 transition-opacity"
-            aria-label="Toggle Navigation"
-          >
-            {mobileOpen ? <FaTimes /> : <FaBars />}
-          </button>
-        </div>
-      </header>
+        {/* Tab 2: Experience — 50px min touch target */}
+        {(() => {
+          const isExpActive = activeSection === 'experience' && !mobileHubOpen && !mobileCopilotOpen
+          return (
+            <a
+              href="#experience"
+              onClick={() => {
+                setMobileHubOpen(false)
+                setMobileCopilotOpen(false)
+              }}
+              aria-current={isExpActive ? 'page' : undefined}
+              aria-label="Experience section, career track record"
+              className="relative flex-1 min-h-[50px] min-w-[48px] py-1.5 px-2 rounded-2xl flex flex-col items-center justify-center transition-colors cursor-pointer select-none group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {isExpActive && (
+                <motion.div
+                  layoutId="activeMobileBottomDockPill"
+                  className="absolute inset-1 rounded-[22px] bg-accent/15 dark:bg-accent/25 border-2 border-accent/40 dark:border-accent/50 -z-10 shadow-xs"
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0.05 }
+                      : { type: 'spring', stiffness: 440, damping: 30 }
+                  }
+                />
+              )}
+              <FaBriefcase
+                className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
+                  isExpActive
+                    ? 'text-amber-600 dark:text-amber-400 scale-110'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+                aria-hidden="true"
+              />
+              <span
+                className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
+                  isExpActive
+                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+              >
+                Exp
+              </span>
+            </a>
+          )
+        })()}
 
-      {/* ── Mobile Drawer (Apple Frosted Glass Sheet) ── */}
+        {/* Tab 3: Skills — 50px min touch target */}
+        {(() => {
+          const isSkillsActive = activeSection === 'skills' && !mobileHubOpen && !mobileCopilotOpen
+          return (
+            <a
+              href="#skills"
+              onClick={() => {
+                setMobileHubOpen(false)
+                setMobileCopilotOpen(false)
+              }}
+              aria-current={isSkillsActive ? 'page' : undefined}
+              aria-label="Skills section, technical arsenal"
+              className="relative flex-1 min-h-[50px] min-w-[48px] py-1.5 px-2 rounded-2xl flex flex-col items-center justify-center transition-colors cursor-pointer select-none group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {isSkillsActive && (
+                <motion.div
+                  layoutId="activeMobileBottomDockPill"
+                  className="absolute inset-1 rounded-[22px] bg-accent/15 dark:bg-accent/25 border-2 border-accent/40 dark:border-accent/50 -z-10 shadow-xs"
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0.05 }
+                      : { type: 'spring', stiffness: 440, damping: 30 }
+                  }
+                />
+              )}
+              <FaCode
+                className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
+                  isSkillsActive
+                    ? 'text-amber-600 dark:text-amber-400 scale-110'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+                aria-hidden="true"
+              />
+              <span
+                className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
+                  isSkillsActive
+                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+              >
+                Skills
+              </span>
+            </a>
+          )
+        })()}
+
+        {/* Tab 4: Copilot (✦ yhelAI) — 50px min touch target */}
+        {(() => {
+          const isCopilotActive = mobileCopilotOpen
+          return (
+            <button
+              type="button"
+              onClick={() => {
+                setMobileHubOpen(false)
+                setMobileCopilotOpen(!mobileCopilotOpen)
+              }}
+              aria-haspopup="dialog"
+              aria-expanded={mobileCopilotOpen}
+              aria-controls="mobile-copilot-modal"
+              aria-label="Open yhelAI Copilot chat assistant modal"
+              className="relative flex-1 min-h-[50px] min-w-[48px] py-1.5 px-2 rounded-2xl flex flex-col items-center justify-center transition-colors cursor-pointer select-none group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {isCopilotActive && (
+                <motion.div
+                  layoutId="activeMobileBottomDockPill"
+                  className="absolute inset-1 rounded-[22px] bg-accent/15 dark:bg-accent/25 border-2 border-accent/40 dark:border-accent/50 -z-10 shadow-xs"
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0.05 }
+                      : { type: 'spring', stiffness: 440, damping: 30 }
+                  }
+                />
+              )}
+              <span className="relative flex items-center justify-center w-5 h-5">
+                <span
+                  className={`text-base font-bold transition-transform duration-200 group-active:scale-90 ${
+                    isCopilotActive
+                      ? 'text-amber-600 dark:text-amber-400 scale-125 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]'
+                      : 'text-amber-600/90 dark:text-amber-400/90 group-hover:text-foreground'
+                  }`}
+                  aria-hidden="true"
+                >
+                  ✦
+                </span>
+                {!isCopilotActive && (
+                  <span
+                    className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-accent dark:bg-amber-400 ring-2 ring-background animate-pulse"
+                    aria-hidden="true"
+                  />
+                )}
+              </span>
+              <span
+                className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
+                  isCopilotActive
+                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+              >
+                Copilot
+              </span>
+            </button>
+          )
+        })()}
+
+        {/* Tab 5: Hub (Control Center / More) — 50px min touch target */}
+        {(() => {
+          const isHubSectionActive = ['certifications', 'education', 'gallery', 'contact'].includes(activeSection)
+          const isHubActive = mobileHubOpen || (isHubSectionActive && !mobileCopilotOpen)
+          return (
+            <button
+              type="button"
+              onClick={() => {
+                setMobileCopilotOpen(false)
+                setMobileHubOpen(!mobileHubOpen)
+              }}
+              aria-haspopup="dialog"
+              aria-expanded={mobileHubOpen}
+              aria-controls="mobile-hub-modal"
+              aria-label="Open Command Hub and navigation menu"
+              className="relative flex-1 min-h-[50px] min-w-[48px] py-1.5 px-2 rounded-2xl flex flex-col items-center justify-center transition-colors cursor-pointer select-none group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {isHubActive && (
+                <motion.div
+                  layoutId="activeMobileBottomDockPill"
+                  className="absolute inset-1 rounded-[22px] bg-accent/15 dark:bg-accent/25 border-2 border-accent/40 dark:border-accent/50 -z-10 shadow-xs"
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0.05 }
+                      : { type: 'spring', stiffness: 440, damping: 30 }
+                  }
+                />
+              )}
+              <span className="relative flex items-center justify-center w-5 h-5">
+                <svg
+                  className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
+                    isHubActive
+                      ? 'text-amber-600 dark:text-amber-400 scale-110'
+                      : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                  }`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="7" height="7" x="3" y="3" rx="1.5" />
+                  <rect width="7" height="7" x="14" y="3" rx="1.5" />
+                  <rect width="7" height="7" x="14" y="14" rx="1.5" />
+                  <rect width="7" height="7" x="3" y="14" rx="1.5" />
+                </svg>
+                {isHubSectionActive && !mobileHubOpen && !mobileCopilotOpen && (
+                  <span
+                    className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-accent dark:bg-amber-400 ring-2 ring-background"
+                    aria-hidden="true"
+                  />
+                )}
+              </span>
+              <span
+                className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
+                  isHubActive
+                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
+                }`}
+              >
+                Hub
+              </span>
+            </button>
+          )
+        })()}
+      </nav>
+
+      {/* ── Apple iOS Command Hub Bottom Sheet Modal (WCAG 2.1 Dialog) ── */}
       <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -8 }}
-            transition={{ type: 'spring', stiffness: 340, damping: 28 }}
-            className="lg:hidden fixed inset-x-3 top-16 z-50 p-4 rounded-2xl bg-background/95 dark:bg-[#080a12]/95 backdrop-blur-2xl border border-border/80 dark:border-white/[0.1] shadow-2xl space-y-4 max-h-[82vh] overflow-y-auto font-mono"
-          >
-            {/* Categorized Nav in Mobile Drawer */}
-            {categorizedNav.map((group) => (
-              <div key={group.category} className="space-y-1">
-                <div className="flex items-center gap-2 px-1 mb-1">
-                  <span className="w-1 h-1 rounded-full bg-accent" />
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-                    {group.category}
+        {mobileHubOpen && (
+          <>
+            {/* Dim Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileHubOpen(false)}
+              className="fixed inset-0 z-40 bg-black/65 dark:bg-black/80 backdrop-blur-sm lg:hidden"
+              aria-hidden="true"
+            />
+
+            {/* Slide-Up Sheet */}
+            <motion.div
+              id="mobile-hub-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="hub-modal-title"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0.05 }
+                  : { type: 'spring', damping: 32, stiffness: 360 }
+              }
+              className="fixed inset-x-0 bottom-0 z-50 max-h-[85vh] rounded-t-[32px] bg-white dark:bg-[#0d101d] text-foreground border-t border-x border-border dark:border-white/10 shadow-[0_-20px_60px_rgba(0,0,0,0.25)] dark:shadow-[0_-20px_60px_rgba(0,0,0,0.85)] p-4 sm:p-6 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] overflow-y-auto font-mono space-y-4 lg:hidden"
+            >
+              {/* iOS Grab Handle */}
+              <div
+                className="w-12 h-1.5 rounded-full bg-muted-foreground/40 mx-auto -mt-1 mb-2 cursor-pointer hover:bg-muted-foreground/60 transition-colors"
+                onClick={() => setMobileHubOpen(false)}
+                aria-hidden="true"
+              />
+
+              {/* Sheet Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-border/60 dark:border-white/[0.08]">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-accent dark:bg-amber-400 animate-pulse" aria-hidden="true" />
+                  <div>
+                    <h2 id="hub-modal-title" className="text-xs uppercase tracking-wider font-bold text-foreground">
+                      Command Hub
+                    </h2>
+                    <p className="text-[11px] text-zinc-600 dark:text-zinc-400">Arnel Baylon &bull; Navigation & Controls</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMobileHubOpen(false)}
+                  className="min-h-[44px] min-w-[44px] w-10 h-10 rounded-full bg-muted/80 hover:bg-muted dark:bg-white/[0.1] dark:hover:bg-white/[0.18] text-foreground flex items-center justify-center transition-colors cursor-pointer text-sm focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                  aria-label="Close Command Hub"
+                >
+                  <FaTimes aria-hidden="true" />
+                </button>
+              </div>
+
+              {/* Categorized Links (Technical Proof & Connect) */}
+              <div className="space-y-3.5">
+                {categorizedNav
+                  .filter((group) => group.category !== 'Systems & Work')
+                  .map((group) => (
+                    <div key={group.category} className="space-y-1.5">
+                      <div className="flex items-center justify-between px-1 mb-1">
+                        <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold">
+                          {group.category}
+                        </span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent/60" aria-hidden="true" />
+                      </div>
+                      <div className="space-y-1.5">
+                        {group.links.map((item) => {
+                          const isActive = activeSection === item.id
+                          const IconComponent = item.icon
+
+                          return (
+                            <a
+                              key={item.id}
+                              href={item.href}
+                              onClick={() => setMobileHubOpen(false)}
+                              aria-current={isActive ? 'page' : undefined}
+                              className={`flex items-center justify-between min-h-[48px] px-3.5 py-3 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                                isActive
+                                  ? 'bg-accent/15 text-accent font-bold border border-accent/40 shadow-2xs'
+                                  : 'text-foreground bg-muted/40 dark:bg-white/[0.04] hover:bg-muted/70 dark:hover:bg-white/[0.08] border border-border/60 dark:border-white/[0.08]'
+                              }`}
+                            >
+                              <div className="flex items-center gap-3">
+                                <IconComponent
+                                  className={`w-4 h-4 ${isActive ? 'text-accent' : 'text-zinc-600 dark:text-zinc-400'}`}
+                                  aria-hidden="true"
+                                />
+                                <span>{item.label}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                {item.badge && (
+                                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-accent/15 border border-accent/30 text-accent font-bold">
+                                    {item.badge}
+                                  </span>
+                                )}
+                                <FaChevronRight className="w-3 h-3 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
+                              </div>
+                            </a>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Quick Action: Apple Wallet Style Résumé Card — 52px min touch target */}
+              <div className="pt-2">
+                <a
+                  href="/pdf/Arnel_Baylon_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download or view official ATS résumé PDF"
+                  className="flex items-center justify-between min-h-[52px] p-3.5 rounded-2xl bg-accent/10 hover:bg-accent/15 border border-accent/35 text-accent transition-all group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center text-accent">
+                      <FaFilePdf className="w-5 h-5" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <div className="text-xs sm:text-sm font-bold text-foreground group-hover:text-accent transition-colors">
+                        Official Résumé
+                      </div>
+                      <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                        ATS-Optimized PDF &bull; Download / View
+                      </div>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-mono px-3 py-1.5 rounded-lg bg-accent text-white dark:text-zinc-950 font-bold shadow-xs">
+                    OPEN
                   </span>
-                </div>
-                <nav className="space-y-0.5">
-                  {group.links.map((item) => {
-                    const isActive = activeSection === item.id
-                    const IconComponent = item.icon
-
-                    return (
-                      <a
-                        key={item.id}
-                        href={item.href}
-                        onClick={() => setMobileOpen(false)}
-                        className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-colors ${
-                          isActive
-                            ? 'bg-accent/15 text-accent font-semibold border border-accent/25'
-                            : 'text-foreground hover:bg-muted/50'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <IconComponent className={isActive ? 'text-accent' : 'text-muted-foreground'} />
-                          <span>{item.label}</span>
-                        </div>
-                        {item.badge && (
-                          <span className="text-[9.5px] px-1.5 py-0.2 rounded bg-accent/15 border border-accent/30 text-accent font-semibold">
-                            {item.badge}
-                          </span>
-                        )}
-                      </a>
-                    )
-                  })}
-                </nav>
-              </div>
-            ))}
-
-            {/* Mobile yhelAI Chat */}
-            <div className="pt-3 border-t border-border/60 dark:border-white/[0.06] space-y-2.5 text-xs">
-              <div className="flex items-center justify-between text-accent font-semibold">
-                <div className="flex items-center gap-1.5">
-                  <span>✦</span>
-                  <span>yhelAI Copilot</span>
-                </div>
+                </a>
               </div>
 
-              <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+              {/* Apple Segmented Theme Switcher — 44px min touch target */}
+              {mounted && (
+                <div className="pt-2 border-t border-border/60 dark:border-white/[0.08] space-y-1.5">
+                  <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold px-1">
+                    Appearance
+                  </span>
+                  <div
+                    role="radiogroup"
+                    aria-label="Appearance theme switcher"
+                    className="relative flex items-center p-1 rounded-xl bg-muted/70 dark:bg-black/40 border border-border/70 dark:border-white/[0.1]"
+                  >
+                    {(['system', 'light', 'dark'] as const).map((mode) => {
+                      const isSelected = theme === mode
+                      return (
+                        <button
+                          key={mode}
+                          type="button"
+                          role="radio"
+                          aria-checked={isSelected}
+                          onClick={() => setTheme(mode)}
+                          className={`relative flex-1 min-h-[44px] py-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-mono capitalize transition-colors duration-150 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                            isSelected ? 'text-foreground font-bold' : 'text-zinc-600 dark:text-zinc-400 hover:text-foreground'
+                          }`}
+                          aria-label={`Switch theme to ${mode} mode`}
+                        >
+                          {isSelected && (
+                            <motion.div
+                              layoutId="activeMobileThemePill"
+                              className="absolute inset-0 rounded-lg bg-background dark:bg-[#121626] shadow-xs border border-border/60 dark:border-white/10 -z-10"
+                              transition={
+                                shouldReduceMotion
+                                  ? { duration: 0.05 }
+                                  : { type: 'spring', stiffness: 450, damping: 32 }
+                              }
+                            />
+                          )}
+                          {mode === 'system' && <FaDesktop className="w-3 h-3" aria-hidden="true" />}
+                          {mode === 'light' && <FaSun className="w-3 h-3" aria-hidden="true" />}
+                          {mode === 'dark' && <FaMoon className="w-3 h-3" aria-hidden="true" />}
+                          <span className="text-[11px]">{mode}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Social Dock — 44px min touch target */}
+              <div className="pt-2 border-t border-border/60 dark:border-white/[0.08] flex items-center justify-between px-2 text-muted-foreground">
+                <div className="flex items-center gap-2.5">
+                  <a
+                    href="https://github.com/hiroqt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-muted/60 dark:bg-white/[0.05] border border-border/60 dark:border-white/[0.08] text-foreground hover:text-accent transition-colors flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                    aria-label="GitHub Profile (opens in new tab)"
+                  >
+                    <FaGithub className="w-4 h-4" aria-hidden="true" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/arnel-baylon-b05233189"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-muted/60 dark:bg-white/[0.05] border border-border/60 dark:border-white/[0.08] text-foreground hover:text-accent transition-colors flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                    aria-label="LinkedIn Profile (opens in new tab)"
+                  >
+                    <FaLinkedin className="w-4 h-4" aria-hidden="true" />
+                  </a>
+                  <a
+                    href="mailto:arnelbaylon15@gmail.com"
+                    className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-muted/60 dark:bg-white/[0.05] border border-border/60 dark:border-white/[0.08] text-foreground hover:text-accent transition-colors flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                    aria-label="Send email to arnelbaylon15@gmail.com"
+                  >
+                    <FaEnvelope className="w-4 h-4" aria-hidden="true" />
+                  </a>
+                </div>
+                <span className="text-[11px] text-zinc-500 dark:text-zinc-400 font-mono">
+                  ARNEL BAYLON &bull; 2026
+                </span>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ── Apple Intelligence yhelAI Copilot Bottom Sheet Modal (WCAG 2.1 Dialog) ── */}
+      <AnimatePresence>
+        {mobileCopilotOpen && (
+          <>
+            {/* Dim Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileCopilotOpen(false)}
+              className="fixed inset-0 z-40 bg-black/65 dark:bg-black/80 backdrop-blur-sm lg:hidden"
+              aria-hidden="true"
+            />
+
+            {/* Slide-Up Sheet */}
+            <motion.div
+              id="mobile-copilot-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="copilot-modal-title"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0.05 }
+                  : { type: 'spring', damping: 32, stiffness: 360 }
+              }
+              className="fixed inset-x-0 bottom-0 z-50 max-h-[85vh] rounded-t-[32px] bg-white dark:bg-[#0d101d] text-foreground border-t border-x border-border dark:border-white/10 shadow-[0_-20px_60px_rgba(0,0,0,0.25)] dark:shadow-[0_-20px_60px_rgba(0,0,0,0.85)] p-4 sm:p-6 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] overflow-hidden font-mono flex flex-col lg:hidden"
+            >
+              {/* Apple Intelligence Aura Glow Bar */}
+              <div
+                className="w-16 h-1.5 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 mx-auto -mt-1 mb-3 animate-pulse cursor-pointer"
+                onClick={() => setMobileCopilotOpen(false)}
+                aria-hidden="true"
+              />
+
+              {/* Sheet Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-border/60 dark:border-white/[0.08] shrink-0">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-base text-accent" aria-hidden="true">✦</span>
+                  <div>
+                    <h2 id="copilot-modal-title" className="text-xs font-bold text-accent tracking-wide">
+                      yhelAI Copilot
+                    </h2>
+                    <p className="text-[11px] text-zinc-600 dark:text-zinc-400">Autonomous Engineering Swarm Assistant</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMobileCopilotOpen(false)}
+                  className="min-h-[44px] min-w-[44px] w-10 h-10 rounded-full bg-muted/80 hover:bg-muted dark:bg-white/[0.1] dark:hover:bg-white/[0.18] text-foreground flex items-center justify-center transition-colors cursor-pointer text-sm focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                  aria-label="Close yhelAI Copilot"
+                >
+                  <FaTimes aria-hidden="true" />
+                </button>
+              </div>
+
+              {/* Messages Container */}
+              <div
+                className="space-y-2.5 overflow-y-auto max-h-[42vh] py-3 pr-1 text-xs scrollbar-thin flex-1 min-h-[140px]"
+                aria-live="polite"
+              >
                 {messages.map((m, idx) => (
                   <div
                     key={idx}
-                    className={`flex ${
-                      m.role === 'assistant' ? 'justify-start' : 'justify-end'
-                    }`}
+                    className={`flex ${m.role === 'assistant' ? 'justify-start' : 'justify-end'}`}
                   >
                     <div
-                      className={`p-2 rounded-xl text-[10.5px] max-w-[85%] ${
+                      className={`p-3 rounded-2xl text-xs leading-relaxed max-w-[88%] ${
                         m.role === 'assistant'
-                          ? 'bg-muted/80 text-foreground border border-border/60'
-                          : 'bg-accent text-white dark:text-zinc-950 font-medium'
+                          ? 'bg-muted/90 dark:bg-white/[0.06] text-foreground border border-border/70 dark:border-white/[0.1] shadow-2xs'
+                          : 'bg-accent text-white dark:text-zinc-950 font-semibold shadow-xs'
                       }`}
                     >
-                      {m.content}
+                      <p className="whitespace-pre-wrap">{m.content}</p>
                     </div>
                   </div>
                 ))}
+                {isLoading && (
+                  <div className="flex items-center gap-2 p-2.5 rounded-2xl bg-muted/70 dark:bg-white/[0.05] text-zinc-700 dark:text-zinc-300 text-xs border border-border/60 w-fit">
+                    <FaSpinner className="animate-spin text-accent text-xs" aria-hidden="true" />
+                    <span>Analyzing engineering context...</span>
+                  </div>
+                )}
+                <div ref={mobileChatBottomRef} />
               </div>
 
+              {/* Quick Prompt Chips — 40px min touch target */}
+              {messages.length <= 2 && (
+                <div className="space-y-1.5 pt-2.5 border-t border-border/40 dark:border-white/[0.06] shrink-0">
+                  <div className="text-[10.5px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold px-1">
+                    Suggested queries
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {defaultPromptSuggestions.map((sug, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => handleSendMessage(sug)}
+                        className="text-left min-h-[40px] px-3 py-1.5 rounded-xl bg-muted/60 dark:bg-white/[0.05] border border-border/70 dark:border-white/[0.1] text-xs font-medium text-foreground hover:border-accent/60 transition-colors cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                      >
+                        {sug}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Chat Form — 44px min touch target */}
               <form
                 onSubmit={(e) => {
                   e.preventDefault()
                   handleSendMessage()
                 }}
-                className="flex items-center gap-1.5 w-full min-w-0"
+                className="pt-3 border-t border-border/40 dark:border-white/[0.06] flex items-center gap-2 shrink-0"
               >
+                <label htmlFor="mobile-copilot-input" className="sr-only">
+                  Ask yhelAI Copilot about engineering architectures, systems, or tech stack
+                </label>
                 <input
+                  id="mobile-copilot-input"
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask yhelAI..."
-                  className="flex-1 min-w-0 px-3 py-1.5 rounded-lg bg-muted border border-border text-xs text-foreground focus:outline-hidden"
+                  placeholder="Ask yhelAI about systems, tech stack..."
+                  className="flex-1 min-w-0 min-h-[44px] px-3.5 py-2.5 rounded-xl bg-muted/80 dark:bg-black/50 border border-border/80 dark:border-white/[0.12] text-foreground text-xs placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                   disabled={isLoading}
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-accent text-white dark:text-zinc-950 cursor-pointer"
+                  className="shrink-0 min-h-[44px] min-w-[44px] w-11 h-11 flex items-center justify-center rounded-xl bg-accent text-white dark:text-zinc-950 hover:bg-accent/90 disabled:opacity-40 transition-opacity cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                  aria-label="Send message to yhelAI Copilot"
                 >
-                  <FaPaperPlane className="text-xs" />
+                  <FaPaperPlane className="text-xs" aria-hidden="true" />
                 </button>
               </form>
-            </div>
-
-            {/* Mobile Footer & Theme */}
-            <div className="pt-3 border-t border-border/60 dark:border-white/[0.06] space-y-3">
-              {mounted && (
-                <div className="flex items-center justify-between p-1 rounded-xl bg-muted/60 dark:bg-black/30 border border-border/60">
-                  {(['system', 'light', 'dark'] as const).map((mode) => (
-                    <button
-                      key={mode}
-                      type="button"
-                      onClick={() => setTheme(mode)}
-                      className={`flex-1 py-1 flex items-center justify-center gap-1 rounded-lg text-xs capitalize ${
-                        theme === mode
-                          ? 'bg-background text-foreground font-semibold shadow-2xs'
-                          : 'text-muted-foreground'
-                      }`}
-                    >
-                      {mode === 'system' && <FaDesktop className="w-2.5 h-2.5" />}
-                      {mode === 'light' && <FaSun className="w-2.5 h-2.5" />}
-                      {mode === 'dark' && <FaMoon className="w-2.5 h-2.5" />}
-                      <span>{mode}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex items-center justify-between text-muted-foreground pt-1">
-                <div className="flex items-center gap-3 text-sm">
-                  <a href="https://github.com/hiroqt" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
-                    <FaGithub />
-                  </a>
-                  <a href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
-                    <FaLinkedin />
-                  </a>
-                  <a href="mailto:arnelbaylon15@gmail.com" className="hover:text-foreground">
-                    <FaEnvelope />
-                  </a>
-                </div>
-                <span className="text-[10px] text-muted-foreground">
-                  PORTFOLIO &bull; 2026
-                </span>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
