@@ -1,21 +1,48 @@
-import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Source_Serif_4, JetBrains_Mono, Caveat } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
-const comico = localFont({
-  src: '../public/Fonts/WEB/fonts/Comico-Regular.woff2',
-  variable: '--font-comico',
+// ── High-Performance Self-Hosted Google Fonts via next/font (0 Render Blocking Requests) ──
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
   display: 'swap',
 })
 
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+  weight: ['400', '600', '700'],
+})
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  variable: '--font-handwriting',
+  display: 'swap',
+  weight: ['600', '700'],
+})
+
+export const viewport: Viewport = {
+  themeColor: '#08090e',
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
-  title: 'Arnel Baylon',
+  title: 'Arnel Baylon — Software Engineer & Agentic Developer',
   description:
     'Portfolio & Résumé of Arnel A. Baylon — Software Engineer & Agentic Developer. Experience, projects, certifications, and skills.',
   openGraph: {
-    title: 'Arnel Baylon',
+    title: 'Arnel Baylon — Software Engineer & Agentic Developer',
     description:
       'Software Engineer and Agentic Developer. Experience, projects, certifications, and skills.',
     type: 'profile',
@@ -28,7 +55,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`dark ${comico.variable}`}>
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${mono.variable} ${sourceSerif.variable} ${caveat.variable}`}
+    >
       <body className="overflow-x-hidden min-h-screen font-sans">
         <ThemeProvider>
           <a
@@ -44,5 +74,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-

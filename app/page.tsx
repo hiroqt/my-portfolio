@@ -1,16 +1,38 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import { Sidebar } from '@/components/ui/Sidebar'
-import { DotWaveBackground } from '@/components/ui/DotWaveBackground'
 import { ATSResumeHeader } from '@/components/sections/ATSResumeHeader'
 import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsSection'
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
 import { SkillsSection } from '@/components/sections/SkillsSection'
-import { CertificationsSection } from '@/components/sections/CertificationsSection'
-import { EducationSection } from '@/components/sections/EducationSection'
-import { GallerySection } from '@/components/sections/GallerySection'
-import { ContactSection } from '@/components/sections/ContactSection'
+
+// ── Performance Optimization: Dynamic Code Splitting for Below-the-Fold & Canvas ──
+const DotWaveBackground = dynamic(
+  () => import('@/components/ui/DotWaveBackground').then((m) => m.DotWaveBackground),
+  { ssr: false }
+)
+
+const CertificationsSection = dynamic(
+  () => import('@/components/sections/CertificationsSection').then((m) => m.CertificationsSection),
+  { ssr: true }
+)
+
+const EducationSection = dynamic(
+  () => import('@/components/sections/EducationSection').then((m) => m.EducationSection),
+  { ssr: true }
+)
+
+const GallerySection = dynamic(
+  () => import('@/components/sections/GallerySection').then((m) => m.GallerySection),
+  { ssr: true }
+)
+
+const ContactSection = dynamic(
+  () => import('@/components/sections/ContactSection').then((m) => m.ContactSection),
+  { ssr: true }
+)
 
 export default function Home() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -27,11 +49,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative">
-      {/* ── Ambient 3D Dot Wave Background ── */}
+      {/* ── Ambient 3D Dot Wave Background (Deferred, Zero-Allocation Particle Canvas) ── */}
       <DotWaveBackground />
-
-      {/* ── Apple-Inspired Floating Command Rail ── */}
-      <Sidebar />
 
       {/* ── Main Content Container (Fluid Padding sync with Sidebar) ── */}
       <main
@@ -68,7 +87,9 @@ export default function Home() {
 
         </div>
       </main>
+
+      {/* ── Apple-Inspired Floating Command Rail (Fixed Overlay Navigation) ── */}
+      <Sidebar />
     </div>
   )
 }
-

@@ -132,9 +132,9 @@ export function ContactSection() {
           className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 dark:shadow-lg dark:shadow-black/20"
         >
           <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/50">
-            <h4 className="font-serif font-bold text-base text-foreground">
+            <h3 className="font-serif font-bold text-base text-foreground">
               Send a Direct Message
-            </h4>
+            </h3>
             <span className="font-mono text-[10.5px] text-muted-foreground">
               Direct inbox delivery
             </span>
@@ -145,9 +145,9 @@ export function ContactSection() {
               <div className="inline-flex p-3 rounded-full bg-emerald-500/10 text-emerald-500 text-2xl mb-1">
                 <FaCheckCircle />
               </div>
-              <h5 className="font-serif font-bold text-lg text-foreground">
+              <p className="font-serif font-bold text-lg text-foreground">
                 Message received!
-              </h5>
+              </p>
               <p className="text-xs sm:text-sm text-muted-foreground max-w-sm mx-auto">
                 Thank you for reaching out. I&apos;ll get back to you promptly at your provided email address.
               </p>

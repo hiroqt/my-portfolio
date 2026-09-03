@@ -285,9 +285,9 @@ export function InteractiveGallery() {
                 <span>{item.categoryLabel}</span>
                 <span className="tabular-nums">{item.date}</span>
               </div>
-              <h4 className="text-xs sm:text-sm font-semibold text-foreground truncate group-hover:text-accent transition-colors">
+              <h3 className="text-xs sm:text-sm font-semibold text-foreground truncate group-hover:text-accent transition-colors">
                 {item.title}
-              </h4>
+              </h3>
             </div>
           </div>
         ))}

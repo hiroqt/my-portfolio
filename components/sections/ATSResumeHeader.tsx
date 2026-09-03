@@ -209,6 +209,7 @@ export function ATSResumeHeader() {
           className="lg:col-span-6"
         >
           <div className="rounded-2xl border border-border/80 bg-muted/20 dark:bg-card/80 p-5 shadow-sm dark:shadow-lg dark:shadow-black/20 space-y-4">
+            <h2 className="sr-only">Interactive Engineering Console &amp; Technical Capabilities</h2>
             
             {/* Header: Clean Typography & Social Connectors (No AB/Robot Icon) */}
             <div className="flex items-center justify-between pb-3 border-b border-border/60">

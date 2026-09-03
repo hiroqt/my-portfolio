@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -36,7 +34,7 @@
   }
 
   :root {
-    font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-sans), 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   * {
@@ -193,13 +191,13 @@
 /* ── Typography & Utilities ─────────────────────────────── */
 @layer utilities {
   .font-mono {
-    font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    font-family: var(--font-mono), 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   }
   .font-serif {
-    font-family: 'Source Serif 4', Georgia, serif;
+    font-family: var(--font-serif), 'Source Serif 4', Georgia, serif;
   }
   .font-handwriting {
-    font-family: 'Caveat', cursive, sans-serif !important;
+    font-family: var(--font-handwriting), 'Caveat', cursive, sans-serif !important;
   }
   .text-accent {
     color: var(--accent);
