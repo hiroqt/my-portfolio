@@ -25,6 +25,7 @@ interface FeaturedProject {
   awardSub: string
   awardIcon: React.ReactNode
   image: string
+  previewName?: string
   description: string
   problemSolution: {
     problem: string
@@ -63,6 +64,7 @@ const featuredSystems: FeaturedProject[] = [
     awardSub: 'Cross-IDE Swarm Architecture',
     awardIcon: <span className="text-accent text-xs">✦</span>,
     image: '/images/pixelcrew.png',
+    previewName: 'pixelcrew.website',
     description:
       'Autonomous multi-agent software engineering framework simulating a 23-person tech startup department. Coordinates specialized agent roles (Creative Director, UX Planner, Frontend, Backend, Security Sentinel, Performance SRE) via Directed Acyclic Graph (DAG) task loops.',
     problemSolution: {
@@ -95,6 +97,7 @@ const featuredSystems: FeaturedProject[] = [
     awardSub: 'Amazon Quick Quest BGC (AWS Headquarters)',
     awardIcon: <FaTrophy className="text-amber-500 text-xs" />,
     image: '/images/finops.jpg',
+    previewName: '-',
     description:
       'Awarded Best Business Impact at the 9-Week Amazon Quick Quest Workshop at the AWS Philippines Office in BGC. Automates enterprise expense reconciliation, invoice-to-PO matching, and policy compliance via Amazon Quick Spaces & Flows.',
     problemSolution: {
@@ -126,7 +129,8 @@ const featuredSystems: FeaturedProject[] = [
     awardBadge: 'WINNER — TOP 30 NATIONWIDE',
     awardSub: 'National eGov Hackathon 2026',
     awardIcon: <FaTrophy className="text-amber-500 text-xs" />,
-    image: '/images/egov.jpg',
+    image: '/images/egov.png',
+    previewName: 'e-gov-ai.vercel.app',
     description:
       'Won Top 30 National Winner at the eGov PH Hackathon 2026 (out of 180+ teams nationwide). AI-powered citizen companion navigating PhilHealth, SSS, GSIS, DFA, and statutory government requirements with grounded legal citation references.',
     problemSolution: {
@@ -158,7 +162,8 @@ const featuredSystems: FeaturedProject[] = [
     awardBadge: 'CIVIC OPEN DATA INITIATIVE',
     awardSub: 'DBM GAA Budget & LGU Transparency',
     awardIcon: <span className="text-accent text-xs">✦</span>,
-    image: '/images/bettertrece.jpg',
+    image: '/images/bettertrece.png',
+    previewName: 'bettertrecemartires.org',
     description:
       'Community-first open data platform mapping city infrastructure projects, public budget expenditures (DBM General Appropriations Act), and LGU resolutions to bring radical transparency to local governance.',
     problemSolution: {
@@ -479,8 +484,8 @@ export function FeaturedProjectsSection() {
                   <div className="rounded-xl overflow-hidden border border-border bg-background dark:bg-card shadow-xs group">
                     <div className="px-3 py-2 bg-muted/60 border-b border-border flex items-center justify-between text-[11px] font-mono text-muted-foreground">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                        <span className="truncate">{selectedProject.id}.app</span>
+                        <span className={`w-2 h-2 rounded-full ${selectedProject.previewName === '-' ? 'bg-muted-foreground/40' : 'bg-emerald-500'}`} />
+                        <span className="truncate">{selectedProject.previewName ?? `${selectedProject.id}.app`}</span>
                       </div>
                       <span>Preview</span>
                     </div>

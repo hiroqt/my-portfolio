@@ -68,7 +68,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'better-trece-portal',
-    src: '/images/bettertrece.jpg',
+    src: '/images/bettertrece.png',
     title: 'Better Trece Martires Civic Open Data Platform',
     category: 'civic',
     categoryLabel: 'Civic Tech & Open Data',

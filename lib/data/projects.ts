@@ -12,6 +12,7 @@ export interface ProjectData {
   link: string;
   github?: string;
   image?: string;
+  previewName?: string;
   embedUrl?: string;
   embedTitle?: string;
   features?: string[];
@@ -34,6 +35,7 @@ export const projectsData: ProjectData[] = [
     link: 'https://github.com/hiroqt/PixelCrew',
     github: 'https://github.com/hiroqt/PixelCrew',
     image: '/images/pixelcrew.png',
+    previewName: 'pixelcrew.website',
     isFeatured: true,
     featuredTag: 'AUTONOMOUS AI SWARM',
     featuredTitle: 'Pixel Crew',
@@ -80,6 +82,7 @@ export const projectsData: ProjectData[] = [
     link: '/projects/finops-ai-dashboard',
     github: 'https://github.com/hiroqt',
     image: '/images/finops.jpg',
+    previewName: '-',
     isFeatured: true,
     featuredTag: 'WINNER - BEST BUSINESS IMPACT',
     featuredTitle: 'FinOps AI Dashboard',
@@ -128,7 +131,8 @@ export const projectsData: ProjectData[] = [
     tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Open Data', 'Civic Tech', 'Leaflet OSM'],
     link: 'https://bettertrecemartires.org',
     github: 'https://github.com/hiroqt/bettertrece',
-    image: '/images/bettertrece.jpg',
+    image: '/images/bettertrece.png',
+    previewName: 'bettertrecemartires.org',
     isFeatured: true,
     featuredTag: 'BETTERGOV INITIATIVE',
     featuredTitle: 'Better Trece Martires',
@@ -172,7 +176,8 @@ export const projectsData: ProjectData[] = [
     summary: 'Winner of eGov Hackathon 2026 (Top 30). Unified government services platform designed to streamline citizen compliance and public service delivery using an agentic AI named e Buddy.',
     tags: ['TypeScript', 'AI', 'Tailwind CSS', 'Agentic AI', 'Next.js'],
     link: '#',
-    image: '/images/egov.jpg',
+    image: '/images/egov.png',
+    previewName: 'e-gov-ai.vercel.app',
     isFeatured: true,
     featuredTag: 'WINNER - TOP 30',
     featuredTitle: 'e Buddy',
