@@ -35,8 +35,8 @@ const contactChannels = [
   },
   {
     name: 'Résumé',
-    value: 'Arnel_Baylon_Resume.pdf',
-    href: '/pdf/Arnel_Baylon_Resume.pdf',
+    value: 'Resume.pdf',
+    href: '/pdf/Resume.pdf',
     icon: <FaFilePdf className="text-accent" />,
     action: 'Download PDF ↗',
   },

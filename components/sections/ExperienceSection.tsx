@@ -96,7 +96,7 @@ export function ExperienceSection() {
           </h2>
         </div>
         <a
-          href="/pdf/Arnel_Baylon_Resume.pdf"
+          href="/pdf/Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"

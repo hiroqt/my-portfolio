@@ -1,10 +1,96 @@
 'use client'
 
-import React from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import { FaExternalLinkAlt } from 'react-icons/fa'
+import React, { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import {
+  FaExternalLinkAlt,
+  FaAward,
+  FaFilePdf,
+  FaExpand,
+  FaTimes,
+  FaCheckCircle,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaImage,
+} from 'react-icons/fa'
 
-// ── SVG Brand Icons for Verified Credly Certifications ──
+// ── Official Physical / Issued AWS Certificate Data ──
+
+interface OfficialCertificate {
+  id: string
+  title: string
+  awardTag: string
+  awardTagColor: 'amber' | 'blue' | 'purple'
+  recipient: string
+  recipientRole: string
+  issuer: string
+  date: string
+  venue: string
+  description: string
+  thumbnailUrl: string
+  highResUrl: string
+  pdfUrl: string
+  leads: string[]
+  isWinner?: boolean
+}
+
+const officialCertificates: OfficialCertificate[] = [
+  {
+    id: 'aws-capstone-best-business-impact',
+    title: 'Certificate of Recognition — Best Business Impact',
+    awardTag: 'WINNER • BEST BUSINESS IMPACT',
+    awardTagColor: 'amber',
+    recipient: 'DEVOOPS',
+    recipientRole: 'Winning Team & FinOps AI Dashboard Project (Lead: Arnel A. Baylon)',
+    issuer: 'AWS User Group Philippines (AWSUG.PH) & AWS BuildNights',
+    date: 'August 21, 2026',
+    venue: 'AWS Office, 15th Flr, Arthaland Century Pacific Tower, Bonifacio Global City, Taguig',
+    description:
+      'Awarded for outstanding performance and demonstrating the Best Business Impact at Capstone on Quick! QuickQuest Finale: Build Responsibly for architecting and defending the FinOps AI Dashboard.',
+    thumbnailUrl: '/certs/aws-capstone-best-business-impact.jpg',
+    highResUrl: '/certs/aws-capstone-best-business-impact.png',
+    pdfUrl: '/certs/aws-capstone-best-business-impact.pdf',
+    leads: ['Mary Jean Navarro', 'Fahad Hadji Esmael', 'Dave Ailller Rivas', 'Denisse Jane Karim'],
+    isWinner: true,
+  },
+  {
+    id: 'aws-capstone-finale-participant',
+    title: 'Certificate of Participation — Capstone on Quick! Finale',
+    awardTag: 'CAPSTONE FINALE PARTICIPANT',
+    awardTagColor: 'purple',
+    recipient: 'ARNEL A. BAYLON',
+    recipientRole: 'Builder & Full-Stack AI Engineer',
+    issuer: 'AWS User Group Philippines (AWSUG.PH) & AWS BuildNights',
+    date: 'August 21, 2026',
+    venue: 'AWS Office, 15th Flr, Arthaland Century Pacific Tower, Bonifacio Global City, Taguig',
+    description:
+      'In recognition of active participation and valuable contribution to Capstone on Quick! QuickQuest Finale: Build Responsibly, building and defending production-grade cloud and AI architectures.',
+    thumbnailUrl: '/certs/aws-capstone-quickquest-participant.jpg',
+    highResUrl: '/certs/aws-capstone-quickquest-participant.png',
+    pdfUrl: '/certs/aws-capstone-quickquest-participant.pdf',
+    leads: ['Mary Jean Navarro', 'Fahad Hadji Esmael', 'Dave Ailller Rivas', 'Denisse Jane Karim'],
+  },
+  {
+    id: 'aws-buildnights-workshop-series',
+    title: 'Certificate of Participation — QuickQuest Workshop Series',
+    awardTag: 'WORKSHOP SERIES COMPLETION (>4 SESSIONS)',
+    awardTagColor: 'blue',
+    recipient: 'ARNEL A. BAYLON',
+    recipientRole: 'AWS Cloud & Agentic AI Cohort Builder',
+    issuer: 'AWS User Group Philippines (AWSUG.PH) & AWS BuildNights',
+    date: 'June 19 – August 21, 2026',
+    venue: 'AWS Office, 15th Flr, Arthaland Century Pacific Tower, Bonifacio Global City, Taguig',
+    description:
+      'In recognition of active participation and completion of the AWS BuildNights QuickQuest Workshop Series, having attended more than 4 in-depth enterprise cloud sessions.',
+    thumbnailUrl: '/certs/aws-buildnights-quickquest-participant.jpg',
+    highResUrl: '/certs/aws-buildnights-quickquest-participant.png',
+    pdfUrl: '/certs/aws-buildnights-quickquest-participant.pdf',
+    leads: ['Mary Jean Navarro', 'Fahad Hadji Esmael', 'Dave Ailller Rivas', 'Denisse Jane Karim'],
+  },
+]
+
+// ── SVG Brand Logos for Verified Credly Digital Badges ──
 
 function IbmLogoSvg({ className = 'w-6 h-auto' }: { className?: string }) {
   return (
@@ -40,19 +126,19 @@ function AwsLogoSvg({ className = 'w-5 h-5' }: { className?: string }) {
 function LeanSixSigmaSvg({ className = 'w-5 h-5' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      {/* Lean Six Sigma Shield & Sigma Symbol */}
       <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.5 5h6v2h-3.8l2.2 3.5-2.2 3.5H16.5v2h-6l3-4.5-3-4.5z" />
     </svg>
   )
 }
 
-const certifications = [
+const digitalBadges = [
   {
     issuer: 'IBM',
     svgLogo: <IbmLogoSvg className="w-6 h-auto" />,
     title: 'IBM Professional AI Specialization',
     count: '7 Verified Badges',
     credentialUrl: 'https://www.credly.com/users/arnel-baylon',
+    badgeId: '82e8f4a4-6ae5-4bea-8b5e-212cf6ec6563',
     topics: [
       'Retrieval-Augmented Generation (RAG)',
       'Neural Networks & Deep Learning',
@@ -67,6 +153,7 @@ const certifications = [
     title: 'AWS Cloud & Generative AI',
     count: '4 Verified Badges',
     credentialUrl: 'https://www.credly.com/users/arnel-baylon',
+    badgeId: '7d53aa8f-5672-4064-b296-f6fccf400108',
     topics: [
       'Generative AI: Bedrock & Foundation Models',
       'Serverless Event-Driven Architectures',
@@ -80,6 +167,7 @@ const certifications = [
     title: 'Lean Six Sigma — White Belt',
     count: 'Quality System',
     credentialUrl: 'https://www.credly.com/users/arnel-baylon',
+    badgeId: 'LSS-WB-2026',
     topics: [
       'DMAIC Process Optimization Framework',
       'Root Cause Analysis & CI/CD',
@@ -91,11 +179,46 @@ const certifications = [
 
 export function CertificationsSection() {
   const reduce = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
+  const [selectedCert, setSelectedCert] = useState<OfficialCertificate | null>(null)
+  const [viewMode, setViewMode] = useState<'image' | 'pdf'>('image')
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Keyboard accessibility for modal
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedCert(null)
+      }
+    },
+    []
+  )
+
+  useEffect(() => {
+    if (selectedCert) {
+      document.body.style.overflow = 'hidden'
+      window.addEventListener('keydown', handleKeyDown)
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selectedCert, handleKeyDown])
+
+  const openCertModal = (cert: OfficialCertificate, mode: 'image' | 'pdf' = 'image') => {
+    setViewMode(mode)
+    setSelectedCert(cert)
+  }
 
   return (
     <section id="certifications" className="py-12 scroll-mt-20">
       {/* ── Section Header ── */}
-      <div className="mb-6 flex items-baseline justify-between border-b border-border pb-3">
+      <div className="mb-8 flex items-baseline justify-between border-b border-border pb-3">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">04</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
@@ -107,72 +230,345 @@ export function CertificationsSection() {
           href="https://www.credly.com/users/arnel-baylon"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+          className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
         >
-          Credly profile ↗
+          <span>Credly profile</span>
+          <FaExternalLinkAlt className="text-[9px]" />
         </a>
       </div>
 
-      {/* ── 3-Column Credential Grid with Authentic SVGs ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {certifications.map((cert, i) => (
-          <motion.div
-            key={cert.title}
-            initial={reduce ? false : { opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: i * 0.08 }}
-            className="group relative flex flex-col justify-between rounded-xl border border-border/80 bg-muted/20 dark:bg-card/80 p-5 hover:border-accent/40 hover:bg-muted/40 transition-all shadow-xs dark:shadow-lg dark:shadow-black/15"
-          >
-            <div>
-              {/* Header: Authentic SVG Logo + Credly Count Badge */}
-              <div className="flex items-start justify-between gap-2 mb-3">
-                <span className="p-2.5 rounded-xl bg-background dark:bg-muted/50 border border-border text-foreground shadow-2xs inline-flex items-center justify-center">
-                  {cert.svgLogo}
-                </span>
-                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-background dark:bg-muted/40 border border-border text-muted-foreground font-semibold">
-                  {cert.count}
-                </span>
-              </div>
-
-              <h3 className="font-serif font-bold text-base text-foreground group-hover:text-accent transition-colors leading-snug">
-                {cert.title}
+      {/* ── PART 1: Official AWS Issued Certificates (With Visual High-Res Images & Centered Lightbox) ── */}
+      <div className="mb-12">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <h3 className="font-mono text-xs uppercase tracking-wider font-semibold text-foreground">
+                Official AWS Honors &amp; Issued Certificates
               </h3>
-              <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5 mb-3">
-                {cert.issuer}
-              </p>
+            </div>
+            <p className="font-mono text-[11px] text-muted-foreground mt-0.5">
+              Presented by AWS User Group Philippines (AWSUG.PH) at AWS Headquarters BGC
+            </p>
+          </div>
+          <span className="hidden sm:inline-block text-[10px] font-mono text-muted-foreground bg-muted/40 border border-border px-2.5 py-1 rounded-full">
+            Click any certificate to preview &amp; inspect
+          </span>
+        </div>
 
-              {/* Topics List */}
-              <div className="space-y-1 pt-2 border-t border-border/40">
-                {cert.topics.map((t) => (
-                  <div key={t} className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground">
-                    <span className="text-accent text-[9px] shrink-0">✦</span>
-                    <span className="truncate">{t}</span>
-                  </div>
-                ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {officialCertificates.map((cert, i) => (
+            <motion.div
+              key={cert.id}
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              onClick={() => openCertModal(cert, 'image')}
+              className={`group relative flex flex-col rounded-2xl border cursor-pointer ${
+                cert.isWinner
+                  ? 'border-amber-500/40 bg-gradient-to-b from-amber-500/[0.04] to-transparent dark:from-amber-500/[0.08] dark:to-card/80 shadow-md shadow-amber-500/5 hover:border-amber-500/70 hover:shadow-lg hover:shadow-amber-500/10'
+                  : 'border-border/80 bg-muted/20 dark:bg-card/80 hover:border-accent/50 hover:bg-muted/30'
+              } p-4 transition-all duration-300 shadow-xs dark:shadow-lg dark:shadow-black/20`}
+            >
+              {/* Winner or Category Tag */}
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span
+                  className={`text-[9.5px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full font-bold border flex items-center gap-1.5 ${
+                    cert.isWinner
+                      ? 'bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400'
+                      : cert.awardTagColor === 'purple'
+                      ? 'bg-purple-500/15 border-purple-500/30 text-purple-600 dark:text-purple-400'
+                      : 'bg-blue-500/15 border-blue-500/30 text-blue-600 dark:text-blue-400'
+                  }`}
+                >
+                  {cert.isWinner && <FaAward className="text-[10px]" />}
+                  <span>{cert.awardTag}</span>
+                </span>
+                <span className="text-[10px] font-mono text-muted-foreground">
+                  2026
+                </span>
               </div>
-            </div>
 
-            {/* Bottom Verify Action */}
-            <div className="mt-5 pt-3 border-t border-border/40 flex items-center justify-between">
-              <span className="text-[9.5px] font-mono uppercase tracking-wider text-muted-foreground">
-                Credly Verified
-              </span>
-              <a
-                href={cert.credentialUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Verify ${cert.title} on Credly (opens in new tab)`}
-                className="inline-flex items-center gap-1 text-xs font-mono font-semibold text-accent hover:underline"
-              >
-                <span>&lt; Verify &gt;</span>
-                <FaExternalLinkAlt className="text-[9px]" />
-              </a>
-            </div>
-          </motion.div>
-        ))}
+              {/* Certificate Image Thumbnail: perfectly centered with object-contain so NO certificate edges or text are cropped */}
+              <div className="relative overflow-hidden rounded-xl border border-border/80 bg-zinc-950/80 aspect-[4/3] flex items-center justify-center p-2 group/img shadow-inner">
+                <img
+                  src={cert.thumbnailUrl}
+                  alt={cert.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                />
+                
+                {/* Hover Overlay with Inspect Badge */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 text-white backdrop-blur-[2px]">
+                  <span className="p-2.5 rounded-full bg-accent text-zinc-950 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 font-bold">
+                    <FaExpand className="text-xs" />
+                  </span>
+                  <span className="font-mono text-[10.5px] uppercase tracking-wider font-semibold text-white">
+                    Preview Certificate
+                  </span>
+                </div>
+              </div>
+
+              {/* Certificate Text Details */}
+              <div className="mt-3.5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="font-serif font-bold text-sm text-foreground group-hover:text-accent transition-colors leading-snug">
+                    {cert.title}
+                  </h4>
+                  <p className="font-mono text-[10.5px] text-muted-foreground mt-1 line-clamp-2">
+                    {cert.description}
+                  </p>
+
+                  <div className="mt-3 pt-2.5 border-t border-border/50 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground">
+                      <FaCalendarAlt className="text-[9px] text-accent shrink-0" />
+                      <span>{cert.date}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground">
+                      <FaMapMarkerAlt className="text-[9px] text-accent shrink-0" />
+                      <span className="truncate">AWS Office, BGC, Taguig City</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+      {/* ── PART 2: Verified Credly Digital Badges (IBM, AWS, Lean Six Sigma) ── */}
+      <div>
+        <div className="mb-4">
+          <div className="flex items-center gap-2">
+            <FaCheckCircle className="text-xs text-accent" />
+            <h3 className="font-mono text-xs uppercase tracking-wider font-semibold text-foreground">
+              Professional Cloud &amp; AI Accreditations (Credly Badges)
+            </h3>
+          </div>
+          <p className="font-mono text-[11px] text-muted-foreground mt-0.5">
+            11+ Verified Digital Competency Badges across Modern LLMs, Vector RAG, and Cloud Architecture
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {digitalBadges.map((cert, i) => (
+            <motion.div
+              key={cert.title}
+              initial={reduce ? false : { opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              className="group relative flex flex-col justify-between rounded-xl border border-border/80 bg-muted/20 dark:bg-card/80 p-5 hover:border-accent/40 hover:bg-muted/40 transition-all shadow-xs dark:shadow-lg dark:shadow-black/15"
+            >
+              <div>
+                {/* Header: Authentic SVG Logo + Credly Count Badge */}
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <span className="p-2.5 rounded-xl bg-background dark:bg-muted/50 border border-border text-foreground shadow-2xs inline-flex items-center justify-center">
+                    {cert.svgLogo}
+                  </span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-background dark:bg-muted/40 border border-border text-muted-foreground font-semibold">
+                    {cert.count}
+                  </span>
+                </div>
+
+                <h4 className="font-serif font-bold text-base text-foreground group-hover:text-accent transition-colors leading-snug">
+                  {cert.title}
+                </h4>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5 mb-3">
+                  {cert.issuer}
+                </p>
+
+                {/* Topics List */}
+                <div className="space-y-1 pt-2 border-t border-border/40">
+                  {cert.topics.map((t) => (
+                    <div key={t} className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground">
+                      <span className="text-accent text-[9px] shrink-0">✦</span>
+                      <span className="truncate">{t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Verify Action */}
+              <div className="mt-5 pt-3 border-t border-border/40 flex items-center justify-between">
+                <span className="text-[9.5px] font-mono uppercase tracking-wider text-muted-foreground">
+                  Credly Verified
+                </span>
+                <a
+                  href={cert.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Verify ${cert.title} on Credly (opens in new tab)`}
+                  className="inline-flex items-center gap-1 text-xs font-mono font-semibold text-accent hover:underline"
+                >
+                  <span>&lt; Verify &gt;</span>
+                  <FaExternalLinkAlt className="text-[9px]" />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Perfectly Centered Portal Modal: Mounted directly on document.body ── */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {selectedCert && (
+              <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+                {/* Full-Screen Dim Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedCert(null)}
+                  className="fixed inset-0 bg-black/85 backdrop-blur-md"
+                  aria-hidden="true"
+                />
+
+                {/* Perfectly Centered Modal Dialog Card */}
+                <motion.div
+                  initial={reduce ? false : { opacity: 0, scale: 0.96, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 15 }}
+                  transition={{ type: 'spring', damping: 28, stiffness: 340 }}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="cert-dialog-title"
+                  className="relative z-10 w-full max-w-4xl my-auto mx-auto max-h-[94vh] overflow-y-auto rounded-3xl border border-border/80 bg-card text-foreground shadow-2xl p-4 sm:p-6 flex flex-col gap-4 scrollbar-thin"
+                >
+                  {/* Modal Header with View Mode Switcher */}
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-border pb-3 shrink-0">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`inline-block text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full font-bold border ${
+                            selectedCert.isWinner
+                              ? 'bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400'
+                              : selectedCert.awardTagColor === 'purple'
+                              ? 'bg-purple-500/15 border-purple-500/30 text-purple-600 dark:text-purple-400'
+                              : 'bg-blue-500/15 border-blue-500/30 text-blue-600 dark:text-blue-400'
+                          }`}
+                        >
+                          {selectedCert.awardTag}
+                        </span>
+                        <span className="text-[10px] font-mono text-muted-foreground">Official Credential</span>
+                      </div>
+                      <h3 id="cert-dialog-title" className="font-serif text-lg sm:text-xl font-bold text-foreground">
+                        {selectedCert.title}
+                      </h3>
+                      <p className="font-mono text-xs text-muted-foreground">
+                        Awarded to: <span className="text-foreground font-semibold">{selectedCert.recipient}</span> • {selectedCert.recipientRole}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 self-end sm:self-start shrink-0">
+                      {/* View Mode Toggle: Image vs Embedded PDF */}
+                      <div className="inline-flex items-center p-1 rounded-xl bg-muted/80 dark:bg-muted/40 border border-border text-xs font-mono">
+                        <button
+                          type="button"
+                          onClick={() => setViewMode('image')}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-medium ${
+                            viewMode === 'image'
+                              ? 'bg-background text-foreground shadow-xs font-semibold'
+                              : 'text-muted-foreground hover:text-foreground'
+                          }`}
+                        >
+                          <FaImage className="text-[11px]" />
+                          <span>Image</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setViewMode('pdf')}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-medium ${
+                            viewMode === 'pdf'
+                              ? 'bg-background text-foreground shadow-xs font-semibold'
+                              : 'text-muted-foreground hover:text-foreground'
+                          }`}
+                        >
+                          <FaFilePdf className="text-[11px] text-red-500" />
+                          <span>PDF</span>
+                        </button>
+                      </div>
+
+                      {/* Close Button */}
+                      <button
+                        type="button"
+                        onClick={() => setSelectedCert(null)}
+                        className="min-h-[36px] min-w-[36px] rounded-xl bg-muted/80 hover:bg-muted text-foreground flex items-center justify-center transition-colors cursor-pointer text-sm border border-border"
+                        aria-label="Close certificate preview"
+                      >
+                        <FaTimes aria-hidden="true" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Centered Viewer Area: Image or Embedded PDF */}
+                  <div className="relative rounded-2xl overflow-hidden border border-border/80 bg-zinc-950 shadow-inner flex items-center justify-center p-2 sm:p-4 min-h-[350px]">
+                    {viewMode === 'image' ? (
+                      <div className="w-full flex items-center justify-center">
+                        <img
+                          src={selectedCert.highResUrl}
+                          alt={selectedCert.title}
+                          className="max-h-[62vh] max-w-full w-auto h-auto object-contain mx-auto rounded-lg shadow-2xl block"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full h-[62vh] rounded-lg overflow-hidden flex flex-col bg-zinc-900">
+                        <iframe
+                          src={`${selectedCert.pdfUrl}#toolbar=1&navpanes=0`}
+                          title={`${selectedCert.title} PDF Preview`}
+                          className="w-full h-full border-0 bg-white"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Modal Metadata Details & CTAs */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-border text-xs font-mono">
+                    <div className="space-y-1">
+                      <div className="text-muted-foreground">
+                        <span className="font-bold text-foreground">Presented By:</span> {selectedCert.issuer}
+                      </div>
+                      <div className="text-muted-foreground">
+                        <span className="font-bold text-foreground">Venue:</span> {selectedCert.venue}
+                      </div>
+                      <div className="text-muted-foreground text-[11px]">
+                        <span className="font-bold text-foreground">Workshop Leads:</span> {selectedCert.leads.join(', ')}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0 pt-2 sm:pt-0">
+                      <a
+                        href={selectedCert.highResUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-muted/80 hover:bg-muted border border-border text-foreground font-semibold text-xs transition-colors"
+                      >
+                        <span>Full Image</span>
+                        <FaExternalLinkAlt className="text-[10px]" />
+                      </a>
+                      <a
+                        href={selectedCert.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-accent text-white dark:text-zinc-950 font-semibold text-xs shadow-xs hover:bg-accent/90 transition-colors"
+                      >
+                        <FaFilePdf className="text-xs" />
+                        <span>Open Raw PDF</span>
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </section>
   )
 }
+
 export default CertificationsSection

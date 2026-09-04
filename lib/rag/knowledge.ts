@@ -147,6 +147,19 @@ Arnel won Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic 
     metadata: { section: 'hackathons', featured: true }
   },
   {
+    id: 'achieve-aws-official-certs',
+    documentId: 'achievements',
+    title: 'AWS Official Certificates & Best Business Impact Award (AWS BGC)',
+    category: 'achievements',
+    content: `Official AWS Certificates & Accreditations (Presented by AWS User Group Philippines AWSUG.PH at AWS Office, 15th Flr, Arthaland Century Pacific Tower, Bonifacio Global City, Taguig):
+1. Certificate of Recognition — Best Business Impact (Awarded to DEVOOPS / Arnel A. Baylon, August 21, 2026 at Capstone on Quick! QuickQuest Finale: Build Responsibly for the FinOps AI Dashboard).
+2. Certificate of Participation — Capstone on Quick! QuickQuest Finale: Build Responsibly (Awarded to Arnel A. Baylon, August 21, 2026).
+3. Certificate of Participation — AWS BuildNights QuickQuest Workshop Series (Awarded to Arnel A. Baylon for attending >4 intensive enterprise cloud sessions from June 19 to August 21, 2026).
+Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denisse Jane Karim.`,
+    keywords: ['aws', 'certifications', 'devoops', 'best business impact', 'winner', 'quickquest', 'buildnights', 'capstone', 'bgc', 'arthaland', 'certificate', 'official', 'awsug'],
+    metadata: { section: 'aws-official-certifications', featured: true }
+  },
+  {
     id: 'achieve-ibm-certs',
     documentId: 'achievements',
     title: 'IBM Professional AI Certifications (7 Topics)',

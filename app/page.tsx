@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import { Sidebar } from '@/components/ui/Sidebar'
+import { SimpleSideNav } from '@/components/ui/SimpleSideNav'
 import { ATSResumeHeader } from '@/components/sections/ATSResumeHeader'
 import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsSection'
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
@@ -35,28 +35,72 @@ const ContactSection = dynamic(
 )
 
 export default function Home() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [isSocialsOpen, setIsSocialsOpen] = useState(false)
 
+  // ── Ensure portfolio always opens at the Hero section, preventing browser auto-scroll / stale hash jumping to Experience ──
   useEffect(() => {
-    const handleCollapseChange = (e: Event) => {
-      const customEvent = e as CustomEvent<{ collapsed: boolean }>
-      setSidebarCollapsed(customEvent.detail?.collapsed ?? false)
-    }
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual'
+      }
 
-    window.addEventListener('sidebar-collapse-change', handleCollapseChange)
-    return () => window.removeEventListener('sidebar-collapse-change', handleCollapseChange)
+      const hash = window.location.hash
+      // If opened cleanly or with stale #experience / #hero / #about from past navigation or autocomplete
+      if (!hash || hash === '#experience' || hash === '#hero' || hash === '#about') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        if (hash === '#experience') {
+          window.history.replaceState(null, '', window.location.pathname)
+        }
+      }
+    }
   }, [])
 
+  const handleToggleChat = () => {
+    setIsSocialsOpen(false)
+    setIsChatOpen((prev) => !prev)
+  }
+
+  const handleToggleSocials = () => {
+    setIsChatOpen(false)
+    setIsSocialsOpen((prev) => !prev)
+  }
+
+  const isPanelOpen = isChatOpen || isSocialsOpen
+
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative">
+    <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative overflow-x-hidden">
       {/* ── Ambient 3D Dot Wave Background (Deferred, Zero-Allocation Particle Canvas) ── */}
       <DotWaveBackground />
 
-      {/* ── Main Content Container (Fluid Padding sync with Sidebar) ── */}
+      {/* ── Clean Floating Side Navigation (Outside Container & Cards) with AI Chat & Socials ── */}
+      <SimpleSideNav
+        isChatOpen={isChatOpen}
+        onToggleChat={handleToggleChat}
+        isSocialsOpen={isSocialsOpen}
+        onToggleSocials={handleToggleSocials}
+      />
+
+      {/* ── Unfocus Dismiss Overlay (Clicking anywhere on unfocused content closes open panel) ── */}
+      {isPanelOpen && (
+        <div
+          onClick={() => {
+            setIsChatOpen(false)
+            setIsSocialsOpen(false)
+          }}
+          className="hidden lg:block fixed inset-0 z-30 cursor-pointer bg-black/5 dark:bg-black/20 backdrop-blur-[1px] transition-opacity duration-500"
+          title="Click to close panel and refocus page"
+          aria-label="Close panel and refocus page"
+        />
+      )}
+
+      {/* ── Main Content Container (Smoothly shifts to the right and unfocuses when AI Chat or Socials extends) ── */}
       <main
         id="main-content"
-        className={`relative z-10 min-h-screen pt-5 sm:pt-7 lg:pt-5 pb-32 lg:pb-16 transition-[padding] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          sidebarCollapsed ? 'lg:pl-[92px]' : 'lg:pl-[288px]'
+        className={`relative z-10 min-h-screen pt-6 sm:pt-10 pb-28 lg:pb-20 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isPanelOpen
+            ? 'lg:translate-x-[260px] xl:translate-x-[300px] 2xl:translate-x-[340px] opacity-40 dark:opacity-30 blur-[2px] scale-[0.985] select-none pointer-events-none'
+            : 'translate-x-0 opacity-100 blur-0 scale-100 pointer-events-auto'
         }`}
       >
         <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-12 space-y-4">
@@ -87,9 +131,6 @@ export default function Home() {
 
         </div>
       </main>
-
-      {/* ── Apple-Inspired Floating Command Rail (Fixed Overlay Navigation) ── */}
-      <Sidebar />
     </div>
   )
 }

@@ -1,14 +1,21 @@
 'use client'
 
-import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaChevronLeft, FaChevronRight, FaExpand, FaCalendarAlt, FaTag } from 'react-icons/fa'
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import {
+  FaTimes,
+  FaChevronLeft,
+  FaChevronRight,
+  FaExpand,
+  FaCalendarAlt,
+  FaSearchPlus,
+} from 'react-icons/fa'
 
 export interface GalleryItem {
   id: string
   src: string
   title: string
-  category: 'aws' | 'civic' | 'hospital' | 'events' | 'apps'
+  category: 'aws' | 'hospital' | 'events' | 'apps'
   categoryLabel: string
   date: string
   caption: string
@@ -25,6 +32,16 @@ export const galleryItems: GalleryItem[] = [
     date: '2026',
     caption: 'Presenting and defending the FinOps AI Dashboard to AWS enterprise architects and judges, winning the "Best Business Impact" award at the final capstone presentation of the 9-Week Amazon Quick Quest Workshop at the AWS BGC headquarters.',
     tag: 'AWS Best Business Impact',
+  },
+  {
+    id: 'aws-cert-business-impact',
+    src: '/certs/aws-capstone-best-business-impact.jpg',
+    title: 'Winner Certificate: Best Business Impact (DevOops)',
+    category: 'aws',
+    categoryLabel: 'AWS & Hackathons',
+    date: '2026',
+    caption: 'Official Certificate of Recognition presented by AWS User Group Philippines (AWSUG.PH) at the AWS Headquarters BGC, awarding DevOops the Best Business Impact title at the Capstone on Quick! Finale.',
+    tag: 'Official AWS Award',
   },
   {
     id: 'aws-cloud-builder',
@@ -47,6 +64,16 @@ export const galleryItems: GalleryItem[] = [
     tag: 'Quick Flows Pipeline',
   },
   {
+    id: 'aws-bizzdev',
+    src: '/images/gallery/aws_bizzdev.jpg',
+    title: 'AWS Enterprise Strategy & Business Development',
+    category: 'aws',
+    categoryLabel: 'AWS & Hackathons',
+    date: '2026',
+    caption: 'Deep-dive session aligning cloud cost optimization benchmarks and multi-tenant enterprise telemetry at AWS BGC.',
+    tag: 'AWS Strategy',
+  },
+  {
     id: 'hospital-queuing',
     src: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg',
     title: 'Hospital AI Queuing Presentation to Medical Section Heads',
@@ -55,6 +82,16 @@ export const galleryItems: GalleryItem[] = [
     date: '2026',
     caption: 'Demonstrating the offline-capable Vue.js & Groq LLM triage queuing console to clinical doctors and hospital administrative heads at GEAMH.',
     tag: 'GEAMH 486h Deployment',
+  },
+  {
+    id: 'hospital-clinical',
+    src: '/images/gallery/internship.jpg',
+    title: 'GEAMH Provincial Hospital Clinical IT Deployment',
+    category: 'hospital',
+    categoryLabel: 'Hospital & Enterprise IT',
+    date: '2026',
+    caption: '486-hour clinical internship deploying hospital informatics, mission-critical network infrastructure, and real-time medical staff support.',
+    tag: 'Provincial Hospital IT',
   },
   {
     id: 'vcm-defense',
@@ -69,22 +106,32 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'better-trece-portal',
     src: '/images/bettertrece.png',
-    title: 'Better Trece Martires Civic Open Data Platform',
-    category: 'civic',
-    categoryLabel: 'Civic Tech & Open Data',
+    title: 'Better Trece Martires Public Open Data Platform',
+    category: 'apps',
+    categoryLabel: 'Open Data & Web Systems',
     date: '2026',
     caption: 'Public governance platform unifying DBM GAA national budget records, COA audit metrics, DPWH infrastructure, and bilingual citizen service charters.',
-    tag: 'BetterGov Philippines',
+    tag: 'Open Data Platform',
   },
   {
     id: 'egov-hackathon',
     src: '/images/gallery/egov3.jpg',
     title: 'eGov Hackathon 2026 — Top 30 National Winner',
-    category: 'civic',
-    categoryLabel: 'Civic Tech & Open Data',
+    category: 'aws',
+    categoryLabel: 'National Hackathons & AI',
     date: '2026',
     caption: 'Collaborative development of e Buddy, the agentic citizen assistant delivering unified government service access and biometric verification.',
     tag: 'Top 30 National Finalist',
+  },
+  {
+    id: 'egov-sprint',
+    src: '/images/gallery/egov1.jpg',
+    title: 'DICT eGov Philippines Hackathon Sprint',
+    category: 'events',
+    categoryLabel: 'Hackathons & Summits',
+    date: '2026',
+    caption: 'Rapid prototyping and systems integration sprint for eGov citizen services with Department of Information and Communications Technology.',
+    tag: 'DICT Hackathon Sprint',
   },
   {
     id: 'echelon-summit',
@@ -98,13 +145,113 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 'sandbox-echelon',
-    src: '/images/gallery/sanbox echelon.jpg',
+    src: '/images/gallery/sandbox_echelon.jpg',
     title: 'Sandbox Innovation & Multi-Agent Swarm Ideation',
     category: 'events',
     categoryLabel: 'Events & Conferences',
     date: '2026',
     caption: 'Exploration and architecture blueprinting for autonomous multi-agent coding swarms (Pixel Crew) and AST symbol-graph context engines.',
-    tag: 'Sandbox ',
+    tag: 'Sandbox Innovation',
+  },
+  {
+    id: 'echelon-delegate-pass',
+    src: '/images/gallery/echelon_2026_delegate.jpg',
+    title: 'Echelon 2026 Official Tech Summit Delegate',
+    category: 'events',
+    categoryLabel: 'Events & Conferences',
+    date: '2026',
+    caption: 'Official accredited delegate pass at Echelon 2026, engaging with Southeast Asian startup founders, venture capitalists, and tech leaders.',
+    tag: 'Echelon Official Delegate',
+  },
+  {
+    id: 'aws-buildnights-cohort',
+    src: '/images/gallery/aws.jpg',
+    title: 'AWS BuildNights Cohort @ Arthaland Tower BGC',
+    category: 'aws',
+    categoryLabel: 'AWS & Hackathons',
+    date: '2026',
+    caption: 'Collaborative cohort sessions during the AWS BuildNights series at the AWS Philippines office in Arthaland Century Pacific Tower, BGC.',
+    tag: 'AWS BuildNights',
+  },
+  {
+    id: 'aws-hands-on-lab',
+    src: '/images/gallery/aws_day3.jpg',
+    title: 'AWS Cloud & Agentic AI Architecture Lab',
+    category: 'aws',
+    categoryLabel: 'AWS & Hackathons',
+    date: '2026',
+    caption: 'Deep-dive implementation lab configuring generative AI workflows, API orchestration, and serverless compute primitives during AWS BuildNights Day 3.',
+    tag: 'AWS Technical Lab',
+  },
+  {
+    id: 'aws-architecture-review',
+    src: '/images/gallery/aws_week2.jpg',
+    title: 'AWS Architecture Review & Solution Defense',
+    category: 'aws',
+    categoryLabel: 'AWS & Hackathons',
+    date: '2026',
+    caption: 'Sprint architecture review analyzing pipeline scalability, event-driven data flow, and cost optimization benchmarks inside AWS BGC.',
+    tag: 'Architecture Sprint',
+  },
+  {
+    id: 'egov-ideation-session',
+    src: '/images/gallery/egov2.jpg',
+    title: 'eGov Hackathon Architecture Ideation',
+    category: 'aws',
+    categoryLabel: 'National Hackathons & AI',
+    date: '2026',
+    caption: 'Brainstorming civic AI architectures and designing the interaction model for the e Buddy citizen service assistant at DICT eGov Hackathon.',
+    tag: 'eGov Hackathon Ideation',
+  },
+  {
+    id: 'egov-mentor-consultation',
+    src: '/images/gallery/egov4.jpg',
+    title: 'eGov Technical Mentorship & Guidance',
+    category: 'aws',
+    categoryLabel: 'National Hackathons & AI',
+    date: '2026',
+    caption: 'Consulting with industry mentors on interoperability, data privacy compliance, and public sector API integration for e Buddy.',
+    tag: 'Industry Mentorship',
+  },
+  {
+    id: 'egov-team-collaboration',
+    src: '/images/gallery/egov5.jpg',
+    title: 'eGov Team Intensive Development Sprint',
+    category: 'aws',
+    categoryLabel: 'National Hackathons & AI',
+    date: '2026',
+    caption: 'Collaborative coding session assembling the full-stack prototype, auth flows, and AI grounding mechanisms under tight competition deadlines.',
+    tag: 'Hackathon Team Sprint',
+  },
+  {
+    id: 'egov-final-pitch-prep',
+    src: '/images/gallery/egov6.jpg',
+    title: 'eGov Final Pitch & Demonstration Prep',
+    category: 'aws',
+    categoryLabel: 'National Hackathons & AI',
+    date: '2026',
+    caption: 'Dry run and live demo preparation before presenting e Buddy to the panel of judges at DICT eGov Hackathon.',
+    tag: 'Pitch Preparation',
+  },
+  {
+    id: 'egov-top30-recognition',
+    src: '/images/gallery/egov7.jpg',
+    title: 'eGov Top 30 National Recognition Ceremony',
+    category: 'aws',
+    categoryLabel: 'National Hackathons & AI',
+    date: '2026',
+    caption: 'Celebration and recognition of the team placing in the Top 30 nationwide at the DICT eGov Philippines Hackathon 2026.',
+    tag: 'Top 30 National Finalist',
+  },
+  {
+    id: 'hospital-it-stakeholder-presentation',
+    src: '/images/gallery/internship_presenting_to_sectionheads.jpg',
+    title: 'GEAMH Clinical Informatics Presentation',
+    category: 'hospital',
+    categoryLabel: 'Hospital & Enterprise IT',
+    date: '2026',
+    caption: 'Presenting clinical information systems and operational automation workflows directly to hospital medical section heads and administrative leadership.',
+    tag: 'GEAMH Leadership Defense',
   },
   {
     id: 'pacementor-app',
@@ -115,6 +262,16 @@ export const galleryItems: GalleryItem[] = [
     date: '2025 – 2026',
     caption: 'Cross-platform mobile engineering with Flutter & Dart, implementing real-time adaptive pace calculations and automated Strava activity syncing.',
     tag: 'Flutter & Strava API',
+  },
+  {
+    id: 'pacementor-runclub-testing',
+    src: '/images/gallery/runclub_development.jpg',
+    title: 'PaceMentor GPS & Strava Field Testing',
+    category: 'apps',
+    categoryLabel: 'Mobile & SaaS Apps',
+    date: '2025 – 2026',
+    caption: 'On-road validation of real-time GPS telemetry, pace smoothing algorithms, and community run club activity sync using Flutter.',
+    tag: 'Field Testing & Telemetry',
   },
   {
     id: 'present-po-saas',
@@ -138,33 +295,250 @@ export const galleryItems: GalleryItem[] = [
   },
 ]
 
-const categories = [
-  { key: 'all', label: 'All Artifacts' },
-  { key: 'aws', label: 'AWS & Hackathons' },
-  { key: 'civic', label: 'Civic Tech & Open Data' },
-  { key: 'hospital', label: 'Hospital & Enterprise IT' },
-  { key: 'events', label: 'Events & Summits' },
-  { key: 'apps', label: 'Mobile & SaaS Apps' },
-]
+// ── Masonry Column Types for Horizontal Carousel Track ──
+type MasonryColumn =
+  | { type: 'tall'; item: GalleryItem; globalIndex: number }
+  | {
+      type: 'stacked'
+      topItem: GalleryItem
+      topIndex: number
+      bottomItem: GalleryItem
+      bottomIndex: number
+    }
+  | { type: 'wide'; item: GalleryItem; globalIndex: number }
 
 export function InteractiveGallery() {
-  const [activeCategory, setActiveCategory] = useState<string>('all')
+  const reduceMotion = useReducedMotion()
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(null)
-  const carouselRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState<boolean>(false)
+  const [isInView, setIsInView] = useState<boolean>(true)
 
-  const filteredItems = activeCategory === 'all'
-    ? galleryItems
-    : galleryItems.filter(item => item.category === activeCategory)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const setRef = useRef<HTMLDivElement>(null)
+  const singleWidthRef = useRef<number>(0)
+  const animFrameId = useRef<number | null>(null)
+  const isDragging = useRef<boolean>(false)
+  const dragStartX = useRef<number>(0)
+  const dragStartScroll = useRef<number>(0)
+  const hasMoved = useRef<boolean>(false)
+  const isInteracting = useRef<boolean>(false)
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Scroll carousel left/right
-  const scrollCarousel = (direction: 'left' | 'right') => {
-    if (carouselRef.current) {
-      const scrollAmount = 380
-      carouselRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      })
+  // ── Dynamic Masonry Grouping Engine ──
+  // Groups all items into alternating columns: Tall -> Stacked Pair -> Wide -> Stacked Pair
+  const masonryColumns = useMemo<MasonryColumn[]>(() => {
+    const cols: MasonryColumn[] = []
+    let i = 0
+    let step = 0
+
+    while (i < galleryItems.length) {
+      const rhythm = step % 4
+
+      if (rhythm === 0) {
+        // Tall Feature Card (1 item)
+        cols.push({
+          type: 'tall',
+          item: galleryItems[i],
+          globalIndex: i,
+        })
+        i += 1
+      } else if (rhythm === 1 || rhythm === 3) {
+        // Stacked Dual Column (2 items)
+        if (i + 1 < galleryItems.length) {
+          cols.push({
+            type: 'stacked',
+            topItem: galleryItems[i],
+            topIndex: i,
+            bottomItem: galleryItems[i + 1],
+            bottomIndex: i + 1,
+          })
+          i += 2
+        } else {
+          cols.push({
+            type: 'tall',
+            item: galleryItems[i],
+            globalIndex: i,
+          })
+          i += 1
+        }
+      } else if (rhythm === 2) {
+        // Wide Feature Card (1 item)
+        cols.push({
+          type: 'wide',
+          item: galleryItems[i],
+          globalIndex: i,
+        })
+        i += 1
+      }
+      step += 1
     }
+
+    return cols
+  }, [])
+
+  // Update single set width on mount & resize
+  const measureSetWidth = useCallback(() => {
+    if (setRef.current) {
+      const width = setRef.current.offsetWidth
+      if (width > 0) {
+        singleWidthRef.current = width
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    measureSetWidth()
+
+    // Initialize scroll position to the middle set (Set 2)
+    const el = containerRef.current
+    if (el && singleWidthRef.current > 0) {
+      el.scrollLeft = singleWidthRef.current
+    }
+
+    const handleResize = () => {
+      measureSetWidth()
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [measureSetWidth, masonryColumns])
+
+  // Pause when off-screen to save CPU & battery
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  // Seamless Infinite Scroll Boundary Reset on Scroll Event
+  const handleScroll = useCallback(() => {
+    const el = containerRef.current
+    const width = singleWidthRef.current
+    if (!el || width <= 0) return
+
+    // Seamless wrapping: when scrolled into the 3rd set, wrap back to the 2nd set
+    if (el.scrollLeft >= width * 2) {
+      el.scrollLeft -= width
+    } else if (el.scrollLeft < width * 0.2) {
+      // When dragged backward towards 1st set boundary, wrap forward to 2nd set
+      el.scrollLeft += width
+    }
+  }, [])
+
+  // ── High-Performance requestAnimationFrame Continuous Smooth Glide ──
+  useEffect(() => {
+    if (reduceMotion) return
+
+    let lastTime = performance.now()
+
+    const loop = (time: number) => {
+      const dt = Math.min((time - lastTime) / 1000, 0.1)
+      lastTime = time
+
+      const el = containerRef.current
+      const width = singleWidthRef.current
+
+      if (
+        el &&
+        width > 0 &&
+        !isHovered &&
+        !isInteracting.current &&
+        selectedItemIndex === null &&
+        isInView &&
+        !document.hidden
+      ) {
+        // Smooth ~38px per second continuous glide
+        el.scrollLeft += 38 * dt
+
+        if (el.scrollLeft >= width * 2) {
+          el.scrollLeft -= width
+        }
+      }
+
+      animFrameId.current = requestAnimationFrame(loop)
+    }
+
+    animFrameId.current = requestAnimationFrame(loop)
+
+    return () => {
+      if (animFrameId.current) cancelAnimationFrame(animFrameId.current)
+    }
+  }, [isHovered, selectedItemIndex, isInView, reduceMotion])
+
+  // Mouse Drag-to-Scroll handlers
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = containerRef.current
+    if (!el) return
+    isDragging.current = true
+    isInteracting.current = true
+    hasMoved.current = false
+    dragStartX.current = e.pageX - el.offsetLeft
+    dragStartScroll.current = el.scrollLeft
+  }
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging.current || !containerRef.current) return
+    const el = containerRef.current
+    const x = e.pageX - el.offsetLeft
+    const walk = (x - dragStartX.current) * 1.3
+    if (Math.abs(walk) > 4) {
+      hasMoved.current = true
+    }
+    el.scrollLeft = dragStartScroll.current - walk
+  }
+
+  const handleMouseUpOrLeave = () => {
+    if (!isDragging.current) return
+    isDragging.current = false
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+    resumeTimeoutRef.current = setTimeout(() => {
+      isInteracting.current = false
+    }, 1500)
+  }
+
+  // Touch handlers for mobile
+  const handleTouchStart = () => {
+    isInteracting.current = true
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+  }
+
+  const handleTouchEnd = () => {
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+    resumeTimeoutRef.current = setTimeout(() => {
+      isInteracting.current = false
+    }, 2000)
+  }
+
+  // Card click handler (prevents modal opening if user was dragging)
+  const handleCardClick = (index: number) => {
+    if (hasMoved.current) {
+      hasMoved.current = false
+      return
+    }
+    setSelectedItemIndex(index)
+  }
+
+  // Smooth Chevron Scroll
+  const scrollByDirection = (direction: 'left' | 'right') => {
+    const el = containerRef.current
+    if (!el) return
+    isInteracting.current = true
+    const scrollAmount = direction === 'left' ? -380 : 380
+    el.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+    resumeTimeoutRef.current = setTimeout(() => {
+      isInteracting.current = false
+    }, 2200)
   }
 
   // Lightbox Handlers
@@ -172,13 +546,13 @@ export function InteractiveGallery() {
 
   const handlePrev = useCallback(() => {
     if (selectedItemIndex === null) return
-    setSelectedItemIndex((prev) => (prev! > 0 ? prev! - 1 : filteredItems.length - 1))
-  }, [selectedItemIndex, filteredItems.length])
+    setSelectedItemIndex((prev) => (prev! > 0 ? prev! - 1 : galleryItems.length - 1))
+  }, [selectedItemIndex])
 
   const handleNext = useCallback(() => {
     if (selectedItemIndex === null) return
-    setSelectedItemIndex((prev) => (prev! < filteredItems.length - 1 ? prev! + 1 : 0))
-  }, [selectedItemIndex, filteredItems.length])
+    setSelectedItemIndex((prev) => (prev! < galleryItems.length - 1 ? prev! + 1 : 0))
+  }, [selectedItemIndex])
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -194,106 +568,236 @@ export function InteractiveGallery() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedItemIndex, handleNext, handlePrev, handleClose])
 
-  const currentItem = selectedItemIndex !== null ? filteredItems[selectedItemIndex] : null
+  const currentItem = selectedItemIndex !== null ? galleryItems[selectedItemIndex] : null
 
   return (
-    <div className="w-full space-y-4">
-      {/* Top Controls Row: Category Pills + Navigation Arrows */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        {/* Filter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat.key
-            return (
-              <button
-                key={cat.key}
-                type="button"
-                onClick={() => {
-                  setActiveCategory(cat.key)
-                  setSelectedItemIndex(null)
-                }}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold whitespace-nowrap transition-all cursor-pointer border ${isActive
-                    ? 'bg-foreground text-background border-foreground shadow-xs'
-                    : 'bg-muted/50 text-muted-foreground border-border/80 hover:border-accent/40 hover:text-foreground'
-                  }`}
-              >
-                {cat.label}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Carousel Arrow Controls */}
-        <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
-          <button
-            type="button"
-            onClick={() => scrollCarousel('left')}
-            aria-label="Scroll gallery carousel left"
-            className="p-2.5 rounded-full bg-background border border-border text-foreground hover:border-accent hover:text-accent transition-colors shadow-2xs hover:scale-105"
-          >
-            <FaChevronLeft className="text-xs" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollCarousel('right')}
-            aria-label="Scroll gallery carousel right"
-            className="p-2.5 rounded-full bg-background border border-border text-foreground hover:border-accent hover:text-accent transition-colors shadow-2xs hover:scale-105"
-          >
-            <FaChevronRight className="text-xs" aria-hidden="true" />
-          </button>
-        </div>
-      </div>
-
-      {/* Compact Horizontal Scrollable Carousel Track */}
+    <div className="w-full relative group/masonry">
+      {/* ── Carousel Masonry Viewport (Infinite Horizontal Glide) ── */}
       <div
-        ref={carouselRef}
-        className="flex gap-4 sm:gap-5 overflow-x-auto py-2 scroll-smooth scrollbar-none snap-x snap-mandatory"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        className="relative rounded-2xl overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => {
+          setIsHovered(false)
+          handleMouseUpOrLeave()
+        }}
       >
-        {filteredItems.map((item, idx) => (
-          <div
-            key={item.id}
-            onClick={() => setSelectedItemIndex(idx)}
-            className="snap-start shrink-0 w-[270px] sm:w-[320px] md:w-[360px] group relative rounded-2xl overflow-hidden border border-border/70 bg-muted/30 backdrop-blur-xs hover:border-accent/60 transition-all duration-300 shadow-sm cursor-pointer flex flex-col justify-between"
-          >
-            {/* Image Thumbnail Container (Centered) */}
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-background flex items-center justify-center">
-              <img
-                src={item.src}
-                alt={item.title}
-                loading="lazy"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-50 group-hover:opacity-75 transition-opacity" />
+        {/* Subtle Horizontal Edge Fades for Cinematic Endless Aesthetic */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-background via-background/40 to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-background via-background/40 to-transparent z-10" />
 
-              {/* Top Tag Badge (High-Contrast Visible Text) */}
-              <div className="absolute top-2.5 left-2.5 z-10">
-                <span className="px-3 py-1 rounded-full bg-black/85 backdrop-blur-md text-[11px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md">
-                  {item.tag}
-                </span>
-              </div>
+        {/* Floating Prev/Next Buttons (Subtle on Hover) */}
+        <button
+          type="button"
+          onClick={() => scrollByDirection('left')}
+          aria-label="Scroll gallery left"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-background/85 hover:bg-background border border-border/80 text-foreground backdrop-blur-md shadow-lg opacity-0 group-hover/masonry:opacity-100 transition-all duration-300 hover:scale-105 cursor-pointer hidden sm:flex items-center justify-center"
+        >
+          <FaChevronLeft className="text-xs" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollByDirection('right')}
+          aria-label="Scroll gallery right"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-background/85 hover:bg-background border border-border/80 text-foreground backdrop-blur-md shadow-lg opacity-0 group-hover/masonry:opacity-100 transition-all duration-300 hover:scale-105 cursor-pointer hidden sm:flex items-center justify-center"
+        >
+          <FaChevronRight className="text-xs" aria-hidden="true" />
+        </button>
 
-              {/* Expand Icon on Hover */}
-              <div className="absolute top-2.5 right-2.5 p-1.5 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                <FaExpand className="text-[10px]" aria-hidden="true" />
-              </div>
+        {/* Horizontal Scroll Track */}
+        <div
+          ref={containerRef}
+          onScroll={handleScroll}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="flex overflow-x-auto py-1 scrollbar-none h-[360px] sm:h-[390px] md:h-[410px] select-none cursor-grab active:cursor-grabbing"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {/* Render 3 Identical Sets for Seamless Infinite Looping */}
+          {[0, 1, 2].map((setIndex) => (
+            <div
+              key={`set-${setIndex}`}
+              ref={setIndex === 0 ? setRef : undefined}
+              aria-hidden={setIndex > 0}
+              className="flex gap-3 sm:gap-3.5 shrink-0 pr-3 sm:pr-3.5"
+            >
+              {masonryColumns.map((col, colIdx) => {
+                // ── TYPE 1: TALL FEATURE CARD (Full Height) ──
+                if (col.type === 'tall') {
+                  const { item, globalIndex } = col
+                  return (
+                    <div
+                      key={`tall-${item.id}-${setIndex}-${colIdx}`}
+                      onClick={() => handleCardClick(globalIndex)}
+                      className="shrink-0 w-[230px] sm:w-[260px] h-full group/card relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
+                    >
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        loading="lazy"
+                        draggable={false}
+                        className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/25 opacity-80 group-hover/card:opacity-95 transition-opacity" />
+
+                      <div className="relative z-10 p-3 flex items-center justify-between">
+                        <span className="px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[10px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md truncate max-w-[170px]">
+                          {item.tag}
+                        </span>
+                        <span className="p-1.5 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
+                          <FaExpand className="text-[9px]" aria-hidden="true" />
+                        </span>
+                      </div>
+
+                      <div className="relative z-10 p-3.5 space-y-1">
+                        <div className="flex items-center justify-between text-[9.5px] font-mono text-zinc-300">
+                          <span>{item.categoryLabel}</span>
+                          <span className="tabular-nums">{item.date}</span>
+                        </div>
+                        <h3 className="text-xs sm:text-[13px] font-semibold text-white leading-snug group-hover/card:text-accent transition-colors line-clamp-2">
+                          {item.title}
+                        </h3>
+                        <div className="pt-1 flex items-center gap-1 text-[10px] font-mono text-accent font-medium opacity-0 group-hover/card:opacity-100 transition-opacity">
+                          <FaSearchPlus className="text-[9px]" />
+                          <span>Inspect photo &bull; View details</span>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+
+                // ── TYPE 2: STACKED DUAL COLUMN (Two half-height cards stacked) ──
+                if (col.type === 'stacked') {
+                  const { topItem, topIndex, bottomItem, bottomIndex } = col
+                  return (
+                    <div
+                      key={`stacked-${setIndex}-${colIdx}`}
+                      className="shrink-0 w-[210px] sm:w-[240px] h-full flex flex-col gap-2.5 sm:gap-3"
+                    >
+                      {/* Top Card */}
+                      <div
+                        onClick={() => handleCardClick(topIndex)}
+                        className="flex-1 relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
+                      >
+                        <img
+                          src={topItem.src}
+                          alt={topItem.title}
+                          loading="lazy"
+                          draggable={false}
+                          className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 opacity-80 group-hover/card:opacity-95 transition-opacity" />
+
+                        <div className="relative z-10 p-2.5 flex items-center justify-between">
+                          <span className="px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[9.5px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md truncate max-w-[150px]">
+                            {topItem.tag}
+                          </span>
+                          <span className="p-1 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
+                            <FaExpand className="text-[8px]" aria-hidden="true" />
+                          </span>
+                        </div>
+
+                        <div className="relative z-10 p-2.5 space-y-0.5">
+                          <div className="flex items-center justify-between text-[9px] font-mono text-zinc-300">
+                            <span className="truncate">{topItem.categoryLabel}</span>
+                            <span className="tabular-nums">{topItem.date}</span>
+                          </div>
+                          <h3 className="text-xs font-semibold text-white truncate group-hover/card:text-accent transition-colors">
+                            {topItem.title}
+                          </h3>
+                        </div>
+                      </div>
+
+                      {/* Bottom Card */}
+                      <div
+                        onClick={() => handleCardClick(bottomIndex)}
+                        className="flex-1 relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
+                      >
+                        <img
+                          src={bottomItem.src}
+                          alt={bottomItem.title}
+                          loading="lazy"
+                          draggable={false}
+                          className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 opacity-80 group-hover/card:opacity-95 transition-opacity" />
+
+                        <div className="relative z-10 p-2.5 flex items-center justify-between">
+                          <span className="px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[9.5px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md truncate max-w-[150px]">
+                            {bottomItem.tag}
+                          </span>
+                          <span className="p-1 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
+                            <FaExpand className="text-[8px]" aria-hidden="true" />
+                          </span>
+                        </div>
+
+                        <div className="relative z-10 p-2.5 space-y-0.5">
+                          <div className="flex items-center justify-between text-[9px] font-mono text-zinc-300">
+                            <span className="truncate">{bottomItem.categoryLabel}</span>
+                            <span className="tabular-nums">{bottomItem.date}</span>
+                          </div>
+                          <h3 className="text-xs font-semibold text-white truncate group-hover/card:text-accent transition-colors">
+                            {bottomItem.title}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+
+                // ── TYPE 3: WIDE FEATURE CARD (Cinematic Width) ──
+                if (col.type === 'wide') {
+                  const { item, globalIndex } = col
+                  return (
+                    <div
+                      key={`wide-${item.id}-${setIndex}-${colIdx}`}
+                      onClick={() => handleCardClick(globalIndex)}
+                      className="shrink-0 w-[290px] sm:w-[330px] md:w-[360px] h-full group/card relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
+                    >
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        loading="lazy"
+                        draggable={false}
+                        className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/25 opacity-80 group-hover/card:opacity-95 transition-opacity" />
+
+                      <div className="relative z-10 p-3 flex items-center justify-between">
+                        <span className="px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[10px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md">
+                          {item.tag}
+                        </span>
+                        <span className="p-1.5 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
+                          <FaExpand className="text-[9px]" aria-hidden="true" />
+                        </span>
+                      </div>
+
+                      <div className="relative z-10 p-3.5 space-y-1 bg-gradient-to-t from-black/90 to-transparent">
+                        <div className="flex items-center justify-between text-[9.5px] font-mono text-zinc-300">
+                          <span>{item.categoryLabel}</span>
+                          <span className="tabular-nums">{item.date}</span>
+                        </div>
+                        <h3 className="text-xs sm:text-[13px] font-semibold text-white leading-snug group-hover/card:text-accent transition-colors line-clamp-2">
+                          {item.title}
+                        </h3>
+                        <p className="text-[11px] font-mono text-zinc-400 line-clamp-1 leading-relaxed">
+                          {item.caption}
+                        </p>
+                      </div>
+                    </div>
+                  )
+                }
+
+                return null
+              })}
             </div>
-
-            {/* Card Footer Details */}
-            <div className="p-3.5 bg-background/90 border-t border-border/50">
-              <div className="flex items-center justify-between gap-2 text-[10px] font-mono text-muted-foreground mb-1">
-                <span>{item.categoryLabel}</span>
-                <span className="tabular-nums">{item.date}</span>
-              </div>
-              <h3 className="text-xs sm:text-sm font-semibold text-foreground truncate group-hover:text-accent transition-colors">
-                {item.title}
-              </h3>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* Fullscreen Interactive Lightbox Modal */}
+      {/* ── Fullscreen Interactive Lightbox Modal ── */}
       <AnimatePresence>
         {currentItem && selectedItemIndex !== null && (
           <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 md:p-10">
@@ -314,7 +818,7 @@ export function InteractiveGallery() {
               initial={{ opacity: 0, scale: 0.94, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 15 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="relative z-10 w-full max-w-4xl max-h-[90vh] bg-background border border-border/80 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
             >
               {/* Modal Header */}
@@ -323,7 +827,9 @@ export function InteractiveGallery() {
                   <span className="px-2.5 py-0.5 rounded-full bg-accent/15 border border-accent/30 text-accent font-semibold">
                     {currentItem.tag}
                   </span>
-                  <span className="text-muted-foreground hidden sm:inline">&bull; {currentItem.categoryLabel}</span>
+                  <span className="text-muted-foreground hidden sm:inline">
+                    &bull; {currentItem.categoryLabel}
+                  </span>
                 </div>
                 <button
                   type="button"
@@ -379,7 +885,9 @@ export function InteractiveGallery() {
                       <FaCalendarAlt className="text-accent" aria-hidden="true" />
                       <span className="tabular-nums">{currentItem.date}</span>
                     </span>
-                    <span>{selectedItemIndex + 1} of {filteredItems.length}</span>
+                    <span>
+                      {selectedItemIndex + 1} of {galleryItems.length}
+                    </span>
                   </div>
                 </div>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
@@ -393,4 +901,5 @@ export function InteractiveGallery() {
     </div>
   )
 }
+
 export default InteractiveGallery

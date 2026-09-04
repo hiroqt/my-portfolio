@@ -19,7 +19,7 @@ export function GallerySection() {
           </h2>
         </div>
         <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          Visual Proof
+          Visual Proof &bull; Infinite Masonry Carousel
         </span>
       </div>
 
