@@ -19,6 +19,7 @@ import {
 import { useTheme } from '../ThemeProvider'
 import { AIChatBubble } from './AIChatBubble'
 import { SocialsBubble } from './SocialsBubble'
+import { MobileFAB } from './MobileFAB'
 
 interface NavItem {
   id: string
@@ -330,42 +331,6 @@ export function SimpleSideNav({
           )
         })}
 
-        {/* Mobile AI Chat Button */}
-        <button
-          type="button"
-          onClick={toggleChat}
-          aria-label="Toggle yhelAI Copilot Chat"
-          aria-expanded={chatOpen}
-          className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-full transition-colors cursor-pointer ${
-            chatOpen
-              ? 'text-accent font-bold'
-              : 'text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          <span className="text-xs font-bold leading-none">✦</span>
-          <span className="text-[10px] font-mono mt-0.5 tracking-tight">
-            AI
-          </span>
-        </button>
-
-        {/* Mobile Socials Button */}
-        <button
-          type="button"
-          onClick={toggleSocials}
-          aria-label="Toggle Social Channels"
-          aria-expanded={socialsOpen}
-          className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-full transition-colors cursor-pointer ${
-            socialsOpen
-              ? 'text-accent font-bold'
-              : 'text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          <FaShareAlt className="w-3.5 h-3.5" />
-          <span className="text-[10px] font-mono mt-0.5 tracking-tight">
-            Socials
-          </span>
-        </button>
-
         {/* Mobile Theme Toggle */}
         {mounted && (
           <button
@@ -385,6 +350,14 @@ export function SimpleSideNav({
           </button>
         )}
       </nav>
+
+      {/* ── Mobile Floating Action Button (FAB Speed Dial for AI Chat & Socials) ── */}
+      <MobileFAB
+        chatOpen={chatOpen}
+        socialsOpen={socialsOpen}
+        onToggleChat={toggleChat}
+        onToggleSocials={toggleSocials}
+      />
 
       {/* ── Floating AI Chat Bubble (Appears toward sidebar icon with pointer) ── */}
       <AIChatBubble

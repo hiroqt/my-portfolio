@@ -128,13 +128,13 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
             exit={{ opacity: 0, scaleX: 0.7, scaleY: 0.92, x: -25, y: '-50%' }}
             transition={{ type: 'spring', stiffness: 360, damping: 26, delay: 0.05 }}
             style={{ transformOrigin: 'left center' }}
-            className="hidden lg:flex fixed left-[68px] xl:left-[84px] 2xl:left-[100px] top-1/2 z-50 w-[380px] xl:w-[410px] flex-col rounded-2xl bg-background/95 dark:bg-[#0c0e18]/95 backdrop-blur-2xl border border-border/80 dark:border-white/12 shadow-[0_25px_70px_rgba(0,0,0,0.35)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.75)] overflow-hidden font-sans select-none"
+            className="hidden lg:flex fixed left-[68px] xl:left-[84px] 2xl:left-[100px] top-1/2 z-50 w-[380px] xl:w-[410px] flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border border-border/80 dark:border-white/12 shadow-[0_25px_70px_rgba(0,0,0,0.45)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.85)] overflow-hidden font-sans select-none"
           >
             {/* ── Speech Bubble Tail pointing to the Sidebar Socials icon ── */}
             <div className="absolute -left-[6px] top-[72%] -translate-y-1/2 w-3 h-3 bg-background dark:bg-[#0c0e18] border-l border-b border-border/80 dark:border-white/15 rotate-45 shadow-[-2px_2px_4px_rgba(0,0,0,0.06)] pointer-events-none z-10" />
 
             {/* ── Bubble Header ── */}
-            <div className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-border/60 dark:border-white/[0.08] bg-muted/30 dark:bg-white/[0.02]">
+            <div className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-border dark:border-white/10 bg-muted/90 dark:bg-[#121624]">
               <div className="flex items-center gap-2.5">
                 <div className="w-7 h-7 rounded-lg bg-accent/15 dark:bg-accent/25 border border-accent/40 flex items-center justify-center text-accent">
                   <FaShareAlt className="w-3.5 h-3.5" />
@@ -227,7 +227,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
             </div>
 
             {/* ── Bubble Footer ── */}
-            <div className="px-4 py-2.5 border-t border-border/60 dark:border-white/[0.08] bg-muted/20 dark:bg-white/[0.01] flex items-center justify-between">
+            <div className="px-4 py-2.5 border-t border-border dark:border-white/10 bg-muted/70 dark:bg-[#121624] flex items-center justify-between">
               <span className="text-[10px] font-mono text-muted-foreground">
                 Arnel Baylon • Software Engineer
               </span>
@@ -243,10 +243,10 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ type: 'spring', stiffness: 360, damping: 28 }}
-            className="lg:hidden fixed inset-x-3 bottom-20 z-50 max-w-md mx-auto max-h-[72vh] flex flex-col rounded-2xl bg-background/95 dark:bg-[#0c0e18]/95 backdrop-blur-2xl border border-border/80 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.35)] overflow-hidden font-sans select-none"
+            className="lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[72vh] flex flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden font-sans select-none"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 dark:border-white/[0.08] bg-muted/30 dark:bg-white/[0.02]">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border dark:border-white/10 bg-muted/90 dark:bg-[#121624]">
               <div className="flex items-center gap-2">
                 <FaShareAlt className="text-accent w-3.5 h-3.5" />
                 <span className="font-mono text-xs font-bold text-foreground">
@@ -263,7 +263,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
             </div>
 
             {/* Mobile Channel Items */}
-            <div className="p-3 space-y-2 overflow-y-auto max-h-[360px] scrollbar-thin">
+            <div className="p-3 space-y-2 overflow-y-auto max-h-[360px] scrollbar-thin bg-background dark:bg-[#0c0e18]">
               {socialChannels.map((channel) => {
                 const Icon = channel.icon
                 const isCopied = copiedId === channel.id
@@ -274,7 +274,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
                     href={channel.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2.5 rounded-xl border border-border/50 dark:border-white/[0.06] bg-muted/20 dark:bg-white/[0.02] hover:bg-muted/40 transition-colors"
+                    className="flex items-center justify-between p-2.5 rounded-xl border border-border/70 dark:border-white/10 bg-muted/50 dark:bg-[#121624] hover:bg-muted/80 dark:hover:bg-[#181d2e] transition-colors"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
                       <div

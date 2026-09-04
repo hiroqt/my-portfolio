@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChatMessageData, AgentAction } from '@/lib/ai/types';
 import { JARVISAvatar } from './JARVISAvatar';
+import { MarkdownContent } from '@/components/ui/MarkdownContent';
 import { FaUser, FaCheck, FaCopy, FaExternalLinkAlt, FaCompass } from 'react-icons/fa';
 
 interface ChatMessageProps {
@@ -28,76 +29,6 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const stripEmojis = (str: string) =>
-    str.replace(/[\uD83C-\uD83E][\uDC00-\uDFFF]|[\u2600-\u27BF]|[\u2300-\u23FF]|[\u2B50-\u2B55]/g, '');
-
-  // Helper to format basic markdown (bold, lists, code, headers)
-  const formatMarkdown = (text: string) => {
-    const cleaned = stripEmojis(text);
-    const lines = cleaned.split('\n');
-    return lines.map((line, index) => {
-      // Headers
-      if (line.startsWith('### ')) {
-        return (
-          <h4 key={index} className="font-mono text-xs font-semibold text-foreground mt-3 mb-1 uppercase tracking-wider">
-            {line.replace('### ', '')}
-          </h4>
-        );
-      }
-      if (line.startsWith('## ')) {
-        return (
-          <h3 key={index} className="font-display text-sm font-bold text-foreground mt-3 mb-1">
-            {line.replace('## ', '')}
-          </h3>
-        );
-      }
-      // List items (bullets)
-      if (line.startsWith('- ') || line.startsWith('* ')) {
-        const itemContent = line.substring(2);
-        return (
-          <li key={index} className="ml-4 list-disc text-xs sm:text-sm text-foreground/90 my-0.5 leading-relaxed">
-            {renderInlineMarkdown(itemContent)}
-          </li>
-        );
-      }
-      // List items (numbered)
-      const numMatch = line.match(/^(\d+)\.\s+(.*)$/);
-      if (numMatch) {
-        return (
-          <li key={index} className="ml-4 list-decimal text-xs sm:text-sm text-foreground/90 my-0.5 leading-relaxed">
-            {renderInlineMarkdown(numMatch[2])}
-          </li>
-        );
-      }
-      // Blank lines
-      if (!line.trim()) {
-        return <div key={index} className="h-1.5" />;
-      }
-      // Standard paragraph
-      return (
-        <p key={index} className="text-xs sm:text-sm text-foreground/90 my-1 leading-relaxed">
-          {renderInlineMarkdown(line)}
-        </p>
-      );
-    });
-  };
-
-  const renderInlineMarkdown = (text: string) => {
-    const parts = text.split(/(\*\*.*?\*\*|`.*?`)/g);
-    return parts.map((part, i) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={i} className="font-semibold text-foreground">{part.slice(2, -2)}</strong>;
-      }
-      if (part.startsWith('`') && part.endsWith('`')) {
-        return (
-          <code key={i} className="px-1.5 py-0.5 rounded bg-background border border-border text-foreground font-mono text-[11px]">
-            {part.slice(1, -1)}
-          </code>
-        );
-      }
-      return part;
-    });
-  };
 
   return (
     <motion.div
@@ -144,7 +75,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
               : 'bg-muted border-border text-foreground rounded-tl-sm'
           }`}
         >
-          {formatMarkdown(message.content)}
+          <MarkdownContent content={message.content} isUser={isUser} />
 
           {/* Streaming Cursor Pulse */}
           {!isUser && isStreaming && (

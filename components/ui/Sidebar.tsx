@@ -25,6 +25,7 @@ import {
   FaChevronRight,
 } from 'react-icons/fa'
 import { useTheme } from '../ThemeProvider'
+import { MarkdownContent } from './MarkdownContent'
 
 interface NavLink {
   id: string
@@ -472,7 +473,7 @@ export function Sidebar() {
                                     : 'bg-accent text-white dark:bg-accent dark:text-zinc-950 font-medium'
                                 }`}
                               >
-                                <p className="whitespace-pre-wrap text-[10.5px]">{m.content}</p>
+                                <MarkdownContent content={m.content} isUser={m.role === 'user'} />
                               </div>
                             </div>
                           ))}
@@ -1261,7 +1262,7 @@ export function Sidebar() {
                           : 'bg-accent text-white dark:text-zinc-950 font-semibold shadow-xs'
                       }`}
                     >
-                      <p className="whitespace-pre-wrap">{m.content}</p>
+                      <MarkdownContent content={m.content} isUser={m.role === 'user'} />
                     </div>
                   </div>
                 ))}
