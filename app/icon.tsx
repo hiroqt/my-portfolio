@@ -7,10 +7,10 @@ export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
 
 export default async function Icon() {
-  const logoPath = join(process.cwd(), 'public', 'logo.jpg')
+  const logoPath = join(process.cwd(), 'public', 'portfolio_icon.png')
   const logoBuffer = await readFile(logoPath)
   const logoBase64 = logoBuffer.toString('base64')
-  const logoSrc = `data:image/jpeg;base64,${logoBase64}`
+  const logoSrc = `data:image/png;base64,${logoBase64}`
 
   return new ImageResponse(
     (

@@ -41,6 +41,10 @@ export const metadata: Metadata = {
   title: 'Arnel Baylon — Software Engineer & Agentic Developer',
   description:
     'Portfolio & Résumé of Arnel A. Baylon — Software Engineer & Agentic Developer. Experience, projects, certifications, and skills.',
+  icons: {
+    icon: '/portfolio_icon.png',
+    apple: '/portfolio_icon.png',
+  },
   openGraph: {
     title: 'Arnel Baylon — Software Engineer & Agentic Developer',
     description:
