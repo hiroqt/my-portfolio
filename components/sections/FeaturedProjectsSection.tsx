@@ -186,6 +186,39 @@ const featuredSystems: FeaturedProject[] = [
     isExternal: false,
     githubUrl: 'https://github.com/hiroqt/better-trece-martires',
   },
+  {
+    id: 'sakto-ka',
+    number: '05',
+    title: 'sakto ka',
+    tagline: 'Stateless AI Career Copilot & ATS Resume Studio',
+    category: 'AI Career Intelligence',
+    awardBadge: 'STATELESS CAREER COPILOT',
+    awardSub: 'Zero Data Retention & ATS Architecture',
+    awardIcon: <span className="text-accent text-xs">✦</span>,
+    image: '/images/saktoka.png',
+    previewName: 'saktoka.click',
+    description:
+      'Privacy-first career copilot featuring automated multi-source job discovery, single-column ATS-standard resume builder with AI XYZ bullet-point optimization, and interactive STAR-method interview coaching — engineered with zero server-side data retention.',
+    problemSolution: {
+      problem: 'Job seekers navigate fragmented job portals, fail opaque ATS resume parsers, and lack structured technical interview preparation while risking personal data leakage.',
+      solution: 'Client-side stateless career intelligence copilot with automated opportunity discovery, single-column ATS resume generation scoring 90%+, and STAR-method interview coaching.',
+    },
+    highlights: [
+      'Multi-source automated job discovery and qualification scoring',
+      'ATS-Standard single-column resume studio engineered to score 90%+ on Workday and Lever',
+      'AI bullet-point enhancer transforming job duties into metric-driven XYZ achievement statements',
+      'Interactive STAR-method AI interview prep coach with simulated role-specific questions',
+    ],
+    tags: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'AI Copilot', 'ATS Optimizer', 'PDF Engine'],
+    metrics: [
+      { label: 'ATS Score Rate', val: '90%+' },
+      { label: 'Data Retention', val: '0% (Stateless)' },
+      { label: 'Interview Prep', val: 'STAR' },
+    ],
+    link: 'https://saktoka.click',
+    isExternal: true,
+    githubUrl: 'https://github.com/hiroqt',
+  },
 ]
 
 // All Projects Catalog (Initial 4 shown in Horizontal View + Full Archive on "Show All")
@@ -319,6 +352,23 @@ const allProjectsList: ProjectArchiveItem[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     githubUrl: 'https://github.com/hiroqt',
   },
+  {
+    id: 'sakto-ka',
+    number: '09',
+    title: 'sakto ka',
+    category: 'AI Career Intelligence',
+    summary: 'Stateless career copilot featuring automated multi-source job discovery, single-column ATS resume studio, and simulated STAR-method interview prep.',
+    problem: 'Job applicants face strict ATS parser rejections, unstructured interview practice, and data privacy concerns with online tools.',
+    solution: 'Single-column ATS resume generator scoring 90%+, automated multi-source job discovery, and STAR-method interview coaching with zero data retention.',
+    highlights: [
+      'ATS-Standard single-column resume studio scoring 90%+ on Workday and Lever',
+      'AI bullet-point enhancer transforming duties into metric-driven XYZ achievement statements',
+      'STAR-method role-specific interview preparation coach with instant simulated feedback',
+    ],
+    tags: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'AI Copilot', 'ATS Optimizer'],
+    liveUrl: 'https://saktoka.click',
+    githubUrl: 'https://github.com/hiroqt',
+  },
 ]
 
 export function FeaturedProjectsSection() {
@@ -364,7 +414,7 @@ export function FeaturedProjectsSection() {
         {/* ── Part 1: Flagship Systems Interactive Switcher & Stage ── */}
         <div className="space-y-4">
           {/* Top Systems Selector Ribbon */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
             {featuredSystems.map((item) => {
               const isActive = selectedSystemId === item.id
 
@@ -523,8 +573,16 @@ export function FeaturedProjectsSection() {
                         rel="noopener noreferrer"
                         className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-all shadow-xs"
                       >
-                        <span>Explore Repository on GitHub</span>
-                        <FaGithub className="text-xs" />
+                        <span>
+                          {selectedProject.link.includes('github.com')
+                            ? 'Explore Repository on GitHub'
+                            : 'Visit Live Application'}
+                        </span>
+                        {selectedProject.link.includes('github.com') ? (
+                          <FaGithub className="text-xs" />
+                        ) : (
+                          <FaExternalLinkAlt className="text-xs" />
+                        )}
                       </a>
                     ) : (
                       <Link
@@ -698,17 +756,30 @@ export function FeaturedProjectsSection() {
                     ))}
                   </div>
 
-                  {expandedProject.githubUrl && (
-                    <a
-                      href={expandedProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground text-background font-mono text-xs font-semibold hover:bg-accent hover:text-white transition-colors"
-                    >
-                      <span>Explore on GitHub</span>
-                      <FaGithub className="text-xs" />
-                    </a>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {expandedProject.liveUrl && (
+                      <a
+                        href={expandedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-accent text-white font-mono text-xs font-semibold hover:opacity-90 transition-opacity"
+                      >
+                        <span>Visit Live Site</span>
+                        <FaExternalLinkAlt className="text-xs" />
+                      </a>
+                    )}
+                    {expandedProject.githubUrl && (
+                      <a
+                        href={expandedProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground text-background font-mono text-xs font-semibold hover:bg-accent hover:text-white transition-colors"
+                      >
+                        <span>Explore on GitHub</span>
+                        <FaGithub className="text-xs" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             )}

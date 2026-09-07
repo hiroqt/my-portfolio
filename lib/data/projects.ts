@@ -74,6 +74,52 @@ export const projectsData: ProjectData[] = [
     ]
   },
   {
+    slug: 'sakto-ka',
+    title: 'sakto ka (AI Career Intelligence & ATS Resume Studio)',
+    type: 'AI Career Intelligence / SaaS',
+    summary: 'Stateless AI career copilot platform featuring automated multi-source job discovery, single-column ATS-standard resume generator with AI XYZ bullet enhancement and keyword tailoring, and interactive STAR-method interview coaching with zero server-side data retention.',
+    tags: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'AI Copilot', 'ATS Optimizer', 'PDF Engine', 'Client Storage'],
+    link: 'https://saktoka.click',
+    github: 'https://github.com/hiroqt',
+    image: '/images/saktoka.png',
+    previewName: 'saktoka.click',
+    isFeatured: true,
+    featuredTag: 'STATELESS AI CAREER COPILOT',
+    featuredTitle: 'sakto ka',
+    featuredSummary: 'Privacy-first career copilot featuring automated multi-source job discovery, ATS-compliant resume builder, and simulated STAR-method AI interview preparation with zero data retention.',
+    initiative: 'Career Intelligence System',
+    metrics: [
+      '90%+ Target score on enterprise ATS parsers',
+      'Zero server-side data retention architecture',
+      'STAR-method structured interview question simulations',
+      'Direct browser-rendered vector PDF export'
+    ],
+    features: [
+      'Automated multi-source job discovery, qualification scoring, and keyword gap analysis',
+      'ATS-Standard single-column resume studio compliant with Workday, Greenhouse, Lever, and Taleo parsers',
+      'AI bullet-point enhancer transforming generic duties into metric-driven XYZ achievement statements',
+      '1-Click role keyword tailoring and gap optimizer for target job descriptions',
+      'AI Interview Prep Coach simulating role-specific technical and behavioral questions using STAR methodology',
+      'Zero data retention architecture ensuring 100% client-side privacy with ephemeral demo session support',
+      'Printable and selectable vector PDF generation directly in the browser',
+      'Real-time light and dark theme mode support with responsive mobile navigation'
+    ],
+    content: [
+      {
+        title: 'Background & Purpose',
+        content: 'Modern tech hiring workflows subject candidate applications to aggressive Applicant Tracking System (ATS) parsers and demanding multi-stage technical and behavioral interviews. sakto ka was developed as a privacy-first, stateless AI career copilot to give job seekers an end-to-end advantage from discovery to final offer.'
+      },
+      {
+        title: 'ATS-Standard Engineering & AI Optimization',
+        content: 'The platform enforces strict single-column formatting, semantic hierarchy, and clean typographical tokens designed to score 90%+ on parsers like Workday, Greenhouse, and Taleo. Integrated AI tools transform passive bullet points into high-impact XYZ achievement statements while dynamically matching target job keywords.'
+      },
+      {
+        title: 'Zero Data Retention & Privacy Architecture',
+        content: 'Unlike traditional career tools that scrape and store candidate resumes and personal history, sakto ka operates on a zero-retention model. All state, career histories, and interview simulations remain strictly in client storage with instant session reset capabilities.'
+      }
+    ]
+  },
+  {
     slug: 'finops-ai-dashboard',
     title: 'FinOps AI Dashboard (Winner - Best Business Impact)',
     type: 'Financial Operations / Enterprise AI',
