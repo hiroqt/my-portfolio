@@ -9,6 +9,17 @@ import {
   FaLinkedin,
   FaEnvelope,
 } from 'react-icons/fa'
+import {
+  SiTypescript,
+  SiNextdotjs,
+  SiReact,
+  SiFlutter,
+  SiLaravel,
+  SiNodedotjs,
+  SiPostgresql,
+  SiDocker,
+  SiTailwindcss,
+} from 'react-icons/si'
 
 const summaryMilestones = [
   {
@@ -37,7 +48,11 @@ const summaryMilestones = [
   },
 ]
 
-export function ATSResumeHeader() {
+interface ATSResumeHeaderProps {
+  onOpenStack?: () => void
+}
+
+export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
   const reduce = useReducedMotion()
 
   return (
@@ -156,17 +171,44 @@ export function ATSResumeHeader() {
             </div>
           </motion.div>
 
-          {/* Primary Tech Stack Pills */}
+          {/* Primary Tech Stack Pills with SVG Logos */}
           <div className="mt-6 flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-muted-foreground">
             <span className="text-foreground font-semibold mr-1">Primary Stack:</span>
-            {['TypeScript', 'Next.js 15', 'React', 'Flutter', 'Laravel', 'Node.js', 'PostgreSQL', 'Docker', 'Tailwind'].map((tech) => (
-              <span
-                key={tech}
-                className="px-2.5 py-0.5 rounded-md bg-muted/50 dark:bg-muted/30 border border-border/80 text-foreground/90 hover:border-accent/40 hover:text-accent transition-colors"
+            {[
+              { name: 'TypeScript', icon: SiTypescript, color: 'text-[#3178C6]' },
+              { name: 'Next.js 15', icon: SiNextdotjs, color: 'text-foreground' },
+              { name: 'React', icon: SiReact, color: 'text-[#61DAFB]' },
+              { name: 'Flutter', icon: SiFlutter, color: 'text-[#02569B]' },
+              { name: 'Laravel', icon: SiLaravel, color: 'text-[#FF2D20]' },
+              { name: 'Node.js', icon: SiNodedotjs, color: 'text-[#5FA04E]' },
+              { name: 'PostgreSQL', icon: SiPostgresql, color: 'text-[#4169E1]' },
+              { name: 'Docker', icon: SiDocker, color: 'text-[#2496ED]' },
+              { name: 'Tailwind', icon: SiTailwindcss, color: 'text-[#06B6D4]' },
+            ].map((tech) => {
+              const Icon = tech.icon
+              return (
+                <button
+                  key={tech.name}
+                  type="button"
+                  onClick={() => onOpenStack?.()}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-muted/50 dark:bg-muted/30 border border-border/80 text-foreground/90 hover:border-accent/40 hover:text-accent transition-all cursor-pointer shadow-2xs group"
+                  title={`Open stack arsenal: ${tech.name}`}
+                >
+                  <Icon className={`w-3 h-3 transition-transform group-hover:scale-110 ${tech.color}`} />
+                  <span>{tech.name}</span>
+                </button>
+              )
+            })}
+            {onOpenStack && (
+              <button
+                type="button"
+                onClick={onOpenStack}
+                className="px-2 py-1 rounded-md text-accent font-semibold hover:underline cursor-pointer transition-colors"
+                title="Open full tech stack & tools drawer"
               >
-                {tech}
-              </span>
-            ))}
+                +40 More ↗
+              </button>
+            )}
           </div>
         </div>
 
@@ -207,6 +249,11 @@ export function ATSResumeHeader() {
             key={idx}
             href={m.href}
             onClick={(e) => {
+              if (m.href === '#skills' && onOpenStack) {
+                e.preventDefault()
+                onOpenStack()
+                return
+              }
               const targetId = m.href.replace('#', '')
               const targetEl = document.getElementById(targetId)
               if (targetEl) {
@@ -217,7 +264,7 @@ export function ATSResumeHeader() {
                 }
               }
             }}
-            className="group block p-4 rounded-2xl border border-border bg-muted/20 dark:bg-card/70 hover:bg-muted/40 hover:border-accent/40 transition-all shadow-2xs dark:shadow-md dark:shadow-black/15"
+            className="group block p-4 rounded-2xl border border-border bg-muted/20 dark:bg-card/70 hover:bg-muted/40 hover:border-accent/40 transition-all shadow-2xs dark:shadow-md dark:shadow-black/15 cursor-pointer"
           >
             <div className="font-serif text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors flex items-center justify-between">
               <span>{m.value}</span>

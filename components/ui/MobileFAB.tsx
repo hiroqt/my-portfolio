@@ -2,30 +2,34 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaShareAlt, FaPlus } from 'react-icons/fa'
+import { FaShareAlt, FaPlus, FaLayerGroup } from 'react-icons/fa'
 import { HiSparkles } from 'react-icons/hi2'
 
 interface MobileFABProps {
   chatOpen: boolean
   socialsOpen: boolean
+  stackOpen?: boolean
   onToggleChat: () => void
   onToggleSocials: () => void
+  onToggleStack?: () => void
 }
 
 export function MobileFAB({
   chatOpen,
   socialsOpen,
+  stackOpen = false,
   onToggleChat,
   onToggleSocials,
+  onToggleStack,
 }: MobileFABProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   // Auto-close FAB speed dial if any modal is opened externally or on ESC
   useEffect(() => {
-    if (chatOpen || socialsOpen) {
+    if (chatOpen || socialsOpen || stackOpen) {
       setIsExpanded(false)
     }
-  }, [chatOpen, socialsOpen])
+  }, [chatOpen, socialsOpen, stackOpen])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -47,8 +51,13 @@ export function MobileFAB({
     onToggleSocials()
   }
 
+  const handleOpenStack = () => {
+    setIsExpanded(false)
+    onToggleStack?.()
+  }
+
   // Hide the FAB while either full card modal is active so it doesn't obstruct the card
-  const isAnyModalOpen = chatOpen || socialsOpen
+  const isAnyModalOpen = chatOpen || socialsOpen || stackOpen
 
   return (
     <div className="lg:hidden">
@@ -77,7 +86,7 @@ export function MobileFAB({
                   initial={{ opacity: 0, y: 15, scale: 0.85 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 12, scale: 0.85 }}
-                  transition={{ type: 'spring', stiffness: 420, damping: 26, delay: 0.04 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26, delay: 0.08 }}
                 >
                   <button
                     type="button"
@@ -105,7 +114,39 @@ export function MobileFAB({
               )}
             </AnimatePresence>
 
-            {/* ── Action 2: Social Channels Button ── */}
+            {/* ── Action 2: Tech Stack & Arsenal Button ── */}
+            <AnimatePresence>
+              {isExpanded && onToggleStack && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15, scale: 0.85 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 12, scale: 0.85 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26, delay: 0.04 }}
+                >
+                  <button
+                    type="button"
+                    onClick={handleOpenStack}
+                    aria-label="Open Tech Stack & Arsenal"
+                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-background dark:bg-[#0c0e18] text-foreground border border-border/90 dark:border-white/20 shadow-[0_12px_32px_rgba(0,0,0,0.35)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.75)] hover:border-accent active:scale-95 transition-all cursor-pointer"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-amber-500/20 text-accent flex items-center justify-center text-xs shadow-xs border border-accent/30">
+                      <FaLayerGroup className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="text-left">
+                      <span className="font-bold text-xs tracking-tight block">Tech Stack</span>
+                      <p className="text-[10px] font-mono text-muted-foreground leading-none mt-0.5">
+                        Languages &amp; Frameworks
+                      </p>
+                    </div>
+                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-accent/15 text-accent border border-accent/30">
+                      40+
+                    </span>
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* ── Action 3: Social Channels Button ── */}
             <AnimatePresence>
               {isExpanded && (
                 <motion.div

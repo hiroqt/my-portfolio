@@ -37,6 +37,7 @@ const ContactSection = dynamic(
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [isSocialsOpen, setIsSocialsOpen] = useState(false)
+  const [isStackOpen, setIsStackOpen] = useState(false)
 
   // ── Ensure portfolio always opens at the Hero section, preventing browser auto-scroll / stale hash jumping to Experience ──
   useEffect(() => {
@@ -47,9 +48,9 @@ export default function Home() {
 
       const hash = window.location.hash
       // If opened cleanly or with stale #experience / #hero / #about from past navigation or autocomplete
-      if (!hash || hash === '#experience' || hash === '#hero' || hash === '#about') {
+      if (!hash || hash === '#experience' || hash === '#hero' || hash === '#about' || hash === '#skills') {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-        if (hash === '#experience') {
+        if (hash === '#experience' || hash === '#skills') {
           window.history.replaceState(null, '', window.location.pathname)
         }
       }
@@ -58,27 +59,37 @@ export default function Home() {
 
   const handleToggleChat = () => {
     setIsSocialsOpen(false)
+    setIsStackOpen(false)
     setIsChatOpen((prev) => !prev)
   }
 
   const handleToggleSocials = () => {
     setIsChatOpen(false)
+    setIsStackOpen(false)
     setIsSocialsOpen((prev) => !prev)
   }
 
-  const isPanelOpen = isChatOpen || isSocialsOpen
+  const handleToggleStack = () => {
+    setIsChatOpen(false)
+    setIsSocialsOpen(false)
+    setIsStackOpen((prev) => !prev)
+  }
+
+  const isPanelOpen = isChatOpen || isSocialsOpen || isStackOpen
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative overflow-x-hidden">
       {/* ── Ambient 3D Dot Wave Background (Deferred, Zero-Allocation Particle Canvas) ── */}
       <DotWaveBackground />
 
-      {/* ── Clean Floating Side Navigation (Outside Container & Cards) with AI Chat & Socials ── */}
+      {/* ── Clean Floating Side Navigation (Outside Container & Cards) with Tech Stack, AI Chat & Socials ── */}
       <SimpleSideNav
         isChatOpen={isChatOpen}
         onToggleChat={handleToggleChat}
         isSocialsOpen={isSocialsOpen}
         onToggleSocials={handleToggleSocials}
+        isStackOpen={isStackOpen}
+        onToggleStack={handleToggleStack}
       />
 
       {/* ── Unfocus Dismiss Overlay (Clicking anywhere on unfocused content closes open panel) ── */}
@@ -87,6 +98,7 @@ export default function Home() {
           onClick={() => {
             setIsChatOpen(false)
             setIsSocialsOpen(false)
+            setIsStackOpen(false)
           }}
           className="hidden lg:block fixed inset-0 z-30 cursor-pointer bg-black/5 dark:bg-black/20 backdrop-blur-[1px] transition-opacity duration-500"
           title="Click to close panel and refocus page"
@@ -94,11 +106,13 @@ export default function Home() {
         />
       )}
 
-      {/* ── Main Content Container (Smoothly shifts to the right and unfocuses when AI Chat or Socials extends) ── */}
+      {/* ── Main Content Container (Smoothly shifts and unfocuses when AI Chat, Tech Stack or Socials extends) ── */}
       <main
         id="main-content"
         className={`relative z-10 min-h-screen pt-6 sm:pt-10 pb-28 lg:pb-20 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          isPanelOpen
+          isStackOpen
+            ? 'lg:-translate-x-[160px] xl:-translate-x-[200px] 2xl:-translate-x-[240px] opacity-40 dark:opacity-30 blur-[2px] scale-[0.985] select-none pointer-events-none'
+            : isChatOpen || isSocialsOpen
             ? 'lg:translate-x-[260px] xl:translate-x-[300px] 2xl:translate-x-[340px] opacity-40 dark:opacity-30 blur-[2px] scale-[0.985] select-none pointer-events-none'
             : 'translate-x-0 opacity-100 blur-0 scale-100 pointer-events-auto'
         }`}
@@ -106,7 +120,7 @@ export default function Home() {
         <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-12 space-y-4">
           
           {/* 00 — Bespoke Editorial Hero & Telemetry HUD */}
-          <ATSResumeHeader />
+          <ATSResumeHeader onOpenStack={() => setIsStackOpen(true)} />
 
           {/* 01 — Flagship Systems Showcase (Pixel Crew + 3 Top Featured Architectures) */}
           <FeaturedProjectsSection />
@@ -114,19 +128,16 @@ export default function Home() {
           {/* 02 — Work Experience & Production Track Record */}
           <ExperienceSection />
 
-          {/* 03 — Technical Arsenal & Core Competencies */}
-          <SkillsSection />
-
-          {/* 04 — Verified Certifications & Credly Accreditations */}
+          {/* 03 — Verified Certifications & Credly Accreditations */}
           <CertificationsSection />
 
-          {/* 05 — Academic Education & Degree */}
+          {/* 04 — Academic Education & Degree */}
           <EducationSection />
 
-          {/* 06 — Photographic Artifact Studio & Milestones */}
+          {/* 05 — Photographic Artifact Studio & Milestones */}
           <GallerySection />
 
-          {/* 07 — Direct Contact & Channels */}
+          {/* 06 — Direct Contact & Channels */}
           <ContactSection />
 
         </div>

@@ -26,7 +26,7 @@ export function EducationSection() {
       {/* ── Section Header ── */}
       <div className="mb-6 flex items-baseline justify-between border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-xs text-accent font-bold">05</span>
+          <span className="font-mono text-xs text-accent font-bold">04</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
           <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Education

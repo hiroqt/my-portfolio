@@ -19,6 +19,7 @@ import {
 import { useTheme } from '../ThemeProvider'
 import { AIChatBubble } from './AIChatBubble'
 import { SocialsBubble } from './SocialsBubble'
+import { TechStackBubble } from './TechStackBubble'
 import { MobileFAB } from './MobileFAB'
 
 interface NavItem {
@@ -32,11 +33,10 @@ const navItems: NavItem[] = [
   { id: 'hero', label: 'Overview', number: '00', icon: FaTerminal },
   { id: 'projects', label: 'Systems & Work', number: '01', icon: FaCode },
   { id: 'experience', label: 'Experience', number: '02', icon: FaBriefcase },
-  { id: 'skills', label: 'Arsenal & Skills', number: '03', icon: FaLayerGroup },
-  { id: 'certifications', label: 'Certifications', number: '04', icon: FaCertificate },
-  { id: 'education', label: 'Education', number: '05', icon: FaGraduationCap },
-  { id: 'gallery', label: 'Artifact Studio', number: '06', icon: FaImages },
-  { id: 'contact', label: 'Get in Touch', number: '07', icon: FaPaperPlane },
+  { id: 'certifications', label: 'Certifications', number: '03', icon: FaCertificate },
+  { id: 'education', label: 'Education', number: '04', icon: FaGraduationCap },
+  { id: 'gallery', label: 'Artifact Studio', number: '05', icon: FaImages },
+  { id: 'contact', label: 'Get in Touch', number: '06', icon: FaPaperPlane },
 ]
 
 interface SimpleSideNavProps {
@@ -44,6 +44,8 @@ interface SimpleSideNavProps {
   onToggleChat?: () => void
   isSocialsOpen?: boolean
   onToggleSocials?: () => void
+  isStackOpen?: boolean
+  onToggleStack?: () => void
 }
 
 export function SimpleSideNav({
@@ -51,6 +53,8 @@ export function SimpleSideNav({
   onToggleChat,
   isSocialsOpen,
   onToggleSocials,
+  isStackOpen,
+  onToggleStack,
 }: SimpleSideNavProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const shouldReduceMotion = useReducedMotion()
@@ -58,12 +62,16 @@ export function SimpleSideNav({
   const [mounted, setMounted] = useState(false)
   const [internalChatOpen, setInternalChatOpen] = useState(false)
   const [internalSocialsOpen, setInternalSocialsOpen] = useState(false)
+  const [internalStackOpen, setInternalStackOpen] = useState(false)
 
   const chatOpen = isChatOpen !== undefined ? isChatOpen : internalChatOpen
   const toggleChat = onToggleChat || (() => setInternalChatOpen((prev) => !prev))
 
   const socialsOpen = isSocialsOpen !== undefined ? isSocialsOpen : internalSocialsOpen
   const toggleSocials = onToggleSocials || (() => setInternalSocialsOpen((prev) => !prev))
+
+  const stackOpen = isStackOpen !== undefined ? isStackOpen : internalStackOpen
+  const toggleStack = onToggleStack || (() => setInternalStackOpen((prev) => !prev))
 
   useEffect(() => {
     setMounted(true)
@@ -128,7 +136,7 @@ export function SimpleSideNav({
         <div className="p-1.5 rounded-2xl bg-background/80 dark:bg-[#0c0e18]/80 backdrop-blur-xl border border-border/60 dark:border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.08)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.5)] flex flex-col items-center gap-1">
           {/* Main Section Links */}
           {navItems.map((item) => {
-            const isActive = activeSection === item.id
+            const isActive = activeSection === item.id && !stackOpen && !chatOpen && !socialsOpen
             const IconComponent = item.icon
 
             return (
@@ -180,6 +188,34 @@ export function SimpleSideNav({
           {/* Minimal Divider */}
           <div className="w-5 h-px bg-border/60 dark:bg-white/10 my-1" />
 
+          {/* ── Tech Stack & Arsenal Button (Opens Left Tech Stack Drawer) ── */}
+          <button
+            type="button"
+            onClick={toggleStack}
+            aria-label="Toggle Tech Stack & Arsenal"
+            aria-expanded={stackOpen}
+            className={`group relative flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-200 cursor-pointer ${
+              stackOpen
+                ? 'bg-accent/25 text-accent border border-accent/45 shadow-[0_0_15px_rgba(245,158,11,0.35)]'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted/40 dark:hover:bg-white/[0.05]'
+            }`}
+          >
+            <FaLayerGroup
+              className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                stackOpen ? 'scale-110 text-accent' : 'group-hover:scale-110'
+              }`}
+            />
+
+            {/* Floating Tooltip */}
+            <span
+              role="tooltip"
+              className="absolute left-full ml-3 px-2.5 py-1 rounded-md bg-foreground text-background font-mono text-[11px] font-medium tracking-wide shadow-lg whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 z-50 flex items-center gap-1.5"
+            >
+              <span className="text-accent font-bold">40+</span>
+              <span>Stack &amp; Arsenal</span>
+            </span>
+          </button>
+
           {/* ── AI Chat Copilot Button (Toggles Floating Chat Bubble) ── */}
           <button
             type="button"
@@ -195,7 +231,7 @@ export function SimpleSideNav({
             <span className="text-xs font-bold leading-none select-none">✦</span>
 
             {/* Subtle glow beacon when closed */}
-            {!chatOpen && (
+            {!chatOpen && !stackOpen && (
               <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-accent animate-ping opacity-60" />
             )}
 
@@ -273,7 +309,7 @@ export function SimpleSideNav({
               className="absolute left-full ml-3 px-2.5 py-1 rounded-md bg-foreground text-background font-mono text-[11px] font-medium tracking-wide shadow-lg whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 z-50 flex items-center gap-1.5"
             >
               <span className="text-accent font-bold">5+</span>
-              <span>Connect & Socials</span>
+              <span>Connect &amp; Socials</span>
             </span>
           </button>
         </div>
@@ -286,14 +322,53 @@ export function SimpleSideNav({
       >
         {/* Core Mobile Tabs */}
         {[
-          { id: 'hero', label: 'Top', icon: FaTerminal },
-          { id: 'projects', label: 'Work', icon: FaCode },
-          { id: 'experience', label: 'Exp', icon: FaBriefcase },
-          { id: 'skills', label: 'Stack', icon: FaLayerGroup },
-          { id: 'contact', label: 'Contact', icon: FaPaperPlane },
+          { id: 'hero', label: 'Top', icon: FaTerminal, isSection: true },
+          { id: 'projects', label: 'Work', icon: FaCode, isSection: true },
+          { id: 'experience', label: 'Exp', icon: FaBriefcase, isSection: true },
+          { id: 'stack', label: 'Stack', icon: FaLayerGroup, isSection: false },
+          { id: 'contact', label: 'Contact', icon: FaPaperPlane, isSection: true },
         ].map((tab) => {
-          const isActive = activeSection === tab.id
+          const isActive = tab.isSection
+            ? activeSection === tab.id && !stackOpen && !chatOpen && !socialsOpen
+            : stackOpen
           const Icon = tab.icon
+
+          if (!tab.isSection) {
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={toggleStack}
+                aria-label="Toggle Tech Stack & Arsenal"
+                aria-expanded={stackOpen}
+                className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-full transition-colors cursor-pointer ${
+                  isActive
+                    ? 'text-foreground font-semibold'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeMobilePill"
+                    className="absolute inset-0 rounded-full bg-accent/15 dark:bg-accent/25 border border-accent/40 -z-10"
+                    transition={
+                      shouldReduceMotion
+                        ? { duration: 0.05 }
+                        : { type: 'spring', stiffness: 440, damping: 30 }
+                    }
+                  />
+                )}
+                <Icon
+                  className={`w-4 h-4 ${
+                    isActive ? 'text-amber-600 dark:text-amber-400' : ''
+                  }`}
+                />
+                <span className="text-[10px] font-mono mt-0.5 tracking-tight">
+                  {tab.label}
+                </span>
+              </button>
+            )
+          }
 
           return (
             <a
@@ -351,12 +426,20 @@ export function SimpleSideNav({
         )}
       </nav>
 
-      {/* ── Mobile Floating Action Button (FAB Speed Dial for AI Chat & Socials) ── */}
+      {/* ── Mobile Floating Action Button (FAB Speed Dial for AI Chat, Tech Stack & Socials) ── */}
       <MobileFAB
         chatOpen={chatOpen}
         socialsOpen={socialsOpen}
+        stackOpen={stackOpen}
         onToggleChat={toggleChat}
         onToggleSocials={toggleSocials}
+        onToggleStack={toggleStack}
+      />
+
+      {/* ── Floating Tech Stack Drawer (Appears toward sidebar icon on left) ── */}
+      <TechStackBubble
+        isOpen={stackOpen}
+        onClose={toggleStack}
       />
 
       {/* ── Floating AI Chat Bubble (Appears toward sidebar icon with pointer) ── */}
@@ -374,3 +457,4 @@ export function SimpleSideNav({
     </>
   )
 }
+

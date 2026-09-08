@@ -9,11 +9,10 @@ const stackGroups = [
     tags: [
       'Claude',
       'Gemini',
-      'OpenAI / Codex',
+      'OpenAI',
       'DeepSeek',
       'Qwen',
       'Ollama',
-      'Cursor Rules',
       'Agentic Loops',
       'LLM Orchestration',
       'RAG Architectures',
