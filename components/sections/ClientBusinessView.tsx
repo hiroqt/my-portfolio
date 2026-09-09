@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   FaArrowRight,
+  FaArrowLeft,
   FaChevronDown,
   FaChevronLeft,
   FaChevronRight,
@@ -14,6 +15,11 @@ import {
   FaLinkedin,
   FaTiktok,
   FaEnvelope,
+  FaCheck,
+  FaGlobe,
+  FaRobot,
+  FaSyncAlt,
+  FaQuestionCircle,
 } from 'react-icons/fa'
 
 // ── Accurate Project Carousel Data with Authentic Details (Friendly, Non-Tech Copy) ──
@@ -221,6 +227,8 @@ interface ClientBusinessViewProps {
 export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewProps) {
   const reduce = useReducedMotion()
   const [inquiryType, setInquiryType] = useState('New Website or App')
+  const [formStep, setFormStep] = useState<1 | 2 | 3>(1)
+  const [formError, setFormError] = useState<string | null>(null)
   const [inquirySubmitted, setInquirySubmitted] = useState(false)
   const [inquiryForm, setInquiryForm] = useState({
     name: '',
@@ -261,13 +269,37 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
     setActiveReviewIdx((prev) => (prev + 1) % clientTestimonials.length)
   }
 
+  const handleNextStep = () => {
+    setFormError(null)
+    if (formStep === 1) {
+      setFormStep(2)
+    } else if (formStep === 2) {
+      if (!inquiryForm.message.trim()) {
+        setFormError('Please share a brief note about what you would like to build or achieve.')
+        return
+      }
+      setFormStep(3)
+    }
+  }
+
+  const handlePrevStep = () => {
+    setFormError(null)
+    if (formStep > 1) {
+      setFormStep((prev) => (prev - 1) as 1 | 2 | 3)
+    }
+  }
+
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (!inquiryForm.name.trim() || !inquiryForm.email.trim()) {
+      setFormError('Please provide your name and email address so I can get back to you.')
+      return
+    }
     const subject = encodeURIComponent(`Project Inquiry: ${inquiryType} (${inquiryForm.name})`)
     const body = encodeURIComponent(
-      `Hi Arnel,\n\nName: ${inquiryForm.name}\nEmail: ${inquiryForm.email}\nProject Type: ${inquiryType}\nTarget Timeline: ${inquiryForm.timeline}\n\nProject Details:\n${inquiryForm.message}\n\nLooking forward to hearing from you!`
+      `Hi Arnel,\n\nName: ${inquiryForm.name}\nEmail: ${inquiryForm.email}\nProject Type: ${inquiryType}\nDesired Timeline: ${inquiryForm.timeline}\n\nProject Overview:\n${inquiryForm.message || 'N/A'}\n\nLooking forward to speaking with you!`
     )
-    window.open(`mailto:arnelbaylon0@gmail.com?subject=${subject}&body=${body}`, '_blank')
+    window.open(`mailto:arnlebaylon15@gmail.com?subject=${subject}&body=${body}`, '_blank')
     setInquirySubmitted(true)
   }
 
@@ -342,7 +374,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
             </a>
 
             <a
-              href="mailto:arnelbaylon0@gmail.com"
+              href="mailto:arnlebaylon15@gmail.com"
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group cursor-pointer"
               aria-label="Email Arnel"
             >
@@ -740,14 +772,17 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
 
             <div className="space-y-4 mb-8">
               <a
-                href="mailto:arnelbaylon0@gmail.com"
-                className="flex items-center gap-3.5 p-4 rounded-2xl bg-card border border-border/80 hover:border-accent/50 text-foreground transition-colors duration-150 group shadow-xs dark:shadow-lg dark:shadow-black/20"
+                href="mailto:arnlebaylon15@gmail.com"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/80 hover:border-amber-500/50 text-foreground transition-colors duration-150 group shadow-xs dark:shadow-lg dark:shadow-black/20"
               >
-                <div className="font-mono text-xs font-bold text-accent px-2.5 py-1.5 rounded-lg bg-muted/60 dark:bg-muted/40 border border-border/80 shrink-0">
-                  EMAIL
+                <div className="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <FaEnvelope className="w-5 h-5" />
                 </div>
-                <div className="text-sm sm:text-base font-semibold group-hover:text-accent transition-colors">
-                  arnelbaylon0@gmail.com
+                <div className="min-w-0">
+                  <div className="text-xs text-muted-foreground font-medium">Email</div>
+                  <div className="text-sm sm:text-base font-semibold text-foreground group-hover:text-accent transition-colors truncate">
+                    arnlebaylon15@gmail.com
+                  </div>
                 </div>
               </a>
 
@@ -755,13 +790,16 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                 href="https://www.linkedin.com/in/arnel-baylon-b05233189"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3.5 p-4 rounded-2xl bg-card border border-border/80 hover:border-accent/50 text-foreground transition-colors duration-150 group shadow-xs dark:shadow-lg dark:shadow-black/20"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/80 hover:border-[#0A66C2]/50 text-foreground transition-colors duration-150 group shadow-xs dark:shadow-lg dark:shadow-black/20"
               >
-                <div className="font-mono text-xs font-bold text-accent px-2.5 py-1.5 rounded-lg bg-muted/60 dark:bg-muted/40 border border-border/80 shrink-0">
-                  LINKEDIN
+                <div className="w-11 h-11 rounded-xl bg-[#0A66C2]/15 text-[#0A66C2] border border-[#0A66C2]/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <FaLinkedin className="w-5 h-5" />
                 </div>
-                <div className="text-sm sm:text-base font-semibold group-hover:text-accent transition-colors">
-                  linkedin.com/in/arnel-baylon
+                <div className="min-w-0">
+                  <div className="text-xs text-muted-foreground font-medium">LinkedIn</div>
+                  <div className="text-sm sm:text-base font-semibold text-foreground group-hover:text-accent transition-colors truncate">
+                    linkedin.com/in/arnel-baylon-b05233189
+                  </div>
                 </div>
               </a>
             </div>
@@ -773,149 +811,441 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
             </div>
           </div>
 
-          {/* Right Column: Project Inquiry Form */}
+          {/* Right Column: Project Inquiry Form Guide */}
           <div className="lg:col-span-7">
             <div className="p-6 sm:p-10 rounded-2xl bg-card border border-border/80 shadow-xs dark:shadow-lg dark:shadow-black/20">
               {inquirySubmitted ? (
                 <div className="py-12 text-center">
-                  <h3 className="text-xl font-bold text-foreground mb-2">
+                  <div className="w-14 h-14 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
+                    <FaCheck className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
                     Email Ready to Send!
                   </h3>
-                  <p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
-                    Your email app has opened with your message ready to go. Simply click send, or write directly to{' '}
-                    <strong className="text-foreground">arnelbaylon0@gmail.com</strong>.
+                  <p className="text-sm text-muted-foreground max-w-md mx-auto mb-6 leading-relaxed">
+                    Your email app has opened with your inquiry prefilled to{' '}
+                    <strong className="text-foreground">arnlebaylon15@gmail.com</strong>. Simply click send in your email client to deliver it!
                   </p>
-                  <button
-                    type="button"
-                    onClick={() => setInquirySubmitted(false)}
-                    className="px-5 py-2.5 rounded-xl bg-foreground text-background text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer"
-                  >
-                    Send Another Message
-                  </button>
+                  <div className="flex flex-wrap items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setInquirySubmitted(false)
+                        setFormStep(1)
+                        setInquiryForm({
+                          name: '',
+                          email: '',
+                          message: '',
+                          timeline: 'Standard pace (2–4 weeks)',
+                        })
+                      }}
+                      className="px-5 py-2.5 rounded-xl bg-foreground text-background text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer shadow-xs"
+                    >
+                      Start Another Inquiry
+                    </button>
+                    <a
+                      href={`mailto:arnlebaylon15@gmail.com?subject=${encodeURIComponent(
+                        `Project Inquiry: ${inquiryType} (${inquiryForm.name})`
+                      )}&body=${encodeURIComponent(
+                        `Hi Arnel,\n\nName: ${inquiryForm.name}\nEmail: ${inquiryForm.email}\nProject Type: ${inquiryType}\nTarget Timeline: ${inquiryForm.timeline}\n\nProject Overview:\n${inquiryForm.message || 'N/A'}\n\nLooking forward to speaking with you!`
+                      )}`}
+                      className="px-5 py-2.5 rounded-xl bg-muted/50 hover:bg-muted text-foreground text-xs font-semibold transition-colors border border-border/70"
+                    >
+                      Re-open Email App
+                    </a>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleInquirySubmit} className="space-y-6">
+                  {/* Step Progress Guide Header */}
                   <div>
-                    <h3 className="text-xl font-bold text-foreground">
-                      Tell Me About Your Project
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Share a few quick details about what you need, and I’ll reply with helpful advice within 24 hours.
-                    </p>
-                  </div>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
+                      <span className="font-semibold text-foreground">
+                        Step {formStep} of 3:{' '}
+                        {formStep === 1
+                          ? 'What to Build'
+                          : formStep === 2
+                          ? 'Goals & Timeline'
+                          : 'Your Contact Details'}
+                      </span>
+                      <span className="font-mono text-[11px] text-amber-600 dark:text-amber-400 font-bold">
+                        {formStep === 1 ? '33%' : formStep === 2 ? '66%' : '100%'} Complete
+                      </span>
+                    </div>
 
-                  {/* Project Type */}
-                  <div>
-                    <label className="block text-xs font-semibold text-muted-foreground mb-2">
-                      What type of project are you planning?
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {/* Progress Bar */}
+                    <div className="w-full h-1.5 bg-muted/60 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full"
+                        initial={false}
+                        animate={{ width: formStep === 1 ? '33%' : formStep === 2 ? '66%' : '100%' }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </div>
+
+                    {/* Step Navigation Pills */}
+                    <div className="grid grid-cols-3 gap-2 mt-4">
                       {[
-                        'New Website or App',
-                        'Smart AI & Automation',
-                        'Redesign Existing Site',
-                        'General Question',
-                      ].map((type) => (
+                        { step: 1, label: '1. What to Build' },
+                        { step: 2, label: '2. Goals & Timeline' },
+                        { step: 3, label: '3. Contact Info' },
+                      ].map((item) => (
                         <button
-                          key={type}
+                          key={item.step}
                           type="button"
-                          onClick={() => setInquiryType(type)}
-                          className={`p-2.5 rounded-xl text-xs font-medium border text-center transition-colors duration-150 cursor-pointer ${
-                            inquiryType === type
-                              ? 'bg-amber-500/15 border-amber-500/50 text-amber-700 dark:text-amber-300 font-semibold shadow-xs'
-                              : 'bg-muted/30 border-border/60 text-muted-foreground hover:text-foreground'
+                          onClick={() => {
+                            if (item.step < formStep) setFormStep(item.step as 1 | 2 | 3)
+                          }}
+                          disabled={item.step > formStep}
+                          className={`py-1.5 px-2 rounded-lg text-[11px] font-medium text-center transition-all ${
+                            formStep === item.step
+                              ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/40 font-bold'
+                              : formStep > item.step
+                              ? 'bg-muted/40 text-foreground hover:bg-muted/70 cursor-pointer'
+                              : 'bg-muted/20 text-muted-foreground/60 cursor-not-allowed'
                           }`}
                         >
-                          {type}
+                          {formStep > item.step ? `✓ ${item.label.split('. ')[1]}` : item.label}
                         </button>
                       ))}
                     </div>
                   </div>
 
-                  {/* Name and Email */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="inquiry-name" className="block text-xs font-medium text-foreground mb-1">
-                        Your Name or Business
-                      </label>
-                      <input
-                        id="inquiry-name"
-                        name="name"
-                        type="text"
-                        required
-                        value={inquiryForm.name}
-                        onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
-                        placeholder="Sarah Johnson (Johnson Real Estate)"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
-                      />
-                    </div>
+                  {/* Dynamic Step Content */}
+                  <AnimatePresence mode="wait">
+                    {/* ── STEP 1: What to Build ── */}
+                    {formStep === 1 && (
+                      <motion.div
+                        key="step1"
+                        initial={reduce ? false : { opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={reduce ? undefined : { opacity: 0, x: -10 }}
+                        transition={{ duration: 0.25 }}
+                        className="space-y-6 pt-2"
+                      >
+                        <div>
+                          <h3 className="text-xl font-bold text-foreground">
+                            What type of project do you have in mind?
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Choose the option that best describes what you’d like to build.
+                          </p>
+                        </div>
 
-                    <div>
-                      <label htmlFor="inquiry-email" className="block text-xs font-medium text-foreground mb-1">
-                        Your Email Address
-                      </label>
-                      <input
-                        id="inquiry-email"
-                        name="email"
-                        type="email"
-                        required
-                        value={inquiryForm.email}
-                        onChange={(e) => setInquiryForm({ ...inquiryForm, email: e.target.value })}
-                        placeholder="sarah@example.com"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
-                      />
-                    </div>
-                  </div>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          {[
+                            {
+                              id: 'New Website or App',
+                              title: 'New Website or App',
+                              desc: 'Custom website, online store, or web app built from scratch',
+                              icon: FaGlobe,
+                            },
+                            {
+                              id: 'Smart AI & Automation',
+                              title: 'Smart AI & Automation',
+                              desc: 'Smart customer assistants, AI features, or automated workflows',
+                              icon: FaRobot,
+                            },
+                            {
+                              id: 'Redesign Existing Site',
+                              title: 'Redesign Existing Site',
+                              desc: 'Modernize design, improve mobile layout, and boost speed',
+                              icon: FaSyncAlt,
+                            },
+                            {
+                              id: 'General Question',
+                              title: 'General Question',
+                              desc: 'Discuss an idea, ask for advice, or explore project scope',
+                              icon: FaQuestionCircle,
+                            },
+                          ].map((type) => {
+                            const isSelected = inquiryType === type.id
+                            const Icon = type.icon
+                            return (
+                              <button
+                                key={type.id}
+                                type="button"
+                                onClick={() => {
+                                  setInquiryType(type.id)
+                                  setFormError(null)
+                                }}
+                                className={`p-4 rounded-2xl text-left border transition-all duration-150 cursor-pointer flex flex-col justify-between ${
+                                  isSelected
+                                    ? 'bg-amber-500/10 border-amber-500/60 shadow-xs ring-1 ring-amber-500/40'
+                                    : 'bg-muted/30 border-border/70 hover:bg-muted/50 hover:border-border'
+                                }`}
+                              >
+                                <div className="flex items-center justify-between mb-3">
+                                  <div
+                                    className={`w-9 h-9 rounded-xl flex items-center justify-center ${
+                                      isSelected
+                                        ? 'bg-amber-500 text-zinc-950 shadow-xs'
+                                        : 'bg-muted text-muted-foreground'
+                                    }`}
+                                  >
+                                    <Icon className="w-4 h-4" />
+                                  </div>
+                                  <span
+                                    className={`w-5 h-5 rounded-full border flex items-center justify-center text-[10px] ${
+                                      isSelected
+                                        ? 'border-amber-500 bg-amber-500 text-zinc-950 font-bold'
+                                        : 'border-border/80 text-transparent'
+                                    }`}
+                                  >
+                                    ✓
+                                  </span>
+                                </div>
+                                <div>
+                                  <div className="font-bold text-sm text-foreground">{type.title}</div>
+                                  <div className="text-xs text-muted-foreground mt-1 leading-snug">{type.desc}</div>
+                                </div>
+                              </button>
+                            )
+                          })}
+                        </div>
 
-                  {/* Timeline Selection */}
-                  <div>
-                    <label htmlFor="launch-timeline" className="block text-xs font-medium text-foreground mb-1">
-                      When would you like this completed?
-                    </label>
-                    <select
-                      id="launch-timeline"
-                      name="timeline"
-                      aria-label="Target Launch Timeline"
-                      value={inquiryForm.timeline}
-                      onChange={(e) => setInquiryForm({ ...inquiryForm, timeline: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
-                    >
-                      <option value="As soon as possible (1–2 weeks)">As soon as possible (1–2 weeks)</option>
-                      <option value="Standard pace (2–4 weeks)">Standard pace (2–4 weeks)</option>
-                      <option value="Flexible (next 1–2 months)">Flexible (next 1–2 months)</option>
-                      <option value="Just exploring ideas">Just exploring ideas</option>
-                    </select>
-                  </div>
+                        <div className="pt-2 flex justify-end">
+                          <button
+                            type="button"
+                            onClick={handleNextStep}
+                            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-foreground text-background font-semibold hover:opacity-90 active:scale-[0.99] transition-[opacity,transform] duration-150 shadow-md flex items-center justify-center gap-2 cursor-pointer text-sm"
+                          >
+                            <span>Next: Goals &amp; Timeline</span>
+                            <FaArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
 
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="inquiry-message" className="block text-xs font-medium text-foreground mb-1">
-                      What would you like to build or achieve?
-                    </label>
-                    <textarea
-                      id="inquiry-message"
-                      name="message"
-                      required
-                      rows={3}
-                      value={inquiryForm.message}
-                      onChange={(e) => setInquiryForm({ ...inquiryForm, message: e.target.value })}
-                      placeholder="Tell me a bit about your business, what you want your website or app to do, or any examples you like..."
-                      className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors resize-none"
-                    />
-                  </div>
+                    {/* ── STEP 2: Goals & Timeline ── */}
+                    {formStep === 2 && (
+                      <motion.div
+                        key="step2"
+                        initial={reduce ? false : { opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={reduce ? undefined : { opacity: 0, x: -10 }}
+                        transition={{ duration: 0.25 }}
+                        className="space-y-6 pt-2"
+                      >
+                        <div>
+                          <h3 className="text-xl font-bold text-foreground">
+                            Timeline &amp; Project Overview
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Let me know your target timeframe and what you want to achieve.
+                          </p>
+                        </div>
 
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="w-full py-4 rounded-xl bg-foreground text-background font-semibold hover:opacity-90 active:scale-[0.99] transition-[opacity,transform] duration-150 shadow-md flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <span>Send Message</span>
-                    <FaArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                        {/* Timeline Selection */}
+                        <div>
+                          <label className="block text-xs font-semibold text-muted-foreground mb-2">
+                            When would you like this completed?
+                          </label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {[
+                              'As soon as possible (1–2 weeks)',
+                              'Standard pace (2–4 weeks)',
+                              'Flexible (next 1–2 months)',
+                              'Just exploring ideas',
+                            ].map((opt) => {
+                              const isSelected = inquiryForm.timeline === opt
+                              return (
+                                <button
+                                  key={opt}
+                                  type="button"
+                                  onClick={() => setInquiryForm({ ...inquiryForm, timeline: opt })}
+                                  className={`p-3 rounded-xl text-xs font-medium border text-left transition-colors duration-150 cursor-pointer flex items-center justify-between ${
+                                    isSelected
+                                      ? 'bg-amber-500/15 border-amber-500/50 text-amber-700 dark:text-amber-300 font-semibold shadow-xs'
+                                      : 'bg-muted/30 border-border/60 text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                  }`}
+                                >
+                                  <span>{opt}</span>
+                                  {isSelected && <span className="text-amber-600 dark:text-amber-400 font-bold ml-2">✓</span>}
+                                </button>
+                              )
+                            })}
+                          </div>
+                        </div>
 
-                  <div className="text-center text-[11px] text-muted-foreground">
-                    I’ll reply directly within 24 hours &bull; 100% private and confidential
-                  </div>
+                        {/* Overview Textarea */}
+                        <div>
+                          <label htmlFor="inquiry-message" className="block text-xs font-medium text-foreground mb-1">
+                            What would you like to build or achieve?
+                          </label>
+                          <textarea
+                            id="inquiry-message"
+                            name="message"
+                            required
+                            rows={4}
+                            value={inquiryForm.message}
+                            onChange={(e) => {
+                              setInquiryForm({ ...inquiryForm, message: e.target.value })
+                              if (formError) setFormError(null)
+                            }}
+                            placeholder="Tell me a bit about your business, what you want your website or app to do, or any examples you like..."
+                            className="w-full px-4 py-3 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors resize-none leading-relaxed"
+                          />
+                          {formError && (
+                            <p className="text-xs text-red-500 mt-1.5 flex items-center gap-1">
+                              <span>⚠️</span> {formError}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Quick helper prompts */}
+                        <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
+                          <span className="font-medium">Quick ideas:</span>
+                          {[
+                            '+ Online booking calendar',
+                            '+ Fast mobile checkout',
+                            '+ Smart AI assistant',
+                            '+ Simple admin dashboard',
+                          ].map((idea) => (
+                            <button
+                              key={idea}
+                              type="button"
+                              onClick={() => {
+                                const cleanIdea = idea.replace('+ ', '')
+                                const current = inquiryForm.message.trim()
+                                const updated = current
+                                  ? `${current}, ${cleanIdea.toLowerCase()}`
+                                  : `I need a solution with ${cleanIdea.toLowerCase()}`
+                                setInquiryForm({ ...inquiryForm, message: updated })
+                                if (formError) setFormError(null)
+                              }}
+                              className="px-2 py-0.5 rounded-md bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer border border-border/50 text-[11px]"
+                            >
+                              {idea}
+                            </button>
+                          ))}
+                        </div>
+
+                        <div className="pt-2 flex items-center justify-between gap-3">
+                          <button
+                            type="button"
+                            onClick={handlePrevStep}
+                            className="px-4 py-3 rounded-xl bg-muted/40 hover:bg-muted text-muted-foreground hover:text-foreground font-medium transition-colors flex items-center gap-2 cursor-pointer text-sm"
+                          >
+                            <FaArrowLeft className="w-3 h-3" />
+                            <span>Back</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={handleNextStep}
+                            className="px-6 py-3 rounded-xl bg-foreground text-background font-semibold hover:opacity-90 active:scale-[0.99] transition-[opacity,transform] duration-150 shadow-md flex items-center gap-2 cursor-pointer text-sm"
+                          >
+                            <span>Next: Contact Details</span>
+                            <FaArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* ── STEP 3: Contact Info ── */}
+                    {formStep === 3 && (
+                      <motion.div
+                        key="step3"
+                        initial={reduce ? false : { opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={reduce ? undefined : { opacity: 0, x: -10 }}
+                        transition={{ duration: 0.25 }}
+                        className="space-y-6 pt-2"
+                      >
+                        <div>
+                          <h3 className="text-xl font-bold text-foreground">
+                            Your Contact Information
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Where should I send my reply and project recommendations?
+                          </p>
+                        </div>
+
+                        {/* Summary Recap Badge */}
+                        <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 flex flex-wrap items-center justify-between gap-2 text-xs">
+                          <div>
+                            <span className="font-semibold text-amber-800 dark:text-amber-300">Project:</span>{' '}
+                            <span className="text-foreground">{inquiryType}</span>
+                          </div>
+                          <div>
+                            <span className="font-semibold text-amber-800 dark:text-amber-300">Timeline:</span>{' '}
+                            <span className="text-foreground">{inquiryForm.timeline}</span>
+                          </div>
+                        </div>
+
+                        {/* Name and Email Inputs */}
+                        <div className="space-y-4">
+                          <div>
+                            <label htmlFor="inquiry-name" className="block text-xs font-medium text-foreground mb-1">
+                              Your Name or Business Name
+                            </label>
+                            <input
+                              id="inquiry-name"
+                              name="name"
+                              type="text"
+                              required
+                              value={inquiryForm.name}
+                              onChange={(e) => {
+                                setInquiryForm({ ...inquiryForm, name: e.target.value })
+                                if (formError) setFormError(null)
+                              }}
+                              placeholder="e.g. Sarah Johnson (Johnson Realty)"
+                              className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
+                            />
+                          </div>
+
+                          <div>
+                            <label htmlFor="inquiry-email" className="block text-xs font-medium text-foreground mb-1">
+                              Your Email Address
+                            </label>
+                            <input
+                              id="inquiry-email"
+                              name="email"
+                              type="email"
+                              required
+                              value={inquiryForm.email}
+                              onChange={(e) => {
+                                setInquiryForm({ ...inquiryForm, email: e.target.value })
+                                if (formError) setFormError(null)
+                              }}
+                              placeholder="e.g. sarah@example.com"
+                              className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
+                            />
+                          </div>
+
+                          {formError && (
+                            <p className="text-xs text-red-500 flex items-center gap-1">
+                              <span>⚠️</span> {formError}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="pt-2 flex items-center justify-between gap-3">
+                          <button
+                            type="button"
+                            onClick={handlePrevStep}
+                            className="px-4 py-3 rounded-xl bg-muted/40 hover:bg-muted text-muted-foreground hover:text-foreground font-medium transition-colors flex items-center gap-2 cursor-pointer text-sm"
+                          >
+                            <FaArrowLeft className="w-3 h-3" />
+                            <span>Back</span>
+                          </button>
+
+                          <button
+                            type="submit"
+                            className="flex-1 sm:flex-initial px-6 py-3 rounded-xl bg-foreground text-background font-semibold hover:opacity-90 active:scale-[0.99] transition-[opacity,transform] duration-150 shadow-md flex items-center justify-center gap-2 cursor-pointer text-sm"
+                          >
+                            <span>Send Message</span>
+                            <FaArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+
+                        <div className="text-center text-[11px] text-muted-foreground">
+                          I’ll reply directly within 24 hours &bull; 100% private and confidential
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </form>
               )}
             </div>
