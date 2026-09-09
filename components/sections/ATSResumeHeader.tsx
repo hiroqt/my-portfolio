@@ -60,51 +60,23 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
       {/* Target anchor for backwards compatibility with #about */}
       <span id="about" className="sr-only" aria-hidden="true" />
       
-      {/* ── Section Header (Consistent 00 Index across Portfolio) ── */}
-      <div className="mb-8 flex items-baseline justify-between border-b border-border pb-3">
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-xs text-accent font-bold">00</span>
-          <span className="text-muted-foreground font-mono text-xs">—</span>
-          <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Overview &bull; Profile
-          </h2>
-        </div>
-        <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          Software Engineering
-        </span>
-      </div>
+
 
       <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
         {/* ── Left Column: AI-First Narrative & Core Identity ── */}
         <div className="lg:col-span-7 flex flex-col justify-center">
-          {/* Status & Location Badges */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="flex flex-wrap items-center gap-2 mb-4"
-          >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-semibold whitespace-nowrap">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Available for Full-Time Roles &bull; 2026
-            </span>
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-muted/60 border border-border/80 text-muted-foreground font-mono text-[11px]">
-              Cavite, PH &bull; BS IT &bull; CvSU
-            </span>
-          </motion.div>
-
           {/* Headline */}
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="space-y-2"
+            className="space-y-1"
           >
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.08]">
               Arnel Baylon
             </h1>
-            <p className="font-mono text-xs sm:text-sm text-accent font-semibold tracking-wide uppercase">
+            <p className="text-base text-muted-foreground font-medium">
               Software Engineer &bull; Generative AI Systems
             </p>
           </motion.div>
@@ -243,8 +215,8 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
 
       </div>
 
-      {/* ── 4-Metric Milestone Stats Ribbon ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-8 pt-6 border-t border-border/60">
+      {/* ── 4-Metric Milestone Stats Ribbon (Zero Cards, Zero Eyebrows) ── */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8 pt-6 border-t border-border/60">
         {summaryMilestones.map((m, idx) => (
           <a
             key={idx}
@@ -265,18 +237,16 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
                 }
               }
             }}
-            className="group block p-4 rounded-2xl border border-border bg-muted/20 dark:bg-card/70 hover:bg-muted/40 hover:border-accent/40 transition-all shadow-2xs dark:shadow-md dark:shadow-black/15 cursor-pointer"
+            className="group block py-1 transition-colors cursor-pointer"
           >
-            <div className="font-serif text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors flex items-center justify-between">
+            <div className="font-mono text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors flex items-center justify-between">
               <span>{m.value}</span>
-              <span className="text-xs font-mono text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-                ↗
-              </span>
+              <span className="text-xs text-muted-foreground group-hover:text-accent">↗</span>
             </div>
-            <div className="font-mono text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mt-1">
+            <div className="text-xs font-semibold text-foreground mt-1">
               {m.label}
             </div>
-            <div className="text-[11px] text-muted-foreground/80 truncate mt-0.5">
+            <div className="text-xs text-muted-foreground truncate mt-0.5">
               {m.sub}
             </div>
           </a>

@@ -10,11 +10,7 @@ import { ExperienceSection } from '@/components/sections/ExperienceSection'
 import { ClientBusinessView } from '@/components/sections/ClientBusinessView'
 import { ModeTransitionShutter } from '@/components/ui/ModeTransitionShutter'
 
-// ── Performance Optimization: Dynamic Code Splitting for Below-the-Fold & Canvas ──
-const DotWaveBackground = dynamic(
-  () => import('@/components/ui/DotWaveBackground').then((m) => m.DotWaveBackground),
-  { ssr: false }
-)
+
 
 const CertificationsSection = dynamic(
   () => import('@/components/sections/CertificationsSection').then((m) => m.CertificationsSection),
@@ -111,8 +107,8 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         mode: nextMode,
         message:
           nextMode === 'client'
-            ? '💼 Executive Client View'
-            : '💻 Developer & Engineering View',
+            ? '💼 Client View'
+            : '💻 Developer View',
       })
     }, 180)
 
@@ -144,8 +140,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative overflow-x-hidden">
-      {/* ── Ambient 3D Dot Wave Background (Deferred Particle Canvas) ── */}
-      <DotWaveBackground />
+
 
       {/* ── Cinematic Aperture Shutter Mode Opening Effect ── */}
       <ModeTransitionShutter

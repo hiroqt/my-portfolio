@@ -100,7 +100,7 @@ export function MobileFAB({
                   <button
                     type="button"
                     onClick={handleToggleMode}
-                    aria-label={`Switch to ${viewMode === 'client' ? 'Developer' : 'Executive Client'} Mode`}
+                    aria-label={`Switch to ${viewMode === 'client' ? 'Developer' : 'Client'} Mode`}
                     className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-background dark:bg-[#0c0e18] text-foreground border border-amber-500/50 shadow-[0_12px_32px_rgba(245,158,11,0.25)] hover:border-accent active:scale-95 transition-all cursor-pointer"
                   >
                     <div className="w-8 h-8 rounded-full bg-amber-500 text-zinc-950 flex items-center justify-center text-sm font-bold shadow-xs">
@@ -109,15 +109,15 @@ export function MobileFAB({
                     <div className="text-left">
                       <div className="flex items-center gap-1.5">
                         <span className="font-bold text-xs tracking-tight">
-                          {viewMode === 'client' ? 'Switch to Dev Mode' : 'Executive Client View'}
+                          {viewMode === 'client' ? 'Switch to Dev Mode' : 'Client View'}
                         </span>
                       </div>
                       <p className="text-[10px] font-mono text-muted-foreground leading-none mt-0.5">
-                        {viewMode === 'client' ? 'Technical specs & telemetry' : 'User-friendly business view'}
+                        {viewMode === 'client' ? 'Code & technical details' : 'User-friendly overview'}
                       </p>
                     </div>
                     <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                      {viewMode === 'client' ? 'DEV' : 'BIZ'}
+                      {viewMode === 'client' ? 'DEV' : 'CLIENT'}
                     </span>
                   </button>
                 </motion.div>

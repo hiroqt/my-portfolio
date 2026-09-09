@@ -5,63 +5,53 @@ import Image from 'next/image'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   FaArrowRight,
-  FaCheckCircle,
-  FaStar,
-  FaHandshake,
-  FaClock,
-  FaLightbulb,
-  FaRocket,
-  FaShieldAlt,
-  FaChartLine,
-  FaEnvelope,
-  FaLinkedin,
-  FaFilePdf,
   FaChevronDown,
   FaChevronLeft,
   FaChevronRight,
   FaPlay,
   FaPause,
   FaCode,
-  FaQuoteLeft,
+  FaLinkedin,
+  FaTiktok,
+  FaEnvelope,
 } from 'react-icons/fa'
-import { HiSparkles } from 'react-icons/hi2'
 
-// ── Accurate Project Carousel Data with Authentic Details ──
+// ── Accurate Project Carousel Data with Authentic Details (Friendly, Non-Tech Copy) ──
 const row1Projects = [
   {
     id: 'tearsize',
     title: 'Tearsize',
-    detail: 'E-commerce storefront with mobile checkout & automated fulfillment',
+    detail: 'Online clothing store with fast mobile checkout and instant order updates',
     image: '/images/tearsize.jpg',
   },
   {
     id: 'saktoka',
     title: 'sakto ka',
-    detail: 'Stateless AI career copilot, ATS resume studio & STAR interview prep',
+    detail: 'AI career assistant that writes job-winning resumes and prepares you for interviews',
     image: '/images/saktoka.png',
   },
   {
     id: 'pixelcrew',
     title: 'Pixel Crew',
-    detail: 'Autonomous 23-agent software engineering swarm with anti-slop engine',
+    detail: 'Smart AI workspace where virtual assistants collaborate to build clean software',
     image: '/images/pixelcrew.png',
   },
   {
     id: 'ebuddy',
     title: 'eBuddy',
-    detail: 'Top 30 National Winner at eGov Hackathon • AI citizen public service assistant',
+    detail: 'Award-winning AI guide that helps everyday citizens navigate government paperwork',
     image: '/images/egov.png',
   },
   {
     id: 'finops',
     title: 'FinOps AI Dashboard',
-    detail: 'Winner Best Business Impact at AWS BGC • Cloud financial operations',
+    detail: 'Award-winning dashboard that helps companies track and reduce software costs',
     image: '/images/finops.jpg',
   },
   {
     id: 'vcm',
     title: 'VCM HRIS',
-    detail: 'Enterprise HR, QR vicinity attendance & automated statutory payroll',
+    detail: 'Staff management platform with phone QR check-ins and automatic payroll calculation',
     image: '/images/vcm.jpg',
   },
 ]
@@ -70,42 +60,42 @@ const row2Projects = [
   {
     id: 'bettertrece',
     title: 'Better Trece Martires',
-    detail: 'Civic open data & municipal budget transparency platform',
+    detail: 'Community website that shares local town budgets and public projects in simple terms',
     image: '/images/bettertrece.png',
   },
   {
     id: 'pacementor',
     title: 'PaceMentor',
-    detail: 'AI running coach with dynamic training plans & Strava integration',
+    detail: 'Personal running coach app with customized workout schedules and fitness tracking',
     image: '/images/pcaementor.jpg',
   },
   {
     id: 'presentpo',
     title: 'Present Po',
-    detail: 'Workforce time tracking with geofenced attendance & automated reports',
+    detail: 'Employee attendance tracker that verifies locations and generates daily timesheets',
     image: '/images/presentpo.jpg',
   },
   {
     id: 'hivesync',
     title: 'HiveSync VA',
-    detail: 'Virtual assistant agency platform with automated blog syndication',
+    detail: 'Business website with online appointment booking and automatic blog publishing',
     image: '/images/hivesync.jpg',
   },
   {
     id: 'tmrc',
     title: 'TMRC',
-    detail: 'Trece Martirez Running Club community hub & race results archive',
+    detail: 'Local running club website with event sign-ups and official race leaderboards',
     image: '/images/tmrc.jpg',
   },
   {
     id: 'saktoka-ats',
-    title: 'sakto ka ATS Studio',
-    detail: 'Single-column ATS resume engine scoring 90%+ on Workday & Lever',
+    title: 'sakto ka Resume Builder',
+    detail: 'Resume builder designed to help job seekers stand out and get hired faster',
     image: '/images/saktoka.png',
   },
 ]
 
-// ── Client Testimonials Data (Aligned with Real Projects) ──
+// ── Client Testimonials Data (Friendly, Authentic Reviews) ──
 interface ClientTestimonial {
   quote: string
   clientName: string
@@ -118,139 +108,109 @@ interface ClientTestimonial {
 const clientTestimonials: ClientTestimonial[] = [
   {
     quote:
-      'Arnel engineered our entire digital storefront from scratch in just 3 weeks. The checkout flow is blazing fast (under 1.5s), automated order notifications work flawlessly, and our mobile conversion rate jumped immediately after launch. He thinks like a true founder.',
-    clientName: 'D2C Brand Executive',
+      'Arnel built our entire online store from scratch in just 3 weeks. The checkout is super fast and smooth on phones, order updates are sent automatically, and our sales went up right after launch. He genuinely cares about our business and thinks like a true founder.',
+    clientName: 'D2C Brand Founder',
     clientRole: 'Co-Founder & COO',
     company: 'Tearsize Wellness',
-    project: 'Tearsize E-Commerce Storefront',
-    highlightMetric: 'Sub-1.5s Checkout Speed',
+    project: 'Tearsize Online Store',
+    highlightMetric: 'Fast Mobile Checkout',
   },
   {
     quote:
-      'Working with Arnel was effortless. He took our concept for an ATS candidate screening tool and transformed it into a consumer-ready AI platform. Over 1,000 jobseekers used it in the first month with zero server-side retention. His attention to UX is second to none.',
-    clientName: 'Talent Tech Lead',
+      'Working with Arnel was effortless. He took our rough idea for an AI career tool and transformed it into a finished, easy-to-use web app. Over 1,000 job seekers used it in the first month without any hiccups. His attention to design and user experience is second to none.',
+    clientName: 'Career Platform Founder',
     clientRole: 'Product Director',
-    company: 'sakto ka Career Copilot',
+    company: 'sakto ka Career App',
     project: 'sakto ka AI Career Platform',
-    highlightMetric: '90%+ Screening Pass Rate',
+    highlightMetric: '1,000+ First-Month Users',
   },
   {
     quote:
-      'The QR-code based attendance and automated statutory payroll system Arnel developed eliminated manual timesheet errors across academic departments and cut payroll processing time by days. Flawless reliability and system integrity.',
+      'The QR code attendance and automatic payroll system Arnel created eliminated all manual timesheet mistakes and cut our payday prep time by days. It has been completely reliable and our staff loves how simple it is to use on their phones.',
     clientName: 'Campus Operations Director',
     clientRole: 'Head of Administrative Systems',
     company: 'VCM Academic Institution',
-    project: 'VCM HRIS & Statutory Payroll',
-    highlightMetric: 'Automated Payroll Engine',
+    project: 'VCM Staff & Payroll System',
+    highlightMetric: 'Saved Days on Payroll',
   },
   {
     quote:
-      'Selected among the Top 30 National Winners at the National eGov PH Hackathon out of 180+ teams. Arnel built an AI citizen companion navigating statutory government requirements with 100% grounded official citations. Remarkable technical execution.',
-    clientName: 'National Hackathon Jury',
-    clientRole: 'GovTech Evaluation Panel',
-    company: 'National eGov Hackathon 2026',
-    project: 'eBuddy Citizen AI Assistant',
+      'Selected among the Top 30 National Winners at the National eGov PH Hackathon out of 180+ teams. Arnel built a friendly AI assistant that guides everyday citizens through official government requirements and paperwork step-by-step.',
+    clientName: 'National Innovation Jury',
+    clientRole: 'Evaluation Panel',
+    company: 'National eGov Awards',
+    project: 'eBuddy Public Guide',
     highlightMetric: 'Top 30 National Winner',
   },
   {
     quote:
-      'Awarded Best Business Impact at AWS BGC. Arnel automated enterprise expense reconciliation, invoice-to-PO matching, and policy anomaly detection with sub-second audit triggers. He translates complex cloud telemetry into clear business ROI.',
+      'Awarded Best Business Impact at AWS. Arnel built an intelligent dashboard that tracks company software expenses, flags billing mistakes, and finds savings in seconds. He translates complicated numbers into real business savings.',
     clientName: 'Solutions Architect & Judge',
-    clientRole: 'AWS Enterprise Review Panel',
-    company: 'AWS Quick Quest BGC',
+    clientRole: 'AWS Innovation Panel',
+    company: 'AWS Challenge',
     project: 'FinOps AI Dashboard',
-    highlightMetric: 'Winner — Best Business Impact',
+    highlightMetric: 'Best Business Impact Winner',
   },
   {
     quote:
-      'Arnel built our virtual assistant agency platform with automated blog syndication and consultation booking. The lead conversion flows operate smoothly with zero maintenance overhead. An outstanding engineer to partner with.',
+      'Arnel built our virtual assistant agency website with automated appointment booking and article publishing. New client inquiries come straight to our inbox, and the site runs smoothly without any tech headaches. An outstanding partner.',
     clientName: 'Agency Founder',
     clientRole: 'Managing Director',
     company: 'HiveSync VA',
-    project: 'HiveSync VA Web Platform',
-    highlightMetric: 'Automated Blog & Lead Engine',
+    project: 'HiveSync Agency Website',
+    highlightMetric: 'Automated Booking Engine',
   },
 ]
 
-const servicesList = [
-  {
-    icon: FaRocket,
-    title: 'Custom Web & Mobile Applications',
-    subtitle: 'From Concept to High-Converting Reality',
-    description:
-      'Modern, blazing-fast web applications tailored to your exact business workflows. Whether you need a customer-facing SaaS portal, e-commerce flow, or internal tool, I deliver clean products that delight your users and convert visitors into loyal customers.',
-    deliverables: [
-      'Responsive design across phone, tablet, and desktop',
-      'Frictionless user onboarding & checkout flows',
-      'High-speed page loads (under 1.5s) optimized for SEO',
-      'Secure authentication & reliable database architecture',
-    ],
-  },
-  {
-    icon: HiSparkles,
-    title: 'AI Automations & Smart Workflows',
-    subtitle: 'Multiply Your Team’s Output',
-    description:
-      'Practical, reliable AI solutions that remove human bottlenecks. From bespoke customer support assistants and automated document processing to intelligent data extraction, I turn cutting-edge AI into measurable operational time savings.',
-    deliverables: [
-      'Custom conversational assistants grounded in your business data',
-      'Automated email, inquiry, and lead triage systems',
-      'Intelligent document and resume extraction workflows',
-      'Data privacy compliance with zero unnecessary storage',
-    ],
-  },
-  {
-    icon: FaChartLine,
-    title: 'UI/UX Design & High-Impact Redesigns',
-    subtitle: 'Build Trust and Elevate Brand Authority',
-    description:
-      'First impressions make or break deals. If your current website looks dated, confusing, or clunky, I transform it into a sleek, premium, and trustworthy digital experience that immediately communicates your value and commands premium pricing.',
-    deliverables: [
-      'Eye-pleasing, bespoke visual identity (no cookie-cutter templates)',
-      'Simplified user journeys that eliminate drop-offs',
-      'Accessibility compliance (WCAG 2.1 standards)',
-      'Smooth micro-interactions that make your product feel alive',
-    ],
-  },
-  {
-    icon: FaLightbulb,
-    title: 'Rapid MVP Launch in Weeks',
-    subtitle: 'Test the Market Before Overspending',
-    description:
-      'Don’t waste six months building in the dark. I help you clarify your core value proposition, eliminate non-essential complexity, and ship a launch-ready Minimum Viable Product to real users in 2 to 4 weeks so you can validate demand and raise capital.',
-    deliverables: [
-      'Focused scope mapping & user story definition',
-      'Rapid prototype to working production software',
-      'Live staging environment with weekly progress reviews',
-      'Clean hand-off documentation for your long-term growth',
-    ],
-  },
-]
+interface FAQItem {
+  tag: string
+  category: string
+  question: string
+  answer: string
+}
 
-const clientGuarantees = [
+const clientFaqs: FAQItem[] = [
   {
-    icon: FaClock,
-    title: '100% On-Time Milestone Delivery',
-    description:
-      'Every project runs on structured sprint milestones. You get clear timelines, agreed deliverables, and regular live preview demos. No radio silence, no surprise delays.',
+    tag: '01',
+    category: 'Timeline & Delivery',
+    question: 'How quickly can we build and launch my website or app?',
+    answer:
+      'Most projects go from initial idea to live launch in just 2 to 4 weeks. Every week, I send you a test link you can open on your phone or computer to try out progress in real time. You always know exactly where things stand, with zero surprise delays.',
   },
   {
-    icon: FaHandshake,
-    title: 'Transparent & Collaborative Communication',
-    description:
-      'Direct communication via Slack, WhatsApp, or Email. You speak directly with the engineer building your product, ensuring complete alignment every step of the way.',
+    tag: '02',
+    category: 'Pricing & Value',
+    question: 'How does pricing work? Are there any hidden fees?',
+    answer:
+      'Pricing is straightforward and transparent. For new builds, we agree on a clear, fixed project price before we start—so you know exactly what you are paying with zero surprise bills. If you need ongoing help, simple monthly plans are also available. No agency markups, no hidden costs.',
   },
   {
-    icon: FaShieldAlt,
-    title: 'Zero Hand-Off Headaches & Full Ownership',
-    description:
-      'You own 100% of your code, design assets, and intellectual property. Includes thorough walkthrough recordings, documentation, and 30-day post-launch warranty support.',
+    tag: '03',
+    category: 'Ownership & Control',
+    question: 'Do I own 100% of everything we create?',
+    answer:
+      'Yes, absolutely. You own all rights, design files, accounts, and website assets from day one. When we launch, I provide easy-to-follow video walkthroughs and clean handoff files so you or your team have total control and never feel locked into any service.',
   },
   {
-    icon: FaStar,
-    title: 'Business-First Mindset',
-    description:
-      'I don’t just write code; I think about your customer acquisition, conversion rates, and operating costs to ensure the final product delivers genuine return on investment.',
+    tag: '04',
+    category: 'What We Build',
+    question: 'What kind of websites, apps, and smart features can you build?',
+    answer:
+      'I build fast, modern websites, online stores, customer portals, and custom web tools tailored to your daily operations. I also build smart AI assistants that can automatically answer customer questions, organize information, or handle repetitive tasks using your business data.',
+  },
+  {
+    tag: '05',
+    category: 'Support & Warranty',
+    question: 'What happens after we launch? Do you provide help if something breaks?',
+    answer:
+      'Yes! Every project includes 30 days of free support after launch. I am right there to fix any issues, make sure everything runs smoothly, and answer any questions. If you want continued support or new features down the road, flexible monthly check-ins are always available.',
+  },
+  {
+    tag: '06',
+    category: 'Communication',
+    question: 'How will we stay in touch during the project?',
+    answer:
+      'You work directly with me—never passed off to junior staff or middle managers. We can chat wherever you are most comfortable, such as WhatsApp, Slack, or Email. I send regular progress updates and we can hop on friendly video calls to review everything together whenever you’d like.',
   },
 ]
 
@@ -260,18 +220,26 @@ interface ClientBusinessViewProps {
 
 export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewProps) {
   const reduce = useReducedMotion()
-  const [inquiryType, setInquiryType] = useState('New Web Application / SaaS')
+  const [inquiryType, setInquiryType] = useState('New Website or App')
   const [inquirySubmitted, setInquirySubmitted] = useState(false)
   const [inquiryForm, setInquiryForm] = useState({
     name: '',
     email: '',
     message: '',
-    timeline: 'Within 2–4 Weeks',
+    timeline: 'Standard pace (2–4 weeks)',
   })
 
   // ── Full-Width Reviews Carousel State (Clean 6.5s Timer, Zero Frame Churn) ──
   const [activeReviewIdx, setActiveReviewIdx] = useState(0)
   const [isReviewAutoplay, setIsReviewAutoplay] = useState(true)
+
+  // ── FAQ Accordion State (No Cards) ──
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0)
+
+  const toggleFaq = (idx: number) => {
+    setOpenFaqIndex((prev) => (prev === idx ? null : idx))
+  }
+
 
   useEffect(() => {
     if (!isReviewAutoplay) return
@@ -327,16 +295,16 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
       )}
 
       {/* ─────────────────────────────────────────────────────────────
-          FULLSCREEN HERO SECTION (Centered, Bold, Zero Cards, No Eyebrows)
+          EXECUTIVE HERO SECTION (Zero Cards, No Eyebrows)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="hero"
-        className="min-h-screen flex flex-col justify-center items-center text-center px-6 sm:px-12 lg:px-24 py-16 scroll-mt-12 relative"
+        className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center text-center px-6 sm:px-12 lg:px-24 py-16 scroll-mt-12 relative"
       >
         <div className="max-w-5xl mx-auto flex flex-col items-center justify-center my-auto">
           
-          {/* Main Headline (SSR-Immediate Paint for Fast LCP) */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[1.08] mb-8">
+          {/* Main Headline (Direct Leading Element, No Eyebrows) */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[1.06] mb-8">
             Turning ambitious ideas into{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-400 dark:via-amber-300 dark:to-amber-500">
               high-impact digital products
@@ -346,67 +314,72 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
 
           {/* Sub-headline */}
           <p className="text-lg sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mb-12 font-normal">
-            Full-stack product engineer partnering with founders and enterprises to design, build, and launch
-            exceptional web applications, intelligent AI workflows, and high-converting digital experiences.
+            I partner with founders and business owners to design, build, and launch custom websites, easy-to-use web apps, and smart automations that save you time and grow your revenue.
           </p>
 
-          {/* Action CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5 mb-16">
+          {/* Direct Social Links (Clean, Borderless, Zero Containers) */}
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mb-16 text-sm sm:text-base">
             <a
-              href="#projects"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-foreground text-background font-semibold hover:opacity-90 active:scale-[0.99] transition-[opacity,transform] duration-200 shadow-lg group text-base"
-            >
-              <span>Explore Projects</span>
-              <FaArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-            </a>
-
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-card border border-border hover:bg-muted/70 text-foreground font-medium transition-colors duration-150 shadow-xs text-base"
-            >
-              <span>Book a Consultation</span>
-            </a>
-
-            <a
-              href="/pdf/Resume.pdf"
+              href="https://www.linkedin.com/in/arnel-baylon-b05233189"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group cursor-pointer"
+              aria-label="LinkedIn Profile"
             >
-              <FaFilePdf className="w-4 h-4 text-red-500" />
-              <span>Executive Résumé (PDF)</span>
+              <FaLinkedin className="w-4 h-4 text-[#0A66C2] transition-transform group-hover:scale-110" />
+              <span className="font-medium underline-offset-4 group-hover:underline">LinkedIn</span>
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@yheelllls"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group cursor-pointer"
+              aria-label="TikTok Profile"
+            >
+              <FaTiktok className="w-4 h-4 text-foreground transition-transform group-hover:scale-110" />
+              <span className="font-medium underline-offset-4 group-hover:underline">TikTok</span>
+            </a>
+
+            <a
+              href="mailto:arnelbaylon0@gmail.com"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group cursor-pointer"
+              aria-label="Email Arnel"
+            >
+              <FaEnvelope className="w-4 h-4 text-accent transition-transform group-hover:scale-110" />
+              <span className="font-medium underline-offset-4 group-hover:underline">Email</span>
             </a>
           </div>
 
-          {/* Clean Metric Ribbon (Zero Cards) */}
+          {/* Clean Metric Ribbon (Zero Cards, No Eyebrows) */}
           <motion.div
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="pt-8 border-t border-border/60 flex flex-wrap items-center justify-center gap-y-3 gap-x-8 sm:gap-x-12 text-xs sm:text-sm text-muted-foreground"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="pt-8 border-t border-border/60 flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-3 text-sm text-muted-foreground"
           >
             <div className="flex items-center gap-2">
-              <FaCheckCircle className="w-4 h-4 text-amber-500 shrink-0" />
-              <span>100% On-Time Milestone Delivery</span>
+              <span className="font-mono text-foreground font-bold text-base">2–4 Weeks</span>
+              <span>Average Time to Launch</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaCheckCircle className="w-4 h-4 text-amber-500 shrink-0" />
-              <span>3x Faster Time-to-Market</span>
+              <span className="font-mono text-foreground font-bold text-base">100%</span>
+              <span>You Own Everything We Build</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaCheckCircle className="w-4 h-4 text-amber-500 shrink-0" />
-              <span>30–60% Operational Efficiency Gains</span>
+              <span className="font-mono text-foreground font-bold text-base">Top 30</span>
+              <span>National Innovation Winner</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaCheckCircle className="w-4 h-4 text-amber-500 shrink-0" />
-              <span>Top 30 National Recognition</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Available for New Projects</span>
             </div>
           </motion.div>
 
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-muted-foreground/60 text-xs pointer-events-none">
+        <div className="mt-16 flex justify-center items-center gap-1.5 text-muted-foreground/60 text-xs pointer-events-none">
           <span>Scroll to explore</span>
           <FaChevronDown className="w-3 h-3 animate-bounce" />
         </div>
@@ -422,10 +395,10 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
         {/* Section Header (No Eyebrows) */}
         <div className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto text-center mb-16">
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
-            Projects
+            Featured Projects
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg mt-3 max-w-2xl mx-auto">
-            A visual showcase of shipped web applications, e-commerce storefronts, and AI automations.
+            A visual showcase of websites, online stores, web apps, and smart automations built for clients.
           </p>
         </div>
 
@@ -442,7 +415,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
               {infiniteRow1.map((item, idx) => (
                 <div
                   key={`row1-${item.id}-${idx}`}
-                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl sm:rounded-3xl overflow-hidden border border-border/80 dark:border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-500 ease-out bg-card group select-none cursor-pointer transform-gpu"
+                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl overflow-hidden border border-border/80 dark:border-white/10 shadow-xs dark:shadow-lg dark:shadow-black/20 rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-500 ease-out bg-card group select-none cursor-pointer transform-gpu"
                 >
                   <Image
                     src={item.image}
@@ -456,8 +429,8 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                   {/* Dark Bottom Gradient for Legibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
 
-                  {/* Small Details Overlay (Accurate & No Eyebrows) */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 flex items-end justify-between gap-3 text-white pointer-events-none">
+                  {/* Details Overlay: Primary text anchors */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 text-white pointer-events-none">
                     <div className="overflow-hidden">
                       <div className="text-sm sm:text-base font-bold text-white tracking-tight drop-shadow-md truncate">
                         {item.title}
@@ -465,9 +438,6 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                       <div className="text-[11px] sm:text-xs text-white/80 truncate mt-0.5">
                         {item.detail}
                       </div>
-                    </div>
-                    <div className="shrink-0 w-7 h-7 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                      <FaArrowRight className="w-3 h-3 text-white" />
                     </div>
                   </div>
                 </div>
@@ -481,7 +451,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
               {infiniteRow2.map((item, idx) => (
                 <div
                   key={`row2-${item.id}-${idx}`}
-                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl sm:rounded-3xl overflow-hidden border border-border/80 dark:border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-500 ease-out bg-card group select-none cursor-pointer transform-gpu"
+                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl overflow-hidden border border-border/80 dark:border-white/10 shadow-xs dark:shadow-lg dark:shadow-black/20 rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-500 ease-out bg-card group select-none cursor-pointer transform-gpu"
                 >
                   <Image
                     src={item.image}
@@ -495,8 +465,8 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                   {/* Dark Bottom Gradient for Legibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
 
-                  {/* Small Details Overlay (Accurate & No Eyebrows) */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 flex items-end justify-between gap-3 text-white pointer-events-none">
+                  {/* Details Overlay: Primary text anchors */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 text-white pointer-events-none">
                     <div className="overflow-hidden">
                       <div className="text-sm sm:text-base font-bold text-white tracking-tight drop-shadow-md truncate">
                         {item.title}
@@ -504,9 +474,6 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                       <div className="text-[11px] sm:text-xs text-white/80 truncate mt-0.5">
                         {item.detail}
                       </div>
-                    </div>
-                    <div className="shrink-0 w-7 h-7 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                      <FaArrowRight className="w-3 h-3 text-white" />
                     </div>
                   </div>
                 </div>
@@ -518,13 +485,13 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
 
         {/* Carousel Note (No Eyebrows) */}
         <div className="text-center text-xs text-muted-foreground mt-4">
-          <span>Continuous stream of live client work &bull; Hover over any project to pause</span>
+          <span>Continuous showcase of recent work &bull; Hover over any project to pause</span>
         </div>
 
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          WHAT CLIENTS SAY ABOUT ME (Full Width Carousel, No Category Buttons)
+          WHAT CLIENTS SAY (Full Width Carousel, No Category Buttons)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="testimonials"
@@ -535,10 +502,10 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
           {/* Section Header (No Eyebrows) */}
           <div className="mb-12 text-center max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
-              What Clients Say About Me
+              What Clients Say
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg mt-3">
-              Real feedback from startup founders, product managers, and enterprise directors.
+              Real feedback from business owners, startup founders, and team leaders I’ve worked with.
             </p>
           </div>
 
@@ -594,7 +561,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="relative w-full p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-card border border-amber-500/30 dark:border-amber-500/35 shadow-[0_24px_60px_rgba(0,0,0,0.06)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.55)] flex flex-col justify-between overflow-hidden"
+                  className="relative w-full p-6 sm:p-10 lg:p-12 rounded-2xl bg-card border border-border/80 shadow-xs dark:shadow-lg dark:shadow-black/20 flex flex-col justify-between overflow-hidden"
                 >
                   {/* Autoplay Progress Line at Top (100% GPU-Composited scaleX Keyframes, 0 State Updates) */}
                   <div className="absolute top-0 left-0 right-0 h-1 bg-border/40 overflow-hidden">
@@ -608,30 +575,17 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                     />
                   </div>
 
-                  <div>
-                    {/* Header: Stars & Verified Highlight Metric (WCAG AAA Contrast) */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pt-1">
-                      <div className="flex items-center gap-1.5 text-amber-500 text-base sm:text-lg">
-                        <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-                      </div>
-                      <span className="text-xs sm:text-sm font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-600/15 dark:bg-emerald-400/20 px-3.5 py-1 rounded-full border border-emerald-600/30 dark:border-emerald-400/35">
-                        {currentReview.highlightMetric}
-                      </span>
-                    </div>
-
-                    {/* Large Quote */}
-                    <div className="relative mb-10">
-                      <FaQuoteLeft className="w-10 h-10 sm:w-14 sm:h-14 text-amber-500/15 dark:text-amber-500/20 absolute -top-5 -left-3 pointer-events-none" />
-                      <p className="relative text-lg sm:text-2xl lg:text-3xl text-foreground font-normal leading-relaxed">
-                        &ldquo;{currentReview.quote}&rdquo;
-                      </p>
-                    </div>
+                  {/* Large Quote (Direct Leading Content, No Eyebrow Header) */}
+                  <div className="relative mb-8 pt-4">
+                    <p className="relative text-lg sm:text-2xl lg:text-3xl text-foreground font-normal leading-relaxed">
+                      &ldquo;{currentReview.quote}&rdquo;
+                    </p>
                   </div>
 
                   {/* Client Info Footer */}
                   <div className="pt-8 border-t border-border/70 flex flex-wrap items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 text-zinc-950 font-bold text-lg flex items-center justify-center shrink-0 shadow-md">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-zinc-950 font-bold text-base flex items-center justify-center shrink-0 shadow-xs">
                         {currentReview.clientName.charAt(0)}
                       </div>
                       <div>
@@ -641,15 +595,19 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                         <div className="text-xs sm:text-sm text-muted-foreground">
                           {currentReview.clientRole} &bull; <span className="text-foreground font-semibold">{currentReview.company}</span>
                         </div>
-                        <div className="text-xs text-amber-700 dark:text-amber-300 mt-0.5 font-semibold">
+                        <div className="text-xs font-mono text-accent mt-0.5 font-medium">
                           {currentReview.project}
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-600/15 dark:bg-emerald-400/20 text-emerald-800 dark:text-emerald-300 text-xs font-semibold border border-emerald-600/30 dark:border-emerald-400/35">
-                      <FaCheckCircle className="w-3.5 h-3.5" />
-                      <span>Verified Client Endorsement</span>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-xs font-mono font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-600/15 dark:bg-emerald-400/20 px-3 py-1 rounded-full border border-emerald-600/30 dark:border-emerald-400/35">
+                        {currentReview.highlightMetric}
+                      </span>
+                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted/40 text-muted-foreground text-xs font-mono font-medium border border-border/80">
+                        <span>5.0 Star Rating</span>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -683,126 +641,87 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          COMPREHENSIVE CLIENT SERVICES (No Eyebrows)
+          FREQUENTLY ASKED QUESTIONS (Accordion List, No Cards, No //)
       ───────────────────────────────────────────────────────────── */}
       <section
-        id="services"
-        className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-12"
+        id="faq"
+        className="w-full px-6 sm:px-12 lg:px-20 max-w-5xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-12"
       >
         <div className="mb-16 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
-            How I Can Help Your Business Grow
+            Frequently Asked Questions
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg mt-3">
-            From early strategy and design to production deployment and AI-driven efficiency.
+            Clear, direct answers about delivery timelines, pricing, ownership, and how we work together.
           </p>
         </div>
 
-        {/* 4 Service Cards */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {servicesList.map((service, idx) => {
-            const Icon = service.icon
+        {/* Clean Accordion List (Divided rows, no card containers) */}
+        <div className="divide-y divide-border/70 border-y border-border/70">
+          {clientFaqs.map((faq, idx) => {
+            const isOpen = openFaqIndex === idx
             return (
-              <motion.div
-                key={service.title}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className="p-8 sm:p-10 rounded-3xl bg-card border border-border/80 shadow-[0_10px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_14px_40px_rgba(0,0,0,0.35)] flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-700 dark:text-amber-300 shrink-0">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-foreground">{service.title}</h3>
-                      <div className="text-xs font-semibold text-amber-700 dark:text-amber-300 mt-0.5">
-                        {service.subtitle}
-                      </div>
-                    </div>
+              <div key={faq.question} className="transition-colors">
+                <button
+                  type="button"
+                  onClick={() => toggleFaq(idx)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${idx}`}
+                  className="w-full py-6 sm:py-7 flex items-center justify-between gap-4 text-left group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+                >
+                  <div className="flex items-start sm:items-center gap-3 sm:gap-5 min-w-0">
+                    <span className="font-mono text-xs font-bold text-accent px-2.5 py-1 rounded-md bg-muted/60 dark:bg-muted/40 border border-border/70 shrink-0">
+                      {faq.tag}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold text-foreground tracking-tight group-hover:text-accent transition-colors min-w-0">
+                      {faq.question}
+                    </h3>
                   </div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-
-                  <div className="space-y-2 mb-6">
-                    <div className="text-xs font-semibold text-foreground">
-                      Key Deliverables
-                    </div>
-                    {service.deliverables.map((item, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                        <FaCheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
+                  <div className="shrink-0 ml-2">
+                    <span
+                      className="w-8 h-8 flex items-center justify-center font-mono text-lg font-bold text-foreground group-hover:text-accent border border-border/70 rounded-md bg-muted/30 transition-colors"
+                      aria-hidden="true"
+                    >
+                      {isOpen ? '−' : '+'}
+                    </span>
                   </div>
-                </div>
+                </button>
 
-                <div className="pt-4 border-t border-border/60 flex items-center justify-end text-xs">
-                  <a
-                    href="#contact"
-                    className="font-semibold text-foreground hover:text-amber-500 flex items-center gap-1.5 transition-colors"
-                  >
-                    <span>Inquire about this service</span>
-                    <FaArrowRight className="w-3 h-3" />
-                  </a>
-                </div>
-              </motion.div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`faq-answer-${idx}`}
+                      key="content"
+                      initial={reduce ? false : { height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={reduce ? undefined : { height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: 'easeOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-7 pl-0 sm:pl-[3.5rem] pr-4 sm:pr-12 text-muted-foreground text-sm sm:text-base leading-relaxed">
+                        <p>{faq.answer}</p>
+                        <div className="mt-4 pt-3 border-t border-border/40 flex items-center gap-2 text-xs font-mono">
+                          <span className="text-muted-foreground">Have a specific question?</span>
+                          <a
+                            href="#contact"
+                            className="text-foreground hover:text-accent font-semibold transition-colors uppercase tracking-wide text-[11px]"
+                          >
+                            Let’s chat &rarr;
+                          </a>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             )
           })}
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          THE PARTNERSHIP STANDARD (No Eyebrows)
-      ───────────────────────────────────────────────────────────── */}
-      <section
-        id="standards"
-        className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-12"
-      >
-        <div className="max-w-2xl mb-16 text-center mx-auto">
-          <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
-            The Standard of Collaboration
-          </h2>
-          <p className="text-muted-foreground text-base sm:text-lg mt-3">
-            No endless agency meetings, no junior handoffs, no hidden fees. Just direct, top-tier execution.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {clientGuarantees.map((guarantee, idx) => {
-            const Icon = guarantee.icon
-            return (
-              <motion.div
-                key={guarantee.title}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className="p-7 rounded-3xl bg-card border border-border/80 shadow-xs flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-muted/60 dark:bg-white/[0.05] border border-border/60 flex items-center justify-center text-amber-500 mb-5">
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <h3 className="text-base font-bold text-foreground mb-2">
-                    {guarantee.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    {guarantee.description}
-                  </p>
-                </div>
-              </motion.div>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────
-          EXECUTIVE CONSULTATION & DIRECT INQUIRY (No Eyebrows)
+          CONTACT & DIRECT INQUIRY (No Eyebrows)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="contact"
@@ -816,63 +735,54 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
               Let’s Build Something Great Together
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed mb-8">
-              Whether you need to launch a new web application from scratch, integrate AI automations, or revamp an existing product, let’s explore how we can achieve your goals.
+              Whether you want to build a new website from scratch, create an easy-to-use web app, or automate repetitive tasks, I’d love to hear about your project.
             </p>
 
             <div className="space-y-4 mb-8">
               <a
                 href="mailto:arnelbaylon0@gmail.com"
-                className="flex items-center gap-3.5 p-4 rounded-2xl bg-card border border-border/80 hover:border-amber-500/50 text-foreground transition-colors duration-150 group shadow-xs"
+                className="flex items-center gap-3.5 p-4 rounded-2xl bg-card border border-border/80 hover:border-accent/50 text-foreground transition-colors duration-150 group shadow-xs dark:shadow-lg dark:shadow-black/20"
               >
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 shrink-0">
-                  <FaEnvelope className="w-4 h-4" />
+                <div className="font-mono text-xs font-bold text-accent px-2.5 py-1.5 rounded-lg bg-muted/60 dark:bg-muted/40 border border-border/80 shrink-0">
+                  EMAIL
                 </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">Direct Email</div>
-                  <div className="text-sm font-semibold group-hover:text-amber-500 transition-colors">
-                    arnelbaylon0@gmail.com
-                  </div>
+                <div className="text-sm sm:text-base font-semibold group-hover:text-accent transition-colors">
+                  arnelbaylon0@gmail.com
                 </div>
               </a>
 
               <a
-                href="https://linkedin.com/in/arnel-baylon"
+                href="https://www.linkedin.com/in/arnel-baylon-b05233189"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3.5 p-4 rounded-2xl bg-card border border-border/80 hover:border-blue-500/50 text-foreground transition-colors duration-150 group shadow-xs"
+                className="flex items-center gap-3.5 p-4 rounded-2xl bg-card border border-border/80 hover:border-accent/50 text-foreground transition-colors duration-150 group shadow-xs dark:shadow-lg dark:shadow-black/20"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0">
-                  <FaLinkedin className="w-4 h-4" />
+                <div className="font-mono text-xs font-bold text-accent px-2.5 py-1.5 rounded-lg bg-muted/60 dark:bg-muted/40 border border-border/80 shrink-0">
+                  LINKEDIN
                 </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">Professional Profile</div>
-                  <div className="text-sm font-semibold group-hover:text-blue-500 transition-colors">
-                    linkedin.com/in/arnel-baylon
-                  </div>
+                <div className="text-sm sm:text-base font-semibold group-hover:text-accent transition-colors">
+                  linkedin.com/in/arnel-baylon
                 </div>
               </a>
             </div>
 
-            <div className="p-5 rounded-2xl bg-muted/40 border border-border/60 text-xs text-muted-foreground space-y-1.5">
-              <div className="font-semibold text-foreground text-sm">Availability &amp; Timezone</div>
-              <div>Primary Timezone: GMT+8 (Asia/Manila) • Flexible overlap with US &amp; European schedules</div>
-              <div>Typical project kickoff turnaround: 5 to 7 business days</div>
+            <div className="p-5 rounded-2xl bg-muted/20 dark:bg-card/80 border border-border/80 text-xs text-muted-foreground space-y-1.5 shadow-xs dark:shadow-lg dark:shadow-black/20">
+              <div className="font-semibold text-foreground text-sm">Availability &amp; Schedule</div>
+              <div>Working hours easily adapt to US, European, and Australian time zones</div>
+              <div>Ready to start new projects within 5 to 7 days</div>
             </div>
           </div>
 
           {/* Right Column: Project Inquiry Form */}
           <div className="lg:col-span-7">
-            <div className="p-7 sm:p-10 rounded-3xl bg-card border border-border/90 shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
+            <div className="p-6 sm:p-10 rounded-2xl bg-card border border-border/80 shadow-xs dark:shadow-lg dark:shadow-black/20">
               {inquirySubmitted ? (
                 <div className="py-12 text-center">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-500 mx-auto mb-4">
-                    <FaCheckCircle className="w-8 h-8" />
-                  </div>
                   <h3 className="text-xl font-bold text-foreground mb-2">
-                    Inquiry Prepared!
+                    Email Ready to Send!
                   </h3>
                   <p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
-                    Your email client has opened with your inquiry prefilled. Feel free to send it or reach out directly to{' '}
+                    Your email app has opened with your message ready to go. Simply click send, or write directly to{' '}
                     <strong className="text-foreground">arnelbaylon0@gmail.com</strong>.
                   </p>
                   <button
@@ -887,10 +797,10 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                 <form onSubmit={handleInquirySubmit} className="space-y-6">
                   <div>
                     <h3 className="text-xl font-bold text-foreground">
-                      Book a Project Strategy Session
+                      Tell Me About Your Project
                     </h3>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Share a few details about what you’d like to build and I’ll get back to you within 24 hours.
+                      Share a few quick details about what you need, and I’ll reply with helpful advice within 24 hours.
                     </p>
                   </div>
 
@@ -901,10 +811,10 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {[
-                        'New Web App / SaaS',
-                        'AI & Automation',
-                        'UI/UX Redesign',
-                        'Advisory / Other',
+                        'New Website or App',
+                        'Smart AI & Automation',
+                        'Redesign Existing Site',
+                        'General Question',
                       ].map((type) => (
                         <button
                           key={type}
@@ -926,7 +836,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="inquiry-name" className="block text-xs font-medium text-foreground mb-1">
-                        Your Name / Organization
+                        Your Name or Business
                       </label>
                       <input
                         id="inquiry-name"
@@ -935,7 +845,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                         required
                         value={inquiryForm.name}
                         onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
-                        placeholder="Jane Doe (Acme Corp)"
+                        placeholder="Sarah Johnson (Johnson Real Estate)"
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
                       />
                     </div>
@@ -951,7 +861,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                         required
                         value={inquiryForm.email}
                         onChange={(e) => setInquiryForm({ ...inquiryForm, email: e.target.value })}
-                        placeholder="jane@example.com"
+                        placeholder="sarah@example.com"
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
                       />
                     </div>
@@ -960,7 +870,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                   {/* Timeline Selection */}
                   <div>
                     <label htmlFor="launch-timeline" className="block text-xs font-medium text-foreground mb-1">
-                      Target Launch Timeline
+                      When would you like this completed?
                     </label>
                     <select
                       id="launch-timeline"
@@ -970,17 +880,17 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                       onChange={(e) => setInquiryForm({ ...inquiryForm, timeline: e.target.value })}
                       className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
                     >
-                      <option value="Urgent (1–2 Weeks)">Urgent (1–2 Weeks)</option>
-                      <option value="Standard (2–4 Weeks)">Standard (2–4 Weeks)</option>
-                      <option value="Flexible (1–2 Months)">Flexible (1–2 Months)</option>
-                      <option value="Exploring Feasibility">Just exploring feasibility</option>
+                      <option value="As soon as possible (1–2 weeks)">As soon as possible (1–2 weeks)</option>
+                      <option value="Standard pace (2–4 weeks)">Standard pace (2–4 weeks)</option>
+                      <option value="Flexible (next 1–2 months)">Flexible (next 1–2 months)</option>
+                      <option value="Just exploring ideas">Just exploring ideas</option>
                     </select>
                   </div>
 
                   {/* Message */}
                   <div>
                     <label htmlFor="inquiry-message" className="block text-xs font-medium text-foreground mb-1">
-                      Project Goals &amp; Overview
+                      What would you like to build or achieve?
                     </label>
                     <textarea
                       id="inquiry-message"
@@ -989,7 +899,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                       rows={3}
                       value={inquiryForm.message}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, message: e.target.value })}
-                      placeholder="Briefly describe what problem you want to solve, desired features, or reference links..."
+                      placeholder="Tell me a bit about your business, what you want your website or app to do, or any examples you like..."
                       className="w-full px-4 py-2.5 rounded-xl bg-muted/30 border border-border/80 focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors resize-none"
                     />
                   </div>
@@ -999,12 +909,12 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                     type="submit"
                     className="w-full py-4 rounded-xl bg-foreground text-background font-semibold hover:opacity-90 active:scale-[0.99] transition-[opacity,transform] duration-150 shadow-md flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <span>Send Project Inquiry</span>
+                    <span>Send Message</span>
                     <FaArrowRight className="w-3.5 h-3.5" />
                   </button>
 
                   <div className="text-center text-[11px] text-muted-foreground">
-                    Direct reply guaranteed within 24 hours &bull; Non-Disclosure Agreement (NDA) respected
+                    I’ll reply directly within 24 hours &bull; 100% private and confidential
                   </div>
                 </form>
               )}

@@ -17,8 +17,7 @@ import {
   FaFilePdf,
   FaShareAlt,
   FaStar,
-  FaRocket,
-  FaHandshake,
+  FaQuestionCircle,
   FaQuoteRight,
 } from 'react-icons/fa'
 import { useTheme } from '../ThemeProvider'
@@ -47,10 +46,9 @@ const techNavItems: NavItem[] = [
 const clientNavItems: NavItem[] = [
   { id: 'hero', label: 'Overview', number: '00', icon: FaStar },
   { id: 'projects', label: 'Projects', number: '01', icon: FaBriefcase },
-  { id: 'testimonials', label: 'Client Feedback', number: '02', icon: FaQuoteRight },
-  { id: 'services', label: 'Services', number: '03', icon: FaRocket },
-  { id: 'standards', label: 'Why Partner', number: '04', icon: FaHandshake },
-  { id: 'contact', label: 'Consultation', number: '05', icon: FaPaperPlane },
+  { id: 'testimonials', label: 'Client Reviews', number: '02', icon: FaQuoteRight },
+  { id: 'faq', label: 'FAQ', number: '03', icon: FaQuestionCircle },
+  { id: 'contact', label: 'Contact', number: '04', icon: FaPaperPlane },
 ]
 
 interface SimpleSideNavProps {
@@ -180,7 +178,7 @@ export function SimpleSideNav({
                 aria-label={
                   isClient
                     ? 'Switch to Developer & Technical View'
-                    : 'Switch to Executive Client & Business View'
+                    : 'Switch to Client View'
                 }
                 className={`group relative flex items-center justify-center w-9 h-9 rounded-xl transition-colors duration-150 cursor-pointer ${
                   isClient
@@ -209,8 +207,8 @@ export function SimpleSideNav({
                   </span>
                   <span>
                     {isClient
-                      ? 'Switch to Developer Mode (Telemetry & Code)'
-                      : 'Switch to Executive Client View (Zero Jargon)'}
+                      ? 'Switch to Developer Mode (Code & Technical Details)'
+                      : 'Switch to Client View (User-Friendly Overview)'}
                   </span>
                 </span>
               </button>
@@ -413,7 +411,7 @@ export function SimpleSideNav({
           ? [
               { id: 'hero', label: 'Top', icon: FaStar, isSection: true },
               { id: 'projects', label: 'Work', icon: FaBriefcase, isSection: true },
-              { id: 'services', label: 'Services', icon: FaRocket, isSection: true },
+              { id: 'faq', label: 'FAQ', icon: FaQuestionCircle, isSection: true },
               { id: 'mode', label: 'Dev Mode', icon: FaTerminal, isSection: false, isModeToggle: true },
               { id: 'contact', label: 'Contact', icon: FaPaperPlane, isSection: true },
             ]
