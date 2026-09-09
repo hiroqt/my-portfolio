@@ -311,27 +311,13 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
 
   return (
     <div className="w-full min-h-screen text-foreground relative overflow-x-hidden">
-      
-      {/* ── Discreet Top Mode Switcher Link (No eyebrows) ── */}
-      {onSwitchToTechMode && (
-        <div className="w-full px-6 sm:px-12 lg:px-20 pt-6 pb-2 flex justify-end">
-          <button
-            type="button"
-            onClick={onSwitchToTechMode}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 hover:bg-muted border border-border text-muted-foreground hover:text-foreground text-xs font-medium transition-colors duration-150 shadow-xs cursor-pointer group backdrop-blur-md"
-          >
-            <FaCode className="w-3.5 h-3.5 text-amber-500 transition-transform group-hover:scale-110" />
-            <span>Developer View</span>
-          </button>
-        </div>
-      )}
 
       {/* ─────────────────────────────────────────────────────────────
           EXECUTIVE HERO SECTION (Zero Cards, No Eyebrows)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="hero"
-        className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center text-center px-6 sm:px-12 lg:px-24 py-16 scroll-mt-12 relative"
+        className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center text-center px-6 sm:px-12 lg:px-24 pt-24 sm:pt-28 lg:pt-32 pb-16 scroll-mt-24 sm:scroll-mt-28 relative"
       >
         <div className="max-w-5xl mx-auto flex flex-col items-center justify-center my-auto">
           
@@ -422,7 +408,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
       ───────────────────────────────────────────────────────────── */}
       <section
         id="projects"
-        className="w-full py-24 sm:py-32 border-t border-border/60 scroll-mt-12 overflow-hidden bg-muted/15 dark:bg-[#06070d]/60"
+        className="w-full py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28 overflow-hidden bg-muted/15 dark:bg-[#06070d]/60"
       >
         {/* Section Header (No Eyebrows) */}
         <div className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto text-center mb-16">
@@ -527,7 +513,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
       ───────────────────────────────────────────────────────────── */}
       <section
         id="testimonials"
-        className="w-full px-6 sm:px-12 lg:px-16 xl:px-20 py-24 sm:py-32 border-t border-border/60 scroll-mt-12 overflow-hidden bg-muted/10 dark:bg-black/20"
+        className="w-full px-6 sm:px-12 lg:px-16 xl:px-20 py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28 overflow-hidden bg-muted/10 dark:bg-black/20"
       >
         <div className="w-full max-w-6xl mx-auto">
           
@@ -677,7 +663,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
       ───────────────────────────────────────────────────────────── */}
       <section
         id="faq"
-        className="w-full px-6 sm:px-12 lg:px-20 max-w-5xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-12"
+        className="w-full px-6 sm:px-12 lg:px-20 max-w-5xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28"
       >
         <div className="mb-16 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
@@ -757,7 +743,7 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
       ───────────────────────────────────────────────────────────── */}
       <section
         id="contact"
-        className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-12"
+        className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28"
       >
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
@@ -1253,6 +1239,25 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
 
         </div>
       </section>
+
+      {/* ── Clean Client Footer ── */}
+      <footer className="w-full py-10 px-6 sm:px-12 border-t border-border/40 text-center text-xs text-muted-foreground bg-muted/5">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            &copy; {new Date().getFullYear()} Arnel Baylon. Built for client clarity and results.
+          </div>
+          {onSwitchToTechMode && (
+            <button
+              type="button"
+              onClick={onSwitchToTechMode}
+              className="text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors cursor-pointer flex items-center gap-1.5 text-xs"
+            >
+              <FaCode className="w-3 h-3 text-amber-500" />
+              <span>Looking for engineering specs? Switch to Developer Mode</span>
+            </button>
+          )}
+        </div>
+      </footer>
 
     </div>
   )
