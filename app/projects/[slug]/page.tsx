@@ -3,6 +3,7 @@
 import { projectsData } from '@/lib/data/projects'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { FaArrowLeft, FaExternalLinkAlt } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import ThemeToggle from '@/components/ui/ThemeToggle'
@@ -92,9 +93,13 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             className="mb-16 sm:mb-24 rounded-3xl overflow-hidden shadow-2xl border border-border/50"
           >
-            <img 
+            <Image 
               src={project.image} 
               alt={`${project.title} project showcase screenshot`} 
+              width={1200}
+              height={800}
+              sizes="(max-width: 768px) 100vw, 800px"
+              priority
               className="w-full h-auto object-contain max-h-[75vh] mx-auto bg-muted/20"
             />
           </motion.div>

@@ -137,10 +137,12 @@ export function Sidebar() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  // Active section scroll spy
+  // Active section scroll spy (RAF-throttled to eliminate layout thrashing & forced reflows)
   useEffect(() => {
     const allLinks = categorizedNav.flatMap((c) => c.links)
-    const handleScroll = () => {
+    let ticking = false
+
+    const updateActiveSection = () => {
       const sectionIds = allLinks.map((n) => n.id)
       const scrollPosition = window.scrollY + 220
 
@@ -148,8 +150,17 @@ export function Sidebar() {
         const element = document.getElementById(sectionIds[i])
         if (element && element.offsetTop <= scrollPosition) {
           setActiveSection(sectionIds[i])
-          break
+          ticking = false
+          return
         }
+      }
+      ticking = false
+    }
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection)
+        ticking = true
       }
     }
 

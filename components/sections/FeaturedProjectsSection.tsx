@@ -14,6 +14,7 @@ import {
   FaLayerGroup,
 } from 'react-icons/fa'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface FeaturedProject {
   id: string
@@ -539,12 +540,16 @@ export function FeaturedProjectsSection() {
                       </div>
                       <span>Preview</span>
                     </div>
-                    <img
-                      src={selectedProject.image}
-                      alt={`${selectedProject.title} screenshot`}
-                      className="w-full h-48 sm:h-56 object-cover object-center group-hover:scale-[1.01] transition-transform duration-300"
-                      loading="lazy"
-                    />
+                    <div className="relative w-full h-48 sm:h-56 overflow-hidden">
+                      <Image
+                        src={selectedProject.image}
+                        alt={`${selectedProject.title} screenshot`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 560px"
+                        className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
 
                   {/* Live Metrics Grid */}

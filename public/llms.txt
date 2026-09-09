@@ -1,0 +1,37 @@
+# Arnel Baylon — Context Engineer & Full-Stack Software Developer
+
+> Portfolio, engineering context, and architectural index for Arnel A. Baylon: Context Engineer, Full-Stack Software Developer, and Autonomous AI Agent Architect.
+
+Arnel Baylon is a software engineer specializing in modern full-stack web applications, agentic AI workflows, Retrieval-Augmented Generation (RAG) architectures, and enterprise business systems.
+
+## Online Profiles & Repositories
+- [Portfolio Website](https://arnelbaylon.dev): Interactive developer portfolio with technical telemetry HUD and executive client view
+- [GitHub Profile](https://github.com/hiroqt): Open-source repositories, agent systems, and active software projects (@hiroqt)
+- [LinkedIn Profile](https://www.linkedin.com/in/arnel-baylon-b05233189): Professional career history, peer recommendations, and industry connections
+- [Curriculum Vitae (PDF)](https://arnelbaylon.dev/pdf/Resume.pdf): Downloadable verified resume with full production track record
+
+## Flagship Systems & Featured Projects
+- [Pixel Crew](https://github.com/hiroqt): Autonomous 23-agent software engineering swarm with an anti-slop design engine, static codebase analysis, and real-time visual dashboard
+- [sakto.ka](https://github.com/hiroqt): Stateless AI career copilot, ATS resume studio scoring 90%+ on enterprise ATS parsers (Workday, Lever), and STAR interview prep engine
+- [FinOps AI Dashboard](https://github.com/hiroqt): Cloud financial operations and cost anomaly detection platform; Winner of Best Business Impact at AWS BGC
+- [eBuddy](https://github.com/hiroqt): Agentic citizen public service assistant unifying civic inquiries; Top 30 National Winner at Philippine eGov Hackathon
+- [Better Trece Martires](https://bettertrece.vercel.app): Civic open data platform and municipal budget transparency explorer with interactive visualizations
+- [VCM HRIS](https://github.com/hiroqt): Enterprise HR management platform with QR-code vicinity attendance validation, statutory deduction computation, and automated payroll
+- [Present Po](https://github.com/hiroqt): Mobile workforce time-tracking solution with geofencing attendance validation and automated daily shift reporting
+- [PaceMentor](https://github.com/hiroqt): AI running coach companion integrating Strava activity tracking and personalized dynamic periodization plans
+- [Tearsize](https://github.com/hiroqt): High-performance e-commerce storefront with mobile-first checkout and automated inventory synchronization
+
+## Core Competencies & Tech Stack
+- [Frontend Architecture](https://arnelbaylon.dev/#skills): Next.js 14/15 (App Router), React 18/19, TypeScript, JavaScript, Tailwind CSS, Framer Motion, Vue.js, Flutter / Dart
+- [Backend & APIs](https://arnelbaylon.dev/#skills): Node.js, Express, Next.js Server Actions & API Routes, Python, PHP, Laravel, REST APIs, GraphQL, WebSockets
+- [Databases & Storage](https://arnelbaylon.dev/#skills): PostgreSQL, Supabase, Neon, MySQL, Redis, Vector Databases (pgvector)
+- [Agentic AI Engineering](https://arnelbaylon.dev/#skills): Google Antigravity SDK, Groq SDK, LangChain, RAG Systems, Multi-Agent Swarms, Tool Calling, Structured JSON Outputs
+- [Infrastructure & Performance](https://arnelbaylon.dev/#skills): Docker, AWS, Vercel, Cloudflare, Git, CI/CD, WCAG 2.1 AA Accessibility, Core Web Vitals Optimization
+
+## Experience & Education
+- [Independent Software Consultant](https://arnelbaylon.dev/#experience): Full-Stack & Context Engineer (2023 – Present)
+- [General Emilio Aguinaldo Memorial Hospital (GEAMH)](https://arnelbaylon.dev/#experience): Software Engineering Intern — Built AI-assisted queuing & triage system
+- [Cavite State University (CvSU Main Campus)](https://arnelbaylon.dev/#education): Bachelor of Science in Information Technology (BS IT)
+
+## Optional & Context Reference
+- [Full Context Prompt Reference](https://arnelbaylon.dev/llms.txt): Machine-readable system instructions and career context for LLM agents

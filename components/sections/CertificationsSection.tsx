@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
@@ -292,13 +293,16 @@ export function CertificationsSection() {
 
               {/* Certificate Image Thumbnail: perfectly centered with object-contain so NO certificate edges or text are cropped */}
               <div className="relative overflow-hidden rounded-xl border border-border/80 bg-zinc-950/80 aspect-[4/3] flex items-center justify-center p-2 group/img shadow-inner">
-                <img
-                  src={cert.thumbnailUrl}
-                  alt={cert.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={cert.thumbnailUrl}
+                    alt={cert.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 360px"
+                    loading="lazy"
+                    className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
                 
                 {/* Hover Overlay with Inspect Badge */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 text-white backdrop-blur-[2px]">
@@ -509,10 +513,14 @@ export function CertificationsSection() {
                   <div className="relative rounded-2xl overflow-hidden border border-border/80 bg-zinc-950 shadow-inner flex items-center justify-center p-2 sm:p-4 min-h-[350px]">
                     {viewMode === 'image' ? (
                       <div className="w-full flex items-center justify-center">
-                        <img
+                        <Image
                           src={selectedCert.highResUrl}
                           alt={selectedCert.title}
+                          width={1200}
+                          height={900}
+                          sizes="(max-width: 768px) 95vw, 1100px"
                           className="max-h-[62vh] max-w-full w-auto h-auto object-contain mx-auto rounded-lg shadow-2xl block"
+                          priority
                         />
                       </div>
                     ) : (

@@ -63,6 +63,9 @@ export default function RootLayout({
       lang="en"
       className={`dark ${inter.variable} ${mono.variable} ${sourceSerif.variable} ${caveat.variable}`}
     >
+      <head>
+        <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context" />
+      </head>
       <body className="overflow-x-hidden min-h-screen font-sans">
         <ThemeProvider>
           <a

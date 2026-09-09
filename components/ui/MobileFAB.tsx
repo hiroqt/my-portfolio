@@ -2,25 +2,29 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaShareAlt, FaPlus, FaLayerGroup } from 'react-icons/fa'
+import { FaShareAlt, FaPlus, FaLayerGroup, FaBriefcase, FaTerminal } from 'react-icons/fa'
 import { HiSparkles } from 'react-icons/hi2'
 
 interface MobileFABProps {
   chatOpen: boolean
   socialsOpen: boolean
   stackOpen?: boolean
+  viewMode?: 'tech' | 'client'
   onToggleChat: () => void
   onToggleSocials: () => void
   onToggleStack?: () => void
+  onToggleViewMode?: () => void
 }
 
 export function MobileFAB({
   chatOpen,
   socialsOpen,
   stackOpen = false,
+  viewMode = 'tech',
   onToggleChat,
   onToggleSocials,
   onToggleStack,
+  onToggleViewMode,
 }: MobileFABProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -56,6 +60,11 @@ export function MobileFAB({
     onToggleStack?.()
   }
 
+  const handleToggleMode = () => {
+    setIsExpanded(false)
+    onToggleViewMode?.()
+  }
+
   // Hide the FAB while either full card modal is active so it doesn't obstruct the card
   const isAnyModalOpen = chatOpen || socialsOpen || stackOpen
 
@@ -79,6 +88,42 @@ export function MobileFAB({
             exit={{ opacity: 0, scale: 0.8 }}
             className="fixed right-4 sm:right-6 bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] z-50 flex flex-col items-end gap-2.5 pointer-events-auto select-none"
           >
+            {/* ── Action 0: View Mode Switcher Button ── */}
+            <AnimatePresence>
+              {isExpanded && onToggleViewMode && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15, scale: 0.85 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 12, scale: 0.85 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 26, delay: 0.12 }}
+                >
+                  <button
+                    type="button"
+                    onClick={handleToggleMode}
+                    aria-label={`Switch to ${viewMode === 'client' ? 'Developer' : 'Executive Client'} Mode`}
+                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-background dark:bg-[#0c0e18] text-foreground border border-amber-500/50 shadow-[0_12px_32px_rgba(245,158,11,0.25)] hover:border-accent active:scale-95 transition-all cursor-pointer"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-amber-500 text-zinc-950 flex items-center justify-center text-sm font-bold shadow-xs">
+                      {viewMode === 'client' ? <FaTerminal className="w-3.5 h-3.5" /> : <FaBriefcase className="w-3.5 h-3.5" />}
+                    </div>
+                    <div className="text-left">
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-bold text-xs tracking-tight">
+                          {viewMode === 'client' ? 'Switch to Dev Mode' : 'Executive Client View'}
+                        </span>
+                      </div>
+                      <p className="text-[10px] font-mono text-muted-foreground leading-none mt-0.5">
+                        {viewMode === 'client' ? 'Technical specs & telemetry' : 'User-friendly business view'}
+                      </p>
+                    </div>
+                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                      {viewMode === 'client' ? 'DEV' : 'BIZ'}
+                    </span>
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* ── Action 1: yhelAI Copilot Button ── */}
             <AnimatePresence>
               {isExpanded && (
@@ -185,7 +230,7 @@ export function MobileFAB({
               aria-label={isExpanded ? 'Close Menu' : 'Open AI & Socials Menu'}
               aria-expanded={isExpanded}
               whileTap={{ scale: 0.9 }}
-              className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-[0_10px_28px_rgba(245,158,11,0.35)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.8)] border transition-all duration-300 cursor-pointer ${
+              className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-[0_10px_28px_rgba(245,158,11,0.35)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.8)] border transition-transform cursor-pointer ${
                 isExpanded
                   ? 'bg-foreground text-background border-border/80'
                   : 'bg-gradient-to-tr from-amber-500 via-accent to-amber-600 text-white border-amber-300/40 hover:brightness-110'

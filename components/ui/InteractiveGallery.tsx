@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   FaTimes,
@@ -376,32 +377,39 @@ export function InteractiveGallery() {
     return cols
   }, [])
 
-  // Update single set width on mount & resize
-  const measureSetWidth = useCallback(() => {
-    if (setRef.current) {
-      const width = setRef.current.offsetWidth
-      if (width > 0) {
-        singleWidthRef.current = width
-      }
-    }
-  }, [])
-
+  // Update single set width and initial scroll without triggering synchronous forced reflow
   useEffect(() => {
-    measureSetWidth()
+    let rafId: number
 
-    // Initialize scroll position to the middle set (Set 2)
-    const el = containerRef.current
-    if (el && singleWidthRef.current > 0) {
-      el.scrollLeft = singleWidthRef.current
-    }
+    // Defer measurement to the next animation frame after paint to eliminate layout thrashing
+    rafId = requestAnimationFrame(() => {
+      if (setRef.current) {
+        const width = setRef.current.offsetWidth
+        if (width > 0) {
+          singleWidthRef.current = width
+          const el = containerRef.current
+          if (el) {
+            el.scrollLeft = width
+          }
+        }
+      }
+    })
 
     const handleResize = () => {
-      measureSetWidth()
+      if (setRef.current) {
+        const width = setRef.current.offsetWidth
+        if (width > 0) {
+          singleWidthRef.current = width
+        }
+      }
     }
 
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [measureSetWidth, masonryColumns])
+    return () => {
+      cancelAnimationFrame(rafId)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [masonryColumns])
 
   // Pause when off-screen to save CPU & battery
   useEffect(() => {
@@ -633,12 +641,14 @@ export function InteractiveGallery() {
                       onClick={() => handleCardClick(globalIndex)}
                       className="shrink-0 w-[230px] sm:w-[260px] h-full group/card relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
                     >
-                      <img
+                      <Image
                         src={item.src}
                         alt={item.title}
+                        fill
+                        sizes="(max-width: 640px) 240px, 280px"
                         loading="lazy"
                         draggable={false}
-                        className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                        className="object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/25 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
@@ -681,12 +691,14 @@ export function InteractiveGallery() {
                         onClick={() => handleCardClick(topIndex)}
                         className="flex-1 relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
                       >
-                        <img
+                        <Image
                           src={topItem.src}
                           alt={topItem.title}
+                          fill
+                          sizes="(max-width: 640px) 220px, 260px"
                           loading="lazy"
                           draggable={false}
-                          className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                          className="object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
@@ -715,12 +727,14 @@ export function InteractiveGallery() {
                         onClick={() => handleCardClick(bottomIndex)}
                         className="flex-1 relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
                       >
-                        <img
+                        <Image
                           src={bottomItem.src}
                           alt={bottomItem.title}
+                          fill
+                          sizes="(max-width: 640px) 220px, 260px"
                           loading="lazy"
                           draggable={false}
-                          className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                          className="object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
@@ -756,12 +770,14 @@ export function InteractiveGallery() {
                       onClick={() => handleCardClick(globalIndex)}
                       className="shrink-0 w-[290px] sm:w-[330px] md:w-[360px] h-full group/card relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
                     >
-                      <img
+                      <Image
                         src={item.src}
                         alt={item.title}
+                        fill
+                        sizes="(max-width: 640px) 300px, 380px"
                         loading="lazy"
                         draggable={false}
-                        className="absolute inset-0 w-full h-full object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
+                        className="object-cover object-center group-hover/card:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/25 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
@@ -843,10 +859,14 @@ export function InteractiveGallery() {
 
               {/* Modal Image Viewport (Centered) */}
               <div className="relative flex-1 min-h-[260px] sm:min-h-[380px] bg-black/95 flex items-center justify-center overflow-hidden">
-                <img
+                <Image
                   src={currentItem.src}
                   alt={currentItem.title}
+                  width={1200}
+                  height={800}
+                  sizes="(max-width: 768px) 95vw, 1200px"
                   className="max-h-[58vh] w-auto max-w-full object-contain mx-auto"
+                  priority
                 />
 
                 {/* Left/Right Lightbox Navigation Arrows */}

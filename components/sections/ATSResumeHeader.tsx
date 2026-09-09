@@ -234,6 +234,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
               width={1254}
               height={1254}
               priority
+              sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
               className="w-full h-full object-contain filter drop-shadow-md dark:drop-shadow-[0_16px_32px_rgba(0,0,0,0.65)] hover:scale-[1.02] transition-transform duration-500 select-none pointer-events-none"
               style={{ imageRendering: 'pixelated' }}
             />
