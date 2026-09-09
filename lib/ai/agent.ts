@@ -14,7 +14,27 @@ export function inferPersona(userText: string): AdaptivePersona {
   if (text.includes('recruiter') || text.includes('hiring') || text.includes('interview') || text.includes('salary') || text.includes('resume') || text.includes('cv') || text.includes('open to work') || text.includes('hire him')) {
     return 'recruiter';
   }
-  if (text.includes('client') || text.includes('quote') || text.includes('cost') || text.includes('price') || text.includes('build my') || text.includes('freelance') || text.includes('proposal') || text.includes('contract')) {
+  if (
+    text.includes('client') ||
+    text.includes('quote') ||
+    text.includes('cost') ||
+    text.includes('price') ||
+    text.includes('build my') ||
+    text.includes('freelance') ||
+    text.includes('proposal') ||
+    text.includes('contract') ||
+    text.includes('not tech savvy') ||
+    text.includes('not technical') ||
+    text.includes('easy to manage') ||
+    text.includes('change pictures') ||
+    text.includes('update photos') ||
+    text.includes('payment') ||
+    text.includes('credit card') ||
+    text.includes('domain') ||
+    text.includes('rough idea') ||
+    text.includes('store') ||
+    text.includes('business')
+  ) {
     return 'client';
   }
   if (text.includes('architecture') || text.includes('schema') || text.includes('latency') || text.includes('api') || text.includes('state') || text.includes('orm') || text.includes('docker') || text.includes('algorithm') || text.includes('sql') || text.includes('rag')) {

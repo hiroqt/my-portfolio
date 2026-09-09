@@ -223,9 +223,13 @@ const clientFaqs: FAQItem[] = [
 
 interface ClientBusinessViewProps {
   onSwitchToTechMode?: () => void
+  onOpenChat?: () => void
 }
 
-export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewProps) {
+export function ClientBusinessView({
+  onSwitchToTechMode,
+  onOpenChat,
+}: ClientBusinessViewProps) {
   const reduce = useReducedMotion()
   const [inquiryType, setInquiryType] = useState('New Website or App')
   const [formStep, setFormStep] = useState<1 | 2 | 3>(1)
@@ -729,14 +733,24 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
                     >
                       <div className="pb-7 pl-0 sm:pl-[3.5rem] pr-4 sm:pr-12 text-muted-foreground text-sm sm:text-base leading-relaxed">
                         <p>{faq.answer}</p>
-                        <div className="mt-4 pt-3 border-t border-border/40 flex items-center gap-2 text-xs font-mono">
+                        <div className="mt-4 pt-3 border-t border-border/40 flex items-center gap-2 text-xs">
                           <span className="text-muted-foreground">Have a specific question?</span>
-                          <a
-                            href="#contact"
-                            className="text-foreground hover:text-accent font-semibold transition-colors uppercase tracking-wide text-[11px]"
-                          >
-                            Let’s chat &rarr;
-                          </a>
+                          {onOpenChat ? (
+                            <button
+                              type="button"
+                              onClick={onOpenChat}
+                              className="text-amber-600 dark:text-amber-400 hover:underline font-semibold transition-colors tracking-wide text-xs cursor-pointer"
+                            >
+                              Ask AI Advisor &rarr;
+                            </button>
+                          ) : (
+                            <a
+                              href="#contact"
+                              className="text-foreground hover:text-accent font-semibold transition-colors uppercase tracking-wide text-[11px]"
+                            >
+                              Let’s chat &rarr;
+                            </a>
+                          )}
                         </div>
                       </div>
                     </motion.div>
@@ -746,6 +760,23 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
             )
           })}
         </div>
+
+        {/* ── Ask AI Advisor Banner Below FAQ ── */}
+        {onOpenChat && (
+          <div className="mt-12 text-center">
+            <div className="inline-flex flex-wrap items-center justify-center gap-3 px-5 py-2.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-xs sm:text-sm">
+              <span className="text-foreground font-medium">Still have questions about your specific project?</span>
+              <button
+                type="button"
+                onClick={onOpenChat}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500 text-zinc-950 font-semibold text-xs hover:bg-amber-400 transition-colors shadow-2xs cursor-pointer"
+              >
+                <span>Ask Arnel&apos;s AI Advisor</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ── Section Separator: Wave Pattern (FAQ -> Contact) ── */}

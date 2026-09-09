@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   FaPaperPlane,
@@ -10,6 +11,7 @@ import {
   FaUser,
   FaSpinner,
 } from 'react-icons/fa'
+import { HiSparkles } from 'react-icons/hi2'
 import { MarkdownContent } from './MarkdownContent'
 
 interface ChatMessage {
@@ -21,34 +23,68 @@ interface AIChatBubbleProps {
   isOpen: boolean
   onClose: () => void
   activeSection?: string
+  mode?: 'tech' | 'client'
 }
 
-const defaultSuggestions = [
+const techSuggestions = [
   'Tell me about Pixel Crew',
   'What are your top engineering skills?',
   'What did you build at AWS?',
   'How can I get in touch?',
 ]
 
-export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChatBubbleProps) {
+const clientSuggestions = [
+  "I'm not tech-savvy—will this be easy to manage?",
+  'How do my customers pay or book online?',
+  'How fast can we launch my website or app?',
+  'How does pricing work? Any surprise fees?',
+  'I only have a rough idea—where do we start?',
+]
+
+const getClientGreeting = () =>
+  "Hello! I'm Arnel's **Client Project Advisor**.\n\nNo technical experience? **No problem at all!** I'm here to answer your questions in plain, everyday English:\n\n- **Easy to Manage**: Point-and-click control to update text and pictures yourself\n- **Fast 2–4 Week Launch**: Weekly test previews sent directly to your phone\n- **Clear Fixed Pricing**: Transparent quotes with zero surprise fees\n- **100% Total Ownership**: You own all files, accounts, and designs from day one\n\nWhat kind of website, store, or app would you like to build?"
+
+const getTechGreeting = () =>
+  "Hello! I am yhelAI, Arnel's autonomous portfolio assistant. Ask me anything about his engineering systems, multi-agent swarms, or technical capabilities!"
+
+export function AIChatBubble({
+  isOpen,
+  onClose,
+  activeSection = 'hero',
+  mode = 'tech',
+}: AIChatBubbleProps) {
+  const isClientMode = mode === 'client'
+  const suggestions = isClientMode ? clientSuggestions : techSuggestions
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content:
-        "Hello! I am yhelAI, Arnel's autonomous portfolio assistant. Ask me anything about his engineering systems, multi-agent swarms, or technical capabilities!",
+      content: isClientMode ? getClientGreeting() : getTechGreeting(),
     },
   ])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
 
-  // Dedicated refs for desktop and mobile scroll containers and inputs
   const desktopScrollRef = useRef<HTMLDivElement | null>(null)
   const mobileScrollRef = useRef<HTMLDivElement | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const mobileInputRef = useRef<HTMLInputElement | null>(null)
 
-  // Track viewport size on mount and resize
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length <= 1) {
+        return [
+          {
+            role: 'assistant',
+            content: isClientMode ? getClientGreeting() : getTechGreeting(),
+          },
+        ]
+      }
+      return prev
+    })
+  }, [isClientMode])
+
   useEffect(() => {
     const checkViewport = () => setIsDesktop(window.innerWidth >= 1024)
     checkViewport()
@@ -56,7 +92,6 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     return () => window.removeEventListener('resize', checkViewport)
   }, [])
 
-  // Focus the appropriate input according to viewport size
   const focusInput = () => {
     if (typeof window === 'undefined') return
     const isDesktopView = window.innerWidth >= 1024
@@ -70,7 +105,6 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     }
   }
 
-  // Callback ref for desktop input: focuses immediately when DOM node mounts
   const setDesktopInputRef = (node: HTMLInputElement | null) => {
     inputRef.current = node
     if (node && isOpen && typeof window !== 'undefined' && window.innerWidth >= 1024) {
@@ -78,7 +112,6 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     }
   }
 
-  // Callback ref for mobile input: focuses synchronously during user tap activation window
   const setMobileInputRef = (node: HTMLInputElement | null) => {
     mobileInputRef.current = node
     if (node && isOpen && typeof window !== 'undefined' && window.innerWidth < 1024) {
@@ -86,11 +119,9 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     }
   }
 
-  // Unified scroll-to-bottom helper targeting visible scroll container
   const scrollToBottom = (behavior: 'smooth' | 'auto' = 'auto') => {
     const scrollTarget = (el: HTMLDivElement | null) => {
       if (!el) return
-      // Check if container is visible or rendered with dimensions
       if (el.offsetParent !== null || el.clientHeight > 0) {
         if (behavior === 'smooth') {
           el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
@@ -103,24 +134,19 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     scrollTarget(mobileScrollRef.current)
   }
 
-  // Multi-staged auto-focus and scroll-down when chat opens
   useEffect(() => {
     if (isOpen) {
-      // Stage 1: Immediate animation frame
       requestAnimationFrame(() => {
         scrollToBottom('auto')
         focusInput()
       })
-      // Stage 2: Quick tick (50ms - early sheet emergence)
       const t1 = setTimeout(() => {
         focusInput()
       }, 50)
-      // Stage 3: Animation complete tick (180ms - guarantees mobile keyboard activates)
       const t2 = setTimeout(() => {
         focusInput()
         scrollToBottom('auto')
       }, 180)
-
       return () => {
         clearTimeout(t1)
         clearTimeout(t2)
@@ -128,14 +154,12 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     }
   }, [isOpen])
 
-  // Scroll to bottom on new message / stream chunk updates
   useEffect(() => {
     if (isOpen) {
       scrollToBottom('auto')
     }
   }, [messages, isOpen])
 
-  // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -158,7 +182,6 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     setInput('')
     setIsLoading(true)
 
-    // Immediate scroll to bottom to show user's query & "Thinking..." state
     requestAnimationFrame(() => {
       scrollToBottom('smooth')
     })
@@ -170,16 +193,12 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
         body: JSON.stringify({
           messages: updatedMessages.slice(0, botMsgIndex).map((m) => ({ role: m.role, content: m.content })),
           uiContext: { activeSection },
+          persona: isClientMode ? 'client' : 'developer',
         }),
       })
 
-      if (!res.ok) {
-        throw new Error(`Chat service returned ${res.status}`)
-      }
-
-      if (!res.body) {
-        throw new Error('No response stream')
-      }
+      if (!res.ok) throw new Error(`Chat service returned ${res.status}`)
+      if (!res.body) throw new Error('No response stream')
 
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
@@ -201,7 +220,6 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
             if (trimmed.startsWith('data:')) {
               const dataStr = trimmed.replace(/^data:\s*/, '')
               if (!dataStr || dataStr === '[DONE]') continue
-
               try {
                 const parsed = JSON.parse(dataStr)
                 if (parsed.type === 'delta' && parsed.content) {
@@ -209,44 +227,21 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
                   setMessages((prev) => {
                     const updated = [...prev]
                     if (updated[botMsgIndex]) {
-                      updated[botMsgIndex] = {
-                        role: 'assistant',
-                        content: assistantText,
-                      }
+                      updated[botMsgIndex] = { role: 'assistant', content: assistantText }
                     }
                     return updated
-                  })
-                  requestAnimationFrame(() => {
-                    scrollToBottom('auto')
-                  })
-                } else if (parsed.content && !assistantText) {
-                  assistantText = parsed.content
-                  setMessages((prev) => {
-                    const updated = [...prev]
-                    if (updated[botMsgIndex]) {
-                      updated[botMsgIndex] = {
-                        role: 'assistant',
-                        content: assistantText,
-                      }
-                    }
-                    return updated
-                  })
-                  requestAnimationFrame(() => {
-                    scrollToBottom('auto')
                   })
                 }
-              } catch {
-                // Ignore parse errors on raw tokens
-              }
+              } catch {}
             }
           }
         }
       }
 
-      // If streaming finished but assistantText is still empty, provide graceful fallback
       if (!assistantText.trim()) {
-        const fallbackText =
-          "Arnel is a full-stack engineer specialized in **TypeScript**, **Next.js**, **Flutter**, and **Generative AI systems**. He created **Pixel Crew** (23-agent autonomous software engineering swarm) and won **Best Business Impact** at AWS BGC."
+        const fallbackText = isClientMode
+          ? "Arnel partners with founders and business owners to build high-converting websites, online stores, and custom web apps with a typical 2–4 week turnaround. You can reach Arnel directly at **arnlebaylon15@gmail.com** or fill out the 3-step project form below!"
+          : "Arnel is a full-stack engineer specialized in **TypeScript**, **Next.js**, **Flutter**, and **Generative AI systems**. He created **Pixel Crew** and won **Best Business Impact** at AWS."
         setMessages((prev) => {
           const updated = [...prev]
           if (updated[botMsgIndex]) {
@@ -256,9 +251,9 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
         })
       }
     } catch {
-      // Offline / API error fallback
-      const fallbackText =
-        "Arnel Baylon is a Software Engineer & Agentic Developer specializing in **Autonomous AI Swarms**, **Next.js**, **Node.js**, and Cloud Infrastructure. He led the architecture of **Pixel Crew** and clinical IT systems at GEAMH."
+      const fallbackText = isClientMode
+        ? "Arnel builds custom websites, web applications, and smart automations tailored for business founders. For immediate project inquiries, feel free to email **arnlebaylon15@gmail.com** or use the step-by-step form guide below."
+        : "Arnel Baylon is a Software Engineer & Agentic Developer specializing in Autonomous AI Swarms, Next.js, and Cloud Infrastructure."
       setMessages((prev) => {
         const updated = [...prev]
         if (updated[botMsgIndex]) {
@@ -279,7 +274,9 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     setMessages([
       {
         role: 'assistant',
-        content: "Chat cleared! What else would you like to know about Arnel's work?",
+        content: isClientMode
+          ? "Chat cleared! How can I help you with your project timeline, pricing, or ideas?"
+          : "Chat cleared! What else would you like to know about Arnel's work?",
       },
     ])
     setTimeout(() => {
@@ -287,11 +284,22 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
     }, 100)
   }
 
+  const handleActionNavigate = (targetId: string) => {
+    onClose()
+    if (typeof window !== 'undefined') {
+      const el = document.getElementById(targetId)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        window.location.hash = `#${targetId}`
+      }
+    }
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* ── Mobile Backdrop (lg:hidden) ── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -300,311 +308,164 @@ export function AIChatBubble({ isOpen, onClose, activeSection = 'hero' }: AIChat
             className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
           />
 
-          {/* ── Chat Bubble Container (Desktop: Beside Sidebar Rail with No Overlap, Extending to Main Content) ── */}
           <motion.div
-            initial={{ opacity: 0, scaleX: 0.7, scaleY: 0.92, x: -25, y: '-50%' }}
-            animate={{ opacity: 1, scaleX: 1, scaleY: 1, x: 0, y: '-50%' }}
-            exit={{ opacity: 0, scaleX: 0.7, scaleY: 0.92, x: -25, y: '-50%' }}
-            transition={{ type: 'spring', stiffness: 360, damping: 26, delay: 0.05 }}
-            style={{ transformOrigin: 'left center' }}
-            className="hidden lg:flex fixed left-[68px] xl:left-[84px] 2xl:left-[100px] top-1/2 z-50 w-[370px] xl:w-[410px] 2xl:w-[440px] h-[530px] max-h-[85vh] flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border border-border/80 dark:border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.45)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.85)] overflow-hidden font-sans select-none"
+            initial={
+              isClientMode
+                ? { opacity: 0, scale: 0.94, y: 20 }
+                : { opacity: 0, scaleX: 0.7, scaleY: 0.92, x: -25, y: '-50%' }
+            }
+            animate={
+              isClientMode
+                ? { opacity: 1, scale: 1, y: 0 }
+                : { opacity: 1, scaleX: 1, scaleY: 1, x: 0, y: '-50%' }
+            }
+            exit={
+              isClientMode
+                ? { opacity: 0, scale: 0.94, y: 20 }
+                : { opacity: 0, scaleX: 0.7, scaleY: 0.92, x: -25, y: '-50%' }
+            }
+            transition={{ type: 'spring', stiffness: 360, damping: 26 }}
+            style={isClientMode ? undefined : { transformOrigin: 'left center' }}
+            className={`hidden lg:flex fixed z-50 flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border ${
+              isClientMode
+                ? 'right-6 xl:right-10 bottom-6 w-[380px] xl:w-[420px] 2xl:w-[440px] h-[550px] max-h-[85vh] border-amber-500/30 dark:border-amber-500/25 shadow-[0_20px_60px_rgba(245,158,11,0.15)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.85)]'
+                : 'left-[68px] xl:left-[84px] 2xl:left-[100px] top-1/2 w-[370px] xl:w-[410px] 2xl:w-[440px] h-[530px] max-h-[85vh] border-border/80 dark:border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.45)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.85)]'
+            } overflow-hidden font-sans select-none`}
           >
-            {/* ── Speech Bubble Tail / Pointer pointing directly to the Sidebar Icon without touching it ── */}
-            <div className="absolute -left-[6px] top-[60%] -translate-y-1/2 w-3 h-3 bg-background dark:bg-[#0c0e18] border-l border-b border-border/80 dark:border-white/15 rotate-45 shadow-[-2px_2px_4px_rgba(0,0,0,0.06)] pointer-events-none z-10" />
+            {!isClientMode && (
+              <div className="absolute -left-[6px] top-[60%] -translate-y-1/2 w-3 h-3 bg-background dark:bg-[#0c0e18] border-l border-b border-border/80 dark:border-white/15 rotate-45 shadow-[-2px_2px_4px_rgba(0,0,0,0.06)] pointer-events-none z-10" />
+            )}
 
-            {/* ── Bubble Header ── */}
             <div className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-border dark:border-white/10 bg-muted/90 dark:bg-[#121624]">
               <div className="flex items-center gap-2.5">
-                <div className="w-6 h-6 rounded-lg bg-accent/15 dark:bg-accent/25 border border-accent/40 flex items-center justify-center text-accent">
-                  <span className="text-xs">✦</span>
-                </div>
+                {isClientMode ? (
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden ring-2 ring-amber-500/40 shrink-0">
+                    <Image src="/images/me.jpg" alt="Arnel Baylon" fill sizes="32px" className="object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-6 h-6 rounded-lg bg-accent/15 dark:bg-accent/25 border border-accent/40 flex items-center justify-center text-accent">
+                    <span className="text-xs">✦</span>
+                  </div>
+                )}
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-xs font-bold tracking-tight text-foreground">
-                      yhelAI
+                    <span className="font-semibold text-xs text-foreground tracking-tight">
+                      {isClientMode ? "Arnel's AI Assistant" : 'yhelAI'}
                     </span>
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   </div>
-                  <p className="text-[10px] font-mono text-muted-foreground leading-none mt-0.5">
-                    Autonomous Portfolio Copilot
+                  <p className="text-[10px] text-muted-foreground leading-none mt-0.5">
+                    {isClientMode ? 'Client Project Advisor • Online' : 'Autonomous Portfolio Copilot'}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-1">
                 {messages.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={handleClear}
-                    title="Clear chat history"
-                    className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
-                  >
-                    <FaTrashAlt className="w-3 h-3" />
-                  </button>
+                  <button type="button" onClick={handleClear} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground transition-colors"><FaTrashAlt className="w-3 h-3" /></button>
                 )}
-                <button
-                  type="button"
-                  onClick={onClose}
-                  title="Close chat (Esc)"
-                  className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
-                >
-                  <FaTimes className="w-3.5 h-3.5" />
-                </button>
+                <button type="button" onClick={onClose} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground transition-colors"><FaTimes className="w-3.5 h-3.5" /></button>
               </div>
             </div>
 
-            {/* ── Scrollable Messages Area ── */}
-            <div
-              ref={desktopScrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-3 font-sans text-xs scrollbar-thin"
-            >
+            <div ref={desktopScrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 font-sans text-xs scrollbar-thin">
               {messages.map((msg, idx) => {
                 const isUser = msg.role === 'user'
                 const isLatestAssistant = !isUser && idx === messages.length - 1
                 return (
-                  <div
-                    key={idx}
-                    className={`flex items-start gap-2.5 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}
-                  >
-                    <div
-                      className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center text-[10px] ${
-                        isUser
-                          ? 'bg-accent text-white font-bold'
-                          : 'bg-muted dark:bg-white/10 text-foreground border border-border/60'
-                      }`}
-                    >
-                      {isUser ? <FaUser /> : <FaRobot className="text-accent" />}
+                  <div key={idx} className={`flex items-start gap-2.5 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center text-[10px] mt-0.5 ${isUser ? 'bg-amber-500 text-zinc-950 font-bold shadow-xs' : isClientMode ? 'bg-amber-500/15 text-amber-500 border border-amber-500/30' : 'bg-muted dark:bg-white/10 text-foreground border border-border/60'}`}>
+                      {isUser ? <FaUser /> : isClientMode ? <HiSparkles className="w-3.5 h-3.5 text-amber-500" /> : <FaRobot className="text-accent" />}
                     </div>
-
-                    <div
-                      className={`max-w-[84%] px-3.5 py-2.5 rounded-2xl leading-relaxed ${
-                        isUser
-                          ? 'bg-accent text-white font-medium rounded-tr-xs shadow-xs'
-                          : 'bg-muted/60 dark:bg-white/[0.06] text-foreground border border-border/50 dark:border-white/[0.06] rounded-tl-xs shadow-xs'
-                      }`}
-                    >
+                    <div className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl leading-relaxed ${isUser ? 'bg-amber-500 text-zinc-950 font-medium rounded-tr-xs shadow-xs' : 'bg-muted/60 dark:bg-white/[0.05] text-foreground border border-border/50 dark:border-white/[0.08] rounded-tl-xs shadow-2xs'}`}>
                       {msg.content ? (
                         <div>
                           <MarkdownContent content={msg.content} isUser={isUser} />
                           {isLatestAssistant && isLoading && (
-                            <motion.span
-                              animate={{ opacity: [1, 0, 1] }}
-                              transition={{ repeat: Infinity, duration: 0.8 }}
-                              className="inline-block w-1.5 h-3.5 ml-1 bg-accent rounded-xs align-middle"
-                              aria-hidden="true"
-                            />
+                            <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-1.5 h-3.5 ml-1 bg-amber-500 rounded-xs align-middle" aria-hidden="true" />
+                          )}
+                          {isClientMode && !isUser && (msg.content.includes('project form') || msg.content.includes('contact form') || msg.content.includes('inquiry')) && (
+                            <div className="mt-2.5 pt-2 border-t border-border/40 dark:border-white/10 flex flex-wrap gap-2">
+                              <button type="button" onClick={() => handleActionNavigate('contact')} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-500 text-zinc-950 hover:bg-amber-400 transition-colors shadow-2xs cursor-pointer"><span>Fill Project Form</span><span>&rarr;</span></button>
+                              <a href="mailto:arnlebaylon15@gmail.com" className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-muted/70 dark:bg-white/[0.08] hover:bg-muted text-foreground border border-border/60 dark:border-white/10 transition-colors cursor-pointer"><span>Email Arnel</span></a>
+                            </div>
+                          )}
+                          {isClientMode && !isUser && msg.content.includes('projects') && !msg.content.includes('project form') && (
+                            <div className="mt-2.5 pt-2 border-t border-border/40 dark:border-white/10 flex flex-wrap gap-2">
+                              <button type="button" onClick={() => handleActionNavigate('projects')} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-colors cursor-pointer"><span>View Client Projects</span><span>&rarr;</span></button>
+                            </div>
                           )}
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground">
-                          <FaSpinner className="w-3 h-3 animate-spin text-accent" />
-                          <span className="text-[11px] font-mono">Thinking...</span>
-                        </div>
+                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground"><FaSpinner className="w-3 h-3 animate-spin text-amber-500" /><span className="text-[11px] font-mono">Thinking...</span></div>
                       )}
                     </div>
                   </div>
                 )
               })}
-
-              {/* Quick Prompt Suggestions when just greeting */}
               {messages.length === 1 && (
                 <div className="pt-2 space-y-1.5">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">
-                    Suggested Questions
-                  </span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">{isClientMode ? 'Common Client Questions' : 'Suggested Questions'}</span>
                   <div className="flex flex-col gap-1.5">
-                    {defaultSuggestions.map((suggestion, sIdx) => (
-                      <button
-                        key={sIdx}
-                        type="button"
-                        onClick={() => handleSend(suggestion)}
-                        className="text-left px-3 py-1.5 rounded-xl bg-muted/40 dark:bg-white/[0.03] hover:bg-accent/15 border border-border/40 dark:border-white/[0.06] text-foreground text-[11px] font-mono transition-colors cursor-pointer"
-                      >
-                        &rarr; {suggestion}
-                      </button>
+                    {suggestions.map((s, i) => (
+                      <button key={i} type="button" onClick={() => handleSend(s)} className="text-left px-3 py-1.5 rounded-xl bg-muted/40 dark:bg-white/[0.03] hover:bg-amber-500/15 border border-border/40 dark:border-white/[0.06] text-foreground text-[11px] transition-colors cursor-pointer">&rarr; {s}</button>
                     ))}
                   </div>
                 </div>
               )}
             </div>
-
-            {/* ── Bubble Input Form ── */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                handleSend()
-              }}
-              className="relative z-10 p-3 border-t border-border dark:border-white/10 bg-muted/60 dark:bg-[#121624]"
-            >
+            <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="relative z-10 p-3 border-t border-border dark:border-white/10 bg-muted/60 dark:bg-[#121624]">
               <div className="relative flex items-center">
-                <input
-                  ref={setDesktopInputRef}
-                  autoFocus={isDesktop}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask anything about Arnel..."
-                  disabled={isLoading}
-                  className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 text-foreground placeholder:text-muted-foreground font-sans text-xs focus:outline-hidden focus:ring-2 focus:ring-accent focus:border-transparent transition-all shadow-inner"
-                />
-
-                <button
-                  type="submit"
-                  disabled={!input.trim() || isLoading}
-                  aria-label="Send message"
-                  className="absolute right-1.5 p-2 rounded-lg bg-accent text-white hover:brightness-110 disabled:opacity-40 disabled:hover:brightness-100 transition-all cursor-pointer shadow-xs"
-                >
-                  {isLoading ? (
-                    <FaSpinner className="w-3 h-3 animate-spin" />
-                  ) : (
-                    <FaPaperPlane className="w-3 h-3" />
-                  )}
+                <input ref={setDesktopInputRef} autoFocus={isDesktop} type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder={isClientMode ? 'Ask in plain English (e.g. "Can I update photos myself?")...' : 'Ask anything about Arnel...'} disabled={isLoading} className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 text-foreground placeholder:text-muted-foreground font-sans text-xs focus:outline-hidden focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all shadow-inner" />
+                <button type="submit" disabled={!input.trim() || isLoading} aria-label="Send message" className="absolute right-1.5 p-2 rounded-lg bg-amber-500 text-zinc-950 hover:bg-amber-400 disabled:opacity-40 transition-all cursor-pointer shadow-xs font-bold">
+                  {isLoading ? <FaSpinner className="w-3 h-3 animate-spin text-zinc-950" /> : <FaPaperPlane className="w-3 h-3 text-zinc-950" />}
                 </button>
               </div>
-              <p className="text-[9.5px] font-mono text-center text-muted-foreground/70 mt-1.5">
-                Grounding on verified resume & portfolio data
-              </p>
+              <p className="text-[9.5px] font-mono text-center text-muted-foreground/70 mt-1.5">{isClientMode ? '100% non-tech friendly • Fixed pricing & 2–4 week launch' : 'Grounding on verified resume & portfolio data'}</p>
             </form>
           </motion.div>
 
-          {/* ── Mobile Bottom Sheet (lg:hidden) ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ type: 'spring', stiffness: 360, damping: 28 }}
-            className="lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[72vh] h-[460px] flex flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden font-sans select-none"
-          >
-            {/* Header */}
+          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 50 }} transition={{ type: 'spring', stiffness: 360, damping: 28 }} className={`lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[72vh] h-[480px] flex flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border ${isClientMode ? 'border-amber-500/30' : 'border-border dark:border-white/15'} shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden font-sans select-none`}>
             <div className="flex items-center justify-between px-4 py-3 border-b border-border dark:border-white/10 bg-muted/90 dark:bg-[#121624]">
               <div className="flex items-center gap-2">
-                <span className="text-accent text-sm">✦</span>
-                <span className="font-mono text-xs font-bold text-foreground">yhelAI Copilot</span>
+                {isClientMode ? <div className="relative w-6 h-6 rounded-full overflow-hidden ring-1.5 ring-amber-500/40 shrink-0"><Image src="/images/me.jpg" alt="Arnel Baylon" fill sizes="24px" className="object-cover" /></div> : <span className="text-accent text-sm">✦</span>}
+                <div><div className="flex items-center gap-1.5"><span className="font-semibold text-xs text-foreground">{isClientMode ? "Arnel's AI Assistant" : 'yhelAI Copilot'}</span><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /></div></div>
               </div>
-              <div className="flex items-center gap-1">
-                {messages.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={handleClear}
-                    title="Clear chat history"
-                    className="p-1 text-muted-foreground hover:text-foreground"
-                  >
-                    <FaTrashAlt className="w-3 h-3" />
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="p-1 text-muted-foreground hover:text-foreground"
-                >
-                  <FaTimes className="w-4 h-4" />
-                </button>
-              </div>
+              <div className="flex items-center gap-1"><button type="button" onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground"><FaTimes className="w-4 h-4" /></button></div>
             </div>
-
-            {/* Mobile Messages */}
-            <div
-              ref={mobileScrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-3 font-sans text-xs scrollbar-thin"
-            >
+            <div ref={mobileScrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 font-sans text-xs scrollbar-thin">
               {messages.map((msg, idx) => {
                 const isUser = msg.role === 'user'
                 const isLatestAssistant = !isUser && idx === messages.length - 1
                 return (
-                  <div
-                    key={idx}
-                    className={`flex items-start gap-2 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}
-                  >
-                    <div
-                      className={`w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-[9px] mt-0.5 ${
-                        isUser
-                          ? 'bg-accent text-white font-bold'
-                          : 'bg-muted dark:bg-white/10 text-foreground border border-border/60'
-                      }`}
-                    >
-                      {isUser ? <FaUser /> : <FaRobot className="text-accent text-[8px]" />}
+                  <div key={idx} className={`flex items-start gap-2 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className={`w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-[9px] mt-0.5 ${isUser ? 'bg-amber-500 text-zinc-950 font-bold' : isClientMode ? 'bg-amber-500/15 text-amber-500 border border-amber-500/30' : 'bg-muted dark:bg-white/10 text-foreground border border-border/60'}`}>
+                      {isUser ? <FaUser /> : isClientMode ? <HiSparkles className="text-amber-500 text-[10px]" /> : <FaRobot className="text-accent text-[8px]" />}
                     </div>
-
-                    <div
-                      className={`max-w-[85%] px-3 py-2 rounded-2xl leading-relaxed ${
-                        isUser
-                          ? 'bg-accent text-white font-medium rounded-tr-xs'
-                          : 'bg-muted/60 dark:bg-white/[0.06] text-foreground border border-border/50 rounded-tl-xs'
-                      }`}
-                    >
+                    <div className={`max-w-[85%] px-3 py-2 rounded-2xl leading-relaxed ${isUser ? 'bg-amber-500 text-zinc-950 font-medium rounded-tr-xs shadow-xs' : 'bg-muted/60 dark:bg-white/[0.06] text-foreground border border-border/50 rounded-tl-xs'}`}>
                       {msg.content ? (
                         <div>
                           <MarkdownContent content={msg.content} isUser={isUser} />
-                          {isLatestAssistant && isLoading && (
-                            <motion.span
-                              animate={{ opacity: [1, 0, 1] }}
-                              transition={{ repeat: Infinity, duration: 0.8 }}
-                              className="inline-block w-1.5 h-3.5 ml-1 bg-accent rounded-xs align-middle"
-                              aria-hidden="true"
-                            />
+                          {isLatestAssistant && isLoading && (<motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-1.5 h-3.5 ml-1 bg-amber-500 rounded-xs align-middle" aria-hidden="true" />)}
+                          {isClientMode && !isUser && (msg.content.includes('project form') || msg.content.includes('contact form') || msg.content.includes('inquiry')) && (
+                            <div className="mt-2.5 pt-2 border-t border-border/40 dark:border-white/10 flex flex-wrap gap-2"><button type="button" onClick={() => handleActionNavigate('contact')} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-amber-500 text-zinc-950 hover:bg-amber-400 transition-colors shadow-2xs cursor-pointer"><span>Fill Form</span><span>&rarr;</span></button><a href="mailto:arnlebaylon15@gmail.com" className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium bg-muted/60 dark:bg-white/[0.06] text-foreground border border-border/60 transition-colors cursor-pointer"><span>Email</span></a></div>
                           )}
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground">
-                          <FaSpinner className="w-3 h-3 animate-spin text-accent" />
-                          <span className="text-[11px] font-mono">Thinking...</span>
-                        </div>
+                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground"><FaSpinner className="w-3 h-3 animate-spin text-amber-500" /><span className="text-[11px] font-mono">Thinking...</span></div>
                       )}
                     </div>
                   </div>
                 )
               })}
-
-              {/* Quick Prompt Suggestions on mobile too when just greeting */}
               {messages.length === 1 && (
-                <div className="pt-2 space-y-1.5">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">
-                    Suggested Questions
-                  </span>
-                  <div className="flex flex-col gap-1.5">
-                    {defaultSuggestions.map((suggestion, sIdx) => (
-                      <button
-                        key={sIdx}
-                        type="button"
-                        onClick={() => handleSend(suggestion)}
-                        className="text-left px-3 py-1.5 rounded-xl bg-muted/40 dark:bg-white/[0.03] hover:bg-accent/15 border border-border/40 dark:border-white/[0.06] text-foreground text-[11px] font-mono transition-colors cursor-pointer"
-                      >
-                        &rarr; {suggestion}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                <div className="pt-2 space-y-1.5"><span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">{isClientMode ? 'Common Questions' : 'Suggested Questions'}</span><div className="flex flex-col gap-1.5">{suggestions.map((s, i) => (<button key={i} type="button" onClick={() => handleSend(s)} className="text-left px-3 py-1.5 rounded-xl bg-muted/40 dark:bg-white/[0.03] hover:bg-amber-500/15 border border-border/40 dark:border-white/[0.06] text-foreground text-[11px] transition-colors cursor-pointer">&rarr; {s}</button>))}</div></div>
               )}
             </div>
-
-            {/* Mobile Input */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                handleSend()
-              }}
-              className="p-3 border-t border-border dark:border-white/10 bg-muted/70 dark:bg-[#121624]"
-            >
+            <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="p-3 border-t border-border dark:border-white/10 bg-muted/70 dark:bg-[#121624]">
               <div className="relative flex items-center">
-                <input
-                  ref={setMobileInputRef}
-                  autoFocus={!isDesktop}
-                  type="text"
-                  inputMode="text"
-                  enterKeyHint="send"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask anything about Arnel..."
-                  disabled={isLoading}
-                  className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 text-foreground text-xs focus:outline-hidden focus:ring-2 focus:ring-accent"
-                />
-                <button
-                  type="submit"
-                  disabled={!input.trim() || isLoading}
-                  className="absolute right-1.5 p-2 rounded-lg bg-accent text-white"
-                >
-                  <FaPaperPlane className="w-3 h-3" />
-                </button>
+                <input ref={setMobileInputRef} autoFocus={!isDesktop} type="text" inputMode="text" enterKeyHint="send" value={input} onChange={(e) => setInput(e.target.value)} placeholder={isClientMode ? 'Ask in plain English (e.g. "Can I update photos myself?")...' : 'Ask anything about Arnel...'} disabled={isLoading} className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 text-foreground text-xs focus:outline-hidden focus:ring-2 focus:ring-amber-500" />
+                <button type="submit" disabled={!input.trim() || isLoading} className="absolute right-1.5 p-2 rounded-lg bg-amber-500 text-zinc-950 font-bold"><FaPaperPlane className="w-3 h-3 text-zinc-950" /></button>
               </div>
             </form>
           </motion.div>

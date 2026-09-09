@@ -54,16 +54,16 @@ export async function POST(req: NextRequest) {
 
     const latestUserMsg = [...messages].reverse().find(m => m.role === 'user')?.content || '';
 
-    // 3. Safety & Grounding Guardrail Check
-    const safetyCheck = checkQuerySafety(latestUserMsg);
+    // 3. Infer Persona or respect explicit client / developer persona
+    const selectedPersona = persona && persona !== 'default' ? persona : inferPersona(latestUserMsg);
+
+    // 4. Safety & Grounding Guardrail Check
+    const safetyCheck = checkQuerySafety(latestUserMsg, selectedPersona);
     if (!safetyCheck.isSafe) {
       return NextResponse.json({
         error: safetyCheck.refusalReason
       }, { status: 400 });
     }
-
-    // 4. Infer Persona if not explicitly provided
-    const selectedPersona = persona && persona !== 'default' ? persona : inferPersona(latestUserMsg);
 
     // 5. Create SSE Streaming Response with quota metadata
     const encoder = new TextEncoder();

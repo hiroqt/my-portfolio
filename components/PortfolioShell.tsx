@@ -176,8 +176,8 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         onToggleViewMode={handleToggleViewMode}
       />
 
-      {/* ── Unfocus Dismiss Overlay (Clicking anywhere on unfocused content closes open panel) ── */}
-      {isPanelOpen && (
+      {/* ── Unfocus Dismiss Overlay (Clicking anywhere on unfocused content closes open panel in Tech mode) ── */}
+      {isPanelOpen && viewMode === 'tech' && (
         <div
           onClick={() => {
             setIsChatOpen(false)
@@ -198,7 +198,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         } transition-[transform,opacity,filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isStackOpen
             ? 'lg:-translate-x-[160px] xl:-translate-x-[200px] 2xl:-translate-x-[240px] opacity-40 dark:opacity-30 blur-[2px] scale-[0.985] select-none pointer-events-none'
-            : isChatOpen || isSocialsOpen
+            : (isChatOpen || isSocialsOpen) && viewMode === 'tech'
             ? 'lg:translate-x-[260px] xl:translate-x-[300px] 2xl:translate-x-[340px] opacity-40 dark:opacity-30 blur-[2px] scale-[0.985] select-none pointer-events-none'
             : 'translate-x-0 opacity-100 blur-0 scale-100 pointer-events-auto'
         }`}
@@ -216,7 +216,10 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="w-full"
             >
-              <ClientBusinessView onSwitchToTechMode={handleToggleViewMode} />
+              <ClientBusinessView
+                onSwitchToTechMode={handleToggleViewMode}
+                onOpenChat={handleToggleChat}
+              />
             </motion.div>
           ) : (
             /* ─────────────────────────────────────────────────────────────

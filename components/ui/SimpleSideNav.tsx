@@ -23,6 +23,7 @@ import {
   FaArrowRight,
 } from 'react-icons/fa'
 import { useTheme } from '../ThemeProvider'
+import { HiSparkles } from 'react-icons/hi2'
 import { AIChatBubble } from './AIChatBubble'
 import { SocialsBubble } from './SocialsBubble'
 import { TechStackBubble } from './TechStackBubble'
@@ -253,8 +254,24 @@ export function SimpleSideNav({
               })}
             </div>
 
-            {/* Right: Action Cluster (Theme Toggle, Developer View Switcher, Let's Talk CTA) */}
+            {/* Right: Action Cluster (Ask AI, Theme Toggle, Developer View Switcher, Let's Talk CTA) */}
             <div className="flex items-center gap-2">
+              {/* Ask AI Advisor Button (Client Mode) */}
+              <button
+                type="button"
+                onClick={toggleChat}
+                aria-label="Ask Arnel's AI Assistant"
+                className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  chatOpen
+                    ? 'bg-amber-500 text-zinc-950 shadow-[0_0_18px_rgba(245,158,11,0.4)]'
+                    : 'text-amber-700 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-500/50'
+                }`}
+                title="Ask Arnel's AI Assistant about project scopes, timelines & pricing"
+              >
+                <HiSparkles className="w-3.5 h-3.5 text-amber-500 transition-transform duration-200 group-hover:scale-110" />
+                <span>Ask AI</span>
+              </button>
+
               {/* Theme Toggle Button */}
               {mounted && (
                 <button
@@ -334,6 +351,21 @@ export function SimpleSideNav({
           </a>
 
           <div className="flex items-center gap-1.5">
+            {/* AI Assistant Mobile Trigger */}
+            <button
+              type="button"
+              onClick={toggleChat}
+              aria-label="Open AI Project Advisor"
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-colors cursor-pointer ${
+                chatOpen
+                  ? 'bg-amber-500 text-zinc-950 shadow-xs'
+                  : 'text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/30'
+              }`}
+            >
+              <HiSparkles className="w-2.5 h-2.5 text-amber-500" />
+              <span>Ask AI</span>
+            </button>
+
             {mounted && (
               <button
                 type="button"
@@ -792,13 +824,42 @@ export function SimpleSideNav({
         />
       )}
 
-      {/* ── Floating AI Chat Bubble (Only in Developer Mode) ── */}
-      {!isClient && (
-        <AIChatBubble
-          isOpen={chatOpen}
-          onClose={toggleChat}
-          activeSection={activeSection}
-        />
+      {/* ── Floating AI Chat Bubble (Available in Both Client & Developer Mode) ── */}
+      <AIChatBubble
+        isOpen={chatOpen}
+        onClose={toggleChat}
+        activeSection={activeSection}
+        mode={isClient ? 'client' : 'tech'}
+      />
+
+      {/* ── Floating "Ask Arnel's AI" Trigger (Client Mode Desktop) ── */}
+      {isClient && !chatOpen && (
+        <aside aria-label="Client AI Chat Trigger" className="hidden lg:block fixed right-6 xl:right-8 bottom-6 z-40">
+          <button
+            type="button"
+            onClick={toggleChat}
+            aria-label="Open AI Project Advisor"
+            className="group flex items-center gap-2.5 pl-2 pr-4 py-2 rounded-full bg-background/95 dark:bg-[#0c0e18]/95 backdrop-blur-xl border border-amber-500/40 hover:border-amber-500 text-foreground shadow-[0_10px_30px_rgba(245,158,11,0.2)] hover:shadow-[0_12px_36px_rgba(245,158,11,0.35)] active:scale-95 transition-all cursor-pointer select-none"
+          >
+            <div className="relative w-7 h-7 rounded-full overflow-hidden ring-1.5 ring-amber-500/50 shrink-0">
+              <Image
+                src="/images/me.jpg"
+                alt="Arnel Baylon"
+                fill
+                sizes="28px"
+                className="object-cover"
+              />
+            </div>
+            <div className="text-left leading-none">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-semibold text-foreground tracking-tight">Ask Arnel&apos;s AI</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              </div>
+              <span className="text-[10px] text-muted-foreground mt-0.5 inline-block">Project &amp; Pricing Advisor</span>
+            </div>
+            <HiSparkles className="w-3.5 h-3.5 text-amber-500 group-hover:scale-110 transition-transform ml-0.5" />
+          </button>
+        </aside>
       )}
 
       {/* ── Floating Socials Bubble (Only in Developer Mode) ── */}
