@@ -21,6 +21,7 @@ import {
   FaSyncAlt,
   FaQuestionCircle,
 } from 'react-icons/fa'
+import { WaveSectionDivider } from '@/components/ui/WaveSectionDivider'
 
 // ── Accurate Project Carousel Data with Authentic Details (Friendly, Non-Tech Copy) ──
 const row1Projects = [
@@ -403,12 +404,15 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
         </div>
       </section>
 
+      {/* ── Section Separator: Wave Pattern (Hero -> Projects) ── */}
+      <WaveSectionDivider />
+
       {/* ─────────────────────────────────────────────────────────────
           PROJECTS (Slanted Carousel with Accurate Details, No Eyebrows)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="projects"
-        className="w-full py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28 overflow-hidden bg-muted/15 dark:bg-[#06070d]/60"
+        className="w-full py-24 sm:py-32 scroll-mt-24 sm:scroll-mt-28 overflow-hidden bg-muted/15 dark:bg-[#06070d]/60"
       >
         {/* Section Header (No Eyebrows) */}
         <div className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto text-center mb-16">
@@ -508,12 +512,15 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
 
       </section>
 
+      {/* ── Section Separator: Wave Pattern (Projects -> Testimonials) ── */}
+      <WaveSectionDivider flip />
+
       {/* ─────────────────────────────────────────────────────────────
           WHAT CLIENTS SAY (Full Width Carousel, No Category Buttons)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="testimonials"
-        className="w-full px-6 sm:px-12 lg:px-16 xl:px-20 py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28 overflow-hidden bg-muted/10 dark:bg-black/20"
+        className="w-full px-6 sm:px-12 lg:px-16 xl:px-20 py-24 sm:py-32 scroll-mt-24 sm:scroll-mt-28 overflow-hidden bg-muted/10 dark:bg-black/20"
       >
         <div className="w-full max-w-6xl mx-auto">
           
@@ -658,12 +665,15 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
         </div>
       </section>
 
+      {/* ── Section Separator: Wave Pattern (Testimonials -> FAQ) ── */}
+      <WaveSectionDivider />
+
       {/* ─────────────────────────────────────────────────────────────
           FREQUENTLY ASKED QUESTIONS (Accordion List, No Cards, No //)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="faq"
-        className="w-full px-6 sm:px-12 lg:px-20 max-w-5xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28"
+        className="w-full px-6 sm:px-12 lg:px-20 max-w-5xl mx-auto py-24 sm:py-32 scroll-mt-24 sm:scroll-mt-28"
       >
         <div className="mb-16 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
@@ -738,12 +748,15 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
         </div>
       </section>
 
+      {/* ── Section Separator: Wave Pattern (FAQ -> Contact) ── */}
+      <WaveSectionDivider flip />
+
       {/* ─────────────────────────────────────────────────────────────
           CONTACT & DIRECT INQUIRY (No Eyebrows)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="contact"
-        className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto py-24 sm:py-32 border-t border-border/60 scroll-mt-24 sm:scroll-mt-28"
+        className="w-full px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto py-24 sm:py-32 scroll-mt-24 sm:scroll-mt-28"
       >
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
@@ -1240,8 +1253,11 @@ export function ClientBusinessView({ onSwitchToTechMode }: ClientBusinessViewPro
         </div>
       </section>
 
+      {/* ── Section Separator: Wave Pattern (Contact -> Footer) ── */}
+      <WaveSectionDivider />
+
       {/* ── Clean Client Footer ── */}
-      <footer className="w-full py-10 px-6 sm:px-12 border-t border-border/40 text-center text-xs text-muted-foreground bg-muted/5">
+      <footer className="w-full py-10 px-6 sm:px-12 text-center text-xs text-muted-foreground bg-muted/5">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             &copy; {new Date().getFullYear()} Arnel Baylon. Built for client clarity and results.
