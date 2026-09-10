@@ -39,7 +39,7 @@ const navSections: NavSection[] = [
   { id: 'education', number: '04', label: 'Education', badge: 'BSIT' },
   { id: 'gallery', number: '05', label: 'Artifact Studio' },
   { id: 'contact', number: '06', label: 'Direct Line' },
-  { id: 'typing', number: '07', label: 'Typing Lab', badge: 'MonkeyType' },
+  { id: 'typing', number: '07', label: 'Typing Sandbox', badge: 'Switch Audio' },
 ]
 
 interface DevExecutiveDossierProps {
@@ -188,7 +188,7 @@ export function DevExecutiveDossier({
           )}
         </div>
 
-        {/* Quick Typing Lab & Mechanical Switch Audition Shortcut */}
+        {/* Quick Typing Sandbox & Mechanical Switch Audition Shortcut */}
         <a
           href="#typing"
           onClick={(e) => onNavClick(e, 'typing')}
@@ -196,7 +196,7 @@ export function DevExecutiveDossier({
         >
           <div className="flex items-center gap-2">
             <FaKeyboard className="w-3.5 h-3.5 text-accent group-hover:scale-110 transition-transform" />
-            <span className="text-foreground/90 font-medium">MonkeyType Lab</span>
+            <span className="text-foreground/90 font-medium">Typing Sandbox</span>
           </div>
           <span className="text-[10px] text-accent bg-accent/15 px-2 py-0.5 rounded-md font-semibold group-hover:bg-accent group-hover:text-background transition-colors">
             Switch Audio &rarr;

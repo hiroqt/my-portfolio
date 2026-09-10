@@ -9,7 +9,7 @@ export function TypingSection() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <section id="typing" aria-label="MonkeyType Speed Test & Switch Audio Lab" className="space-y-6 sm:space-y-8 scroll-mt-20">
+    <section id="typing" aria-label="Mechanical Typing Studio & Switch Audio Lab" className="space-y-6 sm:space-y-8 scroll-mt-20">
       {/* ── Section Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 border-b border-border/40">
         <div className="flex items-center gap-2 font-mono text-xs text-accent">
@@ -21,7 +21,7 @@ export function TypingSection() {
           </span>
         </div>
         <span className="text-xs font-mono text-muted-foreground">
-          MonkeyType Game &bull; Mechanical Switch Audio Engine
+          Keystroke Speed Engine &bull; Mechanical Switch Audio Synthesizer
         </span>
       </div>
 
@@ -30,15 +30,15 @@ export function TypingSection() {
         <div className="flex items-center gap-2">
           <FaKeyboard className="w-5 h-5 text-accent" />
           <h2 className="font-supreme text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Mechanical Typing Lab &amp; Switch Tester
+            Mechanical Keystroke Studio &amp; Switch Audio Lab
           </h2>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl font-sans">
-          Test your coding typing speed with real-time WPM, accuracy metrics, and customizable mechanical switch sound synthesis (Cherry MX Red, Gateron Brown, Outemu Blue, Black Thock, and Holy Panda). Built with pure Web Audio API for zero-latency acoustic feedback.
+          Benchmark your code typing speed with real-time WPM, accuracy metrics, and customizable mechanical switch sound synthesis (Cherry MX Red, Gateron Brown, Outemu Blue, Black Thock, and Holy Panda). Powered by Web Audio API for zero-latency acoustic feedback.
         </p>
       </div>
 
-      {/* ── MonkeyType Game & Switch Sound Sandbox ── */}
+      {/* ── Typing Game & Switch Sound Sandbox ── */}
       <MonkeyTypeGame initialSwitch="red" />
     </section>
   )

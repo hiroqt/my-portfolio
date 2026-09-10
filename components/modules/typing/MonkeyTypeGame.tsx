@@ -343,7 +343,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
 
   return (
     <div className="w-full space-y-6">
-      {/* ── Main MonkeyType Terminal Frame ── */}
+      {/* ── Main Typing Terminal Frame ── */}
       <div
         onClick={() => {
           getKeyboardAudio().ensureContext()
@@ -626,7 +626,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
                           <span key={cIdx} className="relative">
                             {showCaret && (
                               <motion.span
-                                layoutId="monkeyCaret"
+                                layoutId="speedTypingCaret"
                                 transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                                 className="absolute -left-[2px] top-0 bottom-0 w-[2.5px] bg-accent rounded-full animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]"
                               />
@@ -647,7 +647,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
                       {isCurrentWord && currentInput.length >= word.length && (
                         <span className="relative w-[2px]">
                           <motion.span
-                            layoutId="monkeyCaret"
+                            layoutId="speedTypingCaret"
                             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                             className="absolute -left-[1px] top-0 bottom-0 w-[2.5px] bg-accent rounded-full animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]"
                           />

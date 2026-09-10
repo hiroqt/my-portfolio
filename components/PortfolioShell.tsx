@@ -333,7 +333,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
               </div>
 
               {/* ── FULL-WIDTH SECTION BELOW BOTH LEFT & RIGHT COLUMNS ── */}
-              {/* 07 — Mechanical Keyboard MonkeyType Sandbox & Switch Audio Lab */}
+              {/* 07 — Mechanical Keystroke Studio & Switch Audio Lab */}
               <div className="pt-12 sm:pt-16 pb-16 sm:pb-20 border-t border-border/40 mt-8 sm:mt-12">
                 <TypingSection />
               </div>

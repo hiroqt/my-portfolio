@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, AnimatePresence, LayoutGroup, useReducedMotion } from 'framer-motion'
 import {
   FaArrowRight,
+  FaArrowLeft,
   FaChevronLeft,
   FaChevronRight,
   FaPlay,
@@ -23,6 +24,10 @@ import {
   FaTiktok,
   FaCopy,
   FaCheck,
+  FaClock,
+  FaGlobe,
+  FaLaptopCode,
+  FaShieldAlt,
 } from 'react-icons/fa'
 import { HiSparkles } from 'react-icons/hi2'
 
@@ -140,7 +145,7 @@ const heroCarouselProjects: HeroCarouselProject[] = [
     badge: 'AI Assistant',
     image: '/images/saktoka.png',
     liveUrl: 'https://sakto-ka.vercel.app',
-    highlights: ['Free Job Hunt site with Resume builder', '24/7 practice interviews', 'Instant friendly guidance'],
+    highlights: ['Free Job Hunt site', '24/7 practice interviews', 'Instant friendly guidance'],
   },
   {
     id: 'pixelcrew',
@@ -433,10 +438,14 @@ export function ClientBusinessView({
   // ── FAQ State ──
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0)
 
-  // ── Clean Minimal Contact State ──
+  // ── Clean Minimal Contact State & Inquiry Process ──
   const [contactName, setContactName] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [contactMessage, setContactMessage] = useState('')
+  const [inquiryType, setInquiryType] = useState('Web App & SaaS')
+  const [inquiryTimeline, setInquiryTimeline] = useState('1-2 Months')
+  const [inquiryBudget, setInquiryBudget] = useState('50000')
+  const [inquiryStep, setInquiryStep] = useState<1 | 2 | 3>(1)
   const [contactSubmitted, setContactSubmitted] = useState(false)
   const [contactError, setContactError] = useState<string | null>(null)
   const [isInquiryFormOpen, setIsInquiryFormOpen] = useState(false)
@@ -474,13 +483,17 @@ export function ClientBusinessView({
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!contactName.trim() || !contactEmail.trim()) {
-      setContactError('Please enter your name and email address so I can get back to you.')
+      setContactError('Please provide your name and email address so I can get back to you.')
+      setInquiryStep(3)
       return
     }
     setContactError(null)
-    const subject = encodeURIComponent(`Project Inquiry from ${contactName}`)
+    const formattedBudget = inquiryBudget && Number(inquiryBudget) > 0
+      ? `₱${Number(inquiryBudget).toLocaleString('en-PH')} PHP`
+      : 'Flexible / To be discussed (PHP)'
+    const subject = encodeURIComponent(`Project Inquiry: ${inquiryType} - ${contactName}`)
     const body = encodeURIComponent(
-      `Hi Arnel,\n\nName: ${contactName}\nEmail: ${contactEmail}\n\nProject Inquiry Overview:\n${contactMessage || 'I would like to discuss a project with you.'}\n\nLooking forward to hearing from you!`
+      `Hi Arnel,\n\nI would like to submit a project inquiry:\n\n• Name / Company: ${contactName}\n• Email: ${contactEmail}\n• Project Category: ${inquiryType}\n• Desired Timeline: ${inquiryTimeline}\n• Estimated Budget: ${formattedBudget}\n\nProject Vision & Details:\n${contactMessage || 'No extra notes provided.'}\n\nLooking forward to hearing from you!`
     )
     window.open(`mailto:arnlebaylon15@gmail.com?subject=${subject}&body=${body}`, '_blank')
     setContactSubmitted(true)
@@ -596,8 +609,8 @@ export function ClientBusinessView({
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-7 flex flex-col items-center justify-center w-full relative"
           >
-            {/* Signature Evervault Overlapping White Card on Bottom Right */}
-            <div className="hidden md:block absolute -bottom-6 -right-4 lg:-bottom-7 lg:-right-6 w-64 lg:w-72 rounded-2xl bg-white text-zinc-900 p-5 shadow-2xl border border-zinc-200/80 z-20 pointer-events-auto">
+            {/* Signature Evervault Overlapping White Card on Top Right */}
+            <div className="hidden md:block absolute -top-6 -right-3 sm:-right-4 lg:-top-8 lg:-right-6 w-64 lg:w-72 rounded-2xl bg-white text-zinc-900 p-5 shadow-2xl border border-zinc-200/80 z-20 pointer-events-auto">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
                   Client Outcome
@@ -631,33 +644,33 @@ export function ClientBusinessView({
             >
               {/* Card Top Control Bar (Clean Counter & Nav Controls, Zero Eyebrows) */}
               <div className="flex items-center justify-between gap-3 pb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <span className="font-mono text-xs font-bold tracking-tight text-foreground/80">
                     Project {String(activeHeroProjectIdx + 1).padStart(2, '0')}{' '}
                     <span className="text-muted-foreground font-normal">
                       / {String(heroCarouselProjects.length).padStart(2, '0')}
                     </span>
                   </span>
-                </div>
 
-                {/* Controls: Monospace Counter + Navigation Arrows */}
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={handlePrevHeroProject}
-                    aria-label="Previous project"
-                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
-                  >
-                    <FaChevronLeft className="w-3 h-3" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNextHeroProject}
-                    aria-label="Next project"
-                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
-                  >
-                    <FaChevronRight className="w-3 h-3" />
-                  </button>
+                  {/* Navigation Arrows positioned on the left alongside counter so they never conflict with top-right card */}
+                  <div className="flex items-center gap-1.5 ml-1">
+                    <button
+                      type="button"
+                      onClick={handlePrevHeroProject}
+                      aria-label="Previous project"
+                      className="w-7 h-7 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
+                    >
+                      <FaChevronLeft className="w-2.5 h-2.5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextHeroProject}
+                      aria-label="Next project"
+                      className="w-7 h-7 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
+                    >
+                      <FaChevronRight className="w-2.5 h-2.5" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -746,8 +759,8 @@ export function ClientBusinessView({
                     onClick={() => setActiveHeroProjectIdx(idx)}
                     aria-label={`Go to slide ${idx + 1}`}
                     className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeHeroProjectIdx === idx
-                        ? 'w-7 bg-foreground'
-                        : 'w-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'
+                      ? 'w-7 bg-foreground'
+                      : 'w-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'
                       }`}
                   />
                 ))}
@@ -1119,8 +1132,8 @@ export function ClientBusinessView({
                 >
                   <span
                     className={`h-2 rounded-full transition-all duration-200 ${activeReviewIdx === idx
-                        ? 'w-8 bg-amber-500'
-                        : 'w-2 bg-black/20 dark:bg-white/20 group-hover:bg-amber-500/50'
+                      ? 'w-8 bg-amber-500'
+                      : 'w-2 bg-black/20 dark:bg-white/20 group-hover:bg-amber-500/50'
                       }`}
                   />
                 </button>
@@ -1265,202 +1278,636 @@ export function ClientBusinessView({
           </p>
         </div>
 
-        {/* Zellify-Style 2-Column Split Card (Full Width, Large Scale) */}
-        <div className="w-full rounded-[32px] sm:rounded-[40px] supaste-glass-card shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden">
-          <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-black/[0.08] dark:divide-white/[0.08]">
+        {/* ── Morphing Contact Section: 2 Split Cards That Combine into One Inquiry Process Card ── */}
+        <LayoutGroup id="contact-morph-section">
+          <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full">
 
-            {/* Left Column: Project Inquiry */}
-            <div className="p-8 sm:p-12 md:p-16 lg:p-20 flex flex-col justify-between min-h-[420px] sm:min-h-[480px]">
-              <div className="text-center space-y-4">
-                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground border border-black/[0.06] dark:border-white/[0.08]">
-                  Project Inquiry
-                </div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
-                  Submit a project inquiry
-                </h3>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-md mx-auto">
-                  Share your vision, project goals, or requirements for assistance with timelines and an accurate estimate.
-                </p>
-              </div>
-
-              {/* Action Area: Form or Direct Button */}
-              <div className="pt-8 w-full flex flex-col items-center">
+              {/* ── CARD 1: Project Inquiry Card (Smoothly Morphs into Full Width when open) ── */}
+              <motion.div
+                layout
+                layoutId="inquiry-card-container"
+                transition={{
+                  layout: { type: 'spring', stiffness: 260, damping: 28 },
+                  opacity: { duration: 0.25 },
+                }}
+                className={`w-full rounded-[32px] sm:rounded-[40px] supaste-glass-card shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden ${
+                  isInquiryFormOpen ? 'col-span-1 md:col-span-2' : 'col-span-1'
+                }`}
+              >
                 <AnimatePresence mode="wait">
-                  {contactSubmitted ? (
+                  {!isInquiryFormOpen ? (
+                    /* ── Default Collapsed View: Initial Invitation ── */
                     <motion.div
-                      key="submitted"
-                      initial={reduce ? false : { opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      className="w-full text-center space-y-4 py-4"
-                    >
-                      <div className="w-14 h-14 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
-                        <FaCheckCircle className="w-7 h-7" />
-                      </div>
-                      <h4 className="text-xl font-bold text-foreground">Inquiry Ready!</h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed font-normal max-w-sm mx-auto">
-                        Your email client has opened with your project inquiry details. I will review and reply within 24 hours.
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setContactSubmitted(false)
-                          setIsInquiryFormOpen(false)
-                          setContactMessage('')
-                        }}
-                        className="text-sm font-semibold text-amber-500 hover:underline pt-2 cursor-pointer"
-                      >
-                        Submit another inquiry &rarr;
-                      </button>
-                    </motion.div>
-                  ) : isInquiryFormOpen ? (
-                    <motion.form
-                      key="form"
-                      initial={reduce ? false : { opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      onSubmit={handleContactSubmit}
-                      className="w-full max-w-lg space-y-4 text-left mx-auto"
-                    >
-                      <div>
-                        <label htmlFor="contact-name" className="block text-xs font-semibold text-foreground mb-1.5">
-                          Name or Company
-                        </label>
-                        <input
-                          id="contact-name"
-                          type="text"
-                          required
-                          value={contactName}
-                          onChange={(e) => {
-                            setContactName(e.target.value)
-                            if (contactError) setContactError(null)
-                          }}
-                          placeholder="e.g. Alex Rivera"
-                          className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-amber-500 focus:outline-hidden transition-colors"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="contact-email" className="block text-xs font-semibold text-foreground mb-1.5">
-                          Email Address
-                        </label>
-                        <input
-                          id="contact-email"
-                          type="email"
-                          required
-                          value={contactEmail}
-                          onChange={(e) => {
-                            setContactEmail(e.target.value)
-                            if (contactError) setContactError(null)
-                          }}
-                          placeholder="e.g. alex@company.com"
-                          className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-amber-500 focus:outline-hidden transition-colors"
-                        />
-                      </div>
-
-                      <div>
-                        <label htmlFor="contact-message" className="block text-xs font-semibold text-foreground mb-1.5">
-                          Project Requirements &amp; Goals
-                        </label>
-                        <textarea
-                          id="contact-message"
-                          rows={4}
-                          value={contactMessage}
-                          onChange={(e) => setContactMessage(e.target.value)}
-                          placeholder="Tell me about what you want to build (e.g. online shop, web app, AI tool), desired launch date, or scope..."
-                          className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-amber-500 focus:outline-hidden transition-colors resize-none leading-relaxed"
-                        />
-                      </div>
-
-                      {contactError && <p className="text-xs text-red-500 font-medium">&bull; {contactError}</p>}
-
-                      <div className="flex items-center gap-3 pt-2">
-                        <button
-                          type="submit"
-                          className="flex-1 py-3.5 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                          <span>Send Project Inquiry</span>
-                          <FaArrowRight className="w-3.5 h-3.5" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setIsInquiryFormOpen(false)}
-                          className="px-5 py-3.5 rounded-2xl bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground hover:text-foreground text-sm font-medium transition-colors cursor-pointer"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </motion.form>
-                  ) : (
-                    <motion.div
-                      key="button"
+                      key="collapsed-inquiry-view"
                       initial={reduce ? false : { opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="w-full flex flex-col items-center gap-3.5"
+                      transition={{ duration: 0.2 }}
+                      className="p-8 sm:p-12 md:p-16 lg:p-20 flex flex-col justify-between min-h-[420px] sm:min-h-[480px]"
                     >
-                      <button
-                        type="button"
-                        onClick={() => setIsInquiryFormOpen(true)}
-                        className="w-full sm:w-auto min-w-[240px] px-10 py-4 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
-                      >
-                        <span>Submit a Project Inquiry</span>
-                        <FaArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="text-xs text-muted-foreground">
-                        Quick 1-minute inquiry form
-                      </span>
+                      <div className="text-center space-y-4">
+                        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground border border-black/[0.06] dark:border-white/[0.08]">
+                          Project Inquiry
+                        </div>
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
+                          Submit a project inquiry
+                        </h3>
+                        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-md mx-auto">
+                          Share your vision, project goals, or requirements for assistance with timelines and an accurate estimate.
+                        </p>
+                      </div>
+
+                      <div className="pt-8 w-full flex flex-col items-center gap-3.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsInquiryFormOpen(true)
+                            setInquiryStep(1)
+                          }}
+                          className="w-full sm:w-auto min-w-[240px] px-10 py-4 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                        >
+                          <span>Submit a Project Inquiry</span>
+                          <FaArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                        <span className="text-xs text-muted-foreground">
+                          Quick 1-minute guided inquiry flow
+                        </span>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    /* ── Expanded Morph View: The Combined Inquiry Process Card ── */
+                    <motion.div
+                      key="expanded-inquiry-view"
+                      initial={reduce ? false : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25, delay: 0.05 }}
+                      className="w-full flex flex-col"
+                    >
+                      {/* Top Header Navigation Bar: Back Button & Step Indicators */}
+                      <div className="px-6 sm:px-10 py-5 border-b border-black/[0.06] dark:border-white/[0.08] flex flex-wrap items-center justify-between gap-4 bg-black/[0.02] dark:bg-white/[0.02]">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsInquiryFormOpen(false)
+                            setContactSubmitted(false)
+                          }}
+                          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors px-4 py-2 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] cursor-pointer"
+                        >
+                          <FaArrowLeft className="w-3 h-3" />
+                          <span>Back to contact options</span>
+                        </button>
+
+                        {/* Visual Process Stepper Navigation */}
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          {[
+                            { step: 1 as const, label: '1. Project Focus' },
+                            { step: 2 as const, label: '2. Vision & Scope' },
+                            { step: 3 as const, label: '3. Contact Details' },
+                          ].map((s) => (
+                            <button
+                              key={s.step}
+                              type="button"
+                              onClick={() => !contactSubmitted && setInquiryStep(s.step)}
+                              className={`text-xs font-semibold px-3 sm:px-4 py-1.5 rounded-full transition-all cursor-pointer ${
+                                inquiryStep === s.step
+                                  ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs'
+                                  : inquiryStep > s.step
+                                  ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                                  : 'bg-black/[0.03] dark:bg-white/[0.05] text-muted-foreground hover:text-foreground'
+                              }`}
+                            >
+                              {s.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Main Combined Body: Left side Inquiry Process, Right side Interactive Steps */}
+                      <div className="grid lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-black/[0.08] dark:divide-white/[0.08]">
+
+                        {/* Left Column: The Inquiry Process (Roadmap & Trust) */}
+                        <div className="lg:col-span-5 p-8 sm:p-10 lg:p-12 bg-black/[0.015] dark:bg-white/[0.015] flex flex-col justify-between gap-8">
+                          <div className="space-y-6">
+                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                              <HiSparkles className="w-3.5 h-3.5" />
+                              <span>The Inquiry Process</span>
+                            </div>
+
+                            <div className="space-y-2">
+                              <h3 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+                                How We Bring Your Idea to Life
+                              </h3>
+                              <p className="text-sm text-muted-foreground leading-relaxed font-normal">
+                                Clear steps, zero fluff, and no agency overhead. Here is what happens from inquiry to delivery:
+                              </p>
+                            </div>
+
+                            {/* 3 Inquiry Stages Roadmap */}
+                            <div className="space-y-3 pt-2">
+                              {/* Step 1 */}
+                              <div className={`p-4 rounded-2xl border transition-all ${
+                                inquiryStep === 1
+                                  ? 'bg-black/[0.04] dark:bg-white/[0.06] border-zinc-950 dark:border-white ring-1 ring-zinc-950 dark:ring-white'
+                                  : 'bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.06] dark:border-white/[0.08]'
+                              }`}>
+                                <div className="flex items-start gap-3">
+                                  <span className="w-7 h-7 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                    01
+                                  </span>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h4 className="text-sm font-bold text-foreground">Tell Me What You Need</h4>
+                                      {inquiryStep === 1 && (
+                                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold">
+                                          Current
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                                      Select your product category, preferred timeline, and brief overview of goals.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Step 2 */}
+                              <div className={`p-4 rounded-2xl border transition-all ${
+                                inquiryStep === 2
+                                  ? 'bg-black/[0.04] dark:bg-white/[0.06] border-zinc-950 dark:border-white ring-1 ring-zinc-950 dark:ring-white'
+                                  : 'bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.06] dark:border-white/[0.08]'
+                              }`}>
+                                <div className="flex items-start gap-3">
+                                  <span className="w-7 h-7 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                    02
+                                  </span>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h4 className="text-sm font-bold text-foreground">24-Hour Scope &amp; Review</h4>
+                                      {inquiryStep === 2 && (
+                                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold">
+                                          Current
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                                      I personally review your requirements, test feasibility, and draft a transparent estimate.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Step 3 */}
+                              <div className={`p-4 rounded-2xl border transition-all ${
+                                inquiryStep === 3
+                                  ? 'bg-black/[0.04] dark:bg-white/[0.06] border-zinc-950 dark:border-white ring-1 ring-zinc-950 dark:ring-white'
+                                  : 'bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.06] dark:border-white/[0.08]'
+                              }`}>
+                                <div className="flex items-start gap-3">
+                                  <span className="w-7 h-7 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                    03
+                                  </span>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h4 className="text-sm font-bold text-foreground">Kickoff &amp; Milestone Build</h4>
+                                      {inquiryStep === 3 && (
+                                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold">
+                                          Final Step
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                                      Direct engineer communication, weekly live checkpoints, and clean, high-impact delivery.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Trust Guarantees */}
+                          <div className="pt-4 border-t border-black/[0.06] dark:border-white/[0.08] space-y-2.5">
+                            <div className="flex items-center gap-2.5 text-xs text-muted-foreground font-medium">
+                              <FaClock className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                              <span>Reply guaranteed within 24 hours</span>
+                            </div>
+                            <div className="flex items-center gap-2.5 text-xs text-muted-foreground font-medium">
+                              <FaShieldAlt className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                              <span>100% Confidential &amp; NDA-friendly</span>
+                            </div>
+                            <div className="pt-1">
+                              <a
+                                href="mailto:arnlebaylon15@gmail.com?subject=Quick%20Project%20Question"
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                              >
+                                <FaEnvelope className="w-3 h-3" />
+                                <span>Prefer direct email? arnlebaylon15@gmail.com &rarr;</span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right Column: Interactive Inquiry Flow ── */}
+                        <div className="lg:col-span-7 p-8 sm:p-10 lg:p-12 flex flex-col justify-between min-h-[480px]">
+                          {contactSubmitted ? (
+                            <div className="text-center py-10 space-y-6 max-w-md mx-auto my-auto">
+                              <div className="w-16 h-16 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                                <FaCheckCircle className="w-8 h-8" />
+                              </div>
+                              <div className="space-y-2">
+                                <h4 className="text-2xl font-bold text-foreground">Inquiry Ready to Send!</h4>
+                                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                                  Your email application has opened with your project inquiry details for <strong>{inquiryType}</strong>. Simply hit send and I will review and reply within 24 hours.
+                                </p>
+                              </div>
+                              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setIsInquiryFormOpen(false)
+                                    setContactSubmitted(false)
+                                  }}
+                                  className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 text-sm font-semibold hover:opacity-90 transition-all cursor-pointer shadow-md"
+                                >
+                                  Return to Contact Options
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setContactSubmitted(false)
+                                    setInquiryStep(1)
+                                    setContactMessage('')
+                                  }}
+                                  className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground hover:text-foreground text-sm font-semibold transition-colors cursor-pointer"
+                                >
+                                  Submit Another Inquiry
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <form onSubmit={handleContactSubmit} className="space-y-6 flex flex-col justify-between h-full">
+
+                              {/* Step 1: Project Type & Timeline */}
+                              {inquiryStep === 1 && (
+                                <motion.div
+                                  key="step-1"
+                                  initial={reduce ? false : { opacity: 0, x: 10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: -10 }}
+                                  className="space-y-6"
+                                >
+                                  <div>
+                                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                                      Step 1 of 3
+                                    </div>
+                                    <h4 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
+                                      What are you looking to build?
+                                    </h4>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                      Select the category that best matches your project goals.
+                                    </p>
+                                  </div>
+
+                                  {/* Project Type Grid */}
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {[
+                                      {
+                                        id: 'Web App & SaaS',
+                                        label: 'Web App & SaaS',
+                                        desc: 'Interactive platforms, client portals & web software',
+                                        icon: FaLaptopCode,
+                                      },
+                                      {
+                                        id: 'Online Store',
+                                        label: 'Online Store / E-Commerce',
+                                        desc: 'High-converting shop, cart & payment checkout',
+                                        icon: FaShoppingBag,
+                                      },
+                                      {
+                                        id: 'Business Website',
+                                        label: 'Business Website',
+                                        desc: 'Brand showcase, lead generation & landing pages',
+                                        icon: FaGlobe,
+                                      },
+                                      {
+                                        id: 'AI Tool & Automation',
+                                        label: 'AI Tool & Automation',
+                                        desc: 'Custom workflows, smart assistants & data tasks',
+                                        icon: FaRobot,
+                                      },
+                                    ].map((item) => {
+                                      const Icon = item.icon
+                                      const isSelected = inquiryType === item.id
+                                      return (
+                                        <button
+                                          key={item.id}
+                                          type="button"
+                                          onClick={() => setInquiryType(item.id)}
+                                          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-3 ${
+                                            isSelected
+                                              ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 border-zinc-950 dark:border-white shadow-md'
+                                              : 'bg-black/[0.02] dark:bg-white/[0.04] border-black/[0.08] dark:border-white/[0.1] hover:border-foreground/30 text-foreground'
+                                          }`}
+                                        >
+                                          <div className="flex items-center justify-between">
+                                            <Icon className={`w-5 h-5 ${isSelected ? 'text-white dark:text-zinc-950' : 'text-muted-foreground'}`} />
+                                            {isSelected && <FaCheck className="w-3.5 h-3.5" />}
+                                          </div>
+                                          <div>
+                                            <div className="text-sm font-semibold leading-tight">{item.label}</div>
+                                            <div className={`text-xs mt-1 leading-snug ${isSelected ? 'text-white/80 dark:text-zinc-700' : 'text-muted-foreground'}`}>
+                                              {item.desc}
+                                            </div>
+                                          </div>
+                                        </button>
+                                      )
+                                    })}
+                                  </div>
+
+                                  {/* Timeline selection */}
+                                  <div className="space-y-2 pt-1">
+                                    <label className="block text-xs font-semibold text-foreground">
+                                      Desired Launch Timeline
+                                    </label>
+                                    <div className="flex flex-wrap gap-2.5">
+                                      {[
+                                        'ASAP (1-3 weeks)',
+                                        '1-2 Months',
+                                        'Flexible / Planning',
+                                      ].map((timeline) => (
+                                        <button
+                                          key={timeline}
+                                          type="button"
+                                          onClick={() => setInquiryTimeline(timeline)}
+                                          className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                                            inquiryTimeline === timeline
+                                              ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs'
+                                              : 'bg-black/[0.03] dark:bg-white/[0.05] text-muted-foreground hover:text-foreground border border-black/[0.06] dark:border-white/[0.08]'
+                                          }`}
+                                        >
+                                          {timeline}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  <div className="pt-4 flex justify-end">
+                                    <button
+                                      type="button"
+                                      onClick={() => setInquiryStep(2)}
+                                      className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                    >
+                                      <span>Continue to Project Scope</span>
+                                      <FaArrowRight className="w-3.5 h-3.5" />
+                                    </button>
+                                  </div>
+                                </motion.div>
+                              )}
+
+                              {/* Step 2: Vision & Scope */}
+                              {inquiryStep === 2 && (
+                                <motion.div
+                                  key="step-2"
+                                  initial={reduce ? false : { opacity: 0, x: 10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: -10 }}
+                                  className="space-y-6"
+                                >
+                                  <div>
+                                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                                      Step 2 of 3
+                                    </div>
+                                    <h4 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
+                                      Tell me about your project
+                                    </h4>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                      What are the main features, problems to solve, or links to inspiration?
+                                    </p>
+                                  </div>
+
+                                  <div>
+                                    <label htmlFor="inquiry-message" className="block text-xs font-semibold text-foreground mb-1.5">
+                                      Project Vision &amp; Requirements
+                                    </label>
+                                    <textarea
+                                      id="inquiry-message"
+                                      rows={5}
+                                      value={contactMessage}
+                                      onChange={(e) => setContactMessage(e.target.value)}
+                                      placeholder="Describe what you want to achieve, any existing site or tool to upgrade, key features, or questions..."
+                                      className="w-full px-4 py-3.5 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-foreground focus:outline-hidden transition-colors resize-none leading-relaxed"
+                                    />
+                                  </div>
+
+                                  {/* Budget range */}
+                                  <div className="space-y-2">
+                                    <label className="block text-xs font-semibold text-foreground">
+                                      Approximate Budget (Optional)
+                                    </label>
+                                    <div className="flex flex-wrap gap-2.5">
+                                      {[
+                                        'Flexible',
+                                        '$2,500 – $5,000',
+                                        '$5,000 – $10,000',
+                                        '$10,000+',
+                                      ].map((budget) => (
+                                        <button
+                                          key={budget}
+                                          type="button"
+                                          onClick={() => setInquiryBudget(budget)}
+                                          className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                                            inquiryBudget === budget
+                                              ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs'
+                                              : 'bg-black/[0.03] dark:bg-white/[0.05] text-muted-foreground hover:text-foreground border border-black/[0.06] dark:border-white/[0.08]'
+                                          }`}
+                                        >
+                                          {budget}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  <div className="pt-4 flex items-center justify-between gap-3">
+                                    <button
+                                      type="button"
+                                      onClick={() => setInquiryStep(1)}
+                                      className="px-5 py-3 rounded-2xl bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground hover:text-foreground text-sm font-semibold transition-colors cursor-pointer flex items-center gap-1.5"
+                                    >
+                                      <FaArrowLeft className="w-3 h-3" />
+                                      <span>Back</span>
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => setInquiryStep(3)}
+                                      className="px-8 py-3.5 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                    >
+                                      <span>Continue to Contact Info</span>
+                                      <FaArrowRight className="w-3.5 h-3.5" />
+                                    </button>
+                                  </div>
+                                </motion.div>
+                              )}
+
+                              {/* Step 3: Contact Info & Send */}
+                              {inquiryStep === 3 && (
+                                <motion.div
+                                  key="step-3"
+                                  initial={reduce ? false : { opacity: 0, x: 10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: -10 }}
+                                  className="space-y-6"
+                                >
+                                  <div>
+                                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                                      Step 3 of 3
+                                    </div>
+                                    <h4 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
+                                      How can I reach you?
+                                    </h4>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                      Provide your details to receive the feasibility assessment and scoped proposal.
+                                    </p>
+                                  </div>
+
+                                  {/* Summary Badge */}
+                                  <div className="p-3.5 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between text-xs text-muted-foreground">
+                                    <span>Inquiry Details:</span>
+                                    <span className="font-semibold text-foreground">
+                                      {inquiryType} &bull; {inquiryTimeline} &bull; {inquiryBudget}
+                                    </span>
+                                  </div>
+
+                                  <div className="space-y-4">
+                                    <div>
+                                      <label htmlFor="inquiry-name" className="block text-xs font-semibold text-foreground mb-1.5">
+                                        Your Name or Company Name *
+                                      </label>
+                                      <input
+                                        id="inquiry-name"
+                                        type="text"
+                                        required
+                                        value={contactName}
+                                        onChange={(e) => {
+                                          setContactName(e.target.value)
+                                          if (contactError) setContactError(null)
+                                        }}
+                                        placeholder="e.g. Alex Rivera or Rivera Agency"
+                                        className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-foreground focus:outline-hidden transition-colors"
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <label htmlFor="inquiry-email" className="block text-xs font-semibold text-foreground mb-1.5">
+                                        Your Email Address *
+                                      </label>
+                                      <input
+                                        id="inquiry-email"
+                                        type="email"
+                                        required
+                                        value={contactEmail}
+                                        onChange={(e) => {
+                                          setContactEmail(e.target.value)
+                                          if (contactError) setContactError(null)
+                                        }}
+                                        placeholder="e.g. alex@company.com"
+                                        className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-foreground focus:outline-hidden transition-colors"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  {contactError && <p className="text-xs text-red-500 font-medium">&bull; {contactError}</p>}
+
+                                  <div className="pt-4 flex items-center justify-between gap-3">
+                                    <button
+                                      type="button"
+                                      onClick={() => setInquiryStep(2)}
+                                      className="px-5 py-3 rounded-2xl bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground hover:text-foreground text-sm font-semibold transition-colors cursor-pointer flex items-center gap-1.5"
+                                    >
+                                      <FaArrowLeft className="w-3 h-3" />
+                                      <span>Back</span>
+                                    </button>
+                                    <button
+                                      type="submit"
+                                      className="flex-1 sm:flex-initial px-10 py-3.5 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                    >
+                                      <span>Send Project Inquiry</span>
+                                      <FaArrowRight className="w-3.5 h-3.5" />
+                                    </button>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </form>
+                          )}
+                        </div>
+
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
+
+              {/* ── CARD 2: Direct E-mail Card (Slides out smoothly when Inquiry opens) ── */}
+              <AnimatePresence>
+                {!isInquiryFormOpen && (
+                  <motion.div
+                    layout
+                    layoutId="contact-email-card"
+                    initial={{ opacity: 0, scale: 0.95, x: 20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.92, x: 30, transition: { duration: 0.22 } }}
+                    transition={{
+                      layout: { type: 'spring', stiffness: 260, damping: 28 },
+                      opacity: { duration: 0.2 },
+                    }}
+                    className="col-span-1 w-full rounded-[32px] sm:rounded-[40px] supaste-glass-card shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden p-8 sm:p-12 md:p-16 lg:p-20 flex flex-col justify-between min-h-[420px] sm:min-h-[480px]"
+                  >
+                    <div className="text-center space-y-4">
+                      <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground border border-black/[0.06] dark:border-white/[0.08]">
+                        Direct E-mail
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
+                        Send me an e-mail
+                      </h3>
+                      <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-md mx-auto">
+                        Contact me directly via e-mail if you have questions or prefer writing straight from your inbox.
+                      </p>
+                    </div>
+
+                    <div className="pt-8 w-full flex flex-col items-center gap-4">
+                      <a
+                        href="mailto:arnlebaylon15@gmail.com?subject=Project%20Inquiry%20from%20Portfolio"
+                        className="w-full sm:w-auto min-w-[240px] px-10 py-4 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer truncate"
+                      >
+                        <FaEnvelope className="w-4 h-4 shrink-0" />
+                        <span className="truncate">arnlebaylon15@gmail.com</span>
+                      </a>
+
+                      <button
+                        type="button"
+                        onClick={handleCopyEmail}
+                        className="inline-flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer py-1"
+                      >
+                        {copiedEmail ? (
+                          <>
+                            <FaCheck className="w-3.5 h-3.5 text-emerald-500" />
+                            <span className="text-emerald-500 font-semibold">Email copied to clipboard!</span>
+                          </>
+                        ) : (
+                          <>
+                            <FaCopy className="w-3.5 h-3.5" />
+                            <span>Copy email address</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
             </div>
-
-            {/* Right Column: Direct Email */}
-            <div className="p-8 sm:p-12 md:p-16 lg:p-20 flex flex-col justify-between min-h-[420px] sm:min-h-[480px]">
-              <div className="text-center space-y-4">
-                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground border border-black/[0.06] dark:border-white/[0.08]">
-                  Direct E-mail
-                </div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
-                  Send me an e-mail
-                </h3>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-md mx-auto">
-                  Contact me directly via e-mail if you have questions or prefer writing straight from your inbox.
-                </p>
-              </div>
-
-              <div className="pt-8 w-full flex flex-col items-center gap-4">
-                <a
-                  href="mailto:arnlebaylon15@gmail.com?subject=Project%20Inquiry%20from%20Portfolio"
-                  className="w-full sm:w-auto min-w-[240px] px-10 py-4 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer truncate"
-                >
-                  <FaEnvelope className="w-4 h-4 shrink-0" />
-                  <span className="truncate">arnlebaylon15@gmail.com</span>
-                </a>
-
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer py-1"
-                >
-                  {copiedEmail ? (
-                    <>
-                      <FaCheck className="w-3.5 h-3.5 text-emerald-500" />
-                      <span className="text-emerald-500 font-semibold">Email copied to clipboard!</span>
-                    </>
-                  ) : (
-                    <>
-                      <FaCopy className="w-3.5 h-3.5" />
-                      <span>Copy email address</span>
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-
           </div>
-        </div>
+        </LayoutGroup>
 
         {/* Social Media Icons Below (No GitHub, Mobile Responsive) */}
         <div className="mt-16 sm:mt-20 text-center">
