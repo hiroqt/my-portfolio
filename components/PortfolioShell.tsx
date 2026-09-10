@@ -29,6 +29,11 @@ const GallerySection = dynamic(
   { ssr: true }
 )
 
+const TypingSection = dynamic(
+  () => import('@/components/sections/TypingSection').then((m) => m.TypingSection),
+  { ssr: true }
+)
+
 const ContactSection = dynamic(
   () => import('@/components/sections/ContactSection').then((m) => m.ContactSection),
   { ssr: true }
@@ -52,7 +57,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   // ── Scroll spy for Developer Dossier directory sync ──
   useEffect(() => {
     let ticking = false
-    const sectionIds = ['hero', 'projects', 'experience', 'certifications', 'education', 'gallery', 'contact']
+    const sectionIds = ['hero', 'projects', 'experience', 'certifications', 'education', 'gallery', 'contact', 'typing']
 
     const updateActiveSection = () => {
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -251,8 +256,8 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         id="main-content"
         className={`relative z-10 ${
           viewMode === 'client'
-            ? 'min-h-screen pt-0 pb-16 w-full'
-            : 'lg:h-screen lg:overflow-hidden pt-4 sm:pt-6 lg:pt-0 pb-28 lg:pb-0 w-full'
+            ? 'min-h-screen pt-0 pb-0 w-full'
+            : 'min-h-screen pt-4 sm:pt-6 lg:pt-0 pb-28 lg:pb-16 w-full'
         }`}
       >
         <AnimatePresence initial={false} mode="wait">
@@ -276,7 +281,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
           ) : (
             /* ─────────────────────────────────────────────────────────────
                DEVELOPER & TECHNICAL VIEW: Asymmetric Executive Engineering Studio
-               (Desktop: Left side stuck to page; Right side independently scrolls)
+               (Desktop: 2 columns [Left Dossier + Right Stage], with full-width Typing Lab below)
             ───────────────────────────────────────────────────────────── */
             <motion.div
               key="tech-view"
@@ -284,10 +289,11 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
-              className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 lg:h-screen"
+              className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12"
             >
-              <div className="lg:h-full lg:flex lg:items-start lg:gap-10 xl:gap-14 2xl:gap-16">
-                {/* ── Left Sticky Executive Dossier (Desktop lg+ stuck to screen) ── */}
+              {/* ── Top Split: Left Sticky Executive Dossier + Right Main Systems Showcase (Only Right Side Scrollable) ── */}
+              <div className="lg:h-screen lg:flex lg:items-start lg:gap-10 xl:gap-14 2xl:gap-16">
+                {/* ── Left Sticky Executive Dossier (Desktop lg+ fixed) ── */}
                 <DevExecutiveDossier
                   activeSection={activeSection}
                   onNavClick={handleNavClick}
@@ -297,7 +303,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
                   viewMode={viewMode}
                 />
 
-                {/* ── Right Main Engineering Systems Showcase Stage (Independently Scrolling) ── */}
+                {/* ── Right Main Engineering Systems Showcase Stage (Only Right Side is Scrollable) ── */}
                 <div
                   ref={rightScrollRef}
                   id="right-scroll-pane"
@@ -323,25 +329,31 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
 
                   {/* 06 — Direct Contact & Channels */}
                   <ContactSection />
-
-                  {/* Architectural Colophon Footer */}
-                  <footer className="pt-8 pb-4 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-muted-foreground">
-                    <div>
-                      <span>Designed &amp; Engineered by Arnel Baylon</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <span>Next.js 14 &bull; Tailwind &bull; Motion</span>
-                      <a
-                        href="#hero"
-                        onClick={(e) => handleNavClick(e, 'hero')}
-                        className="hover:text-accent transition-colors cursor-pointer"
-                      >
-                        Back to Top ↑
-                      </a>
-                    </div>
-                  </footer>
                 </div>
               </div>
+
+              {/* ── FULL-WIDTH SECTION BELOW BOTH LEFT & RIGHT COLUMNS ── */}
+              {/* 07 — Mechanical Keyboard MonkeyType Sandbox & Switch Audio Lab */}
+              <div className="pt-12 sm:pt-16 pb-16 sm:pb-20 border-t border-border/40 mt-8 sm:mt-12">
+                <TypingSection />
+              </div>
+
+              {/* Architectural Colophon Footer */}
+              <footer className="pt-8 pb-6 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-muted-foreground">
+                <div>
+                  <span>Designed &amp; Engineered by Arnel Baylon</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span>Next.js 14 &bull; Tailwind &bull; Motion</span>
+                  <a
+                    href="#hero"
+                    onClick={(e) => handleNavClick(e, 'hero')}
+                    className="hover:text-accent transition-colors cursor-pointer"
+                  >
+                    Back to Top ↑
+                  </a>
+                </div>
+              </footer>
             </motion.div>
           )}
         </AnimatePresence>

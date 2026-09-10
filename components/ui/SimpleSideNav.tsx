@@ -21,6 +21,7 @@ import {
   FaQuestionCircle,
   FaQuoteRight,
   FaArrowRight,
+  FaKeyboard,
 } from 'react-icons/fa'
 import { useTheme } from '../ThemeProvider'
 import { HiSparkles } from 'react-icons/hi2'
@@ -44,16 +45,16 @@ const techNavItems: NavItem[] = [
   { id: 'education', label: 'Education', number: '04', icon: FaGraduationCap },
   { id: 'gallery', label: 'Artifact Studio', number: '05', icon: FaImages },
   { id: 'contact', label: 'Get in Touch', number: '06', icon: FaPaperPlane },
+  { id: 'typing', label: 'Typing Lab', number: '07', icon: FaKeyboard },
 ]
 
 const clientNavItems: NavItem[] = [
   { id: 'hero', label: 'Overview', number: '00', icon: FaStar },
-  { id: 'projects', label: 'Projects', number: '01', icon: FaBriefcase },
-  { id: 'capabilities', label: 'Capabilities', number: '02', icon: FaLayerGroup },
-  { id: 'testimonials', label: 'Proof', number: '03', icon: FaQuoteRight },
-  { id: 'packages', label: 'Packages', number: '04', icon: FaStar },
-  { id: 'faq', label: 'FAQ', number: '05', icon: FaQuestionCircle },
-  { id: 'contact', label: 'Contact', number: '06', icon: FaPaperPlane },
+  { id: 'capabilities', label: 'Services', number: '01', icon: FaLayerGroup },
+  { id: 'projects', label: 'Work', number: '02', icon: FaBriefcase },
+  { id: 'testimonials', label: 'Reviews', number: '03', icon: FaQuoteRight },
+  { id: 'faq', label: 'FAQ', number: '04', icon: FaQuestionCircle },
+  { id: 'contact', label: 'Contact', number: '05', icon: FaPaperPlane },
 ]
 
 interface SimpleSideNavProps {
@@ -585,9 +586,9 @@ export function SimpleSideNav({
           // Client Mode Mobile Tabs (5 Clean, Readable Tabs with Icons & Plain-English Labels)
           [
             { id: 'hero', label: 'Overview', icon: FaHome },
-            { id: 'projects', label: 'Projects', icon: FaBriefcase },
+            { id: 'capabilities', label: 'Services', icon: FaLayerGroup },
+            { id: 'projects', label: 'Work', icon: FaBriefcase },
             { id: 'testimonials', label: 'Reviews', icon: FaQuoteRight },
-            { id: 'faq', label: 'FAQ', icon: FaQuestionCircle },
             { id: 'contact', label: 'Contact', icon: FaPaperPlane },
           ].map((tab) => {
             const isActive = activeSection === tab.id

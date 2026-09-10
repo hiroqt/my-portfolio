@@ -5,8 +5,6 @@ import Image from 'next/image'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
   FaArrowRight,
-  FaArrowLeft,
-  FaChevronDown,
   FaChevronLeft,
   FaChevronRight,
   FaPlay,
@@ -14,24 +12,21 @@ import {
   FaCode,
   FaLinkedin,
   FaEnvelope,
-  FaCheck,
-  FaGlobe,
-  FaRobot,
-  FaSyncAlt,
-  FaQuestionCircle,
-  FaExternalLinkAlt,
   FaStar,
-  FaShieldAlt,
-  FaRocket,
-  FaBolt,
-  FaLayerGroup,
-  FaDatabase,
-  FaCalendarAlt,
+  FaExternalLinkAlt,
+  FaShoppingBag,
+  FaRobot,
+  FaChartLine,
+  FaCheckCircle,
+  FaFacebook,
+  FaInstagram,
+  FaTiktok,
+  FaCopy,
+  FaCheck,
 } from 'react-icons/fa'
 import { HiSparkles } from 'react-icons/hi2'
 
-
-// ── Accurate Project Showcase Data ──
+// ── Client-Friendly Project Showcase Data (No tech jargon) ──
 interface ShowcaseProject {
   id: string
   title: string
@@ -40,164 +35,251 @@ interface ShowcaseProject {
   image: string
   category: string
   metric: string
-  tags: string[]
+  badge: string
   liveUrl?: string
 }
 
 const flagshipShowcaseProjects: ShowcaseProject[] = [
   {
     id: 'tearsize',
-    title: 'Tearsize',
-    subtitle: 'Modern E-Commerce Store',
-    detail: 'Complete online apparel store featuring instant mobile checkout, real-time automated order notifications, and smooth inventory sync.',
+    title: 'Tearsize Store',
+    subtitle: 'Modern Online Clothing Shop',
+    detail: 'Complete online apparel store with instant mobile checkout, automated order confirmations, and real-time inventory updates so customers can buy effortlessly.',
     image: '/images/tearsize.jpg',
-    category: 'E-Commerce',
-    metric: 'Sub-2s Mobile Checkout',
-    tags: ['Next.js', 'Stripe Payments', 'Tailwind CSS', 'Mobile First'],
+    category: 'Online Store',
+    metric: 'Fast Mobile Checkout',
+    badge: 'E-Commerce',
+    liveUrl: 'https://tearsize.vercel.app',
   },
   {
     id: 'saktoka',
     title: 'sakto ka',
-    subtitle: 'AI Career Intelligence Platform',
-    detail: 'Interactive career platform that translates user experience into ATS-optimized resumes and provides personalized interview coaching.',
+    subtitle: 'AI Career Assistant Platform',
+    detail: 'Friendly web platform that guides job seekers through building standout resumes and prepares them for interviews with personalized coaching.',
     image: '/images/saktoka.png',
-    category: 'AI Platform',
+    category: 'AI Assistant',
     metric: '1,000+ First-Month Users',
-    tags: ['Next.js', 'LLM Agents', 'Tailwind', 'FastAPI'],
+    badge: 'AI Platform',
+    liveUrl: 'https://sakto-ka.vercel.app',
   },
   {
     id: 'pixelcrew',
     title: 'Pixel Crew',
-    subtitle: 'Autonomous Multi-Agent Workspace',
-    detail: 'Visual multi-agent engineering studio where specialized AI assistants collaborate on architectural designs, coding tasks, and automated code review.',
+    subtitle: 'Collaborative AI Workspace',
+    detail: 'Visual workspace where smart AI assistants collaborate to help teams design, plan, and build digital products faster with less manual effort.',
     image: '/images/pixelcrew.png',
-    category: 'Agentic AI',
-    metric: 'Full Swarm Orchestration',
-    tags: ['TypeScript', 'Multi-Agent', 'Canvas UI', 'WebSockets'],
+    category: 'Smart Workspace',
+    metric: 'Automated Daily Tasks',
+    badge: 'AI Studio',
+    liveUrl: 'https://github.com/arnelbaylon',
   },
   {
     id: 'ebuddy',
     title: 'eBuddy Public Guide',
-    subtitle: 'Citizen AI Navigation Assistant',
-    detail: 'National award-winning AI assistant that guides citizens through official government services, documents, and filing requirements step-by-step.',
+    subtitle: 'National Award-Winning Citizen Guide',
+    detail: 'AI assistant that guides everyday citizens through official paperwork and government service requirements step-by-step in simple, friendly language.',
     image: '/images/egov.png',
-    category: 'GovTech & AI',
+    category: 'Public Service',
     metric: 'Top 30 National Winner',
-    tags: ['Next.js', 'RAG Pipeline', 'OpenAI', 'Multi-Lingual'],
+    badge: 'Award Winner',
   },
   {
     id: 'finops',
     title: 'FinOps AI Dashboard',
-    subtitle: 'Cloud Cost Intelligence Dashboard',
-    detail: 'Cloud financial management platform that monitors software infrastructure spend, highlights billing discrepancies, and unlocks recurring cost savings.',
+    subtitle: 'Business Expense Savings Tool',
+    detail: 'Intelligent business dashboard that monitors software subscriptions and cloud expenses, flags billing mistakes, and unlocks recurring monthly savings.',
     image: '/images/finops.jpg',
-    category: 'Cloud & FinOps',
+    category: 'Savings Dashboard',
     metric: 'AWS Best Business Impact',
-    tags: ['Next.js', 'AWS Cloud', 'Data Analytics', 'Chart.js'],
+    badge: 'Cost Savings',
   },
   {
     id: 'vcm',
-    title: 'VCM Academic HRIS',
-    subtitle: 'Staffing & Payroll System',
-    detail: 'Campus management platform with mobile QR check-ins, automated timesheet compilation, and error-free payroll calculation for academic staff.',
+    title: 'VCM Academic Platform',
+    subtitle: 'Staff Attendance & Automatic Payroll',
+    detail: 'Simple campus system with mobile phone QR check-ins, automated daily timesheets, and error-free payroll calculation for school staff.',
     image: '/images/vcm.jpg',
-    category: 'Enterprise Operations',
+    category: 'Staff Management',
     metric: 'Saved Days on Payroll',
-    tags: ['Web App', 'QR Attendance', 'Automated Payroll', 'PostgreSQL'],
+    badge: 'Operations',
   },
 ]
 
-const row1Projects = [
+interface HeroCarouselProject {
+  id: string
+  title: string
+  tagline: string
+  purpose: string
+  metric: string
+  badge: string
+  image: string
+  liveUrl?: string
+  highlights: string[]
+}
+
+const heroCarouselProjects: HeroCarouselProject[] = [
   {
     id: 'tearsize',
-    title: 'Tearsize',
-    detail: 'Online clothing store with fast mobile checkout and instant order updates',
+    title: 'Tearsize Store',
+    tagline: 'Instant Mobile Apparel Store',
+    purpose:
+      'Allows shoppers to browse smoothly on any phone and purchase clothing in seconds, with automated order receipts and live inventory sync.',
+    metric: 'Sub-2s Mobile Checkout',
+    badge: 'Online Store',
     image: '/images/tearsize.jpg',
-    badge: 'E-Commerce',
+    liveUrl: 'https://tearsize.vercel.app',
+    highlights: ['Instant mobile checkout', 'Automated order receipts', 'Live inventory sync'],
   },
   {
     id: 'saktoka',
     title: 'sakto ka',
-    detail: 'AI career assistant that writes job-winning resumes and prepares you for interviews',
+    tagline: 'AI Career & Interview Coach',
+    purpose:
+      'Helps job seekers turn their real experience into standout resumes and practice live job interviews with friendly, instant AI feedback.',
+    metric: '1,000+ First-Month Users',
+    badge: 'AI Assistant',
     image: '/images/saktoka.png',
-    badge: 'AI Platform',
+    liveUrl: 'https://sakto-ka.vercel.app',
+    highlights: ['Free Job Hunt site with Resume builder', '24/7 practice interviews', 'Instant friendly guidance'],
+  },
+  {
+    id: 'pixelcrew',
+    title: 'Pixel Crew Studio',
+    tagline: 'Smart Creative AI Workspace',
+    purpose:
+      'A visual collaborative workspace where specialized AI assistants help creative teams plan, design, and launch digital products in minutes.',
+    metric: 'Automated Daily Workflows',
+    badge: 'Smart Studio',
+    image: '/images/pixelcrew.png',
+    liveUrl: 'https://github.com/arnelbaylon',
+    highlights: ['Visual team workspace', 'Automated routine tasks', 'Faster product launches'],
+  },
+  {
+    id: 'ebuddy',
+    title: 'eBuddy Public Guide',
+    tagline: 'National Award-Winning Citizen Guide',
+    purpose:
+      'Guides everyday citizens through government requirements, document filings, and official paperwork step-by-step in simple, friendly language.',
+    metric: 'Top 30 National Winner',
+    badge: 'Public Service',
+    image: '/images/egov.png',
+    highlights: ['Step-by-step document help', 'Plain everyday language', 'Zero paperwork confusion'],
+  },
+  {
+    id: 'finops',
+    title: 'FinOps AI Dashboard',
+    tagline: 'Business Subscription Savings Tool',
+    purpose:
+      'Monitors company software expenses and recurring bills, flags forgotten subscriptions, and uncovers immediate monthly cost savings.',
+    metric: 'AWS Best Business Impact',
+    badge: 'Cost Savings',
+    image: '/images/finops.jpg',
+    highlights: ['Subscription waste alerts', 'Automated expense tracking', 'Immediate monthly savings'],
+  },
+  {
+    id: 'vcm',
+    title: 'VCM Academic Platform',
+    tagline: 'Campus QR Attendance & Payroll',
+    purpose:
+      'Replaces paper timesheets with mobile phone QR check-ins, tracking staff attendance automatically and calculating payroll with zero manual errors.',
+    metric: 'Saved Days on Monthly Payroll',
+    badge: 'Operations',
+    image: '/images/vcm.jpg',
+    highlights: ['Mobile phone QR check-ins', 'Automatic daily timesheets', 'Zero manual payroll errors'],
+  },
+]
+
+const marqueeRow1 = [
+  {
+    id: 'tearsize',
+    title: 'Tearsize',
+    detail: 'Online apparel store with fast mobile checkout and instant order updates',
+    image: '/images/tearsize.jpg',
+    badge: 'Online Store',
+  },
+  {
+    id: 'saktoka',
+    title: 'sakto ka',
+    detail: 'AI assistant that writes job-winning resumes and interview answers',
+    image: '/images/saktoka.png',
+    badge: 'AI Assistant',
   },
   {
     id: 'pixelcrew',
     title: 'Pixel Crew',
-    detail: 'Smart AI workspace where virtual assistants collaborate to build clean software',
+    detail: 'Collaborative AI workspace that turns product ideas into clean software',
     image: '/images/pixelcrew.png',
-    badge: 'Agentic Studio',
+    badge: 'Smart Studio',
   },
   {
     id: 'ebuddy',
     title: 'eBuddy',
-    detail: 'Award-winning AI guide that helps everyday citizens navigate government paperwork',
+    detail: 'Award-winning guide helping everyday citizens complete public paperwork',
     image: '/images/egov.png',
     badge: 'National Winner',
   },
   {
     id: 'finops',
-    title: 'FinOps AI Dashboard',
-    detail: 'Award-winning dashboard that helps companies track and reduce software costs',
+    title: 'FinOps AI',
+    detail: 'Smart dashboard that helps companies find and reduce wasted software spend',
     image: '/images/finops.jpg',
-    badge: 'AWS Award',
+    badge: 'Cost Savings',
   },
   {
     id: 'vcm',
     title: 'VCM HRIS',
-    detail: 'Staff management platform with phone QR check-ins and automatic payroll calculation',
+    detail: 'Staff platform with mobile QR check-ins and automated payroll calculation',
     image: '/images/vcm.jpg',
-    badge: 'Operations',
+    badge: 'Staff System',
   },
 ]
 
-const row2Projects = [
+const marqueeRow2 = [
   {
     id: 'bettertrece',
     title: 'Better Trece Martires',
-    detail: 'Community portal that shares local town budgets and public projects in simple terms',
+    detail: 'Community portal sharing local city projects and public budgets clearly',
     image: '/images/bettertrece.png',
-    badge: 'Civic Tech',
+    badge: 'Community',
   },
   {
     id: 'pacementor',
     title: 'PaceMentor',
-    detail: 'Personal running coach app with customized workout schedules and fitness tracking',
+    detail: 'Personal fitness and running app with customized weekly workout plans',
     image: '/images/pcaementor.jpg',
     badge: 'Mobile App',
   },
   {
     id: 'presentpo',
     title: 'Present Po',
-    detail: 'Employee attendance tracker that verifies locations and generates daily timesheets',
+    detail: 'Employee attendance tracker that verifies locations and creates timesheets',
     image: '/images/presentpo.jpg',
-    badge: 'HR Platform',
+    badge: 'HR Tool',
   },
   {
     id: 'hivesync',
     title: 'HiveSync VA',
-    detail: 'Business website with online appointment booking and automatic blog publishing',
+    detail: 'Agency website with automated client booking and article publishing',
     image: '/images/hivesync.jpg',
     badge: 'Client Portal',
   },
   {
     id: 'tmrc',
-    title: 'TMRC',
-    detail: 'Local running club website with event sign-ups and official race leaderboards',
+    title: 'TMRC Sports',
+    detail: 'Local running community website with event registrations and race boards',
     image: '/images/tmrc.jpg',
-    badge: 'Sports & Community',
+    badge: 'Sports Club',
   },
   {
     id: 'saktoka-ats',
-    title: 'sakto ka Resume Builder',
-    detail: 'Resume builder designed to help job seekers stand out and get hired faster',
+    title: 'Resume Builder',
+    detail: 'Resume creation tool designed to help applicants get hired faster',
     image: '/images/saktoka.png',
     badge: 'Career Tool',
   },
 ]
 
-// ── Client Testimonials Data ──
+// ── Client Testimonials Data (Real human feedback) ──
 interface ClientTestimonial {
   quote: string
   clientName: string
@@ -210,7 +292,7 @@ interface ClientTestimonial {
 const clientTestimonials: ClientTestimonial[] = [
   {
     quote:
-      'Arnel built our entire online store from scratch in just 3 weeks. The checkout is super fast and smooth on phones, order updates are sent automatically, and our sales went up right after launch. He genuinely cares about our business and thinks like a true founder.',
+      'Arnel built our entire online store from scratch in just 3 weeks. The checkout is super fast and smooth on phones, order updates are sent automatically, and our sales went up right after launch. He genuinely cares about our business and thinks like a true partner.',
     clientName: 'D2C Brand Founder',
     clientRole: 'Co-Founder & COO',
     company: 'Tearsize Wellness',
@@ -264,116 +346,49 @@ const clientTestimonials: ClientTestimonial[] = [
   },
 ]
 
-// ── FAQ Items ──
+// ── FAQ Items (Plain English, Non-Tech) ──
 interface FAQItem {
-  tag: string
-  category: string
+  number: string
   question: string
   answer: string
 }
 
 const clientFaqs: FAQItem[] = [
   {
-    tag: '01',
-    category: 'Timeline & Delivery',
+    number: '01',
     question: 'How quickly can we build and launch my website or app?',
     answer:
-      'Most projects go from initial idea to live launch in just 2 to 4 weeks. Every week, I send you a test link you can open on your phone or computer to try out progress in real time. You always know exactly where things stand, with zero surprise delays.',
+      'Most projects launch within 2 to 4 weeks. Every week, I send you a private link you can open on your phone or computer to test the progress live. You always know exactly what is happening, with zero surprise delays.',
   },
   {
-    tag: '02',
-    category: 'Pricing & Value',
-    question: 'How does pricing work? Are there any hidden fees?',
+    number: '02',
+    question: 'How does pricing work? Are there any surprise bills?',
     answer:
-      'Pricing is straightforward and transparent. For new builds, we agree on a clear, fixed project price before we start—so you know exactly what you are paying with zero surprise bills. If you need ongoing help, simple monthly plans are also available. No agency markups, no hidden costs.',
+      'Pricing is simple and transparent. We agree on a fixed project price before we write a single line of code. You know exactly what you are paying, with no hidden agency markups or unexpected invoices.',
   },
   {
-    tag: '03',
-    category: 'Ownership & Control',
-    question: 'Do I own 100% of everything we create?',
+    number: '03',
+    question: 'Do I own 100% of everything after we launch?',
     answer:
-      'Yes, absolutely. You own all rights, design files, accounts, and website assets from day one. When we launch, I provide easy-to-follow video walkthroughs and clean handoff files so you or your team have total control and never feel locked into any service.',
+      'Yes, 100%. All design files, website accounts, code, and domains belong entirely to you from day one. When we launch, I provide easy video walkthroughs so you or your team have full control and are never locked into any service.',
   },
   {
-    tag: '04',
-    category: 'What We Build',
-    question: 'What kind of websites, apps, and smart features can you build?',
+    number: '04',
+    question: 'What kind of websites, online stores, and AI tools do you build?',
     answer:
-      'I build fast, modern websites, online stores, customer portals, and custom web tools tailored to your daily operations. I also build smart AI assistants that can automatically answer customer questions, organize information, or handle repetitive tasks using your business data.',
+      'I build modern high-converting websites, online stores with fast checkout, private customer portals, and smart AI assistants that can answer customer questions, organize files, or automate daily business tasks.',
   },
   {
-    tag: '05',
-    category: 'Support & Warranty',
-    question: 'What happens after we launch? Do you provide help if something breaks?',
+    number: '05',
+    question: 'What happens after we launch? Do you help if I need changes?',
     answer:
-      'Yes! Every project includes 30 days of free support after launch. I am right there to fix any issues, make sure everything runs smoothly, and answer any questions. If you want continued support or new features down the road, flexible monthly check-ins are always available.',
+      'Every project includes 30 days of free post-launch support. I am right there to fix any questions, ensure everything runs smoothly, and make adjustments. If you want continued regular help down the road, flexible monthly check-ins are also available.',
   },
   {
-    tag: '06',
-    category: 'Communication',
-    question: 'How will we stay in touch during the project?',
+    number: '06',
+    question: 'How will we communicate during the project?',
     answer:
-      'You work directly with me—never passed off to junior staff or middle managers. We can chat wherever you are most comfortable, such as WhatsApp, Slack, or Email. I send regular progress updates and we can hop on friendly video calls to review everything together whenever you’d like.',
-  },
-]
-
-// ── Transparent Engagement Packages (Supaste Pricing Style) ──
-interface ServicePackage {
-  id: string
-  name: string
-  badge?: string
-  headline: string
-  timeline: string
-  description: string
-  inclusions: string[]
-  isFeatured?: boolean
-}
-
-const engagementPackages: ServicePackage[] = [
-  {
-    id: 'sprint',
-    name: 'Sprint MVP',
-    headline: 'Rapid Prototyping & Focused Launch',
-    timeline: '2–3 Weeks Delivery',
-    description: 'Perfect for founders validating an early concept or businesses needing a fast, high-converting launch.',
-    inclusions: [
-      'Bespoke modern UI/UX design (desktop + mobile)',
-      'High-performance Next.js / React build',
-      'Contact / lead collection or email capture',
-      'SEO setup & Core Web Vitals optimization',
-      '14 days post-launch support & handoff call',
-    ],
-  },
-  {
-    id: 'full-build',
-    name: 'Full Product Build',
-    badge: 'Most Popular',
-    headline: 'Complete Web App or AI Platform',
-    timeline: '4–6 Weeks Delivery',
-    description: 'A full-scale custom application, customer portal, or smart AI workflow engineered for serious business operations.',
-    inclusions: [
-      'Full architecture, UI/UX design & design system',
-      'User authentication, role-based permissions & profiles',
-      'Database integration (PostgreSQL / Supabase / Neon)',
-      'Payment processing (Stripe / PayMongo) & billing flow',
-      'Custom AI assistant or automation workflows',
-      '30 days post-launch priority warranty & training',
-    ],
-    isFeatured: true,
-  },
-  {
-    id: 'retainer',
-    name: 'Product Retainer',
-    headline: 'Dedicated Engineering Velocity',
-    timeline: 'Monthly Check-In',
-    description: 'Ongoing senior product engineering for growing teams that need regular feature releases, audits, and AI integrations.',
-    inclusions: [
-      'Dedicated weekly engineering sprint hours',
-      'Continuous feature rollouts & performance tuning',
-      'AI pipeline maintenance & prompt improvements',
-      'Direct Slack / WhatsApp communication channel',
-      'Weekly strategy & interactive product demo calls',
-    ],
+      'You work directly with me—never passed around to account managers or juniors. We can communicate wherever you prefer, including WhatsApp, Slack, or Email, plus friendly video demo calls whenever you want to review progress.',
   },
 ]
 
@@ -388,29 +403,54 @@ export function ClientBusinessView({
 }: ClientBusinessViewProps) {
   const reduce = useReducedMotion()
 
-  // ── Active Preview Showcase State (macOS Window) ──
-  const [activeShowcaseIdx, setActiveShowcaseIdx] = useState(0)
+  // ── Hero Ads-Style Carousel State ──
+  const [activeHeroProjectIdx, setActiveHeroProjectIdx] = useState(0)
+  const [isHeroCarouselAutoplay, setIsHeroCarouselAutoplay] = useState(true)
 
-  // ── Testimonial State ──
+  // Hero carousel autoplay (5.5s interval, pauses on hover)
+  useEffect(() => {
+    if (!isHeroCarouselAutoplay) return
+    const timer = setInterval(() => {
+      setActiveHeroProjectIdx((curr) => (curr + 1) % heroCarouselProjects.length)
+    }, 5500)
+    return () => clearInterval(timer)
+  }, [isHeroCarouselAutoplay])
+
+  const handlePrevHeroProject = () => {
+    setActiveHeroProjectIdx(
+      (prev) => (prev - 1 + heroCarouselProjects.length) % heroCarouselProjects.length
+    )
+  }
+
+  const handleNextHeroProject = () => {
+    setActiveHeroProjectIdx((prev) => (prev + 1) % heroCarouselProjects.length)
+  }
+
+  // ── Testimonials Carousel State ──
   const [activeReviewIdx, setActiveReviewIdx] = useState(0)
   const [isReviewAutoplay, setIsReviewAutoplay] = useState(true)
 
   // ── FAQ State ──
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0)
 
-  // ── Inquiry Form State ──
-  const [inquiryType, setInquiryType] = useState('New Website or App')
-  const [formStep, setFormStep] = useState<1 | 2 | 3>(1)
-  const [formError, setFormError] = useState<string | null>(null)
-  const [inquirySubmitted, setInquirySubmitted] = useState(false)
-  const [inquiryForm, setInquiryForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-    timeline: 'Standard pace (2–4 weeks)',
-  })
+  // ── Clean Minimal Contact State ──
+  const [contactName, setContactName] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
+  const [contactMessage, setContactMessage] = useState('')
+  const [contactSubmitted, setContactSubmitted] = useState(false)
+  const [contactError, setContactError] = useState<string | null>(null)
+  const [isInquiryFormOpen, setIsInquiryFormOpen] = useState(false)
+  const [copiedEmail, setCopiedEmail] = useState(false)
 
-  // Testimonial Autoplay
+  const handleCopyEmail = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText('arnlebaylon15@gmail.com')
+      setCopiedEmail(true)
+      setTimeout(() => setCopiedEmail(false), 2000)
+    }
+  }
+
+  // Testimonials autoplay
   useEffect(() => {
     if (!isReviewAutoplay) return
     const timer = setInterval(() => {
@@ -418,10 +458,6 @@ export function ClientBusinessView({
     }, 6500)
     return () => clearInterval(timer)
   }, [isReviewAutoplay])
-
-  const handleSelectReview = (idx: number) => {
-    setActiveReviewIdx(idx)
-  }
 
   const handlePrevReview = () => {
     setActiveReviewIdx((prev) => (prev - 1 + clientTestimonials.length) % clientTestimonials.length)
@@ -435,211 +471,452 @@ export function ClientBusinessView({
     setOpenFaqIndex((prev) => (prev === idx ? null : idx))
   }
 
-  const handleNextStep = () => {
-    setFormError(null)
-    if (formStep === 1) {
-      setFormStep(2)
-    } else if (formStep === 2) {
-      if (!inquiryForm.message.trim()) {
-        setFormError('Please share a brief note about what you would like to build or achieve.')
-        return
-      }
-      setFormStep(3)
-    }
-  }
-
-  const handlePrevStep = () => {
-    setFormError(null)
-    if (formStep > 1) {
-      setFormStep((prev) => (prev - 1) as 1 | 2 | 3)
-    }
-  }
-
-  const handleInquirySubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!inquiryForm.name.trim() || !inquiryForm.email.trim()) {
-      setFormError('Please provide your name and email address so I can get back to you.')
+    if (!contactName.trim() || !contactEmail.trim()) {
+      setContactError('Please enter your name and email address so I can get back to you.')
       return
     }
-    const subject = encodeURIComponent(`Project Inquiry: ${inquiryType} (${inquiryForm.name})`)
+    setContactError(null)
+    const subject = encodeURIComponent(`Project Inquiry from ${contactName}`)
     const body = encodeURIComponent(
-      `Hi Arnel,\n\nName: ${inquiryForm.name}\nEmail: ${inquiryForm.email}\nProject Type: ${inquiryType}\nDesired Timeline: ${inquiryForm.timeline}\n\nProject Overview:\n${inquiryForm.message || 'N/A'}\n\nLooking forward to speaking with you!`
+      `Hi Arnel,\n\nName: ${contactName}\nEmail: ${contactEmail}\n\nProject Inquiry Overview:\n${contactMessage || 'I would like to discuss a project with you.'}\n\nLooking forward to hearing from you!`
     )
     window.open(`mailto:arnlebaylon15@gmail.com?subject=${subject}&body=${body}`, '_blank')
-    setInquirySubmitted(true)
+    setContactSubmitted(true)
   }
 
-  const currentActiveShowcase = flagshipShowcaseProjects[activeShowcaseIdx]
+  const activeHeroProject = heroCarouselProjects[activeHeroProjectIdx]
+  const nextHeroProjectIdx = (activeHeroProjectIdx + 1) % heroCarouselProjects.length
+  const nextHeroProject = heroCarouselProjects[nextHeroProjectIdx]
   const currentReview = clientTestimonials[activeReviewIdx]
-
-  const infiniteRow1 = [...row1Projects, ...row1Projects]
-  const infiniteRow2 = [...row2Projects, ...row2Projects]
+  const infiniteRow1 = [...marqueeRow1, ...marqueeRow1]
+  const infiniteRow2 = [...marqueeRow2, ...marqueeRow2]
 
   return (
     <div className="w-full min-h-screen text-foreground relative overflow-x-hidden bg-white dark:bg-[#0a0a0b]">
 
       {/* ─────────────────────────────────────────────────────────────
-          01. SUPASTE-STYLE HERO SECTION
-          Full-viewport dark hero with ambient glow, centered split
-          headline (Inter Display Bold + Instrument Serif Italic),
-          trust metrics, and macOS glass showcase window.
+          01. HIGH-IMPACT ADS HERO SECTION (Evervault Exact Aesthetic)
+          Bold ads typography, luminous violet atmospheric glow,
+          clean white pill CTA, zero emojis, zero eyebrows,
+          larger centered card showcase with overlapping white card.
       ───────────────────────────────────────────────────────────── */}
       <section
         id="hero"
-        className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-12 lg:px-20 pt-28 sm:pt-36 pb-16 scroll-mt-24 overflow-hidden bg-white dark:bg-[#0a0a0b]"
+        className="relative w-full px-4 sm:px-6 md:px-12 lg:px-20 pt-28 sm:pt-36 pb-20 sm:pb-28 scroll-mt-24 overflow-hidden"
       >
-        {/* Supaste Diffused Ambient Radial Glow */}
+        {/* Supaste Soft Radial Ambient Glow */}
         <div className="absolute inset-0 supaste-glow pointer-events-none -z-10" />
 
-        <div className="max-w-5xl mx-auto flex flex-col items-center justify-center">
+        {/* Evervault Radiant Violet Atmospheric Bloom */}
+        <div
+          className="absolute -bottom-24 -left-20 w-[650px] h-[550px] rounded-full pointer-events-none -z-10 blur-3xl opacity-80 dark:opacity-90"
+          style={{
+            background:
+              'radial-gradient(ellipse at 20% 85%, rgba(124, 58, 237, 0.45) 0%, rgba(99, 102, 241, 0.3) 35%, rgba(67, 56, 202, 0.15) 60%, transparent 80%)',
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-1/4 w-[500px] h-[350px] rounded-full pointer-events-none -z-10 blur-3xl opacity-50 dark:opacity-70"
+          style={{
+            background:
+              'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(99, 102, 241, 0.15) 45%, transparent 70%)',
+          }}
+        />
 
-          {/* Pill Badge (Supaste Signature Eyebrow) */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-xl shadow-xs text-[12px] font-medium text-foreground mb-8 select-none"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            <span className="font-semibold text-zinc-900 dark:text-zinc-100">Full-Stack Product Engineer</span>
-            <span className="text-muted-foreground/60">&bull;</span>
-            <span className="text-muted-foreground">Available for Projects</span>
-          </motion.div>
-
-          {/* Master Headline (Supaste Exact: Bold sans + Instrument Serif italic, centered) */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mb-6"
-          >
-            <h1
-              className="text-[50px] sm:text-[64px] md:text-[72px] lg:text-[80px] font-bold tracking-[-0.05em] leading-[1em] text-foreground text-center"
-              style={{ fontFamily: "'Inter', 'Inter Display', sans-serif" }}
+        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* ── Left Column: High-Impact Ads Value Proposition ── */}
+          <div className="lg:col-span-5 flex flex-col items-start text-left">
+            {/* Master Headline (Bold Sans + Instrument Serif Italic) */}
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              Ambitious ideas.
-            </h1>
-            <h1
-              className="text-[50px] sm:text-[64px] md:text-[72px] lg:text-[80px] italic tracking-[-0.05em] leading-[1em] text-foreground text-center"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
-            >
-              Shipped products.
-            </h1>
-          </motion.div>
-
-          {/* Subheadline */}
-          <motion.p
-            initial={reduce ? false : { opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 font-normal"
-          >
-            I partner directly with founders and business teams to design, build, and ship custom web applications, autonomous AI workflows, and modern high-converting websites.
-          </motion.p>
-
-          {/* CTA Cluster (Supaste Style: Primary large pill + Secondary) */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10"
-          >
-            {/* Primary Action Button (Supaste large pill: black bg, 20px radius) */}
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2.5 px-7 py-4 rounded-[20px] bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-95 transition-all duration-150 cursor-pointer"
-              style={{
-                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 14px rgba(0,0,0,0.15)',
-              }}
-            >
-              <span>Start a Project</span>
-              <FaArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
-
-            {/* Secondary Action: AI Advisor */}
-            {onOpenChat && (
-              <button
-                type="button"
-                onClick={onOpenChat}
-                className="group inline-flex items-center gap-2 px-6 py-4 rounded-[20px] bg-white/80 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-xl text-foreground font-semibold text-sm tracking-tight shadow-xs hover:border-amber-500/40 active:scale-95 transition-all duration-150 cursor-pointer"
+              <h1
+                className="text-[44px] sm:text-[56px] md:text-[66px] lg:text-[72px] font-bold tracking-[-0.04em] leading-[1.02em] text-foreground"
+                style={{ fontFamily: "'Inter', 'Inter Display', sans-serif" }}
               >
-                <HiSparkles className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
-                <span>Ask Arnel&apos;s AI Advisor</span>
-              </button>
-            )}
-          </motion.div>
+                Websites, stores &amp; AI
+              </h1>
+              <h1
+                className="text-[44px] sm:text-[56px] md:text-[66px] lg:text-[72px] italic tracking-[-0.04em] leading-[1.02em] text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400 mt-1"
+                style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              >
+                built to grow your business.
+              </h1>
+            </motion.div>
 
-          {/* Supaste Trust Metrics Row */}
+            {/* Client-Centric Subtitle (Zero Tech Jargon) */}
+            <motion.p
+              initial={reduce ? false : { opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mt-6 font-normal"
+            >
+              I partner directly with founders and business owners to build fast, reliable websites, online shops, and custom AI tools that save hours of work and convert visitors into customers.
+            </motion.p>
+
+            {/* Primary Action Buttons */}
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mt-8 w-full sm:w-auto"
+            >
+              <a
+                href="#contact"
+                className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-[18px] bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-95 transition-all duration-150 cursor-pointer"
+                style={{
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 14px rgba(0,0,0,0.15)',
+                }}
+              >
+                <span>Start Your Project</span>
+                <FaArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" />
+              </a>
+
+              {onOpenChat && (
+                <button
+                  type="button"
+                  onClick={onOpenChat}
+                  className="group inline-flex items-center justify-center gap-2 px-6 py-4 rounded-[18px] bg-white/80 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-xl text-foreground font-semibold text-sm tracking-tight shadow-xs hover:border-amber-500/40 active:scale-95 transition-all duration-150 cursor-pointer"
+                >
+                  <HiSparkles className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
+                  <span>Ask Arnel&apos;s AI Assistant</span>
+                </button>
+              )}
+            </motion.div>
+          </div>
+
+          {/* ── Right Column: Ads-Type Layered Project Card Carousel (Larger, Centered Image, Zero Eyebrows) ── */}
           <motion.div
-            initial={reduce ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-10 gap-y-2 text-[12px] text-muted-foreground select-none"
+            initial={reduce ? false : { opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-7 flex flex-col items-center justify-center w-full relative"
           >
-            <span>2–4 Week Launch</span>
-            <span>100% Code Ownership</span>
-            <span>Direct 1-on-1 Partnership</span>
+            {/* Signature Evervault Overlapping White Card on Bottom Right */}
+            <div className="hidden md:block absolute -bottom-6 -right-4 lg:-bottom-7 lg:-right-6 w-64 lg:w-72 rounded-2xl bg-white text-zinc-900 p-5 shadow-2xl border border-zinc-200/80 z-20 pointer-events-auto">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                  Client Outcome
+                </span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              </div>
+              <p className="text-sm font-bold text-zinc-950 tracking-tight">
+                {activeHeroProject.metric}
+              </p>
+              <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+                {activeHeroProject.highlights[0]}
+              </p>
+              {activeHeroProject.liveUrl && (
+                <a
+                  href={activeHeroProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-zinc-900 hover:text-indigo-600 transition-colors"
+                >
+                  <span>Visit Live Site</span>
+                  <FaExternalLinkAlt className="w-2.5 h-2.5" />
+                </a>
+              )}
+            </div>
+
+            {/* Main Active Project Card (Larger, Centered Image, Zero Eyebrows) */}
+            <div
+              onMouseEnter={() => setIsHeroCarouselAutoplay(false)}
+              onMouseLeave={() => setIsHeroCarouselAutoplay(true)}
+              className="w-full max-w-2xl rounded-3xl supaste-glass-card shadow-2xl border border-black/[0.08] dark:border-white/[0.12] p-6 sm:p-8 relative z-10 text-left transition-all"
+            >
+              {/* Card Top Control Bar (Clean Counter & Nav Controls, Zero Eyebrows) */}
+              <div className="flex items-center justify-between gap-3 pb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-bold tracking-tight text-foreground/80">
+                    Project {String(activeHeroProjectIdx + 1).padStart(2, '0')}{' '}
+                    <span className="text-muted-foreground font-normal">
+                      / {String(heroCarouselProjects.length).padStart(2, '0')}
+                    </span>
+                  </span>
+                </div>
+
+                {/* Controls: Monospace Counter + Navigation Arrows */}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handlePrevHeroProject}
+                    aria-label="Previous project"
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
+                  >
+                    <FaChevronLeft className="w-3 h-3" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextHeroProject}
+                    aria-label="Next project"
+                    className="w-8 h-8 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
+                  >
+                    <FaChevronRight className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Animated Slide Content */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeHeroProject.id}
+                  initial={reduce ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25 }}
+                  className="pt-4"
+                >
+                  {/* High-Resolution Project Preview (Larger, Centered Image) */}
+                  <div className="relative aspect-[16/10] min-h-[260px] sm:min-h-[320px] md:min-h-[350px] w-full rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.10] shadow-md bg-zinc-950/40 group/img flex items-center justify-center">
+                    <Image
+                      src={activeHeroProject.image}
+                      alt={activeHeroProject.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 700px"
+                      className="object-cover object-center transition-transform duration-500 group-hover/img:scale-102"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  {/* Project Title & Plain Business Purpose (No Tech Jargon) */}
+                  <div className="mt-5 space-y-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
+                      {activeHeroProject.title}{' '}
+                      <span className="text-muted-foreground font-medium text-sm sm:text-base">
+                        &bull; {activeHeroProject.tagline}
+                      </span>
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-normal">
+                      {activeHeroProject.purpose}
+                    </p>
+
+                    {/* Benefit Highlight Pills */}
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {activeHeroProject.highlights.map((item, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08] text-foreground"
+                        >
+                          <FaCheckCircle className="w-3 h-3 text-emerald-500 shrink-0" />
+                          <span>{item}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Card Action Footer */}
+                  <div className="flex items-center justify-between pt-4 mt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
+                    {activeHeroProject.liveUrl ? (
+                      <a
+                        href={activeHeroProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-amber-500 transition-colors"
+                      >
+                        <span>Visit Live Experience</span>
+                        <FaExternalLinkAlt className="w-2.5 h-2.5" />
+                      </a>
+                    ) : (
+                      <span className="text-xs text-muted-foreground font-medium">Production Client Solution</span>
+                    )}
+
+                    <a
+                      href="#contact"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-foreground hover:text-amber-500 transition-colors"
+                    >
+                      <span>Build something similar &rarr;</span>
+                    </a>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Slide Dots Indicator */}
+              <div className="flex items-center justify-center gap-1.5 mt-5 pt-1">
+                {heroCarouselProjects.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveHeroProjectIdx(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeHeroProjectIdx === idx
+                        ? 'w-7 bg-foreground'
+                        : 'w-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'
+                      }`}
+                  />
+                ))}
+              </div>
+            </div>
           </motion.div>
-
         </div>
-
-
       </section>
 
 
       {/* ─────────────────────────────────────────────────────────────
-          03. FEATURED PROJECTS (2-Line Infinite Carousel Showcase)
+          02. OPEN EDITORIAL CAPABILITIES (No Boxed Card Slop)
+          A clean, expansive 4-pillar layout explaining exactly what
+          Arnel builds for businesses in simple, non-tech words.
+      ───────────────────────────────────────────────────────────── */}
+      <section
+        id="capabilities"
+        className="w-full py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-20 max-w-6xl mx-auto scroll-mt-24"
+      >
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
+            Everything you need{' '}
+            <span className="font-instrument italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400">
+              to launch and grow.
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-base sm:text-lg mt-3 font-normal">
+            From initial idea to live launch, here is how I help founders and business teams succeed online.
+          </p>
+        </div>
+
+        {/* Open Editorial 4-Pillar Layout (Spacious, elegant, non-card) */}
+        <div className="space-y-16 sm:space-y-20 divide-y divide-black/[0.06] dark:divide-white/[0.08]">
+          {[
+            {
+              step: '01',
+              title: 'High-Converting Websites & Online Stores',
+              headline: 'Fast mobile shopping that turns visitors into buyers',
+              description:
+                'Your website is your best salesperson. I build modern, mobile-first websites and online shops that load instantly, display your products beautifully, and let customers check out in seconds with credit cards or digital payments.',
+              highlights: [
+                'Loads in under 2 seconds on mobile phones',
+                'Simple, frictionless customer checkout',
+                'Easy for you to update text, photos, and prices',
+                'Built-in Google search optimization',
+              ],
+            },
+            {
+              step: '02',
+              title: 'Smart AI Assistants That Save You Time',
+              headline: 'Friendly AI that answers questions and handles daily work 24/7',
+              description:
+                'Stop answering the same customer questions every day. I build customized AI assistants trained on your business information that can answer inquiries instantly, help visitors pick products, and organize paperwork automatically.',
+              highlights: [
+                'Answers customers 24/7 without extra staff',
+                'Trained specifically on your business information',
+                'Handles document filing and repetitive tasks',
+                'Keeps customer interactions secure and private',
+              ],
+            },
+            {
+              step: '03',
+              title: 'Custom Business Portals & Staff Tools',
+              headline: 'Replace messy spreadsheets with simple web dashboards',
+              description:
+                'Run your daily operations without paper chaos. I build simple, secure web platforms where your team can log daily attendance with phone QR codes, track customer orders, and compile automatic reports with zero manual errors.',
+              highlights: [
+                'Mobile phone QR check-ins for staff',
+                'Eliminates manual timesheet mistakes',
+                'Simple dashboards anyone on your team can use',
+                'Saves days of administrative work every month',
+              ],
+            },
+            {
+              step: '04',
+              title: 'Fast 2–4 Week Turnaround & 100% Peace of Mind',
+              headline: 'Weekly test links, zero agency bureaucracy, you own everything',
+              description:
+                'No endless meetings or confusing tech jargon. You work directly with me from day one. Every week, you receive a live link to test on your phone. When we launch, you own 100% of all accounts, design files, and software.',
+              highlights: [
+                'Launch ready in just 2 to 4 weeks',
+                'Weekly live demo links to test on your phone',
+                '100% complete ownership of your site and code',
+                '30 days of free support and guidance after launch',
+              ],
+            },
+          ].map((item, idx) => (
+            <div
+              key={item.step}
+              className={`pt-14 sm:pt-16 grid lg:grid-cols-12 gap-8 lg:gap-14 items-start ${idx === 0 ? 'border-t-0 pt-0' : ''
+                }`}
+            >
+              <div className="lg:col-span-4 space-y-2">
+                <span className="font-mono text-xs font-bold text-amber-600 dark:text-amber-400">
+                  {item.step} &bull; SERVICE PILLAR
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="text-sm font-semibold text-amber-600 dark:text-amber-400">
+                  {item.headline}
+                </p>
+              </div>
+
+              <div className="lg:col-span-8 space-y-6">
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal">
+                  {item.description}
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3 pt-2">
+                  {item.highlights.map((h) => (
+                    <div key={h} className="flex items-start gap-2.5 text-xs sm:text-sm text-foreground">
+                      <FaCheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <span>{h}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* ─────────────────────────────────────────────────────────────
+          03. VISUAL SHOWCASE OF PRODUCTION WORK (Continuous Marquee)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="projects"
-        className="w-full py-24 sm:py-32 scroll-mt-24 overflow-hidden bg-white dark:bg-[#0a0a0b]"
+        className="w-full py-24 sm:py-32 scroll-mt-24 overflow-hidden"
       >
         <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 max-w-7xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] text-xs font-mono text-muted-foreground mb-4">
-            PROVEN TRACK RECORD
-          </div>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
             Visual showcase of{' '}
             <span className="font-instrument italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400">
-              production
-            </span>{' '}
-            work.
+              real client products.
+            </span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg mt-3 max-w-2xl mx-auto font-normal">
-            Real websites, online stores, web apps, and AI automations shipped for businesses and founders worldwide.
+            Real websites, online stores, web apps, and AI automations shipped for businesses and founders.
           </p>
         </div>
 
         {/* 2-Line Infinite Carousel Container with Edge Gradient Masks */}
         <div className="relative w-full overflow-hidden space-y-8 sm:space-y-10 py-4">
-          
+
           {/* Edge Fade Gradients */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-40 bg-gradient-to-r from-background via-background/80 to-transparent z-20" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-40 bg-gradient-to-l from-background via-background/80 to-transparent z-20" />
 
           {/* ── LINE 1: Scrolling Left ── */}
-          <div className="flex overflow-visible py-4">
+          <div className="flex overflow-visible py-2">
             <div className="animate-infinite-carousel flex gap-6 sm:gap-8 items-stretch px-4">
               {infiniteRow1.map((item, idx) => (
                 <div
                   key={`row1-${item.id}-${idx}`}
-                  className="relative w-[300px] sm:w-[400px] md:w-[440px] aspect-[16/10] shrink-0 rounded-3xl overflow-hidden supaste-glass-card shadow-md hover:scale-[1.03] hover:z-20 transition-transform duration-220 ease-out group select-none cursor-pointer"
+                  className="relative w-[300px] sm:w-[380px] md:w-[420px] aspect-[16/10] shrink-0 rounded-3xl overflow-hidden supaste-glass-card shadow-md hover:scale-[1.03] hover:z-20 transition-transform duration-220 ease-out group select-none cursor-pointer"
                 >
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 300px, 440px"
+                    sizes="(max-width: 768px) 300px, 420px"
                     className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
 
                   {/* Top Badge */}
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-[11px] font-mono font-medium border border-white/20">
+                    <span className="px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/20">
                       {item.badge}
                     </span>
                   </div>
@@ -649,7 +926,7 @@ export function ClientBusinessView({
                     <div className="text-base sm:text-lg font-bold text-white tracking-tight drop-shadow-sm">
                       {item.title}
                     </div>
-                    <div className="text-xs text-white/80 line-clamp-2 mt-1">
+                    <div className="text-xs text-white/80 line-clamp-2 mt-1 font-normal">
                       {item.detail}
                     </div>
                   </div>
@@ -659,25 +936,25 @@ export function ClientBusinessView({
           </div>
 
           {/* ── LINE 2: Scrolling Right ── */}
-          <div className="flex overflow-visible py-4">
+          <div className="flex overflow-visible py-2">
             <div className="animate-infinite-carousel-reverse flex gap-6 sm:gap-8 items-stretch px-4">
               {infiniteRow2.map((item, idx) => (
                 <div
                   key={`row2-${item.id}-${idx}`}
-                  className="relative w-[300px] sm:w-[400px] md:w-[440px] aspect-[16/10] shrink-0 rounded-3xl overflow-hidden supaste-glass-card shadow-md hover:scale-[1.03] hover:z-20 transition-transform duration-220 ease-out group select-none cursor-pointer"
+                  className="relative w-[300px] sm:w-[380px] md:w-[420px] aspect-[16/10] shrink-0 rounded-3xl overflow-hidden supaste-glass-card shadow-md hover:scale-[1.03] hover:z-20 transition-transform duration-220 ease-out group select-none cursor-pointer"
                 >
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 300px, 440px"
+                    sizes="(max-width: 768px) 300px, 420px"
                     className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
 
                   {/* Top Badge */}
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-[11px] font-mono font-medium border border-white/20">
+                    <span className="px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/20">
                       {item.badge}
                     </span>
                   </div>
@@ -687,7 +964,7 @@ export function ClientBusinessView({
                     <div className="text-base sm:text-lg font-bold text-white tracking-tight drop-shadow-sm">
                       {item.title}
                     </div>
-                    <div className="text-xs text-white/80 line-clamp-2 mt-1">
+                    <div className="text-xs text-white/80 line-clamp-2 mt-1 font-normal">
                       {item.detail}
                     </div>
                   </div>
@@ -699,24 +976,21 @@ export function ClientBusinessView({
         </div>
 
         <div className="text-center text-xs text-muted-foreground mt-4 select-none">
-          <span>Continuous production showcase &bull; Hover over any card to pause</span>
+          <span>Continuous client showcase &bull; Hover over any card to pause</span>
         </div>
       </section>
 
 
       {/* ─────────────────────────────────────────────────────────────
-          04. CLIENT PROOF & TESTIMONIALS (Spotlight Card)
+          04. CLIENT REVIEWS & TESTIMONIALS (Spotlight Card)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="testimonials"
-        className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-24 sm:py-32 scroll-mt-24 bg-white dark:bg-[#0a0a0b]"
+        className="w-full px-4 sm:px-6 md:px-12 lg:px-20 py-24 sm:py-32 scroll-mt-24"
       >
-        <div className="w-full max-w-5xl mx-auto">
-          
+        <div className="w-full max-w-4xl mx-auto">
+
           <div className="mb-14 text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold mb-4">
-              CLIENT REVIEWS &amp; VERIFIED OUTCOMES
-            </div>
             <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
               Real feedback from{' '}
               <span className="font-instrument italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400">
@@ -813,17 +1087,17 @@ export function ClientBusinessView({
                         <div className="text-xs sm:text-sm text-muted-foreground font-normal">
                           {currentReview.clientRole} &bull; <span className="text-foreground font-semibold">{currentReview.company}</span>
                         </div>
-                        <div className="text-xs font-mono text-amber-600 dark:text-amber-400 mt-0.5 font-medium">
+                        <div className="text-xs text-amber-600 dark:text-amber-400 mt-0.5 font-medium">
                           {currentReview.project}
                         </div>
                       </div>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs font-mono font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-600/15 dark:bg-emerald-400/20 px-3 py-1 rounded-full border border-emerald-600/30 dark:border-emerald-400/35">
+                      <span className="text-xs font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-600/15 dark:bg-emerald-400/20 px-3 py-1 rounded-full border border-emerald-600/30 dark:border-emerald-400/35">
                         {currentReview.highlightMetric}
                       </span>
-                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] text-muted-foreground text-xs font-mono font-medium border border-black/[0.05] dark:border-white/[0.08]">
+                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] text-muted-foreground text-xs font-medium border border-black/[0.05] dark:border-white/[0.08]">
                         <FaStar className="w-3 h-3 text-amber-500" />
                         <span>5.0 Star Rating</span>
                       </div>
@@ -839,16 +1113,15 @@ export function ClientBusinessView({
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => handleSelectReview(idx)}
+                  onClick={() => setActiveReviewIdx(idx)}
                   className="p-2 min-w-[32px] min-h-[32px] flex items-center justify-center cursor-pointer group rounded-full"
                   aria-label={`Go to slide ${idx + 1}`}
                 >
                   <span
-                    className={`h-2 rounded-full transition-all duration-200 ${
-                      activeReviewIdx === idx
+                    className={`h-2 rounded-full transition-all duration-200 ${activeReviewIdx === idx
                         ? 'w-8 bg-amber-500'
                         : 'w-2 bg-black/20 dark:bg-white/20 group-hover:bg-amber-500/50'
-                    }`}
+                      }`}
                   />
                 </button>
               ))}
@@ -861,16 +1134,13 @@ export function ClientBusinessView({
 
 
       {/* ─────────────────────────────────────────────────────────────
-          06. FREQUENTLY ASKED QUESTIONS (Supaste Clean Accordion)
+          05. FREQUENTLY ASKED QUESTIONS (Supaste Clean Accordion)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="faq"
-        className="w-full px-4 sm:px-6 md:px-12 lg:px-20 max-w-4xl mx-auto py-24 sm:py-32 scroll-mt-24 bg-white dark:bg-[#0a0a0b]"
+        className="w-full px-4 sm:px-6 md:px-12 lg:px-20 max-w-4xl mx-auto py-24 sm:py-32 scroll-mt-24"
       >
         <div className="mb-16 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] text-xs font-mono text-muted-foreground mb-4">
-            QUESTIONS &amp; ANSWERS
-          </div>
           <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
             Frequently Asked{' '}
             <span className="font-instrument italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400">
@@ -878,7 +1148,7 @@ export function ClientBusinessView({
             </span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg mt-3 font-normal">
-            Direct, plain-English answers about delivery timelines, pricing, code ownership, and how we work together.
+            Straightforward answers about launch timelines, pricing, code ownership, and how we work together.
           </p>
         </div>
 
@@ -897,7 +1167,7 @@ export function ClientBusinessView({
                 >
                   <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0">
                     <span className="font-mono text-xs font-bold text-amber-600 dark:text-amber-400 px-2.5 py-1 rounded-md bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] shrink-0">
-                      {faq.tag}
+                      {faq.number}
                     </span>
                     <h3 className="text-base sm:text-xl font-bold text-foreground tracking-tight group-hover:text-amber-500 transition-colors min-w-0">
                       {faq.question}
@@ -928,14 +1198,14 @@ export function ClientBusinessView({
                       <div className="pb-7 pl-0 sm:pl-[3.25rem] pr-4 sm:pr-10 text-muted-foreground text-sm sm:text-base leading-relaxed font-normal">
                         <p>{faq.answer}</p>
                         <div className="mt-4 pt-3 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center gap-2 text-xs">
-                          <span className="text-muted-foreground">Have a unique requirement?</span>
+                          <span className="text-muted-foreground">Have a specific question?</span>
                           {onOpenChat ? (
                             <button
                               type="button"
                               onClick={onOpenChat}
                               className="text-amber-600 dark:text-amber-400 hover:underline font-semibold transition-colors cursor-pointer"
                             >
-                              Ask Arnel&apos;s AI Advisor &rarr;
+                              Ask Arnel&apos;s AI Assistant &rarr;
                             </button>
                           ) : (
                             <a
@@ -959,13 +1229,13 @@ export function ClientBusinessView({
         {onOpenChat && (
           <div className="mt-12 text-center">
             <div className="inline-flex flex-wrap items-center justify-center gap-3 px-5 py-2.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-xs sm:text-sm">
-              <span className="text-foreground font-medium">Have a specific question about your scope or timeline?</span>
+              <span className="text-foreground font-medium">Have questions about your project scope or timeline?</span>
               <button
                 type="button"
                 onClick={onOpenChat}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500 text-zinc-950 font-semibold text-xs hover:bg-amber-400 transition-colors shadow-2xs cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500 text-zinc-950 font-semibold text-xs hover:bg-amber-400 transition-colors shadow-2xs cursor-pointer"
               >
-                <span>Ask Arnel&apos;s AI Advisor</span>
+                <span>Ask AI Assistant</span>
                 <span>&rarr;</span>
               </button>
             </div>
@@ -976,453 +1246,376 @@ export function ClientBusinessView({
 
 
       {/* ─────────────────────────────────────────────────────────────
-          07. DIRECT INQUIRY & CONTACT SECTION (Guided 3-Step Flow)
+          06. DIRECT CONTACT SECTION (Clean, Approachable, No Wizard)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="contact"
-        className="w-full px-4 sm:px-6 md:px-12 lg:px-20 max-w-7xl mx-auto py-24 sm:py-32 scroll-mt-24 bg-white dark:bg-[#0a0a0b]"
+        className="w-full px-4 sm:px-6 md:px-12 lg:px-16 max-w-7xl mx-auto py-28 sm:py-36 scroll-mt-24"
       >
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Column: Direct channels */}
-          <div className="lg:col-span-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-mono font-semibold mb-4">
-              START A CONVERSATION
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight mb-4">
-              Let’s build something{' '}
-              <span className="font-instrument italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400">
-                great.
-              </span>
-            </h2>
-            <p className="text-base text-muted-foreground leading-relaxed mb-8 font-normal">
-              Whether you need to build a custom web app from scratch, launch an online store, or integrate automated AI agents, I’d love to learn about your goals.
-            </p>
-
-            <div className="space-y-4 mb-8">
-              <a
-                href="mailto:arnlebaylon15@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-2xl supaste-glass-card hover:border-amber-500/40 text-foreground transition-colors group shadow-xs"
-              >
-                <div className="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <FaEnvelope className="w-5 h-5" />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs text-muted-foreground font-medium">Direct Email</div>
-                  <div className="text-sm sm:text-base font-semibold text-foreground group-hover:text-amber-500 transition-colors truncate">
-                    arnlebaylon15@gmail.com
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/arnel-baylon-b05233189"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-2xl supaste-glass-card hover:border-[#0A66C2]/50 text-foreground transition-colors group shadow-xs"
-              >
-                <div className="w-11 h-11 rounded-xl bg-[#0A66C2]/15 text-[#0A66C2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <FaLinkedin className="w-5 h-5" />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs text-muted-foreground font-medium">LinkedIn Profile</div>
-                  <div className="text-sm sm:text-base font-semibold text-foreground group-hover:text-amber-500 transition-colors truncate">
-                    linkedin.com/in/arnel-baylon-b05233189
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div className="p-5 rounded-2xl supaste-glass-card text-xs text-muted-foreground space-y-2">
-              <div className="font-semibold text-foreground text-sm flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Availability &amp; Time Zones</span>
-              </div>
-              <div>Working hours adapt smoothly to US, European, and Asia-Pacific time zones.</div>
-              <div>Ready to begin new project sprints within 5 to 7 days.</div>
-            </div>
+        {/* Section Header (Zellify Exact Aesthetic) */}
+        <div className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.1] text-muted-foreground mb-5">
+            Contact
           </div>
+          <h2 className="text-4xl sm:text-6xl font-bold text-foreground tracking-tight">
+            How can I help?
+          </h2>
+          <p className="text-muted-foreground text-base sm:text-xl mt-4 font-normal leading-relaxed max-w-2xl mx-auto">
+            I am here to help you bring your website, online store, or AI tool to life. Reach out with your project details and I will get back to you as soon as possible.
+          </p>
+        </div>
 
-          {/* Right Column: 3-Step Guided Project Questionnaire */}
-          <div className="lg:col-span-7">
-            <div className="p-6 sm:p-10 rounded-3xl supaste-glass-card shadow-lg">
-              {inquirySubmitted ? (
-                <div className="py-12 text-center">
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
-                    <FaCheck className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground">Message Ready!</h3>
-                  <p className="text-sm text-muted-foreground mt-2 max-w-md mx-auto">
-                    Your email client should have opened with your project brief. If it didn&apos;t open automatically, feel free to email me directly at{' '}
-                    <a href="mailto:arnlebaylon15@gmail.com" className="text-foreground font-semibold underline">
-                      arnlebaylon15@gmail.com
-                    </a>.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setInquirySubmitted(false)
-                      setFormStep(1)
-                    }}
-                    className="mt-6 px-6 py-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] text-xs font-semibold text-foreground transition-colors cursor-pointer"
-                  >
-                    Submit Another Inquiry
-                  </button>
+        {/* Zellify-Style 2-Column Split Card (Full Width, Large Scale) */}
+        <div className="w-full rounded-[32px] sm:rounded-[40px] supaste-glass-card shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden">
+          <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-black/[0.08] dark:divide-white/[0.08]">
+
+            {/* Left Column: Project Inquiry */}
+            <div className="p-8 sm:p-12 md:p-16 lg:p-20 flex flex-col justify-between min-h-[420px] sm:min-h-[480px]">
+              <div className="text-center space-y-4">
+                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground border border-black/[0.06] dark:border-white/[0.08]">
+                  Project Inquiry
                 </div>
-              ) : (
-                <form onSubmit={handleInquirySubmit}>
-                  
-                  {/* Step Progress Bar */}
-                  <div className="flex items-center justify-between gap-2 mb-8 text-xs font-mono">
-                    {[
-                      { step: 1, label: '1. Project Type' },
-                      { step: 2, label: '2. Project Scope' },
-                      { step: 3, label: '3. Contact Details' },
-                    ].map((s) => (
-                      <div
-                        key={s.step}
-                        className={`flex-1 text-center pb-2 border-b-2 transition-colors ${
-                          formStep === s.step
-                            ? 'border-amber-500 font-bold text-foreground'
-                            : formStep > s.step
-                            ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400'
-                            : 'border-black/[0.08] dark:border-white/[0.1] text-muted-foreground'
-                        }`}
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
+                  Submit a project inquiry
+                </h3>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-md mx-auto">
+                  Share your vision, project goals, or requirements for assistance with timelines and an accurate estimate.
+                </p>
+              </div>
+
+              {/* Action Area: Form or Direct Button */}
+              <div className="pt-8 w-full flex flex-col items-center">
+                <AnimatePresence mode="wait">
+                  {contactSubmitted ? (
+                    <motion.div
+                      key="submitted"
+                      initial={reduce ? false : { opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      className="w-full text-center space-y-4 py-4"
+                    >
+                      <div className="w-14 h-14 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                        <FaCheckCircle className="w-7 h-7" />
+                      </div>
+                      <h4 className="text-xl font-bold text-foreground">Inquiry Ready!</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed font-normal max-w-sm mx-auto">
+                        Your email client has opened with your project inquiry details. I will review and reply within 24 hours.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setContactSubmitted(false)
+                          setIsInquiryFormOpen(false)
+                          setContactMessage('')
+                        }}
+                        className="text-sm font-semibold text-amber-500 hover:underline pt-2 cursor-pointer"
                       >
-                        {s.label}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* ── STEP 1: Select Type ── */}
-                  {formStep === 1 && (
-                    <motion.div
-                      key="step1"
-                      initial={reduce ? false : { opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="space-y-6"
-                    >
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-foreground">What would you like to build?</h3>
-                        <p className="text-xs sm:text-sm text-muted-foreground mt-1 font-normal">
-                          Select the category that best matches your project vision.
-                        </p>
-                      </div>
-
-                      <div className="grid sm:grid-cols-2 gap-3">
-                        {[
-                          { id: 'New Website or App', desc: 'Custom website, portal, or web app' },
-                          { id: 'AI Assistant or Automation', desc: 'Smart bots, document parser, automated flow' },
-                          { id: 'E-Commerce Store', desc: 'Online shop, checkout flow, payment setup' },
-                          { id: 'Monthly Retainer or Review', desc: 'Ongoing feature sprints & advisory' },
-                        ].map((opt) => {
-                          const isSelected = inquiryType === opt.id
-                          return (
-                            <button
-                              key={opt.id}
-                              type="button"
-                              onClick={() => setInquiryType(opt.id)}
-                              className={`p-4 rounded-2xl text-left border transition-all cursor-pointer ${
-                                isSelected
-                                  ? 'bg-amber-500/10 border-amber-500/60 shadow-xs'
-                                  : 'bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.06] dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20'
-                              }`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className={`text-sm font-semibold ${isSelected ? 'text-amber-600 dark:text-amber-400' : 'text-foreground'}`}>
-                                  {opt.id}
-                                </span>
-                                {isSelected && <span className="text-amber-500 font-bold">&check;</span>}
-                              </div>
-                              <div className="text-xs text-muted-foreground mt-1">{opt.desc}</div>
-                            </button>
-                          )
-                        })}
-                      </div>
-
-                      <div className="pt-4 flex justify-end">
-                        <button
-                          type="button"
-                          onClick={handleNextStep}
-                          className="px-6 py-3 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-xs tracking-tight shadow-sm hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
-                        >
-                          <span>Next: Scope &amp; Details</span>
-                          <FaArrowRight className="w-3 h-3" />
-                        </button>
-                      </div>
+                        Submit another inquiry &rarr;
+                      </button>
                     </motion.div>
-                  )}
-
-                  {/* ── STEP 2: Scope & Overview ── */}
-                  {formStep === 2 && (
-                    <motion.div
-                      key="step2"
-                      initial={reduce ? false : { opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="space-y-6"
+                  ) : isInquiryFormOpen ? (
+                    <motion.form
+                      key="form"
+                      initial={reduce ? false : { opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      onSubmit={handleContactSubmit}
+                      className="w-full max-w-lg space-y-4 text-left mx-auto"
                     >
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-foreground">Tell me about your project</h3>
-                        <p className="text-xs sm:text-sm text-muted-foreground mt-1 font-normal">
-                          Share what you want to achieve or any key features you have in mind.
-                        </p>
+                        <label htmlFor="contact-name" className="block text-xs font-semibold text-foreground mb-1.5">
+                          Name or Company
+                        </label>
+                        <input
+                          id="contact-name"
+                          type="text"
+                          required
+                          value={contactName}
+                          onChange={(e) => {
+                            setContactName(e.target.value)
+                            if (contactError) setContactError(null)
+                          }}
+                          placeholder="e.g. Alex Rivera"
+                          className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-amber-500 focus:outline-hidden transition-colors"
+                        />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-foreground mb-2">Desired Timeline</label>
-                        <div className="grid grid-cols-2 gap-2">
-                          {[
-                            'Fast sprint (2–3 weeks)',
-                            'Standard pace (4–6 weeks)',
-                            'Flexible / Exploration',
-                            'Ongoing monthly',
-                          ].map((t) => (
-                            <button
-                              key={t}
-                              type="button"
-                              onClick={() => setInquiryForm({ ...inquiryForm, timeline: t })}
-                              className={`p-3 rounded-xl text-xs font-medium border text-left transition-colors cursor-pointer ${
-                                inquiryForm.timeline === t
-                                  ? 'bg-amber-500/15 border-amber-500/50 text-foreground font-semibold'
-                                  : 'bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.06] dark:border-white/[0.08] text-muted-foreground hover:text-foreground'
-                              }`}
-                            >
-                              {t}
-                            </button>
-                          ))}
-                        </div>
+                        <label htmlFor="contact-email" className="block text-xs font-semibold text-foreground mb-1.5">
+                          Email Address
+                        </label>
+                        <input
+                          id="contact-email"
+                          type="email"
+                          required
+                          value={contactEmail}
+                          onChange={(e) => {
+                            setContactEmail(e.target.value)
+                            if (contactError) setContactError(null)
+                          }}
+                          placeholder="e.g. alex@company.com"
+                          className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-amber-500 focus:outline-hidden transition-colors"
+                        />
                       </div>
 
                       <div>
-                        <label htmlFor="inquiry-msg" className="block text-xs font-semibold text-foreground mb-2">
-                          Project Summary &amp; Goals
+                        <label htmlFor="contact-message" className="block text-xs font-semibold text-foreground mb-1.5">
+                          Project Requirements &amp; Goals
                         </label>
                         <textarea
-                          id="inquiry-msg"
+                          id="contact-message"
                           rows={4}
-                          value={inquiryForm.message}
-                          onChange={(e) => {
-                            setInquiryForm({ ...inquiryForm, message: e.target.value })
-                            if (formError) setFormError(null)
-                          }}
-                          placeholder="What is your business? What problem are we solving? Any reference websites or apps you admire?"
-                          className="w-full px-4 py-3 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.1] focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors resize-none leading-relaxed"
+                          value={contactMessage}
+                          onChange={(e) => setContactMessage(e.target.value)}
+                          placeholder="Tell me about what you want to build (e.g. online shop, web app, AI tool), desired launch date, or scope..."
+                          className="w-full px-4 py-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.1] text-sm text-foreground focus:border-amber-500 focus:outline-hidden transition-colors resize-none leading-relaxed"
                         />
-                        {formError && <p className="text-xs text-red-500 mt-1.5">&bull; {formError}</p>}
                       </div>
 
-                      <div className="pt-2 flex items-center justify-between">
-                        <button
-                          type="button"
-                          onClick={handlePrevStep}
-                          className="px-4 py-2 rounded-full text-xs font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 cursor-pointer"
-                        >
-                          <FaArrowLeft className="w-2.5 h-2.5" />
-                          <span>Back</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={handleNextStep}
-                          className="px-6 py-3 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-xs tracking-tight shadow-sm hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
-                        >
-                          <span>Next: Contact Details</span>
-                          <FaArrowRight className="w-3 h-3" />
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
+                      {contactError && <p className="text-xs text-red-500 font-medium">&bull; {contactError}</p>}
 
-                  {/* ── STEP 3: Contact Details ── */}
-                  {formStep === 3 && (
-                    <motion.div
-                      key="step3"
-                      initial={reduce ? false : { opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="space-y-6"
-                    >
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-foreground">Your Contact Information</h3>
-                        <p className="text-xs sm:text-sm text-muted-foreground mt-1 font-normal">
-                          Where should I send my thoughts and recommendations?
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div>
-                          <label htmlFor="inquiry-name" className="block text-xs font-medium text-foreground mb-1">
-                            Your Name or Company
-                          </label>
-                          <input
-                            id="inquiry-name"
-                            type="text"
-                            required
-                            value={inquiryForm.name}
-                            onChange={(e) => {
-                              setInquiryForm({ ...inquiryForm, name: e.target.value })
-                              if (formError) setFormError(null)
-                            }}
-                            placeholder="e.g. Sarah Jenkins (Founder, Apex Systems)"
-                            className="w-full px-4 py-3 rounded-xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.1] focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
-                          />
-                        </div>
-
-                        <div>
-                          <label htmlFor="inquiry-email" className="block text-xs font-medium text-foreground mb-1">
-                            Your Email Address
-                          </label>
-                          <input
-                            id="inquiry-email"
-                            type="email"
-                            required
-                            value={inquiryForm.email}
-                            onChange={(e) => {
-                              setInquiryForm({ ...inquiryForm, email: e.target.value })
-                              if (formError) setFormError(null)
-                            }}
-                            placeholder="e.g. sarah@apexsystems.com"
-                            className="w-full px-4 py-3 rounded-xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.1] focus:border-amber-500 focus:outline-hidden text-sm text-foreground transition-colors"
-                          />
-                        </div>
-
-                        {formError && <p className="text-xs text-red-500">&bull; {formError}</p>}
-                      </div>
-
-                      <div className="pt-2 flex items-center justify-between">
-                        <button
-                          type="button"
-                          onClick={handlePrevStep}
-                          className="px-4 py-2 rounded-full text-xs font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 cursor-pointer"
-                        >
-                          <FaArrowLeft className="w-2.5 h-2.5" />
-                          <span>Back</span>
-                        </button>
+                      <div className="flex items-center gap-3 pt-2">
                         <button
                           type="submit"
-                          className="px-6 py-3 rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-xs tracking-tight shadow-sm hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                          className="flex-1 py-3.5 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <span>Send Project Inquiry</span>
-                          <FaArrowRight className="w-3 h-3" />
+                          <FaArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setIsInquiryFormOpen(false)}
+                          className="px-5 py-3.5 rounded-2xl bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground hover:text-foreground text-sm font-medium transition-colors cursor-pointer"
+                        >
+                          Cancel
                         </button>
                       </div>
-
-                      <div className="text-center text-[11px] text-muted-foreground">
-                        I personally reply within 24 hours &bull; 100% confidential and direct
-                      </div>
+                    </motion.form>
+                  ) : (
+                    <motion.div
+                      key="button"
+                      initial={reduce ? false : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="w-full flex flex-col items-center gap-3.5"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setIsInquiryFormOpen(true)}
+                        className="w-full sm:w-auto min-w-[240px] px-10 py-4 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                      >
+                        <span>Submit a Project Inquiry</span>
+                        <FaArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="text-xs text-muted-foreground">
+                        Quick 1-minute inquiry form
+                      </span>
                     </motion.div>
                   )}
-
-                </form>
-              )}
+                </AnimatePresence>
+              </div>
             </div>
-          </div>
 
+            {/* Right Column: Direct Email */}
+            <div className="p-8 sm:p-12 md:p-16 lg:p-20 flex flex-col justify-between min-h-[420px] sm:min-h-[480px]">
+              <div className="text-center space-y-4">
+                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-muted-foreground border border-black/[0.06] dark:border-white/[0.08]">
+                  Direct E-mail
+                </div>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground tracking-tight">
+                  Send me an e-mail
+                </h3>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-md mx-auto">
+                  Contact me directly via e-mail if you have questions or prefer writing straight from your inbox.
+                </p>
+              </div>
+
+              <div className="pt-8 w-full flex flex-col items-center gap-4">
+                <a
+                  href="mailto:arnlebaylon15@gmail.com?subject=Project%20Inquiry%20from%20Portfolio"
+                  className="w-full sm:w-auto min-w-[240px] px-10 py-4 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2.5 cursor-pointer truncate"
+                >
+                  <FaEnvelope className="w-4 h-4 shrink-0" />
+                  <span className="truncate">arnlebaylon15@gmail.com</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer py-1"
+                >
+                  {copiedEmail ? (
+                    <>
+                      <FaCheck className="w-3.5 h-3.5 text-emerald-500" />
+                      <span className="text-emerald-500 font-semibold">Email copied to clipboard!</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaCopy className="w-3.5 h-3.5" />
+                      <span>Copy email address</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Social Media Icons Below (No GitHub, Mobile Responsive) */}
+        <div className="mt-16 sm:mt-20 text-center">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-5">
+            Connect &amp; Follow
+          </p>
+          <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+            <a
+              href="https://www.linkedin.com/in/arnel-baylon-b05233189"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+              className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-black/[0.03] dark:bg-white/[0.05] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] text-foreground text-xs sm:text-sm font-semibold transition-all duration-150 hover:scale-105 active:scale-95 shadow-2xs"
+            >
+              <FaLinkedin className="w-4 h-4 text-[#0A66C2] transition-transform group-hover:scale-110" />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="https://www.facebook.com/arnel.baylon.1650"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook Profile"
+              className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-black/[0.03] dark:bg-white/[0.05] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] text-foreground text-xs sm:text-sm font-semibold transition-all duration-150 hover:scale-105 active:scale-95 shadow-2xs"
+            >
+              <FaFacebook className="w-4 h-4 text-[#1877F2] transition-transform group-hover:scale-110" />
+              <span>Facebook</span>
+            </a>
+
+            <a
+              href="https://www.instagram.com/yheellll"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Profile"
+              className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-black/[0.03] dark:bg-white/[0.05] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] text-foreground text-xs sm:text-sm font-semibold transition-all duration-150 hover:scale-105 active:scale-95 shadow-2xs"
+            >
+              <FaInstagram className="w-4 h-4 text-[#E1306C] transition-transform group-hover:scale-110" />
+              <span>Instagram</span>
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@yheelllls"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok Profile"
+              className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-black/[0.03] dark:bg-white/[0.05] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] text-foreground text-xs sm:text-sm font-semibold transition-all duration-150 hover:scale-105 active:scale-95 shadow-2xs"
+            >
+              <FaTiktok className="w-4 h-4 text-foreground transition-transform group-hover:scale-110" />
+              <span>TikTok</span>
+            </a>
+          </div>
         </div>
       </section>
 
+
       {/* ─────────────────────────────────────────────────────────────
-          08. SUPASTE DEEP BLACK FOOTER
-          Exact Supaste design: inverted white-to-black SVG fillet
-          transition, left brand column, 3 link columns, giant watermark
+          07. SUPASTE DEEP BLACK FOOTER (Tightened, Zero Extra Space Below)
+          Inverted scoop curve transition into black, single-line brand,
+          Menu, Connect, Developer View, and clean architectural watermark
       ───────────────────────────────────────────────────────────── */}
-      <footer className="w-full bg-black text-white relative" style={{ marginTop: 0 }}>
+      <footer id="footer" className="w-full bg-black text-white relative pt-4 pb-0 mb-0">
 
+        {/* ── Top Inverted Corner Bridge (Supaste Scoop Transition) ── */}
+        <div className="w-full h-8 relative overflow-hidden pointer-events-none -mt-8">
+          <div className="w-full h-full bg-black rounded-t-[32px]" />
+        </div>
 
-        {/* ── Footer Content ── */}
-        <div className="w-full max-w-[1200px] mx-auto px-6 sm:px-10 pt-16 pb-10 flex flex-col lg:flex-row gap-10 lg:gap-10 relative">
+        {/* ── Footer Main Content Grid ── */}
+        <div className="w-full max-w-[1200px] mx-auto px-6 sm:px-10 pt-8 pb-4 flex flex-col lg:flex-row gap-10 lg:gap-14 relative">
 
-          {/* ── Left Column: Brand, Headline, Bio, CTA, Copyright ── */}
-          <div className="flex-[2] flex flex-col gap-5 min-w-0">
+          {/* ── Left Column: Brand Identity, Headline, Bio, CTA, Copyright ── */}
+          <div className="flex-[2] flex flex-col gap-4 min-w-0">
 
-            {/* Logo / Brand Identity */}
-            <div className="flex items-center gap-2.5">
-              <div className="relative w-[30px] h-[30px] rounded-[8px] overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900">
+            {/* Logo / Brand Identity (Strict Single Line - No Double Liner!) */}
+            <div className="flex items-center gap-3">
+              <div className="relative w-[32px] h-[32px] rounded-[9px] overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900">
                 <Image
                   src="/images/me.jpg"
                   alt="Arnel Baylon"
                   fill
-                  sizes="30px"
+                  sizes="32px"
                   className="object-cover"
                 />
               </div>
-              <span className="font-semibold text-sm tracking-[-0.02em] text-white">
-                Arnel Baylon
-              </span>
-              <span className="text-white/40 text-sm tracking-[-0.02em]">
-                Engineer
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-base tracking-tight text-white">
+                  Arnel Baylon
+                </span>
+                <span className="text-white/40 text-xs font-mono px-2 py-0.5 rounded bg-white/10">
+                  Engineer
+                </span>
+              </div>
             </div>
 
-            {/* Bold Headline (Supaste style: "Copy once." + italic "Reuse anytime.") */}
+            {/* Dual Headline (Supaste style: Bold sans + Instrument Serif italic) */}
             <div className="flex flex-col gap-0">
-              <span className="text-[28px] sm:text-[30px] font-bold tracking-[-0.05em] leading-[1em] text-white" style={{ fontFamily: "'Inter', 'Inter Display', sans-serif" }}>
+              <span className="text-[24px] sm:text-[30px] font-bold tracking-[-0.04em] leading-[1.1em] text-white" style={{ fontFamily: "'Inter', 'Inter Display', sans-serif" }}>
                 Build once.
               </span>
-              <span className="text-[28px] sm:text-[30px] tracking-[-0.05em] leading-[1em] text-white italic" style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}>
+              <span className="text-[24px] sm:text-[30px] tracking-[-0.04em] leading-[1.1em] text-white italic" style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}>
                 Scale anytime.
               </span>
             </div>
 
             {/* Bio */}
-            <p className="text-[14px] leading-[1.4em] tracking-[-0.01em] text-white/60 max-w-sm">
-              Designing and engineering high-impact web apps, AI agent workflows, and digital platforms that generate unfair competitive advantages for founders and businesses.
+            <p className="text-[13px] sm:text-[14px] leading-[1.5em] text-white/60 max-w-sm font-normal">
+              Designing and building high-impact web apps, online stores, and custom AI tools that create real business advantages for founders.
             </p>
 
-            {/* CTA Button (Supaste exact: white bg, black text, 8px radius) */}
+            {/* CTA Button */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 w-fit px-4 py-2 rounded-[8px] bg-white text-black font-semibold text-xs tracking-tight hover:bg-white/90 active:scale-[0.97] transition-all duration-150 cursor-pointer"
+              className="inline-flex items-center gap-2 w-fit px-4 py-2 rounded-[8px] bg-white text-black font-semibold text-xs tracking-tight hover:bg-white/90 active:scale-[0.97] transition-all duration-150 cursor-pointer shadow-sm mt-0.5"
             >
               <span>Start a Project</span>
               <FaArrowRight className="w-2.5 h-2.5" />
             </a>
 
             {/* Copyright */}
-            <div className="flex flex-col gap-2 mt-4">
-              <span className="text-[12px] leading-[1.6em] text-white/40">
-                &copy; {new Date().getFullYear()} arnelbaylon.com — All rights reserved
+            <div className="flex flex-col gap-1 mt-2">
+              <span className="text-[12px] text-white/40 font-mono">
+                &copy; {new Date().getFullYear()} arnelbaylon.com &bull; All rights reserved
               </span>
-              <div className="flex items-center gap-1.5 text-[12px] leading-[1.6em] text-white">
+              <div className="flex items-center gap-1.5 text-[12px] text-white/80">
                 <span>Built with 💙 by</span>
                 <a
                   href="https://www.linkedin.com/in/arnel-baylon-b05233189"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 hover:text-amber-300 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-white hover:text-amber-300 transition-colors font-medium"
                 >
-                  <div className="relative w-[24px] h-[24px] rounded-full overflow-hidden shrink-0">
-                    <Image
-                      src="/images/me.jpg"
-                      alt="Arnel Baylon"
-                      fill
-                      sizes="24px"
-                      className="object-cover"
-                    />
-                  </div>
-                  <span className="font-medium">Arnel Baylon</span>
+                  <span>Arnel Baylon</span>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* ── Column: Menu ── */}
-          <div className="flex flex-col gap-4 min-w-[120px]">
-            <h6 className="text-white/40 font-semibold text-sm tracking-[-0.02em]">
+          {/* ── Column 1: Menu Navigation (Clean, no packages) ── */}
+          <div className="flex flex-col gap-3 min-w-[120px]">
+            <h4 className="text-white/40 font-mono text-xs uppercase tracking-wider font-semibold">
               Menu
-            </h6>
-            <nav className="flex flex-col gap-0">
+            </h4>
+            <nav className="flex flex-col gap-1.5">
               {[
                 { label: 'Overview', href: '#hero' },
-                { label: 'Capabilities', href: '#capabilities' },
-                { label: 'Projects', href: '#projects' },
+                { label: 'Services', href: '#capabilities' },
+                { label: 'Work', href: '#projects' },
                 { label: 'Reviews', href: '#testimonials' },
-                { label: 'Packages', href: '#packages' },
                 { label: 'FAQ', href: '#faq' },
                 { label: 'Contact', href: '#contact' },
               ].map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-[14px] font-medium tracking-[-0.02em] text-white py-1 hover:text-amber-300 transition-colors"
+                  className="text-[13px] sm:text-[14px] font-medium text-white/80 hover:text-white transition-colors"
                 >
                   {link.label}
                 </a>
@@ -1430,12 +1623,12 @@ export function ClientBusinessView({
             </nav>
           </div>
 
-          {/* ── Column: Connect ── */}
-          <div className="flex flex-col gap-4 min-w-[120px]">
-            <h6 className="text-white/40 font-semibold text-sm tracking-[-0.02em]">
+          {/* ── Column 2: Connect Channels ── */}
+          <div className="flex flex-col gap-3 min-w-[120px]">
+            <h4 className="text-white/40 font-mono text-xs uppercase tracking-wider font-semibold">
               Connect
-            </h6>
-            <nav className="flex flex-col gap-0">
+            </h4>
+            <nav className="flex flex-col gap-1.5">
               {[
                 { label: 'LinkedIn', href: 'https://www.linkedin.com/in/arnel-baylon-b05233189', external: true },
                 { label: 'GitHub', href: 'https://github.com/arnelbaylon', external: true },
@@ -1447,7 +1640,7 @@ export function ClientBusinessView({
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="text-[14px] font-medium tracking-[-0.02em] text-white py-1 hover:text-amber-300 transition-colors"
+                  className="text-[13px] sm:text-[14px] font-medium text-white/80 hover:text-white transition-colors"
                 >
                   {link.label}
                 </a>
@@ -1455,55 +1648,70 @@ export function ClientBusinessView({
             </nav>
           </div>
 
-          {/* ── Column: Engineering Spec ── */}
-          <div className="flex flex-col gap-4 min-w-[140px]">
-            <h6 className="text-white/40 font-semibold text-sm tracking-[-0.02em]">
+          {/* ── Column 3: Engineering Spec ── */}
+          <div className="flex flex-col gap-3 min-w-[140px]">
+            <h4 className="text-white/40 font-mono text-xs uppercase tracking-wider font-semibold">
               Engineering Spec
-            </h6>
-            <nav className="flex flex-col gap-0">
+            </h4>
+            <nav className="flex flex-col gap-1.5">
               {onSwitchToTechMode && (
                 <button
                   type="button"
                   onClick={onSwitchToTechMode}
-                  className="text-[14px] font-medium tracking-[-0.02em] text-white py-1 hover:text-amber-300 transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  className="text-[13px] sm:text-[14px] font-medium text-amber-400 hover:text-amber-300 transition-colors text-left cursor-pointer flex items-center gap-1.5"
                 >
                   <FaCode className="w-3 h-3 text-amber-400" />
                   <span>Developer View</span>
                 </button>
               )}
-              <a href="#hero" className="text-[14px] font-medium tracking-[-0.02em] text-white py-1 hover:text-amber-300 transition-colors">
+              <a href="#hero" className="text-[13px] sm:text-[14px] font-medium text-white/80 hover:text-white transition-colors">
                 Dossier
               </a>
-              <a href="#capabilities" className="text-[14px] font-medium tracking-[-0.02em] text-white py-1 hover:text-amber-300 transition-colors">
+              <a href="#capabilities" className="text-[13px] sm:text-[14px] font-medium text-white/80 hover:text-white transition-colors">
                 Tech Stack
               </a>
-              <a href="#projects" className="text-[14px] font-medium tracking-[-0.02em] text-white py-1 hover:text-amber-300 transition-colors">
+              <a href="#projects" className="text-[13px] sm:text-[14px] font-medium text-white/80 hover:text-white transition-colors">
                 Certifications
               </a>
+              {onSwitchToTechMode && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onSwitchToTechMode()
+                    setTimeout(() => {
+                      const el = document.getElementById('typing')
+                      el?.scrollIntoView({ behavior: 'smooth' })
+                    }, 300)
+                  }}
+                  className="text-[13px] sm:text-[14px] font-medium text-amber-300/90 hover:text-amber-300 transition-colors text-left cursor-pointer flex items-center gap-1.5 mt-1"
+                >
+                  <span>Typing Speed Lab ↗</span>
+                </button>
+              )}
             </nav>
           </div>
 
         </div>
 
-        {/* ── Giant Architectural Watermark Wordmark ── */}
-        <div className="w-full max-w-[1200px] mx-auto flex items-center justify-center overflow-hidden h-[180px] sm:h-[220px] lg:h-[320px] relative">
+        {/* ── Giant Architectural Watermark Wordmark (Snug at Bottom, Zero Extra Space) ── */}
+        <div className="w-full max-w-[1200px] mx-auto flex items-end justify-center overflow-hidden h-[90px] sm:h-[130px] lg:h-[160px] relative select-none pointer-events-none pb-0 mb-0">
           <svg
-            className="w-full h-auto"
-            viewBox="0 0 1171 160"
-            preserveAspectRatio="xMidYMid meet"
-            style={{ overflow: 'visible' }}
+            className="w-full h-auto block align-bottom"
+            viewBox="0 0 1171 140"
+            preserveAspectRatio="xMidYMax meet"
+            style={{ overflow: 'hidden' }}
           >
             <text
               x="50%"
-              y="50%"
-              dominantBaseline="central"
+              y="90%"
+              dominantBaseline="alphabetic"
               textAnchor="middle"
-              fill="rgb(18, 18, 18)"
+              fill="rgb(22, 22, 22)"
               style={{
                 fontFamily: "'Inter', 'Inter Display', sans-serif",
-                fontWeight: 700,
-                fontSize: '160px',
-                letterSpacing: '-10px',
+                fontWeight: 800,
+                fontSize: '150px',
+                letterSpacing: '-8px',
                 lineHeight: '1em',
               }}
             >

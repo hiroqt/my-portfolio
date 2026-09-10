@@ -11,6 +11,7 @@ import {
   FaSun,
   FaMoon,
   FaFilePdf,
+  FaKeyboard,
 } from 'react-icons/fa'
 import { HiSparkles } from 'react-icons/hi2'
 import {
@@ -38,6 +39,7 @@ const navSections: NavSection[] = [
   { id: 'education', number: '04', label: 'Education', badge: 'BSIT' },
   { id: 'gallery', number: '05', label: 'Artifact Studio' },
   { id: 'contact', number: '06', label: 'Direct Line' },
+  { id: 'typing', number: '07', label: 'Typing Lab', badge: 'MonkeyType' },
 ]
 
 interface DevExecutiveDossierProps {
@@ -185,6 +187,21 @@ export function DevExecutiveDossier({
             </button>
           )}
         </div>
+
+        {/* Quick Typing Lab & Mechanical Switch Audition Shortcut */}
+        <a
+          href="#typing"
+          onClick={(e) => onNavClick(e, 'typing')}
+          className="flex items-center justify-between px-3 py-2 rounded-xl bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] border border-border/40 text-xs font-mono transition-all duration-150 active:scale-[0.98] group cursor-pointer"
+        >
+          <div className="flex items-center gap-2">
+            <FaKeyboard className="w-3.5 h-3.5 text-accent group-hover:scale-110 transition-transform" />
+            <span className="text-foreground/90 font-medium">MonkeyType Lab</span>
+          </div>
+          <span className="text-[10px] text-accent bg-accent/15 px-2 py-0.5 rounded-md font-semibold group-hover:bg-accent group-hover:text-background transition-colors">
+            Switch Audio &rarr;
+          </span>
+        </a>
       </div>
 
       {/* ── MIDDLE SEGMENT: Interactive Section Nav Rail (Scroll-Spy) ── */}
