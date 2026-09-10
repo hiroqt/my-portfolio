@@ -23,6 +23,7 @@ import {
   FaArrowRight,
   FaKeyboard,
 } from 'react-icons/fa'
+import { FaSpotify } from 'react-icons/fa6'
 import { useTheme } from '../ThemeProvider'
 import { HiSparkles } from 'react-icons/hi2'
 import { AIChatBubble } from './AIChatBubble'
@@ -67,6 +68,9 @@ interface SimpleSideNavProps {
   viewMode?: 'tech' | 'client'
   onToggleViewMode?: () => void
   showDesktopTechRail?: boolean
+  isMusicOpen?: boolean
+  onToggleMusic?: () => void
+  isMusicPlaying?: boolean
 }
 
 export function SimpleSideNav({
@@ -79,6 +83,9 @@ export function SimpleSideNav({
   viewMode = 'tech',
   onToggleViewMode,
   showDesktopTechRail = false,
+  isMusicOpen = false,
+  onToggleMusic,
+  isMusicPlaying = false,
 }: SimpleSideNavProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const shouldReduceMotion = useReducedMotion()
@@ -275,6 +282,34 @@ export function SimpleSideNav({
                   <FaCode className="w-3 h-3 text-amber-400 transition-transform group-hover:scale-110" />
                   <span className="hidden xl:inline tracking-tight">Developer View</span>
                   <span className="xl:hidden tracking-tight">Dev</span>
+                </button>
+              )}
+
+              {/* Spotify Music Button */}
+              {onToggleMusic && (
+                <button
+                  type="button"
+                  onClick={onToggleMusic}
+                  aria-label="Toggle Spotify Music"
+                  className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
+                    isMusicOpen
+                      ? 'bg-[#1DB954]/25 text-[#1DB954] ring-1 ring-[#1DB954]/40'
+                      : isMusicPlaying
+                      ? 'bg-[#1DB954]/15 text-[#1DB954]'
+                      : 'text-white/70 hover:text-white bg-white/10 hover:bg-white/15'
+                  }`}
+                  title={isMusicOpen ? 'Close Spotify Player' : "Open Spotify Player (Drake - B's on the Table)"}
+                >
+                  <FaSpotify className="w-3.5 h-3.5 text-[#1DB954]" />
+                  <span className="hidden xl:inline tracking-tight">{isMusicPlaying ? "B's on the Table" : 'Spotify'}</span>
+                  <span className="xl:hidden tracking-tight">Music</span>
+                  {isMusicPlaying && (
+                    <span className="flex items-end gap-[1.5px] h-3 ml-0.5 pb-0.5" aria-hidden="true">
+                      <span className="w-[1.5px] h-2 bg-[#1DB954] rounded-full animate-pulse" />
+                      <span className="w-[1.5px] h-3 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.15s]" />
+                      <span className="w-[1.5px] h-1.5 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.3s]" />
+                    </span>
+                  )}
                 </button>
               )}
 
@@ -505,6 +540,37 @@ export function SimpleSideNav({
                 <span>yhelAI Copilot</span>
               </span>
             </button>
+
+            {/* Spotify Music Button */}
+            {onToggleMusic && (
+              <button
+                type="button"
+                onClick={onToggleMusic}
+                aria-label="Toggle Spotify Music"
+                className={`group relative flex items-center justify-center w-9 h-9 rounded-xl transition-colors duration-150 active:scale-95 cursor-pointer ${
+                  isMusicOpen
+                    ? 'bg-[#1DB954]/20 text-[#1DB954]'
+                    : isMusicPlaying
+                    ? 'text-[#1DB954] hover:bg-[#1DB954]/10'
+                    : 'text-muted-foreground hover:text-[#1DB954] hover:bg-muted/40 dark:hover:bg-white/[0.05]'
+                }`}
+              >
+                <FaSpotify className={`w-4 h-4 ${isMusicPlaying ? 'text-[#1DB954]' : ''}`} />
+
+                {isMusicPlaying && (
+                  <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-[#1DB954] animate-ping" />
+                )}
+
+                {/* Floating Tooltip */}
+                <span
+                  role="tooltip"
+                  className="absolute left-full ml-3 px-2.5 py-1 rounded-md bg-foreground text-background font-mono text-[11px] font-medium tracking-wide shadow-lg whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 z-50 flex items-center gap-1.5"
+                >
+                  <span className="text-[#1DB954] font-bold">Spotify</span>
+                  <span>{isMusicPlaying ? "B's on the Table" : 'Music Player'}</span>
+                </span>
+              </button>
+            )}
 
             {/* Theme Toggle Button */}
             {mounted && (

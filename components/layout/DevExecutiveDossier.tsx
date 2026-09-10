@@ -13,6 +13,7 @@ import {
   FaFilePdf,
   FaKeyboard,
 } from 'react-icons/fa'
+import { FaSpotify } from 'react-icons/fa6'
 import { HiSparkles } from 'react-icons/hi2'
 import {
   SiTypescript,
@@ -49,6 +50,9 @@ interface DevExecutiveDossierProps {
   onOpenChat?: () => void
   onToggleViewMode?: () => void
   viewMode?: 'tech' | 'client'
+  isMusicOpen?: boolean
+  onToggleMusic?: () => void
+  isMusicPlaying?: boolean
 }
 
 export function DevExecutiveDossier({
@@ -58,6 +62,9 @@ export function DevExecutiveDossier({
   onOpenChat,
   onToggleViewMode,
   viewMode = 'tech',
+  isMusicOpen = false,
+  onToggleMusic,
+  isMusicPlaying = false,
 }: DevExecutiveDossierProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const shouldReduceMotion = useReducedMotion()
@@ -68,7 +75,7 @@ export function DevExecutiveDossier({
     setMounted(true)
     const updateTime = () => {
       const now = new Date()
-      // Format time in Manila/Davao (Asia/Manila)
+      // Format time in Manila (Asia/Manila)
       try {
         const timeString = now.toLocaleTimeString('en-US', {
           timeZone: 'Asia/Manila',
@@ -107,7 +114,7 @@ export function DevExecutiveDossier({
             <span className="text-foreground/90 font-medium">Available for Work</span>
           </div>
           <span className="text-muted-foreground text-[10.5px]">
-            Davao, PH {currentTime ? `• ${currentTime}` : '• UTC+8'}
+            Manila, PH {currentTime ? `• ${currentTime}` : '• UTC+8'}
           </span>
         </div>
 
@@ -169,6 +176,32 @@ export function DevExecutiveDossier({
             >
               <HiSparkles className="w-3.5 h-3.5" />
               <span>Copilot</span>
+            </button>
+          )}
+
+          {onToggleMusic && (
+            <button
+              type="button"
+              onClick={onToggleMusic}
+              title={isMusicOpen ? 'Close Spotify Player' : "Open Spotify Player (Drake - B's on the Table)"}
+              className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer ${
+                isMusicOpen
+                  ? 'bg-[#1DB954]/20 text-[#1DB954] ring-1 ring-[#1DB954]/40'
+                  : isMusicPlaying
+                  ? 'bg-[#1DB954]/12 text-[#1DB954] hover:bg-[#1DB954]/20'
+                  : 'bg-muted/50 hover:bg-muted/80 text-foreground'
+              }`}
+            >
+              <FaSpotify className="w-3.5 h-3.5 text-[#1DB954]" />
+              <span className="hidden sm:inline">{isMusicPlaying ? "B's on the Table" : 'Music'}</span>
+              <span className="sm:hidden">Music</span>
+              {isMusicPlaying && (
+                <span className="flex items-end gap-[1.5px] h-3 ml-0.5 pb-0.5" aria-hidden="true">
+                  <span className="w-[1.5px] h-2 bg-[#1DB954] rounded-full animate-pulse" />
+                  <span className="w-[1.5px] h-3 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.15s]" />
+                  <span className="w-[1.5px] h-1.5 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.3s]" />
+                </span>
+              )}
             </button>
           )}
 

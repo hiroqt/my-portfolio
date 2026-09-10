@@ -295,16 +295,16 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             className="fixed inset-0 z-40 bg-black/60 lg:bg-black/30 backdrop-blur-xs"
           />
 
-          {/* ── Desktop Right-Side Drawer Container ── */}
+          {/* ── Desktop Right-Side Drawer Container (100% Solid Non-Transparent in Light Mode) ── */}
           <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 360, damping: 32 }}
-            className="hidden lg:flex fixed right-0 top-0 bottom-0 z-50 w-[380px] xl:w-[420px] 2xl:w-[460px] h-screen flex-col bg-background/95 dark:bg-[#0c0e18]/95 backdrop-blur-2xl border-l border-border/80 dark:border-white/12 shadow-[-10px_0_40px_rgba(0,0,0,0.35)] dark:shadow-[-16px_0_60px_rgba(0,0,0,0.85)] overflow-hidden font-sans select-none"
+            className="hidden lg:flex fixed right-0 top-0 bottom-0 z-50 w-[380px] xl:w-[420px] 2xl:w-[460px] h-screen flex-col bg-white dark:bg-[#0c0e18] border-l border-zinc-200 dark:border-white/12 shadow-[-10px_0_40px_rgba(0,0,0,0.18)] dark:shadow-[-16px_0_60px_rgba(0,0,0,0.85)] overflow-hidden font-sans select-none"
           >
             {/* ── Header ── */}
-            <div className="relative z-10 px-5 pt-5 pb-4 border-b border-border dark:border-white/10 bg-muted/80 dark:bg-[#121624]/80 shrink-0">
+            <div className="relative z-10 px-5 pt-5 pb-4 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121624] shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-xl bg-accent/15 dark:bg-accent/25 border border-accent/40 flex items-center justify-center text-accent shadow-xs">
@@ -329,7 +329,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                   type="button"
                   onClick={onClose}
                   title="Close tech stack drawer (Esc)"
-                  className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/80 dark:hover:bg-white/[0.08] transition-colors active:scale-90 cursor-pointer"
+                  className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-zinc-200/70 dark:hover:bg-white/[0.08] transition-colors active:scale-90 cursor-pointer"
                 >
                   <FaTimes className="w-4 h-4" />
                 </button>
@@ -337,16 +337,16 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             </div>
 
             {/* ── Scrollable Skills Content Area ── */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin bg-white dark:bg-[#0c0e18]">
               {techStackCategories.map((group) => {
                 const Icon = group.icon
                 return (
                   <div
                     key={group.id}
-                    className="p-3.5 rounded-xl border border-border/70 dark:border-white/[0.08] bg-muted/20 dark:bg-card/40 space-y-2.5"
+                    className="p-3.5 rounded-xl border border-zinc-200 dark:border-white/[0.08] bg-zinc-50 dark:bg-card/40 space-y-2.5"
                   >
                     {/* Category Header */}
-                    <div className="flex items-center justify-between pb-1.5 border-b border-border/40 dark:border-white/[0.06]">
+                    <div className="flex items-center justify-between pb-1.5 border-b border-zinc-200 dark:border-white/[0.06]">
                       <div className="flex items-center gap-2">
                         <Icon className={`w-3.5 h-3.5 ${group.color}`} />
                         <h4 className="font-supreme font-bold text-xs text-foreground">
@@ -371,8 +371,8 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                             title="Click to copy technology name"
                             className={`group/tag relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-colors duration-150 active:scale-95 cursor-pointer shadow-2xs ${
                               skill.highlight
-                                ? 'bg-accent/[0.08] border-accent/30 text-foreground hover:border-accent hover:bg-accent/15'
-                                : 'bg-background dark:bg-muted/40 border-border/80 text-foreground/90 hover:border-accent/40 hover:text-foreground'
+                                ? 'bg-amber-500/[0.08] border-amber-500/30 text-foreground hover:border-amber-500 hover:bg-amber-500/15'
+                                : 'bg-white dark:bg-muted/40 border-zinc-200 dark:border-border/80 text-foreground/90 hover:border-accent/40 hover:text-foreground'
                             }`}
                           >
                             {SkillIcon && (
@@ -404,7 +404,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             </div>
 
             {/* ── Footer ── */}
-            <div className="px-4 py-2.5 border-t border-border dark:border-white/10 bg-muted/70 dark:bg-[#121624] flex items-center justify-between shrink-0">
+            <div className="px-4 py-2.5 border-t border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121624] flex items-center justify-between shrink-0">
               <span className="text-[10px] font-mono text-muted-foreground">
                 Click any stack tag to copy
               </span>
@@ -420,10 +420,10 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ type: 'spring', stiffness: 360, damping: 28 }}
-            className="lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[76vh] h-[520px] flex flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden font-sans select-none"
+            className="lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[76vh] h-[520px] flex flex-col rounded-2xl bg-white dark:bg-[#0c0e18] border border-zinc-200 dark:border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.25)] overflow-hidden font-sans select-none"
           >
             {/* Mobile Header */}
-            <div className="px-4 py-3 border-b border-border dark:border-white/10 bg-muted/90 dark:bg-[#121624] shrink-0">
+            <div className="px-4 py-3 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121624] shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <FaLayerGroup className="text-accent w-3.5 h-3.5" />
@@ -445,15 +445,15 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             </div>
 
             {/* Mobile Skills List */}
-            <div className="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-thin">
+            <div className="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-thin bg-white dark:bg-[#0c0e18]">
               {techStackCategories.map((group) => {
                 const Icon = group.icon
                 return (
                   <div
                     key={group.id}
-                    className="p-3 rounded-xl border border-border/70 dark:border-white/10 bg-muted/30 dark:bg-card/40 space-y-2"
+                    className="p-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-card/40 space-y-2"
                   >
-                    <div className="flex items-center justify-between pb-1 border-b border-border/40">
+                    <div className="flex items-center justify-between pb-1 border-b border-zinc-200 dark:border-white/10">
                       <div className="flex items-center gap-1.5">
                         <Icon className={`w-3.5 h-3.5 ${group.color}`} />
                         <h4 className="font-supreme font-bold text-xs text-foreground">
@@ -473,8 +473,8 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                             key={skill.name}
                             className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-mono ${
                               skill.highlight
-                                ? 'bg-accent/10 border-accent/30 text-foreground font-medium'
-                                : 'bg-background dark:bg-muted/40 border-border text-foreground/90'
+                                ? 'bg-amber-500/10 border-amber-500/30 text-foreground font-medium'
+                                : 'bg-white dark:bg-muted/40 border-zinc-200 dark:border-border text-foreground/90'
                             }`}
                           >
                             {SkillIcon && (

@@ -126,7 +126,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
   }, [category, mode, wordLimit])
 
   // Reset the game completely
-  const resetGame = useCallback(() => {
+  const resetGame = useCallback((autoFocus = false) => {
     if (timerRef.current) clearInterval(timerRef.current)
     const newWords = generateWords()
     setWords(newWords)
@@ -144,9 +144,11 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
     setCombo(0)
     setMaxCombo(0)
 
-    setTimeout(() => {
-      inputRef.current?.focus()
-    }, 50)
+    if (autoFocus) {
+      setTimeout(() => {
+        inputRef.current?.focus({ preventScroll: true })
+      }, 50)
+    }
   }, [generateWords, timeLimit])
 
   // Sync persisted audio state from audio engine on mount
@@ -156,9 +158,9 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
     setIsMuted(audio.isMute())
   }, [])
 
-  // Initial load and settings change reset
+  // Initial load and settings change reset (never auto-focus on page load to prevent scrolling down)
   useEffect(() => {
-    resetGame()
+    resetGame(false)
   }, [resetGame])
 
   // Volume & Mute Sync
@@ -347,7 +349,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
       <div
         onClick={() => {
           getKeyboardAudio().ensureContext()
-          inputRef.current?.focus()
+          inputRef.current?.focus({ preventScroll: true })
         }}
         className="relative rounded-2xl bg-card/80 dark:bg-[#0e1017]/90 border border-border/80 dark:border-white/[0.08] backdrop-blur-xl p-5 sm:p-7 md:p-8 shadow-xl cursor-text select-none overflow-hidden"
       >
@@ -742,7 +744,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
               type="button"
               onClick={(e) => {
                 e.stopPropagation()
-                resetGame()
+                resetGame(true)
               }}
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-foreground text-background font-semibold hover:bg-accent hover:text-white transition-all active:scale-95 cursor-pointer shadow-xs"
             >

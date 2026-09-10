@@ -9,8 +9,7 @@ import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsS
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
 import { ClientBusinessView } from '@/components/sections/ClientBusinessView'
 import { ModeTransitionShutter } from '@/components/ui/ModeTransitionShutter'
-
-
+import { SpotifyMusicPlayer } from '@/components/ui/SpotifyMusicPlayer'
 
 import { DevExecutiveDossier } from '@/components/layout/DevExecutiveDossier'
 
@@ -51,6 +50,8 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [isSocialsOpen, setIsSocialsOpen] = useState(false)
   const [isStackOpen, setIsStackOpen] = useState(false)
+  const [isMusicOpen, setIsMusicOpen] = useState(false)
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
   const rightScrollRef = useRef<HTMLDivElement>(null)
 
@@ -60,6 +61,13 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
     const sectionIds = ['hero', 'projects', 'experience', 'certifications', 'education', 'gallery', 'contact', 'typing']
 
     const updateActiveSection = () => {
+      const rightEl = rightScrollRef.current
+      if ((!rightEl || rightEl.scrollTop < 120) && window.scrollY < 120) {
+        setActiveSection('hero')
+        ticking = false
+        return
+      }
+
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i])
         if (el) {
@@ -152,6 +160,10 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
       const hash = window.location.hash
       if (!hash || hash === '#experience' || hash === '#hero' || hash === '#about' || hash === '#skills') {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        if (rightScrollRef.current) {
+          rightScrollRef.current.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        }
+        setActiveSection('hero')
         if (hash === '#experience' || hash === '#skills') {
           window.history.replaceState(null, '', window.location.pathname)
         }
@@ -163,6 +175,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
     setIsChatOpen(false)
     setIsSocialsOpen(false)
     setIsStackOpen(false)
+    setIsMusicOpen(false)
 
     const nextMode = viewMode === 'tech' ? 'client' : 'tech'
     setTransitionTarget(nextMode)
@@ -198,19 +211,29 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   const handleToggleChat = () => {
     setIsSocialsOpen(false)
     setIsStackOpen(false)
+    setIsMusicOpen(false)
     setIsChatOpen((prev) => !prev)
   }
 
   const handleToggleSocials = () => {
     setIsChatOpen(false)
     setIsStackOpen(false)
+    setIsMusicOpen(false)
     setIsSocialsOpen((prev) => !prev)
   }
 
   const handleToggleStack = () => {
     setIsChatOpen(false)
     setIsSocialsOpen(false)
+    setIsMusicOpen(false)
     setIsStackOpen((prev) => !prev)
+  }
+
+  const handleToggleMusic = () => {
+    setIsChatOpen(false)
+    setIsSocialsOpen(false)
+    setIsStackOpen(false)
+    setIsMusicOpen((prev) => !prev)
   }
 
   return (
@@ -249,6 +272,17 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         viewMode={viewMode}
         onToggleViewMode={handleToggleViewMode}
         showDesktopTechRail={false}
+        isMusicOpen={isMusicOpen}
+        onToggleMusic={handleToggleMusic}
+        isMusicPlaying={isMusicPlaying}
+      />
+
+      {/* ── Header-Driven Spotify Music Player Modal (No scroll animation) ── */}
+      <SpotifyMusicPlayer
+        isOpen={isMusicOpen}
+        onClose={() => setIsMusicOpen(false)}
+        onPlayingChange={setIsMusicPlaying}
+        mode={viewMode}
       />
 
       {/* ── Main Content Container ── */}
@@ -301,6 +335,9 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
                   onOpenChat={handleToggleChat}
                   onToggleViewMode={handleToggleViewMode}
                   viewMode={viewMode}
+                  isMusicOpen={isMusicOpen}
+                  onToggleMusic={handleToggleMusic}
+                  isMusicPlaying={isMusicPlaying}
                 />
 
                 {/* ── Right Main Engineering Systems Showcase Stage (Only Right Side is Scrollable) ── */}
