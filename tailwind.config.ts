@@ -36,6 +36,7 @@ const config: Config = {
         handwriting: ["var(--font-handwriting)", "'Caveat'", "cursive"],
         sharetech: ["'Share Tech'", "sans-serif"],
         apoc: ["'Apoc Revelations'", "serif"],
+        instrument: ["'Instrument Serif'", "Georgia", "'Times New Roman'", "serif"],
       },
     }
   },

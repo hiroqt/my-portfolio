@@ -15,7 +15,7 @@ export function WaveSectionDivider({
 }: WaveSectionDividerProps) {
   return (
     <div
-      className={`w-full overflow-hidden leading-none select-none pointer-events-none py-1.5 sm:py-2.5 ${
+      className={`w-full overflow-hidden leading-none select-none pointer-events-none py-1.5 sm:py-2.5 bg-white dark:bg-[#0a0a0b] ${
         flip ? 'scale-y-[-1]' : ''
       } ${className}`}
       style={{

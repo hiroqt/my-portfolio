@@ -49,9 +49,11 @@ const techNavItems: NavItem[] = [
 const clientNavItems: NavItem[] = [
   { id: 'hero', label: 'Overview', number: '00', icon: FaStar },
   { id: 'projects', label: 'Projects', number: '01', icon: FaBriefcase },
-  { id: 'testimonials', label: 'Client Reviews', number: '02', icon: FaQuoteRight },
-  { id: 'faq', label: 'FAQ', number: '03', icon: FaQuestionCircle },
-  { id: 'contact', label: 'Contact', number: '04', icon: FaPaperPlane },
+  { id: 'capabilities', label: 'Capabilities', number: '02', icon: FaLayerGroup },
+  { id: 'testimonials', label: 'Proof', number: '03', icon: FaQuoteRight },
+  { id: 'packages', label: 'Packages', number: '04', icon: FaStar },
+  { id: 'faq', label: 'FAQ', number: '05', icon: FaQuestionCircle },
+  { id: 'contact', label: 'Contact', number: '06', icon: FaPaperPlane },
 ]
 
 interface SimpleSideNavProps {
@@ -170,61 +172,58 @@ export function SimpleSideNav({
   return (
     <>
       {/* ── Client Mode Desktop Floating Top Island Navbar (Executive Client Perspective) ── */}
+      {/* ── Client Mode Supaste Notch Navbar (Desktop lg+) ── */}
       {isClient && (
         <header
           aria-label="Main Navigation"
-          className={`hidden lg:flex fixed inset-x-0 z-40 max-w-5xl xl:max-w-6xl mx-auto px-6 pointer-events-none select-none transition-[top] duration-200 ${
-            isScrolled ? 'top-3' : 'top-4'
-          }`}
+          className="hidden lg:flex fixed top-0 left-1/2 -translate-x-1/2 z-50 pointer-events-none select-none transition-all duration-300"
         >
           <nav
-            className={`pointer-events-auto w-full backdrop-blur-2xl rounded-full flex items-center justify-between transition-[padding,background-color,border-color,box-shadow] duration-200 ease-out ${
-              isScrolled
-                ? 'py-2 px-5 sm:px-6 bg-background/90 dark:bg-[#090b14]/90 border border-border/80 dark:border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_18px_50px_rgba(0,0,0,0.7)]'
-                : 'py-2.5 px-6 bg-background/80 dark:bg-[#0c0e18]/80 border border-border/60 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.45)]'
-            }`}
+            className="pointer-events-auto relative flex items-center justify-between gap-8 xl:gap-10 px-6 py-2.5 bg-black text-white rounded-b-[18px] border-b border-x border-white/[0.12] shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
           >
-            {/* Left: Brand Identity & Founder Signature */}
-            <div className="flex items-center gap-3">
-              <a
-                href="#hero"
-                onClick={(e) => handleNavClick(e, 'hero')}
-                className="flex items-center gap-2.5 group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-full py-0.5 pr-2 transition-transform duration-150 active:scale-95"
-              >
-                {/* 30px Circular Avatar */}
-                <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden shrink-0 shadow-xs bg-muted/60">
-                  <Image
-                    src="/images/me.jpg"
-                    alt="Arnel Baylon"
-                    fill
-                    sizes="32px"
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    priority
-                  />
-                </div>
-
-                <div className="flex flex-col text-left leading-none">
-                  <span className="font-bold text-sm tracking-tight text-foreground group-hover:text-accent transition-colors">
-                    Arnel Baylon
-                  </span>
-                  <span className="hidden xl:block text-[10px] text-muted-foreground font-normal mt-0.5">
-                    Product Engineer
-                  </span>
-                </div>
-              </a>
-
-              {/* Status Badge: Available for Projects */}
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shadow-2xs">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                </span>
-                <span>Available for work</span>
-              </span>
+            {/* Left Notch Ear (Inverted Corner SVG from Supaste) */}
+            <div className="absolute top-0 -left-[20px] w-5 h-5 pointer-events-none overflow-hidden">
+              <svg viewBox="0 0 20 20" className="w-5 h-5 fill-black" style={{ transform: 'rotate(90deg)' }}>
+                <path d="M 0 0 L 20 0 C 8.954 0 0 8.954 0 20 Z" />
+              </svg>
             </div>
 
-            {/* Center: Friendly Plain English Navigation Links */}
-            <div className="flex items-center gap-0.5 bg-muted/50 dark:bg-white/[0.04] p-1 rounded-full shadow-inner">
+            {/* Right Notch Ear (Inverted Corner SVG from Supaste) */}
+            <div className="absolute top-0 -right-[20px] w-5 h-5 pointer-events-none overflow-hidden">
+              <svg viewBox="0 0 20 20" className="w-5 h-5 fill-black">
+                <path d="M 0 0 L 20 0 C 8.954 0 0 8.954 0 20 Z" />
+              </svg>
+            </div>
+
+            {/* Left: App Icon & Brand */}
+            <a
+              href="#hero"
+              onClick={(e) => handleNavClick(e, 'hero')}
+              className="flex items-center gap-2.5 group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg pr-1"
+            >
+              <div className="relative w-[30px] h-[30px] rounded-[8px] overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900">
+                <Image
+                  src="/images/me.jpg"
+                  alt="Arnel Baylon"
+                  fill
+                  sizes="30px"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  priority
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-sm tracking-tight text-white group-hover:text-amber-300 transition-colors">
+                  Arnel Baylon
+                </span>
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                </span>
+              </div>
+            </a>
+
+            {/* Center: Navigation Links (Supaste style: 14px, opacity 0.6, hover: opacity 1.0, tracking -0.02em) */}
+            <div className="flex items-center gap-6">
               {clientNavItems.map((item) => {
                 const isActive = activeSection === item.id
                 return (
@@ -233,63 +232,35 @@ export function SimpleSideNav({
                     href={`#${item.id}`}
                     onClick={(e) => handleNavClick(e, item.id)}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`relative px-4 py-1.5 rounded-full text-xs font-medium tracking-tight transition-colors duration-150 active:scale-95 cursor-pointer select-none ${
+                    className={`text-[14px] font-medium tracking-tight transition-all duration-150 cursor-pointer select-none ${
                       isActive
-                        ? 'text-foreground font-semibold'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/40 dark:hover:bg-white/[0.04]'
+                        ? 'text-white font-semibold opacity-100'
+                        : 'text-white/60 hover:text-white hover:opacity-100'
                     }`}
                   >
-                    {isActive && (
-                      <motion.div
-                        layoutId="clientTopNavActive"
-                        className="absolute inset-0 rounded-full bg-background dark:bg-card shadow-xs -z-10"
-                        transition={
-                          shouldReduceMotion
-                            ? { duration: 0.05 }
-                            : { type: 'spring', stiffness: 440, damping: 32 }
-                        }
-                      />
-                    )}
                     <span>{item.label}</span>
                   </a>
                 )
               })}
             </div>
 
-            {/* Right: Action Cluster (Ask AI, Theme Toggle, Developer View Switcher, Let's Talk CTA) */}
-            <div className="flex items-center gap-2">
-              {/* Ask AI Advisor Button (Client Mode) */}
+            {/* Right: Actions Cluster */}
+            <div className="flex items-center gap-3">
+              {/* Ask AI Advisor Button */}
               <button
                 type="button"
                 onClick={toggleChat}
                 aria-label="Ask Arnel's AI Assistant"
-                className={`group flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-[background-color,color,transform] duration-150 active:scale-95 cursor-pointer ${
+                className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 active:scale-95 cursor-pointer ${
                   chatOpen
-                    ? 'bg-accent text-zinc-950'
-                    : 'text-accent bg-accent/15 hover:bg-accent/25'
+                    ? 'bg-amber-400 text-black shadow-xs'
+                    : 'text-white/70 hover:text-white bg-white/10 hover:bg-white/15'
                 }`}
-                title="Ask Arnel's AI Assistant about project scopes, timelines & pricing"
+                title="Ask Arnel's AI Assistant"
               >
-                <HiSparkles className="w-3.5 h-3.5 text-accent transition-transform duration-200 group-hover:scale-110" />
+                <HiSparkles className="w-3.5 h-3.5 text-amber-400" />
                 <span>Ask AI</span>
               </button>
-
-              {/* Theme Toggle Button */}
-              {mounted && (
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-white/[0.08] transition-colors duration-150 active:scale-90 cursor-pointer"
-                  title={resolvedTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                >
-                  {resolvedTheme === 'dark' ? (
-                    <FaSun className="w-3.5 h-3.5 text-accent transition-transform duration-300 hover:rotate-90" />
-                  ) : (
-                    <FaMoon className="w-3.5 h-3.5 text-foreground/70 transition-transform duration-300 hover:-rotate-12" />
-                  )}
-                </button>
-              )}
 
               {/* Developer Mode Switcher */}
               {onToggleViewMode && (
@@ -297,44 +268,41 @@ export function SimpleSideNav({
                   type="button"
                   onClick={onToggleViewMode}
                   aria-label="Switch to Developer Mode"
-                  className="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-muted-foreground hover:text-foreground bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] transition-colors duration-150 active:scale-95 cursor-pointer"
-                  title="Switch to Developer Mode (Engineering resume & source code)"
+                  className="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white/70 hover:text-white bg-white/10 hover:bg-white/15 transition-all duration-150 active:scale-95 cursor-pointer"
+                  title="Switch to Developer Mode"
                 >
-                  <FaCode className="w-3 h-3 text-accent transition-transform duration-200 group-hover:scale-110" />
+                  <FaCode className="w-3 h-3 text-amber-400 transition-transform group-hover:scale-110" />
                   <span className="hidden xl:inline tracking-tight">Developer View</span>
                   <span className="xl:hidden tracking-tight">Dev</span>
-                  <span className="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-muted/60 text-muted-foreground">
-                    CODE
-                  </span>
                 </button>
               )}
 
-              {/* Primary "Let's Talk" CTA */}
+              {/* Primary "Let's Talk" CTA Button (Supaste exact style: white background, black text, 8px radius, font-semibold 12px) */}
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, 'contact')}
-                className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground text-background hover:bg-accent hover:text-white font-semibold text-xs tracking-tight shadow-xs active:scale-95 transition-colors duration-150 cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[8px] bg-white text-black hover:bg-white/90 font-semibold text-xs tracking-tight shadow-sm active:scale-95 transition-all duration-150 cursor-pointer"
               >
                 <span>Let&apos;s Talk</span>
-                <FaArrowRight className="w-2.5 h-2.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                <FaArrowRight className="w-2.5 h-2.5" />
               </a>
             </div>
           </nav>
         </header>
       )}
 
-      {/* ── Client Mode Mobile Header Bar (For Non-Tech-Savvy Users) ── */}
+      {/* ── Client Mode Supaste Mobile Notch Header Bar ── */}
       {isClient && (
         <header
           aria-label="Mobile Header"
-          className="lg:hidden fixed top-3 inset-x-3 sm:inset-x-6 z-40 flex items-center justify-between px-3.5 py-2 rounded-full bg-background/90 dark:bg-[#131416]/90 backdrop-blur-2xl shadow-xs select-none"
+          className="lg:hidden fixed top-0 inset-x-0 z-50 flex items-center justify-between px-4 py-2.5 bg-black text-white rounded-b-[18px] border-b border-white/[0.12] shadow-xl select-none"
         >
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, 'hero')}
             className="flex items-center gap-2 cursor-pointer"
           >
-            <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0 bg-muted">
+            <div className="relative w-6 h-6 rounded-[6px] overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900">
               <Image
                 src="/images/me.jpg"
                 alt="Arnel Baylon"
@@ -343,7 +311,7 @@ export function SimpleSideNav({
                 className="object-cover"
               />
             </div>
-            <span className="font-bold text-xs sm:text-sm tracking-tight text-foreground">
+            <span className="font-bold text-xs sm:text-sm tracking-tight text-white">
               Arnel Baylon
             </span>
             <span className="relative flex h-1.5 w-1.5">
@@ -352,45 +320,27 @@ export function SimpleSideNav({
             </span>
           </a>
 
-          <div className="flex items-center gap-1.5">
-            {/* AI Assistant Mobile Trigger */}
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={toggleChat}
               aria-label="Open AI Project Advisor"
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-colors cursor-pointer ${
-                chatOpen
-                  ? 'bg-accent text-zinc-950'
-                  : 'text-accent bg-accent/15'
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-[6px] text-[11px] font-semibold transition-colors cursor-pointer ${
+                chatOpen ? 'bg-amber-400 text-black' : 'text-white/80 bg-white/10'
               }`}
             >
-              <HiSparkles className="w-2.5 h-2.5 text-accent" />
-              <span>Ask AI</span>
+              <HiSparkles className="w-2.5 h-2.5 text-amber-400" />
+              <span>AI</span>
             </button>
-
-            {mounted && (
-              <button
-                type="button"
-                onClick={toggleTheme}
-                aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              >
-                {resolvedTheme === 'dark' ? (
-                  <FaSun className="w-3 h-3 text-accent" />
-                ) : (
-                  <FaMoon className="w-3 h-3 text-foreground/70" />
-                )}
-              </button>
-            )}
 
             {onToggleViewMode && (
               <button
                 type="button"
                 onClick={onToggleViewMode}
                 aria-label="Switch to Developer Mode"
-                className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold text-foreground/80 bg-muted/60 transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-2.5 py-1 rounded-[6px] text-[11px] font-semibold text-white/80 bg-white/10 transition-colors cursor-pointer"
               >
-                <FaCode className="w-2.5 h-2.5" />
+                <FaCode className="w-2.5 h-2.5 text-amber-400" />
                 <span>Dev</span>
               </button>
             )}
@@ -398,7 +348,7 @@ export function SimpleSideNav({
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, 'contact')}
-              className="px-3 py-1 rounded-full bg-foreground text-background hover:bg-accent hover:text-white font-semibold text-[11px] shadow-xs cursor-pointer active:scale-95 transition-colors"
+              className="px-3 py-1 rounded-[6px] bg-white text-black font-semibold text-[11px] shadow-xs cursor-pointer active:scale-95 transition-all"
             >
               Let&apos;s Talk
             </a>

@@ -46,10 +46,10 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdn.credly.com https://va.vercel-scripts.com",
               // Frames: Turnstile widget + Credly badge iframes + AppBuildersPH vote embeds
               "frame-src 'self' https://challenges.cloudflare.com https://www.credly.com https://appbuildersph.com",
-              // Styles: inline (Tailwind/Framer) + self-hosted next/font
-              "style-src 'self' 'unsafe-inline'",
-              // Fonts: self-hosted next/font woff2 + data URIs
-              "font-src 'self' data:",
+              // Styles: inline (Tailwind/Framer) + self-hosted next/font + fontshare
+              "style-src 'self' 'unsafe-inline' https://api.fontshare.com",
+              // Fonts: self-hosted next/font woff2 + data URIs + Google Fonts gstatic + Fontshare
+              "font-src 'self' data: https://fonts.gstatic.com https://cdn.fontshare.com",
               // Images: self + data URIs + Credly badge images + avatar images from GitHub
               "img-src 'self' data: blob: https://images.credly.com https://cdn.credly.com https://avatars.githubusercontent.com",
               // Media: self + audio blob playback for TTS
