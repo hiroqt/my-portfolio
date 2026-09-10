@@ -338,6 +338,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
                   isMusicOpen={isMusicOpen}
                   onToggleMusic={handleToggleMusic}
                   isMusicPlaying={isMusicPlaying}
+                  isChatOpen={isChatOpen}
                 />
 
                 {/* ── Right Main Engineering Systems Showcase Stage (Only Right Side is Scrollable) ── */}

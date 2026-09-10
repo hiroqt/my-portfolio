@@ -521,15 +521,20 @@ export function SimpleSideNav({
               aria-expanded={chatOpen}
               className={`group relative flex items-center justify-center w-9 h-9 rounded-xl transition-colors duration-150 active:scale-95 cursor-pointer ${
                 chatOpen
-                  ? 'bg-accent/15 text-accent'
+                  ? 'bg-accent/20 text-accent ring-1 ring-accent/40'
                   : 'text-accent/90 hover:text-accent hover:bg-accent/10'
               }`}
             >
               <span className="text-xs font-bold leading-none select-none">✦</span>
 
-              {!chatOpen && !stackOpen && (
+              {chatOpen ? (
+                <span className="absolute top-1.5 right-1.5 flex items-end gap-[1px] h-2" aria-hidden="true">
+                  <span className="w-[1.5px] h-1.5 bg-accent rounded-full animate-pulse" />
+                  <span className="w-[1.5px] h-2.5 bg-accent rounded-full animate-pulse [animation-delay:0.15s]" />
+                </span>
+              ) : !stackOpen ? (
                 <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-accent animate-ping opacity-60" />
-              )}
+              ) : null}
 
               {/* Floating Tooltip */}
               <span

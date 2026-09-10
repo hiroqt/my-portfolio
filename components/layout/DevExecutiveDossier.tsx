@@ -53,6 +53,7 @@ interface DevExecutiveDossierProps {
   isMusicOpen?: boolean
   onToggleMusic?: () => void
   isMusicPlaying?: boolean
+  isChatOpen?: boolean
 }
 
 export function DevExecutiveDossier({
@@ -65,6 +66,7 @@ export function DevExecutiveDossier({
   isMusicOpen = false,
   onToggleMusic,
   isMusicPlaying = false,
+  isChatOpen = false,
 }: DevExecutiveDossierProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const shouldReduceMotion = useReducedMotion()
@@ -171,11 +173,22 @@ export function DevExecutiveDossier({
             <button
               type="button"
               onClick={onOpenChat}
-              title="Open yhelAI Copilot"
-              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-accent/12 hover:bg-accent/20 text-accent text-xs font-mono transition-colors active:scale-[0.97] cursor-pointer"
+              title={isChatOpen ? 'Close yhelAI Copilot' : 'Open yhelAI Copilot'}
+              className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer ${
+                isChatOpen
+                  ? 'bg-accent/25 text-accent ring-1 ring-accent/40 shadow-xs'
+                  : 'bg-accent/12 hover:bg-accent/20 text-accent'
+              }`}
             >
               <HiSparkles className="w-3.5 h-3.5" />
               <span>Copilot</span>
+              {isChatOpen && (
+                <span className="flex items-end gap-[1.5px] h-3 ml-0.5 pb-0.5" aria-hidden="true">
+                  <span className="w-[1.5px] h-2 bg-accent rounded-full animate-pulse" />
+                  <span className="w-[1.5px] h-3 bg-accent rounded-full animate-pulse [animation-delay:0.15s]" />
+                  <span className="w-[1.5px] h-1.5 bg-accent rounded-full animate-pulse [animation-delay:0.3s]" />
+                </span>
+              )}
             </button>
           )}
 
