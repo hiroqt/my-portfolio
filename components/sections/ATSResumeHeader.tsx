@@ -56,24 +56,58 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
   const reduce = useReducedMotion()
 
   return (
-    <header id="hero" className="relative pt-6 pb-12 sm:pt-8 sm:pb-16 border-b border-border/60 scroll-mt-16">
+    <header id="hero" className="relative pt-4 pb-8 sm:pt-6 sm:pb-12 scroll-mt-16">
       {/* Target anchor for backwards compatibility with #about */}
       <span id="about" className="sr-only" aria-hidden="true" />
       
 
 
-      <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* ── Desktop Architectural Mission Statement (lg:block) ── */}
+      <div className="hidden lg:block space-y-4 pt-1 pb-4">
+        <div className="flex items-center gap-2 font-mono text-xs text-accent">
+          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+          <span className="uppercase tracking-wider font-semibold">Autonomous AI Swarms &amp; Cloud Infrastructure</span>
+        </div>
+        <h1 className="font-serif text-3xl xl:text-4xl 2xl:text-[44px] font-bold tracking-[-0.025em] text-foreground leading-[1.12] max-w-2xl">
+          Engineering Frontier AI Loops into Resilient Production Software.
+        </h1>
+        <p className="text-muted-foreground text-sm xl:text-[15px] leading-relaxed max-w-2xl font-sans">
+          Architecting multi-agent swarms, low-latency LLM pipelines, and high-concurrency cloud systems with relentless craft and real-world impact.
+        </p>
+        <div className="pt-2 flex items-center gap-3">
+          <a
+            href="#projects"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-colors duration-150 active:scale-[0.97] shadow-xs group"
+          >
+            <span>Explore Featured Systems</span>
+            <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
+          </a>
+          {onOpenStack && (
+            <button
+              type="button"
+              onClick={onOpenStack}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-muted/50 hover:bg-muted/80 text-foreground font-mono text-xs transition-colors active:scale-[0.97] cursor-pointer"
+            >
+              <span>View 40+ Tech Arsenal</span>
+              <span className="text-accent">&rarr;</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* ── Mobile Full Hero (lg:hidden) ── */}
+      <div className="lg:hidden grid gap-8 items-center">
         
-        {/* ── Left Column: AI-First Narrative & Core Identity ── */}
-        <div className="lg:col-span-7 flex flex-col justify-center">
+        {/* Mobile Identity & Core Pitch */}
+        <div className="flex flex-col justify-center">
           {/* Headline */}
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.05 }}
+            transition={{ duration: 0.35, delay: 0.04, ease: [0.23, 1, 0.32, 1] }}
             className="space-y-1"
           >
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.08]">
+            <h1 className="font-serif text-4xl sm:text-5xl font-bold tracking-[-0.025em] text-foreground leading-[1.08]">
               Arnel Baylon
             </h1>
             <p className="text-base text-muted-foreground font-medium">
@@ -85,7 +119,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.1 }}
+            transition={{ duration: 0.35, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
             className="mt-5 space-y-3.5 text-muted-foreground text-[14.5px] sm:text-[15.5px] leading-relaxed max-w-xl"
           >
             <p>
@@ -100,23 +134,23 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.15 }}
+            transition={{ duration: 0.35, delay: 0.12, ease: [0.23, 1, 0.32, 1] }}
             className="mt-7 flex flex-wrap items-center gap-3"
           >
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-all shadow-xs group"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-[background-color,color,box-shadow,transform] duration-150 active:scale-[0.97] shadow-xs group"
             >
               <span>Explore Featured Systems</span>
               <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
             </a>
 
-            <div className="flex items-center gap-1 p-1 rounded-xl border border-border bg-muted/20 dark:bg-card/60">
+            <div className="flex items-center gap-1 p-1 rounded-xl bg-muted/40 dark:bg-card/40">
               <a
                 href="https://github.com/hiroqt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors duration-150 active:scale-90"
                 title="GitHub"
                 aria-label="GitHub Profile"
               >
@@ -126,7 +160,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
                 href="https://www.linkedin.com/in/arnel-baylon-b05233189"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors duration-150 active:scale-90"
                 title="LinkedIn"
                 aria-label="LinkedIn Profile"
               >
@@ -134,7 +168,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
               </a>
               <a
                 href="mailto:arnelbaylon15@gmail.com"
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors duration-150 active:scale-90"
                 title="Email"
                 aria-label="Send Email"
               >
@@ -143,7 +177,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
             </div>
           </motion.div>
 
-          {/* Primary Tech Stack Pills with SVG Logos */}
+          {/* Primary Tech Stack Pills with SVG Logos (Borderless) */}
           <div className="mt-6 flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-muted-foreground">
             <span className="text-foreground font-semibold mr-1">Primary Stack:</span>
             {[
@@ -163,7 +197,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
                   key={tech.name}
                   type="button"
                   onClick={() => onOpenStack?.()}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-muted/50 dark:bg-muted/30 border border-border/80 text-foreground/90 hover:border-accent/40 hover:text-accent transition-all cursor-pointer shadow-2xs group"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted/50 dark:bg-muted/30 text-foreground/90 hover:bg-muted/80 hover:text-foreground transition-[color,background-color,transform] duration-150 active:scale-95 cursor-pointer group"
                   title={`Open stack arsenal: ${tech.name}`}
                 >
                   <Icon className={`w-3 h-3 transition-transform group-hover:scale-110 ${tech.color}`} />
@@ -175,7 +209,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
               <button
                 type="button"
                 onClick={onOpenStack}
-                className="px-2 py-1 rounded-md text-accent font-semibold hover:underline cursor-pointer transition-colors"
+                className="px-2 py-1 rounded-md text-accent font-semibold hover:underline cursor-pointer transition-colors duration-150 active:scale-95"
                 title="Open full tech stack & tools drawer"
               >
                 +40 More ↗
@@ -184,30 +218,29 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
           </div>
         </div>
 
-        {/* ── Right Column: Hero Side Image (Clean, Borderless, Theme-Adaptive) ── */}
+        {/* Mobile Hero Side Image */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, scale: 0.95 }}
+          initial={reduce ? false : { opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="lg:col-span-5 flex items-center justify-center relative"
+          transition={{ duration: 0.38, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
+          className="flex items-center justify-center relative"
         >
-          {/* Ambient soft glow matching CvSU graduation stole orange */}
           <div
             className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 blur-3xl -z-10"
             style={{
-              background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.22) 0%, transparent 70%)',
+              background: 'radial-gradient(circle at 50% 50%, rgba(194, 157, 104, 0.15) 0%, transparent 70%)',
             }}
           />
 
-          <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] aspect-square flex items-center justify-center">
+          <div className="relative w-full max-w-[280px] sm:max-w-[340px] aspect-square flex items-center justify-center">
             <Image
               src="/images/header.png"
               alt="Arnel Baylon - Software Engineer"
               width={1254}
               height={1254}
               priority
-              sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
-              className="w-full h-full object-contain filter drop-shadow-md dark:drop-shadow-[0_16px_32px_rgba(0,0,0,0.65)] hover:scale-[1.02] transition-transform duration-500 select-none pointer-events-none"
+              sizes="(max-width: 640px) 280px, 340px"
+              className="w-full h-full object-contain filter drop-shadow-md dark:drop-shadow-[0_16px_32px_rgba(0,0,0,0.65)] select-none pointer-events-none"
               style={{ imageRendering: 'pixelated' }}
             />
           </div>
@@ -215,8 +248,8 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
 
       </div>
 
-      {/* ── 4-Metric Milestone Stats Ribbon (Zero Cards, Zero Eyebrows) ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8 pt-6 border-t border-border/60">
+      {/* ── 4-Metric Milestone Stats Ribbon (Zero Cards, Zero Dividing Lines) ── */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-6 pt-2">
         {summaryMilestones.map((m, idx) => (
           <a
             key={idx}
@@ -237,7 +270,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
                 }
               }
             }}
-            className="group block py-1 transition-colors cursor-pointer"
+            className="group block py-1 transition-transform duration-150 active:scale-[0.97] cursor-pointer"
           >
             <div className="font-mono text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors flex items-center justify-between">
               <span>{m.value}</span>

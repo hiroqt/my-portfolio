@@ -22,9 +22,9 @@ export function EducationSection() {
   const reduce = useReducedMotion()
 
   return (
-    <section id="education" className="py-12 scroll-mt-20">
-      {/* ── Section Header ── */}
-      <div className="mb-6 flex items-baseline justify-between border-b border-border pb-3">
+    <section id="education" className="py-8 sm:py-10 scroll-mt-20">
+      {/* ── Section Header (Clean Typographic Hierarchy) ── */}
+      <div className="mb-6 flex items-baseline justify-between">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">04</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
@@ -37,17 +37,17 @@ export function EducationSection() {
         </span>
       </div>
 
-      {/* ── Clean Card (Bryl Lim / Kodekz Style) ── */}
+      {/* ── Borderless Soft Surface (Editorial Architecture) ── */}
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 15 }}
+        initial={reduce ? false : { opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.45 }}
-        className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 hover:bg-muted/40 transition-colors shadow-xs dark:shadow-lg dark:shadow-black/20"
+        transition={{ duration: 0.32, ease: [0.23, 1, 0.32, 1] }}
+        className="rounded-3xl bg-muted/35 dark:bg-card/50 p-6 sm:p-8 transition-colors duration-150"
       >
-        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 pb-3 border-b border-border/50">
+        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 pb-2">
           <div className="flex items-start gap-3">
-            <span className="p-2 rounded-lg bg-background dark:bg-muted/50 border border-border text-foreground shrink-0 mt-0.5">
+            <span className="p-2.5 rounded-2xl bg-muted/60 dark:bg-white/[0.04] text-foreground shrink-0 mt-0.5">
               <FaGraduationCap className="text-base" />
             </span>
             <div>
@@ -72,7 +72,7 @@ export function EducationSection() {
             {educationData.highlights.map((item) => (
               <span
                 key={item}
-                className="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-md bg-background dark:bg-muted/40 border border-border text-foreground"
+                className="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-lg bg-muted/60 dark:bg-white/[0.04] text-muted-foreground"
               >
                 <span className="text-accent text-[9px]">✦</span>
                 <span>{item}</span>

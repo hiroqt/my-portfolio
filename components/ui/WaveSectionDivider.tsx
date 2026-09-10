@@ -30,7 +30,7 @@ export function WaveSectionDivider({
         viewBox="0 0 1200 36"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-6 sm:h-8 lg:h-9 transition-colors text-amber-500/75 dark:text-amber-400/70"
+        className="w-full h-5 sm:h-6 lg:h-7 transition-colors text-accent/25 dark:text-accent/20"
         preserveAspectRatio="none"
       >
         {/* Simple, clean thick continuous wave line (zero dots, zero dashes) */}

@@ -101,9 +101,9 @@ export function MobileFAB({
                     type="button"
                     onClick={handleToggleMode}
                     aria-label={`Switch to ${viewMode === 'client' ? 'Developer' : 'Client'} Mode`}
-                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-background dark:bg-[#0c0e18] text-foreground border border-amber-500/50 shadow-[0_12px_32px_rgba(245,158,11,0.25)] hover:border-accent active:scale-95 transition-all cursor-pointer"
+                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-card text-foreground border border-accent/25 shadow-lg active:scale-95 transition-colors duration-150 cursor-pointer"
                   >
-                    <div className="w-8 h-8 rounded-full bg-amber-500 text-zinc-950 flex items-center justify-center text-sm font-bold shadow-xs">
+                    <div className="w-8 h-8 rounded-full bg-accent text-background dark:text-[#131416] flex items-center justify-center text-sm font-bold shadow-xs">
                       {viewMode === 'client' ? <FaTerminal className="w-3.5 h-3.5" /> : <FaBriefcase className="w-3.5 h-3.5" />}
                     </div>
                     <div className="text-left">
@@ -116,7 +116,7 @@ export function MobileFAB({
                         {viewMode === 'client' ? 'Code & technical details' : 'User-friendly overview'}
                       </p>
                     </div>
-                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-accent/15 text-accent">
                       {viewMode === 'client' ? 'DEV' : 'CLIENT'}
                     </span>
                   </button>
@@ -137,9 +137,9 @@ export function MobileFAB({
                     type="button"
                     onClick={handleOpenChat}
                     aria-label="Open yhelAI Copilot Chat"
-                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-background dark:bg-[#0c0e18] text-foreground border border-border/90 dark:border-white/20 shadow-[0_12px_32px_rgba(0,0,0,0.35)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.75)] hover:border-accent active:scale-95 transition-all cursor-pointer"
+                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-card text-foreground border border-border/40 shadow-lg hover:border-accent/40 active:scale-95 transition-colors duration-150 cursor-pointer"
                   >
-                    <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm shadow-xs">
+                    <div className="w-8 h-8 rounded-full bg-accent text-background dark:text-[#131416] flex items-center justify-center text-sm shadow-xs">
                       <HiSparkles className="w-4 h-4" />
                     </div>
                     <div className="text-left">
@@ -151,7 +151,7 @@ export function MobileFAB({
                         Ask Arnel&apos;s Copilot
                       </p>
                     </div>
-                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-accent/15 text-accent border border-accent/30">
+                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-accent/15 text-accent">
                       AI
                     </span>
                   </button>
@@ -172,9 +172,9 @@ export function MobileFAB({
                     type="button"
                     onClick={handleOpenStack}
                     aria-label="Open Tech Stack & Arsenal"
-                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-background dark:bg-[#0c0e18] text-foreground border border-border/90 dark:border-white/20 shadow-[0_12px_32px_rgba(0,0,0,0.35)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.75)] hover:border-accent active:scale-95 transition-all cursor-pointer"
+                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-card text-foreground border border-border/40 shadow-lg hover:border-accent/40 active:scale-95 transition-colors duration-150 cursor-pointer"
                   >
-                    <div className="w-8 h-8 rounded-full bg-amber-500/20 text-accent flex items-center justify-center text-xs shadow-xs border border-accent/30">
+                    <div className="w-8 h-8 rounded-full bg-accent/15 text-accent flex items-center justify-center text-xs shadow-xs">
                       <FaLayerGroup className="w-3.5 h-3.5" />
                     </div>
                     <div className="text-left">
@@ -183,7 +183,7 @@ export function MobileFAB({
                         Languages &amp; Frameworks
                       </p>
                     </div>
-                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-accent/15 text-accent border border-accent/30">
+                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-accent/15 text-accent">
                       40+
                     </span>
                   </button>
@@ -204,9 +204,9 @@ export function MobileFAB({
                     type="button"
                     onClick={handleOpenSocials}
                     aria-label="Open Social Links"
-                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-background dark:bg-[#0c0e18] text-foreground border border-border/90 dark:border-white/20 shadow-[0_12px_32px_rgba(0,0,0,0.35)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.75)] hover:border-accent active:scale-95 transition-all cursor-pointer"
+                    className="flex items-center gap-3 pr-4 pl-2.5 py-2.5 rounded-full bg-card text-foreground border border-border/40 shadow-lg hover:border-accent/40 active:scale-95 transition-colors duration-150 cursor-pointer"
                   >
-                    <div className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center text-xs shadow-xs">
+                    <div className="w-8 h-8 rounded-full bg-muted text-foreground flex items-center justify-center text-xs shadow-xs">
                       <FaShareAlt className="w-3.5 h-3.5" />
                     </div>
                     <div className="text-left">
@@ -215,7 +215,7 @@ export function MobileFAB({
                         GitHub, LinkedIn, Email
                       </p>
                     </div>
-                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-muted dark:bg-white/10 text-muted-foreground border border-border/60">
+                    <span className="ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-muted text-muted-foreground">
                       5+
                     </span>
                   </button>
@@ -229,11 +229,11 @@ export function MobileFAB({
               onClick={() => setIsExpanded((prev) => !prev)}
               aria-label={isExpanded ? 'Close Menu' : 'Open AI & Socials Menu'}
               aria-expanded={isExpanded}
-              whileTap={{ scale: 0.9 }}
-              className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-[0_10px_28px_rgba(245,158,11,0.35)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.8)] border transition-transform cursor-pointer ${
+              whileTap={{ scale: 0.94 }}
+              className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg border transition-colors cursor-pointer ${
                 isExpanded
-                  ? 'bg-foreground text-background border-border/80'
-                  : 'bg-gradient-to-tr from-amber-500 via-accent to-amber-600 text-white border-amber-300/40 hover:brightness-110'
+                  ? 'bg-foreground text-background border-border/60'
+                  : 'bg-accent text-background dark:text-[#131416] border-accent/40 hover:brightness-105'
               }`}
             >
               <motion.div

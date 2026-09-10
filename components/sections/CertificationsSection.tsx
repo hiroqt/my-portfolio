@@ -164,7 +164,7 @@ const digitalBadges = [
   },
   {
     issuer: 'Six Sigma',
-    svgLogo: <LeanSixSigmaSvg className="w-5 h-5 text-amber-500" />,
+    svgLogo: <LeanSixSigmaSvg className="w-5 h-5 text-accent" />,
     title: 'Lean Six Sigma — White Belt',
     count: 'Quality System',
     credentialUrl: 'https://www.credly.com/users/arnel-baylon',
@@ -217,9 +217,9 @@ export function CertificationsSection() {
   }
 
   return (
-    <section id="certifications" className="py-12 scroll-mt-20">
-      {/* ── Section Header ── */}
-      <div className="mb-8 flex items-baseline justify-between border-b border-border pb-3">
+    <section id="certifications" className="py-8 sm:py-10 scroll-mt-20">
+      {/* ── Section Header (Clean Typographic Hierarchy) ── */}
+      <div className="mb-6 flex items-baseline justify-between">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">03</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
@@ -239,7 +239,7 @@ export function CertificationsSection() {
       </div>
 
       {/* ── PART 1: Official AWS Issued Certificates (With Visual High-Res Images & Centered Lightbox) ── */}
-      <div className="mb-12">
+      <div className="mb-10">
         <div className="flex items-center justify-between mb-4">
           <div>
             <div className="flex items-center gap-2">
@@ -252,12 +252,12 @@ export function CertificationsSection() {
               Presented by AWS User Group Philippines (AWSUG.PH) at AWS Headquarters BGC
             </p>
           </div>
-          <span className="hidden sm:inline-block text-[10px] font-mono text-muted-foreground bg-muted/40 border border-border px-2.5 py-1 rounded-full">
+          <span className="hidden sm:inline-block text-[10px] font-mono text-muted-foreground bg-muted/50 px-2.5 py-1 rounded-full">
             Click any certificate to preview &amp; inspect
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {officialCertificates.map((cert, i) => (
             <motion.div
               key={cert.id}
@@ -266,21 +266,19 @@ export function CertificationsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
               onClick={() => openCertModal(cert, 'image')}
-              className={`group relative flex flex-col rounded-2xl border cursor-pointer ${
+              className={`group relative flex flex-col rounded-3xl cursor-pointer ${
                 cert.isWinner
-                  ? 'border-amber-500/40 bg-gradient-to-b from-amber-500/[0.04] to-transparent dark:from-amber-500/[0.08] dark:to-card/80 shadow-md shadow-amber-500/5 hover:border-amber-500/70 hover:shadow-lg hover:shadow-amber-500/10'
-                  : 'border-border/80 bg-muted/20 dark:bg-card/80 hover:border-accent/50 hover:bg-muted/30'
-              } p-4 transition-all duration-300 shadow-xs dark:shadow-lg dark:shadow-black/20`}
+                  ? 'bg-accent/10 dark:bg-card/70 hover:bg-accent/15'
+                  : 'bg-muted/35 dark:bg-card/50 hover:bg-muted/50'
+              } p-4 sm:p-5 transition-[background-color,transform] duration-200 active:scale-[0.98]`}
             >
-              {/* Winner or Category Tag */}
+              {/* Winner or Category Tag (Borderless Soft Pill) */}
               <div className="flex items-center justify-between gap-2 mb-3">
                 <span
-                  className={`text-[9.5px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full font-bold border flex items-center gap-1.5 ${
+                  className={`text-[9.5px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full font-semibold flex items-center gap-1.5 ${
                     cert.isWinner
-                      ? 'bg-amber-500/15 border-amber-500/40 text-amber-600 dark:text-amber-400'
-                      : cert.awardTagColor === 'purple'
-                      ? 'bg-purple-500/15 border-purple-500/30 text-purple-600 dark:text-purple-400'
-                      : 'bg-blue-500/15 border-blue-500/30 text-blue-600 dark:text-blue-400'
+                      ? 'bg-accent/20 text-accent'
+                      : 'bg-muted/60 text-muted-foreground'
                   }`}
                 >
                   {cert.isWinner && <FaAward className="text-[10px]" />}
@@ -291,8 +289,8 @@ export function CertificationsSection() {
                 </span>
               </div>
 
-              {/* Certificate Image Thumbnail: perfectly centered with object-contain so NO certificate edges or text are cropped */}
-              <div className="relative overflow-hidden rounded-xl border border-border/80 bg-zinc-950/80 aspect-[4/3] flex items-center justify-center p-2 group/img shadow-inner">
+              {/* Certificate Image Thumbnail: perfectly centered with object-contain */}
+              <div className="relative overflow-hidden rounded-2xl bg-muted/60 dark:bg-zinc-900/60 aspect-[4/3] flex items-center justify-center p-2 group/img">
                 <div className="relative w-full h-full">
                   <Image
                     src={cert.thumbnailUrl}
@@ -305,8 +303,8 @@ export function CertificationsSection() {
                 </div>
                 
                 {/* Hover Overlay with Inspect Badge */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 text-white backdrop-blur-[2px]">
-                  <span className="p-2.5 rounded-full bg-accent text-zinc-950 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 font-bold">
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 text-white backdrop-blur-[2px]">
+                  <span className="p-2.5 rounded-full bg-accent text-zinc-950 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-200 font-bold">
                     <FaExpand className="text-xs" />
                   </span>
                   <span className="font-mono text-[10.5px] uppercase tracking-wider font-semibold text-white">
@@ -325,7 +323,7 @@ export function CertificationsSection() {
                     {cert.description}
                   </p>
 
-                  <div className="mt-3 pt-2.5 border-t border-border/50 space-y-1">
+                  <div className="mt-3 pt-1 space-y-1">
                     <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground">
                       <FaCalendarAlt className="text-[9px] text-accent shrink-0" />
                       <span>{cert.date}</span>
@@ -364,15 +362,15 @@ export function CertificationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="group relative flex flex-col justify-between rounded-xl border border-border/80 bg-muted/20 dark:bg-card/80 p-5 hover:border-accent/40 hover:bg-muted/40 transition-all shadow-xs dark:shadow-lg dark:shadow-black/15"
+              className="group relative flex flex-col justify-between rounded-3xl bg-muted/35 dark:bg-card/50 p-5 hover:bg-muted/50 transition-[background-color,transform] duration-200"
             >
               <div>
                 {/* Header: Authentic SVG Logo + Credly Count Badge */}
                 <div className="flex items-start justify-between gap-2 mb-3">
-                  <span className="p-2.5 rounded-xl bg-background dark:bg-muted/50 border border-border text-foreground shadow-2xs inline-flex items-center justify-center">
+                  <span className="p-2.5 rounded-2xl bg-muted/60 dark:bg-white/[0.04] text-foreground inline-flex items-center justify-center">
                     {cert.svgLogo}
                   </span>
-                  <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-background dark:bg-muted/40 border border-border text-muted-foreground font-semibold">
+                  <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-muted/60 text-muted-foreground font-semibold">
                     {cert.count}
                   </span>
                 </div>
@@ -385,7 +383,7 @@ export function CertificationsSection() {
                 </p>
 
                 {/* Topics List */}
-                <div className="space-y-1 pt-2 border-t border-border/40">
+                <div className="space-y-1 pt-1">
                   {cert.topics.map((t) => (
                     <div key={t} className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground">
                       <span className="text-accent text-[9px] shrink-0">✦</span>
@@ -396,7 +394,7 @@ export function CertificationsSection() {
               </div>
 
               {/* Bottom Verify Action */}
-              <div className="mt-5 pt-3 border-t border-border/40 flex items-center justify-between">
+              <div className="mt-5 pt-2 flex items-center justify-between">
                 <span className="text-[9.5px] font-mono uppercase tracking-wider text-muted-foreground">
                   Credly Verified
                 </span>
@@ -421,7 +419,14 @@ export function CertificationsSection() {
         createPortal(
           <AnimatePresence>
             {selectedCert && (
-              <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+              <motion.div
+                key="cert-modal-root"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+              >
                 {/* Full-Screen Dim Backdrop */}
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -437,7 +442,7 @@ export function CertificationsSection() {
                   initial={reduce ? false : { opacity: 0, scale: 0.96, y: 15 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.96, y: 15 }}
-                  transition={{ type: 'spring', damping: 28, stiffness: 340 }}
+                  transition={{ duration: 0.24, ease: [0.23, 1, 0.32, 1] }}
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="cert-dialog-title"
@@ -570,7 +575,7 @@ export function CertificationsSection() {
                     </div>
                   </div>
                 </motion.div>
-              </div>
+              </motion.div>
             )}
           </AnimatePresence>,
           document.body

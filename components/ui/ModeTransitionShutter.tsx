@@ -31,8 +31,8 @@ export function ModeTransitionShutter({
             initial={{ y: 0 }}
             animate={{ y: '-100%' }}
             transition={{
-              duration: 0.7,
-              delay: 0.15,
+              duration: 0.38,
+              delay: 0.08,
               ease: [0.76, 0, 0.24, 1],
             }}
             className="w-full h-1/2 bg-background dark:bg-[#07080e] border-b border-amber-500/50 shadow-2xl relative"
@@ -44,8 +44,8 @@ export function ModeTransitionShutter({
           {/* ── Center Light Seam & Opening Emblem ── */}
           <motion.div
             initial={{ opacity: 1, scale: 1 }}
-            animate={{ opacity: 0, scale: 1.15 }}
-            transition={{ duration: 0.45, delay: 0.2, ease: 'easeOut' }}
+            animate={{ opacity: 0, scale: 1.08 }}
+            transition={{ duration: 0.28, delay: 0.06, ease: [0.23, 1, 0.32, 1] }}
             className="absolute top-1/2 left-0 right-0 -translate-y-1/2 z-20 flex flex-col items-center pointer-events-none"
           >
             {/* Amber Light Beam Line */}
@@ -67,8 +67,8 @@ export function ModeTransitionShutter({
             initial={{ y: 0 }}
             animate={{ y: '100%' }}
             transition={{
-              duration: 0.7,
-              delay: 0.15,
+              duration: 0.38,
+              delay: 0.08,
               ease: [0.76, 0, 0.24, 1],
             }}
             className="w-full h-1/2 bg-background dark:bg-[#07080e] border-t border-amber-500/50 shadow-2xl relative"

@@ -158,7 +158,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
                 type="button"
                 onClick={onClose}
                 title="Close socials (Esc)"
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 dark:hover:bg-white/[0.06] active:scale-90 transition-colors cursor-pointer"
               >
                 <FaTimes className="w-3.5 h-3.5" />
               </button>
@@ -176,7 +176,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
                     href={channel.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative flex items-center justify-between p-2.5 rounded-xl border border-border/50 dark:border-white/[0.06] bg-muted/20 dark:bg-white/[0.02] hover:bg-accent/10 dark:hover:bg-accent/[0.12] hover:border-accent/40 dark:hover:border-accent/40 transition-all duration-200 cursor-pointer shadow-xs"
+                    className="group relative flex items-center justify-between p-2.5 rounded-xl border border-border/50 dark:border-white/[0.06] bg-muted/20 dark:bg-white/[0.02] hover:bg-accent/10 dark:hover:bg-accent/[0.12] hover:border-accent/40 dark:hover:border-accent/40 active:scale-[0.98] transition-colors duration-200 cursor-pointer shadow-xs"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div
@@ -205,7 +205,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
                         type="button"
                         onClick={(e) => handleCopy(e, channel)}
                         title={`Copy ${channel.name} profile link`}
-                        className={`p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-white/10 transition-all cursor-pointer ${
+                        className={`p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 dark:hover:bg-white/10 active:scale-90 transition-colors cursor-pointer ${
                           isCopied ? 'text-emerald-500 hover:text-emerald-500' : ''
                         }`}
                       >
@@ -217,7 +217,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
                       </button>
 
                       {/* Open Link Arrow */}
-                      <div className="p-1.5 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
+                      <div className="p-1.5 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-150">
                         <FaExternalLinkAlt className="w-2.5 h-2.5" />
                       </div>
                     </div>
@@ -256,7 +256,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
               <button
                 type="button"
                 onClick={onClose}
-                className="p-1 text-muted-foreground hover:text-foreground"
+                className="p-1 text-muted-foreground hover:text-foreground active:scale-90 transition-transform"
               >
                 <FaTimes className="w-4 h-4" />
               </button>
@@ -274,7 +274,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
                     href={channel.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2.5 rounded-xl border border-border/70 dark:border-white/10 bg-muted/50 dark:bg-[#121624] hover:bg-muted/80 dark:hover:bg-[#181d2e] transition-colors"
+                    className="flex items-center justify-between p-2.5 rounded-xl border border-border/70 dark:border-white/10 bg-muted/50 dark:bg-[#121624] hover:bg-muted/80 dark:hover:bg-[#181d2e] active:scale-[0.98] transition-colors"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
                       <div
@@ -301,7 +301,7 @@ export function SocialsBubble({ isOpen, onClose }: SocialsBubbleProps) {
                       <button
                         type="button"
                         onClick={(e) => handleCopy(e, channel)}
-                        className="p-1.5 text-muted-foreground"
+                        className="p-1.5 text-muted-foreground active:scale-90 transition-transform"
                       >
                         {isCopied ? (
                           <FaCheck className="w-3 h-3 text-emerald-500" />

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import { FaChevronDown, FaChevronUp, FaExternalLinkAlt } from 'react-icons/fa'
 
 const experiences = [
@@ -85,9 +85,9 @@ export function ExperienceSection() {
   }
 
   return (
-    <section id="experience" className="py-12 scroll-mt-20">
-      {/* ── Section Header ── */}
-      <div className="mb-6 flex items-baseline justify-between border-b border-border pb-3">
+    <section id="experience" className="py-8 sm:py-10 scroll-mt-20">
+      {/* ── Section Header (Clean Typographic Hierarchy) ── */}
+      <div className="mb-6 flex items-baseline justify-between">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">02</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
@@ -105,15 +105,19 @@ export function ExperienceSection() {
         </a>
       </div>
 
-      {/* ── Border-Separated Row Layout (Bryl Lim / Kodekz Style) ── */}
-      <div className="divide-y divide-border border-y border-border">
+      {/* ── Border-Free Soft Timeline Rows (Clean Typography & Whitespace) ── */}
+      <div className="space-y-2">
         {experiences.map((job) => {
           const isExpanded = expandedId === job.id
 
           return (
             <div
               key={job.id}
-              className="group py-4 transition-colors hover:bg-muted/30 px-2 sm:px-3 rounded-lg"
+              className={`p-4 sm:p-5 rounded-2xl transition-[background-color,transform] duration-150 ${
+                isExpanded
+                  ? 'bg-muted/40 dark:bg-card/60 shadow-2xs'
+                  : 'hover:bg-muted/30'
+              }`}
             >
               {/* Row Header Bar */}
               <div
@@ -128,62 +132,64 @@ export function ExperienceSection() {
                 }}
                 className="grid grid-cols-12 items-baseline gap-2 sm:gap-4 cursor-pointer select-none"
               >
-                <div className="col-span-3 sm:col-span-2 font-mono text-[11.5px] text-muted-foreground group-hover:text-foreground transition-colors">
+                <div className="col-span-3 sm:col-span-2 font-mono text-[11.5px] text-muted-foreground">
                   {job.year}
                 </div>
                 <div className="col-span-9 sm:col-span-6 text-[14px] font-medium text-foreground group-hover:text-accent transition-colors flex items-center justify-between sm:justify-start gap-2">
-                  <span>{job.role}</span>
+                  <span className={isExpanded ? 'text-accent font-semibold' : ''}>{job.role}</span>
                   <span className="sm:hidden text-xs text-muted-foreground">
                     {isExpanded ? <FaChevronUp className="w-2.5 h-2.5" /> : <FaChevronDown className="w-2.5 h-2.5" />}
                   </span>
                 </div>
                 <div className="col-span-12 sm:col-span-4 text-[12.5px] text-muted-foreground sm:text-right flex items-center justify-between sm:justify-end gap-2">
                   <span>{job.org}</span>
-                  <span className="hidden sm:inline-block text-xs text-muted-foreground opacity-60 group-hover:opacity-100 transition-opacity">
-                    {isExpanded ? <FaChevronUp className="w-2.5 h-2.5" /> : <FaChevronDown className="w-2.5 h-2.5" />}
+                  <span className="hidden sm:inline-block text-xs text-muted-foreground opacity-60">
+                    {isExpanded ? <FaChevronUp className="w-2.5 h-2.5 text-accent" /> : <FaChevronDown className="w-2.5 h-2.5" />}
                   </span>
                 </div>
               </div>
 
               {/* Expandable Details Drawer */}
-              {isExpanded && (
-                <motion.div
-                  initial={reduce ? false : { opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-3 pt-3 border-t border-border/40 space-y-3"
-                >
-                  <p className="text-xs sm:text-sm text-foreground/90 font-medium">
-                    {job.summary}
-                  </p>
+              <AnimatePresence initial={false}>
+                {isExpanded && (
+                  <motion.div
+                    initial={reduce ? false : { opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+                    className="overflow-hidden mt-4 pt-2 space-y-3"
+                  >
+                    <p className="text-xs sm:text-sm text-foreground/90 font-medium">
+                      {job.summary}
+                    </p>
 
-                  <ul className="space-y-1.5 pl-2" aria-label={`Achievements at ${job.org}`}>
-                    {job.bullets.map((b, bIdx) => (
-                      <li
-                        key={bIdx}
-                        className="text-xs sm:text-[13px] leading-relaxed text-muted-foreground flex items-start gap-2"
-                      >
-                        <span className="text-accent text-[10px] shrink-0 mt-0.5" aria-hidden="true">
-                          ✦
+                    <ul className="space-y-1.5 pl-1" aria-label={`Achievements at ${job.org}`}>
+                      {job.bullets.map((b, bIdx) => (
+                        <li
+                          key={bIdx}
+                          className="text-xs sm:text-[13px] leading-relaxed text-muted-foreground flex items-start gap-2"
+                        >
+                          <span className="text-accent text-[10px] shrink-0 mt-0.5" aria-hidden="true">
+                            ✦
+                          </span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex flex-wrap items-center gap-1.5 pt-2">
+                      {job.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-muted/60 dark:bg-white/[0.04] text-muted-foreground"
+                        >
+                          {t}
                         </span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-wrap items-center gap-1.5 pt-2">
-                    {job.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-background dark:bg-muted/40 border border-border text-muted-foreground"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           )
         })}

@@ -593,12 +593,12 @@ export function InteractiveGallery() {
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-background via-background/40 to-transparent z-10" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-background via-background/40 to-transparent z-10" />
 
-        {/* Floating Prev/Next Buttons (Subtle on Hover) */}
+        {/* Floating Prev/Next Buttons (Borderless, Subtle on Hover) */}
         <button
           type="button"
           onClick={() => scrollByDirection('left')}
           aria-label="Scroll gallery left"
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-background/85 hover:bg-background border border-border/80 text-foreground backdrop-blur-md shadow-lg opacity-0 group-hover/masonry:opacity-100 transition-all duration-300 hover:scale-105 cursor-pointer hidden sm:flex items-center justify-center"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-background/90 hover:bg-background text-foreground backdrop-blur-md shadow-lg opacity-0 group-hover/masonry:opacity-100 transition-all duration-200 hover:scale-105 cursor-pointer hidden sm:flex items-center justify-center"
         >
           <FaChevronLeft className="text-xs" aria-hidden="true" />
         </button>
@@ -606,7 +606,7 @@ export function InteractiveGallery() {
           type="button"
           onClick={() => scrollByDirection('right')}
           aria-label="Scroll gallery right"
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-background/85 hover:bg-background border border-border/80 text-foreground backdrop-blur-md shadow-lg opacity-0 group-hover/masonry:opacity-100 transition-all duration-300 hover:scale-105 cursor-pointer hidden sm:flex items-center justify-center"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-background/90 hover:bg-background text-foreground backdrop-blur-md shadow-lg opacity-0 group-hover/masonry:opacity-100 transition-all duration-200 hover:scale-105 cursor-pointer hidden sm:flex items-center justify-center"
         >
           <FaChevronRight className="text-xs" aria-hidden="true" />
         </button>
@@ -639,7 +639,7 @@ export function InteractiveGallery() {
                     <div
                       key={`tall-${item.id}-${setIndex}-${colIdx}`}
                       onClick={() => handleCardClick(globalIndex)}
-                      className="shrink-0 w-[230px] sm:w-[260px] h-full group/card relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
+                      className="shrink-0 w-[230px] sm:w-[260px] h-full group/card relative rounded-3xl overflow-hidden bg-zinc-950 transition-transform duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
                     >
                       <Image
                         src={item.src}
@@ -653,7 +653,7 @@ export function InteractiveGallery() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/25 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
                       <div className="relative z-10 p-3 flex items-center justify-between">
-                        <span className="px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[10px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md truncate max-w-[170px]">
+                        <span className="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-mono uppercase tracking-wider text-white/90 font-semibold shadow-md truncate max-w-[170px]">
                           {item.tag}
                         </span>
                         <span className="p-1.5 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
@@ -689,7 +689,7 @@ export function InteractiveGallery() {
                       {/* Top Card */}
                       <div
                         onClick={() => handleCardClick(topIndex)}
-                        className="flex-1 relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
+                        className="flex-1 relative rounded-2xl overflow-hidden bg-zinc-950 transition-transform duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
                       >
                         <Image
                           src={topItem.src}
@@ -703,7 +703,7 @@ export function InteractiveGallery() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
                         <div className="relative z-10 p-2.5 flex items-center justify-between">
-                          <span className="px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[9.5px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md truncate max-w-[150px]">
+                          <span className="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[9.5px] font-mono uppercase tracking-wider text-white/90 font-semibold shadow-md truncate max-w-[150px]">
                             {topItem.tag}
                           </span>
                           <span className="p-1 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
@@ -725,7 +725,7 @@ export function InteractiveGallery() {
                       {/* Bottom Card */}
                       <div
                         onClick={() => handleCardClick(bottomIndex)}
-                        className="flex-1 relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
+                        className="flex-1 relative rounded-2xl overflow-hidden bg-zinc-950 transition-transform duration-300 shadow-sm flex flex-col justify-between group/card cursor-pointer"
                       >
                         <Image
                           src={bottomItem.src}
@@ -739,7 +739,7 @@ export function InteractiveGallery() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/20 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
                         <div className="relative z-10 p-2.5 flex items-center justify-between">
-                          <span className="px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[9.5px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md truncate max-w-[150px]">
+                          <span className="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[9.5px] font-mono uppercase tracking-wider text-white/90 font-semibold shadow-md truncate max-w-[150px]">
                             {bottomItem.tag}
                           </span>
                           <span className="p-1 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
@@ -768,7 +768,7 @@ export function InteractiveGallery() {
                     <div
                       key={`wide-${item.id}-${setIndex}-${colIdx}`}
                       onClick={() => handleCardClick(globalIndex)}
-                      className="shrink-0 w-[290px] sm:w-[330px] md:w-[360px] h-full group/card relative rounded-2xl overflow-hidden border border-border/70 bg-zinc-950 hover:border-accent/60 transition-all duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
+                      className="shrink-0 w-[290px] sm:w-[330px] md:w-[360px] h-full group/card relative rounded-3xl overflow-hidden bg-zinc-950 transition-transform duration-300 shadow-sm flex flex-col justify-between cursor-pointer"
                     >
                       <Image
                         src={item.src}
@@ -782,7 +782,7 @@ export function InteractiveGallery() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/25 opacity-80 group-hover/card:opacity-95 transition-opacity" />
 
                       <div className="relative z-10 p-3 flex items-center justify-between">
-                        <span className="px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md text-[10px] font-mono uppercase tracking-wider text-white font-bold border border-white/20 shadow-md">
+                        <span className="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-mono uppercase tracking-wider text-white/90 font-semibold shadow-md">
                           {item.tag}
                         </span>
                         <span className="p-1.5 rounded-full bg-black/60 text-white opacity-0 group-hover/card:opacity-100 transition-opacity">
@@ -816,7 +816,14 @@ export function InteractiveGallery() {
       {/* ── Fullscreen Interactive Lightbox Modal ── */}
       <AnimatePresence>
         {currentItem && selectedItemIndex !== null && (
-          <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 md:p-10">
+          <motion.div
+            key="gallery-lightbox-root"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 md:p-10"
+          >
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -831,10 +838,10 @@ export function InteractiveGallery() {
               role="dialog"
               aria-modal="true"
               aria-label={currentItem.title}
-              initial={{ opacity: 0, scale: 0.94, y: 15 }}
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 15 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
               className="relative z-10 w-full max-w-4xl max-h-[90vh] bg-background border border-border/80 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
             >
               {/* Modal Header */}
@@ -851,7 +858,7 @@ export function InteractiveGallery() {
                   type="button"
                   onClick={handleClose}
                   aria-label="Close dialog"
-                  className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                  className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors duration-150 active:scale-90 cursor-pointer"
                 >
                   <FaTimes className="text-base" aria-hidden="true" />
                 </button>
@@ -877,7 +884,7 @@ export function InteractiveGallery() {
                     handlePrev()
                   }}
                   aria-label="Previous image"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white hover:bg-black/90 hover:scale-110 transition-all cursor-pointer shadow-lg"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white hover:bg-black/90 hover:scale-110 active:scale-95 transition-all duration-150 cursor-pointer shadow-lg"
                 >
                   <FaChevronLeft className="text-sm" aria-hidden="true" />
                 </button>
@@ -888,7 +895,7 @@ export function InteractiveGallery() {
                     handleNext()
                   }}
                   aria-label="Next image"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white hover:bg-black/90 hover:scale-110 transition-all cursor-pointer shadow-lg"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 text-white hover:bg-black/90 hover:scale-110 active:scale-95 transition-all duration-150 cursor-pointer shadow-lg"
                 >
                   <FaChevronRight className="text-sm" aria-hidden="true" />
                 </button>
@@ -915,7 +922,7 @@ export function InteractiveGallery() {
                 </p>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

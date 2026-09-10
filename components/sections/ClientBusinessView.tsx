@@ -441,7 +441,7 @@ export function ClientBusinessView({
               {infiniteRow1.map((item, idx) => (
                 <div
                   key={`row1-${item.id}-${idx}`}
-                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl overflow-hidden border border-border/80 dark:border-white/10 shadow-xs dark:shadow-lg dark:shadow-black/20 rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-500 ease-out bg-card group select-none cursor-pointer transform-gpu"
+                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl overflow-hidden border border-border/80 dark:border-white/10 shadow-xs dark:shadow-lg dark:shadow-black/20 rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-220 ease-out bg-card group select-none cursor-pointer transform-gpu active:scale-100"
                 >
                   <Image
                     src={item.image}
@@ -449,7 +449,7 @@ export function ClientBusinessView({
                     fill
                     sizes="(max-width: 768px) 320px, 480px"
                     quality={60}
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
 
                   {/* Dark Bottom Gradient for Legibility */}
@@ -477,7 +477,7 @@ export function ClientBusinessView({
               {infiniteRow2.map((item, idx) => (
                 <div
                   key={`row2-${item.id}-${idx}`}
-                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl overflow-hidden border border-border/80 dark:border-white/10 shadow-xs dark:shadow-lg dark:shadow-black/20 rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-500 ease-out bg-card group select-none cursor-pointer transform-gpu"
+                  className="relative w-[320px] sm:w-[420px] md:w-[480px] aspect-[16/10] shrink-0 rounded-2xl overflow-hidden border border-border/80 dark:border-white/10 shadow-xs dark:shadow-lg dark:shadow-black/20 rotate-[3deg] hover:rotate-0 hover:scale-105 hover:z-20 transition-transform duration-220 ease-out bg-card group select-none cursor-pointer transform-gpu active:scale-100"
                 >
                   <Image
                     src={item.image}
@@ -485,7 +485,7 @@ export function ClientBusinessView({
                     fill
                     sizes="(max-width: 768px) 320px, 480px"
                     quality={60}
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
 
                   {/* Dark Bottom Gradient for Legibility */}
@@ -565,7 +565,7 @@ export function ClientBusinessView({
                 <button
                   type="button"
                   onClick={handlePrevReview}
-                  className="w-10 h-10 rounded-full bg-card border border-border hover:bg-muted hover:border-amber-500/50 flex items-center justify-center text-foreground transition-colors duration-150 cursor-pointer shadow-xs active:scale-95"
+                  className="w-10 h-10 rounded-full bg-card border border-border hover:bg-muted hover:border-amber-500/50 flex items-center justify-center text-foreground transition-colors duration-150 cursor-pointer shadow-xs active:scale-90"
                   aria-label="Previous testimonial"
                 >
                   <FaChevronLeft className="w-3.5 h-3.5" />
@@ -573,7 +573,7 @@ export function ClientBusinessView({
                 <button
                   type="button"
                   onClick={handleNextReview}
-                  className="w-10 h-10 rounded-full bg-card border border-border hover:bg-muted hover:border-amber-500/50 flex items-center justify-center text-foreground transition-colors duration-150 cursor-pointer shadow-xs active:scale-95"
+                  className="w-10 h-10 rounded-full bg-card border border-border hover:bg-muted hover:border-amber-500/50 flex items-center justify-center text-foreground transition-colors duration-150 cursor-pointer shadow-xs active:scale-90"
                   aria-label="Next testimonial"
                 >
                   <FaChevronRight className="w-3.5 h-3.5" />
@@ -586,10 +586,10 @@ export function ClientBusinessView({
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeReviewIdx}
-                  initial={reduce ? false : { opacity: 0, y: 12 }}
+                  initial={reduce ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.24, ease: [0.23, 1, 0.32, 1] }}
                   className="relative w-full p-6 sm:p-10 lg:p-12 rounded-2xl bg-card border border-border/80 shadow-xs dark:shadow-lg dark:shadow-black/20 flex flex-col justify-between overflow-hidden"
                 >
                   {/* Autoplay Progress Line at Top (100% GPU-Composited scaleX Keyframes, 0 State Updates) */}
@@ -699,7 +699,7 @@ export function ClientBusinessView({
                   onClick={() => toggleFaq(idx)}
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${idx}`}
-                  className="w-full py-6 sm:py-7 flex items-center justify-between gap-4 text-left group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+                  className="w-full py-6 sm:py-7 flex items-center justify-between gap-4 text-left group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm active:scale-[0.99] transition-transform duration-150"
                 >
                   <div className="flex items-start sm:items-center gap-3 sm:gap-5 min-w-0">
                     <span className="font-mono text-xs font-bold text-accent px-2.5 py-1 rounded-md bg-muted/60 dark:bg-muted/40 border border-border/70 shrink-0">
@@ -728,7 +728,7 @@ export function ClientBusinessView({
                       initial={reduce ? false : { height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={reduce ? undefined : { height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: 'easeOut' }}
+                      transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
                       className="overflow-hidden"
                     >
                       <div className="pb-7 pl-0 sm:pl-[3.5rem] pr-4 sm:pr-12 text-muted-foreground text-sm sm:text-base leading-relaxed">
@@ -803,9 +803,9 @@ export function ClientBusinessView({
             <div className="space-y-4 mb-8">
               <a
                 href="mailto:arnlebaylon15@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/80 hover:border-amber-500/50 text-foreground transition-colors duration-150 group shadow-xs dark:shadow-lg dark:shadow-black/20"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/40 hover:border-accent/40 text-foreground transition-colors duration-150 group shadow-xs"
               >
-                <div className="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <div className="w-11 h-11 rounded-xl bg-accent/15 text-accent flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                   <FaEnvelope className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
@@ -929,7 +929,7 @@ export function ClientBusinessView({
                           disabled={item.step > formStep}
                           className={`py-1.5 px-2 rounded-lg text-[11px] font-medium text-center transition-all ${
                             formStep === item.step
-                              ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/40 font-bold'
+                              ? 'bg-accent/15 text-accent font-bold'
                               : formStep > item.step
                               ? 'bg-muted/40 text-foreground hover:bg-muted/70 cursor-pointer'
                               : 'bg-muted/20 text-muted-foreground/60 cursor-not-allowed'
@@ -1086,12 +1086,12 @@ export function ClientBusinessView({
                                   onClick={() => setInquiryForm({ ...inquiryForm, timeline: opt })}
                                   className={`p-3 rounded-xl text-xs font-medium border text-left transition-colors duration-150 cursor-pointer flex items-center justify-between ${
                                     isSelected
-                                      ? 'bg-amber-500/15 border-amber-500/50 text-amber-700 dark:text-amber-300 font-semibold shadow-xs'
-                                      : 'bg-muted/30 border-border/60 text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                      ? 'bg-accent/15 border-accent/40 text-accent font-semibold shadow-xs'
+                                      : 'bg-muted/30 border-border/40 text-muted-foreground hover:text-foreground hover:bg-muted/50'
                                   }`}
                                 >
                                   <span>{opt}</span>
-                                  {isSelected && <span className="text-amber-600 dark:text-amber-400 font-bold ml-2">✓</span>}
+                                  {isSelected && <span className="text-accent font-bold ml-2">✓</span>}
                                 </button>
                               )
                             })}
@@ -1193,13 +1193,13 @@ export function ClientBusinessView({
                         </div>
 
                         {/* Summary Recap Badge */}
-                        <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <div className="p-3.5 rounded-xl bg-accent/10 border border-accent/20 flex flex-wrap items-center justify-between gap-2 text-xs">
                           <div>
-                            <span className="font-semibold text-amber-800 dark:text-amber-300">Project:</span>{' '}
+                            <span className="font-semibold text-accent">Project:</span>{' '}
                             <span className="text-foreground">{inquiryType}</span>
                           </div>
                           <div>
-                            <span className="font-semibold text-amber-800 dark:text-amber-300">Timeline:</span>{' '}
+                            <span className="font-semibold text-accent">Timeline:</span>{' '}
                             <span className="text-foreground">{inquiryForm.timeline}</span>
                           </div>
                         </div>
@@ -1299,7 +1299,7 @@ export function ClientBusinessView({
               onClick={onSwitchToTechMode}
               className="text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors cursor-pointer flex items-center gap-1.5 text-xs"
             >
-              <FaCode className="w-3 h-3 text-amber-500" />
+              <FaCode className="w-3 h-3 text-accent" />
               <span>Looking for engineering specs? Switch to Developer Mode</span>
             </button>
           )}

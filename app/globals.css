@@ -4,33 +4,49 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #09090b;
-    --card: #ffffff;
-    --card-foreground: #09090b;
-    --muted: #f4f4f5;
-    --muted-foreground: #64748b;
-    --border: #e2e8f0;
-    --accent: #d97706;
-    --accent-glow: rgba(217, 119, 6, 0.12);
-    --halftone: rgba(15, 23, 42, 0.7);
-    --sel-bg: #09090b;
-    --sel-fg: #ffffff;
+    --background: #f7f6f3;
+    --foreground: #2d2c29;
+    --card: #fbfbf9;
+    --card-foreground: #2d2c29;
+    --muted: #ece9e2;
+    --muted-foreground: #78756d;
+    --border: rgba(0, 0, 0, 0.05);
+    --accent: #9a6d38;
+    --accent-glow: rgba(154, 109, 56, 0.08);
+    --halftone: rgba(45, 44, 41, 0.03);
+    --sel-bg: #e6e2d8;
+    --sel-fg: #2d2c29;
+
+    /* ── Emil Kowalski & Apple Motion Design Tokens ── */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    --duration-fast: 160ms;
+    --duration-normal: 220ms;
+    --duration-slow: 300ms;
   }
 
   .dark {
-    --background: #08090e;
-    --foreground: #f1f5f9;
-    --card: #10131e;
-    --card-foreground: #f1f5f9;
-    --muted: #131724;
-    --muted-foreground: #94a3b8;
-    --border: rgba(255, 255, 255, 0.08);
-    --accent: #f59e0b;
-    --accent-glow: rgba(245, 158, 11, 0.18);
-    --halftone: rgba(241, 245, 249, 0.15);
-    --sel-bg: #f59e0b;
-    --sel-fg: #08090e;
+    --background: #131416;
+    --foreground: #cfd1d6;
+    --card: #18191c;
+    --card-foreground: #cfd1d6;
+    --muted: #1c1d21;
+    --muted-foreground: #7e838c;
+    --border: rgba(255, 255, 255, 0.04);
+    --accent: #c29d68;
+    --accent-glow: rgba(194, 157, 104, 0.12);
+    --halftone: rgba(207, 209, 214, 0.03);
+    --sel-bg: #28292e;
+    --sel-fg: #cfd1d6;
+
+    /* ── Emil Kowalski & Apple Motion Design Tokens ── */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    --duration-fast: 160ms;
+    --duration-normal: 220ms;
+    --duration-slow: 300ms;
   }
 
   :root {
@@ -195,7 +211,7 @@
   width: 19rem;
   margin-left: -9.5rem;
   transform-origin: center bottom;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, opacity 0.35s ease;
+  transition: transform 280ms var(--ease-out), box-shadow 240ms var(--ease-out), opacity 240ms var(--ease-out);
   will-change: transform;
   outline: none;
 }
@@ -224,19 +240,21 @@
   cursor: pointer;
   opacity: 0.85;
 }
-.deck-card.is-center:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 26px 55px -18px rgba(0, 0, 0, 0.45);
-}
-.deck-card.is-left:hover {
-  transform: translateX(-46%) translateY(4px) rotate(-10deg) scale(0.92);
-  z-index: 25;
-  opacity: 1;
-}
-.deck-card.is-right:hover {
-  transform: translateX(46%) translateY(4px) rotate(10deg) scale(0.92);
-  z-index: 25;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .deck-card.is-center:hover {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow: 0 26px 55px -18px rgba(0, 0, 0, 0.45);
+  }
+  .deck-card.is-left:hover {
+    transform: translateX(-46%) translateY(4px) rotate(-10deg) scale(0.92);
+    z-index: 25;
+    opacity: 1;
+  }
+  .deck-card.is-right:hover {
+    transform: translateX(46%) translateY(4px) rotate(10deg) scale(0.92);
+    z-index: 25;
+    opacity: 1;
+  }
 }
 .deck-card:not(.is-center) a {
   pointer-events: none;
@@ -261,6 +279,30 @@
   }
   .border-accent {
     border-color: var(--accent);
+  }
+
+  /* Optical Typography Tracking (Emil Kowalski / Apple standard) */
+  .tracking-display {
+    letter-spacing: -0.025em;
+  }
+  .tracking-title {
+    letter-spacing: -0.015em;
+  }
+
+  /* Tactile Press Feedback Utilities */
+  .btn-press {
+    transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .btn-press:active {
+    transform: scale(0.965);
+  }
+  .active-press {
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+  .active-press:active {
+    transform: scale(0.96);
   }
 }
 

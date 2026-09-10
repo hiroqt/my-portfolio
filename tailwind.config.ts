@@ -22,6 +22,9 @@ const config: Config = {
         },
         "muted-foreground": "var(--muted-foreground)",
         border: "var(--border)",
+        accent: {
+          DEFAULT: "var(--accent)",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)", "Helvetica", "Arial", "sans-serif"],

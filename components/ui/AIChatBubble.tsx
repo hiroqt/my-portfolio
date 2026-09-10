@@ -325,25 +325,25 @@ export function AIChatBubble({
                 : { opacity: 0, scaleX: 0.7, scaleY: 0.92, x: -25, y: '-50%' }
             }
             transition={{ type: 'spring', stiffness: 360, damping: 26 }}
-            style={isClientMode ? undefined : { transformOrigin: 'left center' }}
-            className={`hidden lg:flex fixed z-50 flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border ${
+            style={{ transformOrigin: isClientMode ? 'bottom right' : 'left center' }}
+            className={`hidden lg:flex fixed z-50 flex-col rounded-2xl bg-card border ${
               isClientMode
-                ? 'right-6 xl:right-10 bottom-6 w-[380px] xl:w-[420px] 2xl:w-[440px] h-[550px] max-h-[85vh] border-amber-500/30 dark:border-amber-500/25 shadow-[0_20px_60px_rgba(245,158,11,0.15)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.85)]'
-                : 'left-[68px] xl:left-[84px] 2xl:left-[100px] top-1/2 w-[370px] xl:w-[410px] 2xl:w-[440px] h-[530px] max-h-[85vh] border-border/80 dark:border-white/15 shadow-[0_25px_70px_rgba(0,0,0,0.45)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.85)]'
+                ? 'right-6 xl:right-10 bottom-6 w-[380px] xl:w-[420px] 2xl:w-[440px] h-[550px] max-h-[85vh] border-accent/25 shadow-xl'
+                : 'left-[68px] xl:left-[84px] 2xl:left-[100px] top-1/2 w-[370px] xl:w-[410px] 2xl:w-[440px] h-[530px] max-h-[85vh] border-border/40 shadow-2xl'
             } overflow-hidden font-sans select-none`}
           >
             {!isClientMode && (
-              <div className="absolute -left-[6px] top-[60%] -translate-y-1/2 w-3 h-3 bg-background dark:bg-[#0c0e18] border-l border-b border-border/80 dark:border-white/15 rotate-45 shadow-[-2px_2px_4px_rgba(0,0,0,0.06)] pointer-events-none z-10" />
+              <div className="absolute -left-[6px] top-[60%] -translate-y-1/2 w-3 h-3 bg-card border-l border-b border-border/40 rotate-45 pointer-events-none z-10" />
             )}
 
-            <div className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-border dark:border-white/10 bg-muted/90 dark:bg-[#121624]">
+            <div className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-border/40 bg-muted/40">
               <div className="flex items-center gap-2.5">
                 {isClientMode ? (
-                  <div className="relative w-8 h-8 rounded-full overflow-hidden ring-2 ring-amber-500/40 shrink-0">
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1.5 ring-accent/40 shrink-0">
                     <Image src="/images/me.jpg" alt="Arnel Baylon" fill sizes="32px" className="object-cover" />
                   </div>
                 ) : (
-                  <div className="w-6 h-6 rounded-lg bg-accent/15 dark:bg-accent/25 border border-accent/40 flex items-center justify-center text-accent">
+                  <div className="w-6 h-6 rounded-lg bg-accent/15 flex items-center justify-center text-accent">
                     <span className="text-xs">✦</span>
                   </div>
                 )}
@@ -362,9 +362,9 @@ export function AIChatBubble({
 
               <div className="flex items-center gap-1">
                 {messages.length > 1 && (
-                  <button type="button" onClick={handleClear} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground transition-colors"><FaTrashAlt className="w-3 h-3" /></button>
+                  <button type="button" onClick={handleClear} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground active:scale-90 transition-colors cursor-pointer"><FaTrashAlt className="w-3 h-3" /></button>
                 )}
-                <button type="button" onClick={onClose} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground transition-colors"><FaTimes className="w-3.5 h-3.5" /></button>
+                <button type="button" onClick={onClose} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground active:scale-90 transition-colors cursor-pointer"><FaTimes className="w-3.5 h-3.5" /></button>
               </div>
             </div>
 
@@ -374,30 +374,30 @@ export function AIChatBubble({
                 const isLatestAssistant = !isUser && idx === messages.length - 1
                 return (
                   <div key={idx} className={`flex items-start gap-2.5 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
-                    <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center text-[10px] mt-0.5 ${isUser ? 'bg-amber-500 text-zinc-950 font-bold shadow-xs' : isClientMode ? 'bg-amber-500/15 text-amber-500 border border-amber-500/30' : 'bg-muted dark:bg-white/10 text-foreground border border-border/60'}`}>
-                      {isUser ? <FaUser /> : isClientMode ? <HiSparkles className="w-3.5 h-3.5 text-amber-500" /> : <FaRobot className="text-accent" />}
+                    <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center text-[10px] mt-0.5 ${isUser ? 'bg-accent text-background dark:text-[#131416] font-bold shadow-xs' : isClientMode ? 'bg-accent/15 text-accent' : 'bg-muted text-foreground'}`}>
+                      {isUser ? <FaUser /> : isClientMode ? <HiSparkles className="w-3.5 h-3.5 text-accent" /> : <FaRobot className="text-accent" />}
                     </div>
-                    <div className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl leading-relaxed ${isUser ? 'bg-amber-500 text-zinc-950 font-medium rounded-tr-xs shadow-xs' : 'bg-muted/60 dark:bg-white/[0.05] text-foreground border border-border/50 dark:border-white/[0.08] rounded-tl-xs shadow-2xs'}`}>
+                    <div className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl leading-relaxed ${isUser ? 'bg-accent text-background dark:text-[#131416] font-medium rounded-tr-xs shadow-xs' : 'bg-muted/50 text-foreground rounded-tl-xs shadow-2xs'}`}>
                       {msg.content ? (
                         <div>
                           <MarkdownContent content={msg.content} isUser={isUser} />
                           {isLatestAssistant && isLoading && (
-                            <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-1.5 h-3.5 ml-1 bg-amber-500 rounded-xs align-middle" aria-hidden="true" />
+                            <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-1.5 h-3.5 ml-1 bg-accent rounded-xs align-middle" aria-hidden="true" />
                           )}
                           {isClientMode && !isUser && (msg.content.includes('project form') || msg.content.includes('contact form') || msg.content.includes('inquiry')) && (
-                            <div className="mt-2.5 pt-2 border-t border-border/40 dark:border-white/10 flex flex-wrap gap-2">
-                              <button type="button" onClick={() => handleActionNavigate('contact')} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-500 text-zinc-950 hover:bg-amber-400 transition-colors shadow-2xs cursor-pointer"><span>Fill Project Form</span><span>&rarr;</span></button>
-                              <a href="mailto:arnlebaylon15@gmail.com" className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-muted/70 dark:bg-white/[0.08] hover:bg-muted text-foreground border border-border/60 dark:border-white/10 transition-colors cursor-pointer"><span>Email Arnel</span></a>
+                            <div className="mt-2.5 pt-2 border-t border-border/40 flex flex-wrap gap-2">
+                              <button type="button" onClick={() => handleActionNavigate('contact')} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-accent text-background dark:text-[#131416] hover:bg-accent/90 active:scale-95 transition-all shadow-2xs cursor-pointer"><span>Fill Project Form</span><span>&rarr;</span></button>
+                              <a href="mailto:arnlebaylon15@gmail.com" className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-muted hover:bg-muted/80 active:scale-95 text-foreground transition-all cursor-pointer"><span>Email Arnel</span></a>
                             </div>
                           )}
                           {isClientMode && !isUser && msg.content.includes('projects') && !msg.content.includes('project form') && (
-                            <div className="mt-2.5 pt-2 border-t border-border/40 dark:border-white/10 flex flex-wrap gap-2">
-                              <button type="button" onClick={() => handleActionNavigate('projects')} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-colors cursor-pointer"><span>View Client Projects</span><span>&rarr;</span></button>
+                            <div className="mt-2.5 pt-2 border-t border-border/40 flex flex-wrap gap-2">
+                              <button type="button" onClick={() => handleActionNavigate('projects')} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-accent/15 text-accent hover:bg-accent/25 active:scale-95 transition-all cursor-pointer"><span>View Client Projects</span><span>&rarr;</span></button>
                             </div>
                           )}
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground"><FaSpinner className="w-3 h-3 animate-spin text-amber-500" /><span className="text-[11px] font-mono">Thinking...</span></div>
+                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground"><FaSpinner className="w-3 h-3 animate-spin text-accent" /><span className="text-[11px] font-mono">Thinking...</span></div>
                       )}
                     </div>
                   </div>
@@ -408,30 +408,30 @@ export function AIChatBubble({
                   <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">{isClientMode ? 'Common Client Questions' : 'Suggested Questions'}</span>
                   <div className="flex flex-col gap-1.5">
                     {suggestions.map((s, i) => (
-                      <button key={i} type="button" onClick={() => handleSend(s)} className="text-left px-3 py-1.5 rounded-xl bg-muted/40 dark:bg-white/[0.03] hover:bg-amber-500/15 border border-border/40 dark:border-white/[0.06] text-foreground text-[11px] transition-colors cursor-pointer">&rarr; {s}</button>
+                      <button key={i} type="button" onClick={() => handleSend(s)} className="text-left px-3 py-1.5 rounded-xl bg-muted/40 hover:bg-accent/15 text-foreground text-[11px] transition-colors active:scale-[0.98] cursor-pointer">&rarr; {s}</button>
                     ))}
                   </div>
                 </div>
               )}
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="relative z-10 p-3 border-t border-border dark:border-white/10 bg-muted/60 dark:bg-[#121624]">
+            <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="relative z-10 p-3 border-t border-border/40 bg-muted/40">
               <div className="relative flex items-center">
-                <input ref={setDesktopInputRef} autoFocus={isDesktop} type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder={isClientMode ? 'Ask in plain English (e.g. "Can I update photos myself?")...' : 'Ask anything about Arnel...'} disabled={isLoading} className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 text-foreground placeholder:text-muted-foreground font-sans text-xs focus:outline-hidden focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all shadow-inner" />
-                <button type="submit" disabled={!input.trim() || isLoading} aria-label="Send message" className="absolute right-1.5 p-2 rounded-lg bg-amber-500 text-zinc-950 hover:bg-amber-400 disabled:opacity-40 transition-all cursor-pointer shadow-xs font-bold">
-                  {isLoading ? <FaSpinner className="w-3 h-3 animate-spin text-zinc-950" /> : <FaPaperPlane className="w-3 h-3 text-zinc-950" />}
+                <input ref={setDesktopInputRef} autoFocus={isDesktop} type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder={isClientMode ? 'Ask in plain English (e.g. "Can I update photos myself?")...' : 'Ask anything about Arnel...'} disabled={isLoading} className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background border border-border/40 text-foreground placeholder:text-muted-foreground font-sans text-xs focus:outline-hidden focus:ring-1.5 focus:ring-accent/40 focus:border-transparent transition-colors shadow-inner" />
+                <button type="submit" disabled={!input.trim() || isLoading} aria-label="Send message" className="absolute right-1.5 p-2 rounded-lg bg-accent text-background dark:text-[#131416] hover:bg-accent/90 disabled:opacity-40 transition-colors active:scale-95 cursor-pointer shadow-xs font-bold">
+                  {isLoading ? <FaSpinner className="w-3 h-3 animate-spin text-inherit" /> : <FaPaperPlane className="w-3 h-3 text-inherit" />}
                 </button>
               </div>
               <p className="text-[9.5px] font-mono text-center text-muted-foreground/70 mt-1.5">{isClientMode ? '100% non-tech friendly • Fixed pricing & 2–4 week launch' : 'Grounding on verified resume & portfolio data'}</p>
             </form>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 50 }} transition={{ type: 'spring', stiffness: 360, damping: 28 }} className={`lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[72vh] h-[480px] flex flex-col rounded-2xl bg-background dark:bg-[#0c0e18] border ${isClientMode ? 'border-amber-500/30' : 'border-border dark:border-white/15'} shadow-[0_25px_60px_rgba(0,0,0,0.5)] overflow-hidden font-sans select-none`}>
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border dark:border-white/10 bg-muted/90 dark:bg-[#121624]">
+          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 50 }} transition={{ type: 'spring', stiffness: 360, damping: 28 }} className={`lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[72vh] h-[480px] flex flex-col rounded-2xl bg-card border ${isClientMode ? 'border-accent/30' : 'border-border/40'} shadow-2xl overflow-hidden font-sans select-none`}>
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-muted/50">
               <div className="flex items-center gap-2">
-                {isClientMode ? <div className="relative w-6 h-6 rounded-full overflow-hidden ring-1.5 ring-amber-500/40 shrink-0"><Image src="/images/me.jpg" alt="Arnel Baylon" fill sizes="24px" className="object-cover" /></div> : <span className="text-accent text-sm">✦</span>}
+                {isClientMode ? <div className="relative w-6 h-6 rounded-full overflow-hidden ring-1.5 ring-accent/40 shrink-0"><Image src="/images/me.jpg" alt="Arnel Baylon" fill sizes="24px" className="object-cover" /></div> : <span className="text-accent text-sm">✦</span>}
                 <div><div className="flex items-center gap-1.5"><span className="font-semibold text-xs text-foreground">{isClientMode ? "Arnel's AI Assistant" : 'yhelAI Copilot'}</span><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /></div></div>
               </div>
-              <div className="flex items-center gap-1"><button type="button" onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground"><FaTimes className="w-4 h-4" /></button></div>
+              <div className="flex items-center gap-1"><button type="button" onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground active:scale-90 transition-transform"><FaTimes className="w-4 h-4" /></button></div>
             </div>
             <div ref={mobileScrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 font-sans text-xs scrollbar-thin">
               {messages.map((msg, idx) => {
@@ -439,33 +439,33 @@ export function AIChatBubble({
                 const isLatestAssistant = !isUser && idx === messages.length - 1
                 return (
                   <div key={idx} className={`flex items-start gap-2 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
-                    <div className={`w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-[9px] mt-0.5 ${isUser ? 'bg-amber-500 text-zinc-950 font-bold' : isClientMode ? 'bg-amber-500/15 text-amber-500 border border-amber-500/30' : 'bg-muted dark:bg-white/10 text-foreground border border-border/60'}`}>
-                      {isUser ? <FaUser /> : isClientMode ? <HiSparkles className="text-amber-500 text-[10px]" /> : <FaRobot className="text-accent text-[8px]" />}
+                    <div className={`w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-[9px] mt-0.5 ${isUser ? 'bg-accent text-background dark:text-[#131416] font-bold' : isClientMode ? 'bg-accent/15 text-accent' : 'bg-muted text-foreground'}`}>
+                      {isUser ? <FaUser /> : isClientMode ? <HiSparkles className="text-accent text-[10px]" /> : <FaRobot className="text-accent text-[8px]" />}
                     </div>
-                    <div className={`max-w-[85%] px-3 py-2 rounded-2xl leading-relaxed ${isUser ? 'bg-amber-500 text-zinc-950 font-medium rounded-tr-xs shadow-xs' : 'bg-muted/60 dark:bg-white/[0.06] text-foreground border border-border/50 rounded-tl-xs'}`}>
+                    <div className={`max-w-[85%] px-3 py-2 rounded-2xl leading-relaxed ${isUser ? 'bg-accent text-background dark:text-[#131416] font-medium rounded-tr-xs shadow-xs' : 'bg-muted/50 text-foreground rounded-tl-xs'}`}>
                       {msg.content ? (
                         <div>
                           <MarkdownContent content={msg.content} isUser={isUser} />
-                          {isLatestAssistant && isLoading && (<motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-1.5 h-3.5 ml-1 bg-amber-500 rounded-xs align-middle" aria-hidden="true" />)}
+                          {isLatestAssistant && isLoading && (<motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-1.5 h-3.5 ml-1 bg-accent rounded-xs align-middle" aria-hidden="true" />)}
                           {isClientMode && !isUser && (msg.content.includes('project form') || msg.content.includes('contact form') || msg.content.includes('inquiry')) && (
-                            <div className="mt-2.5 pt-2 border-t border-border/40 dark:border-white/10 flex flex-wrap gap-2"><button type="button" onClick={() => handleActionNavigate('contact')} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-amber-500 text-zinc-950 hover:bg-amber-400 transition-colors shadow-2xs cursor-pointer"><span>Fill Form</span><span>&rarr;</span></button><a href="mailto:arnlebaylon15@gmail.com" className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium bg-muted/60 dark:bg-white/[0.06] text-foreground border border-border/60 transition-colors cursor-pointer"><span>Email</span></a></div>
+                            <div className="mt-2.5 pt-2 border-t border-border/40 flex flex-wrap gap-2"><button type="button" onClick={() => handleActionNavigate('contact')} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-accent text-background dark:text-[#131416] hover:bg-accent/90 active:scale-95 transition-all shadow-2xs cursor-pointer"><span>Fill Form</span><span>&rarr;</span></button><a href="mailto:arnlebaylon15@gmail.com" className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium bg-muted text-foreground active:scale-95 transition-all cursor-pointer"><span>Email</span></a></div>
                           )}
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground"><FaSpinner className="w-3 h-3 animate-spin text-amber-500" /><span className="text-[11px] font-mono">Thinking...</span></div>
+                        <div className="flex items-center gap-1.5 py-1 text-muted-foreground"><FaSpinner className="w-3 h-3 animate-spin text-accent" /><span className="text-[11px] font-mono">Thinking...</span></div>
                       )}
                     </div>
                   </div>
                 )
               })}
               {messages.length === 1 && (
-                <div className="pt-2 space-y-1.5"><span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">{isClientMode ? 'Common Questions' : 'Suggested Questions'}</span><div className="flex flex-col gap-1.5">{suggestions.map((s, i) => (<button key={i} type="button" onClick={() => handleSend(s)} className="text-left px-3 py-1.5 rounded-xl bg-muted/40 dark:bg-white/[0.03] hover:bg-amber-500/15 border border-border/40 dark:border-white/[0.06] text-foreground text-[11px] transition-colors cursor-pointer">&rarr; {s}</button>))}</div></div>
+                <div className="pt-2 space-y-1.5"><span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">{isClientMode ? 'Common Questions' : 'Suggested Questions'}</span><div className="flex flex-col gap-1.5">{suggestions.map((s, i) => (<button key={i} type="button" onClick={() => handleSend(s)} className="text-left px-3 py-1.5 rounded-xl bg-muted/40 hover:bg-accent/15 text-foreground text-[11px] transition-colors active:scale-[0.98] cursor-pointer">&rarr; {s}</button>))}</div></div>
               )}
             </div>
-            <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="p-3 border-t border-border dark:border-white/10 bg-muted/70 dark:bg-[#121624]">
+            <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="p-3 border-t border-border/40 bg-muted/50">
               <div className="relative flex items-center">
-                <input ref={setMobileInputRef} autoFocus={!isDesktop} type="text" inputMode="text" enterKeyHint="send" value={input} onChange={(e) => setInput(e.target.value)} placeholder={isClientMode ? 'Ask in plain English (e.g. "Can I update photos myself?")...' : 'Ask anything about Arnel...'} disabled={isLoading} className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background dark:bg-[#0c0e18] border border-border dark:border-white/15 text-foreground text-xs focus:outline-hidden focus:ring-2 focus:ring-amber-500" />
-                <button type="submit" disabled={!input.trim() || isLoading} className="absolute right-1.5 p-2 rounded-lg bg-amber-500 text-zinc-950 font-bold"><FaPaperPlane className="w-3 h-3 text-zinc-950" /></button>
+                <input ref={setMobileInputRef} autoFocus={!isDesktop} type="text" inputMode="text" enterKeyHint="send" value={input} onChange={(e) => setInput(e.target.value)} placeholder={isClientMode ? 'Ask in plain English (e.g. "Can I update photos myself?")...' : 'Ask anything about Arnel...'} disabled={isLoading} className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-background border border-border/40 text-foreground text-xs focus:outline-hidden focus:ring-1.5 focus:ring-accent/40 transition-colors" />
+                <button type="submit" disabled={!input.trim() || isLoading} className="absolute right-1.5 p-2 rounded-lg bg-accent text-background dark:text-[#131416] font-bold active:scale-95 transition-transform"><FaPaperPlane className="w-3 h-3 text-inherit" /></button>
               </div>
             </form>
           </motion.div>

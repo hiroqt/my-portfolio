@@ -738,7 +738,7 @@ export function Sidebar() {
               <FaTerminal
                 className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
                   isWorkActive
-                    ? 'text-amber-600 dark:text-amber-400 scale-110'
+                    ? 'text-accent scale-110'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
                 aria-hidden="true"
@@ -746,7 +746,7 @@ export function Sidebar() {
               <span
                 className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
                   isWorkActive
-                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    ? 'text-accent font-bold'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
               >
@@ -784,7 +784,7 @@ export function Sidebar() {
               <FaBriefcase
                 className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
                   isExpActive
-                    ? 'text-amber-600 dark:text-amber-400 scale-110'
+                    ? 'text-accent scale-110'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
                 aria-hidden="true"
@@ -792,7 +792,7 @@ export function Sidebar() {
               <span
                 className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
                   isExpActive
-                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    ? 'text-accent font-bold'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
               >
@@ -830,7 +830,7 @@ export function Sidebar() {
               <FaCode
                 className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
                   isSkillsActive
-                    ? 'text-amber-600 dark:text-amber-400 scale-110'
+                    ? 'text-accent scale-110'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
                 aria-hidden="true"
@@ -838,7 +838,7 @@ export function Sidebar() {
               <span
                 className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
                   isSkillsActive
-                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    ? 'text-accent font-bold'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
               >
@@ -879,8 +879,8 @@ export function Sidebar() {
                 <span
                   className={`text-base font-bold transition-transform duration-200 group-active:scale-90 ${
                     isCopilotActive
-                      ? 'text-amber-600 dark:text-amber-400 scale-125 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]'
-                      : 'text-amber-600/90 dark:text-amber-400/90 group-hover:text-foreground'
+                      ? 'text-accent scale-125'
+                      : 'text-accent/80 group-hover:text-foreground'
                   }`}
                   aria-hidden="true"
                 >
@@ -888,7 +888,7 @@ export function Sidebar() {
                 </span>
                 {!isCopilotActive && (
                   <span
-                    className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-accent dark:bg-amber-400 ring-2 ring-background animate-pulse"
+                    className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-accent ring-2 ring-background animate-pulse"
                     aria-hidden="true"
                   />
                 )}
@@ -896,7 +896,7 @@ export function Sidebar() {
               <span
                 className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
                   isCopilotActive
-                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    ? 'text-accent font-bold'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
               >
@@ -938,7 +938,7 @@ export function Sidebar() {
                 <svg
                   className={`w-5 h-5 transition-transform duration-200 group-active:scale-90 ${
                     isHubActive
-                      ? 'text-amber-600 dark:text-amber-400 scale-110'
+                      ? 'text-accent scale-110'
                       : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                   }`}
                   viewBox="0 0 24 24"
@@ -956,7 +956,7 @@ export function Sidebar() {
                 </svg>
                 {isHubSectionActive && !mobileHubOpen && !mobileCopilotOpen && (
                   <span
-                    className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-accent dark:bg-amber-400 ring-2 ring-background"
+                    className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-accent ring-2 ring-background"
                     aria-hidden="true"
                   />
                 )}
@@ -964,7 +964,7 @@ export function Sidebar() {
               <span
                 className={`text-[11px] sm:text-xs font-mono font-medium tracking-tight mt-1 transition-colors ${
                   isHubActive
-                    ? 'text-amber-600 dark:text-amber-400 font-bold'
+                    ? 'text-accent font-bold'
                     : 'text-zinc-700 dark:text-zinc-300 group-hover:text-foreground'
                 }`}
               >

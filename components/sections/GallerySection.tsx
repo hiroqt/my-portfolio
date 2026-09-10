@@ -8,9 +8,9 @@ export function GallerySection() {
   const reduce = useReducedMotion()
 
   return (
-    <section id="gallery" className="py-12 scroll-mt-20">
-      {/* ── Section Header ── */}
-      <div className="mb-6 flex items-baseline justify-between border-b border-border pb-3">
+    <section id="gallery" className="py-8 sm:py-10 scroll-mt-20">
+      {/* ── Section Header (Clean Typographic Hierarchy) ── */}
+      <div className="mb-6 flex items-baseline justify-between">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">05</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>

@@ -286,21 +286,21 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* ── Mobile Backdrop (lg:hidden) ── */}
+          {/* ── Backdrop Overlay ── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-black/60 lg:bg-black/30 backdrop-blur-xs"
           />
 
           {/* ── Desktop Right-Side Drawer Container ── */}
           <motion.div
-            initial={{ opacity: 0, x: 440 }}
+            initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 440 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 360, damping: 32 }}
             className="hidden lg:flex fixed right-0 top-0 bottom-0 z-50 w-[380px] xl:w-[420px] 2xl:w-[460px] h-screen flex-col bg-background/95 dark:bg-[#0c0e18]/95 backdrop-blur-2xl border-l border-border/80 dark:border-white/12 shadow-[-10px_0_40px_rgba(0,0,0,0.35)] dark:shadow-[-16px_0_60px_rgba(0,0,0,0.85)] overflow-hidden font-sans select-none"
           >
             {/* ── Header ── */}
@@ -329,7 +329,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                   type="button"
                   onClick={onClose}
                   title="Close tech stack drawer (Esc)"
-                  className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/80 dark:hover:bg-white/[0.08] transition-colors cursor-pointer"
+                  className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/80 dark:hover:bg-white/[0.08] transition-colors active:scale-90 cursor-pointer"
                 >
                   <FaTimes className="w-4 h-4" />
                 </button>
@@ -369,7 +369,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                             key={skill.name}
                             onClick={(e) => handleCopySkill(e, skill.name)}
                             title="Click to copy technology name"
-                            className={`group/tag relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-all duration-150 cursor-pointer shadow-2xs ${
+                            className={`group/tag relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-colors duration-150 active:scale-95 cursor-pointer shadow-2xs ${
                               skill.highlight
                                 ? 'bg-accent/[0.08] border-accent/30 text-foreground hover:border-accent hover:bg-accent/15'
                                 : 'bg-background dark:bg-muted/40 border-border/80 text-foreground/90 hover:border-accent/40 hover:text-foreground'
@@ -437,7 +437,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-1 text-muted-foreground hover:text-foreground cursor-pointer"
+                  className="p-1 text-muted-foreground hover:text-foreground active:scale-90 transition-transform cursor-pointer"
                 >
                   <FaTimes className="w-4 h-4" />
                 </button>

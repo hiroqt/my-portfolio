@@ -96,7 +96,7 @@ const featuredSystems: FeaturedProject[] = [
     category: 'Enterprise Cloud AI',
     awardBadge: 'WINNER — BEST BUSINESS IMPACT',
     awardSub: 'Amazon Quick Quest BGC (AWS Headquarters)',
-    awardIcon: <FaTrophy className="text-amber-500 text-xs" />,
+    awardIcon: <FaTrophy className="text-accent text-xs" />,
     image: '/images/finops.jpg',
     previewName: '-',
     description:
@@ -129,7 +129,7 @@ const featuredSystems: FeaturedProject[] = [
     category: 'Government & Civic Tech',
     awardBadge: 'WINNER — TOP 30 NATIONWIDE',
     awardSub: 'National eGov Hackathon 2026',
-    awardIcon: <FaTrophy className="text-amber-500 text-xs" />,
+    awardIcon: <FaTrophy className="text-accent text-xs" />,
     image: '/images/egov.png',
     previewName: 'e-gov-ai.vercel.app',
     description:
@@ -394,10 +394,10 @@ export function FeaturedProjectsSection() {
   }
 
   return (
-    <section id="projects" className="py-12 scroll-mt-20">
+    <section id="projects" className="py-8 sm:py-10 scroll-mt-20">
       
-      {/* ── Section Header ── */}
-      <div className="mb-6 flex items-baseline justify-between border-b border-border pb-3">
+      {/* ── Section Header (Clean Typographic Hierarchy) ── */}
+      <div className="mb-6 flex items-baseline justify-between">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">01</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
@@ -414,7 +414,7 @@ export function FeaturedProjectsSection() {
         
         {/* ── Part 1: Flagship Systems Interactive Switcher & Stage ── */}
         <div className="space-y-4">
-          {/* Top Systems Selector Ribbon */}
+          {/* Top Systems Selector Ribbon (Borderless Tactile Tabs) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
             {featuredSystems.map((item) => {
               const isActive = selectedSystemId === item.id
@@ -424,10 +424,10 @@ export function FeaturedProjectsSection() {
                   key={item.id}
                   type="button"
                   onClick={() => setSelectedSystemId(item.id)}
-                  className={`group text-left p-3 rounded-xl border transition-all cursor-pointer relative ${
+                  className={`group text-left p-3 rounded-2xl transition-[background-color,transform] duration-150 active:scale-[0.98] cursor-pointer relative ${
                     isActive
-                      ? 'border-accent bg-accent/5 dark:bg-accent/10 ring-1 ring-accent shadow-xs'
-                      : 'border-border/80 bg-muted/20 dark:bg-card/50 hover:bg-muted/40 hover:border-border'
+                      ? 'bg-accent/15 text-foreground shadow-2xs'
+                      : 'bg-muted/40 hover:bg-muted/70 text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   <div className="flex items-center justify-between text-[11px] font-mono mb-1">
@@ -451,22 +451,22 @@ export function FeaturedProjectsSection() {
             })}
           </div>
 
-          {/* Active Flagship Stage */}
+          {/* Active Flagship Stage (Borderless Tonal Canvas) */}
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedProject.id}
-              initial={reduce ? undefined : { opacity: 0, y: 10 }}
+              initial={reduce ? undefined : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 shadow-xs dark:shadow-lg dark:shadow-black/20 relative overflow-hidden"
+              exit={reduce ? undefined : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              className="rounded-3xl bg-muted/35 dark:bg-card/60 p-6 sm:p-8 relative overflow-hidden"
             >
               <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                 
                 {/* Left Column: Narrative & Technical Highlights */}
                 <div className="lg:col-span-7 space-y-4">
                   <div>
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-background border border-border text-[11px] font-mono font-semibold text-accent mb-3 shadow-2xs">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-[11px] font-mono font-semibold text-accent mb-3">
                       {selectedProject.awardIcon}
                       <span>{selectedProject.awardBadge}</span>
                     </div>
@@ -483,24 +483,24 @@ export function FeaturedProjectsSection() {
                     {selectedProject.description}
                   </p>
 
-                  {/* Problem vs Solution Callout */}
-                  <div className="p-3.5 rounded-xl bg-background dark:bg-muted/40 border border-border/80 space-y-2 text-xs">
+                  {/* Problem vs Solution Callout (Editorial Typographic Layout, Zero Nested Cards) */}
+                  <div className="space-y-2.5 pt-1 text-xs sm:text-[13px]">
                     <div>
                       <span className="font-mono font-bold text-muted-foreground uppercase text-[10px]">
                         Challenge:
                       </span>
-                      <p className="text-muted-foreground mt-0.5">{selectedProject.problemSolution.problem}</p>
+                      <p className="text-muted-foreground mt-0.5 leading-relaxed">{selectedProject.problemSolution.problem}</p>
                     </div>
-                    <div className="pt-2 border-t border-border/50">
+                    <div className="pt-1">
                       <span className="font-mono font-bold text-accent uppercase text-[10px]">
                         Engineering Solution:
                       </span>
-                      <p className="text-foreground font-medium mt-0.5">{selectedProject.problemSolution.solution}</p>
+                      <p className="text-foreground font-medium mt-0.5 leading-relaxed">{selectedProject.problemSolution.solution}</p>
                     </div>
                   </div>
 
                   {/* Technical Highlights */}
-                  <div>
+                  <div className="pt-1">
                     <h4 className="font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
                       Core Technical Deliverables:
                     </h4>
@@ -514,13 +514,13 @@ export function FeaturedProjectsSection() {
                     </ul>
                   </div>
 
-                  {/* Tech Stack Badges */}
-                  <div className="pt-3 border-t border-border/40">
+                  {/* Tech Stack Badges (Borderless Soft Pills) */}
+                  <div className="pt-2">
                     <div className="flex flex-wrap gap-1.5">
                       {selectedProject.tags.map((t) => (
                         <span
                           key={t}
-                          className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-background dark:bg-muted/50 border border-border text-foreground"
+                          className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-muted/60 dark:bg-white/[0.04] text-foreground/85"
                         >
                           {t}
                         </span>
@@ -532,8 +532,8 @@ export function FeaturedProjectsSection() {
                 {/* Right Column: Visual Stage & Metrics */}
                 <div className="lg:col-span-5 space-y-4">
                   {/* Visual Preview Frame */}
-                  <div className="rounded-xl overflow-hidden border border-border bg-background dark:bg-card shadow-xs group">
-                    <div className="px-3 py-2 bg-muted/60 border-b border-border flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+                  <div className="rounded-2xl overflow-hidden bg-muted/50 dark:bg-card/90 shadow-xs group">
+                    <div className="px-3.5 py-2 bg-muted/60 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
                       <div className="flex items-center gap-1.5">
                         <span className={`w-2 h-2 rounded-full ${selectedProject.previewName === '-' ? 'bg-muted-foreground/40' : 'bg-emerald-500'}`} />
                         <span className="truncate">{selectedProject.previewName ?? `${selectedProject.id}.app`}</span>
@@ -552,12 +552,12 @@ export function FeaturedProjectsSection() {
                     </div>
                   </div>
 
-                  {/* Live Metrics Grid */}
+                  {/* Live Metrics Grid (Soft Tonal Surfaces, Zero Borders) */}
                   <div className="grid grid-cols-3 gap-2">
                     {selectedProject.metrics.map((m, mIdx) => (
                       <div
                         key={mIdx}
-                        className="p-2.5 rounded-lg bg-background dark:bg-muted/30 border border-border/80 text-center shadow-2xs"
+                        className="p-3 rounded-xl bg-muted/50 dark:bg-white/[0.03] text-center"
                       >
                         <div className="font-serif font-bold text-xs sm:text-sm text-foreground">
                           {m.val}
@@ -576,7 +576,7 @@ export function FeaturedProjectsSection() {
                         href={selectedProject.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-all shadow-xs"
+                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-[background-color,color,box-shadow,transform] duration-150 active:scale-[0.98] shadow-xs cursor-pointer"
                       >
                         <span>
                           {selectedProject.link.includes('github.com')
@@ -592,7 +592,7 @@ export function FeaturedProjectsSection() {
                     ) : (
                       <Link
                         href={selectedProject.link}
-                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-all shadow-xs"
+                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-[background-color,color,box-shadow,transform] duration-150 active:scale-[0.98] shadow-xs cursor-pointer"
                       >
                         <span>View Full Project Overview</span>
                         <FaArrowRight className="text-xs" />
@@ -607,7 +607,7 @@ export function FeaturedProjectsSection() {
         </div>
 
         {/* ── Part 2: Engineering Projects (Horizontal View + Show All Projects) ── */}
-        <div className="pt-6 border-t border-border/60 space-y-4">
+        <div className="pt-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs text-accent font-semibold">Engineering</span>
@@ -617,18 +617,18 @@ export function FeaturedProjectsSection() {
               </h3>
             </div>
             
-            {/* Show All Projects Toggle */}
+            {/* Show All Projects Toggle (Borderless Pill) */}
             <button
               type="button"
               onClick={() => setShowAllProjects(!showAllProjects)}
-              className="inline-flex items-center gap-1.5 font-mono text-[11px] px-3 py-1 rounded-lg bg-muted hover:bg-accent/10 border border-border hover:border-accent/40 text-foreground transition-colors cursor-pointer font-medium"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] px-3.5 py-1.5 rounded-xl bg-muted/50 hover:bg-muted/80 text-foreground transition-all duration-150 active:scale-95 cursor-pointer font-medium"
             >
               <span>{showAllProjects ? 'Show Initial 4 Projects' : `Show All Projects (${allProjectsList.length})`}</span>
               {showAllProjects ? <FaChevronUp className="text-[9px]" /> : <FaChevronDown className="text-[9px]" />}
             </button>
           </div>
 
-          {/* Horizontal / Grid View of Projects */}
+          {/* Horizontal / Grid View of Projects (Borderless Soft Surfaces) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {displayedProjects.map((p) => {
               const isExpanded = expandedProjectId === p.id
@@ -637,16 +637,16 @@ export function FeaturedProjectsSection() {
                 <div
                   key={p.id}
                   onClick={() => setExpandedProjectId(isExpanded ? null : p.id)}
-                  className={`p-4 rounded-xl border transition-all cursor-pointer flex flex-col justify-between space-y-3 ${
+                  className={`p-4 rounded-2xl transition-[background-color,transform] duration-150 active:scale-[0.98] cursor-pointer flex flex-col justify-between space-y-3 ${
                     isExpanded
-                      ? 'border-accent bg-accent/5 dark:bg-accent/10 ring-1 ring-accent shadow-xs'
-                      : 'border-border/80 bg-muted/20 dark:bg-card/50 hover:bg-muted/40 hover:border-accent/40'
+                      ? 'bg-accent/15 text-foreground shadow-2xs'
+                      : 'bg-muted/35 dark:bg-card/40 hover:bg-muted/60 text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2 font-mono text-[11px]">
                       <span className="text-accent font-bold shrink-0">{p.number}</span>
-                      <span className="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded bg-background border border-border text-muted-foreground truncate max-w-[60%]" title={p.category}>
+                      <span className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-md bg-muted/60 text-muted-foreground truncate max-w-[65%]" title={p.category}>
                         {p.category}
                       </span>
                     </div>
@@ -660,7 +660,7 @@ export function FeaturedProjectsSection() {
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-border/40 flex items-center justify-between font-mono text-[11px]">
+                  <div className="pt-2 flex items-center justify-between font-mono text-[11px]">
                     <button
                       type="button"
                       onClick={(e) => handleToggleExpand(p.id, e)}
@@ -681,14 +681,14 @@ export function FeaturedProjectsSection() {
             {expandedProject && (
               <motion.div
                 key={expandedProject.id}
-                initial={{ opacity: 0, height: 0, y: 8 }}
+                initial={{ opacity: 0, height: 0, y: 6 }}
                 animate={{ opacity: 1, height: 'auto', y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -8 }}
-                transition={{ duration: 0.25 }}
-                className="overflow-hidden p-5 sm:p-6 rounded-2xl border border-accent/40 bg-background dark:bg-card shadow-md dark:shadow-lg dark:shadow-black/20 space-y-4"
+                exit={{ opacity: 0, height: 0, y: -6 }}
+                transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+                className="overflow-hidden p-5 sm:p-6 rounded-3xl bg-muted/40 dark:bg-card/80 space-y-4"
               >
                 {/* Header with Title and Close Button */}
-                <div className="flex items-start justify-between pb-3 border-b border-border">
+                <div className="flex items-start justify-between pb-2">
                   <div>
                     <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[11px] sm:text-xs text-accent font-bold mb-1">
                       <span>Project #{expandedProject.number}</span>
@@ -702,7 +702,7 @@ export function FeaturedProjectsSection() {
                   <button
                     type="button"
                     onClick={() => setExpandedProjectId(null)}
-                    className="p-1.5 rounded-lg bg-muted text-muted-foreground hover:text-foreground text-xs cursor-pointer"
+                    className="p-2 rounded-xl bg-muted/60 text-muted-foreground hover:text-foreground text-xs cursor-pointer"
                     title="Close Details"
                   >
                     <FaTimes />
@@ -713,8 +713,8 @@ export function FeaturedProjectsSection() {
                   {expandedProject.summary}
                 </p>
 
-                {/* Problem vs Solution */}
-                <div className="grid sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-muted/30 dark:bg-muted/20 border border-border/70 text-xs">
+                {/* Problem vs Solution (Clean Typographic Blocks) */}
+                <div className="grid sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-muted/40 dark:bg-white/[0.02] text-xs">
                   <div>
                     <span className="font-mono font-bold text-muted-foreground uppercase text-[10px] block mb-0.5">
                       The Challenge:
@@ -738,7 +738,7 @@ export function FeaturedProjectsSection() {
                     {expandedProject.highlights.map((h, idx) => (
                       <div
                         key={idx}
-                        className="p-2.5 rounded-lg bg-muted/20 border border-border/60 flex items-start gap-2 text-xs text-foreground/90"
+                        className="p-3 rounded-xl bg-muted/30 dark:bg-white/[0.02] flex items-start gap-2 text-xs text-foreground/90"
                       >
                         <FaCheckCircle className="text-emerald-500 text-[11px] shrink-0 mt-0.5" />
                         <span className="leading-snug text-[11.5px]">{h}</span>
@@ -748,13 +748,13 @@ export function FeaturedProjectsSection() {
                 </div>
 
                 {/* Tech Stack & Action Link */}
-                <div className="pt-3 border-t border-border flex flex-wrap items-center justify-between gap-3">
+                <div className="pt-3 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
                     <span className="text-muted-foreground mr-1">Stack:</span>
                     {expandedProject.tags.map((t) => (
                       <span
                         key={t}
-                        className="px-2 py-0.5 rounded bg-muted border border-border text-foreground"
+                        className="px-2.5 py-1 rounded-lg bg-muted/60 dark:bg-white/[0.04] text-foreground"
                       >
                         {t}
                       </span>

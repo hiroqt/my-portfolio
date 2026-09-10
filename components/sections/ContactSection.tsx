@@ -58,9 +58,9 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-12 scroll-mt-20">
-      {/* ── Section Header ── */}
-      <div className="mb-6 flex items-baseline justify-between border-b border-border pb-3">
+    <section id="contact" className="py-8 sm:py-10 scroll-mt-20">
+      {/* ── Section Header (Clean Typographic Hierarchy) ── */}
+      <div className="mb-6 flex items-baseline justify-between">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">06</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
@@ -77,13 +77,13 @@ export function ContactSection() {
       </div>
 
       <div className="space-y-6">
-        {/* Intro Banner */}
+        {/* Intro Banner (Borderless Soft Surface) */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 15 }}
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
-          className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 hover:bg-muted/30 transition-colors dark:shadow-lg dark:shadow-black/20"
+          transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+          className="rounded-3xl bg-muted/35 dark:bg-card/50 p-6 sm:p-8 transition-colors duration-150"
         >
           <h3 className="font-serif font-bold text-xl sm:text-2xl text-foreground">
             Let&apos;s build something exceptional together.
@@ -92,7 +92,7 @@ export function ContactSection() {
             I&apos;m always open to discussing new engineering projects, AI agent implementations, full-stack consulting, and full-time software engineering roles.
           </p>
 
-          {/* Quick Channels Grid */}
+          {/* Quick Channels Grid (Borderless Soft Tiles) */}
           <div className="mt-6 grid sm:grid-cols-2 gap-2.5">
             {contactChannels.map((c) => (
               <a
@@ -100,7 +100,7 @@ export function ContactSection() {
                 href={c.href}
                 target={c.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel={c.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                className="group flex items-center justify-between p-3 rounded-xl border border-border/80 bg-background dark:bg-muted/30 hover:border-accent/50 transition-colors shadow-2xs"
+                className="group flex items-center justify-between p-3.5 rounded-2xl bg-muted/50 dark:bg-white/[0.03] hover:bg-muted/70 transition-[background-color,transform] duration-150 active:scale-[0.98] cursor-pointer"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   <span className="p-1.5 rounded-lg bg-muted shrink-0 text-sm">
@@ -123,15 +123,15 @@ export function ContactSection() {
           </div>
         </motion.div>
 
-        {/* Message Form Card */}
+        {/* Message Form Card (Borderless Soft Surface) */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 15 }}
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.08 }}
-          className="rounded-2xl border border-border bg-muted/20 dark:bg-card/80 p-5 sm:p-7 dark:shadow-lg dark:shadow-black/20"
+          transition={{ duration: 0.35, delay: 0.06, ease: [0.23, 1, 0.32, 1] }}
+          className="rounded-3xl bg-muted/35 dark:bg-card/50 p-6 sm:p-8"
         >
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/50">
+          <div className="flex items-center justify-between mb-4 pb-1">
             <h3 className="font-serif font-bold text-base text-foreground">
               Send a Direct Message
             </h3>
@@ -176,7 +176,7 @@ export function ContactSection() {
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     placeholder="Jane Doe"
-                    className="w-full rounded-lg border border-border bg-background px-3.5 py-2 font-mono text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+                    className="w-full rounded-xl bg-muted/50 dark:bg-card/80 px-3.5 py-2.5 font-mono text-xs text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-accent/50"
                   />
                 </div>
                 <div>
@@ -190,7 +190,7 @@ export function ContactSection() {
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                     placeholder="jane@company.com"
-                    className="w-full rounded-lg border border-border bg-background px-3.5 py-2 font-mono text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+                    className="w-full rounded-xl bg-muted/50 dark:bg-card/80 px-3.5 py-2.5 font-mono text-xs text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-accent/50"
                   />
                 </div>
               </div>
@@ -206,7 +206,7 @@ export function ContactSection() {
                   value={formState.message}
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   placeholder="Tell me about your project, timeline, or engineering opportunity..."
-                  className="w-full rounded-lg border border-border bg-background px-3.5 py-2 font-mono text-xs text-foreground placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent resize-none"
+                  className="w-full rounded-xl bg-muted/50 dark:bg-card/80 px-3.5 py-2.5 font-mono text-xs text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-accent/50 resize-none"
                 />
               </div>
 
@@ -217,7 +217,7 @@ export function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-2 font-mono text-xs uppercase tracking-wider font-semibold text-background hover:bg-accent hover:text-white transition-colors cursor-pointer shadow-xs disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-xl bg-foreground px-5 py-2.5 font-mono text-xs uppercase tracking-wider font-semibold text-background hover:bg-accent hover:text-white transition-[background-color,color,transform] duration-150 active:scale-95 cursor-pointer disabled:opacity-60"
                 >
                   {isSubmitting ? (
                     <span>Sending...</span>

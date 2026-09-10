@@ -12,6 +12,8 @@ import { ModeTransitionShutter } from '@/components/ui/ModeTransitionShutter'
 
 
 
+import { DevExecutiveDossier } from '@/components/layout/DevExecutiveDossier'
+
 const CertificationsSection = dynamic(
   () => import('@/components/sections/CertificationsSection').then((m) => m.CertificationsSection),
   { ssr: true }
@@ -44,6 +46,65 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [isSocialsOpen, setIsSocialsOpen] = useState(false)
   const [isStackOpen, setIsStackOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
+
+  // ── Scroll spy for Developer Dossier directory sync ──
+  useEffect(() => {
+    let ticking = false
+    const sectionIds = ['hero', 'projects', 'experience', 'certifications', 'education', 'gallery', 'contact']
+
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 280
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i])
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(sectionIds[i])
+          ticking = false
+          return
+        }
+      }
+      if (window.scrollY < 200) {
+        setActiveSection('hero')
+      }
+      ticking = false
+    }
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    const rafId = window.requestAnimationFrame(updateActiveSection)
+
+    return () => {
+      window.cancelAnimationFrame(rafId)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault()
+    if (id === 'hero' || id === 'about') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      if (typeof window !== 'undefined') {
+        window.history.replaceState(null, '', window.location.pathname)
+      }
+      setActiveSection('hero')
+      return
+    }
+
+    const target = document.getElementById(id)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+      if (typeof window !== 'undefined') {
+        window.history.replaceState(null, '', `#${id}`)
+      }
+      setActiveSection(id)
+    }
+  }
 
   // ── Load saved preference from localStorage with hydration safety ──
   useEffect(() => {
@@ -110,12 +171,12 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
             ? '💼 Client View'
             : '💻 Developer View',
       })
-    }, 180)
+    }, 100)
 
     // Dismiss transition shutter
     setTimeout(() => {
       setIsTransitioning(false)
-    }, 850)
+    }, 400)
   }
 
   const handleToggleChat = () => {
@@ -136,11 +197,8 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
     setIsStackOpen((prev) => !prev)
   }
 
-  const isPanelOpen = isChatOpen || isSocialsOpen || isStackOpen
-
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative overflow-x-hidden">
-
 
       {/* ── Cinematic Aperture Shutter Mode Opening Effect ── */}
       <ModeTransitionShutter
@@ -164,7 +222,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         )}
       </AnimatePresence>
 
-      {/* ── Clean Floating Side Navigation Rail with Tech Stack, AI Chat, Socials & Mode Switcher ── */}
+      {/* ── Floating Side Navigation & Modals Rail ── */}
       <SimpleSideNav
         isChatOpen={isChatOpen}
         onToggleChat={handleToggleChat}
@@ -174,33 +232,14 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         onToggleStack={handleToggleStack}
         viewMode={viewMode}
         onToggleViewMode={handleToggleViewMode}
+        showDesktopTechRail={false}
       />
-
-      {/* ── Unfocus Dismiss Overlay (Clicking anywhere on unfocused content closes open panel in Tech mode) ── */}
-      {isPanelOpen && viewMode === 'tech' && (
-        <div
-          onClick={() => {
-            setIsChatOpen(false)
-            setIsSocialsOpen(false)
-            setIsStackOpen(false)
-          }}
-          className="hidden lg:block fixed inset-0 z-30 cursor-pointer bg-black/5 dark:bg-black/20 backdrop-blur-[1px] transition-opacity duration-500"
-          title="Click to close panel and refocus page"
-          aria-label="Close panel and refocus page"
-        />
-      )}
 
       {/* ── Main Content Container ── */}
       <main
         id="main-content"
         className={`relative z-10 min-h-screen ${
-          viewMode === 'client' ? 'pt-0 pb-16 w-full' : 'pt-4 sm:pt-8 pb-28 lg:pb-20'
-        } transition-[transform,opacity,filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          isStackOpen
-            ? 'lg:-translate-x-[160px] xl:-translate-x-[200px] 2xl:-translate-x-[240px] opacity-40 dark:opacity-30 blur-[2px] scale-[0.985] select-none pointer-events-none'
-            : (isChatOpen || isSocialsOpen) && viewMode === 'tech'
-            ? 'lg:translate-x-[260px] xl:translate-x-[300px] 2xl:translate-x-[340px] opacity-40 dark:opacity-30 blur-[2px] scale-[0.985] select-none pointer-events-none'
-            : 'translate-x-0 opacity-100 blur-0 scale-100 pointer-events-auto'
+          viewMode === 'client' ? 'pt-0 pb-16 w-full' : 'pt-4 sm:pt-6 lg:pt-8 pb-28 lg:pb-20 w-full'
         }`}
       >
         <AnimatePresence initial={false} mode="wait">
@@ -213,7 +252,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
               initial={false}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
               className="w-full"
             >
               <ClientBusinessView
@@ -223,36 +262,68 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
             </motion.div>
           ) : (
             /* ─────────────────────────────────────────────────────────────
-               DEVELOPER & TECHNICAL VIEW: Comprehensive Engineering Resume
+               DEVELOPER & TECHNICAL VIEW: Asymmetric Executive Engineering Studio
             ───────────────────────────────────────────────────────────── */
             <motion.div
               key="tech-view"
               initial={false}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-12 space-y-4"
+              transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
+              className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12"
             >
-              {/* 00 — Bespoke Editorial Hero & Telemetry HUD */}
-              <ATSResumeHeader onOpenStack={() => setIsStackOpen(true)} />
+              <div className="lg:flex lg:items-start lg:gap-10 xl:gap-14 2xl:gap-16">
+                {/* ── Left Sticky Executive Dossier (Desktop lg+) ── */}
+                <DevExecutiveDossier
+                  activeSection={activeSection}
+                  onNavClick={handleNavClick}
+                  onOpenStack={handleToggleStack}
+                  onOpenChat={handleToggleChat}
+                  onToggleViewMode={handleToggleViewMode}
+                  viewMode={viewMode}
+                />
 
-              {/* 01 — Flagship Systems Showcase (Pixel Crew + Top Featured Architectures) */}
-              <FeaturedProjectsSection />
+                {/* ── Right Main Engineering Systems Showcase Stage ── */}
+                <div className="flex-1 min-w-0 space-y-12 sm:space-y-14 lg:space-y-16 pb-16">
+                  {/* 00 — Editorial Mission & Milestone Stats */}
+                  <ATSResumeHeader onOpenStack={() => setIsStackOpen(true)} />
 
-              {/* 02 — Work Experience & Production Track Record */}
-              <ExperienceSection />
+                  {/* 01 — Flagship Systems Showcase (Pixel Crew + Top Featured Architectures) */}
+                  <FeaturedProjectsSection />
 
-              {/* 03 — Verified Certifications & Credly Accreditations */}
-              <CertificationsSection />
+                  {/* 02 — Work Experience & Production Track Record */}
+                  <ExperienceSection />
 
-              {/* 04 — Academic Education & Degree */}
-              <EducationSection />
+                  {/* 03 — Verified Certifications & Credly Accreditations */}
+                  <CertificationsSection />
 
-              {/* 05 — Photographic Artifact Studio & Milestones */}
-              <GallerySection />
+                  {/* 04 — Academic Education & Degree */}
+                  <EducationSection />
 
-              {/* 06 — Direct Contact & Channels */}
-              <ContactSection />
+                  {/* 05 — Photographic Artifact Studio & Milestones */}
+                  <GallerySection />
+
+                  {/* 06 — Direct Contact & Channels */}
+                  <ContactSection />
+
+                  {/* Architectural Colophon Footer */}
+                  <footer className="pt-8 pb-4 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-muted-foreground">
+                    <div>
+                      <span>Designed &amp; Engineered by Arnel Baylon</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span>Next.js 14 &bull; Tailwind &bull; Motion</span>
+                      <a
+                        href="#hero"
+                        onClick={(e) => handleNavClick(e, 'hero')}
+                        className="hover:text-accent transition-colors cursor-pointer"
+                      >
+                        Back to Top ↑
+                      </a>
+                    </div>
+                  </footer>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
