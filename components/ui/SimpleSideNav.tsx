@@ -23,7 +23,8 @@ import {
   FaArrowRight,
   FaKeyboard,
 } from 'react-icons/fa'
-import { FaSpotify } from 'react-icons/fa6'
+import { IoMusicalNotes } from 'react-icons/io5'
+import { useMusic, CURRENT_TRACK } from '@/lib/music'
 import { useTheme } from '../ThemeProvider'
 import { HiSparkles } from 'react-icons/hi2'
 import { AIChatBubble } from './AIChatBubble'
@@ -92,6 +93,8 @@ export function SimpleSideNav({
   const [activeSection, setActiveSection] = useState('hero')
   const [mounted, setMounted] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { isPlaying: isAudioPlaying, headerWaveBars } = useMusic()
+  const activePlaying = isAudioPlaying || isMusicPlaying
   const [internalChatOpen, setInternalChatOpen] = useState(false)
   const [internalSocialsOpen, setInternalSocialsOpen] = useState(false)
   const [internalStackOpen, setInternalStackOpen] = useState(false)
@@ -285,31 +288,57 @@ export function SimpleSideNav({
                 </button>
               )}
 
-              {/* Spotify Music Button */}
+              {/* Music Player Button */}
               {onToggleMusic && (
                 <button
                   type="button"
                   onClick={onToggleMusic}
-                  aria-label="Toggle Spotify Music"
-                  className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
-                    isMusicOpen
-                      ? 'bg-[#1DB954]/25 text-[#1DB954] ring-1 ring-[#1DB954]/40'
-                      : isMusicPlaying
-                      ? 'bg-[#1DB954]/15 text-[#1DB954]'
-                      : 'text-white/70 hover:text-white bg-white/10 hover:bg-white/15'
+                  aria-label="Toggle Music Player"
+                  className={`group relative overflow-hidden flex items-center justify-center gap-2 px-3 py-1.5 h-[32px] min-w-[76px] rounded-lg text-xs font-medium transition-all active:scale-95 cursor-pointer shadow-sm border ${
+                    isMusicOpen || activePlaying
+                      ? 'border-emerald-400/50 ring-1 ring-emerald-400/30'
+                      : 'border-white/20 hover:border-white/40'
                   }`}
-                  title={isMusicOpen ? 'Close Spotify Player' : "Open Spotify Player (Drake - B's on the Table)"}
+                  title={isMusicOpen ? 'Close Music Player' : activePlaying ? "Drake - B's on the Table (Playing)" : "Play Drake - B's on the Table"}
                 >
-                  <FaSpotify className="w-3.5 h-3.5 text-[#1DB954]" />
-                  <span className="hidden xl:inline tracking-tight">{isMusicPlaying ? "B's on the Table" : 'Spotify'}</span>
-                  <span className="xl:hidden tracking-tight">Music</span>
-                  {isMusicPlaying && (
-                    <span className="flex items-end gap-[1.5px] h-3 ml-0.5 pb-0.5" aria-hidden="true">
-                      <span className="w-[1.5px] h-2 bg-[#1DB954] rounded-full animate-pulse" />
-                      <span className="w-[1.5px] h-3 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.15s]" />
-                      <span className="w-[1.5px] h-1.5 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.3s]" />
+                  {/* Background cover artwork with slight blur */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-lg">
+                    <Image
+                      src={CURRENT_TRACK.coverSrc}
+                      alt=""
+                      fill
+                      sizes="100px"
+                      className="object-cover scale-125 blur-[2.5px] opacity-75 transition-transform duration-500 group-hover:scale-130"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.5px]" />
+                  </div>
+
+                  {/* Foreground: Icon & Live Wave Effect */}
+                  <div className="relative z-10 flex items-center justify-center gap-2">
+                    <IoMusicalNotes
+                      className={`w-3.5 h-3.5 shrink-0 drop-shadow-sm transition-colors ${
+                        activePlaying || isMusicOpen ? 'text-emerald-400' : 'text-white/80'
+                      }`}
+                    />
+                    <span className="flex items-end gap-[2px] h-3.5 pb-0.5 shrink-0" aria-label="Audio wave effect">
+                      {headerWaveBars.map((bar, idx) => (
+                        <span
+                          key={idx}
+                          className={`w-[2px] rounded-full transition-[height] duration-75 ease-out drop-shadow-sm ${
+                            activePlaying || isMusicOpen
+                              ? 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]'
+                              : 'bg-white/80'
+                          }`}
+                          style={{
+                            height: activePlaying
+                              ? `${Math.max(2.5, Math.round(bar * 12))}px`
+                              : `${[4, 10, 6, 12][idx]}px`,
+                          }}
+                        />
+                      ))}
                     </span>
-                  )}
+                  </div>
                 </button>
               )}
 
@@ -546,24 +575,32 @@ export function SimpleSideNav({
               </span>
             </button>
 
-            {/* Spotify Music Button */}
+            {/* Music Player Button */}
             {onToggleMusic && (
               <button
                 type="button"
                 onClick={onToggleMusic}
-                aria-label="Toggle Spotify Music"
+                aria-label="Toggle Music Player"
                 className={`group relative flex items-center justify-center w-9 h-9 rounded-xl transition-colors duration-150 active:scale-95 cursor-pointer ${
                   isMusicOpen
-                    ? 'bg-[#1DB954]/20 text-[#1DB954]'
-                    : isMusicPlaying
-                    ? 'text-[#1DB954] hover:bg-[#1DB954]/10'
-                    : 'text-muted-foreground hover:text-[#1DB954] hover:bg-muted/40 dark:hover:bg-white/[0.05]'
+                    ? 'bg-emerald-500/20 text-emerald-400'
+                    : activePlaying
+                    ? 'text-emerald-400 hover:bg-emerald-500/10'
+                    : 'text-muted-foreground hover:text-emerald-400 hover:bg-muted/40 dark:hover:bg-white/[0.05]'
                 }`}
               >
-                <FaSpotify className={`w-4 h-4 ${isMusicPlaying ? 'text-[#1DB954]' : ''}`} />
+                <IoMusicalNotes className={`w-4 h-4 ${activePlaying ? 'text-emerald-400' : ''}`} />
 
-                {isMusicPlaying && (
-                  <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-[#1DB954] animate-ping" />
+                {activePlaying && (
+                  <span className="absolute top-1 right-1 flex items-end gap-[1px] h-2.5">
+                    {headerWaveBars.slice(0, 3).map((bar, idx) => (
+                      <span
+                        key={idx}
+                        className="w-[1.5px] bg-emerald-400 rounded-full transition-[height] duration-75"
+                        style={{ height: `${Math.max(2, Math.round(bar * 9))}px` }}
+                      />
+                    ))}
+                  </span>
                 )}
 
                 {/* Floating Tooltip */}
@@ -571,8 +608,8 @@ export function SimpleSideNav({
                   role="tooltip"
                   className="absolute left-full ml-3 px-2.5 py-1 rounded-md bg-foreground text-background font-mono text-[11px] font-medium tracking-wide shadow-lg whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 z-50 flex items-center gap-1.5"
                 >
-                  <span className="text-[#1DB954] font-bold">Spotify</span>
-                  <span>{isMusicPlaying ? "B's on the Table" : 'Music Player'}</span>
+                  <span className="text-emerald-400 font-bold">Music</span>
+                  <span>{isMusicPlaying ? "B's on the Table" : 'Player'}</span>
                 </span>
               </button>
             )}

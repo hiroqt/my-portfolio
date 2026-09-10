@@ -13,7 +13,7 @@ import {
   FaFilePdf,
   FaKeyboard,
 } from 'react-icons/fa'
-import { FaSpotify } from 'react-icons/fa6'
+import { IoMusicalNotes } from 'react-icons/io5'
 import { HiSparkles } from 'react-icons/hi2'
 import {
   SiTypescript,
@@ -24,6 +24,7 @@ import {
   SiDocker,
 } from 'react-icons/si'
 import { useTheme } from '../ThemeProvider'
+import { useMusic, CURRENT_TRACK } from '@/lib/music'
 
 interface NavSection {
   id: string
@@ -72,6 +73,8 @@ export function DevExecutiveDossier({
   const shouldReduceMotion = useReducedMotion()
   const [mounted, setMounted] = useState(false)
   const [currentTime, setCurrentTime] = useState<string>('')
+  const { isPlaying: isAudioPlaying, headerWaveBars } = useMusic()
+  const activePlaying = isAudioPlaying || isMusicPlaying
 
   useEffect(() => {
     setMounted(true)
@@ -196,25 +199,59 @@ export function DevExecutiveDossier({
             <button
               type="button"
               onClick={onToggleMusic}
-              title={isMusicOpen ? 'Close Spotify Player' : "Open Spotify Player (Drake - B's on the Table)"}
-              className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer ${
-                isMusicOpen
-                  ? 'bg-[#1DB954]/20 text-[#1DB954] ring-1 ring-[#1DB954]/40'
-                  : isMusicPlaying
-                  ? 'bg-[#1DB954]/12 text-[#1DB954] hover:bg-[#1DB954]/20'
-                  : 'bg-muted/50 hover:bg-muted/80 text-foreground'
+              title={isMusicOpen ? 'Close Music Player' : activePlaying ? "Drake - B's on the Table (Playing)" : "Play Drake - B's on the Table"}
+              className={`group relative overflow-hidden flex items-center justify-center gap-2 px-3.5 py-1.5 h-[34px] min-w-[80px] rounded-2xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer shadow-sm border ${
+                isMusicOpen || activePlaying
+                  ? 'border-emerald-400/50 ring-1 ring-emerald-400/30'
+                  : 'border-white/20 dark:border-white/10 hover:border-white/40'
               }`}
             >
-              <FaSpotify className="w-3.5 h-3.5 text-[#1DB954]" />
-              <span className="hidden sm:inline">{isMusicPlaying ? "B's on the Table" : 'Music'}</span>
-              <span className="sm:hidden">Music</span>
-              {isMusicPlaying && (
-                <span className="flex items-end gap-[1.5px] h-3 ml-0.5 pb-0.5" aria-hidden="true">
-                  <span className="w-[1.5px] h-2 bg-[#1DB954] rounded-full animate-pulse" />
-                  <span className="w-[1.5px] h-3 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.15s]" />
-                  <span className="w-[1.5px] h-1.5 bg-[#1DB954] rounded-full animate-pulse [animation-delay:0.3s]" />
+              {/* Background cover artwork with slight blur */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
+                <Image
+                  src={CURRENT_TRACK.coverSrc}
+                  alt=""
+                  fill
+                  sizes="120px"
+                  className="object-cover scale-125 blur-[2.5px] opacity-75 dark:opacity-65 transition-transform duration-500 group-hover:scale-130"
+                  priority
+                />
+                {/* Dark overlay for contrast */}
+                <div className="absolute inset-0 bg-black/40 dark:bg-black/50 backdrop-blur-[0.5px]" />
+              </div>
+
+              {/* Foreground: Music Icon & Realtime Audio Wave Effect */}
+              <div className="relative z-10 flex items-center justify-center gap-2">
+                <IoMusicalNotes
+                  className={`w-3.5 h-3.5 shrink-0 drop-shadow-sm transition-colors ${
+                    activePlaying || isMusicOpen
+                      ? 'text-emerald-400'
+                      : 'text-white/80'
+                  }`}
+                />
+
+                {/* 4-Bar Realtime Reactive Wave Audio Visualizer */}
+                <span
+                  className="flex items-end gap-[2.5px] h-3.5 pb-0.5 shrink-0"
+                  aria-label="Audio wave effect"
+                >
+                  {headerWaveBars.map((barVal, idx) => (
+                    <span
+                      key={idx}
+                      className={`w-[2.5px] rounded-full transition-[height] duration-75 ease-out drop-shadow-sm ${
+                        activePlaying || isMusicOpen
+                          ? 'bg-emerald-400 dark:bg-emerald-300 shadow-[0_0_6px_rgba(52,211,153,0.6)]'
+                          : 'bg-white/80'
+                      }`}
+                      style={{
+                        height: activePlaying
+                          ? `${Math.max(3, Math.round(barVal * 14))}px`
+                          : `${[5, 12, 8, 14][idx]}px`,
+                      }}
+                    />
+                  ))}
                 </span>
-              )}
+              </div>
             </button>
           )}
 

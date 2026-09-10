@@ -9,7 +9,7 @@ import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsS
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
 import { ClientBusinessView } from '@/components/sections/ClientBusinessView'
 import { ModeTransitionShutter } from '@/components/ui/ModeTransitionShutter'
-import { SpotifyMusicPlayer } from '@/components/ui/SpotifyMusicPlayer'
+import { MusicPlayer } from '@/components/ui/MusicPlayer'
 
 import { DevExecutiveDossier } from '@/components/layout/DevExecutiveDossier'
 
@@ -277,8 +277,8 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         isMusicPlaying={isMusicPlaying}
       />
 
-      {/* ── Header-Driven Spotify Music Player Modal (No scroll animation) ── */}
-      <SpotifyMusicPlayer
+      {/* ── Native Studio Music Player Modal (Drake - B's on the Table) ── */}
+      <MusicPlayer
         isOpen={isMusicOpen}
         onClose={() => setIsMusicOpen(false)}
         onPlayingChange={setIsMusicPlaying}
