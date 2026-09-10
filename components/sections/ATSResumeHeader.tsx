@@ -68,10 +68,10 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           <span className="uppercase tracking-wider font-semibold">Autonomous AI Swarms &amp; Cloud Infrastructure</span>
         </div>
-        <h1 className="font-serif text-3xl xl:text-4xl 2xl:text-[44px] font-bold tracking-[-0.025em] text-foreground leading-[1.12] max-w-2xl">
+        <h1 className="font-supreme text-3xl sm:text-4xl xl:text-[42px] font-bold tracking-tight text-foreground leading-[1.15] max-w-2xl">
           Engineering Frontier AI Loops into Resilient Production Software.
         </h1>
-        <p className="text-muted-foreground text-sm xl:text-[15px] leading-relaxed max-w-2xl font-sans">
+        <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl font-sans">
           Architecting multi-agent swarms, low-latency LLM pipelines, and high-concurrency cloud systems with relentless craft and real-world impact.
         </p>
         <div className="pt-2 flex items-center gap-3">
@@ -107,10 +107,10 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
             transition={{ duration: 0.35, delay: 0.04, ease: [0.23, 1, 0.32, 1] }}
             className="space-y-1"
           >
-            <h1 className="font-serif text-4xl sm:text-5xl font-bold tracking-[-0.025em] text-foreground leading-[1.08]">
+            <h1 className="font-supreme text-4xl sm:text-5xl font-bold tracking-tight text-foreground leading-[1.08]">
               Arnel Baylon
             </h1>
-            <p className="text-base text-muted-foreground font-medium">
+            <p className="text-base sm:text-lg text-muted-foreground font-medium">
               Software Engineer &bull; Generative AI Systems
             </p>
           </motion.div>
@@ -120,7 +120,7 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
-            className="mt-5 space-y-3.5 text-muted-foreground text-[14.5px] sm:text-[15.5px] leading-relaxed max-w-xl"
+            className="mt-5 space-y-3.5 text-muted-foreground text-[15px] sm:text-base leading-relaxed max-w-xl"
           >
             <p>
               I bridge frontier generative AI models with production-grade software engineering. I build autonomous multi-agent loops, intelligent RAG pipelines, and modern full-stack web applications designed for real-world impact.
@@ -276,10 +276,10 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
               <span>{m.value}</span>
               <span className="text-xs text-muted-foreground group-hover:text-accent">↗</span>
             </div>
-            <div className="text-xs font-semibold text-foreground mt-1">
+            <div className="text-sm font-semibold text-foreground mt-1">
               {m.label}
             </div>
-            <div className="text-xs text-muted-foreground truncate mt-0.5">
+            <div className="text-[13px] text-muted-foreground truncate mt-0.5">
               {m.sub}
             </div>
           </a>

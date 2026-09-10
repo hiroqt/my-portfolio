@@ -316,10 +316,10 @@ export function CertificationsSection() {
               {/* Certificate Text Details */}
               <div className="mt-3.5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-foreground group-hover:text-accent transition-colors leading-snug">
+                  <h4 className="font-supreme font-bold text-base text-foreground group-hover:text-accent transition-colors leading-snug">
                     {cert.title}
                   </h4>
-                  <p className="font-mono text-[10.5px] text-muted-foreground mt-1 line-clamp-2">
+                  <p className="font-mono text-xs text-muted-foreground mt-1 line-clamp-2">
                     {cert.description}
                   </p>
 
@@ -375,7 +375,7 @@ export function CertificationsSection() {
                   </span>
                 </div>
 
-                <h4 className="font-serif font-bold text-base text-foreground group-hover:text-accent transition-colors leading-snug">
+                <h4 className="font-supreme font-bold text-base sm:text-lg text-foreground group-hover:text-accent transition-colors leading-snug">
                   {cert.title}
                 </h4>
                 <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5 mb-3">
@@ -465,7 +465,7 @@ export function CertificationsSection() {
                         </span>
                         <span className="text-[10px] font-mono text-muted-foreground">Official Credential</span>
                       </div>
-                      <h3 id="cert-dialog-title" className="font-serif text-lg sm:text-xl font-bold text-foreground">
+                      <h3 id="cert-dialog-title" className="font-supreme text-lg sm:text-xl font-bold text-foreground">
                         {selectedCert.title}
                       </h3>
                       <p className="font-mono text-xs text-muted-foreground">

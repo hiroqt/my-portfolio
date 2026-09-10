@@ -64,6 +64,8 @@ export default function RootLayout({
       className={`dark ${inter.variable} ${mono.variable} ${sourceSerif.variable} ${caveat.variable}`}
     >
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=supreme@400,500,600,700,800&display=swap" />
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context" />
       </head>
       <body className="overflow-x-hidden min-h-screen font-sans">

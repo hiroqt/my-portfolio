@@ -51,10 +51,10 @@ export function EducationSection() {
               <FaGraduationCap className="text-base" />
             </span>
             <div>
-              <h3 className="font-serif font-bold text-lg sm:text-xl text-foreground">
+              <h3 className="font-supreme font-bold text-lg sm:text-xl text-foreground">
                 {educationData.school}
               </h3>
-              <p className="text-sm font-medium text-accent mt-0.5">
+              <p className="text-sm sm:text-base font-medium text-accent mt-0.5">
                 {educationData.degree}
               </p>
             </div>

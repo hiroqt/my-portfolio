@@ -91,7 +91,7 @@ export function DevExecutiveDossier({
   return (
     <aside
       aria-label="Executive Developer Dossier"
-      className="hidden lg:flex flex-col justify-between w-[320px] xl:w-[360px] 2xl:w-[390px] shrink-0 sticky top-6 h-[calc(100vh-3rem)] py-1 select-none overflow-y-auto scrollbar-none z-20"
+      className="hidden lg:flex flex-col justify-between w-[320px] xl:w-[360px] 2xl:w-[390px] shrink-0 lg:h-full py-6 lg:py-8 select-none overflow-y-auto scrollbar-none z-20"
     >
       {/* ── TOP SEGMENT: Identity, Live Telemetry & Narrative ── */}
       <div className="space-y-4">
@@ -115,11 +115,11 @@ export function DevExecutiveDossier({
             <a
               href="#hero"
               onClick={(e) => onNavClick(e, 'hero')}
-              className="inline-block font-serif text-2xl xl:text-3xl font-bold tracking-[-0.025em] text-foreground hover:text-accent transition-colors"
+              className="inline-block font-supreme text-2xl xl:text-3xl font-bold tracking-tight text-foreground hover:text-accent transition-colors"
             >
               Arnel Baylon
             </a>
-            <p className="text-xs font-mono text-muted-foreground font-medium leading-relaxed">
+            <p className="text-[13px] font-mono text-muted-foreground font-medium leading-relaxed">
               Software Engineer &bull; Agentic Systems
             </p>
           </div>
@@ -138,7 +138,7 @@ export function DevExecutiveDossier({
         </div>
 
         {/* Narrative / Engineering Thesis */}
-        <p className="text-[13px] text-muted-foreground leading-relaxed">
+        <p className="text-sm text-muted-foreground leading-relaxed">
           Bridging frontier generative AI models with production software engineering.
           Autonomous multi-agent loops, cloud backends, and full-stack systems.
         </p>
@@ -201,7 +201,7 @@ export function DevExecutiveDossier({
               key={sec.id}
               href={`#${sec.id}`}
               onClick={(e) => onNavClick(e, sec.id)}
-              className={`group relative flex items-center justify-between px-3 py-2 rounded-xl text-xs font-mono transition-colors duration-150 active:scale-[0.98] cursor-pointer ${
+              className={`group relative flex items-center justify-between px-3 py-2 rounded-xl text-[13px] font-mono transition-colors duration-150 active:scale-[0.98] cursor-pointer ${
                 isActive
                   ? 'text-foreground font-semibold'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
@@ -282,7 +282,7 @@ export function DevExecutiveDossier({
                   type="button"
                   onClick={onOpenStack}
                   title={`Open stack drawer: ${tech.name}`}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted/50 dark:bg-white/[0.03] text-[10.5px] font-mono text-foreground/80 hover:bg-muted/80 dark:hover:bg-white/[0.07] hover:text-foreground transition-colors active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted/50 dark:bg-white/[0.03] text-[11.5px] font-mono text-foreground/80 hover:bg-muted/80 dark:hover:bg-white/[0.07] hover:text-foreground transition-colors active:scale-95 cursor-pointer"
                 >
                   <Icon className={`w-2.5 h-2.5 ${tech.color}`} />
                   <span>{tech.name}</span>

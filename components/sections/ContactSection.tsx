@@ -85,10 +85,10 @@ export function ContactSection() {
           transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
           className="rounded-3xl bg-muted/35 dark:bg-card/50 p-6 sm:p-8 transition-colors duration-150"
         >
-          <h3 className="font-serif font-bold text-xl sm:text-2xl text-foreground">
+          <h3 className="font-supreme font-bold text-xl sm:text-2xl text-foreground">
             Let&apos;s build something exceptional together.
           </h3>
-          <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-xl">
+          <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl">
             I&apos;m always open to discussing new engineering projects, AI agent implementations, full-stack consulting, and full-time software engineering roles.
           </p>
 
@@ -132,7 +132,7 @@ export function ContactSection() {
           className="rounded-3xl bg-muted/35 dark:bg-card/50 p-6 sm:p-8"
         >
           <div className="flex items-center justify-between mb-4 pb-1">
-            <h3 className="font-serif font-bold text-base text-foreground">
+            <h3 className="font-supreme font-bold text-base sm:text-lg text-foreground">
               Send a Direct Message
             </h3>
             <span className="font-mono text-[10.5px] text-muted-foreground">
@@ -145,10 +145,10 @@ export function ContactSection() {
               <div className="inline-flex p-3 rounded-full bg-emerald-500/10 text-emerald-500 text-2xl mb-1">
                 <FaCheckCircle />
               </div>
-              <p className="font-serif font-bold text-lg text-foreground">
+              <p className="font-supreme font-bold text-lg text-foreground">
                 Message received!
               </p>
-              <p className="text-xs sm:text-sm text-muted-foreground max-w-sm mx-auto">
+              <p className="text-sm sm:text-base text-muted-foreground max-w-sm mx-auto">
                 Thank you for reaching out. I&apos;ll get back to you promptly at your provided email address.
               </p>
               <button

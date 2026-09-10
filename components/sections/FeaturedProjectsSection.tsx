@@ -440,7 +440,7 @@ export function FeaturedProjectsSection() {
                     </span>
                     <span className="opacity-80">{item.awardIcon}</span>
                   </div>
-                  <div className="font-serif font-bold text-xs sm:text-sm text-foreground truncate group-hover:text-accent transition-colors">
+                  <div className="font-supreme font-bold text-xs sm:text-sm text-foreground truncate group-hover:text-accent transition-colors">
                     {item.title}
                   </div>
                   <div className="text-[10px] font-mono text-muted-foreground truncate mt-0.5">
@@ -471,28 +471,28 @@ export function FeaturedProjectsSection() {
                       <span>{selectedProject.awardBadge}</span>
                     </div>
 
-                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-foreground leading-tight">
+                    <h3 className="font-supreme text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight">
                       {selectedProject.title}
                     </h3>
-                    <p className="font-mono text-xs sm:text-sm text-accent font-medium mt-1">
+                    <p className="font-mono text-xs sm:text-sm text-accent font-medium mt-1.5">
                       {selectedProject.tagline}
                     </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                     {selectedProject.description}
                   </p>
 
                   {/* Problem vs Solution Callout (Editorial Typographic Layout, Zero Nested Cards) */}
-                  <div className="space-y-2.5 pt-1 text-xs sm:text-[13px]">
+                  <div className="space-y-3 pt-1 text-sm">
                     <div>
-                      <span className="font-mono font-bold text-muted-foreground uppercase text-[10px]">
+                      <span className="font-mono font-bold text-muted-foreground uppercase text-[11px]">
                         Challenge:
                       </span>
                       <p className="text-muted-foreground mt-0.5 leading-relaxed">{selectedProject.problemSolution.problem}</p>
                     </div>
-                    <div className="pt-1">
-                      <span className="font-mono font-bold text-accent uppercase text-[10px]">
+                    <div className="pt-0.5">
+                      <span className="font-mono font-bold text-accent uppercase text-[11px]">
                         Engineering Solution:
                       </span>
                       <p className="text-foreground font-medium mt-0.5 leading-relaxed">{selectedProject.problemSolution.solution}</p>
@@ -501,13 +501,13 @@ export function FeaturedProjectsSection() {
 
                   {/* Technical Highlights */}
                   <div className="pt-1">
-                    <h4 className="font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
+                    <h4 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
                       Core Technical Deliverables:
                     </h4>
                     <ul className="space-y-1.5">
                       {selectedProject.highlights.map((h, hIdx) => (
-                        <li key={hIdx} className="flex items-start gap-2 text-xs text-muted-foreground">
-                          <span className="text-accent text-[10px] shrink-0 mt-0.5">✦</span>
+                        <li key={hIdx} className="flex items-start gap-2 text-[13.5px] sm:text-sm text-muted-foreground leading-relaxed">
+                          <span className="text-accent text-[10px] shrink-0 mt-1">✦</span>
                           <span>{h}</span>
                         </li>
                       ))}
@@ -559,10 +559,10 @@ export function FeaturedProjectsSection() {
                         key={mIdx}
                         className="p-3 rounded-xl bg-muted/50 dark:bg-white/[0.03] text-center"
                       >
-                        <div className="font-serif font-bold text-xs sm:text-sm text-foreground">
+                        <div className="font-supreme font-bold text-sm sm:text-base text-foreground">
                           {m.val}
                         </div>
-                        <div className="text-[10px] font-mono text-muted-foreground truncate mt-0.5">
+                        <div className="text-[11px] font-mono text-muted-foreground truncate mt-0.5">
                           {m.label}
                         </div>
                       </div>
@@ -651,11 +651,11 @@ export function FeaturedProjectsSection() {
                       </span>
                     </div>
 
-                    <h4 className="font-serif font-bold text-sm text-foreground group-hover:text-accent transition-colors">
+                    <h4 className="font-supreme font-bold text-base sm:text-lg text-foreground group-hover:text-accent transition-colors">
                       {p.title}
                     </h4>
 
-                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                    <p className="text-[13.5px] sm:text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                       {p.summary}
                     </p>
                   </div>
@@ -695,7 +695,7 @@ export function FeaturedProjectsSection() {
                       <span className="hidden sm:inline">&bull;</span>
                       <span className="text-muted-foreground font-normal text-[10px] sm:text-xs">{expandedProject.category}</span>
                     </div>
-                    <h4 className="font-serif text-xl font-bold text-foreground">
+                    <h4 className="font-supreme text-xl sm:text-2xl font-bold text-foreground">
                       {expandedProject.title}
                     </h4>
                   </div>
@@ -709,20 +709,20 @@ export function FeaturedProjectsSection() {
                   </button>
                 </div>
 
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm sm:text-[15px] text-muted-foreground leading-relaxed">
                   {expandedProject.summary}
                 </p>
 
                 {/* Problem vs Solution (Clean Typographic Blocks) */}
-                <div className="grid sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-muted/40 dark:bg-white/[0.02] text-xs">
+                <div className="grid sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-muted/40 dark:bg-white/[0.02] text-sm">
                   <div>
-                    <span className="font-mono font-bold text-muted-foreground uppercase text-[10px] block mb-0.5">
+                    <span className="font-mono font-bold text-muted-foreground uppercase text-[10.5px] block mb-0.5">
                       The Challenge:
                     </span>
                     <p className="text-muted-foreground leading-relaxed">{expandedProject.problem}</p>
                   </div>
                   <div>
-                    <span className="font-mono font-bold text-accent uppercase text-[10px] block mb-0.5">
+                    <span className="font-mono font-bold text-accent uppercase text-[10.5px] block mb-0.5">
                       Engineering Approach:
                     </span>
                     <p className="text-foreground font-medium leading-relaxed">{expandedProject.solution}</p>

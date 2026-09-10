@@ -349,7 +349,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                     <div className="flex items-center justify-between pb-1.5 border-b border-border/40 dark:border-white/[0.06]">
                       <div className="flex items-center gap-2">
                         <Icon className={`w-3.5 h-3.5 ${group.color}`} />
-                        <h4 className="font-serif font-bold text-xs text-foreground">
+                        <h4 className="font-supreme font-bold text-xs text-foreground">
                           {group.title}
                         </h4>
                       </div>
@@ -456,7 +456,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                     <div className="flex items-center justify-between pb-1 border-b border-border/40">
                       <div className="flex items-center gap-1.5">
                         <Icon className={`w-3.5 h-3.5 ${group.color}`} />
-                        <h4 className="font-serif font-bold text-xs text-foreground">
+                        <h4 className="font-supreme font-bold text-xs text-foreground">
                           {group.title}
                         </h4>
                       </div>

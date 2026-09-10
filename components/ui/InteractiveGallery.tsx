@@ -904,7 +904,7 @@ export function InteractiveGallery() {
               {/* Modal Caption & Details */}
               <div className="p-5 sm:p-6 bg-background border-t border-border shrink-0">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                  <h3 className="font-serif font-bold text-lg sm:text-xl text-foreground">
+                  <h3 className="font-supreme font-bold text-lg sm:text-xl text-foreground">
                     {currentItem.title}
                   </h3>
                   <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground shrink-0">

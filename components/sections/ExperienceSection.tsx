@@ -132,16 +132,16 @@ export function ExperienceSection() {
                 }}
                 className="grid grid-cols-12 items-baseline gap-2 sm:gap-4 cursor-pointer select-none"
               >
-                <div className="col-span-3 sm:col-span-2 font-mono text-[11.5px] text-muted-foreground">
+                <div className="col-span-3 sm:col-span-2 font-mono text-xs sm:text-[12.5px] text-muted-foreground">
                   {job.year}
                 </div>
-                <div className="col-span-9 sm:col-span-6 text-[14px] font-medium text-foreground group-hover:text-accent transition-colors flex items-center justify-between sm:justify-start gap-2">
+                <div className="col-span-9 sm:col-span-6 text-[15px] sm:text-[16px] font-medium text-foreground group-hover:text-accent transition-colors flex items-center justify-between sm:justify-start gap-2">
                   <span className={isExpanded ? 'text-accent font-semibold' : ''}>{job.role}</span>
                   <span className="sm:hidden text-xs text-muted-foreground">
                     {isExpanded ? <FaChevronUp className="w-2.5 h-2.5" /> : <FaChevronDown className="w-2.5 h-2.5" />}
                   </span>
                 </div>
-                <div className="col-span-12 sm:col-span-4 text-[12.5px] text-muted-foreground sm:text-right flex items-center justify-between sm:justify-end gap-2">
+                <div className="col-span-12 sm:col-span-4 text-[13.5px] sm:text-sm text-muted-foreground sm:text-right flex items-center justify-between sm:justify-end gap-2">
                   <span>{job.org}</span>
                   <span className="hidden sm:inline-block text-xs text-muted-foreground opacity-60">
                     {isExpanded ? <FaChevronUp className="w-2.5 h-2.5 text-accent" /> : <FaChevronDown className="w-2.5 h-2.5" />}
@@ -159,17 +159,17 @@ export function ExperienceSection() {
                     transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
                     className="overflow-hidden mt-4 pt-2 space-y-3"
                   >
-                    <p className="text-xs sm:text-sm text-foreground/90 font-medium">
+                    <p className="text-sm sm:text-base text-foreground/90 font-medium leading-relaxed">
                       {job.summary}
                     </p>
 
-                    <ul className="space-y-1.5 pl-1" aria-label={`Achievements at ${job.org}`}>
+                    <ul className="space-y-2 pl-1" aria-label={`Achievements at ${job.org}`}>
                       {job.bullets.map((b, bIdx) => (
                         <li
                           key={bIdx}
-                          className="text-xs sm:text-[13px] leading-relaxed text-muted-foreground flex items-start gap-2"
+                          className="text-[13.5px] sm:text-sm leading-relaxed text-muted-foreground flex items-start gap-2"
                         >
-                          <span className="text-accent text-[10px] shrink-0 mt-0.5" aria-hidden="true">
+                          <span className="text-accent text-[10px] shrink-0 mt-1" aria-hidden="true">
                             ✦
                           </span>
                           <span>{b}</span>

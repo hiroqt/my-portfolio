@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SimpleSideNav } from '@/components/ui/SimpleSideNav'
@@ -47,6 +47,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   const [isSocialsOpen, setIsSocialsOpen] = useState(false)
   const [isStackOpen, setIsStackOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
+  const rightScrollRef = useRef<HTMLDivElement>(null)
 
   // ── Scroll spy for Developer Dossier directory sync ──
   useEffect(() => {
@@ -54,18 +55,18 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
     const sectionIds = ['hero', 'projects', 'experience', 'certifications', 'education', 'gallery', 'contact']
 
     const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 280
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i])
-        if (el && el.offsetTop <= scrollPosition) {
-          setActiveSection(sectionIds[i])
-          ticking = false
-          return
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= 280) {
+            setActiveSection(sectionIds[i])
+            ticking = false
+            return
+          }
         }
       }
-      if (window.scrollY < 200) {
-        setActiveSection('hero')
-      }
+      setActiveSection('hero')
       ticking = false
     }
 
@@ -77,17 +78,27 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
+    const rightEl = rightScrollRef.current
+    if (rightEl) {
+      rightEl.addEventListener('scroll', handleScroll, { passive: true })
+    }
     const rafId = window.requestAnimationFrame(updateActiveSection)
 
     return () => {
       window.cancelAnimationFrame(rafId)
       window.removeEventListener('scroll', handleScroll)
+      if (rightEl) {
+        rightEl.removeEventListener('scroll', handleScroll)
+      }
     }
-  }, [])
+  }, [viewMode])
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
     if (id === 'hero' || id === 'about') {
+      if (rightScrollRef.current) {
+        rightScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' })
       if (typeof window !== 'undefined') {
         window.history.replaceState(null, '', window.location.pathname)
@@ -238,8 +249,10 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
       {/* ── Main Content Container ── */}
       <main
         id="main-content"
-        className={`relative z-10 min-h-screen ${
-          viewMode === 'client' ? 'pt-0 pb-16 w-full' : 'pt-4 sm:pt-6 lg:pt-8 pb-28 lg:pb-20 w-full'
+        className={`relative z-10 ${
+          viewMode === 'client'
+            ? 'min-h-screen pt-0 pb-16 w-full'
+            : 'lg:h-screen lg:overflow-hidden pt-4 sm:pt-6 lg:pt-0 pb-28 lg:pb-0 w-full'
         }`}
       >
         <AnimatePresence initial={false} mode="wait">
@@ -263,6 +276,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
           ) : (
             /* ─────────────────────────────────────────────────────────────
                DEVELOPER & TECHNICAL VIEW: Asymmetric Executive Engineering Studio
+               (Desktop: Left side stuck to page; Right side independently scrolls)
             ───────────────────────────────────────────────────────────── */
             <motion.div
               key="tech-view"
@@ -270,10 +284,10 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
-              className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12"
+              className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 lg:h-screen"
             >
-              <div className="lg:flex lg:items-start lg:gap-10 xl:gap-14 2xl:gap-16">
-                {/* ── Left Sticky Executive Dossier (Desktop lg+) ── */}
+              <div className="lg:h-full lg:flex lg:items-start lg:gap-10 xl:gap-14 2xl:gap-16">
+                {/* ── Left Sticky Executive Dossier (Desktop lg+ stuck to screen) ── */}
                 <DevExecutiveDossier
                   activeSection={activeSection}
                   onNavClick={handleNavClick}
@@ -283,8 +297,12 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
                   viewMode={viewMode}
                 />
 
-                {/* ── Right Main Engineering Systems Showcase Stage ── */}
-                <div className="flex-1 min-w-0 space-y-12 sm:space-y-14 lg:space-y-16 pb-16">
+                {/* ── Right Main Engineering Systems Showcase Stage (Independently Scrolling) ── */}
+                <div
+                  ref={rightScrollRef}
+                  id="right-scroll-pane"
+                  className="flex-1 min-w-0 lg:h-full lg:overflow-y-auto pt-4 sm:pt-6 lg:pt-8 pb-16 lg:pb-28 lg:pr-3 space-y-12 sm:space-y-14 lg:space-y-16 scroll-smooth scrollbar-thin"
+                >
                   {/* 00 — Editorial Mission & Milestone Stats */}
                   <ATSResumeHeader onOpenStack={() => setIsStackOpen(true)} />
 
@@ -307,7 +325,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
                   <ContactSection />
 
                   {/* Architectural Colophon Footer */}
-                  <footer className="pt-8 pb-4 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-muted-foreground">
+                  <footer className="pt-8 pb-4 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-muted-foreground">
                     <div>
                       <span>Designed &amp; Engineered by Arnel Baylon</span>
                     </div>

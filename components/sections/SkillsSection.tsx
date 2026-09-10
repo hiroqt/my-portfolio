@@ -105,7 +105,7 @@ export function SkillsSection() {
           >
             {/* Category Header at the TOP */}
             <div className="flex items-center justify-between pb-2 border-b border-border/40">
-              <h3 className="font-serif font-bold text-base text-foreground">
+              <h3 className="font-supreme font-bold text-base sm:text-lg text-foreground">
                 {group.category}
               </h3>
               <span className="font-mono text-[11px] text-muted-foreground">
@@ -118,7 +118,7 @@ export function SkillsSection() {
               {group.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-lg bg-background dark:bg-muted/40 border border-border/80 text-foreground font-mono text-xs hover:border-accent/40 hover:text-accent transition-colors shadow-2xs"
+                  className="px-3 py-1.5 rounded-lg bg-background dark:bg-muted/40 border border-border/80 text-foreground font-mono text-xs sm:text-[13px] hover:border-accent/40 hover:text-accent transition-colors shadow-2xs"
                 >
                   {tag}
                 </span>

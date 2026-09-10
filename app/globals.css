@@ -1,8 +1,13 @@
+@import url('https://api.fontshare.com/v2/css?f[]=supreme@400,500,600,700,800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  h1, h2, h3, h4, h5, h6, .font-supreme, .font-display {
+    font-family: 'Supreme', var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
   :root {
     --background: #f7f6f3;
     --foreground: #2d2c29;
@@ -315,6 +320,12 @@
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 4px;
+}
+
+#right-scroll-pane {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (prefers-reduced-motion: reduce) {
