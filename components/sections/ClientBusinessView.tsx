@@ -2130,7 +2130,7 @@ export function ClientBusinessView({
                       el?.scrollIntoView({ behavior: 'smooth' })
                     }, 300)
                   }}
-                  className="text-[13px] sm:text-[14px] font-medium text-amber-300/90 hover:text-amber-300 transition-colors text-left cursor-pointer flex items-center gap-1.5 mt-1"
+                  className="hidden md:flex text-[13px] sm:text-[14px] font-medium text-amber-300/90 hover:text-amber-300 transition-colors text-left cursor-pointer items-center gap-1.5 mt-1"
                 >
                   <span>Typing Speed Lab ↗</span>
                 </button>

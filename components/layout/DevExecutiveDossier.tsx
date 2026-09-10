@@ -275,7 +275,7 @@ export function DevExecutiveDossier({
         <a
           href="#typing"
           onClick={(e) => onNavClick(e, 'typing')}
-          className="flex items-center justify-between px-3 py-2 rounded-xl bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] border border-border/40 text-xs font-mono transition-all duration-150 active:scale-[0.98] group cursor-pointer"
+          className="hidden md:flex items-center justify-between px-3 py-2 rounded-xl bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] border border-border/40 text-xs font-mono transition-all duration-150 active:scale-[0.98] group cursor-pointer"
         >
           <div className="flex items-center gap-2">
             <FaKeyboard className="w-3.5 h-3.5 text-accent group-hover:scale-110 transition-transform" />

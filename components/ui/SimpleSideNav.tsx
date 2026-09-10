@@ -863,19 +863,19 @@ export function SimpleSideNav({
         )}
       </nav>
 
-      {/* ── Mobile Floating Action Button (Only in Developer Mode) ── */}
-      {!isClient && (
-        <MobileFAB
-          chatOpen={chatOpen}
-          socialsOpen={socialsOpen}
-          stackOpen={stackOpen}
-          viewMode={viewMode}
-          onToggleChat={toggleChat}
-          onToggleSocials={toggleSocials}
-          onToggleStack={toggleStack}
-          onToggleViewMode={onToggleViewMode}
-        />
-      )}
+      {/* ── Mobile Floating Action Button ── */}
+      <MobileFAB
+        chatOpen={chatOpen}
+        socialsOpen={socialsOpen}
+        stackOpen={stackOpen}
+        viewMode={viewMode}
+        onToggleChat={toggleChat}
+        onToggleSocials={toggleSocials}
+        onToggleStack={!isClient ? toggleStack : undefined}
+        onToggleViewMode={onToggleViewMode}
+        isMusicOpen={isMusicOpen}
+        onToggleMusic={onToggleMusic}
+      />
 
       {/* ── Floating Tech Stack Drawer (Only in Developer Mode) ── */}
       {!isClient && (

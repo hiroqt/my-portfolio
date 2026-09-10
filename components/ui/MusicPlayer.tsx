@@ -217,7 +217,7 @@ export function MusicPlayer({
             className={`fixed z-50 pointer-events-none select-none ${
               mode === 'client'
                 ? 'top-16 sm:top-20 left-1/2 -translate-x-1/2'
-                : 'top-20 sm:top-24 left-4 sm:left-10 lg:left-[300px] xl:left-[360px]'
+                : 'top-16 sm:top-24 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-10 lg:left-[300px] xl:left-[360px]'
             }`}
           >
             <motion.div

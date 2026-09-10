@@ -9,7 +9,7 @@ export function TypingSection() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <section id="typing" aria-label="Mechanical Typing Studio & Switch Audio Lab" className="space-y-6 sm:space-y-8 scroll-mt-20">
+    <section id="typing" aria-label="Mechanical Typing Studio & Switch Audio Lab" className="hidden md:block space-y-6 sm:space-y-8 scroll-mt-20">
       {/* ── Section Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 border-b border-border/40">
         <div className="flex items-center gap-2 font-mono text-xs text-accent">
