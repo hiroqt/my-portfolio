@@ -191,6 +191,11 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
 
       if (typeof window !== 'undefined') {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        document.documentElement.scrollTop = 0
+        document.body.scrollTop = 0
+        if (rightScrollRef.current) {
+          rightScrollRef.current.scrollTop = 0
+        }
       }
 
       setModeToast({
@@ -294,37 +299,34 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
             : 'min-h-screen pt-4 sm:pt-6 lg:pt-0 pb-28 lg:pb-16 w-full'
         }`}
       >
-        <AnimatePresence initial={false} mode="wait">
-          {viewMode === 'client' ? (
-            /* ─────────────────────────────────────────────────────────────
-               CLIENT & BUSINESS VIEW: Fullscreen Width & Eye-Pleasing
-            ───────────────────────────────────────────────────────────── */
-            <motion.div
-              key="client-view"
-              initial={false}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
-              className="w-full"
-            >
-              <ClientBusinessView
-                onSwitchToTechMode={handleToggleViewMode}
-                onOpenChat={handleToggleChat}
-              />
-            </motion.div>
-          ) : (
-            /* ─────────────────────────────────────────────────────────────
-               DEVELOPER & TECHNICAL VIEW: Asymmetric Executive Engineering Studio
-               (Desktop: 2 columns [Left Dossier + Right Stage], with full-width Typing Lab below)
-            ───────────────────────────────────────────────────────────── */
-            <motion.div
-              key="tech-view"
-              initial={false}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
-              className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12"
-            >
+        {viewMode === 'client' ? (
+          /* ─────────────────────────────────────────────────────────────
+             CLIENT & BUSINESS VIEW: Fullscreen Width & Eye-Pleasing
+          ───────────────────────────────────────────────────────────── */
+          <motion.div
+            key="client-view"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            className="w-full"
+          >
+            <ClientBusinessView
+              onSwitchToTechMode={handleToggleViewMode}
+              onOpenChat={handleToggleChat}
+            />
+          </motion.div>
+        ) : (
+          /* ─────────────────────────────────────────────────────────────
+             DEVELOPER & TECHNICAL VIEW: Asymmetric Executive Engineering Studio
+             (Desktop: 2 columns [Left Dossier + Right Stage], with full-width Typing Lab below)
+          ───────────────────────────────────────────────────────────── */
+          <motion.div
+            key="tech-view"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12"
+          >
               {/* ── Top Split: Left Sticky Executive Dossier + Right Main Systems Showcase (Only Right Side Scrollable) ── */}
               <div className="lg:h-screen lg:flex lg:items-start lg:gap-10 xl:gap-14 2xl:gap-16">
                 {/* ── Left Sticky Executive Dossier (Desktop lg+ fixed) ── */}
@@ -393,8 +395,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
                 </div>
               </footer>
             </motion.div>
-          )}
-        </AnimatePresence>
+        )}
       </main>
     </div>
   )
