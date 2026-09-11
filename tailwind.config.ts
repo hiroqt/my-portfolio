@@ -10,20 +10,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "color-mix(in srgb, var(--background) calc(<alpha-value> * 100%), transparent)",
+        foreground: "color-mix(in srgb, var(--foreground) calc(<alpha-value> * 100%), transparent)",
         card: {
-          DEFAULT: "var(--card)",
+          DEFAULT: "color-mix(in srgb, var(--card) calc(<alpha-value> * 100%), transparent)",
           foreground: "var(--card-foreground)",
         },
         muted: {
-          DEFAULT: "var(--muted)",
+          DEFAULT: "color-mix(in srgb, var(--muted) calc(<alpha-value> * 100%), transparent)",
           foreground: "var(--muted-foreground)",
         },
-        "muted-foreground": "var(--muted-foreground)",
+        "muted-foreground": "color-mix(in srgb, var(--muted-foreground) calc(<alpha-value> * 100%), transparent)",
         border: "var(--border)",
         accent: {
-          DEFAULT: "var(--accent)",
+          DEFAULT: "color-mix(in srgb, var(--accent) calc(<alpha-value> * 100%), transparent)",
         },
       },
       fontFamily: {

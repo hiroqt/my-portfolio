@@ -301,10 +301,10 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 360, damping: 32 }}
-            className="hidden lg:flex fixed right-0 top-0 bottom-0 z-50 w-[380px] xl:w-[420px] 2xl:w-[460px] h-screen flex-col bg-white dark:bg-[#0c0e18] border-l border-zinc-200 dark:border-white/12 shadow-[-10px_0_40px_rgba(0,0,0,0.18)] dark:shadow-[-16px_0_60px_rgba(0,0,0,0.85)] overflow-hidden font-sans select-none"
+            className="hidden lg:flex fixed right-0 top-0 bottom-0 z-50 w-[380px] xl:w-[420px] 2xl:w-[460px] h-screen flex-col bg-white dark:bg-[#0c0e18] border-l border-zinc-200 dark:border-white/10 shadow-[-10px_0_40px_rgba(0,0,0,0.18)] dark:shadow-[-16px_0_60px_rgba(0,0,0,0.85)] overflow-hidden font-sans select-none"
           >
             {/* ── Header ── */}
-            <div className="relative z-10 px-5 pt-5 pb-4 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121624] shrink-0">
+            <div className="relative z-10 px-5 pt-5 pb-4 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#111424] shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-xl bg-accent/15 dark:bg-accent/25 border border-accent/40 flex items-center justify-center text-accent shadow-xs">
@@ -312,14 +312,14 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-sm font-bold tracking-tight text-foreground">
+                      <span className="font-mono text-sm font-bold tracking-tight text-zinc-900 dark:text-white">
                         Tech Stack &amp; Arsenal
                       </span>
                       <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-accent/15 text-accent border border-accent/30 font-semibold">
                         {totalSkillsCount} Tools
                       </span>
                     </div>
-                    <p className="text-[11px] font-mono text-muted-foreground leading-none mt-1">
+                    <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 leading-none mt-1">
                       Languages, Frameworks &amp; AI Systems
                     </p>
                   </div>
@@ -329,7 +329,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                   type="button"
                   onClick={onClose}
                   title="Close tech stack drawer (Esc)"
-                  className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-zinc-200/70 dark:hover:bg-white/[0.08] transition-colors active:scale-90 cursor-pointer"
+                  className="p-2 rounded-xl text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/70 dark:hover:bg-white/[0.08] transition-colors active:scale-90 cursor-pointer"
                 >
                   <FaTimes className="w-4 h-4" />
                 </button>
@@ -343,17 +343,17 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                 return (
                   <div
                     key={group.id}
-                    className="p-3.5 rounded-xl border border-zinc-200 dark:border-white/[0.08] bg-zinc-50 dark:bg-card/40 space-y-2.5"
+                    className="p-3.5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-zinc-50/90 dark:bg-[#111422] space-y-2.5 shadow-2xs"
                   >
                     {/* Category Header */}
-                    <div className="flex items-center justify-between pb-1.5 border-b border-zinc-200 dark:border-white/[0.06]">
+                    <div className="flex items-center justify-between pb-1.5 border-b border-zinc-200/70 dark:border-white/[0.06]">
                       <div className="flex items-center gap-2">
                         <Icon className={`w-3.5 h-3.5 ${group.color}`} />
-                        <h4 className="font-supreme font-bold text-xs text-foreground">
+                        <h4 className="font-supreme font-bold text-xs text-zinc-900 dark:text-zinc-100">
                           {group.title}
                         </h4>
                       </div>
-                      <span className="font-mono text-[9.5px] text-muted-foreground">
+                      <span className="font-mono text-[9.5px] text-zinc-500 dark:text-zinc-400">
                         {group.skills.length} items
                       </span>
                     </div>
@@ -363,25 +363,31 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                       {group.skills.map((skill) => {
                         const isCopied = copiedSkill === skill.name
                         const SkillIcon = skill.icon
+                        const isHighlighted = !!skill.highlight
+                        const iconColorClass = skill.iconColor === 'text-foreground'
+                          ? 'text-zinc-800 dark:text-zinc-100'
+                          : (skill.iconColor || 'text-zinc-800 dark:text-zinc-200')
 
                         return (
                           <div
                             key={skill.name}
                             onClick={(e) => handleCopySkill(e, skill.name)}
                             title="Click to copy technology name"
-                            className={`group/tag relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-colors duration-150 active:scale-95 cursor-pointer shadow-2xs ${
-                              skill.highlight
-                                ? 'bg-amber-500/[0.08] border-amber-500/30 text-foreground hover:border-amber-500 hover:bg-amber-500/15'
-                                : 'bg-white dark:bg-muted/40 border-zinc-200 dark:border-border/80 text-foreground/90 hover:border-accent/40 hover:text-foreground'
+                            className={`group/tag relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-all duration-150 active:scale-95 cursor-pointer shadow-2xs select-none ${
+                              isHighlighted
+                                ? 'bg-amber-500/[0.08] dark:bg-amber-400/[0.12] border-amber-500/30 dark:border-amber-400/35 text-zinc-900 dark:text-amber-200 hover:border-amber-500 dark:hover:border-amber-400 hover:bg-amber-500/15 dark:hover:bg-amber-400/20 font-medium'
+                                : 'bg-white dark:bg-[#161a2b] border-zinc-200 dark:border-white/[0.09] text-zinc-800 dark:text-zinc-200 hover:border-zinc-300 dark:hover:border-white/20 hover:bg-zinc-50 dark:hover:bg-[#1d2238] hover:text-zinc-950 dark:hover:text-white'
                             }`}
                           >
                             {SkillIcon && (
-                              <SkillIcon className={`w-3.5 h-3.5 shrink-0 transition-transform group-hover/tag:scale-110 ${skill.iconColor || 'text-foreground'}`} />
+                              <SkillIcon className={`w-3.5 h-3.5 shrink-0 transition-transform group-hover/tag:scale-110 ${iconColorClass}`} />
                             )}
                             <span className="truncate">{skill.name}</span>
 
                             {skill.level && (
-                              <span className="text-[8.5px] uppercase opacity-50 font-semibold ml-0.5">
+                              <span className={`text-[8.5px] uppercase font-semibold ml-0.5 ${
+                                isHighlighted ? 'text-amber-600 dark:text-amber-400' : 'text-zinc-400 dark:text-zinc-500'
+                              }`}>
                                 {skill.level === 'Expert' ? '★' : ''}
                               </span>
                             )}
@@ -391,7 +397,7 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                               {isCopied ? (
                                 <FaCheck className="text-emerald-500 w-2.5 h-2.5" />
                               ) : (
-                                <FaCopy className="w-2.5 h-2.5" />
+                                <FaCopy className="w-2.5 h-2.5 text-zinc-400 dark:text-zinc-500" />
                               )}
                             </span>
                           </div>
@@ -404,11 +410,11 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             </div>
 
             {/* ── Footer ── */}
-            <div className="px-4 py-2.5 border-t border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121624] flex items-center justify-between shrink-0">
-              <span className="text-[10px] font-mono text-muted-foreground">
+            <div className="px-4 py-2.5 border-t border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#111424] flex items-center justify-between shrink-0">
+              <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
                 Click any stack tag to copy
               </span>
-              <span className="text-[10px] font-mono text-accent font-medium">
+              <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-medium">
                 ★ Core Competency
               </span>
             </div>
@@ -420,14 +426,14 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ type: 'spring', stiffness: 360, damping: 28 }}
-            className="lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[76vh] h-[520px] flex flex-col rounded-2xl bg-white dark:bg-[#0c0e18] border border-zinc-200 dark:border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.25)] overflow-hidden font-sans select-none"
+            className="lg:hidden fixed inset-x-3 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-50 max-w-md mx-auto max-h-[76vh] h-[520px] flex flex-col rounded-2xl bg-white dark:bg-[#0c0e18] border border-zinc-200 dark:border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.4)] overflow-hidden font-sans select-none"
           >
             {/* Mobile Header */}
-            <div className="px-4 py-3 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#121624] shrink-0">
+            <div className="px-4 py-3 border-b border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#111424] shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <FaLayerGroup className="text-accent w-3.5 h-3.5" />
-                  <span className="font-mono text-xs font-bold text-foreground">
+                  <span className="font-mono text-xs font-bold text-zinc-900 dark:text-white">
                     Tech Stack &amp; Arsenal
                   </span>
                   <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-accent/15 text-accent border border-accent/30 font-semibold">
@@ -437,7 +443,8 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-1 text-muted-foreground hover:text-foreground active:scale-90 transition-transform cursor-pointer"
+                  aria-label="Close tech stack drawer"
+                  className="p-1 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white active:scale-90 transition-transform cursor-pointer"
                 >
                   <FaTimes className="w-4 h-4" />
                 </button>
@@ -451,43 +458,72 @@ export function TechStackBubble({ isOpen, onClose }: TechStackBubbleProps) {
                 return (
                   <div
                     key={group.id}
-                    className="p-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-card/40 space-y-2"
+                    className="p-3 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-zinc-50/90 dark:bg-[#111422] space-y-2 shadow-2xs"
                   >
-                    <div className="flex items-center justify-between pb-1 border-b border-zinc-200 dark:border-white/10">
+                    <div className="flex items-center justify-between pb-1 border-b border-zinc-200/70 dark:border-white/[0.06]">
                       <div className="flex items-center gap-1.5">
                         <Icon className={`w-3.5 h-3.5 ${group.color}`} />
-                        <h4 className="font-supreme font-bold text-xs text-foreground">
+                        <h4 className="font-supreme font-bold text-xs text-zinc-900 dark:text-zinc-100">
                           {group.title}
                         </h4>
                       </div>
-                      <span className="font-mono text-[9px] text-muted-foreground">
+                      <span className="font-mono text-[9px] text-zinc-500 dark:text-zinc-400">
                         {group.skills.length}
                       </span>
                     </div>
 
                     <div className="flex flex-wrap gap-1.5">
                       {group.skills.map((skill) => {
+                        const isCopied = copiedSkill === skill.name
                         const SkillIcon = skill.icon
+                        const isHighlighted = !!skill.highlight
+                        const iconColorClass = skill.iconColor === 'text-foreground'
+                          ? 'text-zinc-800 dark:text-zinc-100'
+                          : (skill.iconColor || 'text-zinc-800 dark:text-zinc-200')
+
                         return (
-                          <span
+                          <button
                             key={skill.name}
-                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-mono ${
-                              skill.highlight
-                                ? 'bg-amber-500/10 border-amber-500/30 text-foreground font-medium'
-                                : 'bg-white dark:bg-muted/40 border-zinc-200 dark:border-border text-foreground/90'
+                            type="button"
+                            onClick={(e) => handleCopySkill(e, skill.name)}
+                            title="Tap to copy"
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-mono transition-all duration-150 active:scale-95 cursor-pointer shadow-2xs select-none ${
+                              isHighlighted
+                                ? 'bg-amber-500/[0.08] dark:bg-amber-400/[0.12] border-amber-500/30 dark:border-amber-400/35 text-zinc-900 dark:text-amber-200 font-medium'
+                                : 'bg-white dark:bg-[#161a2b] border-zinc-200 dark:border-white/[0.09] text-zinc-800 dark:text-zinc-200'
                             }`}
                           >
                             {SkillIcon && (
-                              <SkillIcon className={`w-3 h-3 shrink-0 ${skill.iconColor || 'text-foreground'}`} />
+                              <SkillIcon className={`w-3 h-3 shrink-0 ${iconColorClass}`} />
                             )}
                             <span>{skill.name}</span>
-                          </span>
+                            {skill.level && (
+                              <span className={`text-[8.5px] uppercase font-semibold ml-0.5 ${
+                                isHighlighted ? 'text-amber-600 dark:text-amber-400' : 'text-zinc-400 dark:text-zinc-500'
+                              }`}>
+                                {skill.level === 'Expert' ? '★' : ''}
+                              </span>
+                            )}
+                            {isCopied && (
+                              <FaCheck className="text-emerald-500 w-2.5 h-2.5 ml-0.5" />
+                            )}
+                          </button>
                         )
                       })}
                     </div>
                   </div>
                 )
               })}
+            </div>
+
+            {/* Mobile Footer */}
+            <div className="px-4 py-2.5 border-t border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#111424] flex items-center justify-between shrink-0">
+              <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
+                Tap any stack tag to copy
+              </span>
+              <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-medium">
+                ★ Core Competency
+              </span>
             </div>
           </motion.div>
         </>
