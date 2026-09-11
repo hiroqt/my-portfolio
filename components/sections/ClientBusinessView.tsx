@@ -30,6 +30,8 @@ import {
   FaShieldAlt,
 } from 'react-icons/fa'
 import { HiSparkles } from 'react-icons/hi2'
+import { useTheme } from '@/components/ThemeProvider'
+import { YuwellShader } from '@/components/ui/YuwellShader'
 
 // ── Client-Friendly Project Showcase Data (No tech jargon) ──
 interface ShowcaseProject {
@@ -107,90 +109,6 @@ const flagshipShowcaseProjects: ShowcaseProject[] = [
     category: 'Staff Management',
     metric: 'Saved Days on Payroll',
     badge: 'Operations',
-  },
-]
-
-interface HeroCarouselProject {
-  id: string
-  title: string
-  tagline: string
-  purpose: string
-  metric: string
-  badge: string
-  image: string
-  liveUrl?: string
-  highlights: string[]
-}
-
-const heroCarouselProjects: HeroCarouselProject[] = [
-  {
-    id: 'tearsize',
-    title: 'Tearsize Store',
-    tagline: 'Instant Mobile Apparel Store',
-    purpose:
-      'Allows shoppers to browse smoothly on any phone and purchase clothing in seconds, with automated order receipts and live inventory sync.',
-    metric: 'Sub-2s Mobile Checkout',
-    badge: 'Online Store',
-    image: '/images/tearsize.jpg',
-    liveUrl: 'https://tearsize.vercel.app',
-    highlights: ['Instant mobile checkout', 'Automated order receipts', 'Live inventory sync'],
-  },
-  {
-    id: 'saktoka',
-    title: 'sakto ka',
-    tagline: 'AI Career & Interview Coach',
-    purpose:
-      'Helps job seekers turn their real experience into standout resumes and practice live job interviews with friendly, instant AI feedback.',
-    metric: '1,000+ First-Month Users',
-    badge: 'AI Assistant',
-    image: '/images/saktoka.png',
-    liveUrl: 'https://sakto-ka.vercel.app',
-    highlights: ['Free Job Hunt site', '24/7 practice interviews', 'Instant friendly guidance'],
-  },
-  {
-    id: 'pixelcrew',
-    title: 'Pixel Crew Studio',
-    tagline: 'Smart Creative AI Workspace',
-    purpose:
-      'A visual collaborative workspace where specialized AI assistants help creative teams plan, design, and launch digital products in minutes.',
-    metric: 'Automated Daily Workflows',
-    badge: 'Smart Studio',
-    image: '/images/pixelcrew.png',
-    liveUrl: 'https://github.com/arnelbaylon',
-    highlights: ['Visual team workspace', 'Automated routine tasks', 'Faster product launches'],
-  },
-  {
-    id: 'ebuddy',
-    title: 'eBuddy Public Guide',
-    tagline: 'National Award-Winning Citizen Guide',
-    purpose:
-      'Guides everyday citizens through government requirements, document filings, and official paperwork step-by-step in simple, friendly language.',
-    metric: 'Top 30 National Winner',
-    badge: 'Public Service',
-    image: '/images/egov.png',
-    highlights: ['Step-by-step document help', 'Plain everyday language', 'Zero paperwork confusion'],
-  },
-  {
-    id: 'finops',
-    title: 'FinOps AI Dashboard',
-    tagline: 'Business Subscription Savings Tool',
-    purpose:
-      'Monitors company software expenses and recurring bills, flags forgotten subscriptions, and uncovers immediate monthly cost savings.',
-    metric: 'AWS Best Business Impact',
-    badge: 'Cost Savings',
-    image: '/images/finops.jpg',
-    highlights: ['Subscription waste alerts', 'Automated expense tracking', 'Immediate monthly savings'],
-  },
-  {
-    id: 'vcm',
-    title: 'VCM Academic Platform',
-    tagline: 'Campus QR Attendance & Payroll',
-    purpose:
-      'Replaces paper timesheets with mobile phone QR check-ins, tracking staff attendance automatically and calculating payroll with zero manual errors.',
-    metric: 'Saved Days on Monthly Payroll',
-    badge: 'Operations',
-    image: '/images/vcm.jpg',
-    highlights: ['Mobile phone QR check-ins', 'Automatic daily timesheets', 'Zero manual payroll errors'],
   },
 ]
 
@@ -407,29 +325,9 @@ export function ClientBusinessView({
   onOpenChat,
 }: ClientBusinessViewProps) {
   const reduce = useReducedMotion()
+  const { resolvedTheme } = useTheme()
 
-  // ── Hero Ads-Style Carousel State ──
-  const [activeHeroProjectIdx, setActiveHeroProjectIdx] = useState(0)
-  const [isHeroCarouselAutoplay, setIsHeroCarouselAutoplay] = useState(true)
 
-  // Hero carousel autoplay (5.5s interval, pauses on hover)
-  useEffect(() => {
-    if (!isHeroCarouselAutoplay) return
-    const timer = setInterval(() => {
-      setActiveHeroProjectIdx((curr) => (curr + 1) % heroCarouselProjects.length)
-    }, 5500)
-    return () => clearInterval(timer)
-  }, [isHeroCarouselAutoplay])
-
-  const handlePrevHeroProject = () => {
-    setActiveHeroProjectIdx(
-      (prev) => (prev - 1 + heroCarouselProjects.length) % heroCarouselProjects.length
-    )
-  }
-
-  const handleNextHeroProject = () => {
-    setActiveHeroProjectIdx((prev) => (prev + 1) % heroCarouselProjects.length)
-  }
 
   // ── Testimonials Carousel State ──
   const [activeReviewIdx, setActiveReviewIdx] = useState(0)
@@ -499,9 +397,7 @@ export function ClientBusinessView({
     setContactSubmitted(true)
   }
 
-  const activeHeroProject = heroCarouselProjects[activeHeroProjectIdx]
-  const nextHeroProjectIdx = (activeHeroProjectIdx + 1) % heroCarouselProjects.length
-  const nextHeroProject = heroCarouselProjects[nextHeroProjectIdx]
+
   const currentReview = clientTestimonials[activeReviewIdx]
   const infiniteRow1 = [...marqueeRow1, ...marqueeRow1]
   const infiniteRow2 = [...marqueeRow2, ...marqueeRow2]
@@ -517,256 +413,121 @@ export function ClientBusinessView({
       ───────────────────────────────────────────────────────────── */}
       <section
         id="hero"
-        className="relative w-full px-4 sm:px-6 md:px-12 lg:px-20 pt-28 sm:pt-36 pb-20 sm:pb-28 scroll-mt-24 overflow-hidden"
+        className="relative isolate w-full min-h-screen min-h-[100dvh] flex flex-col justify-between px-4 sm:px-6 md:px-12 lg:px-20 pt-28 sm:pt-32 pb-8 sm:pb-12 scroll-mt-24 overflow-hidden"
       >
-        {/* Supaste Soft Radial Ambient Glow */}
-        <div className="absolute inset-0 supaste-glow pointer-events-none -z-10" />
+        {/* ── WebGPU / WebGL Ambient Fluid Shader Backdrop (Full Screen) ── */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+          <YuwellShader
+            theme={resolvedTheme}
+            background={{
+              dark: '#0a0a0b',
+              light: '#ffffff',
+            }}
+            className="w-full h-full"
+            style={{ width: '100%', height: '100%' }}
+          />
+        </div>
 
-        {/* Evervault Radiant Violet Atmospheric Bloom */}
+        {/* Ambient overlay gradient for high-contrast, crystal-clear typography & cards */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-amber-500/[0.02] to-white/90 dark:from-[#0a0a0b]/10 dark:via-amber-500/[0.02] dark:to-[#0a0a0b]/90 pointer-events-none z-[1]" />
+
+        {/* Luminous Warm Amber Atmospheric Blooms (Hardware Accelerated) */}
         <div
-          className="absolute -bottom-24 -left-20 w-[650px] h-[550px] rounded-full pointer-events-none -z-10 blur-3xl opacity-80 dark:opacity-90"
+          className="absolute -bottom-24 -left-20 w-[650px] h-[550px] rounded-full pointer-events-none z-0 opacity-30 dark:opacity-40 will-change-transform"
           style={{
+            transform: 'translateZ(0)',
             background:
-              'radial-gradient(ellipse at 20% 85%, rgba(124, 58, 237, 0.45) 0%, rgba(99, 102, 241, 0.3) 35%, rgba(67, 56, 202, 0.15) 60%, transparent 80%)',
+              'radial-gradient(ellipse at 20% 85%, rgba(245, 158, 11, 0.35) 0%, rgba(217, 119, 6, 0.2) 35%, rgba(180, 83, 9, 0.08) 60%, transparent 80%)',
           }}
         />
         <div
-          className="absolute bottom-0 left-1/4 w-[500px] h-[350px] rounded-full pointer-events-none -z-10 blur-3xl opacity-50 dark:opacity-70"
+          className="absolute top-1/4 -right-10 w-[500px] h-[400px] rounded-full pointer-events-none z-0 opacity-20 dark:opacity-30 will-change-transform"
           style={{
+            transform: 'translateZ(0)',
             background:
-              'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(99, 102, 241, 0.15) 45%, transparent 70%)',
+              'radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, rgba(245, 158, 11, 0.12) 45%, transparent 70%)',
           }}
         />
 
-        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* ── Left Column: High-Impact Ads Value Proposition ── */}
-          <div className="lg:col-span-5 flex flex-col items-start text-left">
-            {/* Master Headline (Bold Sans + Instrument Serif Italic) */}
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1
-                className="text-[44px] sm:text-[56px] md:text-[66px] lg:text-[72px] font-bold tracking-[-0.04em] leading-[1.02em] text-foreground"
-                style={{ fontFamily: "'Inter', 'Inter Display', sans-serif" }}
-              >
-                Websites, stores &amp; AI
-              </h1>
-              <h1
-                className="text-[44px] sm:text-[56px] md:text-[66px] lg:text-[72px] italic tracking-[-0.04em] leading-[1.02em] text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400 mt-1"
-                style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
-              >
-                built to grow your business.
-              </h1>
-            </motion.div>
-
-            {/* Client-Centric Subtitle (Zero Tech Jargon) */}
-            <motion.p
-              initial={reduce ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mt-6 font-normal"
-            >
-              I partner directly with founders and business owners to build fast, reliable websites, online shops, and custom AI tools that save hours of work and convert visitors into customers.
-            </motion.p>
-
-            {/* Primary Action Buttons */}
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mt-8 w-full sm:w-auto"
-            >
-              <a
-                href="#contact"
-                className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-[18px] bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-95 transition-all duration-150 cursor-pointer"
-                style={{
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 14px rgba(0,0,0,0.15)',
-                }}
-              >
-                <span>Start Your Project</span>
-                <FaArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-
-              {onOpenChat && (
-                <button
-                  type="button"
-                  onClick={onOpenChat}
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-4 rounded-[18px] bg-white/80 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-xl text-foreground font-semibold text-sm tracking-tight shadow-xs hover:border-amber-500/40 active:scale-95 transition-all duration-150 cursor-pointer"
-                >
-                  <HiSparkles className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
-                  <span>Ask Arnel&apos;s AI Assistant</span>
-                </button>
-              )}
-            </motion.div>
-          </div>
-
-          {/* ── Right Column: Ads-Type Layered Project Card Carousel (Larger, Centered Image, Zero Eyebrows) ── */}
+        <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center my-auto relative z-10 px-4">
+          {/* Master Headline (Bold Sans + Instrument Serif Italic) */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-7 flex flex-col items-center justify-center w-full relative"
+            initial={reduce ? false : { opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-1 sm:space-y-2"
           >
-            {/* Signature Evervault Overlapping White Card on Top Right */}
-            <div className="hidden md:block absolute -top-6 -right-3 sm:-right-4 lg:-top-8 lg:-right-6 w-64 lg:w-72 rounded-2xl bg-white text-zinc-900 p-5 shadow-2xl border border-zinc-200/80 z-20 pointer-events-auto">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-                  Client Outcome
-                </span>
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              </div>
-              <p className="text-sm font-bold text-zinc-950 tracking-tight">
-                {activeHeroProject.metric}
-              </p>
-              <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
-                {activeHeroProject.highlights[0]}
-              </p>
-              {activeHeroProject.liveUrl && (
-                <a
-                  href={activeHeroProject.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-zinc-900 hover:text-indigo-600 transition-colors"
-                >
-                  <span>Visit Live Site</span>
-                  <FaExternalLinkAlt className="w-2.5 h-2.5" />
-                </a>
-              )}
-            </div>
-
-            {/* Main Active Project Card (Larger, Centered Image, Zero Eyebrows) */}
-            <div
-              onMouseEnter={() => setIsHeroCarouselAutoplay(false)}
-              onMouseLeave={() => setIsHeroCarouselAutoplay(true)}
-              className="w-full max-w-2xl rounded-3xl supaste-glass-card shadow-2xl border border-black/[0.08] dark:border-white/[0.12] p-6 sm:p-8 relative z-10 text-left transition-all"
+            <h1
+              className="text-[44px] sm:text-[62px] md:text-[76px] lg:text-[88px] font-bold tracking-[-0.04em] leading-[1.02em] text-foreground"
+              style={{ fontFamily: "'Inter', 'Inter Display', sans-serif" }}
             >
-              {/* Card Top Control Bar (Clean Counter & Nav Controls, Zero Eyebrows) */}
-              <div className="flex items-center justify-between gap-3 pb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs font-bold tracking-tight text-foreground/80">
-                    Project {String(activeHeroProjectIdx + 1).padStart(2, '0')}{' '}
-                    <span className="text-muted-foreground font-normal">
-                      / {String(heroCarouselProjects.length).padStart(2, '0')}
-                    </span>
-                  </span>
-
-                  {/* Navigation Arrows positioned on the left alongside counter so they never conflict with top-right card */}
-                  <div className="flex items-center gap-1.5 ml-1">
-                    <button
-                      type="button"
-                      onClick={handlePrevHeroProject}
-                      aria-label="Previous project"
-                      className="w-7 h-7 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
-                    >
-                      <FaChevronLeft className="w-2.5 h-2.5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleNextHeroProject}
-                      aria-label="Next project"
-                      className="w-7 h-7 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.16] text-foreground transition-all cursor-pointer active:scale-90"
-                    >
-                      <FaChevronRight className="w-2.5 h-2.5" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Animated Slide Content */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeHeroProject.id}
-                  initial={reduce ? false : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25 }}
-                  className="pt-4"
-                >
-                  {/* High-Resolution Project Preview (Larger, Centered Image) */}
-                  <div className="relative aspect-[16/10] min-h-[260px] sm:min-h-[320px] md:min-h-[350px] w-full rounded-2xl overflow-hidden border border-black/[0.08] dark:border-white/[0.10] shadow-md bg-zinc-950/40 group/img flex items-center justify-center">
-                    <Image
-                      src={activeHeroProject.image}
-                      alt={activeHeroProject.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 700px"
-                      className="object-cover object-center transition-transform duration-500 group-hover/img:scale-102"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                  </div>
-
-                  {/* Project Title & Plain Business Purpose (No Tech Jargon) */}
-                  <div className="mt-5 space-y-2">
-                    <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-                      {activeHeroProject.title}{' '}
-                      <span className="text-muted-foreground font-medium text-sm sm:text-base">
-                        &bull; {activeHeroProject.tagline}
-                      </span>
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-normal">
-                      {activeHeroProject.purpose}
-                    </p>
-
-                    {/* Benefit Highlight Pills */}
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {activeHeroProject.highlights.map((item, idx) => (
-                        <span
-                          key={idx}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.08] text-foreground"
-                        >
-                          <FaCheckCircle className="w-3 h-3 text-emerald-500 shrink-0" />
-                          <span>{item}</span>
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Card Action Footer */}
-                  <div className="flex items-center justify-between pt-4 mt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
-                    {activeHeroProject.liveUrl ? (
-                      <a
-                        href={activeHeroProject.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-amber-500 transition-colors"
-                      >
-                        <span>Visit Live Experience</span>
-                        <FaExternalLinkAlt className="w-2.5 h-2.5" />
-                      </a>
-                    ) : (
-                      <span className="text-xs text-muted-foreground font-medium">Production Client Solution</span>
-                    )}
-
-                    <a
-                      href="#contact"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-foreground hover:text-amber-500 transition-colors"
-                    >
-                      <span>Build something similar &rarr;</span>
-                    </a>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Slide Dots Indicator */}
-              <div className="flex items-center justify-center gap-1.5 mt-5 pt-1">
-                {heroCarouselProjects.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveHeroProjectIdx(idx)}
-                    aria-label={`Go to slide ${idx + 1}`}
-                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeHeroProjectIdx === idx
-                      ? 'w-7 bg-foreground'
-                      : 'w-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'
-                      }`}
-                  />
-                ))}
-              </div>
-            </div>
+              Websites, stores &amp; AI
+            </h1>
+            <p
+              className="text-[46px] sm:text-[64px] md:text-[80px] lg:text-[92px] font-instrument italic font-normal tracking-normal leading-[1.18em] pb-3 pt-1 text-transparent bg-clip-text bg-gradient-to-r from-amber-800 via-amber-700 to-amber-600 dark:from-amber-300 dark:via-amber-200 dark:to-amber-400 select-none overflow-visible"
+              style={{
+                fontFamily: "'Instrument Serif', Georgia, serif",
+                fontWeight: 400,
+                textRendering: 'optimizeLegibility',
+                WebkitFontSmoothing: 'antialiased',
+              }}
+            >
+              built to grow your business.
+            </p>
           </motion.div>
+
+          {/* Client-Centric Subtitle (Zero Tech Jargon) */}
+          <motion.p
+            initial={reduce ? false : { opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mt-6 sm:mt-8 font-normal"
+          >
+            I partner directly with founders and business owners to build fast, reliable websites, online shops, and custom AI tools that save hours of work and convert visitors into customers.
+          </motion.p>
+
+          {/* Primary Action Buttons */}
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-8 sm:mt-10 w-full sm:w-auto"
+          >
+            <a
+              href="#contact"
+              className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-[18px] bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm tracking-tight shadow-md hover:opacity-90 active:scale-95 transition-all duration-150 cursor-pointer w-full sm:w-auto"
+              style={{
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 14px rgba(0,0,0,0.15)',
+              }}
+            >
+              <span>Start Your Project</span>
+              <FaArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+
+            {onOpenChat && (
+              <button
+                type="button"
+                onClick={onOpenChat}
+                className="group inline-flex items-center justify-center gap-2 px-6 py-4 rounded-[18px] bg-white/80 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-xl text-foreground font-semibold text-sm tracking-tight shadow-xs hover:border-amber-500/40 active:scale-95 transition-all duration-150 cursor-pointer w-full sm:w-auto"
+              >
+                <HiSparkles className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
+                <span>Ask Arnel&apos;s AI Assistant</span>
+              </button>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Subtle scroll down indicator */}
+        <div className="w-full flex justify-center pt-6 sm:pt-8 pb-2 relative z-10">
+          <a
+            href="#capabilities"
+            className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-md text-xs font-medium text-muted-foreground hover:text-foreground transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
+            aria-label="Scroll to capabilities"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+            <span>Explore what I build</span>
+            <span className="text-muted-foreground/60 group-hover:translate-y-0.5 transition-transform duration-200">↓</span>
+          </a>
         </div>
       </section>
 

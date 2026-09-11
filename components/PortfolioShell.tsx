@@ -8,7 +8,7 @@ import { ATSResumeHeader } from '@/components/sections/ATSResumeHeader'
 import { FeaturedProjectsSection } from '@/components/sections/FeaturedProjectsSection'
 import { ExperienceSection } from '@/components/sections/ExperienceSection'
 import { ClientBusinessView } from '@/components/sections/ClientBusinessView'
-import { ModeTransitionShutter } from '@/components/ui/ModeTransitionShutter'
+import CascadePageTransition, { yellowPalette, yellowStrokePalette } from '@/components/ui/CascadePageTransition'
 import { MusicPlayer } from '@/components/ui/MusicPlayer'
 
 import { DevExecutiveDossier } from '@/components/layout/DevExecutiveDossier'
@@ -46,6 +46,8 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   const [viewMode, setViewMode] = useState<'tech' | 'client'>(initialMode)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [transitionTarget, setTransitionTarget] = useState<'tech' | 'client'>('client')
+  const transitionTargetRef = useRef<'tech' | 'client'>('client')
+  const [transitionTrigger, setTransitionTrigger] = useState(0)
   const [modeToast, setModeToast] = useState<{ message: string; mode: 'tech' | 'client' } | null>(null)
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [isSocialsOpen, setIsSocialsOpen] = useState(false)
@@ -172,45 +174,48 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   }, [])
 
   const handleToggleViewMode = () => {
+    if (isTransitioning) return
+
     setIsChatOpen(false)
     setIsSocialsOpen(false)
     setIsStackOpen(false)
     setIsMusicOpen(false)
 
     const nextMode = viewMode === 'tech' ? 'client' : 'tech'
+    transitionTargetRef.current = nextMode
     setTransitionTarget(nextMode)
     setIsTransitioning(true)
+    setTransitionTrigger((prev) => prev + 1)
+  }
 
-    // Flip mode during aperture closed moment
-    setTimeout(() => {
-      setViewMode(nextMode)
-      try {
-        localStorage.setItem('portfolio_view_mode', nextMode)
-        document.cookie = `portfolio_view_mode=${nextMode}; path=/; max-age=31536000; SameSite=Lax`
-      } catch (e) {}
+  const handleViewSwap = () => {
+    const target = transitionTargetRef.current
+    setViewMode(target)
+    try {
+      localStorage.setItem('portfolio_view_mode', target)
+      document.cookie = `portfolio_view_mode=${target}; path=/; max-age=31536000; SameSite=Lax`
+    } catch (e) {}
 
-      if (typeof window !== 'undefined') {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-        document.documentElement.scrollTop = 0
-        document.body.scrollTop = 0
-        if (rightScrollRef.current) {
-          rightScrollRef.current.scrollTop = 0
-        }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      if (rightScrollRef.current) {
+        rightScrollRef.current.scrollTop = 0
       }
+    }
 
-      setModeToast({
-        mode: nextMode,
-        message:
-          nextMode === 'client'
-            ? '💼 Client View'
-            : '💻 Developer View',
-      })
-    }, 100)
+    setModeToast({
+      mode: target,
+      message:
+        target === 'client'
+          ? '💼 Client View'
+          : '💻 Developer View',
+    })
+  }
 
-    // Dismiss transition shutter
-    setTimeout(() => {
-      setIsTransitioning(false)
-    }, 400)
+  const handleTransitionComplete = () => {
+    setIsTransitioning(false)
   }
 
   const handleToggleChat = () => {
@@ -244,10 +249,20 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans antialiased relative overflow-x-hidden">
 
-      {/* ── Cinematic Aperture Shutter Mode Opening Effect ── */}
-      <ModeTransitionShutter
-        isTransitioning={isTransitioning}
-        targetMode={transitionTarget}
+      {/* ── Cascade Page Transition between Dev & Client Views ── */}
+      <CascadePageTransition
+        trigger={transitionTrigger}
+        onViewSwap={handleViewSwap}
+        onComplete={handleTransitionComplete}
+        colors={yellowPalette}
+        direction="top"
+        columns={14}
+        mode="in-to-out"
+        showLeadingStroke={true}
+        showTrailingStroke={true}
+        strokeWidth={4}
+        leadingStrokeColors={yellowStrokePalette}
+        trailingStrokeColors={yellowStrokePalette}
       />
 
       {/* ── Floating Mode Switch Confirmation Toast ── */}
