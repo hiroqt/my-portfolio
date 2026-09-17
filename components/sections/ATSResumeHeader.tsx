@@ -56,42 +56,75 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
   const reduce = useReducedMotion()
 
   return (
-    <header id="hero" className="relative pt-4 pb-8 sm:pt-6 sm:pb-12 scroll-mt-16">
+    <header id="hero" className="relative pt-4 pb-8 sm:pt-6 sm:pb-12 lg:py-6 lg:min-h-[calc(100vh-4.5rem)] lg:flex lg:flex-col lg:justify-center lg:snap-start scroll-mt-16">
       {/* Target anchor for backwards compatibility with #about */}
       <span id="about" className="sr-only" aria-hidden="true" />
-      
 
-
-      {/* ── Desktop Architectural Mission Statement (lg:block) ── */}
-      <div className="hidden lg:block space-y-4 pt-1 pb-4">
-        <div className="flex items-center gap-2 font-mono text-xs text-accent">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span className="uppercase tracking-wider font-semibold">Autonomous AI Swarms &amp; Cloud Infrastructure</span>
-        </div>
-        <h1 className="font-supreme text-3xl sm:text-4xl xl:text-[42px] font-bold tracking-tight text-foreground leading-[1.15] max-w-2xl">
-          Engineering Frontier AI Loops into Resilient Production Software.
-        </h1>
-        <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl font-sans">
-          Architecting multi-agent swarms, low-latency LLM pipelines, and high-concurrency cloud systems with relentless craft and real-world impact.
-        </p>
-        <div className="pt-2 flex items-center gap-3">
-          <a
-            href="#projects"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-colors duration-150 active:scale-[0.97] shadow-xs group"
-          >
-            <span>Explore Featured Systems</span>
-            <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
-          </a>
-          {onOpenStack && (
-            <button
-              type="button"
-              onClick={onOpenStack}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-muted/50 hover:bg-muted/80 text-foreground font-mono text-xs transition-colors active:scale-[0.97] cursor-pointer"
+      {/* ── Desktop Architectural Mission & Visual Hero Stage (lg:grid) ── */}
+      <div className="hidden lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+        {/* Left 7 Columns: Narrative, Headline & Direct CTAs */}
+        <div className="lg:col-span-7 space-y-4">
+          <div className="flex items-center gap-2 font-mono text-xs text-accent">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="uppercase tracking-wider font-semibold">Autonomous AI Swarms &amp; AI-Driven Development</span>
+          </div>
+          <h1 className="font-supreme text-3xl sm:text-4xl xl:text-[40px] font-bold tracking-tight text-foreground leading-[1.14]">
+            Engineering Frontier AI Loops into Resilient Production Software.
+          </h1>
+          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-sans max-w-xl">
+            Architecting multi-agent swarms, low-latency LLM pipelines, and high-concurrency AI-driven architectures with relentless craft and real-world impact.
+          </p>
+          <div className="pt-2 flex items-center gap-3">
+            <a
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault()
+                const target = document.getElementById('projects')
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' })
+                  if (typeof window !== 'undefined') {
+                    window.history.replaceState(null, '', '#projects')
+                  }
+                }
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foreground text-background font-mono text-xs uppercase tracking-wider font-semibold hover:bg-accent hover:text-white transition-colors duration-150 active:scale-[0.97] shadow-xs group cursor-pointer"
             >
-              <span>View 40+ Tech Arsenal</span>
-              <span className="text-accent">&rarr;</span>
-            </button>
-          )}
+              <span>Explore Featured Systems</span>
+              <FaArrowRight className="text-[10px] group-hover:translate-x-1 transition-transform" />
+            </a>
+            {onOpenStack && (
+              <button
+                type="button"
+                onClick={onOpenStack}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-muted/50 hover:bg-muted/80 text-foreground font-mono text-xs transition-colors active:scale-[0.97] cursor-pointer"
+              >
+                <span>View 40+ Tech Arsenal</span>
+                <span className="text-accent">&rarr;</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Right 5 Columns: Visual Identity Art & Live Telemetry Pill */}
+        <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+          <div
+            className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 blur-3xl -z-10"
+            style={{
+              background: 'radial-gradient(circle at 50% 50%, rgba(194, 157, 104, 0.22) 0%, transparent 70%)',
+            }}
+          />
+          <div className="relative w-full max-w-[210px] xl:max-w-[240px] aspect-square flex items-center justify-center">
+            <Image
+              src="/images/header.png"
+              alt="Arnel Baylon - Software Engineer"
+              width={1254}
+              height={1254}
+              priority
+              sizes="240px"
+              className="w-full h-full object-contain filter drop-shadow-md dark:drop-shadow-[0_16px_32px_rgba(0,0,0,0.65)] select-none pointer-events-none"
+              style={{ imageRendering: 'pixelated' }}
+            />
+          </div>
         </div>
       </div>
 
@@ -248,8 +281,8 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
 
       </div>
 
-      {/* ── 4-Metric Milestone Stats Ribbon (Zero Cards, Zero Dividing Lines) ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-6 pt-2">
+      {/* ── 4-Metric Milestone Stats Ribbon (Tactile Cards directly below Hero) ── */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 xl:gap-3.5 mt-8 pt-1">
         {summaryMilestones.map((m, idx) => (
           <a
             key={idx}
@@ -270,16 +303,16 @@ export function ATSResumeHeader({ onOpenStack }: ATSResumeHeaderProps = {}) {
                 }
               }
             }}
-            className="group block py-1 transition-transform duration-150 active:scale-[0.97] cursor-pointer"
+            className="group block p-3.5 rounded-2xl bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.03] dark:hover:bg-white/[0.06] border border-border/40 hover:border-accent/40 transition-all duration-150 active:scale-[0.98] cursor-pointer shadow-2xs"
           >
-            <div className="font-mono text-xl sm:text-2xl font-bold text-foreground group-hover:text-accent transition-colors flex items-center justify-between">
+            <div className="font-mono text-lg sm:text-xl font-bold text-foreground group-hover:text-accent transition-colors flex items-center justify-between">
               <span>{m.value}</span>
-              <span className="text-xs text-muted-foreground group-hover:text-accent">↗</span>
+              <span className="text-xs text-muted-foreground group-hover:text-accent transition-colors">↗</span>
             </div>
-            <div className="text-sm font-semibold text-foreground mt-1">
+            <div className="text-xs font-semibold text-foreground mt-1">
               {m.label}
             </div>
-            <div className="text-[13px] text-muted-foreground truncate mt-0.5">
+            <div className="text-[11.5px] text-muted-foreground truncate mt-0.5">
               {m.sub}
             </div>
           </a>

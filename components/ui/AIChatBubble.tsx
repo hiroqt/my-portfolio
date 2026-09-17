@@ -254,7 +254,7 @@ export function AIChatBubble({
     } catch {
       const fallbackText = isClientMode
         ? "Arnel builds custom websites, web applications, and smart automations tailored for business founders. For immediate project inquiries, feel free to email **arnlebaylon15@gmail.com** or use the step-by-step form guide below."
-        : "Arnel Baylon is a Software Engineer & Agentic Developer specializing in Autonomous AI Swarms, Next.js, and Cloud Infrastructure."
+        : "Arnel Baylon is a Software Engineer & Agentic Developer specializing in Autonomous AI Swarms, Next.js, and AI-Driven Development."
       setMessages((prev) => {
         const updated = [...prev]
         if (updated[botMsgIndex]) {

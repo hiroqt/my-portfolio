@@ -70,6 +70,13 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
         return
       }
 
+      // If scrolled to bottom of right pane before typing section
+      if (rightEl && rightEl.scrollTop + rightEl.clientHeight >= rightEl.scrollHeight - 60 && window.scrollY < 120) {
+        setActiveSection('contact')
+        ticking = false
+        return
+      }
+
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i])
         if (el) {
@@ -362,7 +369,7 @@ export function PortfolioShell({ initialMode = 'tech' }: PortfolioShellProps) {
                 <div
                   ref={rightScrollRef}
                   id="right-scroll-pane"
-                  className="flex-1 min-w-0 lg:h-full lg:overflow-y-auto pt-4 sm:pt-6 lg:pt-8 pb-16 lg:pb-28 lg:pr-3 space-y-12 sm:space-y-14 lg:space-y-16 scroll-smooth scrollbar-thin"
+                  className="flex-1 min-w-0 lg:h-full lg:overflow-y-auto pt-4 sm:pt-6 lg:pt-8 pb-16 lg:pb-28 lg:pr-3 space-y-12 sm:space-y-14 lg:space-y-20 scroll-smooth scrollbar-thin lg:snap-y lg:snap-proximity"
                 >
                   {/* 00 — Editorial Mission & Milestone Stats */}
                   <ATSResumeHeader onOpenStack={() => setIsStackOpen(true)} />

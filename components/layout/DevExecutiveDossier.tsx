@@ -104,13 +104,14 @@ export function DevExecutiveDossier({
 
   return (
     <aside
+      id="left-dossier-pane"
       aria-label="Executive Developer Dossier"
-      className="hidden lg:flex flex-col justify-between w-[320px] xl:w-[360px] 2xl:w-[390px] shrink-0 lg:h-full py-6 lg:py-8 select-none overflow-y-auto scrollbar-none z-20"
+      className="hidden lg:flex flex-col justify-between w-[328px] xl:w-[364px] 2xl:w-[392px] shrink-0 lg:h-full py-5 xl:py-6 pr-3.5 xl:pr-4.5 select-none overflow-hidden z-20"
     >
-      {/* ── TOP SEGMENT: Identity, Live Telemetry & Narrative ── */}
-      <div className="space-y-4">
-        {/* Availability & Telemetry Banner (borderless, gentle spacing) */}
-        <div className="flex items-center justify-between text-[11px] font-mono pb-1">
+      {/* ── TOP SEGMENT: Identity, Narrative, Technical Arsenal & Social Connectors ── */}
+      <div className="space-y-3">
+        {/* Availability & Telemetry Banner */}
+        <div className="flex items-center justify-between text-[11px] font-mono">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -124,27 +125,27 @@ export function DevExecutiveDossier({
         </div>
 
         {/* Name, Headline & Portrait in Asymmetric Lockup */}
-        <div className="flex items-start justify-between gap-3 pt-1">
-          <div className="space-y-1">
+        <div className="flex items-start justify-between gap-3 pt-0.5">
+          <div className="space-y-0.5">
             <a
               href="#hero"
               onClick={(e) => onNavClick(e, 'hero')}
-              className="inline-block font-supreme text-2xl xl:text-3xl font-bold tracking-tight text-foreground hover:text-accent transition-colors"
+              className="inline-block font-supreme text-2xl xl:text-[27px] font-bold tracking-tight text-foreground hover:text-accent transition-colors"
             >
               Arnel Baylon
             </a>
-            <p className="text-[13px] font-mono text-muted-foreground font-medium leading-relaxed">
+            <p className="text-[13px] font-mono text-muted-foreground font-medium leading-tight">
               Software Engineer &bull; Agentic Systems
             </p>
           </div>
 
-          {/* Compact Portrait with Warm Subtle Surface */}
-          <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-muted/60 shadow-xs">
+          {/* Portrait Avatar — Elegantly Enlarged with Refined Border */}
+          <div className="relative w-13 h-13 xl:w-14 xl:h-14 rounded-2xl overflow-hidden shrink-0 bg-muted/50 border border-border/50 shadow-xs">
             <Image
               src="/images/header.png"
               alt="Arnel Baylon"
               fill
-              sizes="48px"
+              sizes="56px"
               className="object-contain"
               style={{ imageRendering: 'pixelated' }}
             />
@@ -152,19 +153,171 @@ export function DevExecutiveDossier({
         </div>
 
         {/* Narrative / Engineering Thesis */}
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-[12.5px] xl:text-[13px] text-muted-foreground leading-relaxed">
           Bridging frontier generative AI models with production software engineering.
           Autonomous multi-agent loops, cloud backends, and full-stack systems.
         </p>
 
-        {/* Quick Identity Actions: Switch to Client Mode & Chat */}
-        <div className="flex items-center gap-2 pt-1">
+        {/* Technical Arsenal (Primary Arsenal) — Maximized 2-Column Grid */}
+        <div className="space-y-1.5 pt-0.5">
+          <div className="flex items-center justify-between">
+            <span className="text-[10.5px] font-mono uppercase tracking-wider text-muted-foreground font-semibold">
+              Technical Arsenal
+            </span>
+            {onOpenStack && (
+              <button
+                type="button"
+                onClick={onOpenStack}
+                className="text-[11px] font-mono text-accent hover:underline font-semibold transition-colors active:scale-95 cursor-pointer"
+              >
+                +40 More ↗
+              </button>
+            )}
+          </div>
+
+          <div className="grid grid-cols-2 gap-1.5">
+            {[
+              { name: 'TypeScript', icon: SiTypescript, color: 'text-[#3178C6]' },
+              { name: 'Next.js 15', icon: SiNextdotjs, color: 'text-foreground' },
+              { name: 'React', icon: SiReact, color: 'text-[#61DAFB]' },
+              { name: 'Flutter', icon: SiFlutter, color: 'text-[#02569B]' },
+              { name: 'PostgreSQL', icon: SiPostgresql, color: 'text-[#4169E1]' },
+              { name: 'Docker', icon: SiDocker, color: 'text-[#2496ED]' },
+            ].map((tech) => {
+              const Icon = tech.icon
+              return (
+                <button
+                  key={tech.name}
+                  type="button"
+                  onClick={onOpenStack}
+                  title={`Open stack drawer: ${tech.name}`}
+                  className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.03] dark:hover:bg-white/[0.07] border border-border/40 hover:border-accent/40 text-xs font-mono text-foreground/85 hover:text-foreground transition-all active:scale-95 cursor-pointer"
+                >
+                  <Icon className={`w-3.5 h-3.5 shrink-0 ${tech.color}`} />
+                  <span className="truncate">{tech.name}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Social Connectors & Official Resume — Full-Width Tactile Row */}
+        <div className="flex items-center gap-1.5 pt-1 border-t border-border/40">
+          <div className="flex items-center gap-1">
+            <a
+              href="https://github.com/hiroqt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.03] dark:hover:bg-white/[0.07] border border-border/40 text-muted-foreground hover:text-foreground transition-colors active:scale-90"
+              title="GitHub Profile"
+              aria-label="GitHub Profile"
+            >
+              <FaGithub className="w-4 h-4" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/arnel-baylon-b05233189"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.03] dark:hover:bg-white/[0.07] border border-border/40 text-muted-foreground hover:text-foreground transition-colors active:scale-90"
+              title="LinkedIn Profile"
+              aria-label="LinkedIn Profile"
+            >
+              <FaLinkedin className="w-4 h-4" />
+            </a>
+            <a
+              href="mailto:arnelbaylon15@gmail.com"
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.03] dark:hover:bg-white/[0.07] border border-border/40 text-muted-foreground hover:text-foreground transition-colors active:scale-90"
+              title="Send Direct Email"
+              aria-label="Send Direct Email"
+            >
+              <FaEnvelope className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <a
+            href="/pdf/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 h-8 flex items-center justify-center gap-1.5 px-2.5 rounded-lg bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.03] dark:hover:bg-white/[0.07] border border-border/40 text-xs font-mono text-foreground/85 hover:text-foreground transition-colors active:scale-95"
+            title="Download Verified Resume PDF"
+          >
+            <FaFilePdf className="w-3.5 h-3.5 text-red-500/80" />
+            <span className="font-medium">Resume PDF</span>
+            <span className="text-[10px] text-muted-foreground">↗</span>
+          </a>
+        </div>
+      </div>
+
+      {/* ── MIDDLE SEGMENT: Interactive Section Nav Rail (Directory Scroll-Spy) ── */}
+      <nav aria-label="Section Navigation" className="py-2 space-y-0.5">
+        <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/70 font-semibold px-3 pb-0.5">
+          Directory
+        </div>
+
+        {navSections.map((sec) => {
+          const isActive = activeSection === sec.id
+
+          return (
+            <a
+              key={sec.id}
+              href={`#${sec.id}`}
+              onClick={(e) => onNavClick(e, sec.id)}
+              className={`group relative flex items-center justify-between px-3 py-1.5 rounded-xl text-[12px] xl:text-[12.5px] font-mono transition-colors duration-150 active:scale-[0.98] cursor-pointer ${
+                isActive
+                  ? 'text-foreground font-semibold'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
+              }`}
+            >
+              {/* Active Spring Background Indicator */}
+              {isActive && (
+                <motion.div
+                  layoutId="dossierActiveSectionPill"
+                  className="absolute inset-0 rounded-xl bg-muted/70 dark:bg-white/[0.05] -z-10"
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0.05 }
+                      : { type: 'spring', stiffness: 420, damping: 32 }
+                  }
+                />
+              )}
+
+              <div className="flex items-center gap-2.5">
+                <span
+                  className={`text-[10px] transition-colors ${
+                    isActive ? 'text-accent font-bold' : 'text-muted-foreground/50 group-hover:text-muted-foreground'
+                  }`}
+                >
+                  {sec.number}
+                </span>
+                <span className="tracking-tight">{sec.label}</span>
+              </div>
+
+              {sec.badge && (
+                <span
+                  className={`text-[9px] px-1.5 py-0.5 rounded-md transition-colors ${
+                    isActive
+                      ? 'bg-accent/15 text-accent font-medium'
+                      : 'bg-muted/60 text-muted-foreground/80'
+                  }`}
+                >
+                  {sec.badge}
+                </span>
+              )}
+            </a>
+          )
+        })}
+      </nav>
+
+      {/* ── BOTTOM SEGMENT: ClientView, Copilot, Music, Theme & Typing Sandbox ── */}
+      <div className="space-y-2 pt-2 border-t border-border/40">
+        {/* Actions Row: Client View, Copilot, Music Player & Theme Switcher */}
+        <div className="flex items-center gap-2">
           {onToggleViewMode && (
             <button
               type="button"
               onClick={onToggleViewMode}
               title="Switch to Client-Friendly Overview"
-              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-muted/50 hover:bg-muted/80 text-foreground text-xs font-mono transition-colors active:scale-[0.97] cursor-pointer group"
+              className="flex-1 flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl bg-muted/50 hover:bg-muted/80 text-foreground text-xs font-mono transition-colors active:scale-[0.97] cursor-pointer group"
             >
               <FaTerminal className="w-3 h-3 text-accent group-hover:scale-110 transition-transform" />
               <span>Client View</span>
@@ -177,7 +330,7 @@ export function DevExecutiveDossier({
               type="button"
               onClick={onOpenChat}
               title={isChatOpen ? 'Close yhelAI Copilot' : 'Open yhelAI Copilot'}
-              className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer ${
+              className={`flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer ${
                 isChatOpen
                   ? 'bg-accent/25 text-accent ring-1 ring-accent/40 shadow-xs'
                   : 'bg-accent/12 hover:bg-accent/20 text-accent'
@@ -200,14 +353,14 @@ export function DevExecutiveDossier({
               type="button"
               onClick={onToggleMusic}
               title={isMusicOpen ? 'Close Music Player' : activePlaying ? "Drake - B's on the Table (Playing)" : "Play Drake - B's on the Table"}
-              className={`group relative overflow-hidden flex items-center justify-center gap-2 px-3.5 py-1.5 h-[34px] min-w-[80px] rounded-2xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer shadow-sm border ${
+              className={`group relative overflow-hidden flex items-center justify-center gap-2 px-3 py-1.5 h-[34px] min-w-[76px] rounded-xl text-xs font-mono transition-all active:scale-[0.97] cursor-pointer shadow-sm border ${
                 isMusicOpen || activePlaying
                   ? 'border-emerald-400/50 ring-1 ring-emerald-400/30'
                   : 'border-white/20 dark:border-white/10 hover:border-white/40'
               }`}
             >
               {/* Background cover artwork with slight blur */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
                 <Image
                   src={CURRENT_TRACK.coverSrc}
                   alt=""
@@ -232,13 +385,13 @@ export function DevExecutiveDossier({
 
                 {/* 4-Bar Realtime Reactive Wave Audio Visualizer */}
                 <span
-                  className="flex items-end gap-[2.5px] h-3.5 pb-0.5 shrink-0"
+                  className="flex items-end gap-[2px] h-3.5 pb-0.5 shrink-0"
                   aria-label="Audio wave effect"
                 >
                   {headerWaveBars.map((barVal, idx) => (
                     <span
                       key={idx}
-                      className={`w-[2.5px] rounded-full transition-[height] duration-75 ease-out drop-shadow-sm ${
+                      className={`w-[2px] rounded-full transition-[height] duration-75 ease-out drop-shadow-sm ${
                         activePlaying || isMusicOpen
                           ? 'bg-emerald-400 dark:bg-emerald-300 shadow-[0_0_6px_rgba(52,211,153,0.6)]'
                           : 'bg-white/80'
@@ -275,7 +428,7 @@ export function DevExecutiveDossier({
         <a
           href="#typing"
           onClick={(e) => onNavClick(e, 'typing')}
-          className="hidden md:flex items-center justify-between px-3 py-2 rounded-xl bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] border border-border/40 text-xs font-mono transition-all duration-150 active:scale-[0.98] group cursor-pointer"
+          className="flex items-center justify-between px-3 py-2 rounded-xl bg-muted/40 hover:bg-muted/70 dark:bg-white/[0.02] dark:hover:bg-white/[0.06] border border-border/40 text-xs font-mono transition-all duration-150 active:scale-[0.98] group cursor-pointer"
         >
           <div className="flex items-center gap-2">
             <FaKeyboard className="w-3.5 h-3.5 text-accent group-hover:scale-110 transition-transform" />
@@ -285,157 +438,6 @@ export function DevExecutiveDossier({
             Switch Audio &rarr;
           </span>
         </a>
-      </div>
-
-      {/* ── MIDDLE SEGMENT: Interactive Section Nav Rail (Scroll-Spy) ── */}
-      <nav aria-label="Section Navigation" className="py-5 space-y-1">
-        <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/70 font-semibold px-3 pb-1">
-          Directory
-        </div>
-
-        {navSections.map((sec) => {
-          const isActive = activeSection === sec.id
-
-          return (
-            <a
-              key={sec.id}
-              href={`#${sec.id}`}
-              onClick={(e) => onNavClick(e, sec.id)}
-              className={`group relative flex items-center justify-between px-3 py-2 rounded-xl text-[13px] font-mono transition-colors duration-150 active:scale-[0.98] cursor-pointer ${
-                isActive
-                  ? 'text-foreground font-semibold'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
-              }`}
-            >
-              {/* Active Spring Background Indicator (Borderless Tonal Wash) */}
-              {isActive && (
-                <motion.div
-                  layoutId="dossierActiveSectionPill"
-                  className="absolute inset-0 rounded-xl bg-muted/70 dark:bg-white/[0.05] -z-10"
-                  transition={
-                    shouldReduceMotion
-                      ? { duration: 0.05 }
-                      : { type: 'spring', stiffness: 420, damping: 32 }
-                  }
-                />
-              )}
-
-              <div className="flex items-center gap-2.5">
-                <span
-                  className={`text-[10px] transition-colors ${
-                    isActive ? 'text-accent font-bold' : 'text-muted-foreground/50 group-hover:text-muted-foreground'
-                  }`}
-                >
-                  {sec.number}
-                </span>
-                <span className="tracking-tight">{sec.label}</span>
-              </div>
-
-              {sec.badge && (
-                <span
-                  className={`text-[9.5px] px-2 py-0.5 rounded-md transition-colors ${
-                    isActive
-                      ? 'bg-accent/15 text-accent font-medium'
-                      : 'bg-muted/60 text-muted-foreground/80'
-                  }`}
-                >
-                  {sec.badge}
-                </span>
-              )}
-            </a>
-          )
-        })}
-      </nav>
-
-      {/* ── BOTTOM SEGMENT: Primary Arsenal & Social Connectors (Borderless) ── */}
-      <div className="space-y-3.5 pt-2">
-        {/* Primary Stack Arsenal Pills */}
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-semibold">
-              Primary Arsenal
-            </span>
-            {onOpenStack && (
-              <button
-                type="button"
-                onClick={onOpenStack}
-                className="text-[10.5px] font-mono text-accent hover:underline font-semibold transition-colors active:scale-95 cursor-pointer"
-              >
-                +40 More ↗
-              </button>
-            )}
-          </div>
-
-          <div className="flex flex-wrap gap-1">
-            {[
-              { name: 'TypeScript', icon: SiTypescript, color: 'text-[#3178C6]' },
-              { name: 'Next.js 15', icon: SiNextdotjs, color: 'text-foreground' },
-              { name: 'React', icon: SiReact, color: 'text-[#61DAFB]' },
-              { name: 'Flutter', icon: SiFlutter, color: 'text-[#02569B]' },
-              { name: 'PostgreSQL', icon: SiPostgresql, color: 'text-[#4169E1]' },
-              { name: 'Docker', icon: SiDocker, color: 'text-[#2496ED]' },
-            ].map((tech) => {
-              const Icon = tech.icon
-              return (
-                <button
-                  key={tech.name}
-                  type="button"
-                  onClick={onOpenStack}
-                  title={`Open stack drawer: ${tech.name}`}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted/50 dark:bg-white/[0.03] text-[11.5px] font-mono text-foreground/80 hover:bg-muted/80 dark:hover:bg-white/[0.07] hover:text-foreground transition-colors active:scale-95 cursor-pointer"
-                >
-                  <Icon className={`w-2.5 h-2.5 ${tech.color}`} />
-                  <span>{tech.name}</span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Direct Connectors & Colophon */}
-        <div className="flex items-center justify-between pt-1">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <a
-              href="https://github.com/hiroqt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 rounded-lg hover:text-foreground hover:bg-muted/60 transition-colors active:scale-90"
-              title="GitHub Profile"
-              aria-label="GitHub Profile"
-            >
-              <FaGithub className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/arnel-baylon-b05233189"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 rounded-lg hover:text-foreground hover:bg-muted/60 transition-colors active:scale-90"
-              title="LinkedIn Profile"
-              aria-label="LinkedIn Profile"
-            >
-              <FaLinkedin className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href="mailto:arnlebaylon15@gmail.com"
-              className="p-1.5 rounded-lg hover:text-foreground hover:bg-muted/60 transition-colors active:scale-90"
-              title="Send Direct Email"
-              aria-label="Send Direct Email"
-            >
-              <FaEnvelope className="w-3.5 h-3.5" />
-            </a>
-          </div>
-
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground hover:text-foreground transition-colors active:scale-95"
-            title="Download Verified Resume PDF"
-          >
-            <FaFilePdf className="w-3 h-3 text-red-500/80" />
-            <span>Resume PDF</span>
-          </a>
-        </div>
       </div>
     </aside>
   )
