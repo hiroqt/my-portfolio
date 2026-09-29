@@ -7,16 +7,16 @@ export default function NotFound() {
         <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
           404 &bull; Page Not Found
         </span>
-        <h1 className="font-serif text-4xl font-bold">System Endpoint Missing</h1>
-        <p className="font-mono text-xs text-muted-foreground">
-          The requested route does not exist or has been relocated within the architecture.
+        <h1 className="text-4xl font-semibold tracking-tight">This page took a detour.</h1>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Let’s get you back to the projects, ideas, and people behind my work.
         </p>
         <div className="pt-2">
           <Link
             href="/"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foreground text-background font-mono text-xs font-semibold hover:bg-accent hover:text-white transition-colors"
           >
-            Return to Root System &rarr;
+            Back to the portfolio &rarr;
           </Link>
         </div>
       </div>

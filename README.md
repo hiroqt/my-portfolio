@@ -1,146 +1,66 @@
-# Resume Portfolio
+# Arnel Baylon’s portfolio
 
-A clean, professional resume-style portfolio website for Arnel Baylon showcasing full-stack development projects and technical expertise.
+A responsive portfolio for Arnel’s software engineering, civic technology, and AI work. The site uses one portfolio layout, focused project case studies, and a separate conversational assistant.
 
-## Features
+Built with Next.js 15 App Router, React 19, TypeScript, Tailwind CSS, CSS modules, Geist typography, and restrained Framer Motion interactions. Themes share the same design tokens, and motion supports reduced-motion preferences.
 
-- 🎨 **Dual Theme Support** - Light and dark mode with smooth transitions
-- 💬 **AI Chat Assistant** - Interactive chat powered by Groq LLM to answer visitor questions
-- 📊 **Real-Time GitHub Stats** - Live contribution graph, repository stats, and language analysis
-- 📱 **Fully Responsive** - Optimized for all devices from mobile to desktop
-- ⚡ **Fast & Modern** - Built with Next.js 14, React 18, and TypeScript
-- 🎭 **Smooth Animations** - Powered by Framer Motion
-- 📈 **Analytics** - Integrated Vercel Analytics
+## Routes
 
-## Tech Stack
+| Route | Purpose |
+| --- | --- |
+| `/` | Work, capabilities, background, experience, recognition, and contact |
+| `/assistant` | Streamed portfolio answers, voice controls, suggested questions, and explicit navigation actions |
+| `/projects/[slug]` | Project overview, technology, features, and supporting detail |
+| `/api/ai/chat` | Conversation streaming and available request quota |
+| `/api/ai/tts` | Spoken responses with the configured speech provider and fallback |
 
-### Frontend
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS + Custom CSS
-- **Animations**: Framer Motion
-- **UI Library**: React 18
+The typing playground loads on demand. Project navigation from an AI response runs when a visitor chooses an action button.
 
-### Backend & AI
-- **Chat AI**: Groq SDK (Llama 3.3 70B)
-- **API Routes**: Next.js API Routes
-- **Rate Limiting**: In-memory (production: use Redis)
+## Local setup
 
-### DevOps
-- **Hosting**: Vercel
-- **Analytics**: Vercel Analytics
-- **Version Control**: Git
+Use Node.js 20 or later and npm.
 
-## Projects Showcase
-
-1. **PaceMentor** - AI-powered running coach with dynamic workout graphics
-2. **HRIS Management System** - HR platform with QR attendance and payroll
-3. **Queuing System** - Hospital patient flow management
-4. **Clearance System** - Digital clearance workflow
-5. **EMR System** - Electronic medical records platform
-6. **TMRC Running Club Website** - Community event platform
-7. **HiveSyncVA Website** - VA service showcase
-
-## GitHub Integration
-
-The portfolio includes a **real-time GitHub activity section** that displays:
-
-- 📈 **Contribution Graph** - 365-day heatmap of GitHub activity
-- 📦 **Repository Stats** - Total repos, commits, and stars
-- 💻 **Language Analysis** - Most used programming languages
-- ⭐ **Featured Repos** - Top repositories by stars
-- 👤 **Profile Info** - Bio, followers, and following count
-
-All data is fetched directly from GitHub's public API. See `GITHUB_INTEGRATION.md` for detailed setup instructions.
-
-## Getting Started
-
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Groq API key (for chat feature)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone <repository-url>
-
-# Install dependencies
+```sh
 npm install
-
-# Set up environment variables
 cp .env.example .env.local
-# Add your GROQ_API_KEY to .env.local
-
-# Run development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
+Open [localhost:3000](http://localhost:3000). Add any optional AI credentials to `.env.local`; the portfolio and local assistant fallback work without them. Keep credentials in the ignored local file.
 
-### Environment Variables
+| Environment key | Purpose |
+| --- | --- |
+| `GROQ_API_KEY` | Optional hosted AI responses; empty uses the portfolio-grounded local assistant |
+| `ELEVENLABS_API_KEY` | Optional ElevenLabs speech; empty uses the existing speech fallback |
+| `ELEVENLABS_VOICE_ID` | Optional voice selection; empty keeps the default voice |
 
-Create a `.env.local` file:
+`.env.example` contains empty assignments and can be committed. The browser calls same-origin API routes; provider credentials stay on the server.
 
-```env
-# Required for chat feature
-GROQ_API_KEY=your_groq_api_key_here
+## Checks and production
 
-# Optional for GitHub stats (higher rate limits)
-NEXT_PUBLIC_GITHUB_TOKEN=your_github_token_here
-NEXT_PUBLIC_GITHUB_USERNAME=hiroqt
-```
-
-## Project Structure
-
-```
-├── app/
-│   ├── api/chat/          # Chat API endpoint
-│   ├── globals.css        # Global styles
-│   ├── chat-widget.css    # Chat widget styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Main resume page
-├── components/
-│   ├── layout/
-│   │   └── Section.tsx    # Section wrapper component
-│   ├── GitHubStats.tsx    # GitHub activity component
-│   ├── DotGrid.tsx        # Background grid animation
-│   ├── TerminalIntro.tsx  # Terminal animation
-│   └── TypingText.tsx     # Typing effect component
-├── docs/
-│   └── GITHUB_STATS.md    # GitHub integration docs
-├── lib/
-│   └── utils.ts           # Utility functions
-└── public/                # Static assets
-```
-
-## Build & Deploy
-
-```bash
-# Build for production
+```sh
+npm run lint
 npm run build
-
-# Start production server
 npm start
 ```
 
-The site is optimized for Vercel deployment with automatic builds on push.
+Run the production build when the development server is stopped, or use a separate checkout/output directory. Both commands otherwise write the default `.next` directory.
 
-## Security Features
+Next.js loads the server-side environment for chat and speech. Vercel Analytics is included. API rate limits use a process-local in-memory store in `lib/ai/rateLimit.ts`.
 
-- Rate limiting on chat API (10 requests/minute per IP)
-- Input sanitization and validation
-- Content security patterns
-- Environment variable protection
+## Source layout
 
-## License
+- `app/`: pages, root styling, metadata, project routes, and AI API handlers.
+- `components/PortfolioShell.*`: the primary portfolio layout and interactions.
+- `components/sections/`: focused work, journey, and toolkit sections.
+- `components/modules/ai/`: message rendering and voice controls.
+- `components/modules/typing/`: the on-demand typing playground.
+- `lib/data/projects.ts`: project records shared by the portfolio, case studies, and AI knowledge.
+- `lib/data/stack.ts`: the portfolio’s grouped tools and technology records.
+- `lib/ai/` and `lib/rag/`: assistant orchestration, prompts, grounded knowledge, retrieval, and limits.
+- `lib/audio/`: synthesized keyboard switch sounds.
+- `public/`: project imagery, personal photos, recognition documents, résumé, and site metadata.
+- `content/ai/`: editorial reference documents; the running assistant currently reads `lib/rag/knowledge.ts` and project records.
+- `scripts/test_dialogue.ts`: existing dialogue scenarios for the local response synthesizer.
 
-Private - All rights reserved
-
-## Contact
-
-**Arnel A. Baylon**
-- Email: arnelbaylon15@gmail.com
-- GitHub: [hiroqt](https://github.com/hiroqt)
-- Location: Cavite, Philippines
+Edit project content in `lib/data/projects.ts`. Keep the assistant’s facts aligned in `lib/rag/knowledge.ts`, and keep public links consistent when changing section IDs.

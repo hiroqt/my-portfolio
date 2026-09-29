@@ -234,7 +234,7 @@ function synthesizeClientResponse(
     }
     if (previousAssistantMsg.includes('timeline') || previousAssistantMsg.includes('2 to 4 weeks')) {
       return {
-        text: "Perfect! Whenever you're ready to share your project idea, you can fill out the 3-step form below or email Arnel at **arnlebaylon15@gmail.com**.",
+        text: "Perfect! Whenever you're ready to share your project idea, you can fill out the 3-step form below or email Arnel at **arnelbaylon15@gmail.com**.",
         action: { type: 'open_contact', sectionId: 'contact', label: 'Fill Project Form' }
       };
     }
@@ -251,7 +251,7 @@ function synthesizeClientResponse(
   // 3. Gratitude ("thanks", "thank you")
   if (/^(thanks|thank you|ty|tysm|appreciate it|much appreciated|thanks a lot)[\s!.]*$/i.test(trimmed)) {
     const thanksResponses = [
-      "You're very welcome! If you're ready to bring your idea to life, you can submit an inquiry through the 3-step form below or email Arnel directly at **arnlebaylon15@gmail.com**.",
+      "You're very welcome! If you're ready to bring your idea to life, you can submit an inquiry through the 3-step form below or email Arnel directly at **arnelbaylon15@gmail.com**.",
       "Always happy to help! Let me know if you need anything else clarified regarding how easy it is to manage, timelines, or pricing.",
       "My pleasure! Looking forward to potentially helping you launch your new website or app."
     ];
@@ -520,7 +520,7 @@ function synthesizeClientResponse(
     (isFollowUpToServices && (lower.includes('ai') || lower.includes('bot') || lower.includes('assistant')))
   ) {
     return {
-      text: `${reassurancePrefix}### 24/7 Intelligent AI Assistants & Customer Support Bots\n\n**Never miss a customer inquiry while you're asleep or busy serving clients.** Arnel built **eBuddy** (a Top 5 National Finalist at the 2026 eGov PH Hackathon) and **FinOps AI**:\n\n- **Trained on Your Business**: The AI learns your exact pricing, packages, opening hours, and FAQs to answer customer questions immediately in plain English.\n- **24/7 Lead Capture**: Collects customer names, emails, and phone numbers and alerts you whenever a hot lead asks for a quote.\n- **Seamless Human Handoff**: If a customer needs personal attention, the bot seamlessly directs them to your WhatsApp, phone number, or email.\n\nWhat are the top 3 or 4 questions your customers ask most frequently?`,
+      text: `${reassurancePrefix}### 24/7 Intelligent AI Assistants & Customer Support Bots\n\n**Never miss a customer inquiry while you're asleep or busy serving clients.** Arnel built **eBuddy** for the 2026 eGov PH Hackathon and **FinOps AI**:\n\n- **Trained on Your Business**: The AI learns your exact pricing, packages, opening hours, and FAQs to answer customer questions immediately in plain English.\n- **24/7 Lead Capture**: Collects customer names, emails, and phone numbers and alerts you whenever a hot lead asks for a quote.\n- **Seamless Human Handoff**: If a customer needs personal attention, the bot seamlessly directs them to your WhatsApp, phone number, or email.\n\nWhat are the top 3 or 4 questions your customers ask most frequently?`,
       action: { type: 'open_project', projectId: 'e-buddy', label: 'View eBuddy AI Case Study' }
     };
   }
@@ -785,7 +785,7 @@ function synthesizeClientResponse(
     lower.includes('expensive')
   ) {
     return {
-      text: `${reassurancePrefix}### Transparent, Fixed-Price Project Model\n\nPricing is straightforward, transparent, and agreed upon before work begins:\n\n- **Fixed Project Quote**: We define your scope in advance and provide a fixed price—**no hourly surprises, no agency markups, and no hidden fees**.\n- **30 Days Free Support Included**: Every new build comes with 30 days of post-launch warranty and bug fixes at zero extra cost.\n- **Flexible Care Plans**: If you'd like ongoing feature improvements or maintenance down the road, simple monthly check-in options are available.\n\nBecause every build has unique requirements, Arnel provides a tailored quote within 24 hours.\n\nYou can fill out the 3-step project form below or email **arnlebaylon15@gmail.com** to get your proposal.`,
+      text: `${reassurancePrefix}### Transparent, Fixed-Price Project Model\n\nPricing is straightforward, transparent, and agreed upon before work begins:\n\n- **Fixed Project Quote**: We define your scope in advance and provide a fixed price—**no hourly surprises, no agency markups, and no hidden fees**.\n- **30 Days Free Support Included**: Every new build comes with 30 days of post-launch warranty and bug fixes at zero extra cost.\n- **Flexible Care Plans**: If you'd like ongoing feature improvements or maintenance down the road, simple monthly check-in options are available.\n\nBecause every build has unique requirements, Arnel provides a tailored quote within 24 hours.\n\nYou can fill out the 3-step project form below or email **arnelbaylon15@gmail.com** to get your proposal.`,
       action: { type: 'open_contact', sectionId: 'contact', label: 'Get a Project Quote' }
     };
   }
@@ -838,10 +838,16 @@ function synthesizeClientResponse(
       action: { type: 'open_project', projectId: 'present-po', label: 'View Present Po Details' }
     };
   }
-  if (lower.includes('ebuddy') || lower.includes('e-buddy') || lower.includes('egov')) {
+  if (lower.includes('ebuddy') || lower.includes('e-buddy') || lower.includes('egov') || lower.includes('e-gov')) {
     return {
-      text: "### eBuddy Award-Winning AI Platform\n\n**eBuddy** was selected as a **Top 5 National Finalist** at the 2026 National eGov PH Hackathon:\n\n- **Public Citizen Guide**: Intelligent AI assistant that walks everyday citizens through government requirements and paperwork step-by-step.\n- **Voice & Chat Multi-Modal**: Accessible for both mobile chat and voice inquiries.",
-      action: { type: 'open_project', projectId: 'e-buddy', label: 'View eBuddy Details' }
+      text: "### eGov AI Citizen Services Platform (Top 5 eGov)\n\n**eGov AI** was recognized as a Top 5 project at the 2026 eGov PH Hackathon:\n\n- **Unified Citizen Guide**: An agentic AI assistant that navigates fragmented public services, auto-fills forms, and simplifies citizen transactions.\n- **Biometric & Multi-Modal**: Features face liveness detection (Face Live Nest), voice interaction, and integrated eGov Pay.\n\nUse the button below to explore eGov AI.",
+      action: { type: 'open_project', projectId: 'e-buddy', label: 'View eGov AI Details' }
+    };
+  }
+  if (lower.includes('android deck') || lower.includes('android-deck') || lower.includes('notchdeck') || lower.includes('stream deck')) {
+    return {
+      text: "### Android Deck (NotchDeck macOS & Touchscreen Stream Deck)\n\n**Android Deck** turns an Android phone into a touchscreen stream deck for macOS over USB or Wi-Fi:\n\n- **Mac Notch HUD**: A native Swift Liquid Glass HUD docking directly into the MacBook camera notch.\n- **Adaptive Touch Controls**: Low-latency 6-slot touchscreen deck on Android with sub-16ms haptics.\n- **Open Source**: Full codebase available at github.com/hiroqt/android-deck with 40 passing unit tests.\n\nUse the button below to explore Android Deck.",
+      action: { type: 'open_project', projectId: 'android-deck', label: 'View Android Deck Details' }
     };
   }
   if (lower.includes('finops') || lower.includes('aws')) {
@@ -1092,7 +1098,7 @@ function synthesizeClientResponse(
     lower.includes('talk')
   ) {
     return {
-      text: `${reassurancePrefix}### Ready to Bring Your Project to Life?\n\nHere are the fastest ways to connect with Arnel:\n\n1. **Step-by-Step Project Form**: Fill out the 3-step project form below to share your project type, desired timeline, and goals.\n2. **Direct Email**: Send a note to **arnlebaylon15@gmail.com** (Arnel responds within 24 hours).\n3. **LinkedIn**: Connect directly at [linkedin.com/in/arnel-baylon-b05233189](https://www.linkedin.com/in/arnel-baylon-b05233189).\n\nLet's discuss how we can launch your website or web app!`,
+      text: `${reassurancePrefix}### Ready to Bring Your Project to Life?\n\nHere are the fastest ways to connect with Arnel:\n\n1. **Step-by-Step Project Form**: Fill out the 3-step project form below to share your project type, desired timeline, and goals.\n2. **Direct Email**: Send a note to **arnelbaylon15@gmail.com** (Arnel responds within 24 hours).\n3. **LinkedIn**: Connect directly at [linkedin.com/in/arnel-baylon-b05233189](https://www.linkedin.com/in/arnel-baylon-b05233189).\n\nLet's discuss how we can launch your website or web app!`,
       action: { type: 'open_contact', sectionId: 'contact', label: 'Open Project Inquiry Form' }
     };
   }
@@ -1125,7 +1131,7 @@ function synthesizeClientResponse(
   // A. E-Commerce / Store Context Fallback
   if (hasStoreContext) {
     const storeFollowUps = [
-      `### Tailored for Your Online Store\n\n**That is a great feature idea!** Because Arnel custom-builds your store from the ground up rather than using restrictive generic templates, that exact shopping experience can be seamlessly implemented:\n\n- **Phone-First Flow**: Engineered so mobile shoppers can browse and complete purchases in under a minute\n- **Easy for You to Control**: Managed directly from your point-and-click dashboard with zero coding\n- **Fast 2–4 Week Launch**: Arnel incorporates your requirements and sends weekly test links to your phone\n\nArnel can easily factor this into your store roadmap. Would you like to share a few more specifics through the 3-step project form below, or send a quick note to **arnlebaylon15@gmail.com**?`,
+      `### Tailored for Your Online Store\n\n**That is a great feature idea!** Because Arnel custom-builds your store from the ground up rather than using restrictive generic templates, that exact shopping experience can be seamlessly implemented:\n\n- **Phone-First Flow**: Engineered so mobile shoppers can browse and complete purchases in under a minute\n- **Easy for You to Control**: Managed directly from your point-and-click dashboard with zero coding\n- **Fast 2–4 Week Launch**: Arnel incorporates your requirements and sends weekly test links to your phone\n\nArnel can easily factor this into your store roadmap. Would you like to share a few more specifics through the 3-step project form below, or send a quick note to **arnelbaylon15@gmail.com**?`,
       `### Custom E-Commerce Features\n\n**Yes, absolutely!** When building custom stores like **Tearsize**, Arnel regularly implements tailored customer features to help brands stand out and boost sales:\n\n- **Seamless Checkout**: Customers enjoy a smooth, reliable buying process on phones and laptops\n- **Direct Bank Payouts**: All payments deposit straight into your account without third-party holds\n- **Total Ownership**: You own 100% of your store files, customer lists, and accounts from Day 1\n\nTell me a bit more about how you envision this working, or fill out the 3-step project form below so Arnel can prepare a clear plan!`
     ];
     return {
@@ -1137,7 +1143,7 @@ function synthesizeClientResponse(
   // B. Booking & Appointments Context Fallback
   if (hasBookingContext) {
     const bookingFollowUps = [
-      `### Custom-Tailored for Your Booking Experience\n\n**That is a great workflow consideration!** Because Arnel builds custom appointment systems (like **HiveSync VA** and healthcare clinic portals), we can tailor that process directly to how your clients and staff work:\n\n- **Effortless for Clients**: Clients see your real-time availability and confirm in 3 taps on their phone\n- **Saves Staff Time**: Cuts out repetitive phone calls and eliminates double-booking errors\n- **Automated Alerts**: Syncs with calendars and sends friendly reminders to stop no-shows\n\nWould you like Arnel to review your specific booking workflow? You can fill out the 3-step project form below or email **arnlebaylon15@gmail.com**!`,
+      `### Custom-Tailored for Your Booking Experience\n\n**That is a great workflow consideration!** Because Arnel builds custom appointment systems (like **HiveSync VA** and healthcare clinic portals), we can tailor that process directly to how your clients and staff work:\n\n- **Effortless for Clients**: Clients see your real-time availability and confirm in 3 taps on their phone\n- **Saves Staff Time**: Cuts out repetitive phone calls and eliminates double-booking errors\n- **Automated Alerts**: Syncs with calendars and sends friendly reminders to stop no-shows\n\nWould you like Arnel to review your specific booking workflow? You can fill out the 3-step project form below or email **arnelbaylon15@gmail.com**!`,
       `### Streamlined Client Appointments\n\n**Yes, definitely!** Arnel designs booking and client platforms specifically to eliminate administrative bottlenecks:\n\n- **Tailored Rules**: Set custom buffers between appointments, cutoff times, and deposit requirements\n- **Mobile-Friendly**: Works smoothly on any smartphone with zero apps for clients to download\n- **30-Day Launch Warranty**: Arnel supports your launch to make sure everything runs smoothly\n\nFeel free to share your specific requirements through the 3-step form below so Arnel can put together a customized plan for you!`
     ];
     return {
@@ -1161,7 +1167,7 @@ function synthesizeClientResponse(
   // D. General Wide-Context Fallback (Zero robotic phrases)
   const wideContextFallbacks = [
     `${reassurancePrefix}### Custom Digital Solutions for Your Business\n\n**That is a great question!** Arnel partners directly with founders and business owners to build websites, online stores, client portals, and operations tools tailored specifically to how your business works.\n\nBecause every solution is custom-engineered from the ground up rather than constrained by cookie-cutter templates, Arnel can tailor the design, features, and workflows to match your exact goals:\n\n- **Fast 2–4 Week Turnaround**: We take you from idea to live launch with weekly interactive test links on your phone\n- **Transparent Fixed Quotes**: Defined upfront with zero surprise bills, hourly creep, or hidden fees\n- **100% Non-Tech Friendly**: Easy point-and-click dashboard to update text and photos yourself, plus 2-minute video guides\n- **Total Ownership**: You own all files, accounts, and designs from Day 1\n\nWhat is the main goal you'd like your project to achieve? You can also share your ideas directly through the 3-step form below!`,
-    `${reassurancePrefix}### Bringing Your Vision to Life\n\n**Yes, definitely!** Whatever features or workflows you have in mind, Arnel specializes in turning business ideas into fast, easy-to-use digital products:\n\n- **Designed Phone-First**: Over 70% of web traffic is mobile, so every button, form, and page feels as smooth as an app\n- **Hands-Off Setup**: Arnel handles all technical details (hosting, security, connections) so it's completely stress-free for you\n- **Direct Founder Collaboration**: You work 1-on-1 with Arnel from start to finish\n\nWould you like to explore how we can build this for you? Feel free to fill out the 3-step project form below or email Arnel directly at **arnlebaylon15@gmail.com**!`
+    `${reassurancePrefix}### Bringing Your Vision to Life\n\n**Yes, definitely!** Whatever features or workflows you have in mind, Arnel specializes in turning business ideas into fast, easy-to-use digital products:\n\n- **Designed Phone-First**: Over 70% of web traffic is mobile, so every button, form, and page feels as smooth as an app\n- **Hands-Off Setup**: Arnel handles all technical details (hosting, security, connections) so it's completely stress-free for you\n- **Direct Founder Collaboration**: You work 1-on-1 with Arnel from start to finish\n\nWould you like to explore how we can build this for you? Feel free to fill out the 3-step project form below or email Arnel directly at **arnelbaylon15@gmail.com**!`
   ];
 
   return {
@@ -1305,8 +1311,11 @@ export function synthesizeDynamicResponse(
   // 7. Specific Project Queries with Sub-intent Matching (Tech Stack vs Features vs Overview)
   for (const p of projectsData) {
     const slugMatch = lower.includes(p.slug);
-    const titleMatch = lower.includes(p.title.toLowerCase()) || (p.featuredTitle && lower.includes(p.featuredTitle.toLowerCase()));
+    const titleMatch = lower.includes(p.title.toLowerCase()) || (p.featuredTitle ? lower.includes(p.featuredTitle.toLowerCase()) : false);
     const nickMatch = (p.slug === 'e-buddy' && (lower.includes('ebuddy') || lower.includes('egov') || lower.includes('e-gov') || lower.includes('gov'))) ||
+                      (p.slug === 'android-deck' && (lower.includes('android deck') || lower.includes('notchdeck') || lower.includes('stream deck') || lower.includes('macdeck'))) ||
+                      (p.slug === 'sakto-ka' && (lower.includes('sakto ka') || lower.includes('saktoka') || lower.includes('ats resume'))) ||
+                      (p.slug === 'better-trece' && (lower.includes('better trece') || lower.includes('bettertrece') || lower.includes('trece'))) ||
                       (p.slug === 'pacementor' && (lower.includes('pace') || lower.includes('running coach'))) ||
                       (p.slug === 'present-po' && (lower.includes('present po') || lower.includes('attendance'))) ||
                       (p.slug === 'hospital-queuing-system' && (lower.includes('hospital') || lower.includes('queuing') || lower.includes('triage') || lower.includes('geamh'))) ||
@@ -1337,7 +1346,7 @@ export function synthesizeDynamicResponse(
           `The technology stack behind **${p.title}** comprises ${formattedTags}.`
         ];
         return {
-          text: `${pickNonRepeating(techOpeners, history)}\n\nOpening the project details for you.`,
+          text: `${pickNonRepeating(techOpeners, history)}\n\nUse the button below to view the project details.`,
           action
         };
       }
@@ -1353,7 +1362,7 @@ export function synthesizeDynamicResponse(
           `Core capabilities of **${p.title}** include:`
         ];
         return {
-          text: `${pickNonRepeating(featureOpeners, history)}\n\n${topFeatures}\n\nThe tech stack includes: ${formattedTags}.\n\nOpening the project showcase for you.`,
+          text: `${pickNonRepeating(featureOpeners, history)}\n\n${topFeatures}\n\nThe tech stack includes: ${formattedTags}.\n\nUse the button below to explore the project.`,
           action
         };
       }
@@ -1373,7 +1382,7 @@ export function synthesizeDynamicResponse(
       ];
 
       return {
-        text: `${pickNonRepeating(overviewOpeners, history)}\n\n**Key Highlights:**\n${topFeatures}\n\nThe tech stack includes: ${formattedTags}.\n\nOpening the project showcase for you.`,
+        text: `${pickNonRepeating(overviewOpeners, history)}\n\n**Key Highlights:**\n${topFeatures}\n\nThe tech stack includes: ${formattedTags}.\n\nUse the button below to explore the project.`,
         action
       };
     }
@@ -1399,21 +1408,42 @@ export function synthesizeDynamicResponse(
 
     if (lower.includes('ai') || lower.includes('context')) {
       return {
-        text: "In AI & Context Engineering, Arnel specializes in:\n- Agentic execution loops & autonomous tool calling\n- RAG vector architectures with semantic search\n- LLM orchestration using Groq (Llama 3.3) and OpenAI\n- Dynamic context management and prompt engineering\n\nNavigating to the skills section.",
+        text: "In AI & Context Engineering, Arnel specializes in:\n- Agentic execution loops & autonomous tool calling\n- RAG vector architectures with semantic search\n- LLM orchestration and workflow tools (Codex, Claude, Gemini, Jev, Obsidian, Orca)\n- Dynamic context management and prompt engineering\n\nUse the button below to explore his toolkit.",
+        action
+      };
+    }
+
+    if (lower.includes('tool') || lower.includes('codex') || lower.includes('claude') || lower.includes('gemini') || lower.includes('jev') || lower.includes('obsidian') || lower.includes('orca')) {
+      return {
+        text: "Arnel's core workflow and developer tools include Codex, Claude, Gemini, TypeSafe Jev (for semantic validation and grounding judgments), Obsidian for knowledge synthesis, and Orca for agentic testing.\n\nUse the button below to explore his toolkit.",
         action
       };
     }
 
     if (lower.includes('frontend') || lower.includes('front-end') || lower.includes('react') || lower.includes('next')) {
       return {
-        text: "On the frontend and mobile side, Arnel builds with Next.js (App Router), React 18, TypeScript, Vue.js 3, Flutter & Dart for cross-platform mobile, Tailwind CSS, and Framer Motion.\n\nNavigating to the skills section.",
+        text: "On the frontend and mobile side, Arnel builds with Next.js (App Router), React, TypeScript, React Native & Expo, Tailwind CSS, and Motion.\n\nUse the button below to explore his toolkit.",
         action
       };
     }
 
-    if (lower.includes('backend') || lower.includes('database') || lower.includes('sql')) {
+    if (lower.includes('backend')) {
       return {
-        text: "On the backend and database side, Arnel works with Node.js, Laravel (PHP), PostgreSQL with pgvector, MySQL, Supabase, and Firebase.\n\nNavigating to the skills section.",
+        text: "On the backend side, Arnel builds with Python (FastAPI), Node.js, and Better Auth.\n\nUse the button below to explore his toolkit.",
+        action
+      };
+    }
+
+    if (lower.includes('storage') || lower.includes('database') || lower.includes('sql')) {
+      return {
+        text: "For data and storage, Arnel works with PostgreSQL, Supabase, Redis, and Firebase.\n\nUse the button below to explore his toolkit.",
+        action
+      };
+    }
+
+    if (lower.includes('cloud') || lower.includes('deploy') || lower.includes('platform') || lower.includes('render') || lower.includes('vercel') || lower.includes('google console')) {
+      return {
+        text: "For cloud platforms and deployment, Arnel works with Vercel, Render, and Google Cloud Console alongside Docker and AWS S3.\n\nUse the button below to explore his toolkit.",
         action
       };
     }
@@ -1425,7 +1455,7 @@ export function synthesizeDynamicResponse(
     ];
 
     return {
-      text: `${pickNonRepeating(skillsOpeners, history)}\n\n- **AI & Context Engineering**: Agentic Loops, RAG Pipelines, Groq SDK, Prompt Engineering\n- **Frontend & Mobile**: Next.js, React, TypeScript, Vue.js, Flutter/Dart, Tailwind CSS\n- **Backend & Databases**: Node.js, Laravel, PHP, PostgreSQL, MySQL, Supabase\n- **Cloud & DevOps**: Vercel, AWS, Git, GitHub Actions\n\nNavigating to the skills section.`,
+      text: `${pickNonRepeating(skillsOpeners, history)}\n\n- **Frontend**: TypeScript, React, Next.js, Tailwind CSS, Motion, React Native\n- **Backend**: Python, FastAPI, Node.js, Better Auth\n- **Tools**: Codex, Claude, Gemini, Jev, Obsidian, Orca\n- **Storage**: PostgreSQL, Supabase, Redis, Firebase\n- **Also working with**: Vercel, Render, Google Console, Docker, AWS S3, Terraform, Swift, Kotlin, Rust, Expo\n\nUse the button below to explore his toolkit.`,
       action
     };
   }
@@ -1451,13 +1481,13 @@ export function synthesizeDynamicResponse(
 
     if (lower.includes('best') || lower.includes('top') || lower.includes('recommend') || lower.includes('impressive')) {
       return {
-        text: "Here are Arnel's standout projects:\n\n1. **e Buddy (eGov Hackathon 2026 Top 5 National Finalist)**: An agentic AI platform uniting government public services with chat and voice workflows.\n2. **PaceMentor**: An AI-powered running coach mobile app built with Flutter and Strava sync.\n3. **Present Po**: A B2B attendance and workforce time-tracking SaaS with AI journaling.\n\nNavigating to the projects section.",
+        text: "Here are Arnel's featured projects:\n\n1. **Pixel Crew**: Specialized AI agents that collaborate on Next.js apps, with a pixel-art workspace.\n2. **sakto ka**: A career copilot for job discovery, ATS-ready resumes, and interview practice.\n3. **FinOps AI Dashboard**: Expense reviews, invoice matching, and policy checks; awarded Best Business Impact at AWS BuildNights QuickQuest.\n4. **Better Trece Martires**: An open civic portal for local budgets, public projects, and city services.\n\nUse the button below to explore his projects.",
         action
       };
     }
 
     return {
-      text: "Arnel has developed a range of production applications across AI agent tools, B2B SaaS, mobile apps, and e-commerce:\n\n- **e Buddy**: Agentic AI for public government services (eGov Hackathon 2026 Top 5 National Finalist)\n- **PaceMentor**: AI running coach app in Flutter\n- **Present Po**: Workforce attendance platform with AI journaling\n- **Hospital Queuing System**: AI triage system deployed at GEAMH\n- **yhel.os**: All-in-one freelance operating system\n- **VCM HRIS**: QR attendance & automated payroll system\n\nNavigating to the projects section.",
+      text: "Arnel builds web products, mobile tools, and AI systems. His featured work includes:\n\n- **Pixel Crew**: A collaborative AI coding system with specialized agents and a pixel-art workspace.\n- **sakto ka**: Job discovery, resume building, and interview practice in a career copilot.\n- **FinOps AI Dashboard**: AI-assisted expense reviews, invoice matching, and company policy checks.\n- **Better Trece Martires**: Local budgets, public projects, and citizen services in an open civic portal.\n\nHe has also built a hospital queuing system at GEAMH and **PaceMentor**, a Flutter running coach with Strava integration.\n\nUse the button below to explore his projects.",
       action
     };
   }
@@ -1480,9 +1510,9 @@ export function synthesizeDynamicResponse(
     };
 
     const backgroundResponses = [
-      "Arnel's engineering background includes a Bachelor of Science in Information Technology from Cavite State University, a 486-hour software engineering internship at General Emilio Aguinaldo Memorial Hospital where he built an AI triage and queuing platform, and freelance work delivering client platforms like Present Po, Tearsize, and HiveSync VA.\n\nNavigating to the experience timeline.",
-      "Looking at Arnel's background, he is a Full-Stack Developer and Context Engineer. His background highlights practical engineering at GEAMH developing AI hospital systems, architecting enterprise HRIS software with QR attendance, and earning 11 verified IBM and AWS technical certifications.\n\nNavigating to the experience timeline.",
-      "Arnel's professional background covers full-stack web and AI engineering across three major milestones:\n\n1. **GEAMH Hospital Internship**: Engineered an AI patient queuing and triage system in Vue.js, PHP, and Groq LLMs.\n2. **Enterprise HRIS Capstone**: Built VCM HRIS with QR-code presence validation and automated payroll.\n3. **Freelance Solutions**: Delivered client platforms including Present Po, Tearsize, and HiveSync VA.\n\nNavigating to the experience timeline."
+      "Arnel's engineering background includes a Bachelor of Science in Information Technology from Cavite State University, a 486-hour software engineering internship at General Emilio Aguinaldo Memorial Hospital where he built an AI triage and queuing platform, and freelance work delivering client platforms like Present Po, Tearsize, and HiveSync VA.\n\nUse the button below to view his experience.",
+      "Looking at Arnel's background, he is a Full-Stack Developer and Context Engineer. His background highlights practical engineering at GEAMH developing AI hospital systems, architecting enterprise HRIS software with QR attendance, and earning 11 verified IBM and AWS technical certifications.\n\nUse the button below to view his experience.",
+      "Arnel's professional background covers full-stack web and AI engineering across three major milestones:\n\n1. **GEAMH Hospital Internship**: Engineered an AI patient queuing and triage system in Vue.js, PHP, and Groq LLMs.\n2. **Enterprise HRIS Capstone**: Built VCM HRIS with QR-code presence validation and automated payroll.\n3. **Freelance Solutions**: Delivered client platforms including Present Po, Tearsize, and HiveSync VA.\n\nUse the button below to view his experience."
     ];
 
     return {
@@ -1501,7 +1531,7 @@ export function synthesizeDynamicResponse(
     };
 
     return {
-      text: "Arnel holds 11 verified professional credentials:\n\n- **IBM AI Certifications (7 Badges)**: AI Foundations, Machine Learning, Deep Learning, and RAG Architecture.\n- **AWS Cloud Certifications (4 Badges)**: Advanced SQL & Database Design, Generative AI, S3 Object Storage, and Serverless Systems.\n\nNavigating to the certifications section.",
+      text: "Arnel holds 11 verified professional credentials:\n\n- **IBM AI Certifications (7 Badges)**: AI Foundations, Machine Learning, Deep Learning, and RAG Architecture.\n- **AWS Cloud Certifications (4 Badges)**: Advanced SQL & Database Design, Generative AI, S3 Object Storage, and Serverless Systems.\n\nUse the button below to view his learning credentials.",
       action
     };
   }
@@ -1516,7 +1546,7 @@ export function synthesizeDynamicResponse(
     };
 
     return {
-      text: "Arnel earned his **Bachelor of Science in Information Technology (BS IT)** from **Cavite State University (Main Campus)** in Indang, Cavite, Philippines, focusing on software engineering, database systems, and artificial intelligence.\n\nNavigating to the education section.",
+      text: "Arnel earned his **Bachelor of Science in Information Technology (BS IT)** from **Cavite State University**, class of 2026, focusing on software engineering, database systems, and artificial intelligence.\n\nUse the button below to view his education.",
       action
     };
   }
@@ -1526,7 +1556,7 @@ export function synthesizeDynamicResponse(
     const action: AgentAction = {
       type: 'open_contact',
       sectionId: 'contact',
-      label: 'Contact Form'
+      label: 'Contact Arnel'
     };
 
     const contactOpeners = [
@@ -1536,7 +1566,7 @@ export function synthesizeDynamicResponse(
     ];
 
     return {
-      text: `${pickNonRepeating(contactOpeners, history)}\n\n- **Email**: arnlebaylon15@gmail.com\n- **LinkedIn**: linkedin.com/in/arnel-baylon-b05233189\n- **GitHub**: github.com/hiroqt\n\nOpening the contact form for you now.`,
+      text: `${pickNonRepeating(contactOpeners, history)}\n\n- **Email**: arnelbaylon15@gmail.com\n- **LinkedIn**: linkedin.com/in/arnel-baylon-b05233189\n- **GitHub**: github.com/hiroqt\n\nUse the button below to view his contact details.`,
       action
     };
   }
@@ -1544,22 +1574,22 @@ export function synthesizeDynamicResponse(
   // 15. Direct Navigation Commands
   if (lower.includes('go to') || lower.includes('take me to') || lower.includes('scroll to') || lower.includes('navigate to')) {
     if (lower.includes('project')) {
-      return { text: "Navigating to the projects section.", action: { type: 'navigate', destination: 'projects', sectionId: 'projects', label: 'View Projects' } };
+      return { text: "Use the button below to explore his projects.", action: { type: 'navigate', destination: 'projects', sectionId: 'projects', label: 'View Projects' } };
     }
     if (lower.includes('skill')) {
-      return { text: "Navigating to the skills section.", action: { type: 'navigate', destination: 'skills', sectionId: 'skills', label: 'View Skills' } };
+      return { text: "Use the button below to explore his toolkit.", action: { type: 'navigate', destination: 'skills', sectionId: 'skills', label: 'View Skills' } };
     }
     if (lower.includes('experience') || lower.includes('history') || lower.includes('timeline')) {
-      return { text: "Navigating to the experience timeline.", action: { type: 'navigate', destination: 'experience', sectionId: 'experience', label: 'View Experience' } };
+      return { text: "Use the button below to view his experience.", action: { type: 'navigate', destination: 'experience', sectionId: 'experience', label: 'View Experience' } };
     }
     if (lower.includes('contact')) {
-      return { text: "Opening the contact form.", action: { type: 'open_contact', sectionId: 'contact', label: 'Contact Section' } };
+      return { text: "Use the button below to view his contact details.", action: { type: 'open_contact', sectionId: 'contact', label: 'Contact Section' } };
     }
     if (lower.includes('education')) {
-      return { text: "Navigating to the education section.", action: { type: 'navigate', destination: 'education', sectionId: 'education', label: 'Education Section' } };
+      return { text: "Use the button below to view his education.", action: { type: 'navigate', destination: 'education', sectionId: 'education', label: 'Education Section' } };
     }
     if (lower.includes('certif') || lower.includes('badge')) {
-      return { text: "Navigating to verified certifications.", action: { type: 'navigate', destination: 'certifications', sectionId: 'certifications', label: 'Certifications' } };
+      return { text: "Use the button below to view his learning credentials.", action: { type: 'navigate', destination: 'certifications', sectionId: 'certifications', label: 'Certifications' } };
     }
   }
 

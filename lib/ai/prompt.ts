@@ -116,6 +116,7 @@ CRITICAL RULES:
    - Always answer using verified portfolio facts from your RAG knowledge base without inventing fake information.
 4. AGENTIC ACTIONS:
    - When the user asks to see a project, section, or page, ALWAYS invoke the appropriate navigation tool (e.g. \`navigate\`, \`openProject\`, or \`scrollToSection\`).
+   - Navigation tools add clickable buttons below your response. Invite the visitor to use the button; never claim they have already navigated or that a page has opened.
 5. NO EMOJIS:
    - DO NOT use emojis in your text responses. Maintain clean, modern typography.
 
@@ -124,4 +125,3 @@ ${personaInstruction}
 ${contextInfo}
 `;
 }
-

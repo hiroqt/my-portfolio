@@ -674,7 +674,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
                     <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
                       Speed Test Completed
                     </span>
-                    <h3 className="font-supreme text-2xl sm:text-3xl font-bold tracking-tight text-foreground flex items-center justify-center sm:justify-start gap-2">
+                    <h3 className="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-foreground flex items-center justify-center sm:justify-start gap-2">
                       <FaTrophy className="text-amber-400 w-6 h-6 shrink-0" />
                       <span>{getSpeedRating(wpm).title}</span>
                     </h3>
@@ -696,7 +696,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
                     <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
                       Net Speed
                     </span>
-                    <p className="font-supreme text-3xl sm:text-4xl font-bold text-accent">
+                    <p className="font-sans text-3xl sm:text-4xl font-bold text-accent">
                       {wpm} <span className="text-sm font-mono text-muted-foreground">WPM</span>
                     </p>
                   </div>
@@ -705,7 +705,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
                     <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
                       Accuracy
                     </span>
-                    <p className="font-supreme text-3xl sm:text-4xl font-bold text-foreground">
+                    <p className="font-sans text-3xl sm:text-4xl font-bold text-foreground">
                       {accuracy}
                       <span className="text-sm font-mono text-muted-foreground">%</span>
                     </p>
@@ -715,7 +715,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
                     <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
                       Raw Speed
                     </span>
-                    <p className="font-supreme text-3xl sm:text-4xl font-bold text-foreground">
+                    <p className="font-sans text-3xl sm:text-4xl font-bold text-foreground">
                       {rawWpm} <span className="text-sm font-mono text-muted-foreground">WPM</span>
                     </p>
                   </div>

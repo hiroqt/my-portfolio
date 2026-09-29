@@ -1,147 +1,135 @@
 'use client'
 
-import React from 'react'
+import type { CSSProperties } from 'react'
 import type { ProjectData } from '@/lib/data/projects'
 import Link from 'next/link'
 import Image from 'next/image'
-import { FaArrowLeft, FaExternalLinkAlt } from 'react-icons/fa'
-import { motion } from 'framer-motion'
-import ThemeToggle from '@/components/ui/ThemeToggle'
-import { HeroGraphicBackground } from '@/components/ui/HeroGraphicBackground'
+import { FiArrowLeft, FiArrowUpRight, FiMoon, FiSun } from 'react-icons/fi'
+import { useTheme } from '@/components/ThemeProvider'
+import { TechIcon } from '@/components/ui/TechIcon'
+import styles from './ProjectDetailView.module.css'
 
 export function ProjectDetailView({ project }: { project: ProjectData }) {
+  const { resolvedTheme, setTheme } = useTheme()
+  const title = project.featuredTitle || project.title.split(' (')[0]
+  const summary = project.featuredSummary && project.featuredSummary.length <= 240
+    ? project.featuredSummary
+    : project.summary
+  const projectPath = `/projects/${project.slug}`
+  const hasProjectLink = Boolean(project.link && project.link !== '#' && project.link.split(/[?#]/)[0].replace(/\/$/, '') !== projectPath)
+  const hasSourceLink = Boolean(project.github && (!hasProjectLink || project.github !== project.link))
+
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
-      {/* Synchronized Dynamic Hero Graphic Header Banner */}
-      <HeroGraphicBackground 
-        variant="banner" 
-        techStack={project.tags} 
-        projectName={project.title}
-        className="border-b border-slate-900/10 dark:border-white/10 mb-8 sm:mb-12"
-      >
-        <div className="max-w-screen-md mx-auto px-6 pt-6 sm:pt-8">
-          {/* Navigation */}
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mb-8 flex items-center justify-between"
-          >
-            <Link href="/#projects" aria-label="Back to portfolio projects section" className="group inline-flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
-              <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-              Back to Portfolio
-            </Link>
-            <ThemeToggle variant="header" />
-          </motion.div>
+    <div className={`portfolio-grain ${styles.page}`}>
+      <nav className={styles.navigation} aria-label="Project navigation">
+        <Link href="/#projects" className={styles.backLink}>
+          <FiArrowLeft aria-hidden="true" />
+          <span>All projects</span>
+        </Link>
+        <button
+          type="button"
+          className={styles.themeButton}
+          aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`}
+          onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+        >
+          {resolvedTheme === 'dark' ? <FiSun aria-hidden="true" /> : <FiMoon aria-hidden="true" />}
+        </button>
+      </nav>
 
-          {/* Header Section */}
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="pb-4 text-foreground"
-          >
-            <div className="flex gap-3 mb-6 flex-wrap">
-              {project.type && (
-                <span className="text-[10px] sm:text-xs font-mono tracking-widest uppercase px-3.5 py-1.5 rounded-full border border-border bg-muted text-accent backdrop-blur-md">
-                  {project.type}
-                </span>
+      <main id="main-content" className={styles.main} tabIndex={-1}>
+        <header className={`${styles.header} ${styles.enter}`}>
+          <p className={styles.eyebrow}>{project.type}</p>
+          <h1 className={styles.title}>{title}<span className={styles.titleDot}>.</span></h1>
+          <p className={styles.summary}>{summary}</p>
+
+          <ul className={styles.tags} aria-label="Technology and disciplines">
+            {project.tags.map(tag => (
+              <li key={tag}>
+                <TechIcon name={tag} size={12} aria-hidden="true" />
+                <span>{tag}</span>
+              </li>
+            ))}
+          </ul>
+
+          {(hasProjectLink || hasSourceLink) && (
+            <div className={styles.actions}>
+              {hasProjectLink && (
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.primaryLink}>
+                  Open project <FiArrowUpRight aria-hidden="true" />
+                  <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                </a>
               )}
-              {project.tags.map(tag => (
-                <span key={tag} className="text-[10px] sm:text-xs font-mono tracking-widest uppercase px-3.5 py-1.5 rounded-full bg-muted/70 text-muted-foreground border border-border backdrop-blur-sm">
-                  {tag}
-                </span>
-              ))}
+              {hasSourceLink && (
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.sourceLink}>
+                  View source <FiArrowUpRight aria-hidden="true" />
+                  <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                </a>
+              )}
             </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-normal mb-6 text-foreground leading-tight tracking-tight">
-              {project.title}
-            </h1>
-            
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-serif leading-relaxed mb-8 max-w-prose">
-              {project.summary}
-            </p>
-            
-            {project.link !== '#' && (
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noreferrer"
-                aria-label={`View live site for ${project.title} (opens in new tab)`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-background bg-foreground px-7 py-3 rounded-full hover:scale-105 transition-all shadow-lg"
-              >
-                View Live Project <FaExternalLinkAlt className="text-xs" aria-hidden="true" />
-              </a>
-            )}
-          </motion.header>
-        </div>
-      </HeroGraphicBackground>
+          )}
+        </header>
 
-      <main className="max-w-screen-md mx-auto px-6 pb-16 sm:pb-24">
-        {/* Hero Image */}
         {project.image && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="mb-16 sm:mb-24 rounded-3xl overflow-hidden shadow-2xl border border-border/50"
-          >
-            <Image 
-              src={project.image} 
-              alt={`${project.title} project showcase screenshot`} 
-              width={1200}
-              height={800}
-              sizes="(max-width: 768px) 100vw, 800px"
-              priority
-              className="w-full h-auto object-contain max-h-[75vh] mx-auto bg-muted/20"
-            />
-          </motion.div>
+          <figure className={`${styles.showcase} ${styles.enter}`}>
+            <div
+              className={styles.imageFrame}
+              style={project.imageWidth && project.imageHeight ? {
+                aspectRatio: `${project.imageWidth} / ${project.imageHeight}`
+              } : undefined}
+            >
+              <Image
+                src={project.image}
+                alt={`${title} project showcase`}
+                width={project.imageWidth ?? 1200}
+                height={project.imageHeight ?? 800}
+                sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1040px) calc(100vw - 80px), 960px"
+                priority
+                className={styles.image}
+              />
+            </div>
+            {project.previewName && project.previewName !== '-' && (
+              <figcaption className={styles.caption}>{project.previewName}</figcaption>
+            )}
+          </figure>
         )}
 
-        {/* Core Features */}
         {project.features && project.features.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-            className="mb-16 sm:mb-24"
-          >
-            <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-6">
-              Core Features
-            </h2>
-            <ul className="grid sm:grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-serif text-lg text-foreground/90">
-              {project.features.map((feature, idx) => (
-                <li key={idx} className="flex gap-3 items-start">
-                  <span aria-hidden className="text-accent mt-1.5 text-sm">•</span>
-                  <span className="leading-relaxed">{feature}</span>
+          <section className={`${styles.featuresSection} ${styles.enter}`} aria-labelledby="features-title">
+            <div className={styles.sectionHeading}>
+              <span className={styles.eyebrow}>01 / In practice</span>
+              <h2 id="features-title">What it does</h2>
+            </div>
+            <ul className={styles.features}>
+              {project.features.map((feature, index) => (
+                <li key={feature}>
+                  <span className={styles.featureNumber} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </section>
         )}
 
-        {/* Content Sections (Research Aesthetic) */}
         {project.content && project.content.length > 0 && (
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-            className="space-y-12 sm:space-y-16"
-          >
-            {project.content.map((section, idx) => (
-              <section key={idx} className="relative">
-                <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">
-                  {String(idx + 1).padStart(2, '0')} — {section.title}
-                </h2>
-                <div className="prose prose-lg dark:prose-invert max-w-none font-serif leading-loose text-foreground/90">
-                  <p className="text-lg sm:text-xl text-justify">
-                    {section.content}
-                  </p>
-                </div>
+          <div className={styles.story}>
+            {project.content.map((section, index) => (
+              <section
+                key={section.title}
+                className={`${styles.storySection} ${styles.enter}`}
+                style={{ animationDelay: `${180 + Math.min(index, 4) * 40}ms` } as CSSProperties}
+                aria-labelledby={`story-title-${index}`}
+              >
+                <h2 id={`story-title-${index}`}>{section.title}</h2>
+                <p>{section.content}</p>
               </section>
             ))}
-          </motion.div>
+          </div>
         )}
+
+        <footer className={styles.footer}>
+          <span className={styles.eyebrow}>{project.initiative || 'Arnel Baylon / Selected work'}</span>
+          <Link href="/#projects" className={styles.backLink}><FiArrowLeft aria-hidden="true" /> All projects</Link>
+        </footer>
       </main>
     </div>
   )

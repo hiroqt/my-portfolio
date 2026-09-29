@@ -8,7 +8,7 @@ export const portfolioChunks: KnowledgeChunk[] = [
     documentId: 'about',
     title: 'Arnel Baylon - Context Engineer & Full-Stack Developer',
     category: 'about',
-    content: `Arnel A. Baylon (known as "Nel" or "Yhel") is a Context Engineer and Full-Stack Software Developer based in Cavite, Philippines. He holds a Bachelor of Science in Information Technology (BS IT) from Cavite State University (Don Severino de las Alas Main Campus). He specializes in AI agent loops, RAG architectures, prompt engineering, and modern full-stack web and mobile development with Next.js, TypeScript, Vue.js, Laravel, PostgreSQL, and Flutter. He is open to remote worldwide, hybrid, and on-site opportunities.`,
+    content: `Arnel A. Baylon (known as "Nel" or "Yhel") is a Context Engineer and Full-Stack Software Developer based in Cavite, Philippines. He holds a Bachelor of Science in Information Technology (BS IT) from Cavite State University, class of 2026. His recent public work uses TypeScript, React, Next.js, Vite, React Native, Expo, Python, FastAPI, Node.js, PostgreSQL, and Supabase. He builds AI agent workflows, RAG systems, and web and mobile products. Earlier hospital, capstone, and running-app projects also used Vue.js, PHP, MySQL, Laravel, and Flutter. He is open to remote worldwide, hybrid, and on-site opportunities.`,
     keywords: ['arnel', 'baylon', 'nel', 'yhel', 'context engineer', 'full-stack', 'developer', 'about', 'bio', 'who is', 'location', 'philippines', 'cavite'],
     metadata: { section: 'summary' }
   },
@@ -30,7 +30,7 @@ export const portfolioChunks: KnowledgeChunk[] = [
 - Email: arnelbaylon15@gmail.com
 - GitHub: https://github.com/hiroqt (@hiroqt)
 - LinkedIn: https://www.linkedin.com/in/arnel-baylon-b05233189
-- Portfolio Contact Form: #contact section on the website
+- Portfolio Contact Details: #contact section contains email and social links
 - Instagram: @yheellll
 - Facebook: https://www.facebook.com/arnel.baylon.1650
 Arnel welcomes inquiries for full-time software engineering roles, contract work, freelance projects, and AI consulting.`,
@@ -48,51 +48,56 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
 - Context Engineering: dynamic context window management, few-shot prompting, structured schema enforcement (Zod/JSON Schema), and token budget optimization.
 - Agentic Loops: autonomous decision loops, multi-step tool/function calling, plan-and-execute workflows, and self-correcting error handling.
 - RAG Architectures: semantic chunking, hybrid search (dense cosine embeddings + BM25/TF-IDF keyword weighting), Reciprocal Rank Fusion (RRF), pgvector indexing, and grounding guardrails.
-- LLM Orchestration & Frontier Models: Claude, Gemini, OpenAI / Codex, DeepSeek, Qwen, GLM, Ollama (local LLM runtime & quantization), Cursor, Kiro, OpenCode.`,
-    keywords: ['ai', 'context engineering', 'agentic loops', 'rag', 'llm', 'ollama', 'opencode', 'claude', 'gemini', 'cursor', 'kiro', 'groq', 'llama', 'prompt engineering', 'embeddings', 'pgvector', 'tools'],
-    metadata: { section: 'ai', techStack: ['Ollama', 'OpenCode', 'Cursor', 'Kiro', 'Claude', 'Gemini', 'TypeScript'] }
+- Tools & AI Workflow: Codex, Claude, Gemini, TypeSafe Jev (for semantic validation and grounding judgments), Obsidian for knowledge synthesis, and Orca for agentic testing.
+- Public AI Integrations: Groq in this portfolio, OpenAI and Gemini SDKs in jobhunt, and coding-agent adapters for Claude Code, Codex, Cursor, and Kiro in PixelCrew.`,
+    keywords: ['ai', 'context engineering', 'agentic loops', 'rag', 'llm', 'openai', 'codex', 'claude', 'gemini', 'jev', 'obsidian', 'orca', 'cursor', 'kiro', 'groq', 'prompt engineering', 'embeddings', 'pgvector', 'tools'],
+    metadata: { section: 'ai', techStack: ['Codex', 'Claude', 'Gemini', 'Jev', 'Obsidian', 'Orca', 'Groq', 'OpenAI', 'Node.js', 'Python', 'TypeScript'] }
   },
   {
     id: 'skills-frontend',
     documentId: 'skills',
     title: 'Frontend & Mobile Development Skills',
     category: 'skills',
-    content: `Frontend & Mobile Technologies:
-- Next.js (App Router, Server Components, Server Actions, API Routes)
-- React 18 & TypeScript / JavaScript (ES6+)
-- Vue.js 3 (Composition API, Pinia)
-- Flutter & Dart (Cross-platform iOS and Android mobile development)
-- Tailwind CSS, Framer Motion (micro-animations, HUD and glassmorphism styling)
-- Responsive layout design, SEO optimization, and web accessibility (WCAG).`,
-    keywords: ['frontend', 'nextjs', 'next.js', 'react', 'vue', 'vue.js', 'flutter', 'dart', 'typescript', 'tailwind', 'framer motion', 'javascript', 'ui', 'css'],
-    metadata: { section: 'frontend', techStack: ['Next.js', 'React', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'Flutter', 'Dart', 'Framer Motion'] }
+    content: `Current Frontend & Mobile Stack, evidenced in public GitHub projects:
+- Web: TypeScript, JavaScript, React, Next.js, and Vite.
+- Interfaces: Tailwind CSS and Motion / Framer Motion.
+- Mobile: React Native and Expo in momo.
+- Native tools: Swift / SwiftUI / AppKit and Kotlin / Jetpack Compose in android-deck.
+- Historical project experience: Vue.js in the GEAMH hospital system and Flutter / Dart in PaceMentor.
+- Responsive layouts, clear interactions, and accessible interfaces.`,
+    keywords: ['frontend', 'nextjs', 'next.js', 'react', 'vite', 'react native', 'expo', 'swift', 'kotlin', 'vue', 'vue.js', 'flutter', 'dart', 'typescript', 'tailwind', 'motion', 'framer motion', 'javascript', 'ui', 'css'],
+    metadata: { section: 'frontend', techStack: ['TypeScript', 'React', 'Next.js', 'Vite', 'Tailwind CSS', 'Motion', 'React Native', 'Expo', 'Swift', 'Kotlin'] }
   },
   {
     id: 'skills-backend-db',
     documentId: 'skills',
     title: 'Backend, Databases & DevOps Skills',
     category: 'skills',
-    content: `Backend, Databases & DevOps:
-- Backend: Node.js, Next.js Serverless Routes, PHP, Laravel (MVC, Eloquent ORM, REST APIs, queues).
-- Databases: PostgreSQL (with pgvector), MySQL, Supabase (Postgres, RLS, Auth, Realtime), Firebase (Firestore NoSQL, Cloud Functions).
-- DevOps & Cloud: Vercel (Edge and Serverless deployment), AWS (S3, Generative AI, Serverless), Git, GitHub Actions CI/CD.
-- Tools & Design: Figma (UI/UX design & wireframes), Trello (Kanban), Cloudflare Turnstile bot verification.`,
-    keywords: ['backend', 'database', 'databases', 'postgresql', 'postgres', 'mysql', 'supabase', 'firebase', 'laravel', 'php', 'node', 'nodejs', 'aws', 'vercel', 'git', 'figma', 'devops'],
-    metadata: { section: 'backend', techStack: ['Node.js', 'Laravel', 'PHP', 'PostgreSQL', 'MySQL', 'Supabase', 'Firebase', 'AWS', 'Vercel'] }
+    content: `Current Backend, Data & Infrastructure Stack, evidenced in public GitHub projects:
+- Backend: Python / FastAPI in momo and jobhunt; Node.js / Express in flyrank_crud_api; Node.js in PixelCrew.
+- Data: PostgreSQL, Supabase, and Redis. Other public projects declare SQLAlchemy, Prisma, and Drizzle.
+- Cloud & Deployment: Render, Vercel, Firebase, and Google Cloud Console.
+- Auth & Security: Better Auth and Supabase Auth.
+- Infrastructure: Docker, AWS S3 with Boto3, Terraform S3 website configuration, Git, and GitHub.
+- Historical project experience: PHP / MySQL in the GEAMH hospital system and Laravel / Livewire / MySQL in VCM HRIS.
+- Additional project work: Rust with Soroban in harvest_pay.`,
+    keywords: ['backend', 'python', 'fastapi', 'express', 'database', 'databases', 'postgresql', 'postgres', 'redis', 'supabase', 'firebase', 'render', 'vercel', 'betterauth', 'better auth', 'google console', 'mysql', 'laravel', 'php', 'node', 'nodejs', 'docker', 'terraform', 'aws', 's3', 'git', 'devops', 'rust'],
+    metadata: { section: 'backend', techStack: ['Python', 'FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'Redis', 'Supabase', 'Render', 'Vercel', 'Firebase', 'Better Auth', 'Google Console', 'Docker', 'AWS S3', 'Terraform'] }
   },
 
   // --- EXPERIENCE ---
   {
-    id: 'exp-aws-bgc',
+    id: 'exp-flyrank',
     documentId: 'experience',
-    title: 'Amazon Web Services (AWS) — 9-Week AWS Quick Quest Workshop (Best Business Impact Winner)',
+    title: 'FlyRank — Backend AI Engineer Intern',
     category: 'experience',
-    content: `9-Week AWS Quick Quest Workshop (2026, AWS Office BGC, Taguig):
-- Completed an intensive 9-week enterprise AI builder workshop and hackathon at AWS Philippines Office in BGC.
-- Built and pitched the FinOps AI Dashboard leveraging Amazon Quick Spaces & Flows, winning the "Best Business Impact" award among builder cohorts.
-- Integrated automated expense policy checks, live invoice matching, and bi-directional Google Workspace connectors with sub-second performance.`,
-    keywords: ['aws', 'amazon quick', 'quick quest', 'workshop', '9-week', 'bgc', 'finops', 'hackathon', 'best business impact', 'winner', 'taguig'],
-    metadata: { section: 'aws-bgc', period: '2026', techStack: ['Amazon Quick', 'AWS Cloud', 'AI Agents', 'FinOps', 'TypeScript'] }
+    content: `FlyRank Backend AI Internship (2026):
+- Role: Backend AI Engineer Intern.
+- Engineered layered backend architectures and containerized REST APIs using Node.js, Express, Docker, and PostgreSQL.
+- Implemented robust data contracts, strict input validation, database migrations, and persistent storage layers.
+- Collaborated on AI-assisted engineering workflows and service integrations.`,
+    keywords: ['flyrank', 'backend', 'ai engineer', 'intern', 'internship', 'express', 'postgresql', 'docker', 'node', 'api', 'layered architecture'],
+    metadata: { section: 'flyrank', period: '2026', techStack: ['Node.js', 'Express', 'PostgreSQL', 'Docker', 'REST API'] }
   },
   {
     id: 'exp-hospital',
@@ -135,15 +140,30 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
     metadata: { section: 'freelance', period: '2025 - Present', techStack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS'] }
   },
 
-  // --- ACHIEVEMENTS & CERTIFICATIONS ---
+  {
+    id: 'project-android-deck',
+    documentId: 'projects',
+    title: 'Android Deck - macOS Liquid Glass Notch & Android Touchscreen Stream Deck',
+    category: 'projects',
+    content: `Android Deck (NotchDeck):
+A high-performance desktop productivity suite that turns an Android phone into a tactile stream deck for macOS over USB or Wi-Fi. Features:
+- Native Swift 5.9 Liquid Glass HUD integrated into the MacBook camera notch with fluid spring physics.
+- Android touch client with 6-slot adaptive layout (2x3 portrait, 3x2 landscape) and sub-16ms haptic feedback.
+- Zero-latency USB ADB reverse tunnel and LAN Wi-Fi connectivity.
+- Secure bidirectional WebSocket JSON wire protocol with abstract action IDs.
+- Direct extraction and streaming of native macOS application icons via NSWorkspace.
+- Open-source repository: https://github.com/hiroqt/android-deck with 40 passing Swift unit tests and release DMG build.`,
+    keywords: ['android deck', 'notchdeck', 'macos', 'android', 'swift', 'kotlin', 'stream deck', 'touchscreen', 'notch', 'liquid glass', 'websocket', 'utility'],
+    metadata: { section: 'projects', techStack: ['Swift', 'Kotlin', 'macOS', 'Android', 'WebSocket'] }
+  },
   {
     id: 'achieve-hackathon',
     documentId: 'achievements',
-    title: 'eGov Hackathon 2026 Top 5 National Finalist - e Buddy Agentic AI',
+    title: 'eGov Hackathon 2026 - e Buddy Agentic AI (Top 5)',
     category: 'achievements',
-    content: `eGov Hackathon 2026 (Top 5 National Finalist):
-Arnel reached the Top 5 nationally in the eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government agencies. The system features multi-modal AI chat, voice command execution, EGOV Single Sign-On (SSO), biometric face liveness detection (Face Live Nest), eGov Pay, and Department of Budget and Management (DBM) Compass analytics.`,
-    keywords: ['egov', 'hackathon', '2026', 'top 5', 'national finalist', 'e-buddy', 'e buddy', 'agentic ai', 'government', 'achievement', 'award', 'competition'],
+    content: `eGov Hackathon 2026:
+Arnel developed "e Buddy" for the eGov Hackathon 2026, an agentic AI designed to unify fragmented government agencies. The team was recognized among the Top 5 finalist teams. The system features multi-modal AI chat, voice command execution, EGOV Single Sign-On (SSO), biometric face liveness detection (Face Live Nest), eGov Pay, and Department of Budget and Management (DBM) Compass analytics.`,
+    keywords: ['egov', 'hackathon', '2026', 'top 5', 'top 5 egov', 'e-buddy', 'e buddy', 'agentic ai', 'government', 'achievement', 'competition'],
     metadata: { section: 'hackathons', featured: true }
   },
   {
@@ -211,7 +231,7 @@ Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denis
     category: 'education',
     content: `Education:
 - Degree: Bachelor of Science in Information Technology (BS IT)
-- Institution: Cavite State University - Main Campus (Don Severino de las Alas Campus, Indang, Cavite, Philippines)
+- Institution: Cavite State University, class of 2026
 - Coursework: Data Structures & Algorithms, Database Systems, Web Systems & Technologies, Systems Analysis and Design, Software Architecture, Artificial Intelligence, Mobile App Development, Information Security.
 - Capstone: VCM HRIS (Lead Architect & Developer).
 - Internship: 486 Hours at General Emilio Aguinaldo Memorial Hospital.`,
@@ -226,10 +246,10 @@ Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denis
     title: 'Services Offered by Arnel Baylon',
     category: 'services',
     content: `Services available for hire:
-1. Full-Stack Web Development: Modern Next.js, React, TypeScript, Vue.js, or Laravel applications with responsive Tailwind CSS design.
+1. Full-Stack Web Development: Modern Next.js, React, TypeScript, and Vite applications with responsive Tailwind CSS interfaces, connected to Python / FastAPI or Node.js backends.
 2. AI Agent Integration & RAG Systems: Custom autonomous assistants (like yhelAI), knowledge base retrieval pipelines with pgvector/embeddings, and tool-calling automation.
 3. B2B SaaS & HRIS Platforms: Custom workforce timekeeping, geofenced attendance tracking, automated payroll, and multi-tenant architectures.
-4. Mobile App Development: High-performance cross-platform iOS & Android mobile applications built with Flutter and Dart.
+4. Mobile App Development: Cross-platform applications with React Native and Expo; past Flutter / Dart work includes PaceMentor.
 5. Technical Consulting & Architecture: System audits, database schema optimization, and Figma-to-code sprint execution.`,
     keywords: ['services', 'hire', 'freelance', 'web development', 'ai agents', 'rag integration', 'mobile apps', 'consulting', 'pricing', 'rates'],
     metadata: { section: 'services' }
@@ -242,7 +262,7 @@ Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denis
     title: 'Recruiter FAQ: Skills, Availability & Work Arrangements',
     category: 'faq',
     content: `Recruiter FAQ:
-- What are Arnel's strongest skills? Context Engineering / AI Agents, Full-Stack TypeScript (Next.js, React, Node.js), Backend & Databases (PostgreSQL, Supabase, Laravel, MySQL), and Flutter mobile development.
+- What is Arnel's current core stack? Context Engineering / AI Agents (Codex, Claude, Gemini, Jev, Obsidian, Orca), TypeScript / React / Next.js / Vite, React Native / Expo, Python / FastAPI, Node.js, PostgreSQL, Redis, and Cloud/Auth platforms (Render, Vercel, Firebase, Supabase, Better Auth, Google Cloud Console). Historical hospital and capstone work also includes Vue.js, PHP, Laravel, and MySQL; PaceMentor uses Flutter / Dart.
 - Is Arnel open to full-time opportunities? Yes, Arnel is actively open to full-time software engineering roles and contract positions.
 - Remote Work: Arnel has extensive experience in distributed remote environments and asynchronous communication.
 - Work Location: Cavite, Philippines, capable of working in global timezone shifts (US, Europe, APAC).`,
@@ -255,7 +275,7 @@ Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denis
     title: 'Client FAQ: How to Start a Project & Timelines',
     category: 'faq',
     content: `Client FAQ:
-- How do I hire Arnel? You can submit an inquiry via the portfolio contact form or email arnelbaylon15@gmail.com with your project brief.
+- How do I hire Arnel? Email arnelbaylon15@gmail.com with your project brief or connect through LinkedIn. The portfolio's #contact section lists these channels.
 - What projects does Arnel build? Custom web platforms, SaaS products, AI chatbots, mobile apps, and e-commerce stores.
 - Development Process: Discovery & requirements -> Architecture & wireframes -> Development sprints with live previews -> Testing & deployment -> Ongoing support.`,
     keywords: ['faq', 'client', 'hire', 'how to hire', 'project brief', 'quote', 'timeline', 'process'],

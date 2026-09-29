@@ -8,8 +8,9 @@ export function generateStaticParams() {
   }))
 }
 
-export default function ProjectDetailsPage({ params }: { params: { slug: string } }) {
-  const project = projectsData.find((p) => p.slug === params.slug)
+export default async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const project = projectsData.find((p) => p.slug === slug)
 
   if (!project) {
     notFound()

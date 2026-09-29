@@ -1,0 +1,395 @@
+.education, .recognition { scroll-margin-top: 130px; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(2.25rem, 6vw, 5.25rem);
+  color: var(--folio-ink);
+}
+
+.experience,
+.recognition,
+.entry,
+.credentialCopy {
+  min-width: 0;
+}
+
+.columnTitle {
+  margin: 0 0 1.75rem;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.timeline {
+  margin: 0;
+  padding: 0 0 0 1rem;
+  list-style: none;
+  border-left: 1px solid var(--folio-line);
+}
+
+.timelineItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding-bottom: 1.85rem;
+}
+
+.timelineItem:last-child {
+  padding-bottom: 0.25rem;
+}
+
+.timelineItem::before {
+  position: absolute;
+  top: 0.4rem;
+  left: calc(-1rem - 4px);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--folio-accent);
+  box-shadow: 0 0 0 5px var(--folio-paper);
+  content: '';
+}
+
+.period {
+  padding-top: 0.15rem;
+  color: var(--folio-muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.organization {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--folio-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.roleLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.55rem;
+  row-gap: 0.3rem;
+}
+
+.role {
+  margin: 0;
+  font-size: 0.925rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.note {
+  color: var(--folio-accent);
+  font-size: 0.65rem;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.story {
+  margin: 0.6rem 0 0;
+  color: var(--folio-muted);
+  font-size: 0.84rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.education {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--folio-line);
+}
+
+.education > svg {
+  flex: 0 0 auto;
+  color: var(--folio-accent);
+}
+
+.school {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.degree {
+  margin: 0.35rem 0 0;
+  color: var(--folio-muted);
+  font-size: 0.77rem;
+  line-height: 1.6;
+}
+
+.award {
+  display: block;
+  padding: 1.35rem;
+  border: 1px solid var(--folio-line);
+  border-radius: 0.65rem;
+  color: var(--folio-ink);
+  text-decoration: none;
+  background: var(--folio-soft);
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.awardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+  color: var(--folio-accent);
+}
+
+.awardDate {
+  color: var(--folio-muted);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.awardTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+
+.awardDescription {
+  margin: 0.45rem 0 0;
+  color: var(--folio-muted);
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.awardAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.15rem;
+  color: var(--folio-accent);
+  font-size: 0.73rem;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.finalistAward {
+  margin-top: 0.75rem;
+  padding: 1.1rem 1.35rem;
+  background: var(--folio-surface);
+}
+
+.finalistAward .awardTop {
+  margin-bottom: 0.65rem;
+}
+
+.finalistAward .awardTitle {
+  font-size: 0.94rem;
+}
+
+.finalistAward .awardAction {
+  margin-top: 0.75rem;
+}
+
+.finalistMark {
+  font-size: 1.1rem;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.credentialList {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.credentialList > li + li {
+  border-top: 1px solid var(--folio-line);
+}
+
+.credential {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  color: var(--folio-ink);
+  text-decoration: none;
+}
+
+.issuer {
+  color: var(--folio-muted);
+  font-size: 0.65rem;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.credentialTitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.84rem;
+  font-weight: 550;
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  transition: color 160ms ease;
+}
+
+.credentialDetail {
+  margin: 0.3rem 0 0;
+  color: var(--folio-muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.linkArrow {
+  flex: 0 0 auto;
+  color: var(--folio-accent);
+  transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.details {
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--folio-line);
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+  padding: 0.75rem 0;
+  color: var(--folio-muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.5;
+  list-style: none;
+  cursor: pointer;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.detailsIcon {
+  flex: 0 0 auto;
+  color: var(--folio-accent);
+}
+
+.details[open] .detailsIcon {
+  transform: rotate(45deg);
+}
+
+.detailsContent {
+  padding: 0.25rem 0 0.5rem;
+}
+
+.detailsLabel {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.additionalTopics {
+  margin: 0.4rem 0 0.75rem;
+  color: var(--folio-muted);
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.detailsContent > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  min-height: 40px;
+  color: var(--folio-accent);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.detailsContent > a > svg {
+  flex: 0 0 auto;
+}
+
+.award:focus-visible,
+.credential:focus-visible,
+.summary:focus-visible,
+.detailsContent > a:focus-visible {
+  outline: 2px solid var(--folio-accent);
+  outline-offset: 5px;
+  border-radius: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .award:hover {
+    border-color: var(--folio-accent);
+    background: var(--folio-surface);
+  }
+
+  .credential:hover .credentialTitle,
+  .summary:hover {
+    color: var(--folio-accent);
+  }
+
+  .credential:hover .linkArrow {
+    transform: translate(2px, -2px);
+  }
+
+  .detailsContent > a:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.75rem;
+  }
+
+  .columnTitle {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .timelineItem {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+    padding-bottom: 1.6rem;
+  }
+
+  .period {
+    padding-top: 0;
+  }
+
+  .organization {
+    font-size: 0.73rem;
+  }
+
+  .award {
+    padding: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .award,
+  .credentialTitle,
+  .linkArrow {
+    transition: none;
+  }
+
+  .credential:hover .linkArrow {
+    transform: none;
+  }
+}

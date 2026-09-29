@@ -27,22 +27,13 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "Helvetica", "Arial", "sans-serif"],
-        serif: ["var(--font-serif)", "Georgia", "'Times New Roman'", "serif"],
-        display: ["'Supreme'", "var(--font-sans)", "system-ui", "-apple-system", "sans-serif"],
-        supreme: ["'Supreme'", "var(--font-sans)", "system-ui", "-apple-system", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
-        pacifico: ["'Pacifico'", "cursive"],
-        handwriting: ["var(--font-handwriting)", "'Caveat'", "cursive"],
-        sharetech: ["'Share Tech'", "sans-serif"],
-        apoc: ["'Apoc Revelations'", "serif"],
-        instrument: ["'Instrument Serif'", "Georgia", "'Times New Roman'", "serif"],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
     }
   },
   plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/container-queries')
+    require('@tailwindcss/forms')
   ],
 }
 

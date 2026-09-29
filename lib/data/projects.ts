@@ -12,6 +12,8 @@ export interface ProjectData {
   link: string;
   github?: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   previewName?: string;
   embedUrl?: string;
   embedTitle?: string;
@@ -30,16 +32,18 @@ export const projectsData: ProjectData[] = [
     slug: 'pixelcrew',
     title: 'Pixel Crew (Autonomous Multi-Agent Swarm & Startup Office)',
     type: 'Autonomous AI Swarm / Developer Tooling',
-    summary: 'Autonomous software synthesis framework compiling natural language instructions into Next.js App Router applications via a Directed Acyclic Graph (DAG) task engine orchestrating 23 specialized agent personas working in parallel swarm loops, while eliminating AI-generated slop via 64 strict anti-slop rules and fluid clamp typography.',
-    tags: ['Multi-Agent Swarm', 'TypeScript', 'Next.js', 'DAG Engine', 'Anti-AI-Slop', 'AST Symbol Graph', 'Pixel Art UI'],
+    summary: 'A visual AI agent orchestration workspace for coordinating tasks and following activity in a retro pixel-art office. Built with Node.js and JavaScript, without external dependencies; generated applications can target Next.js.',
+    tags: ['Node.js', 'JavaScript', 'AI Agents', 'DAG Engine', 'AST Symbol Graph', 'Pixel Art UI'],
     link: 'https://github.com/hiroqt/PixelCrew',
     github: 'https://github.com/hiroqt/PixelCrew',
     image: '/images/pixelcrew.png',
+    imageWidth: 1050,
+    imageHeight: 420,
     previewName: 'pixelcrew.website',
     isFeatured: true,
     featuredTag: 'AUTONOMOUS AI SWARM',
     featuredTitle: 'Pixel Crew',
-    featuredSummary: 'Autonomous software synthesis framework and retro pixel-art tech startup office compiling Next.js applications via DAG swarm engine with anti-AI-slop frontend principles.',
+    featuredSummary: 'A visual AI agent orchestration workspace built with Node.js and JavaScript, with parallel tasks and a retro pixel-art office.',
     initiative: 'Open Source AI Tooling',
     metrics: [
       '23 Specialized agent command personas',
@@ -75,18 +79,20 @@ export const projectsData: ProjectData[] = [
   },
   {
     slug: 'sakto-ka',
-    title: 'sakto ka (AI Career Intelligence & ATS Resume Studio)',
+    title: 'Sakto Ka (AI Career Intelligence & ATS Resume Studio)',
     type: 'AI Career Intelligence / SaaS',
-    summary: 'Stateless AI career copilot platform featuring automated multi-source job discovery, single-column ATS-standard resume generator with AI XYZ bullet enhancement and keyword tailoring, and interactive STAR-method interview coaching with zero server-side data retention.',
-    tags: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'AI Copilot', 'ATS Optimizer', 'PDF Engine', 'Client Storage'],
+    summary: 'Private career copilot with offline-first ATS resume scoring, Python FastAPI scoring engine, job matching, and real-time voice interview simulations in the browser.',
+    tags: ['Next.js 15', 'Python', 'FastAPI', 'TypeScript', 'Tailwind CSS', 'AI Copilot', 'ATS Optimizer'],
     link: 'https://saktoka.click',
     github: 'https://github.com/hiroqt',
     image: '/images/saktoka.png',
+    imageWidth: 1254,
+    imageHeight: 1254,
     previewName: 'saktoka.click',
     isFeatured: true,
     featuredTag: 'STATELESS AI CAREER COPILOT',
-    featuredTitle: 'sakto ka',
-    featuredSummary: 'Privacy-first career copilot featuring automated multi-source job discovery, ATS-compliant resume builder, and simulated STAR-method AI interview preparation with zero data retention.',
+    featuredTitle: 'Sakto Ka',
+    featuredSummary: 'Private career copilot with offline-first ATS resume scoring powered by Python FastAPI, job matching, and real-time voice interview simulations directly in your browser.',
     initiative: 'Career Intelligence System',
     metrics: [
       '90%+ Target score on enterprise ATS parsers',
@@ -95,6 +101,7 @@ export const projectsData: ProjectData[] = [
       'Direct browser-rendered vector PDF export'
     ],
     features: [
+      'High-performance Python FastAPI service for instant ATS resume parsing, keyword extraction, and scoring heuristics',
       'Automated multi-source job discovery, qualification scoring, and keyword gap analysis',
       'ATS-Standard single-column resume studio compliant with Workday, Greenhouse, Lever, and Taleo parsers',
       'AI bullet-point enhancer transforming generic duties into metric-driven XYZ achievement statements',
@@ -110,8 +117,8 @@ export const projectsData: ProjectData[] = [
         content: 'Modern tech hiring workflows subject candidate applications to aggressive Applicant Tracking System (ATS) parsers and demanding multi-stage technical and behavioral interviews. sakto ka was developed as a privacy-first, stateless AI career copilot to give job seekers an end-to-end advantage from discovery to final offer.'
       },
       {
-        title: 'ATS-Standard Engineering & AI Optimization',
-        content: 'The platform enforces strict single-column formatting, semantic hierarchy, and clean typographical tokens designed to score 90%+ on parsers like Workday, Greenhouse, and Taleo. Integrated AI tools transform passive bullet points into high-impact XYZ achievement statements while dynamically matching target job keywords.'
+        title: 'Python FastAPI Engine & ATS-Standard Architecture',
+        content: 'The platform pairs a responsive Next.js frontend with a high-performance Python FastAPI service to handle deep document parsing, keyword matching algorithms, and semantic ATS compliance heuristics. The system enforces strict single-column formatting, semantic hierarchy, and clean typographical tokens engineered to score 90%+ on parsers like Workday, Greenhouse, and Taleo.'
       },
       {
         title: 'Zero Data Retention & Privacy Architecture',
@@ -128,6 +135,8 @@ export const projectsData: ProjectData[] = [
     link: '/projects/finops-ai-dashboard',
     github: 'https://github.com/hiroqt',
     image: '/images/finops.jpg',
+    imageWidth: 960,
+    imageHeight: 1280,
     previewName: '-',
     isFeatured: true,
     featuredTag: 'WINNER - BEST BUSINESS IMPACT',
@@ -173,16 +182,18 @@ export const projectsData: ProjectData[] = [
     slug: 'better-trece',
     title: 'Better Trece Martires (BetterGov Initiative)',
     type: 'Civic Tech / Open Governance',
-    summary: 'Independent open-source civic tech portal for Trece Martires City under the BetterGov Philippines initiative — featuring DBM GAA budget tracking, COA audit analysis, DPWH public works explorer, bilingual citizen service guides, and real-time fuel price monitoring.',
-    tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Open Data', 'Civic Tech', 'Leaflet OSM'],
+    summary: 'An open-source civic portal for Trece Martires, built with React, TypeScript, Vite, and Tailwind CSS. Brings public budgets, infrastructure records, and bilingual citizen service guides into one place.',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Open Data', 'Leaflet OSM'],
     link: 'https://bettertrecemartires.org',
     github: 'https://github.com/hiroqt/bettertrece',
     image: '/images/bettertrece.png',
+    imageWidth: 1050,
+    imageHeight: 1050,
     previewName: 'bettertrecemartires.org',
     isFeatured: true,
     featuredTag: 'BETTERGOV INITIATIVE',
-    featuredTitle: 'Better Trece Martires',
-    featuredSummary: 'Open-source civic portal delivering full public budget transparency, citizen service charters, and infrastructure tracking.',
+    featuredTitle: 'Better Trece',
+    featuredSummary: 'Open civic data portal visualizing municipal budgets, infrastructure spending, and public city services for Trece Martires.',
     initiative: 'BetterGov Philippines',
     metrics: [
       'Multi-year DBM GAA budget records (2020–2026)',
@@ -211,25 +222,27 @@ export const projectsData: ProjectData[] = [
       },
       {
         title: 'Architecture & Accessibility',
-        content: 'Built using React 19, TypeScript, Tailwind CSS v4, @bettergov/kapwa UI tokens, and Leaflet OpenStreetMap. It features zero ads, zero tracking scripts, bilingual English/Filipino localization, and strict WCAG 2.1 accessibility compliance.'
+        content: 'Built using React, TypeScript, Vite, Tailwind CSS, @bettergov/kapwa UI tokens, and Leaflet OpenStreetMap. It features zero ads, zero tracking scripts, bilingual English/Filipino localization, and strict WCAG 2.1 accessibility compliance.'
       }
     ]
   },
   {
     slug: 'e-buddy',
-    title: 'e Buddy (eGov Hackathon 2026 Top 5 National Finalist)',
+    title: 'eGov AI (Top 5 eGov Hackathon 2026)',
     type: 'AI / Civic Tech',
-    summary: 'Top 5 national finalist at the eGov Hackathon 2026. A unified government services platform designed to streamline citizen compliance and public service delivery using an agentic AI named e Buddy.',
-    tags: ['TypeScript', 'AI', 'Tailwind CSS', 'Agentic AI', 'Next.js'],
+    summary: 'A unified civic platform with biometric face verification, multi-modal voice AI, and automated public services. Recognized in the Top 5 at the eGov Hackathon 2026.',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Agentic AI'],
     link: '#',
     image: '/images/egov.png',
+    imageWidth: 1050,
+    imageHeight: 1050,
     previewName: 'e-gov-ai.vercel.app',
     isFeatured: true,
-    featuredTag: 'TOP 5 NATIONAL FINALIST',
-    featuredTitle: 'e Buddy',
-    featuredSummary: 'Top 5 national finalist at the eGov Hackathon 2026. Unified government services platform powered by agentic AI.',
+    featuredTag: 'TOP 5 EGOV',
+    featuredTitle: 'eGov AI',
+    featuredSummary: 'A unified civic platform with biometric face verification, multi-modal voice AI, and automated public services. Recognized Top 5 at eGov Hackathon 2026.',
     metrics: [
-      'Top 5 national finalist at the eGov Hackathon 2026',
+      'Top 5 at the eGov Hackathon 2026',
       'Unified multi-agency public workflow automation',
       'Real-time biometric liveness detection'
     ],
@@ -246,15 +259,58 @@ export const projectsData: ProjectData[] = [
     content: [
       {
         title: 'Abstract',
-        content: 'e Buddy was developed for the eGov Hackathon 2026, where it emerged as a Top 5 national finalist. The core problem addressed is the fragmented nature of public services across different government agencies, leading to citizen confusion and administrative bottlenecks.'
+        content: 'eGov AI (e Buddy) was developed for the eGov Hackathon 2026 and recognized as a Top 5 finalist team on September 27, 2026. The core problem addressed is the fragmented nature of public services across different government agencies, leading to citizen confusion and administrative bottlenecks.'
       },
       {
         title: 'The Solution',
-        content: 'By leveraging agentic AI loops, e Buddy acts as a centralized liaison, guiding users through complex bureaucratic processes, auto-filling forms, and bridging data silos between departments securely.'
+        content: 'By leveraging agentic AI loops, eGov AI acts as a centralized liaison, guiding users through complex bureaucratic processes, auto-filling forms, and bridging data silos between departments securely.'
       },
       {
         title: 'Architecture & Results',
-        content: 'Built using TypeScript, Next.js, and Tailwind CSS, the platform prioritizes accessibility, speed, and responsiveness. The AI integration significantly reduces the time required for standard government transactions.'
+        content: 'Built using React, TypeScript, Vite, and Tailwind CSS, the platform prioritizes accessibility, speed, and responsiveness. The AI integration significantly reduces the time required for standard government transactions.'
+      }
+    ]
+  },
+  {
+    slug: 'android-deck',
+    title: 'Android Deck (NotchDeck macOS & Touchscreen Stream Deck)',
+    type: 'macOS & Android Utility',
+    summary: 'Transforms an Android phone into a touchscreen stream deck for macOS over USB or Wi-Fi, paired with a native Swift Liquid Glass notch HUD.',
+    tags: ['Swift', 'Kotlin', 'macOS', 'Android', 'WebSocket'],
+    link: 'https://github.com/hiroqt/android-deck',
+    github: 'https://github.com/hiroqt/android-deck',
+    image: '/images/android-deck.png',
+    imageWidth: 1024,
+    imageHeight: 500,
+    previewName: 'github.com/hiroqt/android-deck',
+    isFeatured: true,
+    featuredTag: 'MACOS & ANDROID UTILITY',
+    featuredTitle: 'Android Deck',
+    featuredSummary: 'Transforms an Android phone into a touchscreen stream deck for macOS over USB or Wi-Fi, paired with a native Swift Liquid Glass notch HUD.',
+    metrics: [
+      '40 Passing Swift unit tests & Release DMG build',
+      'Zero-latency USB ADB tunnel & LAN Wi-Fi fallback',
+      'Fluid Dynamic Island spring animation HUD'
+    ],
+    features: [
+      'Liquid Glass notch HUD configurator for MacBook camera notch',
+      'Full-screen adaptive touchscreen UI (Portrait 2x3 & Landscape 3x2)',
+      'Sub-16ms tactile haptic feedback on touch events',
+      'Direct extraction of native macOS application icons via NSWorkspace',
+      'Bidirectional WebSocket JSON protocol with secure token authentication'
+    ],
+    content: [
+      {
+        title: 'Abstract',
+        content: 'Android Deck (NotchDeck) transforms an Android smartphone into a tactile, dedicated stream deck controller for macOS, eliminating the need for expensive proprietary hardware. It bridges a native Swift macOS menu bar and notch HUD with an Android touch client over USB ADB reverse tunneling and LAN Wi-Fi.'
+      },
+      {
+        title: 'Engineering & Protocol',
+        content: 'Built with Swift 5.9 for macOS 14+ and Kotlin for Android. The architecture utilizes a custom WebSocket JSON wire protocol with abstract action IDs to ensure security boundaries: the Android client triggers abstract events while the Mac host retains complete authority over executable paths and system permissions.'
+      },
+      {
+        title: 'User Experience & Performance',
+        content: 'Features fluid spring physics expanding the Mac camera notch into an interactive configuration panel. Touch interactions on the Android device trigger immediate haptic responses before network confirmation, providing a physical, zero-latency controller experience.'
       }
     ]
   },
@@ -268,6 +324,8 @@ export const projectsData: ProjectData[] = [
     embedUrl: 'https://appbuildersph.com/embed/apps/pacementor',
     embedTitle: 'PaceMentor votes on App Builders PH',
     image: '/images/pcaementor.jpg',
+    imageWidth: 1280,
+    imageHeight: 800,
     isFeatured: true,
     featuredTag: 'AI RUNNING COACH',
     featuredTitle: 'PaceMentor',
@@ -308,6 +366,8 @@ export const projectsData: ProjectData[] = [
     embedUrl: 'https://appbuildersph.com/embed/apps/present-po',
     embedTitle: 'Present Po votes on App Builders PH',
     image: '/images/presentpo.jpg',
+    imageWidth: 1280,
+    imageHeight: 800,
     isFeatured: true,
     featuredTag: 'B2B SOLUTION',
     featuredTitle: 'Present Po',
@@ -373,7 +433,6 @@ export const projectsData: ProjectData[] = [
     summary: 'A centralized local queuing and triage system with Groq LLM integration developed during a 486-hour internship at General Emilio Aguinaldo Memorial Hospital.',
     tags: ['Vue.js', 'PHP', 'MySQL', 'Groq LLM', 'Healthcare'],
     link: '#',
-    image: '/images/gallery/internship_presenting_queuing_to_sectionheads.jpg',
     features: [
       'Offline-capable local network architecture for zero-downtime hospital triage',
       'Multi-tier role controls (Super Admin, Section Admin, Doctor/Staff triage panel)',
@@ -400,6 +459,8 @@ export const projectsData: ProjectData[] = [
     tags: ['Laravel', 'Livewire', 'PHP', 'MySQL', 'QR Attendance'],
     link: '#',
     image: '/images/vcm.jpg',
+    imageWidth: 1280,
+    imageHeight: 800,
     features: [
       'QR-Based attendance validation restricting check-ins to the campus vicinity',
       'Automated payroll engine computing gross pay, statutory deductions, and net salary',
@@ -426,6 +487,8 @@ export const projectsData: ProjectData[] = [
     tags: ['TypeScript', 'Tailwind CSS', 'Payment Gateway'],
     link: '#',
     image: '/images/tearsize.jpg',
+    imageWidth: 1280,
+    imageHeight: 800,
     features: [
       'Responsive product catalog with fast filtering and category indexing',
       'Secure payment gateway integration for digital payments and cards',
@@ -446,6 +509,8 @@ export const projectsData: ProjectData[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Automation'],
     link: 'https://www.hivesyncva.com',
     image: '/images/hivesync.jpg',
+    imageWidth: 1280,
+    imageHeight: 800,
     features: [
       'Automated blog syndication syncing Facebook posts directly to website articles',
       'Integrated consultation booking and inquiry capture system'
@@ -465,6 +530,8 @@ export const projectsData: ProjectData[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     link: '#',
     image: '/images/tmrc.jpg',
+    imageWidth: 1280,
+    imageHeight: 800,
     features: [
       'Race registration directory with historical finish records',
       'Community announcement bulletin and upcoming run event calendar'

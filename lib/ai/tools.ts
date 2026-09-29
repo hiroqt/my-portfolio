@@ -4,8 +4,8 @@ import { projectsData } from '../data/projects';
 import { AgentAction } from './types';
 
 export const ALLOWED_NAV_DESTINATIONS: Record<string, { route: string; sectionId?: string }> = {
-  home: { route: '/' },
-  about: { route: '/', sectionId: 'education' },
+  home: { route: '/', sectionId: 'hero' },
+  about: { route: '/', sectionId: 'about' },
   education: { route: '/', sectionId: 'education' },
   experience: { route: '/', sectionId: 'experience' },
   projects: { route: '/', sectionId: 'projects' },
@@ -43,7 +43,7 @@ export const AI_TOOL_DEFINITIONS = [
     type: 'function' as const,
     function: {
       name: 'getProject',
-      description: 'Retrieve detailed information about a specific project by its slug (e.g., "e-buddy", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
+      description: 'Retrieve detailed information about a specific project by its slug (e.g., "e-buddy", "sakto-ka", "android-deck", "better-trece", "pixelcrew", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
       parameters: {
         type: 'object',
         properties: {
@@ -115,7 +115,7 @@ export const AI_TOOL_DEFINITIONS = [
     type: 'function' as const,
     function: {
       name: 'openProject',
-      description: 'Open the detailed project showcase page for a specific project (e.g., "e-buddy", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
+      description: 'Open the detailed project showcase page for a specific project (e.g., "e-buddy", "sakto-ka", "android-deck", "better-trece", "pixelcrew", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
       parameters: {
         type: 'object',
         properties: {
@@ -243,7 +243,7 @@ export function executeTool(name: string, args: Record<string, any>): ToolExecut
       const dest = args.destination?.toLowerCase() || 'home';
       const mapping = ALLOWED_NAV_DESTINATIONS[dest] || ALLOWED_NAV_DESTINATIONS.home;
       return {
-        output: `Navigating user to ${dest}...`,
+        output: `A button to view ${dest} is available below your response. The visitor chooses when to open it.`,
         action: {
           type: 'navigate',
           destination: dest,
@@ -258,7 +258,7 @@ export function executeTool(name: string, args: Record<string, any>): ToolExecut
       const proj = projectsData.find(p => p.slug.toLowerCase() === slug);
       const title = proj ? proj.title : slug;
       return {
-        output: `Opening project "${title}" for user...`,
+        output: `A button to open project "${title}" is available below your response.`,
         action: {
           type: 'open_project',
           projectId: slug,
@@ -269,11 +269,11 @@ export function executeTool(name: string, args: Record<string, any>): ToolExecut
 
     case 'openContact': {
       return {
-        output: 'Scrolling user to the contact form section...',
+        output: 'A button to view Arnel’s contact details is available below your response.',
         action: {
           type: 'open_contact',
           sectionId: 'contact',
-          label: 'Contact Form'
+          label: 'Contact Arnel'
         }
       };
     }
@@ -281,7 +281,7 @@ export function executeTool(name: string, args: Record<string, any>): ToolExecut
     case 'scrollToSection': {
       const sectionId = args.sectionId?.toLowerCase() || 'projects';
       return {
-        output: `Scrolling to section "#${sectionId}"...`,
+        output: `A button to view the ${sectionId} section is available below your response.`,
         action: {
           type: 'scroll_to_section',
           sectionId,

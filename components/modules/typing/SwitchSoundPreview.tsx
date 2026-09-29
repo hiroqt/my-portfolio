@@ -68,7 +68,7 @@ export function SwitchSoundPreview({
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
-            <h3 className="font-supreme text-base sm:text-lg font-bold tracking-tight text-foreground flex items-center gap-2">
+            <h3 className="font-sans text-base sm:text-lg font-bold tracking-tight text-foreground flex items-center gap-2">
               <span>Mechanical Switch Sound Lab</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-accent/15 text-accent font-semibold">
                 Web Audio Synth
@@ -155,7 +155,7 @@ export function SwitchSoundPreview({
                     +
                   </div>
                   <div>
-                    <h4 className="font-supreme text-xs sm:text-sm font-bold text-foreground leading-tight">
+                    <h4 className="font-sans text-xs sm:text-sm font-bold text-foreground leading-tight">
                       {profile.name}
                     </h4>
                     <span

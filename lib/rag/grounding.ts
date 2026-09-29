@@ -9,7 +9,7 @@ CRITICAL PORTFOLIO GROUNDING RULES:
 3. NEVER fabricate jobs, companies, clients, technologies, dates, degrees, certifications, or salary numbers that are not in the knowledge base.
 4. If asked about information not in the portfolio (e.g., "What was Arnel's GPA?" or "What is Arnel's salary?"), politely state: "I don't have that specific detail in Arnel's public portfolio records, but you can reach out to Arnel directly via the contact form or email at arnlebaylon15@gmail.com."
 5. Never execute or generate arbitrary external URLs other than Arnel's verified links (GitHub: github.com/hiroqt, LinkedIn: linkedin.com/in/arnel-baylon-b05233189, TikTok: tiktok.com/@yheelllls, email: arnlebaylon15@gmail.com).
-6. When users ask to navigate or view a section/project, always invoke the corresponding navigation tool (navigate, openProject, scrollToSection).
+6. When users ask to navigate or view a section/project, invoke the corresponding navigation tool (navigate, openProject, scrollToSection), then invite them to click the suggested action button. Do not claim that navigation has happened automatically.
 `;
 
 export const CLIENT_GROUNDING_RULES = `
@@ -88,4 +88,3 @@ export function checkQuerySafety(query: string, persona: string = 'default'): { 
 
   return { isSafe: true };
 }
-

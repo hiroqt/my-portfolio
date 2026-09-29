@@ -1,0 +1,390 @@
+.showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  width: 100%;
+  min-width: 0;
+  color: var(--folio-ink);
+  font-family: var(--font-geist-sans), var(--font-sans), sans-serif;
+}
+
+.toolsColumn,
+.approachColumn {
+  min-width: 0;
+}
+
+.approachColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolsColumn {
+  border-right: 1px solid var(--folio-line);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--folio-line);
+}
+
+.header h2 {
+  margin: 0;
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+
+.headerMark {
+  flex: 0 0 auto;
+  color: var(--folio-muted);
+  font: 12px/1 var(--font-geist-mono), var(--font-mono), monospace;
+}
+
+.toolsBody {
+  padding: 24px;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px 22px;
+}
+
+.group {
+  min-width: 0;
+}
+
+.groupLabel {
+  display: block;
+  margin: 0 0 12px;
+  color: var(--folio-muted);
+  font: 10px/1.5 var(--font-geist-mono), var(--font-mono), monospace;
+  font-weight: 400;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.technologyList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.technologyList > li {
+  min-width: 0;
+}
+
+.technology {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 7px;
+  min-height: 62px;
+  padding: 3px 0;
+  color: var(--folio-ink);
+  text-decoration: none;
+  transition: color 160ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.monogram {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--folio-line);
+  border-radius: 6px;
+  background: var(--folio-soft);
+  color: var(--folio-ink);
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.monogram svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.technologyName {
+  max-width: 100%;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.additional {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--folio-line);
+}
+
+.additional .groupLabel {
+  margin-bottom: 9px;
+}
+
+.additionalList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.additionalList a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: var(--folio-muted);
+  font-size: 11px;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.additionalList a:hover {
+  background: var(--folio-soft);
+}
+
+.additionalIcon {
+  flex-shrink: 0;
+  color: var(--folio-muted);
+  transition: color 160ms ease;
+}
+
+.approachBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+}
+
+.approachCopy p {
+  margin: 0;
+  color: var(--folio-muted);
+  font-size: 13px;
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.approachCopy p + p {
+  margin-top: 15px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  margin-top: 20px;
+}
+
+.textLink,
+.codeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  color: var(--folio-ink);
+  font-size: 11px;
+  line-height: 1.6;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.codeLink {
+  color: var(--folio-muted);
+}
+
+.platforms {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 23px;
+  padding-top: 22px;
+  border-top: 1px solid var(--folio-line);
+}
+
+.platformsCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.platformList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.platformList > li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--folio-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.platformMark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--folio-line);
+  border-radius: 5px;
+  background: var(--folio-soft);
+  color: var(--folio-ink);
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.platformMark svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.technology:focus-visible,
+.additionalList a:focus-visible,
+.textLink:focus-visible,
+.codeLink:focus-visible {
+  outline: 2px solid var(--folio-accent);
+  outline-offset: 4px;
+}
+
+.technology:focus-visible,
+.additionalList a:focus-visible {
+  color: var(--folio-accent);
+}
+
+.technology:focus-visible .monogram {
+  border-color: var(--folio-accent);
+  color: var(--folio-accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .technology:hover {
+    color: var(--folio-accent);
+    transform: translateY(-2px);
+  }
+
+  .technology:hover .monogram {
+    border-color: var(--folio-accent);
+    color: var(--folio-accent);
+    background: var(--folio-paper);
+  }
+
+  .additionalList a:hover,
+  .textLink:hover,
+  .codeLink:hover {
+    color: var(--folio-accent);
+  }
+
+  .additionalList a:hover .additionalIcon {
+    color: var(--folio-accent);
+  }
+}
+
+@media (max-width: 1050px) and (min-width: 761px) {
+  .header {
+    padding-inline: 20px;
+  }
+
+  .toolsBody,
+  .approachBody {
+    padding: 20px;
+  }
+
+  .groups {
+    gap: 24px 16px;
+  }
+
+  .technologyList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .showcase {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toolsColumn {
+    border-right: 0;
+    border-bottom: 1px solid var(--folio-line);
+  }
+
+  .approachCopy p {
+    max-width: 48ch;
+  }
+}
+
+@media (max-width: 420px) {
+  .header {
+    min-height: 52px;
+    padding: 14px 18px;
+  }
+
+  .toolsBody,
+  .approachBody {
+    padding: 20px 18px;
+  }
+
+  .groups {
+    gap: 22px 16px;
+  }
+
+  .technologyList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .technology {
+    min-height: 66px;
+  }
+
+  .technologyName {
+    font-size: 11px;
+  }
+
+  .links {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .platformList {
+    gap: 14px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .technology,
+  .additionalList a,
+  .textLink,
+  .codeLink {
+    transition: none;
+  }
+
+  .technology:hover {
+    transform: none;
+  }
+}
