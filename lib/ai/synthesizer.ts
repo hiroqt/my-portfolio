@@ -520,7 +520,7 @@ function synthesizeClientResponse(
     (isFollowUpToServices && (lower.includes('ai') || lower.includes('bot') || lower.includes('assistant')))
   ) {
     return {
-      text: `${reassurancePrefix}### 24/7 Intelligent AI Assistants & Customer Support Bots\n\n**Never miss a customer inquiry while you're asleep or busy serving clients.** Arnel built **eBuddy** (a Top 30 National Winner at the eGov PH Hackathon) and **FinOps AI**:\n\n- **Trained on Your Business**: The AI learns your exact pricing, packages, opening hours, and FAQs to answer customer questions immediately in plain English.\n- **24/7 Lead Capture**: Collects customer names, emails, and phone numbers and alerts you whenever a hot lead asks for a quote.\n- **Seamless Human Handoff**: If a customer needs personal attention, the bot seamlessly directs them to your WhatsApp, phone number, or email.\n\nWhat are the top 3 or 4 questions your customers ask most frequently?`,
+      text: `${reassurancePrefix}### 24/7 Intelligent AI Assistants & Customer Support Bots\n\n**Never miss a customer inquiry while you're asleep or busy serving clients.** Arnel built **eBuddy** (a Top 5 National Finalist at the 2026 eGov PH Hackathon) and **FinOps AI**:\n\n- **Trained on Your Business**: The AI learns your exact pricing, packages, opening hours, and FAQs to answer customer questions immediately in plain English.\n- **24/7 Lead Capture**: Collects customer names, emails, and phone numbers and alerts you whenever a hot lead asks for a quote.\n- **Seamless Human Handoff**: If a customer needs personal attention, the bot seamlessly directs them to your WhatsApp, phone number, or email.\n\nWhat are the top 3 or 4 questions your customers ask most frequently?`,
       action: { type: 'open_project', projectId: 'e-buddy', label: 'View eBuddy AI Case Study' }
     };
   }
@@ -840,7 +840,7 @@ function synthesizeClientResponse(
   }
   if (lower.includes('ebuddy') || lower.includes('e-buddy') || lower.includes('egov')) {
     return {
-      text: "### eBuddy Award-Winning AI Platform\n\n**eBuddy** was selected as a **Top 30 National Winner** at the National eGov PH Hackathon out of 180+ teams:\n\n- **Public Citizen Guide**: Intelligent AI assistant that walks everyday citizens through government requirements and paperwork step-by-step.\n- **Voice & Chat Multi-Modal**: Accessible for both mobile chat and voice inquiries.",
+      text: "### eBuddy Award-Winning AI Platform\n\n**eBuddy** was selected as a **Top 5 National Finalist** at the 2026 National eGov PH Hackathon:\n\n- **Public Citizen Guide**: Intelligent AI assistant that walks everyday citizens through government requirements and paperwork step-by-step.\n- **Voice & Chat Multi-Modal**: Accessible for both mobile chat and voice inquiries.",
       action: { type: 'open_project', projectId: 'e-buddy', label: 'View eBuddy Details' }
     };
   }
@@ -1451,13 +1451,13 @@ export function synthesizeDynamicResponse(
 
     if (lower.includes('best') || lower.includes('top') || lower.includes('recommend') || lower.includes('impressive')) {
       return {
-        text: "Here are Arnel's standout projects:\n\n1. **e Buddy (eGov Hackathon 2026 Winner - Top 30)**: An agentic AI platform uniting government public services with chat and voice workflows.\n2. **PaceMentor**: An AI-powered running coach mobile app built with Flutter and Strava sync.\n3. **Present Po**: A B2B attendance and workforce time-tracking SaaS with AI journaling.\n\nNavigating to the projects section.",
+        text: "Here are Arnel's standout projects:\n\n1. **e Buddy (eGov Hackathon 2026 Top 5 National Finalist)**: An agentic AI platform uniting government public services with chat and voice workflows.\n2. **PaceMentor**: An AI-powered running coach mobile app built with Flutter and Strava sync.\n3. **Present Po**: A B2B attendance and workforce time-tracking SaaS with AI journaling.\n\nNavigating to the projects section.",
         action
       };
     }
 
     return {
-      text: "Arnel has developed a range of production applications across AI agent tools, B2B SaaS, mobile apps, and e-commerce:\n\n- **e Buddy**: Agentic AI for public government services (eGov Hackathon 2026 Winner - Top 30)\n- **PaceMentor**: AI running coach app in Flutter\n- **Present Po**: Workforce attendance platform with AI journaling\n- **Hospital Queuing System**: AI triage system deployed at GEAMH\n- **yhel.os**: All-in-one freelance operating system\n- **VCM HRIS**: QR attendance & automated payroll system\n\nNavigating to the projects section.",
+      text: "Arnel has developed a range of production applications across AI agent tools, B2B SaaS, mobile apps, and e-commerce:\n\n- **e Buddy**: Agentic AI for public government services (eGov Hackathon 2026 Top 5 National Finalist)\n- **PaceMentor**: AI running coach app in Flutter\n- **Present Po**: Workforce attendance platform with AI journaling\n- **Hospital Queuing System**: AI triage system deployed at GEAMH\n- **yhel.os**: All-in-one freelance operating system\n- **VCM HRIS**: QR attendance & automated payroll system\n\nNavigating to the projects section.",
       action
     };
   }

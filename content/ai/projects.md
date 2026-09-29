@@ -48,15 +48,15 @@
 
 ---
 
-## 2. e Buddy (Winner - eGov Hackathon 2026 Top 30)
+## 2. e Buddy (eGov Hackathon 2026 Top 5 National Finalist)
 - **Slug**: `e-buddy`
-- **Title**: e Buddy (Winner - eGov Hackathon 2026 Top 30)
+- **Title**: e Buddy (eGov Hackathon 2026 Top 5 National Finalist)
 - **Tagline**: Unified government services platform using an agentic AI named e Buddy.
 - **Category**: AI, Government Tech, Full-Stack
 - **Tags**: TypeScript, AI, Tailwind CSS, Agentic Workflows
-- **Featured**: Yes (Winner - Top 30)
+- **Featured**: Yes (Top 5 National Finalist)
 - **Overview**:
-  e Buddy was developed for the eGov Hackathon 2026, where it emerged as a Top 30 winner. Public services across government agencies are historically fragmented, requiring citizens to navigate separate portals, repeat document verification, and queue for hours.
+  e Buddy was developed for the eGov Hackathon 2026, where it emerged as a Top 5 national finalist. Public services across government agencies are historically fragmented, requiring citizens to navigate separate portals, repeat document verification, and queue for hours.
 - **Core Features**:
   - **Agentic AI Assistant**: Multi-modal AI chat, UI widgets, and voice command system that guides citizens step-by-step through government procedures.
   - **EGOV SSO & E-Verify**: Unified Single Sign-On and digital identity verification across public sector portals.

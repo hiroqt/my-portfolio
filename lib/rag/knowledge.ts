@@ -139,11 +139,11 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
   {
     id: 'achieve-hackathon',
     documentId: 'achievements',
-    title: 'Winner - eGov Hackathon 2026 (Top 30) - e Buddy Agentic AI',
+    title: 'eGov Hackathon 2026 Top 5 National Finalist - e Buddy Agentic AI',
     category: 'achievements',
-    content: `eGov Hackathon 2026 (Winner - Top 30):
-Arnel won Top 30 in the national eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government agencies. The system features multi-modal AI chat, voice command execution, EGOV Single Sign-On (SSO), biometric face liveness detection (Face Live Nest), eGov Pay, and Department of Budget and Management (DBM) Compass analytics.`,
-    keywords: ['egov', 'hackathon', '2026', 'winner', 'top 30', 'e-buddy', 'e buddy', 'agentic ai', 'government', 'achievement', 'award', 'competition'],
+    content: `eGov Hackathon 2026 (Top 5 National Finalist):
+Arnel reached the Top 5 nationally in the eGov Hackathon 2026 with "e Buddy", an agentic AI designed to unify fragmented government agencies. The system features multi-modal AI chat, voice command execution, EGOV Single Sign-On (SSO), biometric face liveness detection (Face Live Nest), eGov Pay, and Department of Budget and Management (DBM) Compass analytics.`,
+    keywords: ['egov', 'hackathon', '2026', 'top 5', 'national finalist', 'e-buddy', 'e buddy', 'agentic ai', 'government', 'achievement', 'award', 'competition'],
     metadata: { section: 'hackathons', featured: true }
   },
   {

@@ -25,6 +25,16 @@ export interface GalleryItem {
 
 export const galleryItems: GalleryItem[] = [
   {
+    id: 'egov-top5-2026',
+    src: '/images/gallery/egov-top5-2026.png',
+    title: 'eGov Hackathon 2026 — Top 5 National Finalist',
+    category: 'aws',
+    categoryLabel: 'National Hackathons & AI',
+    date: '2026',
+    caption: 'National recognition for e Buddy, an agentic citizen-services platform built to make government requirements clearer, faster, and easier to navigate.',
+    tag: 'Top 5 National Finalist',
+  },
+  {
     id: 'aws-bgc-presentation',
     src: '/images/gallery/aws_presentation_week2.jpg',
     title: 'FinOps AI Dashboard Defense @ AWS Office BGC',
@@ -117,12 +127,12 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'egov-hackathon',
     src: '/images/gallery/egov3.jpg',
-    title: 'eGov Hackathon 2026 — Top 30 National Winner',
+    title: 'eGov Hackathon 2026 — Top 5 National Finalist',
     category: 'aws',
     categoryLabel: 'National Hackathons & AI',
     date: '2026',
     caption: 'Collaborative development of e Buddy, the agentic citizen assistant delivering unified government service access and biometric verification.',
-    tag: 'Top 30 National Finalist',
+    tag: 'Top 5 National Finalist',
   },
   {
     id: 'egov-sprint',
@@ -237,12 +247,12 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 'egov-top30-recognition',
     src: '/images/gallery/egov7.jpg',
-    title: 'eGov Top 30 National Recognition Ceremony',
+    title: 'eGov National Recognition Ceremony',
     category: 'aws',
     categoryLabel: 'National Hackathons & AI',
     date: '2026',
-    caption: 'Celebration and recognition of the team placing in the Top 30 nationwide at the DICT eGov Philippines Hackathon 2026.',
-    tag: 'Top 30 National Finalist',
+    caption: 'Celebration and recognition of the team reaching the Top 5 nationwide at the DICT eGov Philippines Hackathon 2026.',
+    tag: 'Top 5 National Finalist',
   },
   {
     id: 'hospital-it-stakeholder-presentation',

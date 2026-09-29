@@ -127,30 +127,30 @@ const featuredSystems: FeaturedProject[] = [
     title: 'e Buddy',
     tagline: 'Philippine Citizen AI Public Service Assistant',
     category: 'Government & Civic Tech',
-    awardBadge: 'WINNER — TOP 30 NATIONWIDE',
+    awardBadge: 'TOP 5 — NATIONAL FINALIST',
     awardSub: 'National eGov Hackathon 2026',
     awardIcon: <FaTrophy className="text-accent text-xs" />,
     image: '/images/egov.png',
     previewName: 'e-gov-ai.vercel.app',
     description:
-      'Won Top 30 National Winner at the eGov PH Hackathon 2026 (out of 180+ teams nationwide). AI-powered citizen companion navigating PhilHealth, SSS, GSIS, DFA, and statutory government requirements with grounded legal citation references.',
+      'Top 5 national finalist at the eGov PH Hackathon 2026. An AI citizen companion that turns complex government requirements into clear, cited next steps.',
     problemSolution: {
       problem: 'Citizens struggle through confusing government portals and bureaucratic requirements without localized guidance.',
       solution: 'RAG-powered conversational assistant with verifiable government citation links, offline caching, and multilingual support.',
     },
     highlights: [
-      'Top 30 National Hackathon Winner recognized by government and industry jury',
+      'Top 5 national finalist at the 2026 eGov PH Hackathon',
       'Grounded RAG pipeline querying official agency gazettes and citizen charters',
       'Verifiable citations preventing hallucinated bureaucratic steps',
       'Lightweight, low-bandwidth mobile optimization for provincial internet connectivity',
     ],
     tags: ['Next.js', 'TypeScript', 'RAG Engine', 'Vector Search', 'GovTech', 'FastAPI'],
     metrics: [
-      { label: 'National Rank', val: 'Top 30' },
+      { label: 'National Rank', val: 'Top 5' },
       { label: 'Competitors', val: '180+ Teams' },
       { label: 'Citation Rate', val: '100% Grounded' },
     ],
-    link: '/projects/ebuddy',
+    link: '/projects/e-buddy',
     isExternal: false,
     githubUrl: 'https://github.com/hiroqt',
   },
@@ -219,6 +219,70 @@ const featuredSystems: FeaturedProject[] = [
     link: 'https://saktoka.click',
     isExternal: true,
     githubUrl: 'https://github.com/hiroqt',
+  },
+  {
+    id: 'momo',
+    number: '06',
+    title: 'Momo',
+    tagline: 'Evidence-first AI study companion',
+    category: 'AI Education Platform',
+    awardBadge: 'OFFLINE-FIRST LEARNING',
+    awardSub: 'Grounded study tools for mobile learners',
+    awardIcon: <span className="text-accent text-xs">✦</span>,
+    image: '/images/momo-dashboard.png',
+    previewName: 'Momo mobile app',
+    description:
+      'Turns a student’s own PDFs, slides, and notes into cited flashcards, quizzes, study guides, and step-by-step tutoring without inventing unsupported answers.',
+    problemSolution: {
+      problem: 'Students lose time rebuilding reviewers and cannot easily verify generic AI answers against their course material.',
+      solution: 'Source-only RAG, offline study decks, and citation-backed tutoring keep every learning flow fast and trustworthy.',
+    },
+    highlights: [
+      'Grounded study sets generated from PDF, DOCX, TXT, and PPTX files',
+      'Offline-first mobile study with safe, idempotent progress sync',
+      'Camera math solver and adaptive tutor with page-level citations',
+    ],
+    tags: ['React Native', 'FastAPI', 'RAG', 'PostgreSQL'],
+    metrics: [
+      { label: 'Source Policy', val: '100% Grounded' },
+      { label: 'Offline Study', val: 'Instant' },
+      { label: 'File Retention', val: '72 Hours' },
+    ],
+    link: 'https://github.com/hiroqt/momo',
+    isExternal: true,
+    githubUrl: 'https://github.com/hiroqt/momo',
+  },
+  {
+    id: 'android-deck',
+    number: '07',
+    title: 'Android Deck',
+    tagline: 'Your Android phone, reimagined as a Mac control deck',
+    category: 'Native Device Integration',
+    awardBadge: 'MACOS + ANDROID SYSTEM',
+    awardSub: 'Notch-native desktop control',
+    awardIcon: <span className="text-accent text-xs">✦</span>,
+    image: '/images/android-deck.png',
+    previewName: 'NotchDeck',
+    description:
+      'A native Mac companion that turns an Android phone into a responsive six-key stream deck, configured directly from a Liquid Glass notch interface.',
+    problemSolution: {
+      problem: 'Desktop shortcuts are fragmented, while dedicated control hardware adds cost and desk clutter.',
+      solution: 'A secure WebSocket bridge syncs Mac app controls to a spare phone over USB or local Wi-Fi with immediate tactile feedback.',
+    },
+    highlights: [
+      'Native Swift notch HUD with live Android connection status',
+      'Adaptive 3×2 touch deck with authentic macOS app icons',
+      'USB and LAN control with Mac-authorized action boundaries',
+    ],
+    tags: ['Swift', 'Kotlin', 'WebSockets', 'macOS'],
+    metrics: [
+      { label: 'Quick Actions', val: '6 Slots' },
+      { label: 'Test Suite', val: '40 Passing' },
+      { label: 'Input Feedback', val: '<16ms' },
+    ],
+    link: 'https://github.com/hiroqt/android-deck',
+    isExternal: true,
+    githubUrl: 'https://github.com/hiroqt/android-deck',
   },
 ]
 
@@ -415,7 +479,7 @@ export function FeaturedProjectsSection() {
         {/* ── Part 1: Flagship Systems Interactive Switcher & Stage ── */}
         <div className="space-y-4">
           {/* Top Systems Selector Ribbon (Borderless Tactile Tabs) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-1 snap-x snap-mandatory scrollbar-thin" aria-label="Featured project selector">
             {featuredSystems.map((item) => {
               const isActive = selectedSystemId === item.id
 
@@ -424,7 +488,8 @@ export function FeaturedProjectsSection() {
                   key={item.id}
                   type="button"
                   onClick={() => setSelectedSystemId(item.id)}
-                  className={`group text-left p-3 rounded-2xl transition-[background-color,transform] duration-150 active:scale-[0.98] cursor-pointer relative ${
+                  aria-pressed={isActive}
+                  className={`group min-w-[148px] flex-1 snap-start text-left p-3 rounded-2xl transition-[background-color,transform] duration-150 active:scale-[0.98] cursor-pointer relative ${
                     isActive
                       ? 'bg-accent/15 text-foreground shadow-2xs'
                       : 'bg-muted/40 hover:bg-muted/70 text-muted-foreground hover:text-foreground'
@@ -459,12 +524,12 @@ export function FeaturedProjectsSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={reduce ? undefined : { opacity: 0, y: -8 }}
               transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
-              className="rounded-3xl bg-muted/35 dark:bg-card/60 p-6 sm:p-8 relative overflow-hidden"
+              className="rounded-3xl bg-muted/35 dark:bg-card/60 p-5 sm:p-6 relative overflow-hidden"
             >
-              <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+              <div className="grid lg:grid-cols-12 gap-5 lg:gap-6 items-start">
                 
                 {/* Left Column: Narrative & Technical Highlights */}
-                <div className="lg:col-span-7 space-y-4">
+                <div className="lg:col-span-7 space-y-3.5">
                   <div>
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/15 text-[11px] font-mono font-semibold text-accent mb-3">
                       {selectedProject.awardIcon}
@@ -479,34 +544,26 @@ export function FeaturedProjectsSection() {
                     </p>
                   </div>
 
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed max-w-[62ch]">
                     {selectedProject.description}
                   </p>
 
-                  {/* Problem vs Solution Callout (Editorial Typographic Layout, Zero Nested Cards) */}
-                  <div className="space-y-3 pt-1 text-sm">
-                    <div>
-                      <span className="font-mono font-bold text-muted-foreground uppercase text-[11px]">
-                        Challenge:
-                      </span>
-                      <p className="text-muted-foreground mt-0.5 leading-relaxed">{selectedProject.problemSolution.problem}</p>
-                    </div>
-                    <div className="pt-0.5">
-                      <span className="font-mono font-bold text-accent uppercase text-[11px]">
-                        Engineering Solution:
-                      </span>
-                      <p className="text-foreground font-medium mt-0.5 leading-relaxed">{selectedProject.problemSolution.solution}</p>
-                    </div>
+                  {/* One concise outcome statement keeps the narrow reading column scannable. */}
+                  <div className="border-l-2 border-accent/60 pl-3 text-sm">
+                    <span className="font-mono font-bold text-accent uppercase text-[10px] tracking-wider">
+                      Built outcome
+                    </span>
+                    <p className="text-foreground/90 font-medium mt-0.5 leading-relaxed line-clamp-2">{selectedProject.problemSolution.solution}</p>
                   </div>
 
                   {/* Technical Highlights */}
                   <div className="pt-1">
                     <h4 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                      Core Technical Deliverables:
+                      Key proof points
                     </h4>
                     <ul className="space-y-1.5">
-                      {selectedProject.highlights.map((h, hIdx) => (
-                        <li key={hIdx} className="flex items-start gap-2 text-[13.5px] sm:text-sm text-muted-foreground leading-relaxed">
+                      {selectedProject.highlights.slice(0, 3).map((h, hIdx) => (
+                        <li key={hIdx} className="flex items-start gap-2 text-[13px] text-muted-foreground leading-snug">
                           <span className="text-accent text-[10px] shrink-0 mt-1">✦</span>
                           <span>{h}</span>
                         </li>
@@ -517,7 +574,7 @@ export function FeaturedProjectsSection() {
                   {/* Tech Stack Badges (Borderless Soft Pills) */}
                   <div className="pt-2">
                     <div className="flex flex-wrap gap-1.5">
-                      {selectedProject.tags.map((t) => (
+                      {selectedProject.tags.slice(0, 4).map((t) => (
                         <span
                           key={t}
                           className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-muted/60 dark:bg-white/[0.04] text-foreground/85"
@@ -540,13 +597,13 @@ export function FeaturedProjectsSection() {
                       </div>
                       <span>Preview</span>
                     </div>
-                    <div className="relative w-full h-48 sm:h-56 overflow-hidden">
+                    <div className="relative w-full h-52 sm:h-60 overflow-hidden">
                       <Image
                         src={selectedProject.image}
                         alt={`${selectedProject.title} screenshot`}
                         fill
                         sizes="(max-width: 768px) 100vw, 560px"
-                        className="object-cover object-center group-hover:scale-[1.01] transition-transform duration-300"
+                        className={`object-cover group-hover:scale-[1.01] transition-transform duration-200 ${selectedProject.id === 'momo' ? 'object-top' : 'object-center'}`}
                         loading="lazy"
                       />
                     </div>

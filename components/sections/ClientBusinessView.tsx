@@ -87,7 +87,7 @@ const flagshipShowcaseProjects: ShowcaseProject[] = [
     detail: 'AI assistant that guides everyday citizens through official paperwork and government service requirements step-by-step in simple, friendly language.',
     image: '/images/egov.png',
     category: 'Public Service',
-    metric: 'Top 30 National Winner',
+    metric: 'Top 5 National Finalist',
     badge: 'Award Winner',
   },
   {
@@ -242,12 +242,12 @@ const clientTestimonials: ClientTestimonial[] = [
   },
   {
     quote:
-      'Selected among the Top 30 National Winners at the National eGov PH Hackathon out of 180+ teams. Arnel built a friendly AI assistant that guides everyday citizens through official government requirements and paperwork step-by-step.',
+      'Selected as a Top 5 national finalist at the 2026 eGov PH Hackathon. Arnel built a friendly AI assistant that guides citizens through official requirements and paperwork step-by-step.',
     clientName: 'National Innovation Jury',
     clientRole: 'Evaluation Panel',
     company: 'National eGov Awards',
     project: 'eBuddy Public Guide',
-    highlightMetric: 'Top 30 National Winner',
+    highlightMetric: 'Top 5 National Finalist',
   },
   {
     quote:

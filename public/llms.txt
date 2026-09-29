@@ -14,7 +14,7 @@ Arnel Baylon is a software engineer specializing in modern full-stack web applic
 - [Pixel Crew](https://github.com/hiroqt): Autonomous 23-agent software engineering swarm with an anti-slop design engine, static codebase analysis, and real-time visual dashboard
 - [sakto.ka](https://github.com/hiroqt): Stateless AI career copilot, ATS resume studio scoring 90%+ on enterprise ATS parsers (Workday, Lever), and STAR interview prep engine
 - [FinOps AI Dashboard](https://github.com/hiroqt): Cloud financial operations and cost anomaly detection platform; Winner of Best Business Impact at AWS BGC
-- [eBuddy](https://github.com/hiroqt): Agentic citizen public service assistant unifying civic inquiries; Top 30 National Winner at Philippine eGov Hackathon
+- [eBuddy](https://github.com/hiroqt): Agentic citizen public service assistant unifying civic inquiries; Top 5 National Finalist at the 2026 Philippine eGov Hackathon
 - [Better Trece Martires](https://bettertrece.vercel.app): Civic open data platform and municipal budget transparency explorer with interactive visualizations
 - [VCM HRIS](https://github.com/hiroqt): Enterprise HR management platform with QR-code vicinity attendance validation, statutory deduction computation, and automated payroll
 - [Present Po](https://github.com/hiroqt): Mobile workforce time-tracking solution with geofencing attendance validation and automated daily shift reporting

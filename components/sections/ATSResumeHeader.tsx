@@ -29,7 +29,7 @@ const summaryMilestones = [
     href: '#skills',
   },
   {
-    value: 'Top 30',
+    value: 'Top 5',
     label: 'National eGov Hackathon',
     sub: 'AI-Powered Citizen Services',
     href: '#projects',

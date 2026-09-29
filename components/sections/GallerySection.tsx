@@ -10,7 +10,7 @@ export function GallerySection() {
   return (
     <section id="gallery" className="py-8 sm:py-10 lg:py-4 lg:min-h-[calc(100vh-4.5rem)] lg:snap-start scroll-mt-20 lg:scroll-mt-4 flex flex-col justify-start">
       {/* ── Section Header (Clean Typographic Hierarchy) ── */}
-      <div className="mb-6 flex items-baseline justify-between">
+      <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-accent font-bold">05</span>
           <span className="text-muted-foreground font-mono text-xs">—</span>
@@ -19,7 +19,7 @@ export function GallerySection() {
           </h2>
         </div>
         <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          Visual Proof &bull; Infinite Masonry Carousel
+          Selected moments &bull; Drag to explore
         </span>
       </div>
 
@@ -36,5 +36,4 @@ export function GallerySection() {
   )
 }
 export default GallerySection
-
 

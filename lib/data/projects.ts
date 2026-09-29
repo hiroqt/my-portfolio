@@ -217,19 +217,19 @@ export const projectsData: ProjectData[] = [
   },
   {
     slug: 'e-buddy',
-    title: 'e Buddy (Winner - eGov Hackathon 2026 Top 30)',
+    title: 'e Buddy (eGov Hackathon 2026 Top 5 National Finalist)',
     type: 'AI / Civic Tech',
-    summary: 'Winner of eGov Hackathon 2026 (Top 30). Unified government services platform designed to streamline citizen compliance and public service delivery using an agentic AI named e Buddy.',
+    summary: 'Top 5 national finalist at the eGov Hackathon 2026. A unified government services platform designed to streamline citizen compliance and public service delivery using an agentic AI named e Buddy.',
     tags: ['TypeScript', 'AI', 'Tailwind CSS', 'Agentic AI', 'Next.js'],
     link: '#',
     image: '/images/egov.png',
     previewName: 'e-gov-ai.vercel.app',
     isFeatured: true,
-    featuredTag: 'WINNER - TOP 30',
+    featuredTag: 'TOP 5 NATIONAL FINALIST',
     featuredTitle: 'e Buddy',
-    featuredSummary: 'Winner of eGov Hackathon 2026 (Top 30). Unified government services platform powered by agentic AI.',
+    featuredSummary: 'Top 5 national finalist at the eGov Hackathon 2026. Unified government services platform powered by agentic AI.',
     metrics: [
-      'Top 30 Winner at national eGov Hackathon 2026',
+      'Top 5 national finalist at the eGov Hackathon 2026',
       'Unified multi-agency public workflow automation',
       'Real-time biometric liveness detection'
     ],
@@ -246,7 +246,7 @@ export const projectsData: ProjectData[] = [
     content: [
       {
         title: 'Abstract',
-        content: 'e Buddy was developed for the eGov Hackathon 2026, where it emerged as a Top 30 winner. The core problem addressed is the fragmented nature of public services across different government agencies, leading to citizen confusion and administrative bottlenecks.'
+        content: 'e Buddy was developed for the eGov Hackathon 2026, where it emerged as a Top 5 national finalist. The core problem addressed is the fragmented nature of public services across different government agencies, leading to citizen confusion and administrative bottlenecks.'
       },
       {
         title: 'The Solution',
