@@ -1,6 +1,6 @@
 # Arnel Baylon’s portfolio
 
-A responsive portfolio for Arnel’s software engineering, civic technology, and AI work. The site uses one portfolio layout, focused project case studies, and a separate conversational assistant.
+A responsive portfolio for Arnel’s software engineering, civic technology, and AI work. The site uses one portfolio layout, focused project case studies, and a separate conversational assistant. New Layout
 
 Built with Next.js 15 App Router, React 19, TypeScript, Tailwind CSS, CSS modules, Geist typography, and restrained Framer Motion interactions. Themes share the same design tokens, and motion supports reduced-motion preferences.
 
