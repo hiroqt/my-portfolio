@@ -10,6 +10,7 @@ import { WorkShowcase } from '@/components/sections/WorkShowcase'
 import { StackShowcase } from '@/components/sections/StackShowcase'
 import { JourneySection } from '@/components/sections/JourneySection'
 import headerImage from '@/public/images/header.png'
+import oracleAgenticAiBadge from '@/public/images/certs/oracle-agentic-ai-foundations.png'
 import styles from './PortfolioShell.module.css'
 
 interface MilestoneProof {
@@ -204,6 +205,16 @@ export function PortfolioShell() {
             <div className={styles.heroCopy}>
               <p className={styles.eyebrow}>AI-DRIVEN SOFTWARE DEVELOPER / AI SYSTEMS</p>
               <h1>I’m Arnel<span>Baylon.</span></h1>
+              <a
+                className={styles.credentialBadge}
+                href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=AE15372EEF7EEFB4229A84C9BB3E1E47AD325384BF2A2731D58BDF4298FDBD47"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View Arnel Baylon’s Oracle Agentic AI Certified Foundations Associate badge"
+              >
+                <Image src={oracleAgenticAiBadge} alt="" width={78} height={39} />
+                <span><small>ORACLE CERTIFIED</small><strong>Agentic AI Foundations Associate</strong><span className={styles.credentialLink}>View credential ↗</span></span>
+              </a>
               <p className={styles.heroTagline}>Deep technical fundamentals.<br />AI as a precision tool, not a shortcut.</p>
               <p className={styles.intro}>I turn complex workflows into useful web products, mobile experiences, and AI systems. Thoughtful interfaces. Practical engineering.</p>
               <div className={styles.heroActions}><a href="#projects" className={styles.primaryButton}>Explore my work <span aria-hidden="true">↗</span></a><a href="/pdf/Resume.pdf" target="_blank" rel="noreferrer" className={styles.textLink}>Résumé <span aria-hidden="true">↗</span></a></div>
