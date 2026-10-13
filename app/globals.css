@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --folio-paper { syntax: "<color>"; inherits: true; initial-value: #f8f8f5; }
+@property --folio-ink { syntax: "<color>"; inherits: true; initial-value: #2d2e2b; }
+@property --folio-muted { syntax: "<color>"; inherits: true; initial-value: #6b6e68; }
+@property --folio-line { syntax: "<color>"; inherits: true; initial-value: #dddfd7; }
+@property --folio-accent { syntax: "<color>"; inherits: true; initial-value: #5358a3; }
+@property --folio-surface { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+@property --folio-soft { syntax: "<color>"; inherits: true; initial-value: #eeefea; }
+
 @layer base {
   :root {
     --font-sans: var(--font-geist-sans);
@@ -27,6 +35,7 @@
     --duration-fast: 160ms;
     --duration-normal: 220ms;
     --duration-slow: 300ms;
+    transition: --folio-paper 900ms ease-in-out, --folio-ink 900ms ease-in-out, --folio-muted 900ms ease-in-out, --folio-line 900ms ease-in-out, --folio-accent 900ms ease-in-out, --folio-surface 900ms ease-in-out, --folio-soft 900ms ease-in-out;
   }
 
   .dark {
