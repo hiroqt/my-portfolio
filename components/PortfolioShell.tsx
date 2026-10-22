@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useMotionTemplate, useReducedMotion, useSpring
 import { useTheme } from '@/components/ThemeProvider'
 import { WorkShowcase } from '@/components/sections/WorkShowcase'
 import { StackShowcase } from '@/components/sections/StackShowcase'
+import { SkillsShowcase } from '@/components/sections/SkillsShowcase'
 import { JourneySection } from '@/components/sections/JourneySection'
 import headerImage from '@/public/images/header.png'
 import oracleAgenticAiBadge from '@/public/images/certs/oracle-agentic-ai-foundations.png'
@@ -65,6 +66,7 @@ const email = 'arnelbaylon15@gmail.com'
 const navigation = [
   { id: 'projects', label: 'Work' },
   { id: 'skills', label: 'Stack' },
+  { id: 'built-skills', label: 'Skills' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ]
@@ -249,18 +251,23 @@ export function PortfolioShell() {
 
         <section id="skills" data-portfolio-section data-reveal className={styles.stackSection} aria-label="Tools and work approach"><StackShowcase /></section>
 
+        <section id="built-skills" data-portfolio-section data-reveal className={styles.section}>
+          <SectionHeading number="01 /" title="Skills I build" note="Tools for more coordinated, capable AI engineering." />
+          <SkillsShowcase />
+        </section>
+
         <section id="projects" data-portfolio-section data-reveal className={styles.section}>
-          <SectionHeading number="01 /" title="Featured work" note="A few ideas I brought to life." />
+          <SectionHeading number="02 /" title="Featured work" note="A few ideas I brought to life." />
           <div className={styles.sectionBody}><WorkShowcase /></div>
         </section>
 
         <section id="services" data-portfolio-section data-nav-section="about" data-reveal className={styles.section}>
-          <SectionHeading number="02 /" title="What I can help with" />
+          <SectionHeading number="03 /" title="What I can help with" />
           <div className={styles.services}>{services.map((service, index) => <article key={service.title}><span className={styles.serviceNumber}>0{index + 1}</span><h3>{service.title}</h3><p>{service.description}</p><small>{service.detail}</small></article>)}</div>
         </section>
 
         <section id="about" data-portfolio-section data-reveal className={styles.section}>
-          <SectionHeading number="03 /" title="The human behind the code" />
+          <SectionHeading number="04 /" title="The human behind the code" />
           <div className={styles.aboutGrid}>
             <div className={styles.aboutCopy}><p className={styles.aboutLead}>Great software is built<br />with intent.</p><p>I’m Arnel—also Nel or Yhel. My work sits at the intersection of solid software development and modern AI systems: building products grounded in deep technical fundamentals and accelerated with AI leverage.</p><p>I care about the whole lifecycle—listening to what users actually need, architecting systems that last, and shipping with precision. When I’m away from the keyboard, you’ll find me running, making pixel art, and exploring what’s next.</p><Link href="/assistant" className={styles.textLink}>A little more about me? Ask my AI <span aria-hidden="true">↗</span></Link></div>
             <figure id="gallery" className={styles.aboutPhoto}><Image src="/images/gallery/egov-top5-2026.png" alt="Arnel with team DEVOOPS at the eGov Hackathon 2026 finalist recognition" width={1080} height={725} sizes="(max-width: 700px) 90vw, 500px" /><figcaption>Team DEVOOPS. Ideas become better together.</figcaption></figure>
@@ -272,12 +279,12 @@ export function PortfolioShell() {
         </section>
 
         <section id="experience" data-portfolio-section data-nav-section="about" data-reveal className={styles.section}>
-          <SectionHeading number="04 /" title="The path so far" note="Building, learning, showing up." />
+          <SectionHeading number="05 /" title="The path so far" note="Building, learning, showing up." />
           <div className={styles.sectionBody}><JourneySection /></div>
         </section>
 
         <section id="contact" data-portfolio-section data-reveal className={`${styles.section} ${styles.contact}`}>
-          <div className={styles.contactMeta}><span>05 / SAY HELLO</span><span><i className={styles.statusDot} />Open to opportunities</span></div>
+          <div className={styles.contactMeta}><span>06 / SAY HELLO</span><span><i className={styles.statusDot} />Open to opportunities</span></div>
           <h2>Let’s make<br />something useful<span>.</span></h2>
           <p>A product to launch, a workflow to simplify, or an AI idea to explore?<br />Tell me what you’re working on.</p>
           <div className={styles.emailRow}><a href={`mailto:${email}`}>{email} <span aria-hidden="true">↗</span></a><button type="button" onClick={copyEmail} aria-label="Copy email address">{copyState === 'copied' ? 'Copied ✓' : 'Copy'}</button></div>

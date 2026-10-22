@@ -1,0 +1,125 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.card + .card {
+  border-left: 1px solid var(--folio-line);
+}
+
+.category {
+  color: var(--folio-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: .07em;
+}
+
+.card h3 {
+  margin-top: 18px;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -.045em;
+}
+
+.summary {
+  max-width: 42ch;
+  margin-top: 10px;
+  color: var(--folio-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.audience {
+  margin-top: 18px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.audience span {
+  margin-right: 8px;
+  color: var(--folio-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 18px 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.capabilities li {
+  padding: 5px 8px;
+  border: 1px solid var(--folio-line);
+  border-radius: 4px;
+  color: var(--folio-muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.link {
+  display: inline-flex;
+  width: max-content;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  color: var(--folio-ink);
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 160ms var(--ease-out);
+}
+
+.link span {
+  color: var(--folio-muted);
+  transition: transform 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+
+.link:hover,
+.link:hover span {
+  color: var(--folio-accent);
+}
+
+.link:hover span {
+  transform: translate(2px, -2px);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--folio-accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 24px 22px;
+  }
+
+  .card + .card {
+    border-top: 1px solid var(--folio-line);
+    border-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .link span {
+    transition: none;
+  }
+}
