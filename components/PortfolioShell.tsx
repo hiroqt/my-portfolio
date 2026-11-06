@@ -31,8 +31,8 @@ const proofMilestones: MilestoneProof[] = [
     tag: 'AWS BUILDNIGHTS / 2026',
     title: 'Best Business Impact',
     sub: 'Capstone Winner · AI Cloud Architecture',
-    imageSrc: '/certs/aws-capstone-best-business-impact.png',
-    alt: 'AWS BuildNights Best Business Impact Capstone Award Certificate',
+    imageSrc: '/images/gallery/business-impact-quickquest.png',
+    alt: 'QuickQuest Capstone on Quick finale poster in magenta and black',
     linkUrl: '/certs/aws-capstone-best-business-impact.pdf',
     linkLabel: 'View official PDF certificate ↗',
   },
@@ -64,9 +64,9 @@ const MonkeyTypeGame = dynamic(
 )
 const email = 'arnelbaylon15@gmail.com'
 const navigation = [
-  { id: 'projects', label: 'Work' },
   { id: 'skills', label: 'Stack' },
   { id: 'built-skills', label: 'Skills' },
+  { id: 'projects', label: 'Work' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ]
@@ -222,9 +222,8 @@ export function PortfolioShell() {
                   <strong>2× HACKATHON WINNER</strong><span aria-hidden="true">↗</span>
                 </a>
               </div>
-              <p className={styles.heroTagline}>Deep technical fundamentals.<br />AI as a precision tool, not a shortcut.</p>
-              <p className={styles.intro}>I turn complex workflows into useful web products, mobile experiences, and AI systems. Thoughtful interfaces. Practical engineering.</p>
-              <div className={styles.heroActions}><a href="#projects" className={styles.primaryButton}>Explore my work <span aria-hidden="true">↗</span></a><a href="/pdf/Resume.pdf" target="_blank" rel="noreferrer" className={styles.textLink}>Résumé <span aria-hidden="true">↗</span></a></div>
+              <p className={styles.intro}>I build useful web products, mobile experiences, and AI systems with thoughtful interfaces and practical engineering.</p>
+              <div className={styles.heroActions}><a href="#projects" className={styles.primaryButton}>Explore my work <span aria-hidden="true">↗</span></a></div>
             </div>
             <div className={styles.heroStatus}><span><i className={styles.statusDot} />Open to good projects</span><span>Cavite, PH <b>{localTime}</b></span></div>
           </div>
@@ -238,21 +237,22 @@ export function PortfolioShell() {
               className={styles.proofCard}
               onClick={() => setSelectedProof(item)}
               aria-haspopup="dialog"
+              aria-label={`Preview ${item.title} recognition`}
             >
+              <span className={styles.proofBackdrop} style={{ backgroundImage: `url("${item.imageSrc}")` }} aria-hidden="true" />
               <small>{item.tag}</small>
               <strong>
                 {item.title} <span aria-hidden="true">↗</span>
               </strong>
               <span className={styles.proofSub}>{item.sub}</span>
-              <span className={styles.proofAction}>Click to preview ✦</span>
             </button>
           ))}
         </div>
 
-        <section id="skills" data-portfolio-section data-reveal className={styles.stackSection} aria-label="Tools and work approach"><StackShowcase /></section>
+        <section id="skills" data-portfolio-section data-reveal className={styles.stackSection} aria-label="Languages and tools"><StackShowcase /></section>
 
         <section id="built-skills" data-portfolio-section data-reveal className={styles.section}>
-          <SectionHeading number="01 /" title="Skills I build" note="Tools for more coordinated, capable AI engineering." />
+          <SectionHeading number="01 /" title="Skills I build" />
           <SkillsShowcase />
         </section>
 
