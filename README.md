@@ -1,4 +1,4 @@
-# Arnel Baylon’s portfolio
+# Yhel’s portfolio
 
 A responsive portfolio for Arnel’s software engineering, civic technology, and AI work. The site uses one portfolio layout, focused project case studies, and a separate conversational assistant. https://yhel.online
 
