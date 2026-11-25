@@ -208,6 +208,7 @@ export function PortfolioShell() {
               )}
             </a>
           ))}
+          <Link href="/blog">Blog</Link>
         </nav>
         <div className={styles.headerActions}>
           <Link href="/assistant" className={styles.aiLink}>Ask my AI <span aria-hidden="true">↗</span></Link>

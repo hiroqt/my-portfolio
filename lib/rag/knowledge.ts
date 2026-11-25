@@ -192,6 +192,15 @@ Both certificates are listed in the Certifications column of the portfolio, with
     metadata: { section: 'nvidia-certifications', featured: true }
   },
   {
+    id: 'writing-ai-fresh-graduates-study',
+    documentId: 'about',
+    title: 'Blog Study: How AI Affects IT Fresh Graduates in Finding a Job',
+    category: 'about',
+    content: `Arnel publishes studies and notes on his blog at /blog. His first study, "How AI Affects IT Fresh Graduates in Finding a Job: The Case of Graduates from State Universities and Lesser-Known Schools in the Philippines" (November 25, 2026, /blog/ai-it-fresh-graduates-philippines), synthesizes 2023–2026 secondary evidence from PSA Labor Force Surveys, IMF and ILO AI-exposure studies, IBPAP industry data, Stanford payroll research, JobStreet employer surveys, graduate tracer studies, and research on AI résumé screening. Key findings: entry-level IT hiring is tightening (IBPAP cut its 2028 job target from 2.5 million to 1.85–2.14 million, citing AI); the profile most exposed to AI matches a fresh IT graduate; school name matters by recognition rather than public or private status (PUP, a state university, led JobStreet's 2023 employer preference list); and AI résumé screening can amplify prestige shortcuts. It concludes that AI does not create the school-name gap but widens it, and that portfolios, certifications, internships, and skills-based hiring are the main counterweights.`,
+    keywords: ['blog', 'study', 'research', 'writing', 'article', 'fresh graduates', 'it graduates', 'jobs', 'hiring', 'state universities', 'suc', 'philippines', 'ai and jobs', 'résumé screening', 'employability'],
+    metadata: { section: 'writing' }
+  },
+  {
     id: 'achieve-oracle-cert',
     documentId: 'achievements',
     title: 'Oracle Agentic AI Certified Foundations Associate',

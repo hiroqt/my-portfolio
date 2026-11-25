@@ -28,6 +28,10 @@ Arnel Baylon is a software engineer specializing in modern full-stack web applic
 - [Agentic AI Engineering](https://arnelbaylon.dev/#skills): Google Antigravity SDK, Groq SDK, LangChain, RAG Systems, Multi-Agent Swarms, Tool Calling, Structured JSON Outputs
 - [Infrastructure & Performance](https://arnelbaylon.dev/#skills): Docker, AWS, Vercel, Cloudflare, Git, CI/CD, WCAG 2.1 AA Accessibility, Core Web Vitals Optimization
 
+## Writing
+- [Blog](https://arnelbaylon.dev/blog): Studies and notes by Arnel Baylon
+- [How AI Affects IT Fresh Graduates in Finding a Job](https://arnelbaylon.dev/blog/ai-it-fresh-graduates-philippines): Study (Nov 25, 2026) on how AI narrows entry-level IT hiring in the Philippines, and why graduates of state universities and lesser-known schools face a higher burden of proof
+
 ## Certifications
 - [NVIDIA — Building LLM Applications With Prompt Engineering](https://arnelbaylon.dev/certs/nvidia-building-llm-apps-prompt-engineering.pdf): Certificate of Competency, issued November 19, 2026
 - [NVIDIA — Fundamentals of Deep Learning](https://arnelbaylon.dev/certs/nvidia-fundamentals-of-deep-learning.pdf): Certificate of Competency, issued November 18, 2026
