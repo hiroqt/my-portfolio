@@ -25,6 +25,17 @@ export interface ProjectData {
   featuredTitle?: string;
   initiative?: string;
   metrics?: string[];
+  /** Places the project in the home page "Featured work" grid. The card reads its title, summary, and first three tags from this record. */
+  showcase?: ProjectShowcase;
+}
+
+export interface ProjectShowcase {
+  /** Position in the grid, starting at 1. */
+  order: number;
+  /** Short label above the card title. */
+  category: string;
+  /** CSS object-position for the 16:10 card crop. Defaults to center. */
+  focus?: string;
 }
 
 export const projectsData: ProjectData[] = [
@@ -44,6 +55,7 @@ export const projectsData: ProjectData[] = [
     featuredTag: 'AUTONOMOUS AI SWARM',
     featuredTitle: 'Pixel Crew',
     featuredSummary: 'A visual AI agent orchestration workspace built with Node.js and JavaScript, with parallel tasks and a retro pixel-art office.',
+    showcase: { order: 4, category: 'Autonomous AI swarm' },
     initiative: 'Open Source AI Tooling',
     metrics: [
       '23 Specialized agent command personas',
@@ -92,6 +104,7 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'STATELESS AI CAREER COPILOT',
     featuredTitle: 'Sakto Ka',
+    showcase: { order: 2, category: 'AI & career copilot', focus: 'center 40%' },
     featuredSummary: 'Private career copilot with offline-first ATS resume scoring powered by Python FastAPI, job matching, and real-time voice interview simulations directly in your browser.',
     initiative: 'Career Intelligence System',
     metrics: [
@@ -131,7 +144,7 @@ export const projectsData: ProjectData[] = [
     title: 'FinOps AI Dashboard (Winner - Best Business Impact)',
     type: 'Financial Operations / Enterprise AI',
     summary: 'Awarded "Best Business Impact" at the Amazon Quick Quest Workshop (AWS BGC, Taguig). An intelligent financial operations hub combining automated expense categorization, invoice-to-PO reconciliation, and real-time policy compliance powered by Amazon Quick.',
-    tags: ['Amazon Quick', 'FinOps', 'QuickSight Spaces', 'AWS', 'Google Connectors', 'AI Agents'],
+    tags: ['Amazon Quick', 'AI Agents', 'FinOps', 'QuickSight Spaces', 'AWS', 'Google Connectors'],
     link: '/projects/finops-ai-dashboard',
     github: 'https://github.com/hiroqt',
     image: '/images/finops.jpg',
@@ -141,6 +154,7 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'WINNER - BEST BUSINESS IMPACT',
     featuredTitle: 'FinOps AI Dashboard',
+    showcase: { order: 3, category: 'Enterprise AI & FinOps', focus: 'center 6%' },
     featuredSummary: 'Winner of Best Business Impact at the final capstone presentation of the 9-Week Amazon Quick Quest Workshop (AWS Office BGC). AI-powered financial operations hub automating expense reviews, invoice PO matching, and compliance.',
     initiative: 'Amazon Quick Quest Workshop (BGC)',
     metrics: [
@@ -193,6 +207,7 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'BETTERGOV INITIATIVE',
     featuredTitle: 'Better Trece',
+    showcase: { order: 6, category: 'Civic tech & open data', focus: 'center 30%' },
     featuredSummary: 'Open civic data portal visualizing municipal budgets, infrastructure spending, and public city services for Trece Martires.',
     initiative: 'BetterGov Philippines',
     metrics: [
@@ -231,7 +246,7 @@ export const projectsData: ProjectData[] = [
     title: 'eGov AI (Top 5 eGov Hackathon 2026)',
     type: 'AI / Civic Tech',
     summary: 'A unified civic platform with biometric face verification, multi-modal voice AI, and automated public services. Recognized in the Top 5 at the eGov Hackathon 2026.',
-    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Agentic AI'],
+    tags: ['React', 'TypeScript', 'Agentic AI', 'Vite', 'Tailwind CSS'],
     link: '#',
     image: '/images/egov.png',
     imageWidth: 1050,
@@ -240,6 +255,7 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'TOP 5 EGOV',
     featuredTitle: 'eGov AI',
+    showcase: { order: 1, category: 'AI & civic tech', focus: 'center 45%' },
     featuredSummary: 'A unified civic platform with biometric face verification, multi-modal voice AI, and automated public services. Recognized Top 5 at eGov Hackathon 2026.',
     metrics: [
       'Top 5 at the eGov Hackathon 2026',
@@ -286,6 +302,7 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'MACOS & ANDROID UTILITY',
     featuredTitle: 'Android Deck',
+    showcase: { order: 5, category: 'macOS & Android utility' },
     featuredSummary: 'Transforms an Android phone into a touchscreen stream deck for macOS over USB or Wi-Fi, paired with a native Swift Liquid Glass notch HUD.',
     metrics: [
       '40 Passing Swift unit tests & Release DMG build',

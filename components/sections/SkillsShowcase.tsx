@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import styles from './SkillsShowcase.module.css'
 
 const skills = [
@@ -22,8 +23,8 @@ const skills = [
 export function SkillsShowcase() {
   return (
     <div className={styles.grid}>
-      {skills.map((skill) => (
-        <article className={styles.card} key={skill.name}>
+      {skills.map((skill, index) => (
+        <article className={styles.card} key={skill.name} data-reveal style={{ '--reveal-index': index } as CSSProperties}>
           <p className={styles.category}>{skill.category}</p>
           <h3>{skill.name}</h3>
           <p className={styles.summary}>{skill.summary}</p>

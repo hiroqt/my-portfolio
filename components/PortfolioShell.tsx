@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -76,6 +76,8 @@ const services = [
   { title: 'Mobile experiences', description: 'Useful apps that feel at home in everyday routines.', detail: 'React Native · Expo · Native integrations' },
 ]
 
+const revealIndex = (index: number) => ({ '--reveal-index': index }) as CSSProperties
+
 function SectionHeading({ number, title, note }: { number: string; title: string; note?: string }) {
   return (
     <div className={styles.sectionHeading}>
@@ -96,7 +98,7 @@ function PixelPortrait() {
       <div className={styles.portraitMeta}><span>ARNEL / ALSO NEL OR YHEL</span><span aria-hidden="true">✦</span></div>
       <motion.div
         className={styles.portrait}
-        style={{ transform: reduceMotion ? 'none' : transform }}
+        style={{ transform }}
         onPointerMove={event => {
           if (reduceMotion || event.pointerType !== 'mouse' || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
           const bounds = event.currentTarget.getBoundingClientRect()
@@ -114,6 +116,7 @@ function PixelPortrait() {
 
 export function PortfolioShell() {
   const { resolvedTheme, setTheme } = useTheme()
+  const reduceMotion = useReducedMotion()
   const [activeSection, setActiveSection] = useState('hero')
   const [localTime, setLocalTime] = useState('GMT+8')
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle')
@@ -192,7 +195,19 @@ export function PortfolioShell() {
       <header className={styles.topbar}>
         <a href="#hero" className={styles.brand} aria-label="Arnel Baylon, back to overview"><span>Arnel Baylon<small>AI-driven software developer</small></span></a>
         <nav className={styles.navigation} aria-label="Main navigation">
-          {navigation.map(({ id, label }) => <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined}>{label}</a>)}
+          {navigation.map(({ id, label }) => (
+            <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined}>
+              {label}
+              {activeSection === id && (
+                <motion.span
+                  className={styles.navIndicator}
+                  layoutId="nav-indicator"
+                  transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 38 }}
+                  aria-hidden="true"
+                />
+              )}
+            </a>
+          ))}
         </nav>
         <div className={styles.headerActions}>
           <Link href="/assistant" className={styles.aiLink}>Ask my AI <span aria-hidden="true">↗</span></Link>
@@ -206,7 +221,10 @@ export function PortfolioShell() {
           <div className={styles.heroBody}>
             <div className={styles.heroCopy}>
               <p className={styles.eyebrow}>AI-DRIVEN SOFTWARE DEVELOPER / AI SYSTEMS</p>
-              <h1>I’m Arnel<span>Baylon.</span></h1>
+              <h1 aria-label="I’m Arnel Baylon.">
+                <span className={styles.headlineLine} aria-hidden="true"><span>I’m Arnel</span></span>
+                <span className={styles.headlineLine} aria-hidden="true"><span>Baylon.</span></span>
+              </h1>
               <div className={styles.heroBadges}>
                 <a
                   className={styles.credentialBadge}
@@ -249,28 +267,31 @@ export function PortfolioShell() {
           ))}
         </div>
 
-        <section id="skills" data-portfolio-section data-reveal className={styles.stackSection} aria-label="Languages and tools"><StackShowcase /></section>
+        <section id="skills" data-portfolio-section className={styles.section}>
+          <SectionHeading number="01 /" title="Languages & tools" />
+          <StackShowcase />
+        </section>
 
-        <section id="built-skills" data-portfolio-section data-reveal className={styles.section}>
-          <SectionHeading number="01 /" title="Skills I build" />
+        <section id="built-skills" data-portfolio-section className={styles.section}>
+          <SectionHeading number="02 /" title="Skills I build" />
           <SkillsShowcase />
         </section>
 
-        <section id="projects" data-portfolio-section data-reveal className={styles.section}>
-          <SectionHeading number="02 /" title="Featured work" note="A few ideas I brought to life." />
+        <section id="projects" data-portfolio-section className={styles.section}>
+          <SectionHeading number="03 /" title="Featured work" note="A few ideas I brought to life." />
           <div className={styles.sectionBody}><WorkShowcase /></div>
         </section>
 
-        <section id="services" data-portfolio-section data-nav-section="about" data-reveal className={styles.section}>
-          <SectionHeading number="03 /" title="What I can help with" />
-          <div className={styles.services}>{services.map((service, index) => <article key={service.title}><span className={styles.serviceNumber}>0{index + 1}</span><h3>{service.title}</h3><p>{service.description}</p><small>{service.detail}</small></article>)}</div>
+        <section id="services" data-portfolio-section data-nav-section="about" className={styles.section}>
+          <SectionHeading number="04 /" title="What I can help with" />
+          <div className={styles.services}>{services.map((service, index) => <article key={service.title} data-reveal style={revealIndex(index)}><span className={styles.serviceNumber}>0{index + 1}</span><h3>{service.title}</h3><p>{service.description}</p><small>{service.detail}</small></article>)}</div>
         </section>
 
-        <section id="about" data-portfolio-section data-reveal className={styles.section}>
-          <SectionHeading number="04 /" title="The human behind the code" />
+        <section id="about" data-portfolio-section className={styles.section}>
+          <SectionHeading number="05 /" title="The human behind the code" />
           <div className={styles.aboutGrid}>
-            <div className={styles.aboutCopy}><p className={styles.aboutLead}>Great software is built<br />with intent.</p><p>I’m Arnel—also Nel or Yhel. My work sits at the intersection of solid software development and modern AI systems: building products grounded in deep technical fundamentals and accelerated with AI leverage.</p><p>I care about the whole lifecycle—listening to what users actually need, architecting systems that last, and shipping with precision. When I’m away from the keyboard, you’ll find me running, making pixel art, and exploring what’s next.</p><Link href="/assistant" className={styles.textLink}>A little more about me? Ask my AI <span aria-hidden="true">↗</span></Link></div>
-            <figure id="gallery" className={styles.aboutPhoto}><Image src="/images/gallery/egov-top5-2026.png" alt="Arnel with team DEVOOPS at the eGov Hackathon 2026 finalist recognition" width={1080} height={725} sizes="(max-width: 700px) 90vw, 500px" /><figcaption>Team DEVOOPS. Ideas become better together.</figcaption></figure>
+            <div className={styles.aboutCopy} data-reveal><p className={styles.aboutLead}>Great software is built<br />with intent.</p><p>I’m Arnel—also Nel or Yhel. My work sits at the intersection of solid software development and modern AI systems: building products grounded in deep technical fundamentals and accelerated with AI leverage.</p><p>I care about the whole lifecycle—listening to what users actually need, architecting systems that last, and shipping with precision. When I’m away from the keyboard, you’ll find me running, making pixel art, and exploring what’s next.</p><Link href="/assistant" className={styles.textLink}>A little more about me? Ask my AI <span aria-hidden="true">↗</span></Link></div>
+            <figure id="gallery" className={styles.aboutPhoto} data-reveal style={revealIndex(1)}><Image src="/images/gallery/egov-top5-2026.png" alt="Arnel with team DEVOOPS at the eGov Hackathon 2026 finalist recognition" width={1080} height={725} sizes="(max-width: 700px) 90vw, 500px" /><figcaption>Team DEVOOPS. Ideas become better together.</figcaption></figure>
           </div>
           <details id="typing" className={styles.playground} onToggle={event => setPlaygroundOpen(event.currentTarget.open)}>
             <summary><span>A small detour: the typing playground</span><span aria-hidden="true">{playgroundOpen ? '−' : '+'}</span></summary>
@@ -278,13 +299,13 @@ export function PortfolioShell() {
           </details>
         </section>
 
-        <section id="experience" data-portfolio-section data-nav-section="about" data-reveal className={styles.section}>
-          <SectionHeading number="05 /" title="The path so far" note="Building, learning, showing up." />
+        <section id="experience" data-portfolio-section data-nav-section="about" className={styles.section}>
+          <SectionHeading number="06 /" title="The path so far" note="Building, learning, showing up." />
           <div className={styles.sectionBody}><JourneySection /></div>
         </section>
 
         <section id="contact" data-portfolio-section data-reveal className={`${styles.section} ${styles.contact}`}>
-          <div className={styles.contactMeta}><span>06 / SAY HELLO</span><span><i className={styles.statusDot} />Open to opportunities</span></div>
+          <div className={styles.contactMeta}><span>07 / SAY HELLO</span><span><i className={styles.statusDot} />Open to opportunities</span></div>
           <h2>Let’s make<br />something useful<span>.</span></h2>
           <p>A product to launch, a workflow to simplify, or an AI idea to explore?<br />Tell me what you’re working on.</p>
           <div className={styles.emailRow}><a href={`mailto:${email}`}>{email} <span aria-hidden="true">↗</span></a><button type="button" onClick={copyEmail} aria-label="Copy email address">{copyState === 'copied' ? 'Copied ✓' : 'Copy'}</button></div>

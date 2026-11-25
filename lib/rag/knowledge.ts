@@ -180,6 +180,27 @@ Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denis
     metadata: { section: 'aws-official-certifications', featured: true }
   },
   {
+    id: 'achieve-nvidia-certs',
+    documentId: 'achievements',
+    title: 'NVIDIA Certificates of Competency (Deep Learning & Prompt Engineering)',
+    category: 'achievements',
+    content: `NVIDIA Certificates of Competency awarded to Arnel Baylon (NVIDIA learning platform, learn.nvidia.com):
+1. Building LLM Applications With Prompt Engineering — issued November 19, 2026 (Certification ID 3g35lFwYStOlKIgoEEAmTw).
+2. Fundamentals of Deep Learning — issued November 18, 2026 (Certification ID f_7g8ar5SQW6cGlgqUtX0w).
+Both certificates are listed in the Certifications column of the portfolio, with the PDF certificates linked.`,
+    keywords: ['nvidia', 'certifications', 'certificate', 'deep learning', 'fundamentals of deep learning', 'prompt engineering', 'llm applications', 'llm', 'competency', 'credentials'],
+    metadata: { section: 'nvidia-certifications', featured: true }
+  },
+  {
+    id: 'achieve-oracle-cert',
+    documentId: 'achievements',
+    title: 'Oracle Agentic AI Certified Foundations Associate',
+    category: 'achievements',
+    content: `Oracle certification: Arnel Baylon is an Oracle Agentic AI Certified Foundations Associate, with a verified Oracle badge linked from the portfolio hero and Certifications column.`,
+    keywords: ['oracle', 'certifications', 'agentic ai', 'foundations associate', 'oracle certified', 'badge', 'credentials'],
+    metadata: { section: 'oracle-certifications' }
+  },
+  {
     id: 'achieve-ibm-certs',
     documentId: 'achievements',
     title: 'IBM Professional AI Certifications (7 Topics)',

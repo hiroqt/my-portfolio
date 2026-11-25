@@ -17,7 +17,7 @@
 .category {
   color: var(--folio-muted);
   font-family: var(--font-mono), monospace;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: .07em;
 }
 
@@ -32,13 +32,13 @@
   max-width: 42ch;
   margin-top: 10px;
   color: var(--folio-muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
 }
 
 .audience {
   margin-top: 18px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
@@ -46,7 +46,7 @@
   margin-right: 8px;
   color: var(--folio-muted);
   font-family: var(--font-mono), monospace;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: .06em;
   text-transform: uppercase;
 }
@@ -65,7 +65,7 @@
   border: 1px solid var(--folio-line);
   border-radius: 4px;
   color: var(--folio-muted);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.4;
 }
 
@@ -77,7 +77,7 @@
   gap: 10px;
   margin-top: auto;
   color: var(--folio-ink);
-  font-size: 11px;
+  font-size: 12px;
   text-decoration: underline;
   text-underline-offset: 4px;
   transition: color 160ms var(--ease-out);

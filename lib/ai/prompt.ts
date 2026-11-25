@@ -67,7 +67,7 @@ ${contextInfo}
     case 'recruiter':
       personaInstruction = `
 - ADAPTIVE STYLE: RECRUITER MODE
-  - Highlight skills, hands-on experience, production deployments, leadership, and verified certifications (IBM, AWS).
+  - Highlight skills, hands-on experience, production deployments, leadership, and verified certifications (NVIDIA, Oracle, IBM, AWS).
   - Be structured, clear, and proactive about providing contact channels for interviews.`;
       break;
     case 'developer':

@@ -87,7 +87,7 @@
 
 .note {
   color: var(--folio-accent);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 550;
   line-height: 1.5;
 }
@@ -128,92 +128,18 @@
   line-height: 1.6;
 }
 
-.award {
-  display: block;
-  padding: 1.35rem;
-  border: 1px solid var(--folio-line);
-  border-radius: 0.65rem;
-  color: var(--folio-ink);
-  text-decoration: none;
-  background: var(--folio-soft);
-  transition: border-color 160ms ease, background-color 160ms ease;
-}
-
-.awardTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.1rem;
-  color: var(--folio-accent);
-}
-
-.awardDate {
-  color: var(--folio-muted);
-  font-size: 0.68rem;
-  line-height: 1.5;
-}
-
-.awardTitle {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -0.025em;
-}
-
-.awardDescription {
-  margin: 0.45rem 0 0;
-  color: var(--folio-muted);
-  font-size: 0.8rem;
-  line-height: 1.65;
-}
-
-.awardAction {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-top: 1.15rem;
-  color: var(--folio-accent);
-  font-size: 0.73rem;
-  font-weight: 550;
-  line-height: 1.5;
-}
-
-.finalistAward {
-  margin-top: 0.75rem;
-  padding: 1.1rem 1.35rem;
-  background: var(--folio-surface);
-}
-
-.finalistAward .awardTop {
-  margin-bottom: 0.65rem;
-}
-
-.finalistAward .awardTitle {
-  font-size: 0.94rem;
-}
-
-.finalistAward .awardAction {
-  margin-top: 0.75rem;
-}
-
-.finalistMark {
-  font-size: 1.1rem;
-  font-weight: 650;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-}
-
 .credentialList {
-  margin: 0.8rem 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.credentialList > li + li {
-  border-top: 1px solid var(--folio-line);
+.credentialList > li {
+  border-bottom: 1px solid var(--folio-line);
+}
+
+.credentialList > li:first-child .credential {
+  padding-top: 0;
 }
 
 .credential {
@@ -227,10 +153,24 @@
 }
 
 .issuer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
   color: var(--folio-muted);
-  font-size: 0.65rem;
-  font-weight: 550;
+  font-size: 0.72rem;
+  font-weight: 600;
   line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.issued {
+  font-weight: 450;
+  font-variant-numeric: tabular-nums;
+}
+
+.issued::before {
+  margin-right: 0.5rem;
+  content: '·';
 }
 
 .credentialTitle {
@@ -257,7 +197,6 @@
 
 .details {
   margin-top: 0.25rem;
-  border-top: 1px solid var(--folio-line);
 }
 
 .summary {
@@ -322,7 +261,6 @@
   flex: 0 0 auto;
 }
 
-.award:focus-visible,
 .credential:focus-visible,
 .summary:focus-visible,
 .detailsContent > a:focus-visible {
@@ -332,11 +270,6 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .award:hover {
-    border-color: var(--folio-accent);
-    background: var(--folio-surface);
-  }
-
   .credential:hover .credentialTitle,
   .summary:hover {
     color: var(--folio-accent);
@@ -376,14 +309,9 @@
   .organization {
     font-size: 0.73rem;
   }
-
-  .award {
-    padding: 1.1rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .award,
   .credentialTitle,
   .linkArrow {
     transition: none;

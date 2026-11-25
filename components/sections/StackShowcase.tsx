@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, type CSSProperties } from 'react'
 import { stackGroups } from '@/lib/data/stack'
 import { TechIcon } from '@/components/ui/TechIcon'
 import styles from './StackShowcase.module.css'
@@ -22,12 +22,7 @@ export function StackShowcase() {
         if (!rootRef.current?.contains(event.relatedTarget as Node | null)) setFocusedGroup(null)
       }}
     >
-      <div className={styles.header}>
-        <h2>Languages &amp; tools</h2>
-        <span className={styles.headerMark} aria-hidden="true">{'</>'}</span>
-      </div>
-
-      <div className={styles.groups}>
+      <div className={styles.groups} data-reveal>
         {stackGroups.map((group, index) => {
           const id = `stack-group-${index}`
           return (
@@ -65,8 +60,8 @@ export function StackShowcase() {
       >
         {activeGroup && (
           <ul className={styles.technologyList} aria-label={`${activeGroup.label} tools`} key={activeGroup.label}>
-            {activeGroup.technologies.map((technology) => (
-              <li key={technology.label}>
+            {activeGroup.technologies.map((technology, index) => (
+              <li key={technology.label} style={{ '--i': index } as CSSProperties}>
                 <a
                   className={styles.technology}
                   href={technology.source}

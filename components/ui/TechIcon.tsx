@@ -46,7 +46,7 @@ import {
 } from 'react-icons/si'
 import { TbBrandReactNative } from 'react-icons/tb'
 import { FaAws, FaLinkedin } from 'react-icons/fa6'
-import { LuGlobe, LuMonitor, LuSparkles, LuCode, LuShieldCheck, LuWorkflow } from 'react-icons/lu'
+import { LuGlobe, LuMonitor, LuSparkles, LuCode, LuShieldCheck, LuWorkflow, LuChartLine } from 'react-icons/lu'
 
 export interface TechIconProps extends SVGProps<SVGSVGElement> {
   name: string
@@ -63,6 +63,7 @@ const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className
   react: SiReact,
   'react.js': SiReact,
   'next.js': SiNextdotjs,
+  'next.js 15': SiNextdotjs,
   nextjs: SiNextdotjs,
   next: SiNextdotjs,
   'tailwind css': SiTailwindcss,
@@ -109,6 +110,7 @@ const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className
   docker: SiDocker,
   terraform: SiTerraform,
   aws: FaAws,
+  'amazon quick': FaAws,
   'aws s3': FaAws,
   s3: FaAws,
   'google cloud': SiGooglecloud,
@@ -132,6 +134,7 @@ const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className
   ai: LuSparkles,
   'ai copilot': LuSparkles,
   'ai agents': LuSparkles,
+  finops: LuChartLine,
   openai: SiOpenai,
   codex: SiOpenai,
   'openai codex': SiOpenai,

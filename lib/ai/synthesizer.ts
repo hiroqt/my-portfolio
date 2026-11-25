@@ -1217,7 +1217,7 @@ export function synthesizeDynamicResponse(
     }
     if (previousAssistantMsg.includes('experience') || previousAssistantMsg.includes('internship') || previousAssistantMsg.includes('hospital')) {
       return {
-        text: "Understood! Would you like to review his verified IBM and AWS certifications, or explore his featured projects?"
+        text: "Understood! Would you like to review his verified NVIDIA, Oracle, IBM, and AWS certifications, or explore his featured projects?"
       };
     }
     if (previousAssistantMsg.includes('contact') || previousAssistantMsg.includes('email') || previousAssistantMsg.includes('reach')) {
@@ -1275,7 +1275,7 @@ export function synthesizeDynamicResponse(
     // First Chat Welcome Introductory Message
     const welcomeIntroGreetings = [
       "Hello! Welcome to Arnel's portfolio. I'm **yhelAI**, an AI assistant integrated into the site. I can walk you through his full-stack projects (like **e Buddy** and **PaceMentor**), his AI & Context Engineering stack, or navigate anywhere on the page for you. What would you like to explore first?",
-      "Hey there! Welcome to Arnel's portfolio. I'm **yhelAI**, his AI assistant. Feel free to ask about his software projects, technical background in Next.js & AI Agent workflows, or his 11 verified IBM and AWS certifications. Where should we start?",
+      "Hey there! Welcome to Arnel's portfolio. I'm **yhelAI**, his AI assistant. Feel free to ask about his software projects, technical background in Next.js & AI Agent workflows, or his verified NVIDIA, Oracle, IBM, and AWS certifications. Where should we start?",
       "Greetings! Welcome to Arnel's portfolio. I'm **yhelAI**, his interactive AI companion. I'm here to help you inspect his production applications, technical skills, engineering timeline, or get in touch with Arnel. What can I bring up for you?"
     ];
     return { text: pickNonRepeating(welcomeIntroGreetings, history) };
@@ -1296,7 +1296,7 @@ export function synthesizeDynamicResponse(
       };
     }
     return {
-      text: "You can explore Arnel's engineering experience timeline, examine his 11 verified IBM and AWS badges, or review case studies in his project showcase.",
+      text: "You can explore Arnel's engineering experience timeline, examine his verified NVIDIA, Oracle, IBM, and AWS credentials, or review case studies in his project showcase.",
       action: { type: 'navigate', destination: 'projects', sectionId: 'projects', label: 'Explore Portfolio' }
     };
   }
@@ -1304,7 +1304,7 @@ export function synthesizeDynamicResponse(
   // 6. AI Identity & Capabilities ("who are you", "what can you do", "help", "are you real", "what is yhelai")
   if (lower === 'what can you do' || lower === 'help' || lower === 'what are your capabilities' || lower === 'who created you' || lower === 'who made you' || lower === 'what is yhelai' || lower === 'what is jarvis') {
     return {
-      text: "I am **yhelAI**, an interactive AI assistant integrated into Arnel's portfolio. I can:\n\n- Walk you through Arnel's **projects, system architectures, and tech stack**\n- Navigate the portfolio and open live project showcases for you\n- Answer questions about his **experience, 11 verified credentials, and education**\n- Help you initiate contact or request a project consultation\n\nWhat would you like to explore first?"
+      text: "I am **yhelAI**, an interactive AI assistant integrated into Arnel's portfolio. I can:\n\n- Walk you through Arnel's **projects, system architectures, and tech stack**\n- Navigate the portfolio and open live project showcases for you\n- Answer questions about his **experience, 14 verified credentials, and education**\n- Help you initiate contact or request a project consultation\n\nWhat would you like to explore first?"
     };
   }
 
@@ -1511,7 +1511,7 @@ export function synthesizeDynamicResponse(
 
     const backgroundResponses = [
       "Arnel's engineering background includes a Bachelor of Science in Information Technology from Cavite State University, a 486-hour software engineering internship at General Emilio Aguinaldo Memorial Hospital where he built an AI triage and queuing platform, and freelance work delivering client platforms like Present Po, Tearsize, and HiveSync VA.\n\nUse the button below to view his experience.",
-      "Looking at Arnel's background, he is a Full-Stack Developer and Context Engineer. His background highlights practical engineering at GEAMH developing AI hospital systems, architecting enterprise HRIS software with QR attendance, and earning 11 verified IBM and AWS technical certifications.\n\nUse the button below to view his experience.",
+      "Looking at Arnel's background, he is a Full-Stack Developer and Context Engineer. His background highlights practical engineering at GEAMH developing AI hospital systems, architecting enterprise HRIS software with QR attendance, and earning verified NVIDIA, Oracle, IBM, and AWS technical certifications.\n\nUse the button below to view his experience.",
       "Arnel's professional background covers full-stack web and AI engineering across three major milestones:\n\n1. **GEAMH Hospital Internship**: Engineered an AI patient queuing and triage system in Vue.js, PHP, and Groq LLMs.\n2. **Enterprise HRIS Capstone**: Built VCM HRIS with QR-code presence validation and automated payroll.\n3. **Freelance Solutions**: Delivered client platforms including Present Po, Tearsize, and HiveSync VA.\n\nUse the button below to view his experience."
     ];
 
@@ -1522,7 +1522,7 @@ export function synthesizeDynamicResponse(
   }
 
   // 12. Certifications & Badges
-  if (lower.includes('certif') || lower.includes('badge') || lower.includes('ibm') || lower.includes('aws') || lower.includes('credly')) {
+  if (lower.includes('certif') || lower.includes('badge') || lower.includes('ibm') || lower.includes('aws') || lower.includes('credly') || lower.includes('nvidia') || lower.includes('oracle')) {
     const action: AgentAction = {
       type: 'navigate',
       destination: 'certifications',
@@ -1531,7 +1531,7 @@ export function synthesizeDynamicResponse(
     };
 
     return {
-      text: "Arnel holds 11 verified professional credentials:\n\n- **IBM AI Certifications (7 Badges)**: AI Foundations, Machine Learning, Deep Learning, and RAG Architecture.\n- **AWS Cloud Certifications (4 Badges)**: Advanced SQL & Database Design, Generative AI, S3 Object Storage, and Serverless Systems.\n\nUse the button below to view his learning credentials.",
+      text: "Arnel holds 14 verified professional credentials:\n\n- **NVIDIA Certificates of Competency (2)**: Building LLM Applications With Prompt Engineering (Nov 19, 2026) and Fundamentals of Deep Learning (Nov 18, 2026).\n- **Oracle Agentic AI Certified Foundations Associate**: verified Oracle badge.\n- **IBM AI Certifications (7 Badges)**: AI Foundations, Machine Learning, Deep Learning, and RAG Architecture.\n- **AWS Cloud Certifications (4 Badges)**: Advanced SQL & Database Design, Generative AI, S3 Object Storage, and Serverless Systems.\n\nUse the button below to view his learning credentials.",
       action
     };
   }

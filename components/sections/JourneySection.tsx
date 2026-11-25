@@ -1,7 +1,7 @@
+import type { CSSProperties } from 'react'
 import {
   LuArrowUpRight as ArrowUpRight,
   LuGraduationCap as GraduationCap,
-  LuAward as Award,
   LuPlus as Plus,
 } from 'react-icons/lu'
 import styles from './JourneySection.module.css'
@@ -34,24 +34,62 @@ const experience = [
   },
 ]
 
-const credentials = [
+type Credential = {
+  issuer: string
+  title: string
+  detail: string
+  /** Shown only when the issue date is on record. */
+  issued?: string
+  href: string
+  /** Completes "…, ___ in a new tab" for screen readers. */
+  linkPurpose: string
+}
+
+// Newest first.
+const credentials: Credential[] = [
+  {
+    issuer: 'NVIDIA',
+    title: 'Building LLM Applications With Prompt Engineering',
+    detail: 'Certificate of competency',
+    issued: 'Nov 2026',
+    href: '/certs/nvidia-building-llm-apps-prompt-engineering.pdf',
+    linkPurpose: 'open the certificate PDF',
+  },
+  {
+    issuer: 'NVIDIA',
+    title: 'Fundamentals of Deep Learning',
+    detail: 'Certificate of competency',
+    issued: 'Nov 2026',
+    href: '/certs/nvidia-fundamentals-of-deep-learning.pdf',
+    linkPurpose: 'open the certificate PDF',
+  },
+  {
+    issuer: 'Oracle',
+    title: 'Agentic AI Foundations Associate',
+    detail: 'Oracle certified · verified badge',
+    href: 'https://catalog-education.oracle.com/pls/certview/sharebadge?id=AE15372EEF7EEFB4229A84C9BB3E1E47AD325384BF2A2731D58BDF4298FDBD47',
+    linkPurpose: 'view the verified badge',
+  },
   {
     issuer: 'IBM',
     title: 'AI & machine learning',
     detail: 'Foundations, neural networks, and RAG',
     href: 'https://www.credly.com/users/arnel-baylon',
+    linkPurpose: 'view the Credly profile',
   },
   {
     issuer: 'AWS',
     title: 'Cloud & generative AI',
     detail: 'Serverless, object storage, and databases',
     href: 'https://www.credly.com/users/arnel-baylon',
+    linkPurpose: 'view the Credly profile',
   },
   {
     issuer: 'Six Sigma',
     title: 'Lean Six Sigma · White Belt',
     detail: 'Process improvement and quality systems',
     href: 'https://www.credly.com/users/arnel-baylon',
+    linkPurpose: 'view the Credly profile',
   },
 ]
 
@@ -61,8 +99,8 @@ export function JourneySection() {
       <div className={styles.experience}>
         <h3 className={styles.columnTitle}>Experience</h3>
         <ol className={styles.timeline}>
-          {experience.map((item) => (
-            <li className={styles.timelineItem} key={item.organization}>
+          {experience.map((item, index) => (
+            <li className={styles.timelineItem} key={item.organization} data-reveal style={{ '--reveal-index': index } as CSSProperties}>
               <span className={styles.period}>{item.period}</span>
               <div className={styles.entry}>
                 <span className={styles.organization}>{item.organization}</span>
@@ -86,56 +124,23 @@ export function JourneySection() {
       </div>
 
       <div id="certifications" className={styles.recognition}>
-        <h3 className={styles.columnTitle}>Recognition &amp; learning</h3>
+        <h3 className={styles.columnTitle}>Certifications</h3>
 
-        <a
-          className={styles.award}
-          href="/certs/aws-capstone-best-business-impact.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Best Business Impact recognition, open award PDF in a new tab"
-        >
-          <div className={styles.awardTop}>
-            <Award size={24} strokeWidth={1.5} aria-hidden="true" />
-            <span className={styles.awardDate}>Aug 2026</span>
-          </div>
-          <h4 className={styles.awardTitle}>Best Business Impact</h4>
-          <p className={styles.awardDescription}>AWS BuildNights QuickQuest · Team DEVOOPS</p>
-          <span className={styles.awardAction}>
-            View recognition <ArrowUpRight size={15} aria-hidden="true" />
-          </span>
-        </a>
-
-        <a
-          className={`${styles.award} ${styles.finalistAward}`}
-          href="/images/gallery/egov-top5-2026.png"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="eGov Hackathon 2026 Top 5 recognition, open event photo in a new tab"
-        >
-          <div className={styles.awardTop}>
-            <span className={styles.finalistMark} aria-hidden="true">05</span>
-            <span className={styles.awardDate}>Sep 27, 2026</span>
-          </div>
-          <h4 className={styles.awardTitle}>Top 5 eGov</h4>
-          <p className={styles.awardDescription}>eGov Hackathon 2026</p>
-          <span className={styles.awardAction}>
-            View recognition <span aria-hidden="true">↗</span>
-          </span>
-        </a>
-
-        <ul className={styles.credentialList} aria-label="Selected learning credentials">
-          {credentials.map((credential) => (
-            <li key={credential.issuer}>
+        <ul className={styles.credentialList} aria-label="Certifications, newest first">
+          {credentials.map((credential, index) => (
+            <li key={credential.title} data-reveal style={{ '--reveal-index': Math.min(index, 5) } as CSSProperties}>
               <a
                 className={styles.credential}
                 href={credential.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${credential.title} by ${credential.issuer}, view Credly profile in a new tab`}
+                aria-label={`${credential.title} by ${credential.issuer}, ${credential.linkPurpose} in a new tab`}
               >
                 <div className={styles.credentialCopy}>
-                  <span className={styles.issuer}>{credential.issuer}</span>
+                  <span className={styles.issuer}>
+                    {credential.issuer}
+                    {credential.issued && <span className={styles.issued}>{credential.issued}</span>}
+                  </span>
                   <h4 className={styles.credentialTitle}>{credential.title}</h4>
                   <p className={styles.credentialDetail}>{credential.detail}</p>
                 </div>
