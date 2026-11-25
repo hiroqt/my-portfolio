@@ -247,6 +247,19 @@
   display: none;
 }
 
+.viewsPending {
+  visibility: hidden;
+}
+
+.views {
+  animation: viewsIn 320ms var(--ease-out) both;
+}
+
+@keyframes viewsIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ---------- Article layout ---------- */
 
 .articleLayout {
@@ -875,7 +888,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .enter {
+  .enter,
+  .views {
     animation: none;
   }
 

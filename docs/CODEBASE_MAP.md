@@ -5,3 +5,4 @@
 - [projects.ts](../lib/data/projects.ts) holds project records used by the portfolio and assistant (records with a `showcase` entry appear, in order, in the Featured work grid); [lib/rag](../lib/rag) contains the assistant's retrieval knowledge.
 - [PortfolioShell.module.css](../components/PortfolioShell.module.css) and section CSS modules style the page; [app/globals.css](../app/globals.css) defines shared theme tokens.
 - [blog.ts](../lib/data/blog.ts) holds blog posts as typed blocks; [app/blog](../app/blog) renders the index and each post with components from [components/blog](../components/blog), which turn every URL in post text into a link.
+- [lib/blog/views.ts](../lib/blog/views.ts) counts blog post views in Upstash Redis (once per visitor per post per day; local and preview counts are kept apart from production) behind the [views API route](../app/api/blog/views/[slug]/route.ts).

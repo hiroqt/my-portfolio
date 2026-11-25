@@ -112,3 +112,4 @@ temp/
 # Agents
 .gemini
 .agents/
+.env*

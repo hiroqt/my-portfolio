@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FiArrowUpRight } from 'react-icons/fi'
 import { BlogNav } from '@/components/blog/BlogNav'
+import { ListedViewCount, ViewCountsProvider } from '@/components/blog/ViewCount'
 import { blogPosts, formatPostDate, getReadingMinutes } from '@/lib/data/blog'
 import styles from '@/components/blog/Blog.module.css'
 
@@ -31,27 +32,30 @@ export default function BlogIndexPage() {
           <p className={styles.indexIntro}>{description}</p>
         </header>
 
-        <ol className={styles.postList} aria-label="Posts">
-          {blogPosts.map(post => (
-            <li key={post.slug} className={styles.enter}>
-              <Link href={`/blog/${post.slug}`} className={styles.postLink}>
-                <p className={styles.postMeta}>
-                  <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
-                  <span>{post.kind}</span>
-                  <span>{getReadingMinutes(post)} min read</span>
-                </p>
-                <div className={styles.postText}>
-                  <h2 className={styles.postTitle}>{post.title}</h2>
-                  {post.subtitle && <p className={styles.postSubtitle}>{post.subtitle}</p>}
-                  <p className={styles.postSummary}>{post.summary}</p>
-                  <span className={styles.postCta}>
-                    Read the {post.kind.toLowerCase()} <FiArrowUpRight aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <ViewCountsProvider>
+          <ol className={styles.postList} aria-label="Posts">
+            {blogPosts.map(post => (
+              <li key={post.slug} className={styles.enter}>
+                <Link href={`/blog/${post.slug}`} className={styles.postLink}>
+                  <p className={styles.postMeta}>
+                    <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
+                    <span>{post.kind}</span>
+                    <span>{getReadingMinutes(post)} min read</span>
+                    <ListedViewCount slug={post.slug} />
+                  </p>
+                  <div className={styles.postText}>
+                    <h2 className={styles.postTitle}>{post.title}</h2>
+                    {post.subtitle && <p className={styles.postSubtitle}>{post.subtitle}</p>}
+                    <p className={styles.postSummary}>{post.summary}</p>
+                    <span className={styles.postCta}>
+                      Read the {post.kind.toLowerCase()} <FiArrowUpRight aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </ViewCountsProvider>
       </main>
     </div>
   )

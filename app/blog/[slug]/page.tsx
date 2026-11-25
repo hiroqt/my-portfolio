@@ -6,6 +6,7 @@ import { ArticleSection } from '@/components/blog/ArticleBody'
 import { ArticleToc, type TocItem } from '@/components/blog/ArticleToc'
 import { BlogNav } from '@/components/blog/BlogNav'
 import { RichText } from '@/components/blog/RichText'
+import { ViewCount } from '@/components/blog/ViewCount'
 import { blogPosts, formatPostDate, getBlogPost, getPostFullTitle, getReadingMinutes } from '@/lib/data/blog'
 import styles from '@/components/blog/Blog.module.css'
 
@@ -86,6 +87,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
               <span>{post.author}</span>
               <span>{readingMinutes} min read</span>
+              <ViewCount slug={post.slug} />
             </p>
           </header>
 

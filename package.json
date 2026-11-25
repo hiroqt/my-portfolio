@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@upstash/redis": "^1.41.1",
     "@vercel/analytics": "^1.6.1",
     "framer-motion": "^11.0.0",
     "geist": "^1.7.2",
