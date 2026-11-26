@@ -43,7 +43,7 @@ export const AI_TOOL_DEFINITIONS = [
     type: 'function' as const,
     function: {
       name: 'getProject',
-      description: 'Retrieve detailed information about a specific project by its slug (e.g., "e-buddy", "sakto-ka", "android-deck", "better-trece", "pixelcrew", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
+      description: 'Retrieve detailed information about a specific project by its slug (e.g., "e-buddy", "sakto-ka", "android-deck", "better-trece", "momo", "pixelcrew", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
       parameters: {
         type: 'object',
         properties: {
@@ -115,7 +115,7 @@ export const AI_TOOL_DEFINITIONS = [
     type: 'function' as const,
     function: {
       name: 'openProject',
-      description: 'Open the detailed project showcase page for a specific project (e.g., "e-buddy", "sakto-ka", "android-deck", "better-trece", "pixelcrew", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
+      description: 'Open the detailed project showcase page for a specific project (e.g., "e-buddy", "sakto-ka", "android-deck", "better-trece", "momo", "pixelcrew", "pacementor", "present-po", "yhel-os", "vcm-hris", "tearsize", "hivesync-va", "hospital-queuing-system", "tmrc").',
       parameters: {
         type: 'object',
         properties: {

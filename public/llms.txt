@@ -16,6 +16,7 @@ Arnel Baylon is a software engineer specializing in modern full-stack web applic
 - [FinOps AI Dashboard](https://github.com/hiroqt): Cloud financial operations and cost anomaly detection platform; Winner of Best Business Impact at AWS BGC
 - [eBuddy](https://github.com/hiroqt): Agentic citizen public service assistant unifying civic inquiries; developed for the 2026 Philippine eGov Hackathon
 - [Better Trece Martires](https://bettertrece.vercel.app): Civic open data platform and municipal budget transparency explorer with interactive visualizations
+- [Momo](https://github.com/hiroqt/momo): AI study platform that turns uploaded class files into source-grounded flashcards, quizzes, and practice exams, with an offline-first Expo app and a FastAPI + pgvector RAG backend
 - [VCM HRIS](https://github.com/hiroqt): Enterprise HR management platform with QR-code vicinity attendance validation, statutory deduction computation, and automated payroll
 - [Present Po](https://github.com/hiroqt): Mobile workforce time-tracking solution with geofencing attendance validation and automated daily shift reporting
 - [PaceMentor](https://github.com/hiroqt): AI running coach companion integrating Strava activity tracking and personalized dynamic periodization plans
@@ -35,6 +36,7 @@ Arnel Baylon is a software engineer specializing in modern full-stack web applic
 ## Certifications
 - [NVIDIA — Building LLM Applications With Prompt Engineering](https://arnelbaylon.dev/certs/nvidia-building-llm-apps-prompt-engineering.pdf): Certificate of Competency, issued November 19, 2026
 - [NVIDIA — Fundamentals of Deep Learning](https://arnelbaylon.dev/certs/nvidia-fundamentals-of-deep-learning.pdf): Certificate of Competency, issued November 18, 2026
+- NVIDIA Developer Bootcamp (November 2026): Graduated from a paid 3-day NVIDIA Developer bootcamp as the only scholar at the event, earning both NVIDIA certificates above
 - [Oracle — Agentic AI Certified Foundations Associate](https://arnelbaylon.dev/#certifications): Verified Oracle badge
 - [IBM — AI & Machine Learning](https://www.credly.com/users/arnel-baylon): AI foundations, machine learning, neural networks and deep learning, RAG
 - [AWS — Cloud & Generative AI](https://www.credly.com/users/arnel-baylon): Serverless, S3 object storage, generative AI, SQL and database design

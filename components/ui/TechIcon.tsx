@@ -46,7 +46,7 @@ import {
 } from 'react-icons/si'
 import { TbBrandReactNative } from 'react-icons/tb'
 import { FaAws, FaLinkedin } from 'react-icons/fa6'
-import { LuGlobe, LuMonitor, LuSparkles, LuCode, LuShieldCheck, LuWorkflow, LuChartLine } from 'react-icons/lu'
+import { LuGlobe, LuMonitor, LuSparkles, LuCode, LuShieldCheck, LuWorkflow, LuChartLine, LuMic, LuPuzzle } from 'react-icons/lu'
 
 export interface TechIconProps extends SVGProps<SVGSVGElement> {
   name: string
@@ -139,6 +139,12 @@ const ICON_MAP: Record<string, ComponentType<{ size?: number | string; className
   codex: SiOpenai,
   'openai codex': SiOpenai,
   claude: SiAnthropic,
+  'claude ultra': SiAnthropic,
+  'wispr flow': LuMic,
+  ponytail: LuPuzzle,
+  caveman: LuPuzzle,
+  overdrive: LuPuzzle,
+  graphify: LuPuzzle,
   gemini: SiGooglegemini,
   'google gemini': SiGooglegemini,
   jev: LuShieldCheck,
