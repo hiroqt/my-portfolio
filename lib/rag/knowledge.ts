@@ -8,8 +8,8 @@ export const portfolioChunks: KnowledgeChunk[] = [
     documentId: 'about',
     title: 'Arnel Baylon - Context Engineer & Full-Stack Developer',
     category: 'about',
-    content: `Arnel A. Baylon (known as "Nel" or "Yhel") is a Context Engineer and Full-Stack Software Developer based in Cavite, Philippines. He holds a Bachelor of Science in Information Technology (BS IT) from Cavite State University, class of 2026. His recent public work uses TypeScript, React, Next.js, Vite, React Native, Expo, Python, FastAPI, Node.js, PostgreSQL, and Supabase. He builds AI agent workflows, RAG systems, and web and mobile products. Earlier hospital, capstone, and running-app projects also used Vue.js, PHP, MySQL, Laravel, and Flutter. He is open to remote worldwide, hybrid, and on-site opportunities.`,
-    keywords: ['arnel', 'baylon', 'nel', 'yhel', 'context engineer', 'full-stack', 'developer', 'about', 'bio', 'who is', 'location', 'philippines', 'cavite'],
+    content: `Arnel A. Baylon (known as "Nel" or "Yhel") is a Context Engineer and Full-Stack Software Developer based in Cavite, Philippines. He holds a Bachelor of Science in Information Technology (BS IT) from Cavite State University, class of 2026. His recent public work uses TypeScript, React, Next.js, Vite, React Native, Expo, Python, FastAPI, Node.js, PostgreSQL, and Supabase. He builds AI agent workflows, RAG systems, and web and mobile products. Earlier hospital, capstone, and running-app projects also used Vue.js, PHP, MySQL, Laravel, and Flutter. He is open to remote worldwide, hybrid, and on-site opportunities. Right now he is focused on AI technology and generative AI. Outside work, he has run a 42 km marathon, loves hiking, used to powerlift, and has won twice in cycling.`,
+    keywords: ['arnel', 'baylon', 'nel', 'yhel', 'context engineer', 'full-stack', 'developer', 'about', 'bio', 'who is', 'location', 'philippines', 'cavite', 'hobbies', 'fun', 'marathon', 'running', 'hiking', 'powerlifting', 'cycling', 'generative ai', 'focus'],
     metadata: { section: 'summary' }
   },
   {

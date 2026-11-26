@@ -1,10 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion, useMotionTemplate, useReducedMotion, useSpring } from 'framer-motion'
-import { FiChevronDown } from 'react-icons/fi'
 import headerImage from '@/public/images/header.webp'
 import oracleAgenticAiBadge from '@/public/images/certs/oracle-agentic-ai-foundations.webp'
 import styles from '../PortfolioShell.module.css'
@@ -34,10 +31,8 @@ function PixelPortrait() {
   )
 }
 
-/** The Overview's opening: portrait, name, role, credential, and a bio that opens on request. */
+/** The Overview's opening: portrait, name, role, credential, and a short bio. */
 export function Profile() {
-  const [bioOpen, setBioOpen] = useState(false)
-
   return (
     <header id="hero" className={styles.profile}>
       <PixelPortrait />
@@ -55,17 +50,9 @@ export function Profile() {
           <span>Oracle Certified · <strong>Agentic AI Foundations</strong></span>
           <span aria-hidden="true">↗</span>
         </a>
-        <div id="about" className={styles.bioBlock}>
-          <div id="bio-text" className={styles.bio} data-collapsed={bioOpen ? undefined : true}>
-            <p className={styles.bioLead}>I build web products, mobile apps, and AI systems.</p>
-            <p>I’m Arnel—also Nel or Yhel. My work sits at the intersection of solid software development and modern AI systems: building products grounded in deep technical fundamentals and accelerated with AI leverage.</p>
-            <p>I care about the whole lifecycle—listening to what users actually need, architecting systems that last, and shipping with precision. When I’m away from the keyboard, you’ll find me running, making pixel art, and exploring what’s next.</p>
-            {bioOpen && <Link href="/assistant" className={styles.textLink}>A little more about me? Ask my AI <span aria-hidden="true">↗</span></Link>}
-          </div>
-          <button type="button" className={styles.bioToggle} aria-expanded={bioOpen} aria-controls="bio-text" onClick={() => setBioOpen(open => !open)}>
-            <FiChevronDown aria-hidden="true" />
-            {bioOpen ? 'Show less' : 'More about me'}
-          </button>
+        <div id="about" className={styles.bio}>
+          <p className={styles.bioLead}>Right now, I’m focused on AI technology and generative AI, and I build the web products and apps that put them to work.</p>
+          <p>I’m Arnel, also Nel or Yhel. Away from the keyboard, I’ve run a 42 km marathon, I love hiking, I used to powerlift, and I’ve won twice in cycling.</p>
         </div>
       </div>
     </header>
