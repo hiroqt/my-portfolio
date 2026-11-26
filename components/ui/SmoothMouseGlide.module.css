@@ -16,8 +16,8 @@
   height: 34px;
   border-radius: 50%;
   border: 1.5px solid var(--folio-accent);
-  background: radial-gradient(circle, rgba(83, 88, 163, 0.12) 0%, rgba(83, 88, 163, 0.02) 70%, transparent 100%);
-  box-shadow: 0 0 16px rgba(83, 88, 163, 0.18);
+  background: radial-gradient(circle, color-mix(in srgb, var(--folio-clay) 12%, transparent) 0%, color-mix(in srgb, var(--folio-clay) 2%, transparent) 70%, transparent 100%);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--folio-clay) 18%, transparent);
   opacity: 0.4;
   backdrop-filter: blur(0.5px);
   transition: opacity 220ms var(--ease-out),
@@ -27,20 +27,20 @@
 
 :global(.dark) .glideRing {
   border-color: var(--folio-accent);
-  background: radial-gradient(circle, rgba(184, 190, 240, 0.18) 0%, rgba(184, 190, 240, 0.03) 70%, transparent 100%);
-  box-shadow: 0 0 20px rgba(184, 190, 240, 0.22);
+  background: radial-gradient(circle, color-mix(in srgb, var(--folio-accent) 18%, transparent) 0%, color-mix(in srgb, var(--folio-accent) 3%, transparent) 70%, transparent 100%);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--folio-accent) 22%, transparent);
   opacity: 0.55;
 }
 
 .glideRingHovered {
   opacity: 0.75;
   border-color: var(--folio-accent);
-  box-shadow: 0 0 24px rgba(83, 88, 163, 0.35);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--folio-clay) 35%, transparent);
 }
 
 :global(.dark) .glideRingHovered {
   opacity: 0.9;
-  box-shadow: 0 0 28px rgba(184, 190, 240, 0.45);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--folio-accent) 45%, transparent);
 }
 
 .glideDotWrapper {

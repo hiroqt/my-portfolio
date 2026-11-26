@@ -2,7 +2,6 @@
 
 .page {
   min-height: 100svh;
-  background: var(--folio-paper);
   color: var(--folio-ink);
 }
 
@@ -65,7 +64,7 @@
   height: 44px;
   border: 1px solid var(--folio-line);
   border-radius: 50%;
-  background: transparent;
+  background: var(--folio-paper);
   color: var(--folio-ink);
   cursor: pointer;
   transition: background-color var(--duration-fast) ease, transform var(--duration-fast) var(--ease-out);

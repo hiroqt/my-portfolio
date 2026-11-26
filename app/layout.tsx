@@ -6,9 +6,10 @@ import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { SmoothScroll } from '@/components/providers/SmoothScroll'
 import { SmoothMouseGlide } from '@/components/ui/SmoothMouseGlide'
+import { AsciiField } from '@/components/ui/AsciiField'
 
 export const viewport: Viewport = {
-  themeColor: '#f8f7f4',
+  themeColor: '#faf9f5',
   width: 'device-width',
   initialScale: 1,
 }
@@ -63,6 +64,7 @@ export default function RootLayout({
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context" />
       </head>
       <body className="overflow-x-hidden min-h-screen font-sans">
+        <AsciiField />
         <ThemeProvider>
           <SmoothScroll>
             <SmoothMouseGlide />

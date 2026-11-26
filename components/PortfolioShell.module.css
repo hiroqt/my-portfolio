@@ -7,7 +7,6 @@
   --column: 680px;
   min-height: 100vh;
   color: var(--folio-ink);
-  background: var(--folio-paper);
 }
 
 /* ── Sidebar ─────────────────────────────────────────────── */
@@ -25,7 +24,7 @@
   border: 1px solid var(--folio-line);
   border-radius: 16px;
   background: var(--folio-surface);
-  box-shadow: 0 1px 2px rgb(24 26 20 / 5%), 0 18px 40px -24px rgb(24 26 20 / 30%);
+  box-shadow: 0 1px 2px rgb(38 28 20 / 5%), 0 18px 40px -24px rgb(38 28 20 / 30%);
 }
 
 .sidebarHeader { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 12px 10px 14px; }
@@ -190,7 +189,7 @@
   .sidebar[data-open] { visibility: visible; transform: none; transition: transform 380ms cubic-bezier(.32, .72, 0, 1), visibility 0s; }
   .closeButton { display: grid; flex: none; place-items: center; width: 40px; height: 40px; border-radius: 10px; color: var(--folio-muted); cursor: pointer; }
   .closeButton svg { width: 18px; height: 18px; }
-  .backdrop { position: fixed; z-index: 45; inset: 0; display: block; background: rgb(14 15 12 / 38%); opacity: 0; pointer-events: none; transition: opacity 260ms var(--ease-out); }
+  .backdrop { position: fixed; z-index: 45; inset: 0; display: block; background: rgb(24 18 14 / 38%); opacity: 0; pointer-events: none; transition: opacity 260ms var(--ease-out); }
   .backdrop[data-open] { opacity: 1; pointer-events: auto; }
 
   .main { padding: 48px 24px 0; }

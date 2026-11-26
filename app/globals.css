@@ -2,25 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-@property --folio-paper { syntax: "<color>"; inherits: true; initial-value: #f8f8f5; }
-@property --folio-ink { syntax: "<color>"; inherits: true; initial-value: #2d2e2b; }
-@property --folio-muted { syntax: "<color>"; inherits: true; initial-value: #6b6e68; }
-@property --folio-line { syntax: "<color>"; inherits: true; initial-value: #dddfd7; }
-@property --folio-accent { syntax: "<color>"; inherits: true; initial-value: #5358a3; }
+@property --folio-paper { syntax: "<color>"; inherits: true; initial-value: #faf9f5; }
+@property --folio-ink { syntax: "<color>"; inherits: true; initial-value: #1f1e1d; }
+@property --folio-muted { syntax: "<color>"; inherits: true; initial-value: #6b6a63; }
+@property --folio-line { syntax: "<color>"; inherits: true; initial-value: #e6e3d9; }
+@property --folio-accent { syntax: "<color>"; inherits: true; initial-value: #ad4f2c; }
+@property --folio-clay { syntax: "<color>"; inherits: true; initial-value: #d97757; }
 @property --folio-surface { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
-@property --folio-soft { syntax: "<color>"; inherits: true; initial-value: #eeefea; }
+@property --folio-soft { syntax: "<color>"; inherits: true; initial-value: #f0eee6; }
 
 @layer base {
   :root {
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
-    --folio-paper: #f8f8f5;
-    --folio-ink: #2d2e2b;
-    --folio-muted: #6b6e68;
-    --folio-line: #dddfd7;
-    --folio-accent: #5358a3;
+    /* Warm paper and clay. --folio-accent is the text-safe clay; --folio-clay is for decoration only. */
+    --folio-paper: #faf9f5;
+    --folio-ink: #1f1e1d;
+    --folio-muted: #6b6a63;
+    --folio-line: #e6e3d9;
+    --folio-accent: #ad4f2c;
+    --folio-clay: #d97757;
     --folio-surface: #ffffff;
-    --folio-soft: #eeefea;
+    --folio-soft: #f0eee6;
     --background: var(--folio-paper);
     --foreground: var(--folio-ink);
     --card: var(--folio-surface);
@@ -33,17 +36,18 @@
     --ease-in-out: cubic-bezier(.77, 0, .175, 1);
     --duration-fast: 160ms;
     --duration-slow: 300ms;
-    transition: --folio-paper 900ms ease-in-out, --folio-ink 900ms ease-in-out, --folio-muted 900ms ease-in-out, --folio-line 900ms ease-in-out, --folio-accent 900ms ease-in-out, --folio-surface 900ms ease-in-out, --folio-soft 900ms ease-in-out;
+    transition: --folio-paper 900ms ease-in-out, --folio-ink 900ms ease-in-out, --folio-muted 900ms ease-in-out, --folio-line 900ms ease-in-out, --folio-accent 900ms ease-in-out, --folio-clay 900ms ease-in-out, --folio-surface 900ms ease-in-out, --folio-soft 900ms ease-in-out;
   }
 
   .dark {
-    --folio-paper: #191b18;
-    --folio-ink: #eeeee9;
-    --folio-muted: #a8aca2;
-    --folio-line: #353930;
-    --folio-accent: #b8bef0;
-    --folio-surface: #22251f;
-    --folio-soft: #292d25;
+    --folio-paper: #1f1e1d;
+    --folio-ink: #f0eee6;
+    --folio-muted: #a6a39a;
+    --folio-line: #3a3936;
+    --folio-accent: #e08a6a;
+    --folio-clay: #e5906f;
+    --folio-surface: #282725;
+    --folio-soft: #2f2e2b;
   }
 
   * { box-sizing: border-box; }
@@ -55,10 +59,12 @@
   .lenis [data-lenis-prevent],
   .lenis [data-lenis-prevent-wheel],
   .lenis [data-lenis-prevent-touch] { overscroll-behavior: contain; }
-  body { font-family: var(--font-sans), system-ui, sans-serif; background: var(--background); color: var(--foreground); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  /* No body background: html paints the paper so the fixed ASCII field (z-index -1) shows through. */
+  body { font-family: var(--font-sans), system-ui, sans-serif; color: var(--foreground); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
   h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans), system-ui, sans-serif; }
   button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
-  ::selection { background: var(--folio-ink); color: var(--folio-paper); }
+  ::selection { background: color-mix(in srgb, var(--folio-clay) 32%, var(--folio-paper)); color: var(--folio-ink); }
+  html { caret-color: var(--folio-accent); }
 }
 
 ::-webkit-scrollbar { width: 5px; height: 5px; }
