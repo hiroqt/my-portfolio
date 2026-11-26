@@ -165,10 +165,3 @@ export function TechIcon({ name, size = 16, className, ...props }: TechIconProps
 
   return <IconComponent size={size} className={className} {...props} />
 }
-
-export function hasTechIcon(name: string): boolean {
-  const normalized = name.trim().toLowerCase()
-  return normalized in ICON_MAP
-}
-
-export default TechIcon

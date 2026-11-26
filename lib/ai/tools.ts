@@ -3,7 +3,7 @@ import { portfolioChunks } from '../rag/knowledge';
 import { projectsData } from '../data/projects';
 import { AgentAction } from './types';
 
-export const ALLOWED_NAV_DESTINATIONS: Record<string, { route: string; sectionId?: string }> = {
+const ALLOWED_NAV_DESTINATIONS: Record<string, { route: string; sectionId?: string }> = {
   home: { route: '/', sectionId: 'hero' },
   about: { route: '/', sectionId: 'about' },
   education: { route: '/', sectionId: 'education' },
@@ -159,7 +159,7 @@ export const AI_TOOL_DEFINITIONS = [
   }
 ];
 
-export interface ToolExecutionResult {
+interface ToolExecutionResult {
   output: string;
   action?: AgentAction;
 }

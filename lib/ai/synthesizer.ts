@@ -1,5 +1,5 @@
-import { AdaptivePersona, AgentAction, ChatMessageData, UIContext } from './types';
-import { searchKnowledge, getProjectBySlug } from '../rag/retrieval';
+import { AdaptivePersona, AgentAction, ChatMessageData } from './types';
+import { searchKnowledge } from '../rag/retrieval';
 import { projectsData } from '../data/projects';
 
 /**
@@ -40,8 +40,7 @@ function pickNonRepeating(options: string[], history: ChatMessageData[] = []): s
 function synthesizeClientResponse(
   trimmed: string,
   lower: string,
-  history: ChatMessageData[] = [],
-  uiContext?: UIContext
+  history: ChatMessageData[] = []
 ): { text: string; action?: AgentAction } {
   // 1. Strict Guardrails: Reject out-of-scope queries (general coding, trivia, homework, politics, recipes, medical)
   const isOutOfScope =
@@ -112,12 +111,6 @@ function synthesizeClientResponse(
     allHistoryText.includes('vcm hris') ||
     allHistoryText.includes('qr check') ||
     allHistoryText.includes('employees');
-
-  const hasAIContext =
-    allHistoryText.includes('ai assistant') ||
-    allHistoryText.includes('ebuddy') ||
-    allHistoryText.includes('chatbot') ||
-    allHistoryText.includes('support bot');
 
   // Detect specific prompt types asked by the assistant in previous turn
   const isAskedClothingNewOrUpgrade =
@@ -1182,7 +1175,6 @@ function synthesizeClientResponse(
 export function synthesizeDynamicResponse(
   userQuery: string,
   persona: AdaptivePersona = 'default',
-  uiContext?: UIContext,
   history: ChatMessageData[] = []
 ): { text: string; action?: AgentAction } {
   const trimmed = userQuery.trim();
@@ -1190,7 +1182,7 @@ export function synthesizeDynamicResponse(
 
   // ── ROUTE CLIENT PERSONA TO DEDICATED GROUNDED CLIENT ADVISOR ──
   if (persona === 'client') {
-    return synthesizeClientResponse(trimmed, lower, history, uiContext);
+    return synthesizeClientResponse(trimmed, lower, history);
   }
 
   // Get previous assistant message for conversational continuity

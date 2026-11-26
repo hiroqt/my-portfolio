@@ -16,12 +16,11 @@ interface VoiceControllerProps {
 // Global active audio & utterance references to prevent garbage collection and deadlock in Chrome
 let activeAudioElement: HTMLAudioElement | null = null;
 let activeAudioUrl: string | null = null;
-let activeUtterance: SpeechSynthesisUtterance | null = null;
 let activeTtsAbortController: AbortController | null = null;
 let cachedVoices: SpeechSynthesisVoice[] = [];
 let sharedAudioContext: AudioContext | null = null;
 
-export function ensureVoicesLoaded(): SpeechSynthesisVoice[] {
+function ensureVoicesLoaded(): SpeechSynthesisVoice[] {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return [];
   const voices = window.speechSynthesis.getVoices();
   if (voices && voices.length > 0) {
@@ -39,7 +38,7 @@ export function ensureVoicesLoaded(): SpeechSynthesisVoice[] {
 /**
  * Filter and select exclusively JARVIS-like male AI voices (excluding female voicepacks)
  */
-export function getJarvisVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined {
+function getJarvisVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined {
   if (!voices || voices.length === 0) return undefined;
 
   const englishVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
@@ -248,79 +247,10 @@ export const VoiceController: React.FC<VoiceControllerProps> = ({
 };
 
 /**
- * Generate a friendly, natural companion thinking phrase based on the user's question
- */
-export function getCompanionThinkingPhrase(queryText?: string): string {
-  if (!queryText) return 'Hmm, let me think about that.';
-
-  const trimmed = queryText.trim();
-  const lower = trimmed.toLowerCase();
-
-  // Handle greetings cleanly
-  const isGreeting = /^(hi|hello|hey|hey there|good morning|good afternoon|good evening|sup|yo|what's up|howdy|greetings)[\s!.]*$/i.test(trimmed);
-  if (isGreeting) {
-    const greetingPhrases = [
-      "Hey there! Great to meet you.",
-      "Hello! Great to have you here.",
-      "Hey! Welcome to Arnel's portfolio."
-    ];
-    return greetingPhrases[Math.floor(Math.random() * greetingPhrases.length)];
-  }
-
-  if (lower.includes('experience') || lower.includes('internship') || lower.includes('hospital') || lower.includes('work history')) {
-    const options = [
-      "Hmm, checking Arnel's engineering experience.",
-      "Oh, let's look at his experience and hospital internship.",
-      "Gotcha, pulling up his background and experience."
-    ];
-    return options[Math.floor(Math.random() * options.length)];
-  }
-
-  if (lower.includes('yourself') || lower.includes('tell me about you') || lower.includes('who are you') || lower.includes('about yourself')) {
-    const options = [
-      "Ohhh so you're interested in me, huh? Let me think...",
-      "Oh, curious about Arnel? Let me pull that up for you.",
-      "Hmm, let me tell you about Arnel."
-    ];
-    return options[Math.floor(Math.random() * options.length)];
-  }
-
-  if (lower.includes('project') || lower.includes('built') || lower.includes('work') || lower.includes('e buddy') || lower.includes('pace') || lower.includes('tearsize') || lower.includes('present po') || lower.includes('tmrc')) {
-    const options = [
-      "Hmm, looking for cool projects? Let me check that.",
-      "Oh, you want to see the projects? On it!",
-      "Oh ok! Let me pull up the best projects."
-    ];
-    return options[Math.floor(Math.random() * options.length)];
-  }
-
-  if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('next') || lower.includes('react') || lower.includes('database') || lower.includes('backend')) {
-    const options = [
-      "Oh, let's talk tech stack! Checking skills now.",
-      "Hmm, let's break down the technical abilities.",
-      "Oh ok! Let me grab the tech stack for you."
-    ];
-    return options[Math.floor(Math.random() * options.length)];
-  }
-
-  if (lower.includes('contact') || lower.includes('hire') || lower.includes('email') || lower.includes('message')) {
-    return "Oh, thinking of working together? Let me pull up contact details.";
-  }
-
-  const generic = [
-    "Hmm, let me think about that...",
-    "Oh ok! Looking that up right now.",
-    "Gotcha, checking that for you.",
-    "Oh, let me look into that."
-  ];
-  return generic[Math.floor(Math.random() * generic.length)];
-}
-
-/**
  * Summarize and naturalize responses for voice output,
  * ensuring complete, fluent spoken sentences without getting truncated prematurely.
  */
-export function summarizeForVoice(text: string): string {
+function summarizeForVoice(text: string): string {
   if (!text) return '';
 
   // 1. Strip emojis and special unicode symbols
@@ -389,7 +319,7 @@ export function summarizeForVoice(text: string): string {
 /**
  * High-Reliability Browser Speech Synthesis with Chrome deadlock fix
  */
-export function playWebSpeech(text: string, onEnd?: () => void): () => void {
+function playWebSpeech(text: string, onEnd?: () => void): () => void {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
     onEnd?.();
     return () => {};
@@ -424,16 +354,12 @@ export function playWebSpeech(text: string, onEnd?: () => void): () => void {
 
       if (preferredVoice) utterance.voice = preferredVoice;
 
-      activeUtterance = utterance;
-
       utterance.onend = () => {
-        activeUtterance = null;
         onEnd?.();
       };
 
       utterance.onerror = (e) => {
         console.warn('[WebSpeech Error]:', e);
-        activeUtterance = null;
         onEnd?.();
       };
 
@@ -449,7 +375,6 @@ export function playWebSpeech(text: string, onEnd?: () => void): () => void {
     clearTimeout(timer);
     try {
       window.speechSynthesis.cancel();
-      activeUtterance = null;
     } catch {
       // Safe ignore
     }
@@ -460,7 +385,7 @@ export function playWebSpeech(text: string, onEnd?: () => void): () => void {
  * Play Ultra-Realistic Microsoft Edge Neural TTS audio via /api/ai/tts,
  * with immediate automatic fallback to playWebSpeech if audio streaming is unavailable.
  */
-export function playNeuralSpeech(
+function playNeuralSpeech(
   text: string,
   onEnd?: () => void,
   voice?: string
@@ -562,7 +487,7 @@ export function playNeuralSpeech(
 /**
  * Stop any active audio and speech synthesis immediately
  */
-export function stopAllSpeech(): void {
+function stopAllSpeech(): void {
   if (typeof window === 'undefined') return;
 
   if (activeTtsAbortController) {
@@ -597,19 +522,10 @@ export function stopAllSpeech(): void {
   if ('speechSynthesis' in window) {
     try {
       window.speechSynthesis.cancel();
-      activeUtterance = null;
     } catch {
       // Safe ignore
     }
   }
-}
-
-/**
- * Speak brief audio prompt immediately using ElevenLabs or Microsoft Edge Neural TTS
- */
-export function speakPrompt(text: string, onEnd?: () => void, voice?: string): () => void {
-  unlockAudio();
-  return playNeuralSpeech(text, onEnd, voice);
 }
 
 /**

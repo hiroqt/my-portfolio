@@ -11,8 +11,6 @@ import {
   FaQuoteLeft,
   FaCode,
   FaTrophy,
-  FaCheckCircle,
-  FaTimesCircle,
   FaFire,
   FaKeyboard,
 } from 'react-icons/fa'
@@ -62,6 +60,8 @@ const CLASSIC_WORDS = [
   'even', 'new', 'want', 'because', 'any', 'these', 'give', 'day', 'most', 'us',
 ]
 
+const WORD_LIMIT = 25
+
 type ModeType = 'time' | 'words' | 'quote'
 type CategoryType = 'code' | 'quotes' | 'words'
 
@@ -79,7 +79,6 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
   // Game Settings
   const [mode, setMode] = useState<ModeType>('time')
   const [timeLimit, setTimeLimit] = useState<number>(30)
-  const [wordLimit, setWordLimit] = useState<number>(25)
   const [category, setCategory] = useState<CategoryType>('code')
 
   // Game Runtime State
@@ -98,7 +97,6 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
   const [correctKeystrokes, setCorrectKeystrokes] = useState<number>(0)
   const [incorrectKeystrokes, setIncorrectKeystrokes] = useState<number>(0)
   const [combo, setCombo] = useState<number>(0)
-  const [maxCombo, setMaxCombo] = useState<number>(0)
 
   // DOM Refs
   const inputRef = useRef<HTMLInputElement>(null)
@@ -116,14 +114,14 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
       sourceList = CLASSIC_WORDS
     }
 
-    const count = mode === 'words' ? wordLimit : 60
+    const count = mode === 'words' ? WORD_LIMIT : 60
     const shuffled: string[] = []
     for (let i = 0; i < count; i++) {
       const randWord = sourceList[Math.floor(Math.random() * sourceList.length)]
       shuffled.push(randWord)
     }
     return shuffled
-  }, [category, mode, wordLimit])
+  }, [category, mode])
 
   // Reset the game completely
   const resetGame = useCallback((autoFocus = false) => {
@@ -142,7 +140,6 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
     setCorrectKeystrokes(0)
     setIncorrectKeystrokes(0)
     setCombo(0)
-    setMaxCombo(0)
 
     if (autoFocus) {
       setTimeout(() => {
@@ -284,11 +281,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
       setIncorrectKeystrokes((prev) => prev + incorrectCount)
 
       if (isWordCorrect) {
-        setCombo((prev) => {
-          const next = prev + 1
-          setMaxCombo((m) => Math.max(m, next))
-          return next
-        })
+        setCombo((prev) => prev + 1)
       } else {
         setCombo(0)
       }
@@ -312,11 +305,7 @@ export function MonkeyTypeGame({ initialSwitch = 'red' }: MonkeyTypeGameProps) {
 
       if (e.key === targetChar) {
         setCorrectKeystrokes((prev) => prev + 1)
-        setCombo((prev) => {
-          const next = prev + 1
-          setMaxCombo((m) => Math.max(m, next))
-          return next
-        })
+        setCombo((prev) => prev + 1)
       } else {
         setIncorrectKeystrokes((prev) => prev + 1)
         setCombo(0)

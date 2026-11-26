@@ -89,7 +89,6 @@ class KeyboardAudioEngine {
   private masterGain: GainNode | null = null
   private volume: number = 0.75
   private muted: boolean = false
-  private isUnlocked: boolean = false
   private cachedNoiseBuffer: AudioBuffer | null = null
 
   constructor() {
@@ -168,8 +167,6 @@ class KeyboardAudioEngine {
         silentGain.connect(this.masterGain)
         silentOsc.start(0)
         silentOsc.stop(0.001)
-
-        this.isUnlocked = true
       } catch {
         return null
       }
