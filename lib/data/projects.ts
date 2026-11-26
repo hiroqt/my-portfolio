@@ -24,17 +24,19 @@ export interface ProjectData {
   featuredSummary?: string;
   featuredTitle?: string;
   initiative?: string;
+  /** Short recognition tag shown beside the title on the home page list and the project page. */
+  badge?: string;
   metrics?: string[];
-  /** Places the project in the home page "Featured work" grid. The card reads its title, summary, and first three tags from this record. */
+  /** Lists the project on the home page. The row reads its title, summary, and image from this record; projects without it appear only on their own page. */
   showcase?: ProjectShowcase;
 }
 
 export interface ProjectShowcase {
-  /** Position in the grid, starting at 1. */
+  /** Position in the home page list, starting at 1. */
   order: number;
-  /** Short label above the card title. */
+  /** Short label shown at the right of the row. */
   category: string;
-  /** CSS object-position for the 16:10 card crop. Defaults to center. */
+  /** CSS object-position for the 16:10 thumbnail crop. Defaults to center. */
   focus?: string;
 }
 
@@ -55,7 +57,7 @@ export const projectsData: ProjectData[] = [
     featuredTag: 'AUTONOMOUS AI SWARM',
     featuredTitle: 'Pixel Crew',
     featuredSummary: 'A visual AI agent orchestration workspace built with Node.js and JavaScript, with parallel tasks and a retro pixel-art office.',
-    showcase: { order: 4, category: 'Autonomous AI swarm' },
+    showcase: { order: 3, category: 'Autonomous AI swarm' },
     initiative: 'Open Source AI Tooling',
     metrics: [
       '23 Specialized agent command personas',
@@ -154,7 +156,6 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'WINNER - BEST BUSINESS IMPACT',
     featuredTitle: 'FinOps AI Dashboard',
-    showcase: { order: 3, category: 'Enterprise AI & FinOps', focus: 'center 6%' },
     featuredSummary: 'Winner of Best Business Impact at the final capstone presentation of the 9-Week Amazon Quick Quest Workshop (AWS Office BGC). AI-powered financial operations hub automating expense reviews, invoice PO matching, and compliance.',
     initiative: 'Amazon Quick Quest Workshop (BGC)',
     metrics: [
@@ -200,14 +201,14 @@ export const projectsData: ProjectData[] = [
     tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Open Data', 'Leaflet OSM'],
     link: 'https://bettertrecemartires.org',
     github: 'https://github.com/hiroqt/bettertrece',
-    image: '/images/bettertrece.webp',
-    imageWidth: 1050,
-    imageHeight: 1050,
+    image: '/images/better-trece-logo.webp',
+    imageWidth: 1080,
+    imageHeight: 1080,
     previewName: 'bettertrecemartires.org',
     isFeatured: true,
     featuredTag: 'BETTERGOV INITIATIVE',
     featuredTitle: 'Better Trece',
-    showcase: { order: 6, category: 'Civic tech & open data', focus: 'center 30%' },
+    showcase: { order: 5, category: 'Civic tech & open data', focus: 'center 42%' },
     featuredSummary: 'Open civic data portal visualizing municipal budgets, infrastructure spending, and public city services for Trece Martires.',
     initiative: 'BetterGov Philippines',
     metrics: [
@@ -242,6 +243,53 @@ export const projectsData: ProjectData[] = [
     ]
   },
   {
+    slug: 'momo',
+    title: 'Momo (AI Study Platform)',
+    type: 'EdTech / AI Study Platform',
+    summary: 'An AI study platform that turns uploaded PDF, DOCX, PPTX, and TXT files into flashcards, quizzes, practice exams, and outlines grounded only in the student’s own material. Built with a React Native (Expo) app, a FastAPI backend, and a Next.js showcase site.',
+    tags: ['React Native', 'Expo', 'FastAPI', 'Python', 'PostgreSQL', 'pgvector', 'RAG', 'Next.js'],
+    link: 'https://github.com/hiroqt/momo',
+    github: 'https://github.com/hiroqt/momo',
+    image: '/images/momo.webp',
+    imageWidth: 1536,
+    imageHeight: 1024,
+    isFeatured: true,
+    featuredTag: 'AI STUDY PLATFORM',
+    featuredTitle: 'Momo',
+    showcase: { order: 6, category: 'AI study platform', focus: 'center 30%' },
+    featuredSummary: 'Turns class files into flashcards, quizzes, and practice exams grounded only in the student’s own sources, with an offline-first mobile app and a tutor that cites its pages.',
+    metrics: [
+      'Study sets built only from uploaded sources',
+      'Offline-first mobile study with idempotent sync',
+      'Tutor answers cite exact pages and sections',
+      'Uploaded files expire after 72 hours; study sets persist'
+    ],
+    features: [
+      'Flashcards, multiple choice with rationales, true/false, identification, fill-in-the-blank, timed practice exams, and chapter outlines',
+      'Source-only generation that reports missing evidence instead of guessing',
+      'Vocabulary and depth tuned from Grade 9 to graduate level',
+      'Offline study in Expo SQLite with a queued, idempotent sync to the server',
+      'Camera and typed math solver with step-by-step LaTeX solutions',
+      'Conversational Momo tutor with tool calling and clickable page citations',
+      '2D concept diagrams generated from course context',
+      'Gamified economy with hearts, XP, Momo Coins, daily streaks, and a mascot shop'
+    ],
+    content: [
+      {
+        title: 'Overview',
+        content: 'Momo converts uploaded academic documents (PDF, DOCX, TXT, and PPTX) into interactive study materials. Every item comes from the student’s own files: retrieved passages are given to the model as evidence, and when they do not cover a topic the pipeline reports insufficient source material instead of filling the gap with general knowledge.'
+      },
+      {
+        title: 'Architecture',
+        content: 'A React Native (Expo) app with an offline SQLite store talks to a FastAPI backend over JWT-authenticated REST. Background workers ingest, chunk, and embed documents into Supabase PostgreSQL with pgvector, generate study sets with NVIDIA Nemotron models through OpenRouter, and validate the output against Pydantic schemas before saving it. A Next.js 15 site presents the product with an interactive preview chat.'
+      },
+      {
+        title: 'Status',
+        content: 'Momo is in active development. A production readiness checklist in the repository tracks verified work, partial modules, and the tasks that remain before launch.'
+      }
+    ]
+  },
+  {
     slug: 'e-buddy',
     title: 'eGov AI (Top 5 eGov Hackathon 2026)',
     type: 'AI / Civic Tech',
@@ -255,6 +303,7 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'TOP 5 EGOV',
     featuredTitle: 'eGov AI',
+    badge: 'Top 5 · eGov Hackathon',
     showcase: { order: 1, category: 'AI & civic tech', focus: 'center 45%' },
     featuredSummary: 'A unified civic platform with biometric face verification, multi-modal voice AI, and automated public services. Recognized Top 5 at eGov Hackathon 2026.',
     metrics: [
@@ -302,7 +351,7 @@ export const projectsData: ProjectData[] = [
     isFeatured: true,
     featuredTag: 'MACOS & ANDROID UTILITY',
     featuredTitle: 'Android Deck',
-    showcase: { order: 5, category: 'macOS & Android utility' },
+    showcase: { order: 4, category: 'macOS & Android utility' },
     featuredSummary: 'Transforms an Android phone into a touchscreen stream deck for macOS over USB or Wi-Fi, paired with a native Swift Liquid Glass notch HUD.',
     metrics: [
       '40 Passing Swift unit tests & Release DMG build',

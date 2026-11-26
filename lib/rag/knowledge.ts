@@ -48,10 +48,11 @@ Arnel welcomes inquiries for full-time software engineering roles, contract work
 - Context Engineering: dynamic context window management, few-shot prompting, structured schema enforcement (Zod/JSON Schema), and token budget optimization.
 - Agentic Loops: autonomous decision loops, multi-step tool/function calling, plan-and-execute workflows, and self-correcting error handling.
 - RAG Architectures: semantic chunking, hybrid search (dense cosine embeddings + BM25/TF-IDF keyword weighting), Reciprocal Rank Fusion (RRF), pgvector indexing, and grounding guardrails.
-- Tools & AI Workflow: Codex, Claude, Gemini, TypeSafe Jev (for semantic validation and grounding judgments), Obsidian for knowledge synthesis, and Orca for agentic testing.
+- Tools & AI Workflow: Codex, Claude Ultra, Gemini, TypeSafe Jev (for semantic validation and grounding judgments), Obsidian for knowledge synthesis, Orca for agentic testing, and Wispr Flow for voice dictation.
+- Agent skills Arnel uses in his coding agents: Ponytail (minimal, no-over-engineering solutions), Caveman (terse, token-saving answers), Overdrive (his own adaptive engineering workflows), and Graphify (codebase knowledge graphs).
 - Public AI Integrations: Groq in this portfolio, OpenAI and Gemini SDKs in jobhunt, and coding-agent adapters for Claude Code, Codex, Cursor, and Kiro in PixelCrew.`,
-    keywords: ['ai', 'context engineering', 'agentic loops', 'rag', 'llm', 'openai', 'codex', 'claude', 'gemini', 'jev', 'obsidian', 'orca', 'cursor', 'kiro', 'groq', 'prompt engineering', 'embeddings', 'pgvector', 'tools'],
-    metadata: { section: 'ai', techStack: ['Codex', 'Claude', 'Gemini', 'Jev', 'Obsidian', 'Orca', 'Groq', 'OpenAI', 'Node.js', 'Python', 'TypeScript'] }
+    keywords: ['ai', 'context engineering', 'agentic loops', 'rag', 'llm', 'openai', 'codex', 'claude', 'gemini', 'jev', 'obsidian', 'orca', 'wispr flow', 'ponytail', 'caveman', 'overdrive', 'graphify', 'agent skills', 'cursor', 'kiro', 'groq', 'prompt engineering', 'embeddings', 'pgvector', 'tools'],
+    metadata: { section: 'ai', techStack: ['Codex', 'Claude Ultra', 'Gemini', 'Jev', 'Obsidian', 'Orca', 'Wispr Flow', 'Groq', 'OpenAI', 'Node.js', 'Python', 'TypeScript'] }
   },
   {
     id: 'skills-frontend',
@@ -187,8 +188,9 @@ Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denis
     content: `NVIDIA Certificates of Competency awarded to Arnel Baylon (NVIDIA learning platform, learn.nvidia.com):
 1. Building LLM Applications With Prompt Engineering — issued November 19, 2026 (Certification ID 3g35lFwYStOlKIgoEEAmTw).
 2. Fundamentals of Deep Learning — issued November 18, 2026 (Certification ID f_7g8ar5SQW6cGlgqUtX0w).
-Both certificates are listed in the Certifications column of the portfolio, with the PDF certificates linked.`,
-    keywords: ['nvidia', 'certifications', 'certificate', 'deep learning', 'fundamentals of deep learning', 'prompt engineering', 'llm applications', 'llm', 'competency', 'credentials'],
+Arnel earned both certificates at a paid, 3-day NVIDIA Developer bootcamp in November 2026, which he attended as the only scholar at the event and graduated from.
+Both certificates are listed in the Certifications section of the portfolio, with the PDF certificates linked, and the bootcamp appears under Recognition.`,
+    keywords: ['nvidia', 'bootcamp', 'developer bootcamp', 'scholar', 'scholarship', 'graduate', 'certifications', 'certificate', 'deep learning', 'fundamentals of deep learning', 'prompt engineering', 'llm applications', 'llm', 'competency', 'credentials'],
     metadata: { section: 'nvidia-certifications', featured: true }
   },
   {
