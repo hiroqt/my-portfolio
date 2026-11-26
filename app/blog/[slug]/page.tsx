@@ -35,9 +35,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.publishedAt,
       authors: ['Arnel Baylon'],
       tags: post.keywords,
-      images: [{ url: '/images/header.png?v=2', width: 1024, height: 1024, alt: 'Pixel-art portrait of Arnel Baylon' }],
+      images: [{ url: '/images/og-image.png', width: 1024, height: 1024, alt: 'Pixel-art portrait of Arnel Baylon' }],
     },
-    twitter: { card: 'summary', title, description: post.summary, images: ['/images/header.png?v=2'] },
+    twitter: { card: 'summary', title, description: post.summary, images: ['/images/og-image.png'] },
   }
 }
 

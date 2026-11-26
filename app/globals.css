@@ -73,7 +73,7 @@
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  background: url('/images/grain.png') repeat;
+  background: url('/images/grain.webp') repeat;
   background-size: 160px 160px;
   opacity: .04;
   mix-blend-mode: multiply;

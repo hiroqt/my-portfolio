@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     type: 'profile',
     images: [
       {
-        url: '/images/header.png?v=2',
+        url: '/images/og-image.png',
         width: 1024,
         height: 1024,
         alt: 'Pixel-art portrait of Arnel Baylon',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: 'Arnel Baylon — AI-Driven Software Developer & Agentic Systems',
     description:
       'AI-Driven Software Developer & Agentic Systems. Experience, projects, certifications, and skills.',
-    images: ['/images/header.png?v=2'],
+    images: ['/images/og-image.png'],
   },
 }
 

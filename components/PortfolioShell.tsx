@@ -10,8 +10,8 @@ import { WorkShowcase } from '@/components/sections/WorkShowcase'
 import { StackShowcase } from '@/components/sections/StackShowcase'
 import { SkillsShowcase } from '@/components/sections/SkillsShowcase'
 import { JourneySection } from '@/components/sections/JourneySection'
-import headerImage from '@/public/images/header.png'
-import oracleAgenticAiBadge from '@/public/images/certs/oracle-agentic-ai-foundations.png'
+import headerImage from '@/public/images/header.webp'
+import oracleAgenticAiBadge from '@/public/images/certs/oracle-agentic-ai-foundations.webp'
 import styles from './PortfolioShell.module.css'
 
 interface MilestoneProof {
@@ -31,7 +31,7 @@ const proofMilestones: MilestoneProof[] = [
     tag: 'AWS BUILDNIGHTS / 2026',
     title: 'Best Business Impact',
     sub: 'Capstone Winner · AI Cloud Architecture',
-    imageSrc: '/images/gallery/business-impact-quickquest.png',
+    imageSrc: '/images/gallery/business-impact-quickquest.webp',
     alt: 'QuickQuest Capstone on Quick finale poster in magenta and black',
     linkUrl: '/certs/aws-capstone-best-business-impact.pdf',
     linkLabel: 'View official PDF certificate ↗',
@@ -41,9 +41,9 @@ const proofMilestones: MilestoneProof[] = [
     tag: 'EGOV HACKATHON / 2026',
     title: 'Top 5 eGov Finalist',
     sub: 'National Finalist · Team DEVOOPS',
-    imageSrc: '/images/gallery/egov-top5-2026.png',
+    imageSrc: '/images/gallery/egov-top5-2026.webp',
     alt: 'Top 5 Finalist recognition at eGov PH Hackathon 2026 with Team DEVOOPS',
-    linkUrl: '/images/gallery/egov-top5-2026.png',
+    linkUrl: '/images/gallery/egov-top5-2026.webp',
     linkLabel: 'Open full-resolution photo ↗',
   },
   {
@@ -51,7 +51,7 @@ const proofMilestones: MilestoneProof[] = [
     tag: 'GEAMH PUBLIC HOSPITAL',
     title: '486 Hours of Building',
     sub: 'Live AI Triage & Queuing Deployment',
-    imageSrc: '/images/gallery/internship_presenting_to_sectionheads.jpg',
+    imageSrc: '/images/gallery/internship_presenting_to_sectionheads.webp',
     alt: 'Arnel presenting the AI queuing and triage system to hospital section heads at General Emilio Aguinaldo Memorial Hospital',
     linkUrl: '#experience',
     linkLabel: 'Read about the experience in Journey ↗',
@@ -292,7 +292,7 @@ export function PortfolioShell() {
           <SectionHeading number="05 /" title="The human behind the code" />
           <div className={styles.aboutGrid}>
             <div className={styles.aboutCopy} data-reveal><p className={styles.aboutLead}>Great software is built<br />with intent.</p><p>I’m Arnel—also Nel or Yhel. My work sits at the intersection of solid software development and modern AI systems: building products grounded in deep technical fundamentals and accelerated with AI leverage.</p><p>I care about the whole lifecycle—listening to what users actually need, architecting systems that last, and shipping with precision. When I’m away from the keyboard, you’ll find me running, making pixel art, and exploring what’s next.</p><Link href="/assistant" className={styles.textLink}>A little more about me? Ask my AI <span aria-hidden="true">↗</span></Link></div>
-            <figure id="gallery" className={styles.aboutPhoto} data-reveal style={revealIndex(1)}><Image src="/images/gallery/egov-top5-2026.png" alt="Arnel with team DEVOOPS at the eGov Hackathon 2026 finalist recognition" width={1080} height={725} sizes="(max-width: 700px) 90vw, 500px" /><figcaption>Team DEVOOPS. Ideas become better together.</figcaption></figure>
+            <figure id="gallery" className={styles.aboutPhoto} data-reveal style={revealIndex(1)}><Image src="/images/gallery/egov-top5-2026.webp" alt="Arnel with team DEVOOPS at the eGov Hackathon 2026 finalist recognition" width={1080} height={725} sizes="(max-width: 700px) 90vw, 500px" /><figcaption>Team DEVOOPS. Ideas become better together.</figcaption></figure>
           </div>
           <details id="typing" className={styles.playground} onToggle={event => setPlaygroundOpen(event.currentTarget.open)}>
             <summary><span>A small detour: the typing playground</span><span aria-hidden="true">{playgroundOpen ? '−' : '+'}</span></summary>
