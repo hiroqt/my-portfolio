@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { FiArrowLeft, FiArrowUpRight, FiMoon, FiSun } from 'react-icons/fi'
 import { useTheme } from '@/components/ThemeProvider'
 import { TechIcon } from '@/components/ui/TechIcon'
+import { YouTubeEmbed } from '@/components/ui/YouTubeEmbed'
 import styles from './ProjectDetailView.module.css'
 
 export function ProjectDetailView({ project }: { project: ProjectData }) {
@@ -18,6 +19,7 @@ export function ProjectDetailView({ project }: { project: ProjectData }) {
   const projectPath = `/projects/${project.slug}`
   const hasProjectLink = Boolean(project.link && project.link !== '#' && project.link.split(/[?#]/)[0].replace(/\/$/, '') !== projectPath)
   const hasSourceLink = Boolean(project.github && (!hasProjectLink || project.github !== project.link))
+  const hasFeatures = Boolean(project.features && project.features.length > 0)
 
   return (
     <div className={`portfolio-grain ${styles.page}`}>
@@ -110,6 +112,34 @@ export function ProjectDetailView({ project }: { project: ProjectData }) {
                 </li>
               ))}
             </ul>
+          </section>
+        )}
+
+        {project.video && (
+          <section className={`${styles.videoSection} ${styles.enter}`} aria-labelledby="demo-title">
+            <div className={styles.sectionHeading}>
+              <span className={styles.eyebrow}>{hasFeatures ? '02' : '01'} / Demo</span>
+              <h2 id="demo-title">See it in action</h2>
+            </div>
+            <figure className={styles.video}>
+              <YouTubeEmbed
+                id={project.video.youtubeId}
+                title={project.video.title}
+                sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1040px) calc(100vw - 80px), 960px"
+              />
+              <figcaption className={styles.videoCaption}>
+                <span>{project.video.title}</span>
+                <a
+                  href={`https://www.youtube.com/watch?v=${project.video.youtubeId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.textLink}
+                >
+                  Watch on YouTube <FiArrowUpRight aria-hidden="true" />
+                  <span className={styles.visuallyHidden}> (opens in a new tab)</span>
+                </a>
+              </figcaption>
+            </figure>
           </section>
         )}
 
