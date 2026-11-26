@@ -48,16 +48,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const readingMinutes = getReadingMinutes(post)
   const tocItems: TocItem[] = [
-    { id: 'abstract', title: 'Abstract' },
+    ...(post.abstract ? [{ id: 'abstract', title: 'Abstract' }] : []),
     ...post.sections.map(section => ({ id: section.id, label: section.label, title: section.title })),
   ]
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'ScholarlyArticle',
+    '@type': post.abstract ? 'ScholarlyArticle' : 'BlogPosting',
     headline: getPostFullTitle(post),
     description: post.summary,
     datePublished: post.publishedAt,
-    keywords: post.keywords.join(', '),
+    keywords: post.keywords?.join(', '),
     url: `${siteUrl}/blog/${post.slug}`,
     author: { '@type': 'Person', name: 'Arnel Baylon', alternateName: 'Yhel', url: siteUrl },
   }
@@ -111,15 +111,27 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </ol>
               </details>
 
-              <section id="abstract" className={styles.abstract} aria-labelledby="abstract-title">
-                <h2 id="abstract-title" className={styles.abstractTitle}>Abstract</h2>
-                {post.abstract.map(paragraph => (
-                  <p key={paragraph.slice(0, 32)}><RichText text={paragraph} /></p>
-                ))}
-                <p className={styles.keywords}>
-                  <strong>Keywords:</strong> {post.keywords.join(', ')}
-                </p>
-              </section>
+              {post.intro && (
+                <div className={styles.intro}>
+                  {post.intro.map(paragraph => (
+                    <p key={paragraph.slice(0, 32)}><RichText text={paragraph} /></p>
+                  ))}
+                </div>
+              )}
+
+              {post.abstract && (
+                <section id="abstract" className={styles.abstract} aria-labelledby="abstract-title">
+                  <h2 id="abstract-title" className={styles.abstractTitle}>Abstract</h2>
+                  {post.abstract.map(paragraph => (
+                    <p key={paragraph.slice(0, 32)}><RichText text={paragraph} /></p>
+                  ))}
+                  {post.keywords && (
+                    <p className={styles.keywords}>
+                      <strong>Keywords:</strong> {post.keywords.join(', ')}
+                    </p>
+                  )}
+                </section>
+              )}
 
               {post.sections.map(section => <ArticleSection key={section.id} section={section} />)}
 

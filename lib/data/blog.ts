@@ -32,8 +32,12 @@ export interface BlogPost {
   summary: string
   author: string
   publishedAt: string
-  abstract: string[]
-  keywords: string[]
+  /** Opening paragraphs shown before the first section, for essays. */
+  intro?: string[]
+  /** For studies: shown in a boxed Abstract with the keywords. */
+  abstract?: string[]
+  /** Used in search metadata; listed under the abstract when there is one. */
+  keywords?: string[]
   sections: BlogSection[]
 }
 
@@ -773,7 +777,8 @@ export function getReadingMinutes(post: BlogPost) {
   const text = [
     post.title,
     post.subtitle ?? '',
-    ...post.abstract,
+    ...(post.intro ?? []),
+    ...(post.abstract ?? []),
     ...post.sections.flatMap(section => [section.title, ...section.blocks.flatMap(blockText)]),
   ].join(' ')
   const words = text.split(/\s+/).filter(Boolean).length
