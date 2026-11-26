@@ -8,6 +8,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import styles from './Assistant.module.css';
 import { ChatMessageData, AgentAction, AdaptivePersona } from '@/lib/ai/types';
 import { AIStatusState } from '@/components/modules/ai/types';
+import { routeForSection } from '@/lib/portfolio/sections';
 import { useRouter } from 'next/navigation';
 
 export default function AssistantPage() {
@@ -65,7 +66,7 @@ export default function AssistantPage() {
     } else if (action.type === 'navigate' || action.type === 'scroll_to_section' || action.type === 'open_contact') {
       const requestedTarget = action.sectionId || action.destination || (action.type === 'open_contact' ? 'contact' : 'home');
       const targetId = action.destination === 'about' ? 'about' : requestedTarget === 'home' ? 'hero' : requestedTarget;
-      destination = `/#${targetId}`;
+      destination = routeForSection(targetId);
     }
     if (destination) {
       setStatus('navigating');
@@ -293,7 +294,7 @@ export default function AssistantPage() {
           <div className={styles.sidebarFoot}>
             <div className={styles.quota}><strong>{remainingQuota}</strong><span>of {totalQuota} questions left</span></div>
             <p>Conversation history stays in this tab. Clearing the chat keeps your request limit.</p>
-            <Link href="/#contact" className={styles.contactLink}>Prefer a real conversation? <span aria-hidden="true">↗</span></Link>
+            <Link href="/contact" className={styles.contactLink}>Prefer a real conversation? <span aria-hidden="true">↗</span></Link>
           </div>
         </aside>
 

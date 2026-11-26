@@ -57,6 +57,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${GeistSans.variable} ${GeistMono.variable}`}
+      data-scroll-behavior="smooth"
     >
       <head>
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Context" />

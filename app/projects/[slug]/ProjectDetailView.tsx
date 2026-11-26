@@ -22,7 +22,7 @@ export function ProjectDetailView({ project }: { project: ProjectData }) {
   return (
     <div className={`portfolio-grain ${styles.page}`}>
       <nav className={styles.navigation} aria-label="Project navigation">
-        <Link href="/#projects" className={styles.backLink}>
+        <Link href="/projects" className={styles.backLink}>
           <FiArrowLeft aria-hidden="true" />
           <span>All projects</span>
         </Link>
@@ -38,7 +38,10 @@ export function ProjectDetailView({ project }: { project: ProjectData }) {
 
       <main id="main-content" className={styles.main} tabIndex={-1}>
         <header className={`${styles.header} ${styles.enter}`}>
-          <p className={styles.eyebrow}>{project.type}</p>
+          <div className={styles.kicker}>
+            <p className={styles.eyebrow}>{project.type}</p>
+            {project.badge && <span className={styles.badge}>{project.badge}</span>}
+          </div>
           <h1 className={styles.title}>{title}<span className={styles.titleDot}>.</span></h1>
           <p className={styles.summary}>{summary}</p>
 
@@ -128,7 +131,7 @@ export function ProjectDetailView({ project }: { project: ProjectData }) {
 
         <footer className={styles.footer}>
           <span className={styles.eyebrow}>{project.initiative || 'Arnel Baylon / Selected work'}</span>
-          <Link href="/#projects" className={styles.backLink}><FiArrowLeft aria-hidden="true" /> All projects</Link>
+          <Link href="/projects" className={styles.backLink}><FiArrowLeft aria-hidden="true" /> All projects</Link>
         </footer>
       </main>
     </div>

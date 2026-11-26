@@ -30,7 +30,7 @@ export const portfolioChunks: KnowledgeChunk[] = [
 - Email: arnelbaylon15@gmail.com
 - GitHub: https://github.com/hiroqt (@hiroqt)
 - LinkedIn: https://www.linkedin.com/in/arnel-baylon-b05233189
-- Portfolio Contact Details: #contact section contains email and social links
+- Portfolio Contact Details: the /contact page lists email and social links
 - Instagram: @yheellll
 - Facebook: https://www.facebook.com/arnel.baylon.1650
 Arnel welcomes inquiries for full-time software engineering roles, contract work, freelance projects, and AI consulting.`,
@@ -189,7 +189,7 @@ Workshop Leads: Mary Jean Navarro, Fahad Hadji Esmael, Dave Ailller Rivas, Denis
 1. Building LLM Applications With Prompt Engineering — issued November 19, 2026 (Certification ID 3g35lFwYStOlKIgoEEAmTw).
 2. Fundamentals of Deep Learning — issued November 18, 2026 (Certification ID f_7g8ar5SQW6cGlgqUtX0w).
 Arnel earned both certificates at a paid, 3-day NVIDIA Developer bootcamp in November 2026, which he attended as the only scholar at the event and graduated from.
-Both certificates are listed in the Certifications section of the portfolio, with the PDF certificates linked, and the bootcamp appears under Recognition.`,
+Both certificates are listed in the Certifications section of the portfolio, with the PDF certificates linked, and the bootcamp appears under Recognition on the Overview.`,
     keywords: ['nvidia', 'bootcamp', 'developer bootcamp', 'scholar', 'scholarship', 'graduate', 'certifications', 'certificate', 'deep learning', 'fundamentals of deep learning', 'prompt engineering', 'llm applications', 'llm', 'competency', 'credentials'],
     metadata: { section: 'nvidia-certifications', featured: true }
   },
@@ -307,7 +307,7 @@ Both certificates are listed in the Certifications section of the portfolio, wit
     title: 'Client FAQ: How to Start a Project & Timelines',
     category: 'faq',
     content: `Client FAQ:
-- How do I hire Arnel? Email arnelbaylon15@gmail.com with your project brief or connect through LinkedIn. The portfolio's #contact section lists these channels.
+- How do I hire Arnel? Email arnelbaylon15@gmail.com with your project brief or connect through LinkedIn. The portfolio's /contact page lists these channels.
 - What projects does Arnel build? Custom web platforms, SaaS products, AI chatbots, mobile apps, and e-commerce stores.
 - Development Process: Discovery & requirements -> Architecture & wireframes -> Development sprints with live previews -> Testing & deployment -> Ongoing support.`,
     keywords: ['faq', 'client', 'hire', 'how to hire', 'project brief', 'quote', 'timeline', 'process'],
