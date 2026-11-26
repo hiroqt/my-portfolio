@@ -21,6 +21,30 @@
   min-width: 0;
 }
 
+/* Cards in the same row reveal with a short left-to-right stagger. */
+.card:nth-child(2n) {
+  --reveal-index: 1;
+}
+
+/* With the full-width desktop layout, the grid has room for three per row. */
+@media (min-width: 1600px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .card:nth-child(n) {
+    --reveal-index: 0;
+  }
+
+  .card:nth-child(3n + 2) {
+    --reveal-index: 1;
+  }
+
+  .card:nth-child(3n) {
+    --reveal-index: 2;
+  }
+}
+
 .cardLink {
   display: flex;
   width: 100%;
