@@ -31,6 +31,7 @@ Arnel Baylon is a software engineer specializing in modern full-stack web applic
 
 ## Writing
 - [Blog](https://arnelbaylon.dev/blog): Studies and notes by Arnel Baylon
+- [Typing playground](https://arnelbaylon.dev/typing): A typing speed and accuracy game with mechanical switch sounds
 - [How AI Affects IT Fresh Graduates in Finding a Job](https://arnelbaylon.dev/blog/ai-it-fresh-graduates-philippines): Study (Nov 25, 2026) on how AI narrows entry-level IT hiring in the Philippines, and why graduates of state universities and lesser-known schools face a higher burden of proof
 
 ## Certifications

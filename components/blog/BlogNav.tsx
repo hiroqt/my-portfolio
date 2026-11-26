@@ -9,14 +9,16 @@ interface BlogNavProps {
   backHref: string
   backLabel: string
   showHome?: boolean
+  /** Accessible name for the navigation landmark. */
+  label?: string
 }
 
-export function BlogNav({ backHref, backLabel, showHome = false }: BlogNavProps) {
+export function BlogNav({ backHref, backLabel, showHome = false, label = 'Blog navigation' }: BlogNavProps) {
   const { resolvedTheme, setTheme } = useTheme()
   const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
 
   return (
-    <nav className={styles.navigation} aria-label="Blog navigation">
+    <nav className={styles.navigation} aria-label={label}>
       <Link href={backHref} className={styles.backLink}>
         <FiArrowLeft aria-hidden="true" />
         <span>{backLabel}</span>
