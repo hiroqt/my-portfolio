@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     title: 'Blog — Arnel Baylon',
     description,
     type: 'website',
-    images: [{ url: '/images/header.png?v=2', width: 1024, height: 1024, alt: 'Pixel-art portrait of Arnel Baylon' }],
+    images: [{ url: '/images/og-image.png', width: 1024, height: 1024, alt: 'Pixel-art portrait of Arnel Baylon' }],
   },
-  twitter: { card: 'summary', title: 'Blog — Arnel Baylon', description, images: ['/images/header.png?v=2'] },
+  twitter: { card: 'summary', title: 'Blog — Arnel Baylon', description, images: ['/images/og-image.png'] },
 }
 
 export default function BlogIndexPage() {
