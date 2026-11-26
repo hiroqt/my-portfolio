@@ -53,7 +53,7 @@ export const afterGraduation: BlogPost = {
         {
           type: 'list',
           items: [
-            `Build Build Overnights, hosted by the Amazon Users Group Philippines. I joined with a team from STI College in Quezon City. I was the only one not from their school, the "odd one in," and they still welcomed me.`,
+            `Build Build Overnights, hosted by the Amazon Users Group Philippines. I joined with a team from STI College Fairview. I was the only one not from their school, the "odd one in," and they still welcomed me.`,
             `Climate Track. We built a system that helps commuters and riders check whether a road in Metro Manila is passable before they head out, so they don't end up stranded.`,
             `AI Vision Forum Manila at Shangri-La, plus events by Google Cloud Manila, MongoDB, and many other communities.`,
             `Echelon 2026 and several community meetups.`,
