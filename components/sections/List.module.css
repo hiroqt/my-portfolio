@@ -1,0 +1,424 @@
+/* Shared list rows for the home page sections: one quiet row per entry,
+   separated by hairlines, with the detail tucked to the right. */
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row + .row {
+  border-top: 1px solid var(--folio-line);
+}
+
+.rowLink,
+.rowStatic {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 4px 20px;
+  padding: 16px 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.rowLink {
+  border-radius: 8px;
+  transition: color 160ms var(--ease-out);
+}
+
+.rowLink:focus-visible {
+  outline-offset: 2px;
+}
+
+.withThumb {
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--folio-line);
+  border-radius: 8px;
+  background-color: var(--folio-soft);
+  background-image: radial-gradient(var(--folio-line) 1px, transparent 1px);
+  background-size: 8px 8px;
+  color: var(--folio-muted);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color 180ms ease;
+}
+
+.thumb img {
+  object-fit: cover;
+  transition: transform 420ms var(--ease-out);
+}
+
+.rowBody {
+  min-width: 0;
+}
+
+.rowBody > span {
+  display: block;
+}
+
+.rowTitle {
+  margin: 0;
+  color: var(--folio-ink);
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  transition: color 160ms var(--ease-out);
+}
+
+.rowTitle span {
+  color: var(--folio-muted);
+  font-weight: 400;
+}
+
+.rowText {
+  margin: 3px 0 0;
+  color: var(--folio-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.rowMeta {
+  margin: 6px 0 0;
+  color: var(--folio-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.rowAside {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2px;
+  color: var(--folio-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.arrow {
+  display: inline-block;
+  color: var(--folio-muted);
+  font-size: 13px;
+  transition: transform 180ms var(--ease-out), color 160ms ease;
+}
+
+.rowTitle .chip,
+.chip {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--folio-accent) 12%, transparent);
+  color: var(--folio-accent);
+  font-family: var(--font-mono), monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  vertical-align: 2px;
+}
+
+/* Two-column rows: a label on the left, the entries on the right. */
+.defRow {
+  display: grid;
+  grid-template-columns: 184px minmax(0, 1fr);
+  gap: 10px 32px;
+  padding: 26px 0;
+}
+
+.defRow + .defRow {
+  border-top: 1px solid var(--folio-line);
+}
+
+.defLabel {
+  margin: 0;
+  padding-top: 4px;
+  color: var(--folio-ink);
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.defValue {
+  min-width: 0;
+  margin: 0;
+}
+
+.defTitle {
+  margin: 0;
+  color: var(--folio-ink);
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 32px;
+  color: var(--folio-ink);
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 160ms var(--ease-out);
+}
+
+.tool svg {
+  flex: none;
+  color: var(--folio-muted);
+  transition: color 160ms var(--ease-out);
+}
+
+/* Roomier rows for short lists that are read rather than scanned:
+   Skills I build and Services. */
+.relaxed .rowLink,
+.relaxed .rowStatic {
+  gap: 6px 28px;
+  padding: 24px 0;
+}
+
+.relaxed .rowTitle {
+  font-size: 17px;
+}
+
+.relaxed .rowText {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* In a two-column row the description starts level with its title. */
+.relaxed .defValue > :first-child {
+  margin-top: 0;
+}
+
+.relaxed .rowMeta {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.relaxed .rowAside {
+  font-size: 13px;
+}
+
+/* "+N more": the next row peeks out under a fade, then the button. */
+.peek {
+  max-height: 64px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000, transparent 85%);
+  mask-image: linear-gradient(#000, transparent 85%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.revealed {
+  animation: rowIn 420ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+.moreRow {
+  display: flex;
+  justify-content: center;
+  padding-top: 14px;
+}
+
+.moreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid var(--folio-line);
+  border-radius: 999px;
+  background: var(--folio-surface);
+  color: var(--folio-ink);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.moreButton:active {
+  transform: scale(0.97);
+}
+
+.education {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--folio-line);
+  border-radius: 12px;
+  background: var(--folio-surface);
+  scroll-margin-top: 96px;
+}
+
+.education svg {
+  flex: none;
+  color: var(--folio-accent);
+}
+
+.education p {
+  margin: 0;
+}
+
+.extra {
+  margin-top: 10px;
+  border-top: 1px solid var(--folio-line);
+}
+
+.extra summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  color: var(--folio-muted);
+  font-size: 13px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.extra summary::-webkit-details-marker {
+  display: none;
+}
+
+.extra summary svg {
+  transition: transform 220ms var(--ease-out);
+}
+
+.extra[open] summary svg {
+  transform: rotate(45deg);
+}
+
+.extraBody {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 14px;
+  color: var(--folio-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.extraBody p {
+  margin: 0;
+}
+
+.extraBody a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  min-height: 32px;
+  color: var(--folio-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--folio-line);
+  text-underline-offset: 4px;
+}
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rowLink:hover .rowTitle,
+  .tool:hover,
+  .extraBody a:hover {
+    color: var(--folio-accent);
+  }
+
+  .rowLink:hover .arrow {
+    transform: translate(2px, -2px);
+    color: var(--folio-accent);
+  }
+
+  .rowLink:hover .thumb {
+    border-color: var(--folio-accent);
+  }
+
+  .rowLink:hover .thumb img {
+    transform: scale(1.06);
+  }
+
+  .tool:hover svg {
+    color: var(--folio-accent);
+  }
+
+  .moreButton:hover {
+    border-color: var(--folio-accent);
+    color: var(--folio-accent);
+  }
+}
+
+@media (max-width: 640px) {
+  .withThumb {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .thumb {
+    width: 64px;
+  }
+
+  .withThumb .rowAside {
+    display: none;
+  }
+
+  .defRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 22px 0;
+  }
+
+  .tools {
+    gap: 8px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealed {
+    animation: none;
+  }
+
+  .thumb img,
+  .arrow,
+  .moreButton {
+    transition: none;
+  }
+}
