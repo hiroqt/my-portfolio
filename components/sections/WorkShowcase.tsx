@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import type { CSSProperties } from 'react'
 import { projectsData, type ProjectData, type ProjectShowcase } from '@/lib/data/projects'
 import { TechIcon } from '@/components/ui/TechIcon'
 import styles from './WorkShowcase.module.css'
@@ -11,14 +10,14 @@ const showcaseProjects = projectsData
   .filter((project): project is ShowcaseProject => Boolean(project.showcase))
   .sort((a, b) => a.showcase.order - b.showcase.order)
 
-function ProjectCard({ project, column }: { project: ShowcaseProject; column: number }) {
+function ProjectCard({ project }: { project: ShowcaseProject }) {
   const title = project.featuredTitle ?? project.title.split(' (')[0]
   const summary = project.featuredSummary ?? project.summary
   const titleId = `work-${project.slug}-title`
   const summaryId = `work-${project.slug}-summary`
 
   return (
-    <li className={styles.card} data-reveal style={{ '--reveal-index': column } as CSSProperties}>
+    <li className={styles.card} data-reveal>
       <Link href={`/projects/${project.slug}`} className={styles.cardLink} aria-labelledby={titleId} aria-describedby={summaryId}>
         <div className={styles.artwork}>
           <div className={styles.imageReveal}>
@@ -27,7 +26,7 @@ function ProjectCard({ project, column }: { project: ShowcaseProject; column: nu
                 src={project.image}
                 alt=""
                 fill
-                sizes="(max-width: 680px) calc(100vw - 72px), (max-width: 1140px) 45vw, 500px"
+                sizes="(max-width: 680px) calc(100vw - 72px), (max-width: 1179px) 50vw, (max-width: 1599px) calc(50vw - 174px), calc(33vw - 125px)"
                 className={styles.image}
                 style={{ objectPosition: project.showcase.focus ?? 'center' }}
               />
@@ -59,8 +58,8 @@ export function WorkShowcase() {
   return (
     <div className={styles.showcase}>
       <ul className={styles.grid}>
-        {showcaseProjects.map((project, index) => (
-          <ProjectCard key={project.slug} project={project} column={index % 2} />
+        {showcaseProjects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
         ))}
       </ul>
 
