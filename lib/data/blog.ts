@@ -5,6 +5,8 @@
  * typographic quotes and turns every http(s) URL into a clickable link.
  */
 
+import { afterGraduation } from './posts/afterGraduation'
+
 export type BlogListItem = string | { lead: string; text: string }
 
 export type BlogBlock =
@@ -740,7 +742,8 @@ const aiAndItFreshGraduates: BlogPost = {
 }
 
 /** Newest first. */
-export const blogPosts: BlogPost[] = [aiAndItFreshGraduates]
+// Newest first.
+export const blogPosts: BlogPost[] = [afterGraduation, aiAndItFreshGraduates]
 
 export function getBlogPost(slug: string) {
   return blogPosts.find(post => post.slug === slug)
