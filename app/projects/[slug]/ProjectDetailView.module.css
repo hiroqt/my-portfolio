@@ -1,6 +1,5 @@
 .page {
   min-height: 100svh;
-  background: var(--folio-paper);
   color: var(--folio-ink);
 }
 

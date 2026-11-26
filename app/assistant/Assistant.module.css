@@ -10,7 +10,6 @@
   height: 100dvh;
   min-height: 0;
   overflow: hidden;
-  background: var(--folio-paper);
   color: var(--folio-ink);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
