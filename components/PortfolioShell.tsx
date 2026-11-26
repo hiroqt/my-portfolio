@@ -1,143 +1,160 @@
 'use client'
 
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { AnimatePresence, motion, useMotionTemplate, useReducedMotion, useSpring } from 'framer-motion'
+import { usePathname, useRouter } from 'next/navigation'
+import { motion, useReducedMotion } from 'framer-motion'
+import { useLenis } from 'lenis/react'
+import type { IconType } from 'react-icons'
+import {
+  FiAward,
+  FiBookOpen,
+  FiBriefcase,
+  FiCpu,
+  FiFileText,
+  FiGithub,
+  FiGrid,
+  FiHome,
+  FiLayers,
+  FiLinkedin,
+  FiMail,
+  FiMenu,
+  FiMoon,
+  FiSun,
+  FiTool,
+  FiX,
+} from 'react-icons/fi'
+import { LuKeyboard } from 'react-icons/lu'
 import { useTheme } from '@/components/ThemeProvider'
-import { WorkShowcase } from '@/components/sections/WorkShowcase'
-import { StackShowcase } from '@/components/sections/StackShowcase'
-import { SkillsShowcase } from '@/components/sections/SkillsShowcase'
-import { JourneySection } from '@/components/sections/JourneySection'
-import headerImage from '@/public/images/header.webp'
-import oracleAgenticAiBadge from '@/public/images/certs/oracle-agentic-ai-foundations.webp'
+import { email, links } from '@/lib/portfolio/links'
+import { movedSectionRoute } from '@/lib/portfolio/sections'
+import avatarImage from '@/public/images/avatar.webp'
 import styles from './PortfolioShell.module.css'
 
-interface MilestoneProof {
-  id: string
-  tag: string
-  title: string
-  sub: string
-  imageSrc: string
-  alt: string
-  linkUrl?: string
-  linkLabel?: string
+/** How many entries each sidebar page holds, shown beside its link. */
+export interface NavCounts {
+  experience: number
+  projects: number
+  skills: number
+  stack: number
+  certifications: number
+  services: number
+  posts: number
 }
 
-const proofMilestones: MilestoneProof[] = [
-  {
-    id: 'aws-award',
-    tag: 'AWS BUILDNIGHTS / 2026',
-    title: 'Best Business Impact',
-    sub: 'Capstone Winner · AI Cloud Architecture',
-    imageSrc: '/images/gallery/business-impact-quickquest.webp',
-    alt: 'QuickQuest Capstone on Quick finale poster in magenta and black',
-    linkUrl: '/certs/aws-capstone-best-business-impact.pdf',
-    linkLabel: 'View official PDF certificate ↗',
-  },
-  {
-    id: 'egov-award',
-    tag: 'EGOV HACKATHON / 2026',
-    title: 'Top 5 eGov Finalist',
-    sub: 'National Finalist · Team DEVOOPS',
-    imageSrc: '/images/gallery/egov-top5-2026.webp',
-    alt: 'Top 5 Finalist recognition at eGov PH Hackathon 2026 with Team DEVOOPS',
-    linkUrl: '/images/gallery/egov-top5-2026.webp',
-    linkLabel: 'Open full-resolution photo ↗',
-  },
-  {
-    id: 'hospital-internship',
-    tag: 'GEAMH PUBLIC HOSPITAL',
-    title: '486 Hours of Building',
-    sub: 'Live AI Triage & Queuing Deployment',
-    imageSrc: '/images/gallery/internship_presenting_to_sectionheads.webp',
-    alt: 'Arnel presenting the AI queuing and triage system to hospital section heads at General Emilio Aguinaldo Memorial Hospital',
-    linkUrl: '#experience',
-    linkLabel: 'Read about the experience in Journey ↗',
-  },
-]
-
-const MonkeyTypeGame = dynamic(
-  () => import('@/components/modules/typing/MonkeyTypeGame').then(module => module.MonkeyTypeGame),
-  { ssr: false, loading: () => <p>Loading the typing playground…</p> },
-)
-const email = 'arnelbaylon15@gmail.com'
-const navigation = [
-  { id: 'skills', label: 'Stack' },
-  { id: 'built-skills', label: 'Skills' },
-  { id: 'projects', label: 'Work' },
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
-]
-const services = [
-  { title: 'Web products', description: 'Clear interfaces, reliable APIs, and the data that connects them.', detail: 'React · Next.js · Python · PostgreSQL' },
-  { title: 'AI systems', description: 'Assistants and agent workflows with the right context, tools, and checks.', detail: 'Context engineering · RAG · Tool calling' },
-  { title: 'Mobile experiences', description: 'Useful apps that feel at home in everyday routines.', detail: 'React Native · Expo · Native integrations' },
-]
-
-const revealIndex = (index: number) => ({ '--reveal-index': index }) as CSSProperties
-
-function SectionHeading({ number, title, note }: { number: string; title: string; note?: string }) {
-  return (
-    <div className={styles.sectionHeading}>
-      <div><span className={styles.sectionNumber}>{number}</span><h2>{title}</h2></div>
-      {note && <p>{note}</p>}
-    </div>
-  )
+interface NavItem {
+  label: string
+  href: string
+  icon: IconType
+  count?: number
+  external?: boolean
 }
 
-function PixelPortrait() {
-  const reduceMotion = useReducedMotion()
-  const tiltX = useSpring(0, { stiffness: 120, damping: 24 })
-  const tiltY = useSpring(0, { stiffness: 120, damping: 24 })
-  const transform = useMotionTemplate`perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`
-
-  return (
-    <div className={styles.portraitPanel}>
-      <div className={styles.portraitMeta}><span>ARNEL / ALSO NEL OR YHEL</span><span aria-hidden="true">✦</span></div>
-      <motion.div
-        className={styles.portrait}
-        style={{ transform }}
-        onPointerMove={event => {
-          if (reduceMotion || event.pointerType !== 'mouse' || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
-          const bounds = event.currentTarget.getBoundingClientRect()
-          tiltX.set((0.5 - (event.clientY - bounds.top) / bounds.height) * 6)
-          tiltY.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 6)
-        }}
-        onPointerLeave={() => { tiltX.set(0); tiltY.set(0) }}
-      >
-        <Image src={headerImage} alt="Pixel-art portrait of Arnel Baylon" width={440} height={440} sizes="(max-width: 700px) 280px, 430px" priority />
-      </motion.div>
-      <div className={styles.portraitFooter}><span>A LITTLE PIXEL PERSONALITY.</span></div>
-    </div>
-  )
-}
-
-export function PortfolioShell() {
+/**
+ * The frame around the home page and its sidebar pages: a floating sidebar on
+ * desktop, a top bar with a slide-in drawer below 1024px, and the footer.
+ * Each sidebar link opens its own page in the content column.
+ */
+export function PortfolioShell({ counts, children }: { counts: NavCounts; children: ReactNode }) {
   const { resolvedTheme, setTheme } = useTheme()
   const reduceMotion = useReducedMotion()
-  const [activeSection, setActiveSection] = useState('hero')
+  const lenis = useLenis()
+  const pathname = usePathname()
+  const router = useRouter()
   const [localTime, setLocalTime] = useState('GMT+8')
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle')
-  const [playgroundOpen, setPlaygroundOpen] = useState(false)
-  const [selectedProof, setSelectedProof] = useState<MilestoneProof | null>(null)
-  const copyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const lastPathname = useRef(pathname)
 
+  const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
+  const ThemeIcon = resolvedTheme === 'dark' ? FiSun : FiMoon
+  const toggleTheme = () => setTheme(nextTheme)
+
+  const navGroups: { label?: string; items: NavItem[] }[] = [
+    {
+      items: [
+        { label: 'Overview', href: '/', icon: FiHome },
+        { label: 'Experience', href: '/experience', icon: FiBriefcase, count: counts.experience },
+        { label: 'Projects', href: '/projects', icon: FiGrid, count: counts.projects },
+        { label: 'Contact', href: '/contact', icon: FiMail },
+      ],
+    },
+    {
+      label: 'Toolkit',
+      items: [
+        { label: 'Skills I build', href: '/skills', icon: FiCpu, count: counts.skills },
+        { label: 'Stack', href: '/stack', icon: FiLayers, count: counts.stack },
+        { label: 'Certifications', href: '/certifications', icon: FiAward, count: counts.certifications },
+        { label: 'Services', href: '/services', icon: FiTool, count: counts.services },
+      ],
+    },
+    {
+      label: 'Elsewhere',
+      items: [
+        { label: 'Blog', href: '/blog', icon: FiBookOpen, count: counts.posts },
+        { label: 'Typing playground', href: '/typing', icon: LuKeyboard },
+        { label: 'Résumé', href: links.resume, icon: FiFileText, external: true },
+        { label: 'GitHub', href: links.github, icon: FiGithub, external: true },
+      ],
+    },
+  ]
+
+  // Old links to home page sections (/#experience, /#contact, …) open the page the section moved to.
   useEffect(() => {
-    if (!selectedProof) return
+    const redirect = () => {
+      if (window.location.pathname !== '/') return
+      const target = movedSectionRoute(window.location.hash.slice(1))
+      if (target) router.replace(target)
+    }
+    redirect()
+    window.addEventListener('hashchange', redirect)
+    return () => window.removeEventListener('hashchange', redirect)
+  }, [router])
+
+  // A new page closes the drawer and starts at the top, unless its link names a spot on the page.
+  useEffect(() => {
+    if (lastPathname.current === pathname) return
+    lastPathname.current = pathname
+    setMenuOpen(false)
+    if (window.location.hash) return
+    if (lenis) lenis.scrollTo(0, { immediate: true, force: true })
+    else window.scrollTo(0, 0)
+  }, [pathname, lenis])
+
+  // Phone and tablet drawer: Escape closes it, the page behind holds still,
+  // and focus moves into the drawer and back to the menu button.
+  useEffect(() => {
+    if (!menuOpen) return
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedProof(null)
+      if (e.key === 'Escape') setMenuOpen(false)
     }
     window.addEventListener('keydown', handleKeyDown)
-    const originalOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    const root = document.documentElement
+    const originalOverflow = root.style.overflow
+    root.style.overflow = 'hidden'
+    lenis?.stop()
+    // Wait a frame so the drawer is visible before it takes focus.
+    const focusFrame = requestAnimationFrame(() => closeButtonRef.current?.focus())
+    const menuButton = menuButtonRef.current
     return () => {
+      cancelAnimationFrame(focusFrame)
       window.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = originalOverflow
+      root.style.overflow = originalOverflow
+      lenis?.start()
+      menuButton?.focus({ preventScroll: true })
     }
-  }, [selectedProof])
+  }, [menuOpen, lenis])
+
+  // The drawer only exists below the desktop breakpoint.
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)')
+    const close = () => { if (desktop.matches) setMenuOpen(false) }
+    desktop.addEventListener('change', close)
+    return () => desktop.removeEventListener('change', close)
+  }, [])
 
   useEffect(() => {
     const update = () => setLocalTime(new Intl.DateTimeFormat('en', {
@@ -148,23 +165,7 @@ export function PortfolioShell() {
     return () => clearInterval(timer)
   }, [])
 
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-portfolio-section]'))
-    const update = () => {
-      let current = 'hero'
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= window.innerHeight * 0.35) current = section.dataset.navSection || section.id
-      }
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) current = 'contact'
-      setActiveSection(current)
-    }
-    const observer = new IntersectionObserver(update, { rootMargin: '-10% 0px -60% 0px', threshold: [0, 1] })
-    sections.forEach(section => observer.observe(section))
-    window.addEventListener('scroll', update, { passive: true })
-    update()
-    return () => { observer.disconnect(); window.removeEventListener('scroll', update) }
-  }, [])
-
+  // Rows further down a page rise in as they scroll into view.
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return
     const elements = rootRef.current?.querySelectorAll<HTMLElement>('[data-reveal]')
@@ -179,211 +180,135 @@ export function PortfolioShell() {
       observer.observe(element)
     })
     return () => observer.disconnect()
-  }, [])
+  }, [pathname])
 
-  useEffect(() => () => { if (copyTimeout.current) clearTimeout(copyTimeout.current) }, [])
+  const renderNavItem = (item: NavItem) => {
+    const isActive = !item.external && pathname === item.href
+    const Icon = item.icon
+    const content = (
+      <>
+        {isActive && (
+          <motion.span
+            className={styles.navActive}
+            layoutId="sidebar-active"
+            transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 460, damping: 40 }}
+            aria-hidden="true"
+          />
+        )}
+        <Icon aria-hidden="true" />
+        <span>{item.label}</span>
+        {item.external ? (
+          <span className={styles.navTrail} aria-hidden="true">↗</span>
+        ) : item.count !== undefined ? (
+          <span className={styles.navTrail} aria-hidden="true">{item.count}</span>
+        ) : null}
+      </>
+    )
 
-  const copyEmail = async () => {
-    if (copyTimeout.current) clearTimeout(copyTimeout.current)
-    try { await navigator.clipboard.writeText(email); setCopyState('copied') }
-    catch { setCopyState('error') }
-    copyTimeout.current = setTimeout(() => setCopyState('idle'), 2500)
+    if (item.external) {
+      return (
+        <a className={styles.navItem} href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.label}, opens in a new tab`}>
+          {content}
+        </a>
+      )
+    }
+    return (
+      <Link className={styles.navItem} href={item.href} aria-current={isActive ? 'page' : undefined} onClick={() => setMenuOpen(false)}>
+        {content}
+      </Link>
+    )
   }
 
   return (
     <div className={`portfolio-grain ${styles.portfolio}`} ref={rootRef}>
-      <header className={styles.topbar}>
-        <a href="#hero" className={styles.brand} aria-label="Arnel Baylon, back to overview"><span>Arnel Baylon<small>AI-driven software developer</small></span></a>
-        <nav className={styles.navigation} aria-label="Main navigation">
-          {navigation.map(({ id, label }) => (
-            <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined}>
-              {label}
-              {activeSection === id && (
-                <motion.span
-                  className={styles.navIndicator}
-                  layoutId="nav-indicator"
-                  transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 38 }}
-                  aria-hidden="true"
-                />
-              )}
-            </a>
-          ))}
-          <Link href="/blog">Blog</Link>
-        </nav>
-        <div className={styles.headerActions}>
-          <Link href="/assistant" className={styles.aiLink}>Ask my AI <span aria-hidden="true">↗</span></Link>
-          <button type="button" className={styles.themeButton} onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`}><span aria-hidden="true">{resolvedTheme === 'dark' ? '☀' : '◐'}</span></button>
-        </div>
+      <header className={styles.mobileBar} inert={menuOpen}>
+        <button
+          ref={menuButtonRef}
+          type="button"
+          className={styles.menuButton}
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={menuOpen}
+          aria-controls="site-sidebar"
+        >
+          <FiMenu aria-hidden="true" />
+        </button>
+        <Link href="/" className={styles.mobileBrand}>
+          <span className={styles.avatar}><Image src={avatarImage} alt="" width={30} height={30} /></span>
+          Arnel Baylon
+        </Link>
+        <button type="button" className={styles.iconButton} onClick={toggleTheme} aria-label={`Switch to ${nextTheme} theme`}>
+          <ThemeIcon aria-hidden="true" />
+        </button>
       </header>
 
-      <main id="main-content" className={styles.main} tabIndex={-1}>
-        <header id="hero" data-portfolio-section className={styles.hero}>
-          <PixelPortrait />
-          <div className={styles.heroBody}>
-            <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>AI-DRIVEN SOFTWARE DEVELOPER / AI SYSTEMS</p>
-              <h1 aria-label="I’m Arnel Baylon.">
-                <span className={styles.headlineLine} aria-hidden="true"><span>I’m Arnel</span></span>
-                <span className={styles.headlineLine} aria-hidden="true"><span>Baylon.</span></span>
-              </h1>
-              <div className={styles.heroBadges}>
-                <a
-                  className={styles.credentialBadge}
-                  href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=AE15372EEF7EEFB4229A84C9BB3E1E47AD325384BF2A2731D58BDF4298FDBD47"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="View Arnel Baylon’s Oracle Agentic AI Certified Foundations Associate badge"
-                >
-                  <Image src={oracleAgenticAiBadge} alt="" width={78} height={39} />
-                  <span><small>ORACLE CERTIFIED</small><strong>Agentic AI Foundations Associate</strong><span className={styles.credentialLink}>View credential ↗</span></span>
-                </a>
-                <a className={styles.hackathonBadge} href="#experience" aria-label="Read about Arnel’s hackathon wins">
-                  <strong>2× HACKATHON WINNER</strong><span aria-hidden="true">↗</span>
-                </a>
-              </div>
-              <p className={styles.intro}>I build useful web products, mobile experiences, and AI systems with thoughtful interfaces and practical engineering.</p>
-              <div className={styles.heroActions}><a href="#projects" className={styles.primaryButton}>Explore my work <span aria-hidden="true">↗</span></a></div>
-            </div>
-            <div className={styles.heroStatus}><span><i className={styles.statusDot} />Open to good projects</span><span>Cavite, PH <b>{localTime}</b></span></div>
-          </div>
-        </header>
-
-        <div className={styles.proofStrip} aria-label="A few key milestones">
-          {proofMilestones.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className={styles.proofCard}
-              onClick={() => setSelectedProof(item)}
-              aria-haspopup="dialog"
-              aria-label={`Preview ${item.title} recognition`}
-            >
-              <span className={styles.proofBackdrop} style={{ backgroundImage: `url("${item.imageSrc}")` }} aria-hidden="true" />
-              <small>{item.tag}</small>
-              <strong>
-                {item.title} <span aria-hidden="true">↗</span>
-              </strong>
-              <span className={styles.proofSub}>{item.sub}</span>
-            </button>
-          ))}
+      <aside id="site-sidebar" className={styles.sidebar} data-open={menuOpen || undefined} aria-label="Site">
+        <div className={styles.sidebarHeader}>
+          <Link href="/" className={styles.brand} onClick={() => setMenuOpen(false)} aria-label="Arnel Baylon, back to overview">
+            <span className={styles.avatar}><Image src={avatarImage} alt="" width={38} height={38} /></span>
+            <span className={styles.brandText}>
+              <strong>Arnel Baylon</strong>
+              <small>AI-driven software developer</small>
+            </span>
+          </Link>
+          <button ref={closeButtonRef} type="button" className={styles.closeButton} onClick={() => setMenuOpen(false)} aria-label="Close menu">
+            <FiX aria-hidden="true" />
+          </button>
         </div>
 
-        <section id="skills" data-portfolio-section className={styles.section}>
-          <SectionHeading number="01 /" title="Languages & tools" />
-          <StackShowcase />
-        </section>
+        <Link href="/assistant" className={styles.sidebarCta}>
+          Ask my AI
+          <span aria-hidden="true">↗</span>
+        </Link>
 
-        <section id="built-skills" data-portfolio-section className={styles.section}>
-          <SectionHeading number="02 /" title="Skills I build" />
-          <SkillsShowcase />
-        </section>
+        <nav className={styles.sidebarNav} aria-label="Main navigation" data-lenis-prevent>
+          {navGroups.map(group => (
+            <div className={styles.navGroup} key={group.label ?? 'main'}>
+              {group.label && <p className={styles.navGroupLabel}>{group.label}</p>}
+              <ul className={styles.navList}>
+                {group.items.map(item => <li key={item.label}>{renderNavItem(item)}</li>)}
+              </ul>
+            </div>
+          ))}
+        </nav>
 
-        <section id="projects" data-portfolio-section className={styles.section}>
-          <SectionHeading number="03 /" title="Featured work" note="A few ideas I brought to life." />
-          <div className={styles.sectionBody}><WorkShowcase /></div>
-        </section>
+        <div className={styles.statusCard}>
+          <span><i className={styles.statusDot} />Open to good projects</span>
+          <span>Cavite, PH · {localTime}</span>
+        </div>
 
-        <section id="services" data-portfolio-section data-nav-section="about" className={styles.section}>
-          <SectionHeading number="04 /" title="What I can help with" />
-          <div className={styles.services}>{services.map((service, index) => <article key={service.title} data-reveal style={revealIndex(index)}><span className={styles.serviceNumber}>0{index + 1}</span><h3>{service.title}</h3><p>{service.description}</p><small>{service.detail}</small></article>)}</div>
-        </section>
+        <div className={styles.sidebarFooter}>
+          <button type="button" className={styles.iconButton} onClick={toggleTheme} aria-label={`Switch to ${nextTheme} theme`}>
+            <ThemeIcon aria-hidden="true" />
+          </button>
+          <a className={styles.iconButton} href={`mailto:${email}`} aria-label="Email Arnel">
+            <FiMail aria-hidden="true" />
+          </a>
+          <a className={styles.iconButton} href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn, opens in a new tab">
+            <FiLinkedin aria-hidden="true" />
+          </a>
+          <a className={styles.iconButton} href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub, opens in a new tab">
+            <FiGithub aria-hidden="true" />
+          </a>
+        </div>
+      </aside>
+      <div className={styles.backdrop} data-open={menuOpen || undefined} onClick={() => setMenuOpen(false)} aria-hidden="true" />
 
-        <section id="about" data-portfolio-section className={styles.section}>
-          <SectionHeading number="05 /" title="The human behind the code" />
-          <div className={styles.aboutGrid}>
-            <div className={styles.aboutCopy} data-reveal><p className={styles.aboutLead}>Great software is built<br />with intent.</p><p>I’m Arnel—also Nel or Yhel. My work sits at the intersection of solid software development and modern AI systems: building products grounded in deep technical fundamentals and accelerated with AI leverage.</p><p>I care about the whole lifecycle—listening to what users actually need, architecting systems that last, and shipping with precision. When I’m away from the keyboard, you’ll find me running, making pixel art, and exploring what’s next.</p><Link href="/assistant" className={styles.textLink}>A little more about me? Ask my AI <span aria-hidden="true">↗</span></Link></div>
-            <figure id="gallery" className={styles.aboutPhoto} data-reveal style={revealIndex(1)}><Image src="/images/gallery/egov-top5-2026.webp" alt="Arnel with team DEVOOPS at the eGov Hackathon 2026 finalist recognition" width={1080} height={725} sizes="(max-width: 700px) 90vw, (max-width: 1179px) 45vw, calc(50vw - 190px)" /><figcaption>Team DEVOOPS. Ideas become better together.</figcaption></figure>
-          </div>
-          <details id="typing" className={styles.playground} onToggle={event => setPlaygroundOpen(event.currentTarget.open)}>
-            <summary><span>A small detour: the typing playground</span><span aria-hidden="true">{playgroundOpen ? '−' : '+'}</span></summary>
-            {playgroundOpen && <div className={styles.playgroundContent} data-lenis-prevent><p>A little keyboard break. Test your speed, accuracy, and favorite switch sound.</p><MonkeyTypeGame /></div>}
-          </details>
-        </section>
+      <main id="main-content" className={styles.main} tabIndex={-1} inert={menuOpen}>
+        <div className={styles.column}>
+          {children}
 
-        <section id="experience" data-portfolio-section data-nav-section="about" className={styles.section}>
-          <SectionHeading number="06 /" title="The path so far" note="Building, learning, showing up." />
-          <div className={styles.sectionBody}><JourneySection /></div>
-        </section>
-
-        <section id="contact" data-portfolio-section data-reveal className={`${styles.section} ${styles.contact}`}>
-          <div className={styles.contactMeta}><span>07 / SAY HELLO</span><span><i className={styles.statusDot} />Open to opportunities</span></div>
-          <h2>Let’s make<br />something useful<span>.</span></h2>
-          <p>A product to launch, a workflow to simplify, or an AI idea to explore?<br />Tell me what you’re working on.</p>
-          <div className={styles.emailRow}><a href={`mailto:${email}`}>{email} <span aria-hidden="true">↗</span></a><button type="button" onClick={copyEmail} aria-label="Copy email address">{copyState === 'copied' ? 'Copied ✓' : 'Copy'}</button></div>
-          <span className={styles.copyFeedback} role="status">{copyState === 'copied' ? 'Email copied. See you in the inbox.' : copyState === 'error' ? 'Use the email link to get in touch.' : ''}</span>
-          <div id="github" className={styles.contactSocials}><a href="https://github.com/hiroqt" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/arnel-baylon-b05233189" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="/pdf/Resume.pdf" target="_blank" rel="noreferrer">Résumé ↗</a></div>
-        </section>
+          <footer className={styles.footer}>
+            <span>© {new Date().getFullYear()} Arnel Baylon</span>
+            <nav id="github" aria-label="Elsewhere">
+              <a href={`mailto:${email}`}>Email</a>
+              <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>
+              <a href={links.resume} target="_blank" rel="noreferrer">Résumé</a>
+            </nav>
+          </footer>
+        </div>
       </main>
-
-      <footer className={styles.footer}><span>© {new Date().getFullYear()} Arnel Baylon</span><span>Thoughtfully built. Still learning.</span><a href="#hero">Back to top ↑</a></footer>
-
-      <AnimatePresence>
-        {selectedProof && (
-          <motion.div
-            className={styles.lightboxBackdrop}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            onClick={() => setSelectedProof(null)}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="proof-modal-title"
-          >
-            <motion.div
-              className={styles.lightboxDialog}
-              initial={{ opacity: 0, scale: 0.96, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 10 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className={styles.lightboxHeader}>
-                <div>
-                  <small className={styles.lightboxTag}>{selectedProof.tag}</small>
-                  <h3 id="proof-modal-title">{selectedProof.title}</h3>
-                </div>
-                <button
-                  type="button"
-                  className={styles.lightboxClose}
-                  onClick={() => setSelectedProof(null)}
-                  aria-label="Close image preview"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className={styles.lightboxImageWrap}>
-                <Image
-                  src={selectedProof.imageSrc}
-                  alt={selectedProof.alt}
-                  width={1400}
-                  height={950}
-                  className={styles.lightboxImage}
-                  priority
-                />
-              </div>
-              <div className={styles.lightboxFooter}>
-                <p>{selectedProof.sub}</p>
-                {selectedProof.linkUrl && (
-                  <a
-                    href={selectedProof.linkUrl}
-                    target={selectedProof.linkUrl.startsWith('#') ? undefined : '_blank'}
-                    rel={selectedProof.linkUrl.startsWith('#') ? undefined : 'noreferrer'}
-                    onClick={() => {
-                      if (selectedProof.linkUrl?.startsWith('#')) {
-                        setSelectedProof(null)
-                      }
-                    }}
-                    className={styles.lightboxLink}
-                  >
-                    {selectedProof.linkLabel || 'Open document ↗'}
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }
