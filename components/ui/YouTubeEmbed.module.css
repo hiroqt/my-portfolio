@@ -1,0 +1,92 @@
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--folio-line);
+  border-radius: 10px;
+  background: var(--folio-ink);
+}
+
+.player,
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.poster {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.thumbnail {
+  object-fit: cover;
+  transition: transform 600ms var(--ease-out), filter 600ms var(--ease-out);
+}
+
+.play {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--folio-accent);
+  color: var(--folio-paper);
+  box-shadow: 0 10px 30px -8px rgb(24 16 10 / 55%);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+/* The triangle's visual centre sits left of its box; nudge it so it reads centred in the circle. */
+.play svg {
+  transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+  .play {
+    width: 52px;
+    height: 52px;
+  }
+
+  .play svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.poster:active .play {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .poster:hover .thumbnail {
+    transform: scale(1.015);
+    filter: brightness(0.92);
+  }
+
+  .poster:hover .play {
+    transform: scale(1.06);
+  }
+}
+
+.poster:focus-visible {
+  outline: 2px solid var(--folio-accent);
+  outline-offset: -4px;
+  border-radius: 10px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
