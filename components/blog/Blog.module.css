@@ -328,6 +328,24 @@
   display: none;
 }
 
+/* ---------- Essay intro ---------- */
+
+.intro p {
+  max-width: 60ch;
+  margin: 0 0 1em;
+  color: var(--folio-ink);
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+@media (max-width: 700px) {
+  .intro p {
+    font-size: 18px;
+  }
+}
+
 /* ---------- Abstract ---------- */
 
 .abstract {
