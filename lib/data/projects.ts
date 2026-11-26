@@ -17,6 +17,8 @@ export interface ProjectData {
   previewName?: string;
   embedUrl?: string;
   embedTitle?: string;
+  /** YouTube demo shown on the project page; plays from youtube-nocookie.com only after a click. */
+  video?: ProjectVideo;
   features?: string[];
   content?: ProjectSection[];
   isFeatured?: boolean;
@@ -29,6 +31,13 @@ export interface ProjectData {
   metrics?: string[];
   /** Lists the project on the home page. The row reads its title, summary, and image from this record; projects without it appear only on their own page. */
   showcase?: ProjectShowcase;
+}
+
+export interface ProjectVideo {
+  /** The ID from the watch URL, e.g. `yKKCDXQ0uRU` in youtube.com/watch?v=yKKCDXQ0uRU. */
+  youtubeId: string;
+  /** The video's title on YouTube; used as the player's accessible name and caption. */
+  title: string;
 }
 
 export interface ProjectShowcase {
@@ -98,6 +107,7 @@ export const projectsData: ProjectData[] = [
     summary: 'Private career copilot with offline-first ATS resume scoring, Python FastAPI scoring engine, job matching, and real-time voice interview simulations in the browser.',
     tags: ['Next.js 15', 'Python', 'FastAPI', 'TypeScript', 'Tailwind CSS', 'AI Copilot', 'ATS Optimizer'],
     link: 'https://saktoka.click',
+    video: { youtubeId: 'Utc8JwrLpfs', title: 'Sakto ka — Find jobs that truly match your skills — without the guesswork.' },
     github: 'https://github.com/hiroqt',
     image: '/images/saktoka.webp',
     imageWidth: 1254,
@@ -249,6 +259,7 @@ export const projectsData: ProjectData[] = [
     summary: 'An AI study platform that turns uploaded PDF, DOCX, PPTX, and TXT files into flashcards, quizzes, practice exams, and outlines grounded only in the student’s own material. Built with a React Native (Expo) app, a FastAPI backend, and a Next.js showcase site.',
     tags: ['React Native', 'Expo', 'FastAPI', 'Python', 'PostgreSQL', 'pgvector', 'RAG', 'Next.js'],
     link: 'https://github.com/hiroqt/momo',
+    video: { youtubeId: 'Yk81rA04qjM', title: 'Momo - From Notes to Know How' },
     github: 'https://github.com/hiroqt/momo',
     image: '/images/momo.webp',
     imageWidth: 1536,
@@ -296,6 +307,7 @@ export const projectsData: ProjectData[] = [
     summary: 'A unified civic platform with biometric face verification, multi-modal voice AI, and automated public services. Recognized in the Top 5 at the eGov Hackathon 2026.',
     tags: ['React', 'TypeScript', 'Agentic AI', 'Vite', 'Tailwind CSS'],
     link: '#',
+    video: { youtubeId: 'yKKCDXQ0uRU', title: 'e Buddy - e-Gov Hackathon 2026 Entry' },
     image: '/images/egov.webp',
     imageWidth: 1050,
     imageHeight: 1050,

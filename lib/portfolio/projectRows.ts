@@ -14,4 +14,5 @@ export const projectRows: ProjectRow[] = projectsData
     image: project.image,
     focus: project.showcase.focus,
     badge: project.badge,
+    video: project.video,
   }))

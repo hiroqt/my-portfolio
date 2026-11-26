@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <div className={styles.view}>
       <PageHeader title="Projects" intro="Products and tools I’ve designed and built, from civic tech to AI." count={projectRows.length} />
-      <ProjectList projects={projectRows} visible={projectRows.length} />
+      <ProjectList projects={projectRows} visible={projectRows.length} demos />
     </div>
   )
 }

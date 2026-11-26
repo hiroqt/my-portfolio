@@ -246,6 +246,74 @@
   user-select: none;
 }
 
+/* Demo toggle and player under a project row (Projects page). The bar lines up
+   with the row's text column: thumbnail width plus the row's column gap. */
+.demo {
+  margin-top: -6px;
+  padding-bottom: 16px;
+}
+
+.demoBar {
+  padding-left: calc(76px + 20px);
+}
+
+.demoToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 14px 0 5px;
+  border: 1px solid var(--folio-line);
+  border-radius: 999px;
+  background: var(--folio-surface);
+  color: var(--folio-ink);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.demoToggle:active {
+  transform: scale(0.97);
+}
+
+.demoIcon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--folio-accent);
+  color: var(--folio-paper);
+}
+
+.demoPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 420ms var(--ease-out), margin-top 420ms var(--ease-out);
+}
+
+.demoPanel[data-open] {
+  grid-template-rows: 1fr;
+  margin-top: 14px;
+}
+
+.demoPanelInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 .revealed {
   animation: rowIn 420ms var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * 45ms);
@@ -381,7 +449,8 @@
     color: var(--folio-accent);
   }
 
-  .moreButton:hover {
+  .moreButton:hover,
+  .demoToggle:hover {
     border-color: var(--folio-accent);
     color: var(--folio-accent);
   }
@@ -394,6 +463,10 @@
 
   .thumb {
     width: 64px;
+  }
+
+  .demoBar {
+    padding-left: calc(64px + 20px);
   }
 
   .withThumb .rowAside {

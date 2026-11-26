@@ -225,6 +225,59 @@
   animation-delay: 140ms;
 }
 
+.videoSection {
+  padding-bottom: 44px;
+  animation-delay: 160ms;
+}
+
+.video {
+  margin: 28px 0 0;
+}
+
+.videoCaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  color: var(--folio-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.videoCaption > span {
+  min-width: 0;
+  text-wrap: pretty;
+}
+
+.textLink {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  color: var(--folio-ink);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--duration-fast) ease;
+}
+
+.textLink svg {
+  width: 13px;
+  height: 13px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .textLink:hover {
+    color: var(--folio-accent);
+  }
+
+  .textLink:hover svg {
+    transform: translate(2px, -2px);
+  }
+}
+
 .sectionHeading {
   display: flex;
   justify-content: space-between;
