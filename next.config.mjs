@@ -5,6 +5,8 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    // Project demo posters; served through /_next/image so the page's img-src can stay same-origin.
+    remotePatterns: [{ protocol: 'https', hostname: 'i.ytimg.com', pathname: '/vi/**' }],
   },
   experimental: {
     optimizePackageImports: ['framer-motion', 'react-icons', 'react-icons/fa'],
@@ -32,8 +34,8 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               `script-src ${scriptSources.join(' ')}`,
-              // Project data includes App Builders PH vote embeds.
-              "frame-src 'self' https://appbuildersph.com",
+              // Project data includes App Builders PH vote embeds and YouTube demos (privacy-enhanced mode only).
+              "frame-src 'self' https://appbuildersph.com https://www.youtube-nocookie.com",
               "style-src 'self' 'unsafe-inline'",
               "font-src 'self' data:",
               "img-src 'self' data: blob:",
