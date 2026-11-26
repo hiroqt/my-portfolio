@@ -118,7 +118,6 @@ export const MarkdownContent: React.FC<MarkdownContentProps> = ({
   const elements: React.ReactNode[] = [];
 
   let inCodeBlock = false;
-  let codeBlockLang = '';
   let codeBlockContent: string[] = [];
 
   rawLines.forEach((line, index) => {
@@ -126,7 +125,6 @@ export const MarkdownContent: React.FC<MarkdownContentProps> = ({
     if (line.trim().startsWith('```')) {
       if (!inCodeBlock) {
         inCodeBlock = true;
-        codeBlockLang = line.trim().slice(3).trim();
         codeBlockContent = [];
         return;
       } else {

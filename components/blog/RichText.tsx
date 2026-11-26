@@ -5,7 +5,7 @@ const URL_PATTERN = /(https?:\/\/[^\s]+)/g
 const TRAILING_PUNCTUATION = /[.,;:)\]]+$/
 
 /** Converts ASCII quotes to typographic ones. Only used on non-URL text. */
-export function smartQuotes(text: string) {
+function smartQuotes(text: string) {
   return text
     .replace(/(^|[\s(\[—–-])"/g, '$1“')
     .replace(/"/g, '”')

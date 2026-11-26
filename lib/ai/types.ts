@@ -38,11 +38,3 @@ export interface ChatRequestPayload {
   uiContext?: UIContext;
   persona?: AdaptivePersona;
 }
-
-export interface ChatStreamChunk {
-  type: 'delta' | 'action' | 'done' | 'error';
-  content?: string;
-  action?: AgentAction;
-  persona?: AdaptivePersona;
-  error?: string;
-}

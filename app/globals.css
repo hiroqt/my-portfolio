@@ -31,9 +31,7 @@
     --accent: var(--folio-accent);
     --ease-out: cubic-bezier(.23, 1, .32, 1);
     --ease-in-out: cubic-bezier(.77, 0, .175, 1);
-    --ease-drawer: cubic-bezier(.32, .72, 0, 1);
     --duration-fast: 160ms;
-    --duration-normal: 220ms;
     --duration-slow: 300ms;
     transition: --folio-paper 900ms ease-in-out, --folio-ink 900ms ease-in-out, --folio-muted 900ms ease-in-out, --folio-line 900ms ease-in-out, --folio-accent 900ms ease-in-out, --folio-surface 900ms ease-in-out, --folio-soft 900ms ease-in-out;
   }
@@ -61,11 +59,6 @@
   h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans), system-ui, sans-serif; }
   button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
   ::selection { background: var(--folio-ink); color: var(--folio-paper); }
-}
-
-@layer utilities {
-  .font-mono { font-family: var(--font-mono), ui-monospace, monospace; }
-  .scrollbar-thin { scrollbar-width: thin; scrollbar-color: var(--folio-line) transparent; }
 }
 
 ::-webkit-scrollbar { width: 5px; height: 5px; }

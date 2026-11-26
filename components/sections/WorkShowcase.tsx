@@ -80,5 +80,3 @@ export function WorkShowcase() {
     </div>
   )
 }
-
-export default WorkShowcase

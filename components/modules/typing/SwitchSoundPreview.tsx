@@ -1,14 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   FaVolumeUp,
   FaVolumeMute,
   FaSlidersH,
   FaPlay,
   FaKeyboard,
-  FaInfoCircle,
 } from 'react-icons/fa'
 import {
   SwitchType,
@@ -35,11 +34,9 @@ export function SwitchSoundPreview({
 }: SwitchSoundPreviewProps) {
   const [activeTestKey, setActiveTestKey] = useState<string | null>(null)
   const [testInputText, setTestInputText] = useState('')
-  const [lastPlayedSwitch, setLastPlayedSwitch] = useState<SwitchType | null>(null)
 
   const handleAudition = (sw: SwitchType, keyType: 'standard' | 'space' | 'enter' = 'standard') => {
     onSelectSwitch(sw)
-    setLastPlayedSwitch(sw)
     const audio = getKeyboardAudio()
     audio.playKey(sw, keyType)
   }
@@ -51,7 +48,6 @@ export function SwitchSoundPreview({
     else if (e.key === 'Backspace') keyType = 'backspace'
 
     setActiveTestKey(e.key.length === 1 ? e.key.toUpperCase() : e.key)
-    setLastPlayedSwitch(currentSwitch)
 
     const audio = getKeyboardAudio()
     audio.playKey(currentSwitch, keyType)

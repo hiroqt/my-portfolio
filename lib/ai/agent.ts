@@ -2,8 +2,7 @@ import Groq from 'groq-sdk';
 import { AdaptivePersona, AgentAction, ChatMessageData, UIContext } from './types';
 import { buildSystemPrompt } from './prompt';
 import { AI_TOOL_DEFINITIONS, executeTool } from './tools';
-import { searchKnowledge } from '../rag/retrieval';
-import { projectsData } from '../data/projects';
+import { synthesizeDynamicResponse } from './synthesizer';
 
 /**
  * Infer the user's communication style automatically if none is provided
@@ -50,22 +49,19 @@ export function inferPersona(userText: string): AdaptivePersona {
   return 'default';
 }
 
-import { synthesizeDynamicResponse } from './synthesizer';
-
 /**
  * Local Grounded Dynamic Engine when Groq API Key is not provided
  */
-export async function* runLocalHeuristicAgent(
+async function* runLocalHeuristicAgent(
   userQuery: string,
   persona: AdaptivePersona,
-  uiContext?: UIContext,
   history: ChatMessageData[] = []
 ): AsyncGenerator<{ type: 'delta' | 'action' | 'done'; content?: string; action?: AgentAction }> {
   // 1. Realistic knowledge retrieval & processing delay (400ms - 600ms)
   const initialDelay = Math.floor(Math.random() * 200) + 400;
   await new Promise(r => setTimeout(r, initialDelay));
 
-  const result = synthesizeDynamicResponse(userQuery, persona, uiContext, history);
+  const result = synthesizeDynamicResponse(userQuery, persona, history);
 
   if (result.action) {
     yield { type: 'action', action: result.action };
@@ -108,7 +104,7 @@ export async function* streamAgentResponse(
 
   // Fallback to local heuristic RAG agent if no Groq API key is configured
   if (!apiKey || apiKey === 'your_groq_api_key_here') {
-    yield* runLocalHeuristicAgent(lastUserMsg, persona, uiContext, messages);
+    yield* runLocalHeuristicAgent(lastUserMsg, persona, messages);
     return;
   }
 
@@ -210,6 +206,6 @@ export async function* streamAgentResponse(
   } catch (err: any) {
     console.error('[yhelAI Agent Error]:', err);
     // Graceful fallback to local heuristic agent on API failure
-    yield* runLocalHeuristicAgent(lastUserMsg, persona, uiContext);
+    yield* runLocalHeuristicAgent(lastUserMsg, persona);
   }
 }

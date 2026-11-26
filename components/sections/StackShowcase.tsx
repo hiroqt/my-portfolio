@@ -80,5 +80,3 @@ export function StackShowcase() {
     </div>
   )
 }
-
-export default StackShowcase
