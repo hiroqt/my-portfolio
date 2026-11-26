@@ -6,7 +6,7 @@ export function Stats({ projectCount }: { projectCount: number }) {
   const stats = [
     { value: '2×', label: 'Hackathon wins', href: '#recognition' },
     { value: String(projectCount), label: 'Projects built', href: '/projects' },
-    { value: '486 hrs', label: 'Hospital internship', href: '/experience' },
+    { value: '2×', label: 'Oracle certified', href: '/certifications' },
   ]
 
   return (
