@@ -1,0 +1,12 @@
+.game {
+  min-width: 0;
+  padding-top: clamp(32px, 5vw, 48px);
+  animation-delay: 80ms;
+}
+
+.loading {
+  margin: 0;
+  color: var(--folio-muted);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+}
