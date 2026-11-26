@@ -82,16 +82,9 @@
 .credential strong { font-weight: 550; color: var(--folio-ink); transition: color 160ms var(--ease-out); }
 .credential > span:last-child { display: inline-block; color: var(--folio-accent); transition: transform 180ms var(--ease-out); }
 
-.bioBlock { margin-top: 12px; scroll-margin-top: 32px; }
-.bio { color: var(--folio-muted); font-size: 15px; line-height: 1.75; }
+.bio { margin-top: 14px; color: var(--folio-muted); font-size: 15px; line-height: 1.75; scroll-margin-top: 32px; }
 .bio > p + p { margin-top: 12px; }
 .bioLead { color: var(--folio-ink); }
-.bio[data-collapsed] { max-height: calc(1.75em * 4); overflow: hidden; -webkit-mask-image: linear-gradient(#000 40%, transparent); mask-image: linear-gradient(#000 40%, transparent); }
-.bioToggle { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; margin-top: 2px; color: var(--folio-ink); font-size: 13px; cursor: pointer; transition: color 160ms var(--ease-out); }
-.bioToggle svg { transition: transform 240ms var(--ease-out); }
-.bioToggle[aria-expanded='true'] svg { transform: rotate(180deg); }
-.textLink { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; margin-top: 8px; color: var(--folio-ink); font-size: 13px; }
-.textLink span { display: inline-block; transition: transform 180ms var(--ease-out); }
 
 /* At a glance */
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 48px 0 0; padding: 0; list-style: none; }
@@ -172,8 +165,8 @@
   .sidebarCta:hover > span:last-child, .stat:hover .statArrow { transform: translate(2px, -2px); color: var(--folio-accent); }
   .iconButton:hover, .emailRow button:hover { background-color: var(--folio-soft); }
   .stat:hover strong { color: var(--folio-accent); }
-  .credential:hover strong, .bioToggle:hover, .textLink:hover, .footer a:hover, .emailRow > a:hover { color: var(--folio-accent); }
-  .credential:hover > span:last-child, .textLink:hover span, .emailRow > a:hover span { transform: translate(2px, -2px); }
+  .credential:hover strong, .footer a:hover, .emailRow > a:hover { color: var(--folio-accent); }
+  .credential:hover > span:last-child, .emailRow > a:hover span { transform: translate(2px, -2px); }
 }
 
 /* ── Phones and tablets: top bar + drawer ────────────────── */
@@ -193,7 +186,7 @@
   .backdrop[data-open] { opacity: 1; pointer-events: auto; }
 
   .main { padding: 48px 24px 0; }
-  .profile, .bioBlock, .section, .contact, .footer { scroll-margin-top: 76px; }
+  .profile, .bio, .section, .contact, .footer { scroll-margin-top: 76px; }
 }
 
 @media (max-width: 640px) {
@@ -224,8 +217,7 @@
 }
 
 @media print {
-  .sidebar, .mobileBar, .backdrop, .emailRow button, .bioToggle { display: none; }
+  .sidebar, .mobileBar, .backdrop, .emailRow button { display: none; }
   .main { padding: 0; }
-  .bio[data-collapsed] { max-height: none; -webkit-mask-image: none; mask-image: none; }
   .portfolio [data-hidden] { opacity: 1; transform: none; }
 }
